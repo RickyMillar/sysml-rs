@@ -1,6 +1,6 @@
 name: License Policy
 
-# OSL-12 — automated license-policy enforcement.
+# Automated license and dependency-advisory policy enforcement.
 #
 # Config:   deny.toml, scripts/license-policy-check.sh
 #
@@ -47,9 +47,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        # references/** is stripped from the public tree (OS0 decision 4) and is
-        # pruned by the invariant script regardless, so no LFS or reference
-        # fetch is needed here.
+        # references/** is fetched, not tracked, and is pruned by the
+        # invariant script regardless, so no LFS or reference fetch is
+        # needed here.
 
       - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
 
@@ -80,10 +80,10 @@ jobs:
       # necessarily the one you resolve tomorrow. `advisories` is NOT run —
       # see deny.toml for why that stays out of this gate.
       - name: cargo-deny (licenses + sources + bans)
-        run: cargo deny --offline check licenses sources bans
+        run: cargo deny --offline check licenses sources bans advisories
 
       # Outbound declarations plus the two invariants the policy rests on.
       # Covers the pyproject.toml and tree-sitter.json declaration sites, which
-      # neither cargo nor npm tooling can see (inventory §3.1).
+      # neither cargo nor npm tooling can see.
       - name: License declaration invariants
         run: ./scripts/license-policy-check.sh

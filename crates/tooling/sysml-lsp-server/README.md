@@ -185,7 +185,7 @@ Library loading is asynchronous; features degrade gracefully until the stdlib is
 
 - `sysml-core` · `sysml-id` · `sysml-span` (serde)
 
-- `tower-lsp` · `tokio` · `tree-sitter` · `dashmap` · `directories` · `sha2` · `bincode`
+- `tower-lsp` · `tokio` · `tree-sitter` · `dashmap` · `directories` · `sha2`
 
 **Downstream.**
 

@@ -31,7 +31,6 @@
 
 use std::collections::BTreeMap;
 use std::fs;
-use std::io::Read;
 use std::path::{Path, PathBuf};
 use std::time::SystemTime;
 
@@ -49,8 +48,7 @@ use sysml_parser_trait::library::{LibraryConfig, LibraryLoadError};
 const CACHE_DISABLE_ENV: &str = "SYSML_LIBRARY_CACHE_DISABLE";
 
 /// Current cache format version. Bump this when the serialization format changes.
-/// v1: bincode, combined metadata+graph (ambiguous Ref/String values)
-/// v2: bincode split metadata+graph (still ambiguous Ref/String values)
+/// v1/v2: bincode (no longer read — such a cache is treated as a miss)
 /// v3: serde_json for graph, JSON sidecar for metadata (requires ref rehydration on load)
 // TS-3.6: bumped 3 → 4 to invalidate any pre-existing on-disk caches that
 // were written by a PestParser-backed `LibraryCache::load(...)` (pre-TS-3.2
@@ -101,13 +99,6 @@ struct CacheMetadata {
     source_hash: String,
     /// Timestamp when the cache was created.
     created_at: u64,
-}
-
-/// Cached library data (legacy format v1, kept for migration).
-#[derive(Debug, Serialize, Deserialize)]
-struct CachedLibraryV1 {
-    metadata: CacheMetadata,
-    graph: ModelGraph,
 }
 
 /// Result of a cache load attempt.
@@ -196,11 +187,11 @@ impl LibraryCache {
         let meta_path = self.meta_path();
 
         // Phase 1: Quick metadata check (tiny file, ~200 bytes)
+        //
+        // A graph file with no metadata sidecar is a pre-v3 cache. It reads as
+        // a miss and is rebuilt: the sidecar-split format arrived three format
+        // versions ago, and a rebuild is what a miss already costs.
         if !meta_path.exists() || !cache_path.exists() {
-            // Try legacy v1 migration
-            if cache_path.exists() && !meta_path.exists() {
-                return self.try_load_legacy(&cache_path);
-            }
             return CacheLoadResult::Miss(CacheMissReason::NotFound);
         }
 
@@ -241,51 +232,6 @@ impl LibraryCache {
             Ok(graph) => CacheLoadResult::Hit(Box::new(graph)),
             Err(e) => CacheLoadResult::Miss(CacheMissReason::Corrupted(e)),
         }
-    }
-
-    /// Try to load from legacy v1 combined format (metadata+graph in one file).
-    fn try_load_legacy(&self, cache_path: &Path) -> CacheLoadResult {
-        let cached: CachedLibraryV1 = match self.read_legacy_cache(cache_path) {
-            Ok(c) => c,
-            Err(_) => return CacheLoadResult::Miss(CacheMissReason::NotFound),
-        };
-
-        // Validate and migrate
-        if cached.metadata.crate_version != CRATE_VERSION {
-            return CacheLoadResult::Miss(CacheMissReason::VersionMismatch {
-                cached: cached.metadata.crate_version,
-                current: CRATE_VERSION.to_owned(),
-            });
-        }
-
-        let current_hash = self.compute_source_hash();
-        if cached.metadata.source_hash != current_hash {
-            return CacheLoadResult::Miss(CacheMissReason::SourceChanged);
-        }
-
-        // Legacy payload may not have usable derived indexes after deserialization.
-        // Rehydrate Ref-like values and rebuild indexes to guarantee library lookups work.
-        let mut graph = cached.graph;
-        rehydrate_cached_ref_values(&mut graph);
-        graph.rebuild_indexes();
-        if !graph.library_packages().is_empty() {
-            graph.build_library_index();
-        }
-
-        // Migrate: save in new split format.
-        let source_hash_prefix: String = cached.metadata.source_hash.chars().take(8).collect();
-        tracing::info!(
-            cache_path = %cache_path.display(),
-            meta_path = %self.meta_path().display(),
-            library_path = %self.config.library_path.display(),
-            source_hash_prefix = %source_hash_prefix,
-            from_format = "v1",
-            to_format = CACHE_FORMAT_VERSION,
-            "migrating library cache from legacy format"
-        );
-        let _ = self.save_cache(&graph);
-
-        CacheLoadResult::Hit(Box::new(graph))
     }
 
     /// Load the standard library via the unified salsa loader on the host.
@@ -449,15 +395,6 @@ impl LibraryCache {
         Ok(graph)
     }
 
-    /// Read legacy v1 combined cache file.
-    fn read_legacy_cache(&self, path: &Path) -> Result<CachedLibraryV1, String> {
-        let mut file = fs::File::open(path).map_err(|e| format!("failed to open: {}", e))?;
-        let mut bytes = Vec::new();
-        file.read_to_end(&mut bytes)
-            .map_err(|e| format!("failed to read: {}", e))?;
-        bincode::deserialize(&bytes).map_err(|e| format!("failed to deserialize v1: {}", e))
-    }
-
     /// Quick check: is the cache file newer than all library source directories?
     ///
     /// This avoids the expensive per-file hash computation when nothing has changed.
@@ -560,13 +497,10 @@ impl LibraryCache {
             });
         }
 
-        // Fallback: try reading legacy format
-        let cached = self.read_legacy_cache(&cache_path).ok()?;
-        Some(CacheStats {
-            size_bytes: size,
-            element_count: cached.graph.element_count(),
-            crate_version: cached.metadata.crate_version,
-        })
+        // No metadata sidecar: a pre-v3 cache, which try_load treats as a miss.
+        // Report nothing rather than deserializing a graph that will be
+        // discarded on the next load anyway.
+        None
     }
 }
 

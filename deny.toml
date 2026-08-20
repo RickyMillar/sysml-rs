@@ -1,16 +1,16 @@
-# cargo-deny configuration — OSL-12 automated license policy
+# cargo-deny configuration — license, source, ban, and advisory policy.
 #
+# Every allowance below was reviewed against the crate that needs it. The
+# allow-list is deliberately *not* "whatever resolves today": a new license
+# expression entering the graph must fail this gate and get a human decision,
+# which is the whole point of the file.
 #
-# Every allowance below traces to a specific section of the inventory. The
-# allow-list is *derived from the reviewed inventory*, not from whatever
-# happens to resolve in the graph today — a new license expression entering
-# the graph must fail this gate and be reviewed, which is the whole point.
+# Run:  cargo deny check licenses sources bans advisories
 #
-# Run:  cargo deny check licenses
 # The companion invariant checks (workspace/npm/pyproject/tree-sitter.json
 # declarations, and the no-NOTICE-dependency assertion) live in
 # scripts/license-policy-check.sh, because cargo metadata cannot see the
-# pyproject.toml or tree-sitter.json declaration sites — see inventory §3.1.
+# pyproject.toml or tree-sitter.json declaration sites.
 
 # ---------------------------------------------------------------------------
 # Graph scope
@@ -31,14 +31,12 @@ exclude-dev = false
 feature-depth = 1
 
 # ---------------------------------------------------------------------------
-# Licenses — the OSL-12 deliverable
+# Licenses
 # ---------------------------------------------------------------------------
 [licenses]
 # Fail closed. cargo-deny 0.18+ denies anything not explicitly allowed and
-# treats an undeclared or unparseable license as an error, which is
-# release-plan principle 10 ("the gate must fail closed on an unknown or
-# undeclared license"). Inventory §3.2 records that zero of the 679
-# third-party crates lack an SPDX expression today; this keeps it that way.
+# treats an undeclared or unparseable license as an error. Every third-party
+# crate in the graph carries an SPDX expression today; this keeps it that way.
 confidence-threshold = 0.93
 
 # First-party workspace packages are checked too (not skipped as "private"),
@@ -47,8 +45,8 @@ confidence-threshold = 0.93
 # `[licenses.private]` header here would capture every key below it.
 private = { ignore = false }
 
-# The permissive allow-list. Each entry is present in the graph today per
-# inventory §3.2 / Appendix A; nothing is allow-listed speculatively.
+# The permissive allow-list. Each entry is present in the graph today;
+# nothing is allow-listed speculatively.
 #
 # Note on disjunctions: cargo-deny satisfies `A OR B` if *either* branch is
 # allowed, so most of the graph's 33 distinct expressions resolve through MIT
@@ -63,13 +61,12 @@ allow = [
     # `Apache-2.0 WITH LLVM-exception` — required on its own by
     # `target-lexicon` 0.12.16 (desktop-only). The 14-crate rustix/wasm family
     # declares `Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT` and would
-    # resolve through MIT anyway. Inventory Appendix A.
+    # resolve through MIT anyway.
     "Apache-2.0 WITH LLVM-exception",
 
-    # Attribution-bearing permissive families. Inventory §3.3 "Other
-    # attribution-bearing families": these require the copyright notice and
-    # disclaimer to travel with binary distributions, which the per-artifact
-    # THIRD-PARTY-NOTICES bundle (licensing-policy.md §5) provides.
+    # Attribution-bearing permissive families: these require the copyright
+    # notice and disclaimer to travel with binary distributions, which the
+    # per-artifact THIRD-PARTY-NOTICES bundle provides.
     #
     # BSD-2-Clause: `atomic-wait`. Also inside `BSD-2-Clause OR Apache-2.0 OR MIT`.
     "BSD-2-Clause",
@@ -84,22 +81,22 @@ allow = [
     "Zlib",
     # Unicode-3.0: the 18-crate ICU4X family, plus the conjunction
     # `(MIT OR Apache-2.0) AND Unicode-3.0` (unicode-ident). Permissive with an
-    # attribution requirement satisfied by the notice bundle. Inventory §3.3.
+    # attribution requirement satisfied by the notice bundle.
     "Unicode-3.0",
 
     # CDLA-Permissive-2.0: `webpki-roots` 0.26.11 and 1.0.6 — a compiled copy
     # of the Mozilla CA root store, reached from `ureq` in `sysml-resolve`.
     # A permissive *data* license: no copyleft, no share-alike, and no
     # notice-retention duty beyond keeping the license text with any
-    # redistributed copy of the data. Inventory §3.3.
+    # redistributed copy of the data.
     "CDLA-Permissive-2.0",
 ]
 
 # NOT allow-listed, deliberately, and each for a reason:
 #
-#   MPL-2.0 — weak copyleft. Allowed only per-crate below (decision D-1) so a
-#             *new* MPL dependency entering the graph fails this gate instead
-#             of inheriting a blanket allowance.
+#   MPL-2.0 — weak copyleft. Allowed only per-crate below, so a *new* MPL
+#             dependency entering the graph fails this gate instead of
+#             inheriting a blanket allowance.
 #
 #   LGPL-2.1-or-later — appears in exactly one disjunction, `r-efi` 5.3.0's
 #             `MIT OR Apache-2.0 OR LGPL-2.1-or-later`. We elect MIT (or
@@ -108,7 +105,6 @@ allow = [
 #             branch. `r-efi` is additionally cfg(target_os = "uefi")-gated via
 #             `getrandom` and is never compiled for a platform we ship.
 #             Recorded here so a keyword scan for "LGPL" has an answer.
-#             Inventory §3.3.
 #
 #   BSL-1.0, Unlicense, 0BSD, CC0-1.0, MIT-0 — each appears only as one branch
 #             of a disjunction that also offers MIT or Apache-2.0
@@ -117,9 +113,9 @@ allow = [
 #             Allow-listing them would be dead policy surface.
 #
 #   No GPL, AGPL, or SSPL crate appears anywhere in the graph — not required,
-#   not optional, and not in a disjunction. Inventory §3.3.
+#   not optional, and not in a disjunction.
 
-# --- Reviewed exceptions: weak copyleft accepted per-crate (decision D-1) ---
+# --- Reviewed exceptions: weak copyleft accepted per-crate ---
 #
 # MPL-2.0 is file-level copyleft: it attaches to the MPL-licensed files
 # themselves, not to the work that links them, and §3.3 of the MPL explicitly
@@ -130,7 +126,7 @@ allow = [
 # These are crate-scoped rather than a blanket `MPL-2.0` allowance so that any
 # *sixth* MPL crate arriving in the graph fails the gate and gets reviewed.
 
-# D-1: the only MPL-2.0 crate that links into a core (non-desktop) binary,
+# The only MPL-2.0 crate that links into a core (non-desktop) binary,
 # reached via `directories` 5.0.1 -> `dirs-sys`, a direct dependency of
 # sysml-cli, sysml-lsp-server, sysml-resolve, and sysml-service. Accepted
 # unmodified. If a zero-copyleft core ever becomes a stated goal, the
@@ -140,7 +136,7 @@ name = "option-ext"
 version = "=0.2.0"
 allow = ["MPL-2.0"]
 
-# D-1 (desktop-only): the four MPL-2.0 crates in the Tauri/`wry` web stack.
+# Desktop-only: the four MPL-2.0 crates in the Tauri/`wry` web stack.
 # Unreachable from the core `default-members` set; they exist only in the
 # desktop shell's graph. Same weak-copyleft analysis as above.
 [[licenses.exceptions]]
@@ -202,17 +198,14 @@ multiple-versions = "allow"
 # not a licensing one, so the rule was left off rather than papered over with a
 # skip-list.
 #
-# That question is now answered: OSA-04 (commits ba35b871, d72adf6e) set
-# `publish = false` on all workspace packages (25 at the time; 24 since
-# `sysml-layout` was retired on 2026-08-13 under OS-D2 decision 4), per the Stage A
-# crates.
-# The exemption applies, so the rule is on.
+# That question is now answered: every workspace package carries
+# `publish = false`, so the exemption applies and the rule is on.
 #
 # Note what this does NOT do: the exemption is scoped by construction, not a
-# blanket pass. When Stage B selects a crate for publication it loses
+# blanket pass. The first crate selected for publication loses
 # `publish = false`, loses the exemption, and this gate immediately demands
-# real version requirements on its path dependencies — which is OSC-03. The
-# rule reasserts itself precisely when it starts to matter.
+# real version requirements on its path dependencies. The rule reasserts
+# itself precisely when it starts to matter.
 #
 # Verified rather than assumed, because a green that comes from a config
 # accident is worth nothing: with `allow-wildcard-paths` removed, `cargo deny
@@ -221,13 +214,63 @@ wildcards = "deny"
 allow-wildcard-paths = true
 
 # ---------------------------------------------------------------------------
-# Advisories — OUT OF SCOPE for OSL-12, on purpose
+# Advisories — enforced, with a closed and justified ignore list
 # ---------------------------------------------------------------------------
-# Vulnerability and unmaintained-crate triage is a separate body of work with
-# its own review cadence and its own failure mode (a gate that goes red on
-# somebody else's disclosure schedule). This slice deliberately does not open
-# it. `cargo deny check advisories` is NOT wired into CI, and the empty
-# `ignore` list below is a placeholder for whoever does that work — it is not
-# a claim that the graph is advisory-clean.
+# `cargo deny check advisories` runs in CI and blocks. Every vulnerability and
+# unsoundness advisory against this graph is FIXED, not ignored: the graph
+# carries zero `vulnerability` and zero `unsound` findings.
+#
+# What remains is `unmaintained`, and every entry below is a transitive crate
+# whose advisory says, in the advisory database's own words, "No safe upgrade
+# is available". None is a vulnerability. Each is listed individually so a
+# *new* unmaintained crate — or a *new* vulnerability in any of these — fails
+# the gate rather than disappearing into a category-wide allowance.
+#
+# Revisit trigger, in order of likelihood:
+#   - Any of these gaining a vulnerability advisory: it will still fail here,
+#     because these ignores are ID-scoped, not crate-scoped.
+#   - A Tauri release that moves off the GTK3 bindings (16 of the 17 entries
+#     below come from `sysml-desktop`'s Tauri dependency and vanish with it).
+#   - A diffsol upgrade for `paste` — deliberately not taken as part of a
+#     security pass, because diffsol is the ODE solver behind the physics
+#     runtime and a major bump needs its own regression campaign.
+#
+# Re-audit at each release tag, and drop any entry the graph no longer reaches.
 [advisories]
-ignore = []
+ignore = [
+    # ── Tauri → GTK3 bindings. Reached only from `sysml-desktop`, which is
+    # excluded from the workspace default-members; the CLI, LSP, API, and MCP
+    # binaries never link them. The gtk-rs project retired the GTK3 bindings
+    # in favour of GTK4, and Tauri v2 has not moved. No upgrade exists.
+    "RUSTSEC-2024-0411",  # gdkwayland-sys
+    "RUSTSEC-2024-0412",  # gdk
+    "RUSTSEC-2024-0413",  # atk
+    "RUSTSEC-2024-0414",  # gdkx11-sys
+    "RUSTSEC-2024-0415",  # gtk
+    "RUSTSEC-2024-0416",  # atk-sys
+    "RUSTSEC-2024-0417",  # gdkx11
+    "RUSTSEC-2024-0418",  # gdk-sys
+    "RUSTSEC-2024-0419",  # gtk3-macros
+    "RUSTSEC-2024-0420",  # gtk-sys
+
+    # ── Tauri → urlpattern → the rust-unic Unicode family, retired upstream
+    # in favour of icu_properties / unicode-ident. Same reachability as above:
+    # desktop shell only.
+    "RUSTSEC-2025-0075",  # unic-char-range
+    "RUSTSEC-2025-0080",  # unic-common
+    "RUSTSEC-2025-0081",  # unic-char-property
+    "RUSTSEC-2025-0098",  # unic-ucd-version
+    "RUSTSEC-2025-0100",  # unic-ucd-ident
+
+    # ── Tauri → glib-macros → proc-macro-error. A build-time proc-macro
+    # helper superseded by proc-macro-error2; glib 0.18 pins the original.
+    "RUSTSEC-2024-0370",  # proc-macro-error
+
+    # ── diffsol → faer → gemm → paste. The ONE entry that reaches core
+    # binaries. `paste` is a build-time proc-macro that pastes identifiers
+    # together; it has no runtime presence and no reported defect. Clearing it
+    # means diffsol 0.11 → 0.16, a major version of the ODE solver the physics
+    # runtime is built on — worth doing, and worth doing with its own
+    # validation rather than inside a dependency-security pass.
+    "RUSTSEC-2024-0436",  # paste
+]

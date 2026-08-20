@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# scripts/license-policy-check.sh — OSL-12 license-policy invariant gate.
+# scripts/license-policy-check.sh — license-policy invariant gate.
 #
 #
-# This is the half of the OSL-12 gate that `cargo deny` cannot do. `deny.toml`
+# This is the half of the license gate that `cargo deny` cannot do. `deny.toml`
 # polices the *inbound* licenses of third-party crates; this script polices the
 # *outbound* declaration and the two invariants the licensing policy rests on:
 #
@@ -21,8 +21,8 @@
 # directory and declares its license at FOUR sites. `cargo metadata` sees one
 # of them, npm tooling sees another, and NOTHING in either toolchain can see
 # `pyproject.toml` or `tree-sitter.json`. A scaffolding default of bare `MIT`
-# survived at all four sites until commits 7d1c2380 and 2caa22a4 found them by
-# hand. Inventory §3.1 is explicit that the gate must assert against the files.
+# survived at all four sites until a manual audit found them, which is why
+# this gate asserts against the files themselves.
 #
 # Usage:
 #   scripts/license-policy-check.sh
@@ -62,7 +62,7 @@ for f in LICENSE-MIT LICENSE-APACHE; do
     if [ -f "$f" ]; then
         echo "  ok       $f"
     else
-        fail "$f is missing. Every manifest in this tree declares '$EXPECTED'; both texts must exist at the repository root (licensing-policy.md §1)."
+        fail "$f is missing. Every manifest in this tree declares '$EXPECTED'; both texts must exist at the repository root."
     fi
 done
 
@@ -91,15 +91,15 @@ echo "  ok       $pkg_count package(s) declare '$EXPECTED'"
 echo "== B. npm manifests =="
 # Discovered rather than listed, so a NEW manifest is covered the day it lands.
 # Pruned: node_modules (third-party), target (build output), and references/
-# (third-party OMG + Pilot Implementation material, excluded by the OS0 strip
-# decision — inventory §6; its licenses are not ours to declare).
+# (third-party OMG + Pilot Implementation material, fetched rather than
+# tracked; its licenses are not ours to declare).
 mapfile -t npm_manifests < <(
     find . \
         \( -name node_modules -o -name target -o -path ./references \) -prune -o \
         -name package.json -type f -print | sed 's|^\./||' | sort
 )
 
-# The four publishing sites named in inventory §4.1. Discovery covers more than
+# The four publishing sites. Discovery covers more than
 # this, but these four must be present: if the find above silently stops
 # matching, an empty-but-green run would be worse than a red one.
 readonly REQUIRED_NPM=(
@@ -113,7 +113,7 @@ for required in "${REQUIRED_NPM[@]}"; do
     for m in "${npm_manifests[@]}"; do
         [ "$m" = "$required" ] && found=1 && break
     done
-    [ "$found" -eq 1 ] || fail "expected npm manifest '$required' was not found. Either it moved (update REQUIRED_NPM in this script) or manifest discovery is broken — inventory §4.1 names it as a publishing site."
+    [ "$found" -eq 1 ] || fail "expected npm manifest '$required' was not found. Either it moved (update REQUIRED_NPM in this script) or manifest discovery is broken. It is one of the four publishing sites."
 done
 
 for m in "${npm_manifests[@]}"; do
@@ -132,7 +132,7 @@ done
 echo "== C. tree-sitter.json =="
 readonly TS_JSON="crates/lang/sysml-parser-incremental/tree-sitter/tree-sitter.json"
 if [ ! -f "$TS_JSON" ]; then
-    fail "$TS_JSON is missing — it is one of the four license declaration sites for tree-sitter-sysml (inventory §3.1)."
+    fail "$TS_JSON is missing — it is one of the four license declaration sites for tree-sitter-sysml."
 else
     ts_declared=$(jq -r '.metadata.license // "<undeclared>"' "$TS_JSON" 2>/dev/null) \
         || fail "$TS_JSON is not valid JSON"
@@ -149,14 +149,14 @@ fi
 echo "== D. pyproject.toml =="
 readonly PYPROJECT="crates/lang/sysml-parser-incremental/tree-sitter/pyproject.toml"
 if [ ! -f "$PYPROJECT" ]; then
-    fail "$PYPROJECT is missing — it is the fourth license declaration site for tree-sitter-sysml (inventory §3.1)."
+    fail "$PYPROJECT is missing — it is the fourth license declaration site for tree-sitter-sysml."
 else
     # Grep rather than a TOML parser: no Python or toml CLI is guaranteed on
     # the CI image, and the assertion is over a single literal line whose exact
-    # form is itself the thing under policy. Inventory §3.1 explains why this
-    # stays in PEP 621 table form (`license.text`) instead of the PEP 639 SPDX
-    # string: the SPDX form needs setuptools>=77 -> Python>=3.9, and this
-    # package is pinned to 3.8 by requires-python and Py_LIMITED_API.
+    # form is itself the thing under policy. This stays in PEP 621 table form
+    # (`license.text`) instead of the PEP 639 SPDX string because the SPDX form
+    # needs setuptools>=77 -> Python>=3.9, and this package is pinned to 3.8 by
+    # requires-python and Py_LIMITED_API.
     if grep -Eq "^license\.text[[:space:]]*=[[:space:]]*\"${EXPECTED}\"[[:space:]]*$" "$PYPROJECT"; then
         echo "  ok       $PYPROJECT (license.text)"
     else
@@ -170,9 +170,9 @@ else
     # license.text above — an affirmative misstatement, not an omission.
     if grep -q "License :: OSI Approved" "$PYPROJECT"; then
         grep -q "License :: OSI Approved :: MIT License" "$PYPROJECT" \
-            || fail "$PYPROJECT carries 'License :: OSI Approved' classifiers but not 'MIT License'. Dual licensing pre-PEP-639 requires both classifiers (inventory §3.1)."
+            || fail "$PYPROJECT carries 'License :: OSI Approved' classifiers but not 'MIT License'. Dual licensing pre-PEP-639 requires both classifiers."
         grep -q "License :: OSI Approved :: Apache Software License" "$PYPROJECT" \
-            || fail "$PYPROJECT carries 'License :: OSI Approved' classifiers but not 'Apache Software License'. A lone MIT classifier contradicts license.text (inventory §3.1)."
+            || fail "$PYPROJECT carries 'License :: OSI Approved' classifiers but not 'Apache Software License'. A lone MIT classifier contradicts license.text."
         echo "  ok       $PYPROJECT (both License:: classifiers present)"
     fi
 fi
@@ -181,7 +181,7 @@ fi
 # E. No third-party crate ships a NOTICE file
 # ---------------------------------------------------------------------------
 echo "== E. no dependency ships a NOTICE file =="
-# licensing-policy.md §3.2 declines to create a root NOTICE on the grounds that
+# The policy declines to create a root NOTICE on the grounds that
 # Apache-2.0 §4(d) is conditional — it obliges propagation only "if the Work
 # includes a NOTICE text file as part of its distribution" — and that no
 # dependency ships one. That is a factual claim with an expiry date: one
@@ -209,7 +209,7 @@ for manifest in "${dep_manifests[@]}"; do
     while IFS= read -r notice; do
         [ -z "$notice" ] && continue
         notice_count=$((notice_count + 1))
-        fail "third-party crate ships a NOTICE file: $notice — licensing-policy.md §3.2 declines a root NOTICE on the basis that none exists. Re-open that decision (§3.3 revisit triggers) or add the file to the per-artifact notice bundle."
+        fail "third-party crate ships a NOTICE file: $notice — this repository declines a root NOTICE on the basis that none exists. Re-open that decision or add the file to the per-artifact notice bundle."
     done < <(find "$dir" -maxdepth 1 -iname 'NOTICE*' -type f 2>/dev/null)
 done
 
@@ -224,7 +224,7 @@ echo "  ok       scanned $unpacked third-party crate source dir(s), found $notic
 # G. Third-party npm licenses
 # ---------------------------------------------------------------------------
 echo "== G. npm dependency licenses =="
-# This is the npm half of the OSL-12 exception list. licensing-policy.md §6
+# This is the npm half of the exception list. The licensing policy
 # requires elkjs (D-2) and the @vscode/vsce-sign family (D-3) to be recorded
 # explicitly "so it cannot pass as an unreviewed unknown", and cargo-deny
 # cannot hold them because they are not Cargo dependencies.
@@ -236,7 +236,7 @@ echo "== G. npm dependency licenses =="
 # package, so `jq` over the four committed lockfiles is the same assertion at
 # zero install cost and with a deterministic, reviewable input. The tradeoff,
 # stated plainly: these are lockfile-DECLARED licenses, not licenses read from
-# installed package files. Inventory §4.2 already flags that OSL-13 must
+# installed package files. A follow-up must
 # re-derive them from an actual install of the exact release lockfile.
 #
 # Second tradeoff: expressions are compared as literal strings, because there
@@ -244,13 +244,13 @@ echo "== G. npm dependency licenses =="
 # rather than resolved to its MIT branch. That is stricter, not looser — a new
 # spelling of an already-acceptable license fails and gets a human look.
 
-# Permissive expressions, from inventory Appendix B. Every one of these is
+# Permissive expressions. Every one of these is
 # present in a lockfile today.
 readonly NPM_ALLOWED_LICENSES=(
     "MIT" "ISC" "0BSD" "MIT-0" "BSD-2-Clause" "BSD-3-Clause" "Apache-2.0"
     "Apache-2.0 OR MIT" "MIT OR Apache-2.0"
     # Disjunctions that offer a plainly permissive branch, and two
-    # single-license permissive outliers. All dev/build-only; inventory §4.3
+    # single-license permissive outliers. All dev/build-only;
     # records "all permissive, no action" for each.
     "(BSD-2-Clause OR MIT OR Apache-2.0)"  # rc
     "(MIT OR CC0-1.0)"                     # type-fest
@@ -268,13 +268,13 @@ npm_exception_reason() {
     local name="$1" license="$2"
     case "$name|$license" in
     "elkjs|EPL-2.0")
-        echo "D-2: weak file-level copyleft, bundled UNMODIFIED into the desktop app as the diagram layout engine. EPL-2.0 permits distributing the surrounding work under other terms; the source-availability obligation is discharged by naming elkjs, its version, EPL-2.0 and its upstream source in the artifact notice bundle (OSL-11). Note EPL-2.0 is not GPL-compatible — that constrains downstreams, not us. Inventory §4.3."
+        echo "Weak file-level copyleft, bundled UNMODIFIED into the desktop app as the diagram layout engine. EPL-2.0 permits distributing the surrounding work under other terms; the source-availability obligation is discharged by naming elkjs, its version, EPL-2.0 and its upstream source in the artifact notice bundle. Note EPL-2.0 is not GPL-compatible — that constrains downstreams, not us."
         ;;
     "dompurify|(MPL-2.0 OR Apache-2.0)")
-        echo "Disjunctive and RUNTIME. We elect the Apache-2.0 branch, so the MPL branch never applies. The election must be recorded explicitly in the notice bundle so it is auditable rather than inferred. Inventory §4.3."
+        echo "Disjunctive and RUNTIME. We elect the Apache-2.0 branch, so the MPL branch never applies. The election must be recorded explicitly in the notice bundle so it is auditable rather than inferred."
         ;;
     "caniuse-lite|CC-BY-4.0")
-        echo "Browserslist data, dev/build-only. CC-BY-4.0 requires attribution only if redistributed, and this is never redistributed. OSL-11 must confirm no build inlines its data into a shipped bundle. Inventory §4.3."
+        echo "Browserslist data, dev/build-only. CC-BY-4.0 requires attribution only if redistributed, and this is never redistributed. Any change to the bundling setup must re-confirm that no build inlines its data into a shipped bundle."
         ;;
     esac
 
@@ -285,10 +285,10 @@ npm_exception_reason() {
     # single-publisher scoped-or-hyphenated names.
     case "$name|$license" in
     "@vscode/vsce-sign"*"|SEE LICENSE IN LICENSE.txt")
-        echo "D-3: Microsoft's proprietary VSIX signing helper — non-SPDX and NOT open source. Accepted as a devDependency of the publishing toolchain that is never redistributed by us, and recorded here explicitly so it cannot pass as an unreviewed unknown. It must NOT appear in shipped VSIX notices (licensing-policy.md §5). Inventory §4.3."
+        echo "Microsoft's proprietary VSIX signing helper — non-SPDX and NOT open source. Accepted as a devDependency of the publishing toolchain that is never redistributed by us, and recorded here explicitly so it cannot pass as an unreviewed unknown. It must NOT appear in shipped VSIX notices."
         ;;
     "lightningcss"*"|MPL-2.0")
-        echo "The CSS transformer inside the Vite/Tailwind build. Weak file-level copyleft, but dev:true in every lockfile that carries it — it never enters a shipped artifact, so distribution imposes no obligation. Inventory §4.3."
+        echo "The CSS transformer inside the Vite/Tailwind build. Weak file-level copyleft, but dev:true in every lockfile that carries it — it never enters a shipped artifact, so distribution imposes no obligation."
         ;;
     esac
 }
@@ -299,7 +299,7 @@ mapfile -t npm_lockfiles < <(
         -name package-lock.json -type f -print | sed 's|^\./||' | sort
 )
 [ "${#npm_lockfiles[@]}" -gt 0 ] \
-    || abort "no package-lock.json found — npm license discovery is broken (inventory §4.2 expects four)"
+    || abort "no package-lock.json found — npm license discovery is broken (four are expected)"
 
 npm_checked=0
 npm_excepted=0
