@@ -1267,17 +1267,25 @@ async fn workspace_files(
 
 /// Bearer-token auth middleware for mutation endpoints.
 ///
-/// If `SYSML_API_TOKEN` is set, POST requests must include a matching
-/// `Authorization: Bearer <token>` header. If the env var is unset,
-/// mutations are open (backward compatible).
-async fn require_auth(headers: HeaderMap, request: Request, next: Next) -> impl IntoResponse {
-    let expected = std::env::var("SYSML_API_TOKEN").ok();
+/// The expected token is fixed when the router is built (see [`ApiConfig`]),
+/// not read per request. `None` means mutations are open.
+///
+/// Reading the environment here instead would make every request depend on
+/// mutable process-wide state — which is both a surprising thing for a server
+/// to do and, in tests, a race: one test setting the variable changed the
+/// answer for every other test running beside it.
+async fn require_auth(
+    expected: Option<Arc<str>>,
+    headers: HeaderMap,
+    request: Request,
+    next: Next,
+) -> impl IntoResponse {
     if let Some(expected_token) = expected {
         let provided = headers
             .get("authorization")
             .and_then(|v| v.to_str().ok())
             .and_then(|v| v.strip_prefix("Bearer "));
-        if provided != Some(&expected_token) {
+        if provided != Some(&*expected_token) {
             return StatusCode::UNAUTHORIZED.into_response();
         }
     }
@@ -1396,19 +1404,71 @@ fn is_loopback_origin(origin: &str) -> bool {
     matches!(host, "localhost" | "127.0.0.1" | "::1")
 }
 
+// ── Router configuration ────────────────────────────────────────────────
+
+/// Everything about the router that is a deployment decision rather than a
+/// property of the model: who may call it from a browser, and what token (if
+/// any) mutations must present.
+///
+/// Both are resolved ONCE, when the router is built. Neither is re-read per
+/// request, so a running server's access rules cannot change under it.
+#[derive(Debug, Clone, Default)]
+pub struct ApiConfig {
+    /// Which browser origins may call this server.
+    pub cors: CorsPolicy,
+    /// Bearer token required by write and command routes. `None` leaves
+    /// mutations open, which is the development default.
+    pub auth_token: Option<Arc<str>>,
+}
+
+impl ApiConfig {
+    /// Read the deployment configuration from the environment:
+    /// `SYSML_API_TOKEN` and `SYSML_API_CORS`.
+    ///
+    /// An empty `SYSML_API_TOKEN` is treated as unset. Exporting the variable
+    /// with no value reads as "I want auth", and silently accepting the empty
+    /// string as the required token would grant everyone access instead.
+    #[must_use]
+    pub fn from_env() -> Self {
+        Self {
+            cors: CorsPolicy::from_env(),
+            auth_token: std::env::var("SYSML_API_TOKEN")
+                .ok()
+                .filter(|t| !t.is_empty())
+                .map(Arc::from),
+        }
+    }
+
+    /// Require this bearer token on write and command routes.
+    #[must_use]
+    pub fn with_auth_token(mut self, token: impl AsRef<str>) -> Self {
+        self.auth_token = Some(Arc::from(token.as_ref()));
+        self
+    }
+
+    /// Use this browser-origin policy.
+    #[must_use]
+    pub fn with_cors(mut self, cors: CorsPolicy) -> Self {
+        self.cors = cors;
+        self
+    }
+}
+
 // ── Router construction ─────────────────────────────────────────────────
 
-/// Create the API router backed by a [`SysmlService`], with the default
-/// ([`CorsPolicy::LocalhostOnly`]) browser-origin policy.
+/// Create the API router backed by a [`SysmlService`], configured from the
+/// environment via [`ApiConfig::from_env`].
 ///
 /// If you need backward-compatible construction (empty in-memory store),
 /// use `create_router(Arc::new(AppState::new()))`.
 pub fn create_router(state: Arc<AppState>) -> Router {
-    create_router_with_cors(state, CorsPolicy::default())
+    create_router_with_config(state, ApiConfig::from_env())
 }
 
-/// Create the API router with an explicit browser-origin policy.
-pub fn create_router_with_cors(state: Arc<AppState>, cors: CorsPolicy) -> Router {
+/// Create the API router with an explicit configuration, reading nothing from
+/// the environment. This is what tests should use.
+pub fn create_router_with_config(state: Arc<AppState>, config: ApiConfig) -> Router {
+    let ApiConfig { cors, auth_token } = config;
     // Read-only routes (no auth required)
     let read_routes = Router::new()
         .route("/health", get(health))
@@ -1488,11 +1548,17 @@ pub fn create_router_with_cors(state: Arc<AppState>, cors: CorsPolicy) -> Router
         .route("/sessions/orchestrator/:key", delete(orchestrator_stop))
         // Generic command dispatch
         .route("/api/command", post(dispatch_command))
-        .layer(middleware::from_fn(require_auth));
+        .layer(middleware::from_fn({
+            let token = auth_token.clone();
+            move |h, r, n| require_auth(token.clone(), h, r, n)
+        }));
 
     // Auto-generated routes for all registered service commands
     let command_routes = inventory_routes()
-        .layer(middleware::from_fn(require_auth));
+        .layer(middleware::from_fn({
+            let token = auth_token.clone();
+            move |h, r, n| require_auth(token.clone(), h, r, n)
+        }));
 
     read_routes
         .merge(write_routes)
@@ -1617,7 +1683,10 @@ mod tests {
     async fn permissive_policy_still_admits_any_origin() {
         // The opt-out has to actually restore the old behaviour, or operators
         // behind a trusted proxy have no way back.
-        let app = create_router_with_cors(test_state(), CorsPolicy::Permissive);
+        let app = create_router_with_config(
+            test_state(),
+            ApiConfig::default().with_cors(CorsPolicy::Permissive),
+        );
         assert_eq!(
             allowed_origin_for(app, "https://example.com").await,
             Some("*".to_owned())
@@ -1628,6 +1697,93 @@ mod tests {
     fn the_safe_policy_is_the_default() {
         assert_eq!(CorsPolicy::default(), CorsPolicy::LocalhostOnly);
     }
+
+    // ── Auth configuration ──────────────────────────────────────────────
+    //
+    // The expected token used to be read from the process environment on every
+    // request. That made these tests mutate global state, and three unrelated
+    // tests running beside them intermittently saw the token and failed with
+    // 401 — a flake that made the whole suite unusable as a release gate. The
+    // token is now fixed when the router is built.
+
+    /// POST a source-load with whatever auth headers the caller supplies.
+    async fn post_source(app: Router, auth: Option<&str>) -> StatusCode {
+        let mut req = Request::builder()
+            .method("POST")
+            .uri("/sources")
+            .header("content-type", "application/json");
+        if let Some(a) = auth {
+            req = req.header("authorization", a);
+        }
+        app.oneshot(
+            req.body(Body::from(r#"{"uri":"t.sysml","source":"package P {}"}"#))
+                .unwrap(),
+        )
+        .await
+        .unwrap()
+        .status()
+    }
+
+    fn token_router() -> Router {
+        create_router_with_config(
+            test_state(),
+            ApiConfig::default().with_auth_token("right-token"),
+        )
+    }
+
+    #[tokio::test]
+    async fn a_correct_bearer_token_is_accepted() {
+        // The negative cases below are worthless without this one: middleware
+        // that rejected EVERYTHING would satisfy them all.
+        assert_ne!(
+            post_source(token_router(), Some("Bearer right-token")).await,
+            StatusCode::UNAUTHORIZED
+        );
+    }
+
+    #[tokio::test]
+    async fn a_wrong_or_missing_bearer_token_is_rejected() {
+        for auth in [None, Some("Bearer wrong-token"), Some("right-token")] {
+            assert_eq!(
+                post_source(token_router(), auth).await,
+                StatusCode::UNAUTHORIZED,
+                "auth {auth:?} must not pass"
+            );
+        }
+    }
+
+    #[tokio::test]
+    async fn command_routes_are_gated_too() {
+        // The inventory-generated routes carry their own auth layer. A token
+        // that only guarded the hand-written writes would leave the whole
+        // command surface open.
+        let response = token_router()
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri("/api/command")
+                    .header("content-type", "application/json")
+                    .body(Body::from(r#"{"command":"sysml.model.stats","params":{}}"#))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::UNAUTHORIZED);
+    }
+
+    #[tokio::test]
+    async fn no_token_configured_leaves_mutations_open() {
+        let app = create_router_with_config(test_state(), ApiConfig::default());
+        assert_ne!(post_source(app, None).await, StatusCode::UNAUTHORIZED);
+    }
+
+    #[test]
+    fn the_default_config_requires_no_token_and_restricts_origins() {
+        let c = ApiConfig::default();
+        assert!(c.auth_token.is_none());
+        assert_eq!(c.cors, CorsPolicy::LocalhostOnly);
+    }
+
 
     #[test]
     fn loopback_origin_matching_is_exact_on_the_host() {
@@ -1702,10 +1858,10 @@ mod tests {
 
     #[tokio::test]
     async fn post_without_auth_returns_401_when_token_set() {
-        // Set the expected token for this test
-        unsafe { std::env::set_var("SYSML_API_TOKEN", "test-secret-token") };
-
-        let app = create_router(test_state());
+        let app = create_router_with_config(
+            test_state(),
+            ApiConfig::default().with_auth_token("test-secret-token"),
+        );
 
         let response = app
             .oneshot(
@@ -1720,16 +1876,14 @@ mod tests {
             .unwrap();
 
         assert_eq!(response.status(), StatusCode::UNAUTHORIZED);
-
-        // Clean up
-        unsafe { std::env::remove_var("SYSML_API_TOKEN") };
     }
 
     #[tokio::test]
     async fn get_works_without_auth_when_token_set() {
-        unsafe { std::env::set_var("SYSML_API_TOKEN", "test-secret-token-2") };
-
-        let app = create_router(test_state());
+        let app = create_router_with_config(
+            test_state(),
+            ApiConfig::default().with_auth_token("test-secret-token-2"),
+        );
 
         let response = app
             .oneshot(
@@ -1742,8 +1896,6 @@ mod tests {
             .unwrap();
 
         assert_eq!(response.status(), StatusCode::OK);
-
-        unsafe { std::env::remove_var("SYSML_API_TOKEN") };
     }
 
     // ── New endpoint tests ──────────────────────────────────────────────
@@ -1771,9 +1923,10 @@ mod tests {
 
     #[tokio::test]
     async fn load_source_auth_required_when_token_set() {
-        unsafe { std::env::set_var("SYSML_API_TOKEN", "test-source-token") };
-
-        let app = create_router(test_state());
+        let app = create_router_with_config(
+            test_state(),
+            ApiConfig::default().with_auth_token("test-source-token"),
+        );
 
         let response = app
             .oneshot(
@@ -1790,8 +1943,6 @@ mod tests {
             .unwrap();
 
         assert_eq!(response.status(), StatusCode::UNAUTHORIZED);
-
-        unsafe { std::env::remove_var("SYSML_API_TOKEN") };
     }
 
     #[tokio::test]

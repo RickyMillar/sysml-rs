@@ -77,17 +77,17 @@ const DEFAULT_ADDR: &str = "127.0.0.1:8080";
 /// and a proxy or container setup is a legitimate reason. It refuses to let the
 /// exposure be silent.
 #[allow(clippy::print_stderr)] // startup banner
-fn warn_if_exposed(addr: &str, cors: sysml_api::CorsPolicy) {
+fn warn_if_exposed(addr: &str, config: &sysml_api::ApiConfig) {
     let host = addr.rsplit_once(':').map_or(addr, |(h, _)| h);
     let loopback = matches!(host.trim_start_matches('[').trim_end_matches(']'),
                             "127.0.0.1" | "::1" | "localhost");
     if !loopback {
         eprintln!("WARNING: binding {addr} — this server is reachable beyond this machine.");
-        if std::env::var_os("SYSML_API_TOKEN").is_none() {
+        if config.auth_token.is_none() {
             eprintln!("WARNING: SYSML_API_TOKEN is not set, so writes are UNAUTHENTICATED.");
         }
     }
-    if cors == sysml_api::CorsPolicy::Permissive {
+    if config.cors == sysml_api::CorsPolicy::Permissive {
         eprintln!("WARNING: permissive CORS — any web origin may call this API from a browser.");
     }
 }
@@ -104,12 +104,11 @@ async fn main() {
         .cloned()
         .unwrap_or_else(|| DEFAULT_ADDR.to_owned());
 
-    let cors = if args.iter().any(|a| a == "--permissive-cors") {
-        sysml_api::CorsPolicy::Permissive
-    } else {
-        sysml_api::CorsPolicy::from_env()
-    };
-    warn_if_exposed(&addr, cors);
+    let mut config = sysml_api::ApiConfig::from_env();
+    if args.iter().any(|a| a == "--permissive-cors") {
+        config.cors = sysml_api::CorsPolicy::Permissive;
+    }
+    warn_if_exposed(&addr, &config);
 
     if mcp_mode {
         // Shared service: both HTTP API and MCP stdio use the same instance.
@@ -120,7 +119,7 @@ async fn main() {
 
         let service = build_service(&args);
         let state = Arc::new(sysml_api::AppState::with_service(service.clone()));
-        let app = sysml_api::create_router_with_cors(state, cors);
+        let app = sysml_api::create_router_with_config(state, config.clone());
 
         // Spawn the HTTP server in a background task
         let http_handle = tokio::spawn(async move {
@@ -138,7 +137,7 @@ async fn main() {
     } else {
         eprintln!("SysML API server listening on {addr}");
         let state = Arc::new(sysml_api::AppState::with_service(build_service(&args)));
-        let app = sysml_api::create_router_with_cors(state, cors);
+        let app = sysml_api::create_router_with_config(state, config.clone());
         let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
         axum::serve(listener, app).await.unwrap();
     }

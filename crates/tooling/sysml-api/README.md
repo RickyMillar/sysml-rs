@@ -54,7 +54,7 @@ Holds an opaque `SessionReaperGuard`. The reaper is spawned at construction *onl
 
 #### `— *fn create_router(state: Arc<AppState>) -> Router` — *router*
 
-Assembles three route groups — `read_routes` (no auth), `write_routes` (auth layer), and `inventory_routes()` (auth layer) — then applies a global 50 MB body limit and the CORS layer for the active `CorsPolicy` (loopback origins only unless told otherwise). Returns the full `axum::Router`. `create_router_with_cors` takes the policy explicitly.
+Assembles three route groups — `read_routes` (no auth), `write_routes` (auth layer), and `inventory_routes()` (auth layer) — then applies a global 50 MB body limit and the CORS layer for the active `CorsPolicy` (loopback origins only unless told otherwise). Returns the full `axum::Router`. `create_router_with_config` takes the whole `ApiConfig` (CORS policy plus auth token) explicitly and reads nothing from the environment.
 
 #### `— *async fn run_server(addr: &str) -> Result<(), Box<dyn Error>>` — *entry*
 
@@ -146,7 +146,7 @@ GET /models/coffee.sysml/diagnostics?with_readiness=1
 
 | File | Responsibility | Key items |
 |---|---|---|
-| src/lib.rs | Request/response types, all REST handlers, error mapping, router assembly, auth/CORS/body-limit middleware, test module | AppState · create_router · create_router_with_cors · CorsPolicy · inventory_routes · require_auth · service_err_response |
+| src/lib.rs | Request/response types, all REST handlers, error mapping, router assembly, auth/CORS/body-limit middleware, test module | AppState · create_router · create_router_with_config · ApiConfig · CorsPolicy · inventory_routes · require_auth · service_err_response |
 | src/main.rs | Binary entry point; default HTTP server, optional shared MCP stdio handler via `--mcp` | main · AppState::new · sysml_mcp::serve |
 | src/lsp_ws.rs | WebSocket transport bridging an LSP session over WS at `/lsp` | lsp_ws_handler |
 | src/progress_sse.rs | SSE stream over `SysmlService::subscribe_progress` | progress_sse_handler |
@@ -229,7 +229,7 @@ None inside the workspace — `sysml-api` is a terminal transport. It is consume
 
 - **Reaper needs a runtime.** `AppState::new()` only spawns the session reaper inside a tokio runtime; in a sync test it is a no-op. Dropping the state aborts the task.
 
-- **Auth is off by default.** With `SYSML_API_TOKEN` unset, all mutations are open (back-compat). When set, write/inventory routes require `Authorization: Bearer <token>`.
+- **Auth is off by default.** With `SYSML_API_TOKEN` unset, all mutations are open. When set, write/inventory routes require `Authorization: Bearer <token>`; read routes are never gated. The token is resolved ONCE when the router is built (`ApiConfig::from_env`), never per request — `create_router_with_config` takes it explicitly, which is what tests should use.
 
 - **CORS admits loopback origins only.** The default `CorsPolicy::LocalhostOnly` grants `localhost` / `127.0.0.1` / `[::1]` on any port and either scheme; every other origin gets no allow-origin header back. `--permissive-cors` or `SYSML_API_CORS=permissive` restores allow-any — appropriate behind a trusted proxy, not on an open port.
 
