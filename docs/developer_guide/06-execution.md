@@ -625,7 +625,7 @@ We are significantly ahead of both reference implementations across all executio
 
 ## Beyond EX-8: port flow, ODE, physics
 
-Phases 10–15 extended the runtime with port-aware simulation, parametric solving, plugin solvers, and ODE-with-state-machine coupling. Phases 16+ (Apr 12–14 2026) added the physics-aware layer and the SysML-to-Simulation pipeline. Tracked in [Runtime-in-Diagram Tracker](../archive/runtime-in-diagram-tracker.md), [Port-Flow Architecture](../archive/port-flow-simulation-architecture.md), [Physics-Aware Simulation](../archive/physics-aware-simulation.md), and [SysML-to-Simulation Pipeline](../design/sysml-to-simulation-pipeline.md).
+Phases 10–15 extended the runtime with port-aware simulation, parametric solving, plugin solvers, and ODE-with-state-machine coupling. Phases 16+ (Apr 12–14 2026) added the physics-aware layer and the SysML-to-Simulation pipeline. All of it has shipped; the module map above and the `sysml-runtime` source are the current description.
 
 | Phase | Feature | Status |
 |-------|---------|--------|
@@ -712,7 +712,7 @@ Records simulation events as an interaction model with lifelines (for parts) and
 | ADR-5 | Sequence trace as first-class output format |
 | ADR-6 | No external dependencies until Phase 14 (plugin API) |
 
-See the [architecture doc](../archive/port-flow-simulation-architecture.md) for full ADR details, risk assessment, and implementation guide.
+See `crates/lang/sysml-runtime/src/flows/` for the implementation.
 
 ### Phase 14: Solver Plugin API
 

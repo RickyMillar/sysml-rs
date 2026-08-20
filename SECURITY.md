@@ -2,18 +2,20 @@
 
 ## Supported versions
 
-sysml-rs is in **preview**. There is no long-term support branch and no
-backporting: only the most recent release receives security fixes, and fixes
-land as a new release rather than as a patch to an older one.
+sysml-rs is in **pre-alpha preview**, and **there are no releases yet** —
+`main` is the only thing to run. Build it from source; the quick start in
+[README.md](README.md) is the supported path.
 
 | Version | Supported |
 |---|---|
-| Latest release | Yes |
-| Any earlier release | No — upgrade to the latest release |
-| `main` / unreleased commits | Best effort; report anyway |
+| `main` | Yes — report anything you find |
+| A build you made from an older commit | Rebuild from current `main` first |
 
-If a fix requires a breaking change during preview, we will make the breaking
-change and say so in the release notes.
+Once releases exist, the policy will be: no long-term support branch and no
+backporting — only the most recent release receives security fixes, and a fix
+lands as a new release rather than as a patch to an older one. If a fix
+requires a breaking change during preview, we will make the breaking change and
+say so.
 
 ## Reporting a vulnerability
 
@@ -25,7 +27,10 @@ Report privately through GitHub's private vulnerability reporting:
 2. Choose **Report a vulnerability** to open a private Security Advisory.
 
 That channel is private to you and the maintainers until an advisory is
-published.
+published. If the **Report a vulnerability** button is not there, the feature
+has not been enabled yet — open an issue saying only that you have a security
+report and would like a private channel, with no details in it, and you will be
+given one.
 
 Useful things to include, as far as you have them: affected component (CLI,
 LSP server, REST/WebSocket API, MCP server, VS Code extension, desktop app, or

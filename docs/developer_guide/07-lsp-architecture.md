@@ -11,7 +11,7 @@ The LSP is a Layer 5 transport crate (`crates/tooling/sysml-lsp-server`). It doe
 3. Manage open-document state, library lifecycle, and project discovery.
 4. Format the responses back as LSP types.
 
-[ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) codifies the "LSP holds no domain state" rule: the LSP is the single writer for URIs it has open, but the model itself is owned by `SysmlService` / `AnalysisHost`.
+The "LSP holds no domain state" rule is load-bearing here: the LSP is the single writer for URIs it has open, but the model itself is owned by `SysmlService` / `AnalysisHost`.
 
 ## Module map
 
@@ -178,6 +178,5 @@ Provides **richer** highlighting on top of tree-sitter — uses the resolved `Mo
 - [03-resolution.md](03-resolution.md) — what the LSP's resolution queries do.
 - [08-logging-contract.md](08-logging-contract.md) — `ux_messages` channels and field vocabulary.
 - [20-sysml-service-design.md](20-sysml-service-design.md) — the service the LSP dispatches to.
-- [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "LSP holds no domain state".
-- [ADR-013](../design/adr/013-monaco-editor-transport.md) — Monaco-over-WebSocket transport (the in-browser sibling of the stdio LSP).
+- `crates/tooling/sysml-service/README.md` — the service surface the LSP dispatches into.
 - `crates/tooling/sysml-lsp-server/README.md` — quick-reference module map and pitfall list.

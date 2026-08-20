@@ -188,7 +188,7 @@ re-export would break the CST-only build's layering invariant.
 - `sysml-parser-incremental` → `sysml-span`, `tree-sitter`, `tree-sitter-sysml`; under `semantic`, also `sysml-parser-trait` + `sysml-core`
 
 See [02-parsing.md](02-parsing.md) for the grammar and the parse pipeline, and
-[ADR-014](../design/adr/014-tree-sitter-canonical-parser.md) for why there is
+[02-parsing.md](02-parsing.md) for why there is
 only one parser.
 
 ---
@@ -297,9 +297,9 @@ Two further points about the surface:
 
 #### Transports
 
-- `sysml-lsp-server` — tower-lsp over stdio. A thin wrapper that translates LSP protocol calls into `SysmlService` dispatches; see [07-lsp-architecture.md](07-lsp-architecture.md) and [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md).
+- `sysml-lsp-server` — tower-lsp over stdio. A thin wrapper that translates LSP protocol calls into `SysmlService` dispatches; see [07-lsp-architecture.md](07-lsp-architecture.md).
 - `sysml-cli` — the `sysml` binary. 26 subcommands (`check`, `inspect`, `query`, `export`, `simulate`, `run`, `verify`, `trade-study`, the `init`/`add`/`lock`/`fetch` project family, …). Subcommands delegate to service commands; the CLI keeps only I/O and output formatting. `sysml serve` is gated behind the `server` feature, which pulls in `sysml-api`.
-- `sysml-api` — axum REST + WebSocket, and the widest-reach binary: it embeds `sysml-lsp-server` (LSP over WebSocket, the Monaco transport — see [ADR-013](../design/adr/013-monaco-editor-transport.md)) and `sysml-mcp` (with `--mcp`), all sharing one `SysmlService`.
+- `sysml-api` — axum REST + WebSocket, and the widest-reach binary: it embeds `sysml-lsp-server` (LSP over WebSocket, the Monaco transport — see [07-lsp-architecture.md](07-lsp-architecture.md)) and `sysml-mcp` (with `--mcp`), all sharing one `SysmlService`.
 - `sysml-mcp` — an `rmcp` MCP server exposing service commands as MCP tools for AI agents. Runs standalone or inside `sysml-api --mcp`. It carries one tool more than there are service commands: `sysml_command_catalog` exposes the registry itself and has no `#[service_command]` behind it.
 
 **Dependencies:**

@@ -276,6 +276,6 @@ cargo test -p sysml-api -- --test-threads=1       # REST tests (serial for env v
 - [00-architecture.md](00-architecture.md) — how the service sits in the broader layering.
 - [07-lsp-architecture.md](07-lsp-architecture.md) — the LSP transport adapter.
 - [19-mcp-server-architecture.md](19-mcp-server-architecture.md) — the MCP transport adapter and tool registry.
-- [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "LSP holds no domain state" (the principle the service surface embodies).
+- [07-lsp-architecture.md](07-lsp-architecture.md) — "LSP holds no domain state", the principle the service surface embodies.
 - `crates/tooling/sysml-service/README.md` — quick-reference module map + pitfalls.
 - `crates/tooling/sysml-service-macros/src/` — proc-macro implementation.

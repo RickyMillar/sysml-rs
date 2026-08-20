@@ -205,10 +205,14 @@ illustrations, not normative sources, and are not evidence of conformance.
 
 ## Learning SysML v2
 
-If you are learning the language rather than the tool, start with the companion
-book: **[sysmlv2-book](https://www.omg.org/spec/SysML/)**, a
-plain-English guide to SysML v2 maintained alongside this project. The OMG
-specification itself lives at <https://www.omg.org/sysml/sysmlv2/>.
+If you are learning the language rather than the tool, the OMG specification is
+the authority: **[SysML v2](https://www.omg.org/spec/SysML/)** and the KerML
+layer beneath it. sysml-rs follows that specification and does not extend it, so
+anything the spec says about a construct is what this tool aims to do with it.
+
+The `examples/` directory in this repository is the practical starting point —
+each file is a working model the test suite exercises, so it parses, resolves,
+and (where applicable) runs.
 
 ## Contributing
 

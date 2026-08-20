@@ -1,0 +1,32 @@
+sysml-rs is dual-licensed.
+
+You may use this software under the terms of EITHER:
+
+  * the Apache License, Version 2.0 — see LICENSE-APACHE, or
+    <http://www.apache.org/licenses/LICENSE-2.0>
+
+  * the MIT license — see LICENSE-MIT, or
+    <http://opensource.org/licenses/MIT>
+
+at your option. This is the customary dual license for the Rust ecosystem, and
+it is what every manifest in this repository declares as `MIT OR Apache-2.0`.
+
+This file is a pointer, not a licence. It does not add to, restrict, or
+override either licence, and it does not replace them: the operative texts are
+LICENSE-APACHE and LICENSE-MIT, both of which must travel with any copy of this
+software. Where this summary and those texts differ, those texts govern.
+
+Unless you state otherwise, any contribution you intentionally submit for
+inclusion in this work is dual-licensed on the same terms, with no additional
+conditions. See CONTRIBUTING.md.
+
+--
+
+This covers the contents of this repository only.
+
+The OMG specification materials that tools/fetch-references retrieves — the
+SysML v2 and KerML specification documents, the standard model library, the
+metamodel and vocabulary files, and the SysML v2 Pilot Implementation — are NOT
+part of this repository, are not distributed with it, and carry their own terms
+from the Object Management Group. Fetching them is your action, under those
+terms.

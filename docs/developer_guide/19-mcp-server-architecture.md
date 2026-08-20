@@ -40,7 +40,7 @@ Every tool handler is one line of real work: `dispatch_to_service(&self.service,
 2. The tool-name → command-name mapping (mechanical: dots → underscores).
 3. Optional typed request structs for tools that benefit from explicit MCP schema documentation.
 
-[ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) governs this layering: transports are thin, the service owns the model.
+One rule governs this layering: transports are thin, the service owns the model.
 
 ## Tool surface (grouped by category)
 
@@ -194,4 +194,4 @@ No live-MCP integration test currently runs in CI; the coverage gate plus servic
 - [20-sysml-service-design.md](20-sysml-service-design.md) — the service this transport adapts.
 - [07-lsp-architecture.md](07-lsp-architecture.md) — sibling stdio transport (LSP).
 - `crates/tooling/sysml-mcp/README.md` — quick-reference module map + pitfalls.
-- [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "transport adapters hold no domain state" (applied identically here).
+- The rule that transport adapters hold no domain state applies identically here.
