@@ -551,9 +551,9 @@ mod tests {
             store.append(new_event("p1", "  ")),
             Err(WorkflowStoreError::MissingActor)
         ));
-        let a = store.append(new_event("p1", "ricky")).unwrap();
-        let b = store.append(new_event("p1", "ricky")).unwrap();
-        let c = store.append(new_event("p2", "ricky")).unwrap();
+        let a = store.append(new_event("p1", "analyst")).unwrap();
+        let b = store.append(new_event("p1", "analyst")).unwrap();
+        let c = store.append(new_event("p2", "analyst")).unwrap();
         assert_eq!((a.seq, b.seq, c.seq), (1, 2, 1));
         assert_eq!(a.schema_version, WORKFLOW_SCHEMA_VERSION);
         assert_eq!(store.events(&ProjectId::new("p1"), None).unwrap().len(), 2);
@@ -581,8 +581,8 @@ mod tests {
         {
             let (store, rec) = JsonlWorkflowStore::open(&path).unwrap();
             assert!(rec.torn_tail_discarded.is_none());
-            store.append(new_event("p1", "ricky")).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
         }
         let (store, rec) = JsonlWorkflowStore::open(&path).unwrap();
         assert!(rec.torn_tail_discarded.is_none());
@@ -590,7 +590,7 @@ mod tests {
         assert_eq!(events.len(), 2);
         assert_eq!(events[1].seq, 2);
         // Appends continue the seq after replay.
-        let next = store.append(new_event("p1", "ricky")).unwrap();
+        let next = store.append(new_event("p1", "analyst")).unwrap();
         assert_eq!(next.seq, 3);
     }
 
@@ -600,7 +600,7 @@ mod tests {
         let path = dir.path().join("workflow.jsonl");
         {
             let (store, _) = JsonlWorkflowStore::open(&path).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
         }
         // Simulate a torn append.
         {
@@ -622,8 +622,8 @@ mod tests {
         let path = dir.path().join("workflow.jsonl");
         {
             let (store, _) = JsonlWorkflowStore::open(&path).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
         }
         // Corrupt the FIRST line.
         let raw = std::fs::read_to_string(&path).unwrap();
@@ -642,8 +642,8 @@ mod tests {
         let path = dir.path().join("workflow.jsonl");
         {
             let (store, _) = JsonlWorkflowStore::open(&path).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
-            store.append(new_event("p1", "ricky")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
+            store.append(new_event("p1", "analyst")).unwrap();
         }
         // Delete the first line (history truncated from the front).
         let raw = std::fs::read_to_string(&path).unwrap();
@@ -688,7 +688,7 @@ mod tests {
                 .append(NewWorkflowEvent {
                     project: project.clone(),
                     element_id: el.clone(),
-                    actor: "ricky".into(),
+                    actor: "analyst".into(),
                     kind,
                 })
                 .unwrap();

@@ -7,7 +7,7 @@
 //!
 //! The obligation this tier gates is *no-regression*: the real corpus still
 //! parses / resolves / elaborates / executes. It is **illustration, not
-//! conformance proof** (root `CLAUDE.md` source-precedence rule 5) — a red row
+//! conformance proof** (source-precedence rule 5) — a red row
 //! here is a real signal owned by the grammar lane, never softened away.
 //!
 //! ## Corpus registry

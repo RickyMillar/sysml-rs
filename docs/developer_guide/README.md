@@ -16,7 +16,6 @@ Architecture, workflows, and conventions for the Rust implementation of the OMG 
 | 06 | [Execution Runtime](06-execution.md) | sysml-runtime modules, execution semantics, physics |
 | 07 | [LSP Architecture](07-lsp-architecture.md) | LSP server map, diagnostic sources, highlighting |
 | 08 | [Logging Contract](08-logging-contract.md) | Field vocabulary, volume controls |
-| 11 | [Vis Coverage Roadmap](11-vis-coverage-roadmap.md) | Diagram view coverage plan and status |
 | 13 | [Vis Pipeline Architecture](13-vis-pipeline-architecture.md) | ModelGraph → generators → DiagramIR → ViewModel → React-SVG renderer |
 | 19 | [MCP Server Architecture](19-mcp-server-architecture.md) | sysml-mcp transport, one tool per service command |
 | 20 | [sysml-service Design](20-sysml-service-design.md) | #[service_command] dispatch, transport adapters, state model |
@@ -112,8 +111,8 @@ Server-rendered and delivered to editors — no in-browser parse/render engine. 
 
 - Read the relevant guide for your area.
 
-- Research the SysML v2 spec before implementing (see the root `CLAUDE.md` and `references/sysmlv2/`).
+- Research the SysML v2 spec before implementing (see `references/sysmlv2/`).
 
 - Run `cargo test`; for parser/diagnostic work run the corpus and `tools/scripts/diagnostic_sweep.sh`.
 
-Part of the [sysml-rs](../../README.md) workspace · agent guidance in `CLAUDE.md`
+Part of the [sysml-rs](../../README.md) workspace

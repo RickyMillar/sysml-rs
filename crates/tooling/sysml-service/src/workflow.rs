@@ -495,12 +495,12 @@ mod tests {
 
         // Method outside the spec's closed set dies at the write boundary.
         let bad = attest_verification(
-            &mut store, &workflow, &project, &g1, &req_id, "inspekt", "looked", "ricky",
+            &mut store, &workflow, &project, &g1, &req_id, "inspekt", "looked", "analyst",
         );
         assert!(matches!(bad, Err(ServiceError::InvalidInput(_))));
 
         let event = attest_verification(
-            &mut store, &workflow, &project, &g1, &req_id, "inspect", "looked closely", "ricky",
+            &mut store, &workflow, &project, &g1, &req_id, "inspect", "looked closely", "analyst",
         )
         .unwrap();
         assert!(matches!(
@@ -560,7 +560,7 @@ mod tests {
         );
         assert!(matches!(missing_actor, Err(ServiceError::InvalidInput(_))));
         let event = attest_suspect_clearing(
-            &mut store, &workflow, &project, &g2, &req.id, "B1", "intent unchanged", "ricky",
+            &mut store, &workflow, &project, &g2, &req.id, "B1", "intent unchanged", "analyst",
         )
         .unwrap();
         let views = suspects_with_clearings(&store, &workflow, &project, "B1", None).unwrap();
@@ -595,7 +595,7 @@ mod tests {
         storage::create_baseline(&mut store, &project, "B1", None, None).unwrap();
         // Nothing changed — attesting must fail loudly.
         let err = attest_suspect_clearing(
-            &mut store, &workflow, &project, &g1, &req.id, "B1", "why", "ricky",
+            &mut store, &workflow, &project, &g1, &req.id, "B1", "why", "analyst",
         )
         .unwrap_err();
         assert!(err.to_string().contains("not suspect"));
@@ -614,44 +614,44 @@ mod tests {
 
         // Existence gate (all four share it — spot-check two).
         assert!(matches!(
-            comment(&workflow, &graph, &project, &dead, "hi", "ricky"),
+            comment(&workflow, &graph, &project, &dead, "hi", "analyst"),
             Err(ServiceError::ElementNotFound(_))
         ));
         assert!(matches!(
-            set_approval(&workflow, &graph, &project, &dead, "in_review", "ricky"),
+            set_approval(&workflow, &graph, &project, &dead, "in_review", "analyst"),
             Err(ServiceError::ElementNotFound(_))
         ));
 
         // Blank payloads die in the service layer.
         assert!(matches!(
-            comment(&workflow, &graph, &project, &req.id, "  ", "ricky"),
+            comment(&workflow, &graph, &project, &req.id, "  ", "analyst"),
             Err(ServiceError::InvalidInput(_))
         ));
         assert!(matches!(
-            assign(&workflow, &graph, &project, &req.id, "", "ricky"),
+            assign(&workflow, &graph, &project, &req.id, "", "analyst"),
             Err(ServiceError::InvalidInput(_))
         ));
         assert!(matches!(
-            sign_off(&workflow, &graph, &project, &req.id, " \n", "ricky"),
+            sign_off(&workflow, &graph, &project, &req.id, " \n", "analyst"),
             Err(ServiceError::InvalidInput(_))
         ));
 
         // Happy path: payloads are stored trimmed, kinds are right.
-        let c = comment(&workflow, &graph, &project, &req.id, " looks fine ", "ricky").unwrap();
+        let c = comment(&workflow, &graph, &project, &req.id, " looks fine ", "analyst").unwrap();
         assert_eq!(
             c.kind,
             WorkflowEventKind::Comment {
                 body: "looks fine".to_owned()
             }
         );
-        let a = assign(&workflow, &graph, &project, &req.id, "sam", "ricky").unwrap();
+        let a = assign(&workflow, &graph, &project, &req.id, "sam", "analyst").unwrap();
         assert_eq!(
             a.kind,
             WorkflowEventKind::EngineerAssigned {
                 assignee: "sam".to_owned()
             }
         );
-        let s = sign_off(&workflow, &graph, &project, &req.id, "reviewed rev B", "ricky").unwrap();
+        let s = sign_off(&workflow, &graph, &project, &req.id, "reviewed rev B", "analyst").unwrap();
         assert_eq!(
             s.kind,
             WorkflowEventKind::SignOffAttestation {
@@ -677,18 +677,18 @@ mod tests {
         graph.add_element(req.clone());
 
         // Unknown state is rejected before anything is written.
-        let err = set_approval(&workflow, &graph, &project, &req.id, "aproved", "ricky")
+        let err = set_approval(&workflow, &graph, &project, &req.id, "aproved", "analyst")
             .unwrap_err();
         assert!(err.to_string().contains("unknown approval state"));
 
         // No-op: the initial state IS draft — "transitioning" to it
         // records nothing.
         let err =
-            set_approval(&workflow, &graph, &project, &req.id, "draft", "ricky").unwrap_err();
+            set_approval(&workflow, &graph, &project, &req.id, "draft", "analyst").unwrap_err();
         assert!(err.to_string().contains("already in approval state"));
 
         // First real transition derives from == the initial state.
-        let e1 = set_approval(&workflow, &graph, &project, &req.id, "in_review", "ricky").unwrap();
+        let e1 = set_approval(&workflow, &graph, &project, &req.id, "in_review", "analyst").unwrap();
         assert_eq!(
             e1.kind,
             WorkflowEventKind::ApprovalStateChanged {
@@ -722,7 +722,7 @@ mod tests {
         let mut graph = ModelGraph::new();
         graph.add_element(alive.clone());
 
-        assert!(relink(&workflow, &graph, &project, &dead, &dead, "r", "ricky").is_err());
+        assert!(relink(&workflow, &graph, &project, &dead, &dead, "r", "analyst").is_err());
         assert!(relink(
             &workflow,
             &graph,
@@ -730,12 +730,12 @@ mod tests {
             &dead,
             &ElementId::from_string("also-missing"),
             "r",
-            "ricky"
+            "analyst"
         )
         .is_err());
 
         let event =
-            relink(&workflow, &graph, &project, &dead, &alive.id, "successor", "ricky").unwrap();
+            relink(&workflow, &graph, &project, &dead, &alive.id, "successor", "analyst").unwrap();
         assert_eq!(event.element_id, alive.id);
     }
 }

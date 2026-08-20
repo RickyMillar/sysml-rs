@@ -75,9 +75,8 @@ All scripts are idempotent and safe to re-run.
   already be cached, and the cache will never see your output.
 * **Do not commit `parser.c`.** It is gitignored. CI generates it from
   scratch (no cache). Local cache only.
-* **Do not `git stash` / `git checkout --` inside a worktree** - another
-  parallel agent likely owns uncommitted changes. The repo-level CLAUDE.md
-  rule applies inside worktrees too.
+* **Do not `git stash` / `git checkout --` inside a worktree.** Grammar
+  worktrees routinely hold uncommitted work that is not yours to discard.
 
 ## Tree-sitter facts (locked)
 
@@ -92,11 +91,7 @@ All scripts are idempotent and safe to re-run.
 
 ## Cross-references
 
-  - per-gap intake for the future grammar agent (built by a sibling agent
-  in parallel with this infrastructure work).
-* `Architectural-cleanup/tree-sitter-canonical-plan/PROGRESS.md`
-  - bucket rollup.
-* `crates/lang/sysml-parser-incremental/CLAUDE.md` - grammar architecture
+* `crates/lang/sysml-parser-incremental/README.md` - grammar architecture
   and pitfalls (the "ALL optionals INLINE" rule, conflict declarations,
   rule merging).
 * `crates/lang/sysml-parser-incremental/tree-sitter/OPTIMIZATION_GUIDE.md`

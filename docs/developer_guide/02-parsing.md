@@ -121,7 +121,8 @@ grep -n "StateDefinition" \
   references/sysmlv2/SysML-v2-Pilot-Implementation/org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext
 ```
 
-Or delegate via the research agent: `Task(subagent_type=sysml-research, prompt="Find the xtext grammar rule for StateDefinition")`.
+The xtext rule is the authority on what the concrete syntax admits; the
+tree-sitter rule must accept the same shapes.
 
 ### 3. Patch the rule module
 
@@ -180,4 +181,4 @@ now-passing file from the list — coverage tests will fail loudly if you forget
 
 - [00-architecture.md](00-architecture.md) — where parsing sits in the overall layering.
 - [03-resolution.md](03-resolution.md) — what happens to `unresolved_*` properties after parsing.
-- `crates/lang/sysml-parser-incremental/CLAUDE.md` — full tree-sitter crate playbook.
+- `crates/lang/sysml-parser-incremental/README.md` — full tree-sitter crate playbook.

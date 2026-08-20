@@ -30,7 +30,7 @@ transport tower-lsp axum tower
 
 ## What the suite covers
 
-`sysml-spec-tests` splits into two halves: reusable **coverage primitives** in `src/` (importable as a library), and 37 **integration test files** in `tests/` (count refreshed 2026-07-30; layer map in `sysml-spec-tests/CLAUDE.md`) that drive the real engine and transports against committed fixtures and the official corpus.
+`sysml-spec-tests` splits into two halves: reusable **coverage primitives** in `src/` (importable as a library), and 37 **integration test files** in `tests/` (count refreshed 2026-07-30; layer map in `sysml-spec-tests/README.md`) that drive the real engine and transports against committed fixtures and the official corpus.
 
 **Coverage primitives (`src/`).**
 
@@ -89,4 +89,4 @@ SYSML_CORPUS_PATH=references/sysmlv2 \
 cargo insta review
 ```
 
-Part of the [sysml-rs](../../README.md) workspace · crate docs: [sysml-spec-tests](sysml-spec-tests/README.md) · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../README.md) workspace · crate docs: [sysml-spec-tests](sysml-spec-tests/README.md) · regenerated 2026-06-03

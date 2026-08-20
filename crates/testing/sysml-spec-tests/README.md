@@ -176,4 +176,4 @@ cargo insta review
 
 > ⚠  **Removed:** `sysml-parser-batch` is no longer a dependency — the Pest parser and its rule-coverage consumer were deleted (see the comment at the top of `Cargo.toml`). It is a test-only crate, so nothing depends on it downstream.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

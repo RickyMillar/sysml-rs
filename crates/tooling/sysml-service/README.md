@@ -290,4 +290,4 @@ cargo test -p sysml-mcp               # MCP coverage (every command has a tool)
 cargo bench -p sysml-service          # bench_check_constraints, bench_sim_start
 ```
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

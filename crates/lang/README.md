@@ -82,4 +82,4 @@ SYSML_CORPUS_PATH=references/sysmlv2 \
 
 Integration tests that need parsing use `sysml-parser-incremental` with the `semantic` feature (which enables `ModelGraph` construction). Each crate keeps its own `#[cfg(test)] mod tests` colocated with source.
 
-Part of the [sysml-rs](../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../README.md) workspace · regenerated 2026-06-03

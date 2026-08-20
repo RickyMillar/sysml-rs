@@ -11632,7 +11632,7 @@ mod tests {
     /// single-SM-no-ODE mint entry point existed yet; now that
     /// `build_sm_orchestrator` does, this collapses onto it rather than
     /// keeping a second slot-minting path alive for a scenario production
-    /// already covers (CLAUDE.md principle 4/5). The subsystem name is now
+    /// already covers — one home. The subsystem name is now
     /// "SM" (the declared state-def name `build_sm_orchestrator` registers
     /// under), not the old arbitrary "sm" label.
     fn insert_running_sim_session(service: &SysmlService) -> String {

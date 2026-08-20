@@ -171,7 +171,7 @@ pub type EvalResult = Result<Value, EvaluationError>;
 /// out of snapshot views, diff reports, time-series collection and
 /// occurrence feature capture.
 ///
-/// This is the single home for the predicate (CLAUDE.md #4): the eval
+/// This is the single home for the predicate: the eval
 /// context, snapshot view, orchestrator and service layer all route their
 /// `starts_with("__")` checks here. When bookkeeping slots become typed
 /// (`SlotMeta::bookkeeping`, RSC-2.0 §D-2.0.2) this string predicate is the

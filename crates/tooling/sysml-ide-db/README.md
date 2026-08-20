@@ -207,4 +207,4 @@ A mutation on the host blocks until every `Analysis` clone drops, cancelling the
 
 Required for cross-thread snapshots and salsa memoisation. New queries must satisfy `PartialEq + Eq + Hash` — wrap via the arc macro.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

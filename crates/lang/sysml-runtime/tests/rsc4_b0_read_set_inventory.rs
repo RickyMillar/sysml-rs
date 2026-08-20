@@ -353,7 +353,7 @@ fn inventory(orch: &Orchestrator) -> String {
     // witness, which only checked the RESULT permutation and would miss a case
     // where the two assemblies disagree on edges yet both happen to yield an
     // identity order. The scheduler exposes its own edges via `edges()`, so this
-    // is one home (CLAUDE.md #4): a single edge definition, independently derived
+    // is one home: a single edge definition, independently derived
     // here and diffed, not a second producer.
     let sched_edge_set: BTreeSet<(usize, usize, u32)> = orch
         .execution_schedule()

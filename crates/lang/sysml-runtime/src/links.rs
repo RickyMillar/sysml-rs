@@ -164,7 +164,7 @@ impl LinkEndpoint {
 ///
 /// This is the single home for endpoint→feature-name discovery: signal
 /// propagation, signal-feature slot minting, and move-clear all route through
-/// it so the def-vs-instance bridge is expressed once (CLAUDE.md #4/#5). The
+/// it so the def-vs-instance bridge is expressed exactly once. The
 /// one site that previously derived this keying by hand — the orchestrator's
 /// move-clear — was reading the registry with the per-*instance* key and so
 /// always missed (the bug this consolidation closes).

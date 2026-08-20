@@ -32,7 +32,7 @@ Persistent record of *completed runtime sessions* — keyed by opaque session id
 
 - Module: `session_archive` (re-exported from the crate root)
 
->  **Why one crate?** Both subsystems are pure persistence with a `serde`-based wire contract and no `sysml-runtime` dependency. Snapshots store model JSON; the archive stores execution snapshots as opaque `serde_json::Value` so the service layer converts `ExecutionSnapshot ⇄ JSON` at the boundary. (Tracked as low-severity tech debt — see CLAUDE.md.)
+>  **Why one crate?** Both subsystems are pure persistence with a `serde`-based wire contract and no `sysml-runtime` dependency. Snapshots store model JSON; the archive stores execution snapshots as opaque `serde_json::Value` so the service layer converts `ExecutionSnapshot ⇄ JSON` at the boundary. (Tracked as low-severity tech debt.)
 
 ## Where it sits
 
@@ -285,4 +285,4 @@ cargo test -p sysml-store --features postgres
 
 Coverage: snapshot put/get round-trip, latest tracking, commit-list ordering, project listing, conflict detection, 100-commit cap eviction; archive record/get/list/filter, idempotent record, golden mark/unmark/pinning, ring eviction, and serde wire-shape lock-down.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

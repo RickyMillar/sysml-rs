@@ -207,4 +207,4 @@ ls target/debug/build/sysml-core-*/out/*.generated.rs
 
 - **TTL/shape parsing is format-sensitive.** `shapes_parser` and `xtext_parser` are hand-rolled char/line scanners carrying `#[allow(clippy::indexing_slicing)]` with manual bounds guards — test against the real spec files, not synthetic snippets.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

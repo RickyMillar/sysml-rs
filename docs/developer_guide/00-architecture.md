@@ -392,8 +392,8 @@ exist. Where they went:
 
 ## See Also
 
-- `crates/lang/CLAUDE.md` — cross-cutting lang patterns (codegen, `ModelGraph` as universal IR)
-- `crates/tooling/CLAUDE.md` — cross-cutting tooling patterns
+- `crates/lang/README.md` — cross-cutting lang patterns (codegen, `ModelGraph` as universal IR)
+- `crates/tooling/README.md` — cross-cutting tooling patterns
 - [02-parsing.md](02-parsing.md) — tree-sitter grammar + parser pipeline
 - [03-resolution.md](03-resolution.md) — two-pass name resolution
 - [04-codegen.md](04-codegen.md) — build-time spec-to-Rust code generation

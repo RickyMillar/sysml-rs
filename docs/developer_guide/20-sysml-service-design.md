@@ -4,7 +4,7 @@
 
 > What shipped: 171 `#[service_command]` methods, the CLI `inspect` collapse onto a service command, a single `RuntimeSession` for execution, and tree-sitter as the only parser. The command count moves whenever a command is added — `command_count()` is the authority, and [00-architecture.md](00-architecture.md) shows how to read it.
 
-For wider context, see [00-architecture.md](00-architecture.md). For per-crate detail, see `crates/tooling/sysml-service/CLAUDE.md` and `crates/tooling/sysml-mcp/CLAUDE.md`.
+For wider context, see [00-architecture.md](00-architecture.md). For per-crate detail, see `crates/tooling/sysml-service/README.md` and `crates/tooling/sysml-mcp/README.md`.
 
 ## Why it exists
 
@@ -277,5 +277,5 @@ cargo test -p sysml-api -- --test-threads=1       # REST tests (serial for env v
 - [07-lsp-architecture.md](07-lsp-architecture.md) — the LSP transport adapter.
 - [19-mcp-server-architecture.md](19-mcp-server-architecture.md) — the MCP transport adapter and tool registry.
 - [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "LSP holds no domain state" (the principle the service surface embodies).
-- `crates/tooling/sysml-service/CLAUDE.md` — quick-reference module map + pitfalls.
+- `crates/tooling/sysml-service/README.md` — quick-reference module map + pitfalls.
 - `crates/tooling/sysml-service-macros/src/` — proc-macro implementation.

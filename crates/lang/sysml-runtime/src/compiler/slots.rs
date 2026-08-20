@@ -1228,7 +1228,7 @@ impl ModelCompiler {
                 feature_parents.push(port_usage_id);
             }
             // Feature-name discovery routes through the shared def-keyed bridge
-            // (ledger L36, CLAUDE.md #4/#5); the per-feature value + mRef loop
+            // (one home for the rule); the per-feature value + mRef loop
             // below is signal-slot-specific and stays here.
             for feat_name in crate::links::endpoint_feature_names(registry, endpoint) {
                 let Some(feat) = inst.features.get(&feat_name) else {

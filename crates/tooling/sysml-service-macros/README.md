@@ -228,4 +228,4 @@ The generated code is **not** standalone: it names sysml-service items by `crate
 
 > **Unsupported param types fail loudly** with *“unsupported parameter type”* — but the span points at the whole method/argument rather than the offending type, because `type_mapping` returns stringly-typed errors that lose finer span info. Add a branch in `type_mapping.rs` to support a new type.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

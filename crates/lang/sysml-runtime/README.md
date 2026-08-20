@@ -191,4 +191,4 @@ fn run(graph: ModelGraph) -> Result<(), Box<dyn std::error::Error>> {
 
 - **Expression recursion cap.** `MAX_EVAL_DEPTH = 128`; deeper nesting returns `EvaluationError::RecursionLimit`.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

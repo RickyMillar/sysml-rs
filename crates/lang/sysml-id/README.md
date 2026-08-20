@@ -176,4 +176,4 @@ cargo bench -p sysml-id                        # criterion benchmarks
 
 Property tests cover `ElementId` round-trip and uniqueness, `QualifiedName` round-trip, `starts_with` transitivity, and segment-count invariants. `CanonicalKey` has a dedicated suite asserting determinism and that distinct names / kinds / sibling indices / projects / relationship tuples all yield distinct IDs.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

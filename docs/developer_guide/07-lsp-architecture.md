@@ -180,4 +180,4 @@ Provides **richer** highlighting on top of tree-sitter — uses the resolved `Mo
 - [20-sysml-service-design.md](20-sysml-service-design.md) — the service the LSP dispatches to.
 - [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "LSP holds no domain state".
 - [ADR-013](../design/adr/013-monaco-editor-transport.md) — Monaco-over-WebSocket transport (the in-browser sibling of the stdio LSP).
-- `crates/tooling/sysml-lsp-server/CLAUDE.md` — quick-reference module map and pitfall list.
+- `crates/tooling/sysml-lsp-server/README.md` — quick-reference module map and pitfall list.

@@ -233,5 +233,5 @@ SYSML_CORPUS_PATH=references/sysmlv2 \
 - [02-parsing.md](02-parsing.md) — produces the unresolved input.
 - [05-validation.md](05-validation.md) — runs after resolution.
 - [07-lsp-architecture.md](07-lsp-architecture.md) — how the LSP consumes resolved models.
-- `crates/lang/sysml-core/CLAUDE.md` — semantic model details.
-- `crates/tooling/sysml-ide-db/CLAUDE.md` — salsa query layer.
+- `crates/lang/sysml-core/README.md` — semantic model details.
+- `crates/tooling/sysml-ide-db/README.md` — salsa query layer.

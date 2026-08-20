@@ -236,4 +236,4 @@ assert!(index.conflicts().is_empty());          // stdlib has no name clashes
 
 - **Path form is preserved.** `discover` does not canonicalise or follow symlinks — relative roots yield relative paths, keeping URIs aligned with what the caller passed.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

@@ -148,7 +148,9 @@ forces every site to be updated. `build.rs` additionally compares
 `build.rs` itself — NOT against the enum variant sets — and only counts
 compartment entries without checking their names; it prints coverage warnings
 (it warns; it does not fail the build). The tracker has drifted from the enums
-(see the status header in `11-vis-coverage-roadmap.md`).
+and is not authoritative: read the `VisualKind` / `CompartmentKind` enums in
+`crates/lang/sysml-diagram/src/visual_kind.rs` and `RelationshipKind` in
+`crates/lang/sysml-core/src/relationship.rs` for the real coverage.
 
 ---
 

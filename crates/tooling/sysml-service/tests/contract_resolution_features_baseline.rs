@@ -13,7 +13,7 @@
 //! Lifts the audit's test_matrix into executable form. Each test maps to one
 //! feature is fixed, drop the `#[ignore]` and the test guards against regression.
 //!
-//! Patterns followed (from `crates/tooling/sysml-service/CLAUDE.md`):
+//! Patterns followed (see `crates/tooling/sysml-service/README.md`):
 //! - `SysmlService::empty()` constructor.
 //! - `service.open_context(OpenTarget::Folder(...))` for workspace loading
 //!   (single source of truth — every transport routes through this).

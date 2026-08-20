@@ -175,7 +175,7 @@ The `references/sysmlv2/` directory contains the SysML v2 specification material
 - **Standard library**: `library.kernel/`, `library.systems/`
 - **Test corpus**: `org.omg.sysml.xpect.tests/`
 
-See `CLAUDE.md` for detailed reference mappings per crate.
+See each crate's `README.md` for detailed reference mappings.
 
 ## Common Tasks
 
@@ -215,5 +215,5 @@ the regression/improvement verdict against the previous run.
 ## Getting Help
 
 - Check existing documentation in `developer_guide/`
-- Read `CLAUDE.md` for spec reference locations
+- Read `tools/fetch-references/README.md` for how the OMG spec references are fetched and where they land
 - Open an issue on GitHub for bugs or questions

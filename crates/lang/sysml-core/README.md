@@ -175,4 +175,4 @@ JSON serialization lives behind the `serde` feature (`sysml_core::json`).
 
 - **Register new semantic checks.** A new check function in `semantic_checks/` must also be registered in `codegen/src/semantic_rules.toml`.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

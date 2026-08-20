@@ -188,4 +188,4 @@ if lock_path.exists() {
 
 - **Lock order ≠ graph order.** Lock files sort by `(name, source)` for determinism — don't assume they mirror resolution order.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

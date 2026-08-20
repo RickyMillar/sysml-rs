@@ -321,7 +321,7 @@ fn approval_sidecar_accepts_verification_case_element() {
     let ev = execute_command(
         &service,
         "sysml.workflow.set_approval",
-        json!({ "project": "testmgmt", "element_id": case_element_id, "to": "in_review", "actor": "ricky" }),
+        json!({ "project": "testmgmt", "element_id": case_element_id, "to": "in_review", "actor": "analyst" }),
     )
     .expect("set_approval on a verification case must succeed");
     assert_eq!(ev["kind"], "approval_state_changed");
@@ -330,7 +330,7 @@ fn approval_sidecar_accepts_verification_case_element() {
     execute_command(
         &service,
         "sysml.workflow.set_approval",
-        json!({ "project": "testmgmt", "element_id": case_element_id, "to": "approved", "actor": "ricky" }),
+        json!({ "project": "testmgmt", "element_id": case_element_id, "to": "approved", "actor": "analyst" }),
     )
     .expect("second transition succeeds");
 

@@ -205,4 +205,4 @@ Top-level binary: consumed by editors (`editors/vscode`, `editors/zed`, Neovim, 
 
 - **URI normalization.** Use the canonical-URI / alias helpers, not raw string equality (symlinks).
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

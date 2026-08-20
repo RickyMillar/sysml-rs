@@ -350,7 +350,7 @@ export interface StreamActionEntry {
  * Streaming-action emissions snapshot.
  *
  * The backend `ExecutionSnapshot` does not yet expose a `streaming_actions`
- * field (see crates/tooling/sysml-service/CLAUDE.md). Until it does this
+ * field (see crates/tooling/sysml-service/README.md). Until it does this
  * always returns an empty array, which keeps the workbench timeline tab in
  * its empty-state path. The unused `_detail` parameter is retained so callers
  * can pass session detail forward without a breaking signature change once

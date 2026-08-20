@@ -57,7 +57,7 @@ Counts below refreshed 2026-07-29 (derive with `ls crates/<group>/<crate>/tests/
 |-------|-----------|----------------------|---------|
 | sysml-cli | inline | 11 files | One file per subcommand |
 | sysml-diagram | inline | 14 files | One file per view type |
-| sysml-spec-tests | library | 40 files | Tier map: `crates/testing/sysml-spec-tests/CLAUDE.md` |
+| sysml-spec-tests | library | 40 files | Tier map: `crates/testing/sysml-spec-tests/README.md` |
 | sysml-lsp-server | ~630 inline | - | Tests alongside implementation |
 | sysml-ide-db | inline | 3 files | project_integration, id_stability, eval_context_seed |
 

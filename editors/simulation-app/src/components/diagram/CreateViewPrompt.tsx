@@ -1,6 +1,6 @@
 /**
  * CreateViewPrompt — the guided create-view flow, v2: PROJECTION-FIRST
- * target-first order at Ricky's direction 2026-07-15).
+ * (it previously asked for the target first).
  *
  * Users think in projections ("I want a state diagram") before targets,
  * so the flow asks:

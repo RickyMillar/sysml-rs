@@ -97,4 +97,4 @@ cargo test -p sysml-store --features postgres      # Postgres backend (needs DB)
 
 Cross-transport parity — a command producing identical output across CLI/LSP/REST/MCP — is exercised by the fixtures in `crates/testing/sysml-spec-tests`.
 
-Part of the [sysml-rs](../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../README.md) workspace · regenerated 2026-06-03

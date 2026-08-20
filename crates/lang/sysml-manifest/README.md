@@ -244,4 +244,4 @@ cargo test -p sysml-manifest
 
 Coverage: minimal / full / workspace manifest parsing, manifest & lock round-trips, lock sort, dependency-type detection, walk-up discovery (current dir, walk-up, none, workspace), `walk_up` first-match / root-termination, stdlib filtering (include_only / exclude / exclude-all), and rejection of legacy boolean-keyed `[stdlib]`.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

@@ -228,4 +228,4 @@ cargo test -p sysml-mcp
 
 - `tests/readiness_envelope.rs` (integration) — loads a tempdir workspace, then asserts `sysml_diagnostics` returns `_readiness.project.state == "indexed"`. Exercises the in-process dispatch helper (the single source of truth shared by every handler), not a live stdio transport.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

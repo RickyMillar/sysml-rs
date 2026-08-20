@@ -82,7 +82,7 @@ fn slot_writer_map(store: &SlotStore) -> BTreeMap<u32, usize> {
 /// where subsystem B's `read_slots()` contains a slot written by same-phase
 /// subsystem A. Shared by the scheduler (below) and the RSC-4.B0 read-set
 /// inventory gate so the gate validates the SAME edges the scheduler orders on
-/// (CLAUDE.md #4 — one home). Edges are de-duplicated on `(writer, reader, slot)`.
+/// (one home). Edges are de-duplicated on `(writer, reader, slot)`.
 ///
 /// **Why only read-set edges (D-4.1.1, corrected 2026-07-03).** The design
 /// originally also projected signal-link `dependency_edges()` onto subsystem

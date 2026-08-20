@@ -75,8 +75,8 @@ const MODE_TOKENS: Record<EvaluationMode, ModeTokens> = {
   trajectory: {
     label: 'trajectory',
     glyph: '∿', // ∿ — a run's trace over time
-    // Sim-accent tint (Ricky ruling 2026-07-19: session-backed verdicts pop
-    // against static ones); the SOLID square border stays the primary channel
+    // Sim-accent tint so session-backed verdicts read distinctly from static
+    // ones; the SOLID square border stays the primary channel
     // — geometry distinguishes the family, hue is secondary (never a verdict
     // colour).
     color: 'var(--sim-accent)',

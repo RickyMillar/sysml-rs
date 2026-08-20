@@ -279,4 +279,4 @@ Live grammar metrics (case counts, coverage) are tracked in `tree-sitter/TREE_SI
 
 - `sysml-spec-tests`
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

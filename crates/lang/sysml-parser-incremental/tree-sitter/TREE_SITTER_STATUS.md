@@ -84,7 +84,6 @@ With N optionals across M rules, the state table grows as **M × 2^N**. For this
 **Rule Merging (Phase 3):** 5 structurally identical standard usages (part, attribute, item,
 occurrence, ref) merged into `standard_usage` with a `keyword` field. This eliminates 4 duplicate
 rule state sets without hidden subrule GLR inflation. Consumers distinguish via keyword field value.
-See `~/.claude/skills/learned/treesitter-rule-merging-optimization.md` for the full pattern.
 
 **Control-Flow Node Merge (Phase 4):** 5 control-flow nodes (merge_node, decision_node, fork_node,
 join_node, perform_action) merged into `control_flow_node` with keyword field. Saves 202 states

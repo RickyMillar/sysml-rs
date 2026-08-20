@@ -478,7 +478,7 @@ impl AnalysisHost {
     /// resolves any file-entry path before manifest discovery completes. Once
     /// the real manifest project is known it must replace that placeholder —
     /// not coexist with it — so a directory maps to exactly one project
-    /// (CLAUDE.md #4/#5). Coexistence inflated `project_count()` and risked
+    /// (one home). Coexistence inflated `project_count()` and risked
     /// `find_project_for_uri` returning the `0.0.0-synthetic` project over the
     /// real one. Replacement is scoped to this path (and guarded by the version
     /// sentinel), NOT folded into the general `load_project` API, which tests

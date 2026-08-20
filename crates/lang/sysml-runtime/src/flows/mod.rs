@@ -510,7 +510,7 @@ fn specializes_transitively(graph: &ModelGraph, name: &str, target: &str, depth:
 /// `Value::Null` clears nothing.
 ///
 /// Pure — the storage-specific clear is the caller's job. This is the ONE home
-/// for the match rule (CLAUDE.md #4/#5): both the registry-as-store path
+/// for the match rule — one home: both the registry-as-store path
 /// ([`clear_payload_at_source`], used by `ExchangePlane::route_pending_with_ports`)
 /// and the orchestrator's SlotStore path (`apply_move_semantics`) select the
 /// cleared features through it. The two differ only in *where* the value lives

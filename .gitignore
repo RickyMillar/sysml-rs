@@ -67,6 +67,7 @@ scripts/__pycache__/
 .claude/routines
 .claude/settings.json
 .claude/skills
+/.mcp.json
 /editors/.claude/
 /editors/.mcp.json
 /editors/simulation-app/.claude/

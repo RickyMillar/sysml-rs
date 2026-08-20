@@ -155,4 +155,4 @@ cargo bench -p sysml-span            # span_benchmarks (criterion)
 cargo run   -p sysml-span --example render_diagnostics
 ```
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

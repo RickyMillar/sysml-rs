@@ -188,4 +188,4 @@ assert!(result.is_ok());
 
 - **Tracing is opt-in.** `library.rs` emits spans only when built with `--features tracing`.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

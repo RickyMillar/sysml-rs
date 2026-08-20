@@ -129,7 +129,7 @@ impl OdeWriteSet {
 /// RSC-4.2: evaluate an ODE executor's signal expressions and route the
 /// results through its slot write-set, choosing the eval context per
 /// [`SignalEvalMode`]. Shared by the RK4 and RK45 executors so the two
-/// slot-routed writebacks cannot drift (CLAUDE.md principle 4/5).
+/// slot-routed writebacks cannot drift.
 ///
 /// `write_states_into` populates a fresh states-only context (the executor's
 /// `sync_to_context`) — used verbatim in [`SignalEvalMode::FreshState`] for a

@@ -182,4 +182,4 @@ cargo test -p sysml-diagram --test smodel_general
 cargo run -p sysml-diagram --example all_views
 ```
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

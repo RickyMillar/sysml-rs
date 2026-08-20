@@ -277,7 +277,7 @@ fn b10_attest_verification_appends_and_rejects_unknown_method() {
         "sysml.workflow.attest_verification",
         json!({
             "project": "b10", "element_id": case_id, "method": "inspekt",
-            "statement": "checked it", "actor": "ricky"
+            "statement": "checked it", "actor": "analyst"
         }),
     )
     .expect_err("unknown method must be rejected");
@@ -288,7 +288,7 @@ fn b10_attest_verification_appends_and_rejects_unknown_method() {
         &service,
         "sysml.workflow.attest_verification",
         json!({ "project": "b10", "element_id": case_id, "method": "inspect",
-                "statement": "  ", "actor": "ricky" }),
+                "statement": "  ", "actor": "analyst" }),
     )
     .is_err());
     assert!(execute_command(
@@ -305,13 +305,13 @@ fn b10_attest_verification_appends_and_rejects_unknown_method() {
         "sysml.workflow.attest_verification",
         json!({
             "project": "b10", "element_id": case_id, "method": "inspect",
-            "statement": "visually inspected creepage distance", "actor": "ricky"
+            "statement": "visually inspected creepage distance", "actor": "analyst"
         }),
     )
     .expect("valid attestation appends");
     assert_eq!(event["kind"], "verification_attestation");
     assert_eq!(event["method"], "inspect");
-    assert_eq!(event["actor"], "ricky");
+    assert_eq!(event["actor"], "analyst");
     assert!(
         event["attested_commit"].as_str().is_some_and(|c| !c.is_empty()),
         "content digest pinned at attest time"

@@ -80,7 +80,7 @@ impl ModelCompiler {
     /// walk), the derivative/signal expression parse, and the sampled-function
     /// extraction do **not** depend on `overrides` — only the swept parameter
     /// *values* do, and those enter at assembly time as a float map. Per
-    /// CLAUDE.md principle 5b (performance is in the DNA), an `ode_sweep` of N
+    /// performance is a design constraint here: an `ode_sweep` of N
     /// variants must not re-run this graph walk N times; it prepares once and
     /// assembles per variant. The result mirrors how
     /// [`build_workspace_orchestrator`] takes pre-built cached inputs.

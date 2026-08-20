@@ -193,5 +193,5 @@ No live-MCP integration test currently runs in CI; the coverage gate plus servic
 - [00-architecture.md](00-architecture.md) — overall layering.
 - [20-sysml-service-design.md](20-sysml-service-design.md) — the service this transport adapts.
 - [07-lsp-architecture.md](07-lsp-architecture.md) — sibling stdio transport (LSP).
-- `crates/tooling/sysml-mcp/CLAUDE.md` — quick-reference module map + pitfalls.
+- `crates/tooling/sysml-mcp/README.md` — quick-reference module map + pitfalls.
 - [ADR-010](../design/adr/010-lsp-as-thin-wrapper.md) — "transport adapters hold no domain state" (applied identically here).

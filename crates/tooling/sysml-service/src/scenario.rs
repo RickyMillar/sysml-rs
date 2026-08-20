@@ -46,7 +46,7 @@ pub(crate) fn run_scenario(
     //
     // This previously hand-rolled `Orchestrator::new` + `add_state_machine`
     // in a loop and inlined `StateMachineCompiler::compile_named` — a
-    // documented invariant violation (sysml-service/CLAUDE.md: never inline
+    // documented invariant violation (never inline
     // elaborate+compile_named in a command) that also skipped
     // `ModelCompiler::mint_slot_store`/`bind_expression_slots`, so a
     // transition-effect attribute assignment had no slot-routed writeback and

@@ -174,4 +174,4 @@ If the graph changes mid-pagination, `graph_revision` moves, the next page's `cu
 
 - **Cursors are versioned.** `CURSOR_VERSION` must bump if the cursor payload shape changes; old cursors then fail to decode rather than mis-page.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

@@ -37,7 +37,7 @@ Row rules (from `README.md` "How an obligation is recorded"):
   need no runtime gate (README "Coverage metric" counts them honestly).
 - **Fixtures are purpose-built spec-faithful snippets, NOT corpus files** —
   corpus survival is a no-regression signal, never conformance proof (root
-  CLAUDE.md source-precedence rule 5).
+  source-precedence rule 5 in the tracker README).
 
 ## Coverage
 

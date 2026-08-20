@@ -234,4 +234,4 @@ None inside the workspace — `sysml-api` is a terminal transport. It is consume
 
 - **Prefer dispatch over new aliases.** New structured reads should go through `POST /api/query` or an inventory command, not a hand-coded REST alias.
 
-Part of the [sysml-rs](../../../README.md) workspace · agent guidance in `CLAUDE.md` · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03

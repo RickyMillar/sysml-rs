@@ -2,7 +2,7 @@
 //! generator — findings register R2-7.
 //!
 //! Notation contract (sysml-graphical-notation-contract.md, constraint /
-//! parametric section; crate CLAUDE.md "constraint notation"): a constraint
+//! parametric section; see the crate README on constraint notation): a constraint
 //! block shows its `{expression}` in a compartment and its `in` parameters as
 //! small square parametric ports (`PortTag::Parametric`). Both corpus
 //! authoring shapes must produce content:

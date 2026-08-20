@@ -25,7 +25,7 @@
 //! construction (ledger L41): a hybrid whose derivative read a peer's slot
 //! produced no scheduler edge, and RSC-4.2 ruling 6 forbade papering over
 //! that with a partially-harvested read-set. The split below is the fix —
-//! deleted in favor of the two-executor design, not demoted (CLAUDE.md #5).
+//! deleted in favor of the two-executor design, not demoted.
 //! One real behavior difference from the fused type: it applied a mode
 //! transition's entry reset synchronously within its own `tick()`, visible
 //! to that same tick's ODE step. Split into two ordinarily-phased
