@@ -1,0 +1,89 @@
+# SysML v2 Parser - Expected Failures
+#
+# This file lists corpus files that are expected to fail parsing.
+# The list MUST shrink over time as parser bugs are fixed.
+#
+# Format: One file path pattern per line
+# - Use relative paths from references/sysmlv2/
+# - Use **/ prefix for "any directory" matching
+# - Lines starting with # are comments
+# - Empty lines are ignored
+#
+# Reconciled 2026-07-15 against a full corpus run (45/58 parsing).
+# EIT_System_Use_Cases.sysml left the list (the corpus file now writes
+# `use case` as two words and parses). Every entry below reproduces on
+# the current grammar; parser gaps are filed as G## in
+# Architectural-cleanup/tree-sitter-canonical-plan/grammar-gaps-inventory.md.
+
+# =============================================================================
+# Corpus Errors - Files with syntax that doesn't match the xtext grammar
+# =============================================================================
+
+# Uses C-style `&&` in constraint expressions; KerMLExpressions.xtext has
+# only `&` (line 140) and `and` (line 144) — no `&&` token exists.
+**/SE_Models/HVACSystemRequirements.sysml
+
+# Brace-comma sequence initializer `attribute partMasses = { a::m, b::m };`
+# (line 226). KerML sequences are parenthesized `(a, b, c)`; `{}` bodies
+# take `;`-separated members + one result expression, never comma lists
+# (KerMLExpressions.xtext ExpressionBody, line 372). The previous reason
+# (`alias ... as`) is stale — the file now writes `alias ... for`.
+**/SE_Models/VehicleModel.sysml
+
+# =============================================================================
+# Parser Gaps - Valid per the xtext grammar; our grammar/lowering fails.
+# Each is filed in grammar-gaps-inventory.md; fix the gap, drop the entry.
+# =============================================================================
+
+# G28: `message notifyBatteryLow of SigBatteryLow from battery.bms to fc;`
+# interaction message usages. G29: `enum propKind : PropKind;` enumeration
+# usages in definition bodies.
+**/SE_Models/DroneModelLogical.sysml
+
+# G30: specialization target with qualified name + feature chain —
+# `subject battery :>> Drone_SystemArchitecture::drone.battery;` (line 37).
+**/SE_Models/Drone_BaseArchitecture.sysml
+
+# G31: `#system ffds { ... }` — user-defined-keyword (prefix metadata)
+# USAGE authoring; G24/B1b covered the dependency/derivation forms only.
+**/SE_Models/ForestFireDetectionSystemModel.sysml
+
+# G31: `#mop cargoCapacity : Real;` / `#moe minimumProfit : Real { ... }` —
+# same prefix-metadata usage-keyword gap as ForestFireDetectionSystemModel.
+**/example_EveOnlineMiningFrigate/DomainModel/Domain.sysml
+
+# G32: transition effect `do action undockFromStation : UndockFromStation
+# { in undockCommand = pilotPodUndockCommand; }` — inline do-action with a
+# typed declaration + body inside a transition (line 69 et al.).
+**/example_EveOnlineMiningFrigate/DomainModel/MiningFrigate.sysml
+
+# G34: `private import Domain::MiningCorporation::miningFrigate;` — import
+# whose target is a nested USAGE member (3-segment qualified name, line 3).
+**/example_EveOnlineMiningFrigate/DomainModel/cause-effect.sysml
+
+# G30 (::> on connector ends): `interface ... connect hullPort ::>
+# hull.highSlot1 to modulePort ::> miningLaser.highSlot;` (lines 27-31) —
+# reference subsetting on interface ends, flagged in G24's filing as the
+# non-dependency remainder.
+**/example_EveOnlineMiningFrigate/LogicalArchitecture/MiningFrigate.sysml
+
+# G35: `require minimumAgeForAdoptiveParenthood { parentAge = ...; }` —
+# RequirementConstraintUsage first alternative (OwnedReferenceSubsetting +
+# CalculationBody, SysML.xtext:2061-2063). Also G28 `message Statement1 of
+# applicableLaw : ApplicableLaw from ... to ...;` (line 171).
+**/example_family/family.sysml
+
+# G33: loop-action shorthands — `private action initialization assign
+# index := 1; then private action whileLoop while index <= size(seq)
+# { ... }` (old pilot xpect-test copy of the Actions library; the current
+# library.systems/Actions.sysml parses via different formulations).
+**/org.omg.sysml.xpect.tests/library.systems/Actions.sysml
+
+# G30: `ref case self : Case :>> Calculation::self;` — redefinition with a
+# qualified feature target (old pilot xpect-test copy of the Cases library).
+**/org.omg.sysml.xpect.tests/library.systems/Cases.sysml
+
+# G30: `ref requirement :>> self : RequirementCheck;` — anonymous usage
+# declaration starting with a redefinition (old pilot xpect-test copy of
+# the Requirements library).
+**/org.omg.sysml.xpect.tests/library.systems/Requirements.sysml

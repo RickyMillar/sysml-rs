@@ -1,0 +1,732 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateHtmlReport — content snapshot > whole-document snapshot (stable) 1`] = `
+"<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Espresso Production Cell — Verify (2026-04-19 14:07:32 UTC)</title>
+<style>:root {
+  /* Light surfaces — default because reports are printed. */
+  --rpt-bg:              #f8fafc;
+  --rpt-surface:         #ffffff;
+  --rpt-surface-alt:     #f1f5f9;
+  --rpt-border:          #e2e8f0;
+  --rpt-text:            #0f172a;
+  --rpt-text-muted:      #475569;
+  --rpt-text-subtle:     #94a3b8;
+  --rpt-accent:          oklch(62% 0.16 265);
+  --rpt-accent-hex:      #6366f1;
+  --rpt-shadow:          0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.08);
+  --rpt-mono:            ui-monospace, 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace;
+  --rpt-sans:            system-ui, -apple-system, 'Segoe UI', Roboto, 'Inter', sans-serif;
+}
+[data-theme='dark'] {
+  --rpt-bg:              #0d131f;
+  --rpt-surface:         #19202b;
+  --rpt-surface-alt:     #151c27;
+  --rpt-border:          #2f3541;
+  --rpt-text:            #dde2f2;
+  --rpt-text-muted:      #c6c5d5;
+  --rpt-text-subtle:     #908f9e;
+  --rpt-accent:          oklch(78% 0.10 285);
+  --rpt-accent-hex:      #bdc2ff;
+  --rpt-shadow:          0 1px 2px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.5);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--rpt-bg);
+  color: var(--rpt-text);
+  font-family: var(--rpt-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-feature-settings: 'tnum' 1, 'ss01' 1;
+}
+main.report {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.rpt-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: 10px;
+  background: var(--rpt-surface);
+  box-shadow: var(--rpt-shadow);
+  border: 1px solid var(--rpt-border);
+  margin-bottom: 20px;
+}
+.rpt-header h1 {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.rpt-header__meta {
+  display: flex;
+  gap: 16px;
+  color: var(--rpt-text-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.rpt-header__meta span strong {
+  color: var(--rpt-text);
+  font-weight: 500;
+}
+.rpt-overall {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--rpt-surface-alt);
+  border: 1px solid var(--rpt-border);
+}
+.rpt-overall__badge {
+  font-size: 24px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: var(--badge-color-oklch, var(--badge-color, #0f172a));
+  background: color-mix(in srgb, var(--badge-color, #0f172a) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color, #0f172a) 30%, transparent);
+  font-weight: 600;
+}
+.rpt-overall__counts {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.rpt-overall__counts span { color: var(--rpt-text-muted); }
+.rpt-overall__counts strong { color: var(--rpt-text); font-weight: 600; }
+
+.rpt-section {
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: var(--rpt-surface);
+  border-radius: 10px;
+  border: 1px solid var(--rpt-border);
+  box-shadow: var(--rpt-shadow);
+}
+.rpt-section h2 {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rpt-text-muted);
+}
+.rpt-env {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.rpt-env__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+}
+.rpt-env__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rpt-text-subtle);
+}
+.rpt-env__value {
+  font-family: var(--rpt-mono);
+  font-size: 12px;
+  color: var(--rpt-text);
+  word-break: break-word;
+}
+
+.rpt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+.rpt-table th,
+.rpt-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rpt-border);
+  vertical-align: top;
+}
+.rpt-table th {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rpt-text-muted);
+  cursor: pointer;
+  user-select: none;
+  background: var(--rpt-surface-alt);
+}
+.rpt-table th[data-sort-active='asc']::after { content: ' \\25B2'; }
+.rpt-table th[data-sort-active='desc']::after { content: ' \\25BC'; }
+.rpt-table tr.rpt-row--fail { background: color-mix(in srgb, #ef4444 5%, transparent); }
+.rpt-table tr.rpt-row--error { background: color-mix(in srgb, #d946ef 6%, transparent); }
+
+.rpt-row__toggle {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: var(--rpt-accent-hex);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0;
+}
+.rpt-row__toggle::before { content: '\\25B8 '; }
+.rpt-row__toggle[aria-expanded='true']::before { content: '\\25BE '; }
+
+.rpt-sub {
+  background: var(--rpt-surface-alt);
+}
+.rpt-sub td { padding: 8px 16px; }
+.rpt-sub-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.rpt-sub-table th,
+.rpt-sub-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rpt-border);
+  text-align: left;
+}
+.rpt-sub-table th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rpt-text-subtle);
+}
+
+.rpt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--badge-color);
+  color: var(--badge-color-oklch);
+  background: color-mix(in srgb, var(--badge-color) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 36%, transparent);
+  white-space: nowrap;
+}
+.rpt-badge--compact { font-size: 10px; padding: 1px 6px; }
+.rpt-badge__glyph { font-weight: 700; }
+
+.rpt-evidence {
+  font-family: var(--rpt-mono);
+  font-size: 12px;
+  color: var(--rpt-accent-hex);
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+}
+.rpt-evidence:hover { opacity: 0.8; }
+.rpt-evidence--missing {
+  color: var(--rpt-text-subtle);
+  font-style: italic;
+  cursor: default;
+  border-bottom: 0;
+}
+
+.rpt-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  margin-top: 20px;
+  border-top: 1px solid var(--rpt-border);
+}
+.rpt-actions__button {
+  font: inherit;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--rpt-border);
+  background: var(--rpt-surface);
+  color: var(--rpt-text);
+  cursor: pointer;
+}
+.rpt-actions__button:hover { background: var(--rpt-surface-alt); }
+.rpt-actions__button:focus-visible {
+  outline: 2px solid var(--rpt-accent-hex);
+  outline-offset: 2px;
+}
+
+.report--print .rpt-actions,
+.report--print .rpt-row__toggle { display: none; }
+.report--print .rpt-sub { display: table-row !important; }
+.report--print .rpt-header__meta { font-size: 11px; }
+.report--print main.report { padding: 8px; }
+
+@media print {
+  .rpt-actions, .rpt-row__toggle { display: none; }
+  .rpt-section { break-inside: avoid; box-shadow: none; }
+  body { background: #ffffff; }
+  .rpt-sub { display: table-row !important; }
+}</style>
+</head>
+<body>
+<main class="report">
+
+  
+  <header class="rpt-header">
+    <div>
+      <h1>Espresso Production Cell — Verification Report</h1>
+      <div class="rpt-header__meta">
+        <span><strong>Run:</strong> 2026-04-19 14:07:32 UTC</span>
+        <span><strong>Duration:</strong> 4.321 s</span>
+        <span><strong>Cases:</strong> 3</span>
+      </div>
+    </div>
+    <div class="rpt-overall" data-overall="error">
+      <span class="rpt-overall__badge" style="--badge-color: #d946ef; --badge-color-oklch: oklch(66% 0.27 320);" title="Error" aria-label="Overall verdict: Error">⚠</span>
+      <div class="rpt-overall__counts">
+        <span><strong>1</strong> pass</span>
+        <span><strong>1</strong> fail</span>
+        <span><strong>0</strong> inconclusive</span>
+        <span><strong>2</strong> error</span>
+      </div>
+    </div>
+  </header>
+  
+  <section class="rpt-section">
+    <h2>Environment</h2>
+    <div class="rpt-env">
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Backend</span>
+        <span class="rpt-env__value">sysml-runtime 0.3.1 (rev abc1234)</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Suite</span>
+        <span class="rpt-env__value">Espresso cell acceptance suite</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Sim dt</span>
+        <span class="rpt-env__value">0.001 s</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Seeds</span>
+        <span class="rpt-env__value">42, 1729</span>
+      </div></div>
+  </section>
+  
+  <section class="rpt-section">
+    <h2>Provenance</h2>
+    <div class="rpt-env">
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Evaluation</span>
+        <span class="rpt-env__value">—</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Model revision</span>
+        <span class="rpt-env__value">sha256:deadbeefcafe</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Workspace root</span>
+        <span class="rpt-env__value">/models/espresso-production-cell</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Session</span>
+        <span class="rpt-env__value">sess-001</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Archive</span>
+        <span class="rpt-env__value">arch-0042</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Origin</span>
+        <span class="rpt-env__value">user</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Sim dt</span>
+        <span class="rpt-env__value">0.001 s</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Scenario</span>
+        <span class="rpt-env__value">nominal</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">View</span>
+        <span class="rpt-env__value">Interconnection</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Started</span>
+        <span class="rpt-env__value">2026-04-19T14:07:28.000Z</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Stopped</span>
+        <span class="rpt-env__value">2026-04-19T14:07:32.000Z</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Cases</span>
+        <span class="rpt-env__value">Brew quality — station 1, Pressure safety</span>
+      </div>
+      <div class="rpt-env__item">
+        <span class="rpt-env__label">Overrides</span>
+        <span class="rpt-env__value">ambient_c=40</span>
+      </div></div>
+    <table class="rpt-sub-table"><thead><tr><th>File</th><th>Hash</th></tr></thead><tbody><tr><td>ProductQuality.sysml</td><td>sha256:aaaa1111</td></tr><tr><td>ScenarioVerification.sysml</td><td>sha256:bbbb2222</td></tr></tbody></table>
+  </section>
+  
+  <section class="rpt-section">
+    <h2>Cases (3)</h2>
+    <table class="rpt-table">
+      <thead>
+        <tr>
+          <th data-col="name">Case</th>
+          <th data-col="verdict">Verdict</th>
+          <th data-col="actual">Actual</th>
+          <th data-col="expected">Expected</th>
+          <th data-col="margin">Margin</th>
+          <th data-col="runtime">Runtime</th>
+        </tr>
+      </thead>
+      <tbody>
+    <tr class="rpt-row--fail" data-row-kind="case" data-detail-id="rpt-case-detail-0">
+      <td>
+        <button type="button" class="rpt-row__toggle" aria-expanded="false" data-row-toggle="rpt-case-detail-0">
+          Brew quality — station 1
+        </button>
+      </td>
+      <td data-sort-value="fail"><span class="rpt-badge" data-verdict="fail" data-verdict-shape="cross" style="--badge-color: #ef4444; --badge-color-oklch: oklch(64% 0.23 25);" title="Fail"><span class="rpt-badge__glyph" aria-hidden="true">✗</span><span class="rpt-badge__label">Fail</span></span></td>
+      <td data-sort-value="5.4">5.4</td>
+      <td data-sort-value="5">5</td>
+      <td data-sort-value="0.4">0.4</td>
+      <td data-sort-value="100">100 ms</td>
+    </tr>
+    <tr id="rpt-case-detail-0" class="rpt-sub" style="display: none;" data-row-kind="detail">
+      <td colspan="6">
+        
+    <table class="rpt-sub-table">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>Verdict</th>
+          <th>Actual</th>
+          <th>Reason / note</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Group-head temperature within 90–96 °C</td>
+          <td><span class="rpt-badge rpt-badge--compact" data-verdict="pass" data-verdict-shape="check" style="--badge-color: #10b981; --badge-color-oklch: oklch(73% 0.15 163);" title="Pass"><span class="rpt-badge__glyph" aria-hidden="true">✓</span><span class="rpt-badge__label">Pass</span></span></td>
+          <td>92.4</td>
+          <td></td>
+          <td><a class="rpt-evidence" href="/run?session=sess-001&amp;tick=482&amp;element=station1.groupHeadTemp">Open in Run</a></td>
+        </tr>
+        <tr>
+          <td>Station reaches Ready within 5 s</td>
+          <td><span class="rpt-badge rpt-badge--compact" data-verdict="fail" data-verdict-shape="cross" style="--badge-color: #ef4444; --badge-color-oklch: oklch(64% 0.23 25);" title="Fail"><span class="rpt-badge__glyph" aria-hidden="true">✗</span><span class="rpt-badge__label">Fail</span></span></td>
+          <td>5.4</td>
+          <td>warm-up exceeded budget by 0.4 s</td>
+          <td><a class="rpt-evidence" href="/run?session=sess-001&amp;tick=137&amp;element=station1.readyTime">Open in Run</a></td>
+        </tr></tbody>
+    </table>
+      </td>
+    </tr>
+    <tr class="rpt-row--error" data-row-kind="case" data-detail-id="rpt-case-detail-1">
+      <td>
+        <button type="button" class="rpt-row__toggle" aria-expanded="false" data-row-toggle="rpt-case-detail-1">
+          Pressure safety
+        </button>
+      </td>
+      <td data-sort-value="error"><span class="rpt-badge" data-verdict="error" data-verdict-shape="triangle" style="--badge-color: #d946ef; --badge-color-oklch: oklch(66% 0.27 320);" title="Error"><span class="rpt-badge__glyph" aria-hidden="true">⚠</span><span class="rpt-badge__label">Error</span></span></td>
+      <td data-sort-value="—">—</td>
+      <td data-sort-value="—">—</td>
+      <td data-sort-value="">—</td>
+      <td data-sort-value="12">12 ms</td>
+    </tr>
+    <tr id="rpt-case-detail-1" class="rpt-sub" style="display: none;" data-row-kind="detail">
+      <td colspan="6">
+        
+    <table class="rpt-sub-table">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>Verdict</th>
+          <th>Actual</th>
+          <th>Reason / note</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Manifold pressure stays ≤ 20 bar</td>
+          <td><span class="rpt-badge rpt-badge--compact" data-verdict="error" data-verdict-shape="triangle" style="--badge-color: #d946ef; --badge-color-oklch: oklch(66% 0.27 320);" title="Error"><span class="rpt-badge__glyph" aria-hidden="true">⚠</span><span class="rpt-badge__label">Error</span></span></td>
+          <td>—</td>
+          <td>solver failed to converge on the demand-surge scenario</td>
+          <td><span class="rpt-evidence rpt-evidence--missing">no evidence attached</span></td>
+        </tr></tbody>
+    </table>
+      </td>
+    </tr>
+    <tr class="rpt-row--error" data-row-kind="case" data-detail-id="rpt-case-detail-2">
+      <td>
+        <button type="button" class="rpt-row__toggle" aria-expanded="false" data-row-toggle="rpt-case-detail-2">
+          Demand binding
+        </button>
+      </td>
+      <td data-sort-value="error"><span class="rpt-badge" data-verdict="error" data-verdict-shape="triangle" style="--badge-color: #d946ef; --badge-color-oklch: oklch(66% 0.27 320);" title="Error"><span class="rpt-badge__glyph" aria-hidden="true">⚠</span><span class="rpt-badge__label">Error</span></span></td>
+      <td data-sort-value="error: unresolved binding: q_total">error: unresolved binding: q_total</td>
+      <td data-sort-value="—">—</td>
+      <td data-sort-value="">—</td>
+      <td data-sort-value="1">1 ms</td>
+    </tr>
+    <tr id="rpt-case-detail-2" class="rpt-sub" style="display: none;" data-row-kind="detail">
+      <td colspan="6">
+        
+    <table class="rpt-sub-table">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>Verdict</th>
+          <th>Actual</th>
+          <th>Reason / note</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="rpt-sub-row--error">
+          <td>Aggregate demand binding resolves</td>
+          <td><span class="rpt-badge rpt-badge--compact" data-verdict="error" data-verdict-shape="triangle" style="--badge-color: #d946ef; --badge-color-oklch: oklch(66% 0.27 320);" title="Error"><span class="rpt-badge__glyph" aria-hidden="true">⚠</span><span class="rpt-badge__label">Error</span></span></td>
+          <td>error: unresolved binding: q_total</td>
+          <td></td>
+          <td><span class="rpt-evidence rpt-evidence--missing">no evidence attached</span></td>
+        </tr></tbody>
+    </table>
+      </td>
+    </tr></tbody>
+    </table>
+  </section>
+  
+  <div class="rpt-actions">
+    <button type="button" class="rpt-actions__button" id="rpt-action-copy-md">Copy as Markdown</button>
+    <button type="button" class="rpt-actions__button" id="rpt-action-download-json">Download JSON</button>
+    <button type="button" class="rpt-actions__button" id="rpt-action-print">Print-friendly view</button>
+  </div>
+  <script type="text/plain" id="rpt-payload-md"># Espresso Production Cell — Verification Report
+
+**Overall:** ⚠ Error  
+**Run:** 2026-04-19 14:07:32 UTC  
+**Duration:** 4.321 s  
+**Verdict counts:** 1 pass · 1 fail · 0 inconclusive · 2 error
+
+## Environment
+
+- **Backend:** sysml-runtime 0.3.1 (rev abc1234)
+- **Suite:** Espresso cell acceptance suite
+- **Sim dt:** 0.001 s
+- **Seeds:** 42, 1729
+
+## Provenance
+
+- **Evaluation:** —
+- **Model revision:** sha256:deadbeefcafe
+- **Workspace root:** /models/espresso-production-cell
+- **Files (2):**
+  - \`ProductQuality.sysml\` — \`sha256:aaaa1111\`
+  - \`ScenarioVerification.sysml\` — \`sha256:bbbb2222\`
+- **Session:** sess-001
+- **Archive:** arch-0042
+- **Origin:** user
+- **Sim dt:** 0.001 s
+- **Scenario:** nominal
+- **View:** Interconnection
+- **Started:** 2026-04-19T14:07:28.000Z
+- **Stopped:** 2026-04-19T14:07:32.000Z
+- **Cases:** Brew quality — station 1, Pressure safety
+- **Overrides:** ambient_c=40
+
+## Cases
+
+| Case | Verdict | Actual | Expected | Margin | Runtime |
+|---|---|---|---|---|---|
+| Brew quality — station 1 | ✗ Fail | 5.4 | 5 | 0.4 | 100 ms |
+| Pressure safety | ⚠ Error | — | — | — | 12 ms |
+| Demand binding | ⚠ Error | — | — | — | 1 ms |
+
+## Requirement detail
+
+### Brew quality — station 1 — ✗ Fail
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Group-head temperature within 90–96 °C | ✓ Pass | 92.4 |  | [Open in Run](/run?session=sess-001&amp;tick=482&amp;element=station1.groupHeadTemp) |
+| Station reaches Ready within 5 s | ✗ Fail | 5.4 | warm-up exceeded budget by 0.4 s | [Open in Run](/run?session=sess-001&amp;tick=137&amp;element=station1.readyTime) |
+
+### Pressure safety — ⚠ Error
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Manifold pressure stays ≤ 20 bar | ⚠ Error | — | solver failed to converge on the demand-surge scenario | _no evidence_ |
+
+### Demand binding — ⚠ Error
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Aggregate demand binding resolves | ⚠ Error | — |  | _no evidence_ |
+</script>
+  <script type="application/json" id="rpt-payload-json">[
+  {
+    &quot;id&quot;: &quot;req.brew_temp.in_band&quot;,
+    &quot;label&quot;: &quot;Group-head temperature within 90–96 °C&quot;,
+    &quot;verdict&quot;: &quot;pass&quot;,
+    &quot;actual&quot;: 92.4,
+    &quot;expected&quot;: 96,
+    &quot;margin&quot;: -3.6,
+    &quot;error&quot;: null,
+    &quot;runtimeMs&quot;: 42,
+    &quot;evidence&quot;: {
+      &quot;session_id&quot;: &quot;sess-001&quot;,
+      &quot;tick&quot;: 482,
+      &quot;element_id&quot;: &quot;station1.groupHeadTemp&quot;
+    }
+  },
+  {
+    &quot;id&quot;: &quot;req.warmup.within_budget&quot;,
+    &quot;label&quot;: &quot;Station reaches Ready within 5 s&quot;,
+    &quot;verdict&quot;: &quot;fail&quot;,
+    &quot;actual&quot;: 5.4,
+    &quot;expected&quot;: 5,
+    &quot;margin&quot;: 0.4,
+    &quot;error&quot;: null,
+    &quot;reason&quot;: &quot;warm-up exceeded budget by 0.4 s&quot;,
+    &quot;runtimeMs&quot;: 58,
+    &quot;evidence&quot;: {
+      &quot;session_id&quot;: &quot;sess-001&quot;,
+      &quot;tick&quot;: 137,
+      &quot;element_id&quot;: &quot;station1.readyTime&quot;
+    }
+  },
+  {
+    &quot;id&quot;: &quot;req.pressure.safe&quot;,
+    &quot;label&quot;: &quot;Manifold pressure stays ≤ 20 bar&quot;,
+    &quot;verdict&quot;: &quot;error&quot;,
+    &quot;actual&quot;: null,
+    &quot;expected&quot;: null,
+    &quot;error&quot;: null,
+    &quot;reason&quot;: &quot;solver failed to converge on the demand-surge scenario&quot;,
+    &quot;runtimeMs&quot;: 12,
+    &quot;evidence&quot;: null
+  },
+  {
+    &quot;id&quot;: &quot;req.demand.resolved&quot;,
+    &quot;label&quot;: &quot;Aggregate demand binding resolves&quot;,
+    &quot;verdict&quot;: &quot;error&quot;,
+    &quot;actual&quot;: null,
+    &quot;expected&quot;: null,
+    &quot;error&quot;: &quot;unresolved binding: q_total&quot;,
+    &quot;runtimeMs&quot;: 1,
+    &quot;evidence&quot;: null
+  }
+]</script>
+
+</main>
+<script>(function() {
+  // Expand / collapse per-row detail sections.
+  document.querySelectorAll('[data-row-toggle]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var row = document.getElementById(btn.getAttribute('data-row-toggle'));
+      if (!row) return;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      row.style.display = open ? 'none' : 'table-row';
+    });
+  });
+
+  // Sort the main case table by clicking a header cell.
+  document.querySelectorAll('table.rpt-table').forEach(function(table) {
+    var ths = table.querySelectorAll('thead th[data-col]');
+    ths.forEach(function(th, colIdx) {
+      th.addEventListener('click', function() {
+        var current = th.getAttribute('data-sort-active');
+        var dir = current === 'asc' ? 'desc' : 'asc';
+        ths.forEach(function(x) { x.removeAttribute('data-sort-active'); });
+        th.setAttribute('data-sort-active', dir);
+        var tbody = table.querySelector('tbody');
+        if (!tbody) return;
+        // Sort only top-level rows (not the expand-detail rows).
+        var rows = Array.prototype.filter.call(
+          tbody.querySelectorAll('tr[data-row-kind="case"]'),
+          function() { return true; }
+        );
+        rows.sort(function(a, b) {
+          var av = a.children[colIdx] ? a.children[colIdx].getAttribute('data-sort-value') || a.children[colIdx].textContent : '';
+          var bv = b.children[colIdx] ? b.children[colIdx].getAttribute('data-sort-value') || b.children[colIdx].textContent : '';
+          var na = parseFloat(av), nb = parseFloat(bv);
+          if (!isNaN(na) && !isNaN(nb)) return dir === 'asc' ? na - nb : nb - na;
+          return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+        });
+        rows.forEach(function(r) {
+          tbody.appendChild(r);
+          var detailId = r.getAttribute('data-detail-id');
+          if (detailId) {
+            var detail = document.getElementById(detailId);
+            if (detail) tbody.appendChild(detail);
+          }
+        });
+      });
+    });
+  });
+
+  // Print-friendly toggle.
+  var printBtn = document.getElementById('rpt-action-print');
+  if (printBtn) {
+    printBtn.addEventListener('click', function() {
+      document.body.classList.toggle('report--print');
+    });
+  }
+
+  // Copy as Markdown.
+  var copyBtn = document.getElementById('rpt-action-copy-md');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+      var md = document.getElementById('rpt-payload-md');
+      if (!md || !navigator.clipboard) return;
+      navigator.clipboard.writeText(md.textContent || '').then(function() {
+        var prev = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function() { copyBtn.textContent = prev; }, 1500);
+      });
+    });
+  }
+
+  // Download JSON.
+  var jsonBtn = document.getElementById('rpt-action-download-json');
+  if (jsonBtn) {
+    jsonBtn.addEventListener('click', function() {
+      var payload = document.getElementById('rpt-payload-json');
+      if (!payload) return;
+      var blob = new Blob([payload.textContent || ''], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = (document.title || 'verdicts') + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    });
+  }
+})();</script>
+</body>
+</html>
+"
+`;

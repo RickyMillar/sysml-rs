@@ -1,0 +1,45 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[E200] error @ "BrewedCoffee"
+  no definition 'BrewedCoffee' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Brewer"
+  no definition 'Brewer' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Steam"
+  no definition 'Steam' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Temperature"
+  no definition 'Temperature' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterTank"
+  no definition 'WaterTank' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed
+[PH003] info @ "WaterPort"
+  port 'WaterPort' classified as signal (measurement-only) carrying thermal quantity (temperature)
+  note: signal ports carry measurements, not power — they are exempt from conservation-law checks (PH002/PH004)
+[PH006] info @ "current"
+  did you mean `ISQ::ElectricCurrentValue`? attribute 'current' in 'PowerPort' is typed as Real
+  note: electrical flow — enables KCL at junctions — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute current : ISQ::ElectricCurrentValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation
+[PH006] info @ "voltage"
+  did you mean `ISQ::ElectricPotentialValue`? attribute 'voltage' in 'PowerPort' is typed as Real
+  note: electrical effort — enables voltage propagation — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute voltage : ISQ::ElectricPotentialValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation
+[PH006] info @ "flowRate"
+  did you mean `ISQ::VolumeFlowRateValue`? attribute 'flowRate' in 'WaterPort' is typed as Real
+  note: volume flow rate — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute flowRate : ISQ::VolumeFlowRateValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation

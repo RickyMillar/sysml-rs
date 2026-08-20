@@ -1,0 +1,24 @@
+[package]
+name = "sysml-parser-trait"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Parser trait and result types for SysML v2 text parsing"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-core = { workspace = true }
+sysml-span = { workspace = true }
+walkdir = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true, optional = true }
+
+[features]
+default = []
+tracing = ["dep:tracing"]
+
+[lints]
+workspace = true

@@ -1,0 +1,12 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": {
+    "executions":<N>,
+    "hit_ratio":<F>,
+    "validations":<N>
+  }
+}

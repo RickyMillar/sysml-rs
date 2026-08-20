@@ -1,0 +1,21 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "element_id": "<UUID>",
+    "overrides": []
+  },
+  "response": {
+    "context": {},
+    "diagnostics": [],
+    "display": "2",
+    "element_name": "accumulatorGain",
+    "source": "2.0",
+    "symbols": [],
+    "value": 2.0,
+    "value_type": "Float",
+    "verdict": "inconclusive"
+  }
+}

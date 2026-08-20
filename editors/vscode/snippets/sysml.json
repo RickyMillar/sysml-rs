@@ -1,0 +1,277 @@
+{
+  "Package": {
+    "prefix": ["pkg", "package"],
+    "body": ["package ${1:Name} {", "    $0", "}"],
+    "description": "Create a package declaration"
+  },
+  "Part Definition": {
+    "prefix": ["partdef", "part def"],
+    "body": ["part def ${1:Name} {", "    $0", "}"],
+    "description": "Create a part definition"
+  },
+  "Part Usage": {
+    "prefix": "part",
+    "body": "part ${1:name} : ${2:Type};$0",
+    "description": "Create a part usage"
+  },
+  "Attribute Definition": {
+    "prefix": ["attrdef", "attribute def"],
+    "body": ["attribute def ${1:Name} {", "    $0", "}"],
+    "description": "Create an attribute definition"
+  },
+  "Attribute Usage": {
+    "prefix": ["attr", "attribute"],
+    "body": "attribute ${1:name} : ${2:Type};$0",
+    "description": "Create an attribute usage"
+  },
+  "Action Definition": {
+    "prefix": ["actiondef", "action def"],
+    "body": [
+      "action def ${1:Name} {",
+      "    in ${2:input} : ${3:InputType};",
+      "    out ${4:output} : ${5:OutputType};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create an action definition with inputs and outputs"
+  },
+  "Action Usage": {
+    "prefix": "action",
+    "body": ["action ${1:name} : ${2:ActionDef} {", "    $0", "}"],
+    "description": "Create an action usage"
+  },
+  "State Definition": {
+    "prefix": ["statedef", "state def"],
+    "body": [
+      "state def ${1:Name} {",
+      "    entry { $2 }",
+      "    do { $3 }",
+      "    exit { $4 }",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a state definition with entry/do/exit actions"
+  },
+  "State Usage": {
+    "prefix": "state",
+    "body": "state ${1:name};$0",
+    "description": "Create a state usage"
+  },
+  "Transition": {
+    "prefix": ["trans", "transition"],
+    "body": "transition ${1:name} first ${2:sourceState} then ${3:targetState};$0",
+    "description": "Create a state transition"
+  },
+  "Port Definition": {
+    "prefix": ["portdef", "port def"],
+    "body": ["port def ${1:Name} {", "    $0", "}"],
+    "description": "Create a port definition"
+  },
+  "Port Usage": {
+    "prefix": "port",
+    "body": "port ${1:name} : ${2:PortType};$0",
+    "description": "Create a port usage"
+  },
+  "Interface Definition": {
+    "prefix": ["interfacedef", "interface def"],
+    "body": [
+      "interface def ${1:Name} {",
+      "    end ${2:end1} : ${3:Type1};",
+      "    end ${4:end2} : ${5:Type2};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create an interface definition"
+  },
+  "Connection Usage": {
+    "prefix": ["conn", "connection", "connect"],
+    "body": "connect ${1:port1} to ${2:port2};$0",
+    "description": "Create a connection between ports"
+  },
+  "Requirement Definition": {
+    "prefix": ["reqdef", "requirement def"],
+    "body": [
+      "requirement def ${1:Name} {",
+      "    doc /* ${2:description} */",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a requirement definition"
+  },
+  "Requirement Usage": {
+    "prefix": ["req", "requirement"],
+    "body": [
+      "requirement ${1:name} : ${2:RequirementDef} {",
+      "    subject ${3:subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a requirement usage"
+  },
+  "Constraint Definition": {
+    "prefix": ["constraintdef", "constraint def"],
+    "body": [
+      "constraint def ${1:Name} {",
+      "    in ${2:param} : ${3:Type};",
+      "    ${4:expression}",
+      "}"
+    ],
+    "description": "Create a constraint definition"
+  },
+  "Constraint Usage": {
+    "prefix": "constraint",
+    "body": "constraint ${1:name} : ${2:ConstraintDef};$0",
+    "description": "Create a constraint usage"
+  },
+  "Import All": {
+    "prefix": "import",
+    "body": "import ${1:QualifiedName}::*;$0",
+    "description": "Import all members from a namespace"
+  },
+  "Import Single": {
+    "prefix": "imports",
+    "body": "import ${1:QualifiedName};$0",
+    "description": "Import a single element"
+  },
+  "Item Definition": {
+    "prefix": ["itemdef", "item def"],
+    "body": ["item def ${1:Name} {", "    $0", "}"],
+    "description": "Create an item definition"
+  },
+  "Item Usage": {
+    "prefix": "item",
+    "body": "item ${1:name} : ${2:Type};$0",
+    "description": "Create an item usage"
+  },
+  "Enum Definition": {
+    "prefix": ["enumdef", "enum def"],
+    "body": [
+      "enum def ${1:Name} {",
+      "    ${2:value1};",
+      "    ${3:value2};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create an enumeration definition"
+  },
+  "Allocation Definition": {
+    "prefix": ["allocdef", "allocation def"],
+    "body": [
+      "allocation def ${1:Name} {",
+      "    end ${2:source} : ${3:SourceType};",
+      "    end ${4:target} : ${5:TargetType};",
+      "}"
+    ],
+    "description": "Create an allocation definition"
+  },
+  "Allocation Usage": {
+    "prefix": ["alloc", "allocation", "allocate"],
+    "body": "allocate ${1:source} to ${2:target};$0",
+    "description": "Create an allocation"
+  },
+  "View Definition": {
+    "prefix": ["viewdef", "view def"],
+    "body": ["view def ${1:Name} {", "    expose ${2:namespace}::*;", "    $0", "}"],
+    "description": "Create a view definition"
+  },
+  "View Usage": {
+    "prefix": "view",
+    "body": ["view ${1:name} : ${2:ViewDef} {", "    $0", "}"],
+    "description": "Create a view usage"
+  },
+  "Concern Definition": {
+    "prefix": ["concerndef", "concern def"],
+    "body": [
+      "concern def ${1:Name} {",
+      "    doc /* ${2:description} */",
+      "    stakeholder ${3:stakeholder};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a concern definition"
+  },
+  "Case Definition": {
+    "prefix": ["casedef", "case def"],
+    "body": [
+      "case def ${1:Name} {",
+      "    subject ${2:subject} : ${3:Type};",
+      "    objective {",
+      "        $0",
+      "    }",
+      "}"
+    ],
+    "description": "Create a use case or verification case definition"
+  },
+  "Calc Definition": {
+    "prefix": ["calcdef", "calc def"],
+    "body": [
+      "calc def ${1:Name} {",
+      "    in ${2:input} : ${3:InputType};",
+      "    return : ${4:ReturnType};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a calculation definition"
+  },
+  "Calc Usage": {
+    "prefix": "calc",
+    "body": "calc ${1:name} : ${2:CalcDef};$0",
+    "description": "Create a calculation usage"
+  },
+  "Doc Comment": {
+    "prefix": "doc",
+    "body": "doc /* ${1:description} */$0",
+    "description": "Create a documentation comment"
+  },
+  "Verification Case Definition": {
+    "prefix": ["verificationcasedef", "verification case def"],
+    "body": [
+      "verification case def ${1:Name} {",
+      "    subject ${2:subject} : ${3:Type};",
+      "    objective {",
+      "        verify requirement ${4:req};",
+      "    }",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a verification case definition"
+  },
+  "Use Case Definition": {
+    "prefix": ["usecasedef", "use case def"],
+    "body": [
+      "use case def ${1:Name} {",
+      "    subject ${2:subject} : ${3:Type};",
+      "    objective {",
+      "        $0",
+      "    }",
+      "}"
+    ],
+    "description": "Create a use case definition"
+  },
+  "Analysis Case Definition": {
+    "prefix": ["analysiscasedef", "analysis case def"],
+    "body": [
+      "analysis case def ${1:Name} {",
+      "    subject ${2:subject} : ${3:Type};",
+      "    return : ${4:ResultType};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create an analysis case definition"
+  },
+  "Flow Connection": {
+    "prefix": ["flowconn", "flow connection"],
+    "body": "flow of ${1:ItemType} from ${2:source}.${3:outPort} to ${4:target}.${5:inPort};$0",
+    "description": "Create a flow connection between ports"
+  },
+  "Satisfy Requirement": {
+    "prefix": "satisfy",
+    "body": "satisfy requirement ${1:reqName} by ${2:element};$0",
+    "description": "Satisfy a requirement by an element"
+  },
+  "Assert Constraint": {
+    "prefix": "assert",
+    "body": "assert constraint ${1:constraintName};$0",
+    "description": "Assert a constraint"
+  }
+}

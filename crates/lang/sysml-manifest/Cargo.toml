@@ -1,0 +1,23 @@
+[package]
+name = "sysml-manifest"
+description = "SysML project manifest (sysml.toml) and lock file parsing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-id = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }
+semver = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+
+[lints]
+workspace = true

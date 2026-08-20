@@ -1,0 +1,20 @@
+{
+  "grammars": [
+    {
+      "name": "sysml",
+      "camelcase": "SysML",
+      "scope": "source.sysml",
+      "injection-regex": "^sysml$",
+      "file-types": ["sysml"],
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "MIT OR Apache-2.0",
+    "description": "SysML v2 grammar for tree-sitter",
+    "links": {
+      "repository": "https://github.com/RickyMillar/sysml-rs"
+    }
+  }
+}

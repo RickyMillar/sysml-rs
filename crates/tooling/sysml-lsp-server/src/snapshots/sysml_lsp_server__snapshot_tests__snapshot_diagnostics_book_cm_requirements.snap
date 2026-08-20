@@ -1,0 +1,44 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 788
+expression: rendered
+---
+[E200] error @ "require constraint : BrewTempConstraint;"
+  no definition 'BrewTempConstraint' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "require constraint : BrewTimeConstraint;"
+  no definition 'BrewTimeConstraint' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeMachine"
+  no definition 'CoffeeMachine' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "subject machine : CoffeeMachine;"
+  no definition 'CoffeeMachine' found in scope of subject membership 'machine'
+  note: qualified name: Requirements::CoffeeMachineRequirements::machine
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "require constraint : GrindConsistencyConstraint;"
+  no definition 'GrindConsistencyConstraint' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM006] error @ "import Calculations::*;"
+  import references unknown standard library namespace 'Calculations'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[CN002] info @ "machine.cupSensor.cupDetected == true;"
+  constraint '<UUID>': variable 'machine' has no value — result is inconclusive
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed
+[RQ002] info @ "requirement def CoffeeMachineRequirements {\n        doc ..."
+  requirement 'CoffeeMachineRequirements' is not satisfied by any element
+[RQ002] info @ "requirement def GrindConsistency :> CoffeeMachineRequirem..."
+  requirement 'GrindConsistency' is not satisfied by any element
+[RQ003] info @ "requirement def CoffeeMachineRequirements {\n        doc ..."
+  requirement 'CoffeeMachineRequirements' has no verification case
+[RQ003] info @ "requirement def GrindConsistency :> CoffeeMachineRequirem..."
+  requirement 'GrindConsistency' has no verification case
+[RQ003] info @ "requirement def SafetyInterlock :> CoffeeMachineRequireme..."
+  requirement 'SafetyInterlock' has no verification case

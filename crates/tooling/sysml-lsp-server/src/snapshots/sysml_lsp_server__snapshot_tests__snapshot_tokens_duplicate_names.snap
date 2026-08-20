@@ -1,0 +1,16 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 471
+expression: rendered
+---
+1:1..8:82  "/* Fixture: duplicate_names.sysml\n  ..."  COMMENT  []
+10:1..10:8  "package"  KEYWORD  []
+10:1..13:2  "package DupExample {\n    part def Fo..."  NAMESPACE  [definition]
+11:5..11:9  "part"  KEYWORD  []
+11:5..11:18  "part def Foo;"  CLASS  [definition]
+11:10..11:13  "def"  KEYWORD  []
+11:17..11:18  ";"  OPERATOR  []
+12:5..12:9  "part"  KEYWORD  []
+12:5..12:18  "part def Foo;"  CLASS  [definition]
+12:10..12:13  "def"  KEYWORD  []
+12:17..12:18  ";"  OPERATOR  []

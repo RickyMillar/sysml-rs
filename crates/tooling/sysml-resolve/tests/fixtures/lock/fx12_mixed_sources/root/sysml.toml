@@ -1,0 +1,9 @@
+[project]
+name = "root-fx12"
+version = "0.1.0"
+
+[dependencies]
+dep-path = { path = "../deps/dep-path" }
+dep-git = { git = "{{GIT_URL}}", rev = "{{GIT_COMMIT}}" }
+dep-kpar = { kpar = "../deps/dep-kpar.kpar" }
+dep-reg = { version = "4.5.6", registry = "sysand" }

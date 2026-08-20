@@ -1,0 +1,196 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "max_depth": 2,
+    "root": "<WS>/libraries/standard/library.kernel"
+  },
+  "response": {
+    "entries": [
+      {
+        "name": "Base.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Base.kerml",
+        "type": "file"
+      },
+      {
+        "name": "BaseFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/BaseFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "BooleanFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/BooleanFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Clocks.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Clocks.kerml",
+        "type": "file"
+      },
+      {
+        "name": "CollectionFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/CollectionFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Collections.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Collections.kerml",
+        "type": "file"
+      },
+      {
+        "name": "ComplexFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/ComplexFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "ControlFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/ControlFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "ControlPerformances.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/ControlPerformances.kerml",
+        "type": "file"
+      },
+      {
+        "name": "DataFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/DataFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "FeatureReferencingPerformances.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/FeatureReferencingPerformances.kerml",
+        "type": "file"
+      },
+      {
+        "name": "IntegerFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/IntegerFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "KerML.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/KerML.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Links.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Links.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Metaobjects.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Metaobjects.kerml",
+        "type": "file"
+      },
+      {
+        "name": "NaturalFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/NaturalFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "NumericalFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/NumericalFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Objects.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Objects.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Observation.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Observation.kerml",
+        "type": "file"
+      },
+      {
+        "name": "OccurrenceFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/OccurrenceFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Occurrences.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Occurrences.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Performances.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Performances.kerml",
+        "type": "file"
+      },
+      {
+        "name": "RationalFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/RationalFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "RealFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/RealFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "ScalarFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/ScalarFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "ScalarValues.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/ScalarValues.kerml",
+        "type": "file"
+      },
+      {
+        "name": "SequenceFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/SequenceFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "SpatialFrames.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/SpatialFrames.kerml",
+        "type": "file"
+      },
+      {
+        "name": "StatePerformances.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/StatePerformances.kerml",
+        "type": "file"
+      },
+      {
+        "name": "StringFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/StringFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Transfers.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Transfers.kerml",
+        "type": "file"
+      },
+      {
+        "name": "TransitionPerformances.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/TransitionPerformances.kerml",
+        "type": "file"
+      },
+      {
+        "name": "TrigFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/TrigFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "Triggers.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/Triggers.kerml",
+        "type": "file"
+      },
+      {
+        "name": "VectorFunctions.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/VectorFunctions.kerml",
+        "type": "file"
+      },
+      {
+        "name": "VectorValues.kerml",
+        "path": "<WS>/libraries/standard/library.kernel/VectorValues.kerml",
+        "type": "file"
+      }
+    ],
+    "root": "<WS>/libraries/standard/library.kernel"
+  }
+}

@@ -1,0 +1,44 @@
+[package]
+name = "sysml-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "SysML v2 execution CLI tool"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[[bin]]
+name = "sysml"
+path = "src/main.rs"
+
+[dependencies]
+sysml-core = { workspace = true, features = ["serde"] }
+sysml-parser-trait = { workspace = true }
+sysml-runtime = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+sysml-span = { workspace = true }
+sysml-project = { workspace = true }
+sysml-manifest = { workspace = true }
+sysml-resolve = { workspace = true }
+sysml-service = { workspace = true }
+tree-sitter = { workspace = true }
+thiserror = { workspace = true }
+clap = { workspace = true }
+directories = { workspace = true }
+sysml-diagram = { workspace = true }
+sysml-api = { workspace = true, optional = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+tokio = { workspace = true }
+
+[features]
+server = ["dep:sysml-api"]
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

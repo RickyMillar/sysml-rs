@@ -1,0 +1,16 @@
+lock_version = 1
+
+[[package]]
+name = "dep-base"
+version = "1.0.0"
+source = "path:../dep-base"
+
+[[package]]
+name = "dep-left"
+version = "0.2.0"
+source = "path:../deps/dep-left"
+
+[[package]]
+name = "dep-right"
+version = "0.2.0"
+source = "path:../deps/dep-right"

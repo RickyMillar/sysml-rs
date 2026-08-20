@@ -1,0 +1,60 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "Documentation",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "body": "* Anything is the top level generalized type in the language."
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 301,
+          "file":"<FILE>",
+          "line": 9,
+          "start": 215
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "self",
+      "name_span": {
+        "col": 10,
+        "end": 319,
+        "file":"<FILE>",
+        "line": 14,
+        "start": 315
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 612,
+          "file":"<FILE>",
+          "line": 14,
+          "start": 307
+        }
+      ]
+    }
+  ]
+}

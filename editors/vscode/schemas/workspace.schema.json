@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SysML Workspace",
+  "description": "Schema for .workspace.json files describing a SysML v2 workspace.",
+  "type": "object",
+  "required": ["projects"],
+  "properties": {
+    "projects": {
+      "type": "array",
+      "description": "Projects in this workspace.",
+      "items": {
+        "type": "object",
+        "required": ["path", "iris"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path to the project directory."
+          },
+          "iris": {
+            "type": "array",
+            "description": "IRIs associated with this project.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "col": 1,
+    "line": 7,
+    "new_name": null,
+    "uri": "<PATH>"
+  },
+  "response": {
+    "prepare": {
+      "col_end": 2,
+      "col_start": 1,
+      "line_end": 21,
+      "line_start": 7,
+      "placeholder": "Anything"
+    }
+  }
+}

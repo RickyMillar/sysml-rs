@@ -1,0 +1,52 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "diagnostics": [],
+    "range_end_col": 4,
+    "range_end_line": 109,
+    "range_start_col": 4,
+    "range_start_line": 109,
+    "uri": "<PATH>"
+  },
+  "response": [
+    {
+      "edits": [
+        {
+          "edits": [
+            {
+              "col_end": 32,
+              "col_start": 30,
+              "line_end": 109,
+              "line_start": 109,
+              "new_text": "specializes"
+            }
+          ],
+          "uri": "<PATH>"
+        }
+      ],
+      "kind": "refactor.rewrite",
+      "title": "Convert ':>' to 'specializes'"
+    },
+    {
+      "edits": [
+        {
+          "edits": [
+            {
+              "col_end": 32,
+              "col_start": 30,
+              "line_end": 109,
+              "line_start": 109,
+              "new_text": "subsets"
+            }
+          ],
+          "uri": "<PATH>"
+        }
+      ],
+      "kind": "refactor.rewrite",
+      "title": "Convert ':>' to 'subsets'"
+    }
+  ]
+}

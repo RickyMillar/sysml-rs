@@ -1,0 +1,6 @@
+[project]
+name = "dep-a"
+version = "0.1.0"
+
+[dependencies]
+dep-b = { path = "../dep-b" }

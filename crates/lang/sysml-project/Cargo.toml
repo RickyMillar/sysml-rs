@@ -1,0 +1,37 @@
+[package]
+name = "sysml-project"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "SysML v2 project manifests, workspace discovery, and .kpar archive support"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[features]
+default = ["kpar", "lock"]
+kpar = ["dep:zip", "dep:chrono", "dep:sysml-id"]
+lock = ["dep:toml"]
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+sha2 = { workspace = true }
+semver = { workspace = true }
+walkdir = { workspace = true }
+hex = { workspace = true }
+zip = { workspace = true, optional = true }
+toml = { workspace = true, optional = true }
+sysml-id = { workspace = true, optional = true }
+sysml-manifest = { workspace = true }
+tree-sitter = { workspace = true }
+tree-sitter-sysml = { path = "../sysml-parser-incremental/tree-sitter" }
+chrono = { workspace = true, optional = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "markdown.sysml.codeblock",
+  "injectionSelector": "L:text.html.markdown",
+  "patterns": [
+    {
+      "comment": "Fenced code block with sysml language tag",
+      "begin": "(^|\\G)(\\s*)(\\`{3,}|~{3,})\\s*(?i:sysml)(?:\\s+[^`~]*)?\\s*$",
+      "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
+      "beginCaptures": {
+        "3": { "name": "punctuation.definition.markdown" }
+      },
+      "endCaptures": {
+        "3": { "name": "punctuation.definition.markdown" }
+      },
+      "contentName": "meta.embedded.block.sysml",
+      "patterns": [
+        { "include": "source.sysml" }
+      ]
+    }
+  ]
+}

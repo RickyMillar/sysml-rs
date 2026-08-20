@@ -1,0 +1,30 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 486
+expression: rendered
+---
+[----] error @ ": Signal"
+  Syntax error near `: Signal`
+  note: after `result`
+[AX009] error @ "for item in items {\n            action processItem;\n   ..."
+  for loop '<unnamed>' in 'LoopAction' has no collection reference
+  note: add a collection, e.g. `for x in items`
+[E200] error @ "inputData"
+  no definition 'inputData' found in scope of redefinition
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "outputData"
+  no definition 'outputData' found in scope of redefinition
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[AX002] warning @ "action def ConditionalAction {\n        if true {\n      ..."
+  action 'ConditionalAction' has no explicit control flow; steps will execute sequentially
+[AX002] warning @ "action def ControlLoop {\n        action monitor : Monito..."
+  action 'ControlLoop' has no explicit control flow; steps will execute sequentially
+[AX002] warning @ "action def LoopAction {\n        while true {\n          ..."
+  action 'LoopAction' has no explicit control flow; steps will execute sequentially
+[AX002] warning @ "action def ProcessData {\n        in item inputData;\n   ..."
+  action 'ProcessData' has no explicit control flow; steps will execute sequentially
+[AX011] warning @ "accept sensor : Signal;"
+  accept action 'sensor' in 'MonitorAction' has no receiver
+  note: add `via <port>` to specify where to receive messages

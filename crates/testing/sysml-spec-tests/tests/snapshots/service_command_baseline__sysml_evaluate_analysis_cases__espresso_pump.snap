@@ -1,0 +1,69 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "case_name": "AnalysisCase",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "TradeStudy",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": "tradeStudyObjective",
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "analysisCases",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "self",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "subAnalysisCases",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    }
+  ]
+}

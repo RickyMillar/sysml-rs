@@ -1,0 +1,6 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[----] error @ "o"
+  expected `;` after 'Foo' in definition

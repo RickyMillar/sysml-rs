@@ -1,0 +1,8 @@
+[project]
+name = "view-showcase"
+version = "0.1.0"
+description = "Test bed for every spec view kind and every ViewUsage feature (Phase 5)"
+license = "MIT"
+
+[package]
+iri = "urn:sysml-rs:view-showcase"

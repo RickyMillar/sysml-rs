@@ -1,0 +1,31 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+  },
+  "response": [
+    {
+      "code": "PH006",
+      "message": "did you mean `ISQ::SpeedValue`? attribute 'motorSpeed' in 'Grinder' is typed as Real",
+      "notes": [
+        "ISQ types enable domain detection, conservation laws, and simulation",
+        "mechanical effort — using the ISQ type unlocks automatic physics classification",
+        "try: `attribute motorSpeed : ISQ::SpeedValue;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 18,
+        "end": 1253,
+        "file":"<FILE>",
+        "line": 40,
+        "start": 1243
+      },
+      "tier": "Semantic"
+    }
+  ]
+}

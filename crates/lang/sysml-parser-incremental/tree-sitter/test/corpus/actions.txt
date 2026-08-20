@@ -1,0 +1,329 @@
+====================================
+action-definition-minimal
+====================================
+
+action def Run;
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)))
+
+====================================
+action-usage-with-typing
+====================================
+
+action run : Run;
+
+---
+
+(source_file
+  (action_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+action-with-send
+====================================
+
+action def Notify {
+  send Signal() to target;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (send_action
+        (primary_expression
+          (invocation_expression
+            (feature_chain
+              (identifier))))
+        (primary_expression
+          (feature_chain
+            (identifier)))))))
+
+====================================
+action-with-accept
+====================================
+
+action def Listen {
+  accept msg : Message;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (accept_action
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+====================================
+action-with-assign
+====================================
+
+action def Update {
+  assign x = 42;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (assignment_action
+        (primary_expression
+          (feature_chain
+            (identifier)))
+        (primary_expression
+          (literal
+            (integer_literal)))))))
+
+====================================
+if-action
+====================================
+
+action def Branch {
+  if ready {
+    action go;
+  }
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (if_action
+        (primary_expression
+          (feature_chain
+            (identifier)))
+        (action_body
+          (action_usage
+            name: (identifier)))))))
+
+====================================
+if-else-action
+====================================
+
+action def Branch {
+  if ready {
+    action go;
+  } else {
+    action wait;
+  }
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (if_action
+        (primary_expression
+          (feature_chain
+            (identifier)))
+        (action_body
+          (action_usage
+            name: (identifier)))
+        (action_body
+          (action_usage
+            name: (identifier)))))))
+
+====================================
+while-action
+====================================
+
+action def Loop {
+  while active {
+    action step;
+  }
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (while_action
+        (primary_expression
+          (feature_chain
+            (identifier)))
+        (action_body
+          (action_usage
+            name: (identifier)))))))
+
+====================================
+for-action
+====================================
+
+action def Iterate {
+  for item in items {
+    action process;
+  }
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (for_action
+        var: (identifier)
+        (primary_expression
+          (feature_chain
+            (identifier)))
+        (action_body
+          (action_usage
+            name: (identifier)))))))
+
+====================================
+fork-node
+====================================
+
+action def Parallel {
+  fork startParallel;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (control_flow_node
+        name: (identifier)))))
+
+====================================
+join-node
+====================================
+
+action def WaitAll {
+  join sync;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (control_flow_node
+        name: (identifier)))))
+
+====================================
+merge-node
+====================================
+
+action def Converge {
+  merge m;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (control_flow_node
+        name: (identifier)))))
+
+====================================
+decision-node
+====================================
+
+action def Choose {
+  decide d;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (control_flow_node
+        name: (identifier)))))
+
+====================================
+perform-action
+====================================
+
+action def Run {
+  perform action init;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (control_flow_node
+        name: (identifier)))))
+
+====================================
+send-via-port
+====================================
+
+action def SendMsg {
+  send Data() via outputPort;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (send_action
+        (primary_expression
+          (invocation_expression
+            (feature_chain
+              (identifier))))
+        (primary_expression
+          (feature_chain
+            (identifier)))))))
+
+====================================
+succession-in-action
+====================================
+
+action def Sequential {
+  action step1;
+  action step2;
+  succession step1 then step2;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (action_usage
+        name: (identifier))
+      (action_usage
+        name: (identifier))
+      (succession_decl
+        source: (feature_chain
+          (identifier))
+        target: (feature_chain
+          (identifier))))))

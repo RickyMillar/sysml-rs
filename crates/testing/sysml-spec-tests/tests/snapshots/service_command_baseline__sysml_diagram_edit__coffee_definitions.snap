@@ -1,0 +1,40 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "request": {
+      "action": "create",
+      "containerId": null,
+      "elementTypeId": "PartDefinition",
+      "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+    }
+  },
+  "response": {
+    "action": "create",
+    "status_message": "Created PartDefinition in <BOOK>/examples/coffee-machine/definitions.sysml",
+    "status_payload": {
+      "elementType": "PartDefinition",
+      "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+    },
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml",
+    "workspace_edit": {
+      "changes": [
+        {
+          "edits": [
+            {
+              "col_end": 0,
+              "col_start": 0,
+              "line_end": 80,
+              "line_start": 80,
+              "new_text": "    part def NewPart {\n    }\n\n"
+            }
+          ],
+          "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+        }
+      ]
+    }
+  }
+}

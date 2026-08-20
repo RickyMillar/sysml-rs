@@ -1,0 +1,14 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "element_id": "<UUID>",
+    "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+  },
+  "response": {
+    "documentation_markdown": "4) Action-flow view — the brew cycle, ordered by control flow.\nDifferent supertype, different shape; no other change."
+  }
+}

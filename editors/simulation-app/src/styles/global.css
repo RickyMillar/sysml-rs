@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./tokens-compat.css"; /* Phase 0 alias layer — deleted in Phase 8 */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--surface-canvas);
+  /* Numerals: tabular lining, everywhere, always. */
+  font-variant-numeric: tabular-nums lining-nums;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar (minimal) ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* ── Selection ── */
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* ── Focus visible: 2px accent ring, 1px offset, always visible on keyboard nav ── */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+}
+
+/* ── Mono text utility (identifiers, IDs, units, values) ── */
+.mono-text {
+  font-family: var(--font-mono);
+}
+
+/* ── HoverPopup skeleton pulse (R6.3) ─────────────────────────────
+   Used by the loading-state placeholder in features/hover/HoverPopup.tsx.
+   Honors prefers-reduced-motion: the component skips the animation
+   property in reduced-motion mode. */
+@keyframes sysml-hover-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+/* ── ninebar meter pulse (see components/Ninebar.tsx — the ONE glyph
+   for a live/pending measure; never decorative) ── */
+@keyframes nb-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nb-meter [data-nb-seg] { animation: none !important; }
+}

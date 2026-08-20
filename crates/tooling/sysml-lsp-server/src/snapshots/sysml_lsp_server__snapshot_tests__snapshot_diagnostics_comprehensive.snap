@@ -1,0 +1,19 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 510
+expression: rendered
+---
+[----] error @ ": DataPacket"
+  Syntax error near `: DataPacket`
+  note: after `signal`
+[----] error @ "part"
+  Unexpected keyword `part`
+  note: after `subject`
+[AX011] warning @ "accept ack : DataPacket;"
+  accept action 'ack' in 'DriveAction' has no receiver
+  note: add `via <port>` to specify where to receive messages
+[PH006] info @ "horsePower"
+  did you mean `ISQ::PowerValue`? attribute 'horsePower' in 'Engine' is typed as Real
+  note: power quantity — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute horsePower : ISQ::PowerValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation

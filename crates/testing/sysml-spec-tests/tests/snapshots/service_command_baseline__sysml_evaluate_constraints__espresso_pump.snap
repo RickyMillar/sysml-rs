@@ -1,0 +1,113 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "chamberPressure"
+              },
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "chamberPressure"
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "*"
+            }
+          },
+          {
+            "kind": "LiteralRational",
+            "props": {
+              "value": 100.0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<="
+        }
+      },
+      "detail": "ERROR (chamberPressure * chamberPressure <= 100.0): undefined variable: `chamberPressure`",
+      "display": "ERR",
+      "error": "undefined variable: `chamberPressure`",
+      "expr": "chamberPressure * chamberPressure <= 100.0",
+      "kind": "ConstraintUsage",
+      "name": "bounded",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "exposure",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "exposureTrip"
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<"
+        }
+      },
+      "detail": "ERROR (exposure < exposureTrip): undefined variable: `exposure`",
+      "display": "ERR",
+      "error": "undefined variable: `exposure`",
+      "expr": "exposure < exposureTrip",
+      "kind": "ConstraintUsage",
+      "name": "noReliefLatched",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "exposure",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "exposureTrip"
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">="
+        }
+      },
+      "detail": "ERROR (exposure >= exposureTrip): undefined variable: `exposure`",
+      "display": "ERR",
+      "error": "undefined variable: `exposure`",
+      "expr": "exposure >= exposureTrip",
+      "kind": "ConstraintUsage",
+      "name": "reliefEngaged",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    }
+  ]
+}

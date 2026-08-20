@@ -1,0 +1,8 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[E200] error @ "Enginne"
+  no definition 'Enginne' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library

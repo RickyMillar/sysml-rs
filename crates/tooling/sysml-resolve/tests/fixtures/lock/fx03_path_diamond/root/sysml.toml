@@ -1,0 +1,7 @@
+[project]
+name = "root-fx03"
+version = "0.1.0"
+
+[dependencies]
+dep-left = { path = "../deps/dep-left" }
+dep-right = { path = "../deps/dep-right" }

@@ -1,0 +1,228 @@
+=====================
+package-and-features
+=====================
+
+package Vehicle {
+  part def Engine specializes propulsion::EngineType;
+  part engine : Engine;
+  attribute def mass;
+  attribute mass : Real;
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (standard_def
+        name: (identifier)
+        (supertype_list
+          (type_ref
+            (qualified_name
+              (identifier)
+              (identifier)))))
+      (standard_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (standard_def
+        name: (identifier))
+      (standard_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+=======================
+definitions-and-usages
+=======================
+
+import foo::bar;
+action def Run;
+action run : Run;
+state def Idle;
+state idle;
+requirement def Req;
+constraint def C;
+
+---
+
+(source_file
+  (import_decl
+    target: (import_target
+      (import_qualified_name
+        (identifier)
+        (identifier))))
+  (action_def
+    name: (identifier))
+  (action_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier)))))
+  (state_def
+    name: (identifier))
+  (state_usage
+    name: (identifier))
+  (requirement_def
+    name: (identifier))
+  (constraint_def
+    name: (identifier)))
+
+================================
+nested-usages-and-bracket-units
+================================
+
+part def Sleigh {
+  part cockpit {
+    attribute volume :> ISQ::volume = 500 [SI::L];
+  }
+}
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (definition_body
+      (standard_usage
+        name: (identifier)
+        (usage_body
+          (standard_usage
+            name: (identifier)
+            (supertype_list
+              (type_ref
+                (qualified_name
+                  (identifier)
+                  (identifier))))
+            (default_value
+              (primary_expression
+                (bracket_expression
+                  (literal
+                    (integer_literal))
+                  (primary_expression
+                    (qualified_name
+                      (identifier)
+                      (identifier))))))))))))
+
+=======================================
+requirement-short-name-and-constraints
+=======================================
+
+requirement def <'TR1.1'> CockpitForSanta {
+  subject sleigh : SantaSleigh;
+  require constraint {
+    language "English" /* Must have cockpit */
+  }
+  requirement : CockpitSize;
+}
+
+---
+
+(source_file
+  (requirement_def
+    (short_name
+      (quoted_name))
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (require_constraint
+        (constraint_body
+          (textual_representation
+            language: (string_literal)
+            (doc_string))))
+      (requirement_usage
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+===========================
+constraint-body-expressions
+===========================
+
+requirement def CockpitSize {
+  subject sleigh : SantaSleigh;
+  assume constraint {
+    sleigh.santa.weight >= 0
+  }
+  require constraint {
+    sleigh.cockpit.volume >= 3 * sleigh.santa.weight
+  }
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (assume_constraint
+        (constraint_body
+          (result_expression
+            (relational_expression
+              (primary_expression
+                (feature_chain
+                  (identifier)
+                  (identifier)
+                  (identifier)))
+              (primary_expression
+                (literal
+                  (integer_literal)))))))
+      (require_constraint
+        (constraint_body
+          (result_expression
+            (relational_expression
+              (primary_expression
+                (feature_chain
+                  (identifier)
+                  (identifier)
+                  (identifier)))
+              (multiplicative_expression
+                (primary_expression
+                  (literal
+                    (integer_literal)))
+                (primary_expression
+                  (feature_chain
+                    (identifier)
+                    (identifier)
+                    (identifier)))))))))))
+
+===============
+private-import
+===============
+
+package Foo {
+  private import Bar::*;
+  part x;
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (import_decl
+        (visibility_indicator)
+        target: (import_target
+          (import_single_name
+            (identifier))))
+      (standard_usage
+        name: (identifier)))))

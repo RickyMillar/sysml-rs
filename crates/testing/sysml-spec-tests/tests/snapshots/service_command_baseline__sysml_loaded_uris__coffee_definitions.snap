@@ -1,0 +1,25 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    "file://<BOOK>/examples/coffee-machine/actions.sysml",
+    "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml",
+    "file://<BOOK>/examples/coffee-machine/calculations.sysml",
+    "file://<BOOK>/examples/coffee-machine/connections.sysml",
+    "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+    "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml",
+    "file://<BOOK>/examples/coffee-machine/flows.sysml",
+    "file://<BOOK>/examples/coffee-machine/metadata.sysml",
+    "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
+    "file://<BOOK>/examples/coffee-machine/package-structure.sysml",
+    "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
+    "file://<BOOK>/examples/coffee-machine/requirements.sysml",
+    "file://<BOOK>/examples/coffee-machine/states.sysml",
+    "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+    "file://<BOOK>/examples/coffee-machine/views.sysml"
+  ]
+}

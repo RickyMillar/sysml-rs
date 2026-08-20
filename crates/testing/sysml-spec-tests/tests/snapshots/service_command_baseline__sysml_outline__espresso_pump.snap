@@ -1,0 +1,2355 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+  },
+  "response": [
+    {
+      "children": [
+        {
+          "children": [],
+          "detail": null,
+          "kind": "Documentation",
+          "name": "<unnamed>",
+          "range_end": 2239,
+          "range_start": 27,
+          "selection_end": 2239,
+          "selection_start": 27
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 2276,
+          "range_start": 2245,
+          "selection_end": 2276,
+          "selection_start": 2245
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 2324,
+          "range_start": 2281,
+          "selection_end": 2324,
+          "selection_start": 2281
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 2364,
+          "range_start": 2329,
+          "selection_end": 2364,
+          "selection_start": 2329
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 2406,
+          "range_start": 2369,
+          "selection_end": 2406,
+          "selection_start": 2369
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2625,
+                  "range_start": 2621,
+                  "selection_end": 2625,
+                  "selection_start": 2621
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 2640,
+                  "range_start": 2634,
+                  "selection_end": 2640,
+                  "selection_start": 2634
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "omega",
+              "range_end": 2641,
+              "range_start": 2603,
+              "selection_end": 2608,
+              "selection_start": 2603
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2871,
+                  "range_start": 2867,
+                  "selection_end": 2871,
+                  "selection_start": 2867
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 2883,
+                  "range_start": 2880,
+                  "selection_end": 2883,
+                  "selection_start": 2880
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "pistonArea",
+              "range_end": 2884,
+              "range_start": 2844,
+              "selection_end": 2854,
+              "selection_start": 2844
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2972,
+                  "range_start": 2968,
+                  "selection_end": 2972,
+                  "selection_start": 2968
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 2984,
+                  "range_start": 2981,
+                  "selection_end": 2984,
+                  "selection_start": 2981
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "dischargeCoeff",
+              "range_end": 2985,
+              "range_start": 2941,
+              "selection_end": 2955,
+              "selection_start": 2941
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3053,
+                  "range_start": 3049,
+                  "selection_end": 3053,
+                  "selection_start": 3049
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3065,
+                  "range_start": 3062,
+                  "selection_end": 3065,
+                  "selection_start": 3062
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "dpRef",
+              "range_end": 3066,
+              "range_start": 3031,
+              "selection_end": 3036,
+              "selection_start": 3031
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3149,
+                  "range_start": 3145,
+                  "selection_end": 3149,
+                  "selection_start": 3145
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3164,
+                  "range_start": 3158,
+                  "selection_end": 3164,
+                  "selection_start": 3158
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "epsRoot",
+              "range_end": 3165,
+              "range_start": 3125,
+              "selection_end": 3132,
+              "selection_start": 3125
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3232,
+                  "range_start": 3228,
+                  "selection_end": 3232,
+                  "selection_start": 3228
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3245,
+                  "range_start": 3241,
+                  "selection_end": 3245,
+                  "selection_start": 3241
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "leakCoeff",
+              "range_end": 3246,
+              "range_start": 3206,
+              "selection_end": 3215,
+              "selection_start": 3206
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3316,
+                  "range_start": 3312,
+                  "selection_end": 3316,
+                  "selection_start": 3312
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3328,
+                  "range_start": 3325,
+                  "selection_end": 3328,
+                  "selection_start": 3325
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "chamberGain",
+              "range_end": 3329,
+              "range_start": 3288,
+              "selection_end": 3299,
+              "selection_start": 3288
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3405,
+                  "range_start": 3401,
+                  "selection_end": 3405,
+                  "selection_start": 3401
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3417,
+                  "range_start": 3414,
+                  "selection_end": 3417,
+                  "selection_start": 3414
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "accumulatorGain",
+              "range_end": 3418,
+              "range_start": 3373,
+              "selection_end": 3388,
+              "selection_start": 3373
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 3716,
+                  "range_start": 3712,
+                  "selection_end": 3716,
+                  "selection_start": 3712
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 3728,
+                  "range_start": 3725,
+                  "selection_end": 3728,
+                  "selection_start": 3725
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "restrictionConductance",
+              "range_end": 3729,
+              "range_start": 3677,
+              "selection_end": 3699,
+              "selection_start": 3677
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4214,
+                  "range_start": 4210,
+                  "selection_end": 4214,
+                  "selection_start": 4210
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4226,
+                  "range_start": 4223,
+                  "selection_end": 4226,
+                  "selection_start": 4223
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "pWarning",
+              "range_end": 4227,
+              "range_start": 4189,
+              "selection_end": 4197,
+              "selection_start": 4189
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4309,
+                  "range_start": 4305,
+                  "selection_end": 4309,
+                  "selection_start": 4305
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4321,
+                  "range_start": 4318,
+                  "selection_end": 4321,
+                  "selection_start": 4318
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "exposureTrip",
+              "range_end": 4322,
+              "range_start": 4280,
+              "selection_end": 4292,
+              "selection_start": 4280
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4740,
+                  "range_start": 4736,
+                  "selection_end": 4740,
+                  "selection_start": 4736
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4753,
+                  "range_start": 4749,
+                  "selection_end": 4753,
+                  "selection_start": 4749
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "stroke",
+              "range_end": 4754,
+              "range_start": 4713,
+              "selection_end": 4719,
+              "selection_start": 4713
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4792,
+                  "range_start": 4788,
+                  "selection_end": 4792,
+                  "selection_start": 4788
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4804,
+                  "range_start": 4801,
+                  "selection_end": 4804,
+                  "selection_start": 4801
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "velocity",
+              "range_end": 4805,
+              "range_start": 4763,
+              "selection_end": 4771,
+              "selection_start": 4763
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4850,
+                  "range_start": 4846,
+                  "selection_end": 4850,
+                  "selection_start": 4846
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4862,
+                  "range_start": 4859,
+                  "selection_end": 4862,
+                  "selection_start": 4859
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "chamberPressure",
+              "range_end": 4863,
+              "range_start": 4814,
+              "selection_end": 4829,
+              "selection_start": 4814
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4912,
+                  "range_start": 4908,
+                  "selection_end": 4912,
+                  "selection_start": 4908
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4924,
+                  "range_start": 4921,
+                  "selection_end": 4924,
+                  "selection_start": 4921
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "accumulatorPressure",
+              "range_end": 4925,
+              "range_start": 4872,
+              "selection_end": 4891,
+              "selection_start": 4872
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 4963,
+                  "range_start": 4959,
+                  "selection_end": 4963,
+                  "selection_start": 4959
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "LiteralRational",
+                  "name": "<unnamed>",
+                  "range_end": 4975,
+                  "range_start": 4972,
+                  "selection_end": 4975,
+                  "selection_start": 4972
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "exposure",
+              "range_end": 4976,
+              "range_start": 4934,
+              "selection_end": 4942,
+              "selection_start": 4934
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "Subclassification",
+                  "name": "<unnamed>",
+                  "range_end": 5199,
+                  "range_start": 5171,
+                  "selection_end": 5199,
+                  "selection_start": 5171
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 5313,
+                      "range_start": 5304,
+                      "selection_end": 5313,
+                      "selection_start": 5304
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "detail": null,
+                              "kind": "LiteralRational",
+                              "name": "<unnamed>",
+                              "range_end": 5350,
+                              "range_start": 5347,
+                              "selection_end": 5350,
+                              "selection_start": 5347
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "LiteralRational",
+                                  "name": "<unnamed>",
+                                  "range_end": 5359,
+                                  "range_start": 5356,
+                                  "selection_end": 5359,
+                                  "selection_start": 5356
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "dpRef",
+                                      "range_end": 5408,
+                                      "range_start": 5403,
+                                      "selection_end": 5408,
+                                      "selection_start": 5403
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "accumulatorPressure",
+                                          "range_end": 5399,
+                                          "range_start": 5380,
+                                          "selection_end": 5399,
+                                          "selection_start": 5380
+                                        },
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "chamberPressure",
+                                          "range_end": 5377,
+                                          "range_start": 5362,
+                                          "selection_end": 5377,
+                                          "selection_start": 5362
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 5399,
+                                              "range_start": 5362,
+                                              "selection_end": 5399,
+                                              "selection_start": 5362
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "x",
+                                          "range_end": 5399,
+                                          "range_start": 5362,
+                                          "selection_end": 5363,
+                                          "selection_start": 5362
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 5399,
+                                              "range_start": 5362,
+                                              "selection_end": 5399,
+                                              "selection_start": 5362
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "y",
+                                          "range_end": 5399,
+                                          "range_start": 5362,
+                                          "selection_end": 5363,
+                                          "selection_start": 5362
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "OperatorExpression",
+                                      "name": "<unnamed>",
+                                      "range_end": 5399,
+                                      "range_start": 5362,
+                                      "selection_end": 5399,
+                                      "selection_start": 5362
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 5408,
+                                          "range_start": 5361,
+                                          "selection_end": 5408,
+                                          "selection_start": 5361
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "x",
+                                      "range_end": 5408,
+                                      "range_start": 5361,
+                                      "selection_end": 5362,
+                                      "selection_start": 5361
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 5408,
+                                          "range_start": 5361,
+                                          "selection_end": 5408,
+                                          "selection_start": 5361
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "y",
+                                      "range_end": 5408,
+                                      "range_start": 5361,
+                                      "selection_end": 5362,
+                                      "selection_start": 5361
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "OperatorExpression",
+                                  "name": "<unnamed>",
+                                  "range_end": 5408,
+                                  "range_start": 5361,
+                                  "selection_end": 5408,
+                                  "selection_start": 5361
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "InvocationExpression",
+                              "name": "min",
+                              "range_end": 5409,
+                              "range_start": 5352,
+                              "selection_end": 5355,
+                              "selection_start": 5352
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "InvocationExpression",
+                          "name": "max",
+                          "range_end": 5410,
+                          "range_start": 5343,
+                          "selection_end": 5346,
+                          "selection_start": 5343
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "u",
+                      "range_end": 5411,
+                      "range_start": 5332,
+                      "selection_end": 5333,
+                      "selection_start": 5332
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "CommandOutput",
+                  "range_end": 5425,
+                  "range_start": 5278,
+                  "selection_end": 5291,
+                  "selection_start": 5278
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 5470,
+                      "range_start": 5461,
+                      "selection_end": 5470,
+                      "selection_start": 5461
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "closingBranch",
+                                  "range_end": 5636,
+                                  "range_start": 5623,
+                                  "selection_end": 5636,
+                                  "selection_start": 5623
+                                },
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "u",
+                                  "range_end": 5639,
+                                  "range_start": 5638,
+                                  "selection_end": 5639,
+                                  "selection_start": 5638
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "InvocationExpression",
+                              "name": "interpolateLinear",
+                              "range_end": 5640,
+                              "range_start": 5605,
+                              "selection_end": 5622,
+                              "selection_start": 5605
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "openingBranch",
+                                  "range_end": 5575,
+                                  "range_start": 5562,
+                                  "selection_end": 5575,
+                                  "selection_start": 5562
+                                },
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "u",
+                                  "range_end": 5578,
+                                  "range_start": 5577,
+                                  "selection_end": 5578,
+                                  "selection_start": 5577
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "InvocationExpression",
+                              "name": "interpolateLinear",
+                              "range_end": 5579,
+                              "range_start": 5544,
+                              "selection_end": 5561,
+                              "selection_start": 5544
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "velocity",
+                                  "range_end": 5534,
+                                  "range_start": 5526,
+                                  "selection_end": 5534,
+                                  "selection_start": 5526
+                                },
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "LiteralRational",
+                                  "name": "<unnamed>",
+                                  "range_end": 5541,
+                                  "range_start": 5538,
+                                  "selection_end": 5541,
+                                  "selection_start": 5538
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 5541,
+                                      "range_start": 5526,
+                                      "selection_end": 5541,
+                                      "selection_start": 5526
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 5541,
+                                  "range_start": 5526,
+                                  "selection_end": 5527,
+                                  "selection_start": 5526
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 5541,
+                                      "range_start": 5526,
+                                      "selection_end": 5541,
+                                      "selection_start": 5526
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 5541,
+                                  "range_start": 5526,
+                                  "selection_end": 5527,
+                                  "selection_start": 5526
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 5541,
+                              "range_start": 5526,
+                              "selection_end": 5541,
+                              "selection_start": 5526
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 5640,
+                                  "range_start": 5523,
+                                  "selection_end": 5640,
+                                  "selection_start": 5523
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "x",
+                              "range_end": 5640,
+                              "range_start": 5523,
+                              "selection_end": 5524,
+                              "selection_start": 5523
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 5640,
+                                  "range_start": 5523,
+                                  "selection_end": 5640,
+                                  "selection_start": 5523
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "y",
+                              "range_end": 5640,
+                              "range_start": 5523,
+                              "selection_end": 5524,
+                              "selection_start": 5523
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 5640,
+                                  "range_start": 5523,
+                                  "selection_end": 5640,
+                                  "selection_start": 5523
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "z",
+                              "range_end": 5640,
+                              "range_start": 5523,
+                              "selection_end": 5524,
+                              "selection_start": 5523
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "OperatorExpression",
+                          "name": "<unnamed>",
+                          "range_end": 5640,
+                          "range_start": 5523,
+                          "selection_end": 5640,
+                          "selection_start": 5523
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "aEff",
+                      "range_end": 5641,
+                      "range_start": 5489,
+                      "selection_end": 5493,
+                      "selection_start": 5489
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "AreaOutput",
+                  "range_end": 5655,
+                  "range_start": 5438,
+                  "selection_end": 5448,
+                  "selection_start": 5438
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 5703,
+                      "range_start": 5694,
+                      "selection_end": 5703,
+                      "selection_start": 5694
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "aEff",
+                                  "range_end": 5757,
+                                  "range_start": 5753,
+                                  "selection_end": 5757,
+                                  "selection_start": 5753
+                                },
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "dischargeCoeff",
+                                  "range_end": 5750,
+                                  "range_start": 5736,
+                                  "selection_end": 5750,
+                                  "selection_start": 5736
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 5757,
+                                      "range_start": 5736,
+                                      "selection_end": 5757,
+                                      "selection_start": 5736
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 5757,
+                                  "range_start": 5736,
+                                  "selection_end": 5737,
+                                  "selection_start": 5736
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 5757,
+                                      "range_start": 5736,
+                                      "selection_end": 5757,
+                                      "selection_start": 5736
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 5757,
+                                  "range_start": 5736,
+                                  "selection_end": 5737,
+                                  "selection_start": 5736
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 5757,
+                              "range_start": 5736,
+                              "selection_end": 5757,
+                              "selection_start": 5736
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 5837,
+                                  "range_start": 5736,
+                                  "selection_end": 5837,
+                                  "selection_start": 5736
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "x",
+                              "range_end": 5837,
+                              "range_start": 5736,
+                              "selection_end": 5737,
+                              "selection_start": 5736
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 5837,
+                                  "range_start": 5736,
+                                  "selection_end": 5837,
+                                  "selection_start": 5736
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "y",
+                              "range_end": 5837,
+                              "range_start": 5736,
+                              "selection_end": 5737,
+                              "selection_start": 5736
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "epsRoot",
+                                      "range_end": 5835,
+                                      "range_start": 5828,
+                                      "selection_end": 5835,
+                                      "selection_start": 5828
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "accumulatorPressure",
+                                          "range_end": 5826,
+                                          "range_start": 5807,
+                                          "selection_end": 5826,
+                                          "selection_start": 5807
+                                        },
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "chamberPressure",
+                                          "range_end": 5804,
+                                          "range_start": 5789,
+                                          "selection_end": 5804,
+                                          "selection_start": 5789
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 5826,
+                                              "range_start": 5789,
+                                              "selection_end": 5826,
+                                              "selection_start": 5789
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "x",
+                                          "range_end": 5826,
+                                          "range_start": 5789,
+                                          "selection_end": 5790,
+                                          "selection_start": 5789
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 5826,
+                                              "range_start": 5789,
+                                              "selection_end": 5826,
+                                              "selection_start": 5789
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "y",
+                                          "range_end": 5826,
+                                          "range_start": 5789,
+                                          "selection_end": 5790,
+                                          "selection_start": 5789
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "OperatorExpression",
+                                      "name": "<unnamed>",
+                                      "range_end": 5826,
+                                      "range_start": 5789,
+                                      "selection_end": 5826,
+                                      "selection_start": 5789
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "InvocationExpression",
+                                  "name": "max",
+                                  "range_end": 5836,
+                                  "range_start": 5785,
+                                  "selection_end": 5788,
+                                  "selection_start": 5785
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "InvocationExpression",
+                              "name": "sqrt",
+                              "range_end": 5837,
+                              "range_start": 5780,
+                              "selection_end": 5784,
+                              "selection_start": 5780
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "OperatorExpression",
+                          "name": "<unnamed>",
+                          "range_end": 5837,
+                          "range_start": 5736,
+                          "selection_end": 5837,
+                          "selection_start": 5736
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "qOut",
+                      "range_end": 5838,
+                      "range_start": 5722,
+                      "selection_end": 5726,
+                      "selection_start": 5722
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "OrificeOutput",
+                  "range_end": 5852,
+                  "range_start": 5668,
+                  "selection_end": 5681,
+                  "selection_start": 5668
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 5976,
+                      "range_start": 5963,
+                      "selection_end": 5976,
+                      "selection_start": 5963
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "detail": null,
+                          "kind": "FeatureReferenceExpression",
+                          "name": "velocity",
+                          "range_end": 6022,
+                          "range_start": 6014,
+                          "selection_end": 6022,
+                          "selection_start": 6014
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "dstrokedt",
+                      "range_end": 6023,
+                      "range_start": 5995,
+                      "selection_end": 6004,
+                      "selection_start": 5995
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "StrokeDerivative",
+                  "range_end": 6037,
+                  "range_start": 5934,
+                  "selection_end": 5950,
+                  "selection_start": 5934
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 6094,
+                      "range_start": 6081,
+                      "selection_end": 6094,
+                      "selection_start": 6081
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "detail": null,
+                              "kind": "FeatureReferenceExpression",
+                              "name": "stroke",
+                              "range_end": 6164,
+                              "range_start": 6158,
+                              "selection_end": 6164,
+                              "selection_start": 6158
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "omega",
+                                  "range_end": 6155,
+                                  "range_start": 6150,
+                                  "selection_end": 6155,
+                                  "selection_start": 6150
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "omega",
+                                      "range_end": 6146,
+                                      "range_start": 6141,
+                                      "selection_end": 6146,
+                                      "selection_start": 6141
+                                    },
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "LiteralRational",
+                                      "name": "<unnamed>",
+                                      "range_end": 6138,
+                                      "range_start": 6135,
+                                      "selection_end": 6138,
+                                      "selection_start": 6135
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6146,
+                                          "range_start": 6135,
+                                          "selection_end": 6146,
+                                          "selection_start": 6135
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "x",
+                                      "range_end": 6146,
+                                      "range_start": 6135,
+                                      "selection_end": 6136,
+                                      "selection_start": 6135
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6146,
+                                          "range_start": 6135,
+                                          "selection_end": 6146,
+                                          "selection_start": 6135
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "y",
+                                      "range_end": 6146,
+                                      "range_start": 6135,
+                                      "selection_end": 6136,
+                                      "selection_start": 6135
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "OperatorExpression",
+                                  "name": "<unnamed>",
+                                  "range_end": 6146,
+                                  "range_start": 6135,
+                                  "selection_end": 6146,
+                                  "selection_start": 6135
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6155,
+                                      "range_start": 6134,
+                                      "selection_end": 6155,
+                                      "selection_start": 6134
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 6155,
+                                  "range_start": 6134,
+                                  "selection_end": 6135,
+                                  "selection_start": 6134
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6155,
+                                      "range_start": 6134,
+                                      "selection_end": 6155,
+                                      "selection_start": 6134
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 6155,
+                                  "range_start": 6134,
+                                  "selection_end": 6135,
+                                  "selection_start": 6134
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 6155,
+                              "range_start": 6134,
+                              "selection_end": 6155,
+                              "selection_start": 6134
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6164,
+                                  "range_start": 6134,
+                                  "selection_end": 6164,
+                                  "selection_start": 6134
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "x",
+                              "range_end": 6164,
+                              "range_start": 6134,
+                              "selection_end": 6135,
+                              "selection_start": 6134
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6164,
+                                  "range_start": 6134,
+                                  "selection_end": 6164,
+                                  "selection_start": 6134
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "y",
+                              "range_end": 6164,
+                              "range_start": 6134,
+                              "selection_end": 6135,
+                              "selection_start": 6134
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "OperatorExpression",
+                          "name": "<unnamed>",
+                          "range_end": 6164,
+                          "range_start": 6134,
+                          "selection_end": 6164,
+                          "selection_start": 6134
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "dvelocitydt",
+                      "range_end": 6165,
+                      "range_start": 6113,
+                      "selection_end": 6124,
+                      "selection_start": 6113
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "VelocityDerivative",
+                  "range_end": 6179,
+                  "range_start": 6050,
+                  "selection_end": 6068,
+                  "selection_start": 6050
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 6273,
+                      "range_start": 6260,
+                      "selection_end": 6273,
+                      "selection_start": 6260
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "detail": null,
+                              "kind": "FeatureReferenceExpression",
+                              "name": "chamberGain",
+                              "range_end": 6532,
+                              "range_start": 6521,
+                              "selection_end": 6532,
+                              "selection_start": 6521
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6651,
+                                  "range_start": 6521,
+                                  "selection_end": 6651,
+                                  "selection_start": 6521
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "x",
+                              "range_end": 6651,
+                              "range_start": 6521,
+                              "selection_end": 6522,
+                              "selection_start": 6521
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6651,
+                                  "range_start": 6521,
+                                  "selection_end": 6651,
+                                  "selection_start": 6521
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "y",
+                              "range_end": 6651,
+                              "range_start": 6521,
+                              "selection_end": 6522,
+                              "selection_start": 6521
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "pistonArea",
+                                      "range_end": 6566,
+                                      "range_start": 6556,
+                                      "selection_end": 6566,
+                                      "selection_start": 6556
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "velocity",
+                                          "range_end": 6586,
+                                          "range_start": 6578,
+                                          "selection_end": 6586,
+                                          "selection_start": 6578
+                                        },
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "LiteralRational",
+                                          "name": "<unnamed>",
+                                          "range_end": 6576,
+                                          "range_start": 6573,
+                                          "selection_end": 6576,
+                                          "selection_start": 6573
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "InvocationExpression",
+                                      "name": "max",
+                                      "range_end": 6587,
+                                      "range_start": 6569,
+                                      "selection_end": 6572,
+                                      "selection_start": 6569
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6587,
+                                          "range_start": 6556,
+                                          "selection_end": 6587,
+                                          "selection_start": 6556
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "x",
+                                      "range_end": 6587,
+                                      "range_start": 6556,
+                                      "selection_end": 6557,
+                                      "selection_start": 6556
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6587,
+                                          "range_start": 6556,
+                                          "selection_end": 6587,
+                                          "selection_start": 6556
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "y",
+                                      "range_end": 6587,
+                                      "range_start": 6556,
+                                      "selection_end": 6557,
+                                      "selection_start": 6556
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "OperatorExpression",
+                                  "name": "<unnamed>",
+                                  "range_end": 6587,
+                                  "range_start": 6556,
+                                  "selection_end": 6587,
+                                  "selection_start": 6556
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "qOut",
+                                      "range_end": 6619,
+                                      "range_start": 6615,
+                                      "selection_end": 6619,
+                                      "selection_start": 6615
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "chamberPressure",
+                                          "range_end": 6649,
+                                          "range_start": 6634,
+                                          "selection_end": 6649,
+                                          "selection_start": 6634
+                                        },
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureReferenceExpression",
+                                          "name": "leakCoeff",
+                                          "range_end": 6631,
+                                          "range_start": 6622,
+                                          "selection_end": 6631,
+                                          "selection_start": 6622
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 6649,
+                                              "range_start": 6622,
+                                              "selection_end": 6649,
+                                              "selection_start": 6622
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "x",
+                                          "range_end": 6649,
+                                          "range_start": 6622,
+                                          "selection_end": 6623,
+                                          "selection_start": 6622
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureValue",
+                                              "name": "<unnamed>",
+                                              "range_end": 6649,
+                                              "range_start": 6622,
+                                              "selection_end": 6649,
+                                              "selection_start": 6622
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "Feature",
+                                          "name": "y",
+                                          "range_end": 6649,
+                                          "range_start": 6622,
+                                          "selection_end": 6623,
+                                          "selection_start": 6622
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "OperatorExpression",
+                                      "name": "<unnamed>",
+                                      "range_end": 6649,
+                                      "range_start": 6622,
+                                      "selection_end": 6649,
+                                      "selection_start": 6622
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6649,
+                                          "range_start": 6615,
+                                          "selection_end": 6649,
+                                          "selection_start": 6615
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "x",
+                                      "range_end": 6649,
+                                      "range_start": 6615,
+                                      "selection_end": 6616,
+                                      "selection_start": 6615
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6649,
+                                          "range_start": 6615,
+                                          "selection_end": 6649,
+                                          "selection_start": 6615
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "y",
+                                      "range_end": 6649,
+                                      "range_start": 6615,
+                                      "selection_end": 6616,
+                                      "selection_start": 6615
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "OperatorExpression",
+                                  "name": "<unnamed>",
+                                  "range_end": 6649,
+                                  "range_start": 6615,
+                                  "selection_end": 6649,
+                                  "selection_start": 6615
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6650,
+                                      "range_start": 6556,
+                                      "selection_end": 6650,
+                                      "selection_start": 6556
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 6650,
+                                  "range_start": 6556,
+                                  "selection_end": 6557,
+                                  "selection_start": 6556
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6650,
+                                      "range_start": 6556,
+                                      "selection_end": 6650,
+                                      "selection_start": 6556
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 6650,
+                                  "range_start": 6556,
+                                  "selection_end": 6557,
+                                  "selection_start": 6556
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 6650,
+                              "range_start": 6556,
+                              "selection_end": 6650,
+                              "selection_start": 6556
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "OperatorExpression",
+                          "name": "<unnamed>",
+                          "range_end": 6651,
+                          "range_start": 6521,
+                          "selection_end": 6651,
+                          "selection_start": 6521
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "dchamberPressuredt",
+                      "range_end": 6652,
+                      "range_start": 6493,
+                      "selection_end": 6511,
+                      "selection_start": 6493
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "ChamberDerivative",
+                  "range_end": 6666,
+                  "range_start": 6230,
+                  "selection_end": 6247,
+                  "selection_start": 6230
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 6726,
+                      "range_start": 6713,
+                      "selection_end": 6726,
+                      "selection_start": 6713
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "detail": null,
+                              "kind": "FeatureReferenceExpression",
+                              "name": "accumulatorGain",
+                              "range_end": 6792,
+                              "range_start": 6777,
+                              "selection_end": 6792,
+                              "selection_start": 6777
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "qOut",
+                                  "range_end": 6820,
+                                  "range_start": 6816,
+                                  "selection_end": 6820,
+                                  "selection_start": 6816
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureReferenceExpression",
+                                      "name": "restrictionConductance",
+                                      "range_end": 6845,
+                                      "range_start": 6823,
+                                      "selection_end": 6845,
+                                      "selection_start": 6823
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6911,
+                                          "range_start": 6823,
+                                          "selection_end": 6911,
+                                          "selection_start": 6823
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "x",
+                                      "range_end": 6911,
+                                      "range_start": 6823,
+                                      "selection_end": 6824,
+                                      "selection_start": 6823
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "detail": null,
+                                          "kind": "FeatureValue",
+                                          "name": "<unnamed>",
+                                          "range_end": 6911,
+                                          "range_start": 6823,
+                                          "selection_end": 6911,
+                                          "selection_start": 6823
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "Feature",
+                                      "name": "y",
+                                      "range_end": 6911,
+                                      "range_start": 6823,
+                                      "selection_end": 6824,
+                                      "selection_start": 6823
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureReferenceExpression",
+                                              "name": "accumulatorPressure",
+                                              "range_end": 6900,
+                                              "range_start": 6881,
+                                              "selection_end": 6900,
+                                              "selection_start": 6881
+                                            },
+                                            {
+                                              "children": [],
+                                              "detail": null,
+                                              "kind": "FeatureReferenceExpression",
+                                              "name": "epsRoot",
+                                              "range_end": 6909,
+                                              "range_start": 6902,
+                                              "selection_end": 6909,
+                                              "selection_start": 6902
+                                            }
+                                          ],
+                                          "detail": null,
+                                          "kind": "InvocationExpression",
+                                          "name": "max",
+                                          "range_end": 6910,
+                                          "range_start": 6877,
+                                          "selection_end": 6880,
+                                          "selection_start": 6877
+                                        }
+                                      ],
+                                      "detail": null,
+                                      "kind": "InvocationExpression",
+                                      "name": "sqrt",
+                                      "range_end": 6911,
+                                      "range_start": 6872,
+                                      "selection_end": 6876,
+                                      "selection_start": 6872
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "OperatorExpression",
+                                  "name": "<unnamed>",
+                                  "range_end": 6911,
+                                  "range_start": 6823,
+                                  "selection_end": 6911,
+                                  "selection_start": 6823
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6911,
+                                      "range_start": 6816,
+                                      "selection_end": 6911,
+                                      "selection_start": 6816
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 6911,
+                                  "range_start": 6816,
+                                  "selection_end": 6817,
+                                  "selection_start": 6816
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 6911,
+                                      "range_start": 6816,
+                                      "selection_end": 6911,
+                                      "selection_start": 6816
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 6911,
+                                  "range_start": 6816,
+                                  "selection_end": 6817,
+                                  "selection_start": 6816
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 6911,
+                              "range_start": 6816,
+                              "selection_end": 6911,
+                              "selection_start": 6816
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6912,
+                                  "range_start": 6777,
+                                  "selection_end": 6912,
+                                  "selection_start": 6777
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "x",
+                              "range_end": 6912,
+                              "range_start": 6777,
+                              "selection_end": 6778,
+                              "selection_start": 6777
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureValue",
+                                  "name": "<unnamed>",
+                                  "range_end": 6912,
+                                  "range_start": 6777,
+                                  "selection_end": 6912,
+                                  "selection_start": 6777
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "Feature",
+                              "name": "y",
+                              "range_end": 6912,
+                              "range_start": 6777,
+                              "selection_end": 6778,
+                              "selection_start": 6777
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "OperatorExpression",
+                          "name": "<unnamed>",
+                          "range_end": 6912,
+                          "range_start": 6777,
+                          "selection_end": 6912,
+                          "selection_start": 6777
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "daccumulatorPressuredt",
+                      "range_end": 6913,
+                      "range_start": 6745,
+                      "selection_end": 6767,
+                      "selection_start": 6745
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "AccumulatorDerivative",
+                  "range_end": 6927,
+                  "range_start": 6679,
+                  "selection_end": 6700,
+                  "selection_start": 6679
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "detail": null,
+                      "kind": "Subclassification",
+                      "name": "<unnamed>",
+                      "range_end": 7058,
+                      "range_start": 7045,
+                      "selection_end": 7058,
+                      "selection_start": 7045
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "detail": null,
+                              "kind": "LiteralRational",
+                              "name": "<unnamed>",
+                              "range_end": 7105,
+                              "range_start": 7102,
+                              "selection_end": 7105,
+                              "selection_start": 7102
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "accumulatorPressure",
+                                  "range_end": 7126,
+                                  "range_start": 7107,
+                                  "selection_end": 7126,
+                                  "selection_start": 7107
+                                },
+                                {
+                                  "children": [],
+                                  "detail": null,
+                                  "kind": "FeatureReferenceExpression",
+                                  "name": "pWarning",
+                                  "range_end": 7137,
+                                  "range_start": 7129,
+                                  "selection_end": 7137,
+                                  "selection_start": 7129
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 7137,
+                                      "range_start": 7107,
+                                      "selection_end": 7137,
+                                      "selection_start": 7107
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "x",
+                                  "range_end": 7137,
+                                  "range_start": 7107,
+                                  "selection_end": 7108,
+                                  "selection_start": 7107
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "detail": null,
+                                      "kind": "FeatureValue",
+                                      "name": "<unnamed>",
+                                      "range_end": 7137,
+                                      "range_start": 7107,
+                                      "selection_end": 7137,
+                                      "selection_start": 7107
+                                    }
+                                  ],
+                                  "detail": null,
+                                  "kind": "Feature",
+                                  "name": "y",
+                                  "range_end": 7137,
+                                  "range_start": 7107,
+                                  "selection_end": 7108,
+                                  "selection_start": 7107
+                                }
+                              ],
+                              "detail": null,
+                              "kind": "OperatorExpression",
+                              "name": "<unnamed>",
+                              "range_end": 7137,
+                              "range_start": 7107,
+                              "selection_end": 7137,
+                              "selection_start": 7107
+                            }
+                          ],
+                          "detail": null,
+                          "kind": "InvocationExpression",
+                          "name": "max",
+                          "range_end": 7138,
+                          "range_start": 7098,
+                          "selection_end": 7101,
+                          "selection_start": 7098
+                        }
+                      ],
+                      "detail": null,
+                      "kind": "ReturnParameterMembership",
+                      "name": "dexposuredt",
+                      "range_end": 7139,
+                      "range_start": 7077,
+                      "selection_end": 7088,
+                      "selection_start": 7077
+                    }
+                  ],
+                  "detail": null,
+                  "kind": "CalculationDefinition",
+                  "name": "ExposureDerivative",
+                  "range_end": 7153,
+                  "range_start": 7014,
+                  "selection_end": 7032,
+                  "selection_start": 7014
+                }
+              ],
+              "detail": null,
+              "kind": "ActionDefinition",
+              "name": "PumpFieldDynamics",
+              "range_end": 7163,
+              "range_start": 5139,
+              "selection_end": 5156,
+              "selection_start": 5139
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "ReciprocatingPump",
+          "range_end": 7169,
+          "range_start": 2412,
+          "selection_end": 2429,
+          "selection_start": 2412
+        }
+      ],
+      "detail": null,
+      "kind": "Package",
+      "name": "PumpDynamics",
+      "range_end": 7171,
+      "range_start": 0,
+      "selection_end": 12,
+      "selection_start": 0
+    }
+  ]
+}

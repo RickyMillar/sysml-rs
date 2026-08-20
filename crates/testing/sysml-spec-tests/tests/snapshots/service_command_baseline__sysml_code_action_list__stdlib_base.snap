@@ -1,0 +1,52 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "diagnostics": [],
+    "range_end_col": 1,
+    "range_end_line": 7,
+    "range_start_col": 1,
+    "range_start_line": 7,
+    "uri": "<PATH>"
+  },
+  "response": [
+    {
+      "edits": [
+        {
+          "edits": [
+            {
+              "col_end": 0,
+              "col_start": 0,
+              "line_end": 7,
+              "line_start": 7,
+              "new_text": "\tdoc /* TODO: Add documentation */\n"
+            }
+          ],
+          "uri": "<PATH>"
+        }
+      ],
+      "kind": "refactor.rewrite",
+      "title": "Add documentation comment"
+    },
+    {
+      "edits": [
+        {
+          "edits": [
+            {
+              "col_end": 10,
+              "col_start": 1,
+              "line_end": 7,
+              "line_start": 7,
+              "new_text": ""
+            }
+          ],
+          "uri": "<PATH>"
+        }
+      ],
+      "kind": "refactor.rewrite",
+      "title": "Remove 'abstract' modifier"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+    "index": {
+        "Vehicle": "Vehicle.sysml",
+        "Engine": "Engine.sysml",
+        "Wheel": "Wheel.sysml"
+    },
+    "created": "2026-03-01T00:00:00Z",
+    "metamodel": "https://www.omg.org/spec/SysML/20250201"
+}

@@ -1,0 +1,11 @@
+lock_version = 1
+
+[[package]]
+name = "dep-leaf"
+version = "0.3.0"
+source = "path:../dep-leaf"
+
+[[package]]
+name = "dep-mid"
+version = "0.2.0"
+source = "path:../deps/dep-mid"

@@ -1,0 +1,23 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[E200] error @ "BrewedCoffee"
+  no definition 'BrewedCoffee' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeBeans"
+  no definition 'CoffeeBeans' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "GroundCoffee"
+  no definition 'GroundCoffee' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Water"
+  no definition 'Water' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed

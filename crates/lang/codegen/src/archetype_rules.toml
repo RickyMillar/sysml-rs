@@ -1,0 +1,86 @@
+# Single source of truth for model-tree classification.
+# Codegen reads this + the ElementKind hierarchy and emits both
+# Rust (for sysml-service::query) and TypeScript (for the FE
+# testHelpers + future direct consumers).
+#
+# Resolution rules (first match wins, evaluated top-to-bottom):
+# - `anchors`: kind matches if `kind == anchor` OR
+#   `kind.is_subtype_of(anchor)` for any listed anchor.
+# - `exact`: kind matches only if `kind == one of these` (subtypes
+#   excluded). Used for archetypes whose subtypes belong elsewhere
+#   (Calc — case family subtypes CalculationUsage but renders as
+#   Action).
+
+[[archetypes]]
+name = "Port"
+anchors = ["PortUsage", "PortDefinition"]
+
+[[archetypes]]
+name = "Connection"
+anchors = ["ConnectorAsUsage", "ConnectionDefinition", "FlowDefinition"]
+
+[[archetypes]]
+name = "Part"
+anchors = ["ItemUsage", "ItemDefinition"]
+
+[[archetypes]]
+name = "Attribute"
+anchors = ["AttributeUsage", "AttributeDefinition"]
+
+[[archetypes]]
+name = "Sm"
+anchors = ["StateUsage", "StateDefinition"]
+
+[[archetypes]]
+name = "Constraint"
+anchors = ["ConstraintUsage", "ConstraintDefinition"]
+
+[[archetypes]]
+name = "Calc"
+exact = ["CalculationUsage", "CalculationDefinition"]
+
+# Case family (Case / AnalysisCase / VerificationCase / UseCase /
+# IncludeUseCase, usages + definitions). These subtype
+# CalculationUsage → ActionUsage per spec (SysML-vocab.ttl:151-161),
+# so they must be matched BEFORE `Action` (first-match-wins) — a
+# verification case under an "Actions" header is misleading. `Calc`
+# above is `exact`, so it never catches them.
+[[archetypes]]
+name = "Case"
+anchors = ["CaseUsage", "CaseDefinition"]
+
+[[archetypes]]
+name = "Action"
+anchors = ["ActionUsage", "ActionDefinition"]
+
+# Noise: kinds hidden in view=user_facing. Same first-match-wins
+# semantics. `predicates` are the generated ElementKind methods
+# (is_subtype_of(Membership), is_relationship+!is_usage+!is_definition,
+# is_control_node, no syntax_keyword).
+
+[noise]
+predicates = [
+    "membership_subtree",   # kind.is_subtype_of(Membership)
+    "type_binding",         # is_relationship && !is_usage && !is_definition
+    "control_node",         # kind.is_control_node()
+    "no_syntax_keyword",    # syntax_keyword().is_none()
+]
+explicit_hide = [
+    "Comment", "Documentation", "MetadataUsage", "Namespace",
+    "TransitionUsage", "SuccessionAsUsage", "ReferenceUsage",
+    "ViewUsage", "ViewpointUsage", "RenderingUsage",
+    "OccurrenceUsage", "EventOccurrenceUsage",
+]
+
+# Allowlist of variants that legitimately fall to Other archetype.
+# CRITICAL: any ElementKind variant not classified, not noise, and
+# not in this list will FAIL codegen. This prevents silent drift —
+# spec extensions that add new kinds force someone to consciously
+# decide where the kind lands.
+
+[other]
+explicit_other = [
+    "Package", "LibraryPackage",
+    "MetadataDefinition",
+    "OccurrenceDefinition",
+]

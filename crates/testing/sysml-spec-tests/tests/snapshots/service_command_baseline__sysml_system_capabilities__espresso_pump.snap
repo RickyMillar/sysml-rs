@@ -1,0 +1,11 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": {
+    "has_fork_at_tick": true,
+    "snapshot_retention_ticks": 256
+  }
+}

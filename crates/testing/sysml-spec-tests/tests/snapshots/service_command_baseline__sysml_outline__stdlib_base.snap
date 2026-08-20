@@ -1,0 +1,425 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "children": [
+        {
+          "children": [],
+          "detail": null,
+          "kind": "Documentation",
+          "name": "<unnamed>",
+          "range_end": 175,
+          "range_start": 33,
+          "selection_end": 175,
+          "selection_start": 33
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "multiplicity",
+          "range_end": 1774,
+          "range_start": 1762,
+          "selection_end": 1774,
+          "selection_start": 1762
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "multiplicity",
+          "range_end": 1910,
+          "range_start": 1898,
+          "selection_end": 1910,
+          "selection_start": 1898
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "multiplicity",
+          "range_end": 2046,
+          "range_start": 2034,
+          "selection_end": 2046,
+          "selection_start": 2034
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "multiplicity",
+          "range_end": 2181,
+          "range_start": 2169,
+          "selection_end": 2181,
+          "selection_start": 2169
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 1413,
+              "range_start": 1323,
+              "selection_end": 1413,
+              "selection_start": 1323
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "FeatureTyping",
+              "name": "<unnamed>",
+              "range_end": 1287,
+              "range_start": 1278,
+              "selection_end": 1287,
+              "selection_start": 1278
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subsetting",
+              "name": "<unnamed>",
+              "range_end": 1318,
+              "range_start": 1312,
+              "selection_end": 1318,
+              "selection_start": 1312
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "dataValues",
+          "range_end": 1416,
+          "range_start": 1249,
+          "selection_end": 1259,
+          "selection_start": 1249
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 1755,
+              "range_start": 1500,
+              "selection_end": 1755,
+              "selection_start": 1500
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "FeatureTyping",
+              "name": "<unnamed>",
+              "range_end": 1470,
+              "range_start": 1449,
+              "selection_end": 1470,
+              "selection_start": 1449
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subsetting",
+              "name": "<unnamed>",
+              "range_end": 1495,
+              "range_start": 1485,
+              "selection_end": 1495,
+              "selection_start": 1485
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "naturals",
+          "range_end": 1758,
+          "range_start": 1422,
+          "selection_end": 1430,
+          "selection_start": 1422
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 1891,
+              "range_start": 1797,
+              "selection_end": 1891,
+              "selection_start": 1797
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "exactlyOne",
+          "range_end": 1894,
+          "range_start": 1775,
+          "selection_end": 1785,
+          "selection_start": 1775
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 2025,
+              "range_start": 1932,
+              "selection_end": 2025,
+              "selection_start": 1932
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "zeroOrOne",
+          "range_end": 2030,
+          "range_start": 1911,
+          "selection_end": 1920,
+          "selection_start": 1911
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 2162,
+              "range_start": 2068,
+              "selection_end": 2162,
+              "selection_start": 2068
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "oneToMany",
+          "range_end": 2165,
+          "range_start": 2047,
+          "selection_end": 2056,
+          "selection_start": 2047
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 2331,
+              "range_start": 2204,
+              "selection_end": 2331,
+              "selection_start": 2204
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "zeroToMany",
+          "range_end": 2334,
+          "range_start": 2182,
+          "selection_end": 2192,
+          "selection_start": 2182
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 301,
+              "range_start": 215,
+              "selection_end": 301,
+              "selection_start": 215
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "Documentation",
+                  "name": "<unnamed>",
+                  "range_end": 608,
+                  "range_start": 372,
+                  "selection_end": 608,
+                  "selection_start": 372
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 329,
+                  "range_start": 321,
+                  "selection_end": 329,
+                  "selection_start": 321
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "Subsetting",
+                  "name": "<unnamed>",
+                  "range_end": 347,
+                  "range_start": 341,
+                  "selection_end": 347,
+                  "selection_start": 341
+                }
+              ],
+              "detail": null,
+              "kind": "ReferenceUsage",
+              "name": "self",
+              "range_end": 612,
+              "range_start": 307,
+              "selection_end": 311,
+              "selection_start": 307
+            }
+          ],
+          "detail": null,
+          "kind": "Classifier",
+          "name": "Anything",
+          "range_end": 615,
+          "range_start": 182,
+          "selection_end": 190,
+          "selection_start": 182
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 791,
+              "range_start": 672,
+              "selection_end": 791,
+              "selection_start": 672
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subclassification",
+              "name": "<unnamed>",
+              "range_end": 667,
+              "range_start": 659,
+              "selection_end": 667,
+              "selection_start": 659
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 820,
+                  "range_start": 811,
+                  "selection_end": 820,
+                  "selection_start": 811
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "Redefinition",
+                  "name": "<unnamed>",
+                  "range_end": 845,
+                  "range_start": 831,
+                  "selection_end": 845,
+                  "selection_start": 831
+                }
+              ],
+              "detail": null,
+              "kind": "ReferenceUsage",
+              "name": "self",
+              "range_end": 846,
+              "range_start": 797,
+              "selection_end": 801,
+              "selection_start": 797
+            }
+          ],
+          "detail": null,
+          "kind": "DataType",
+          "name": "DataValue",
+          "range_end": 849,
+          "range_start": 619,
+          "selection_end": 628,
+          "selection_start": 619
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 976,
+              "range_start": 908,
+              "selection_end": 976,
+              "selection_start": 908
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "FeatureTyping",
+              "name": "<unnamed>",
+              "range_end": 886,
+              "range_start": 878,
+              "selection_end": 886,
+              "selection_start": 878
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "Documentation",
+                  "name": "<unnamed>",
+                  "range_end": 1235,
+                  "range_start": 1012,
+                  "selection_end": 1235,
+                  "selection_start": 1012
+                },
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1003,
+                  "range_start": 995,
+                  "selection_end": 1003,
+                  "selection_start": 995
+                }
+              ],
+              "detail": null,
+              "kind": "ReferenceUsage",
+              "name": "that",
+              "range_end": 1242,
+              "range_start": 980,
+              "selection_end": 984,
+              "selection_start": 980
+            }
+          ],
+          "detail": null,
+          "kind": "ReferenceUsage",
+          "name": "things",
+          "range_end": 1245,
+          "range_start": 853,
+          "selection_end": 859,
+          "selection_start": 853
+        }
+      ],
+      "detail": null,
+      "kind": "LibraryPackage",
+      "name": "Base",
+      "range_end": 2338,
+      "range_start": 0,
+      "selection_end": 4,
+      "selection_start": 0
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[project]
+name = "exchange-plane-fixture"
+version = "0.1.0"
+description = "RSC-3.5 ExchangePlane corpus fixture — all three link classes with name-matched reconcilable typed port features + a 2-instance (L19) case"
+license = "MIT"
+
+[package]
+iri = "urn:sysml-rs:exchange-plane-fixture"

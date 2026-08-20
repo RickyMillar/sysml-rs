@@ -1,0 +1,14 @@
+[project]
+name = "coffee-machine"
+version = "0.1.0"
+description = "Smart coffee machine system model"
+license = "MIT"
+
+[package]
+iri = "urn:acme:coffee-machine"
+
+[stdlib]
+include_only = ["systems", "analysis"]
+
+[dependencies]
+beverage-types = { path = "../beverage-types" }

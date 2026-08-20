@@ -1,0 +1,111 @@
+// Generated from KerMLExpressions.xtext. Do not edit by hand.
+module.exports = [
+  {
+    name: "ConditionalOperator",
+    category: "conditional",
+    precedence: 1,
+    symbols: ["if"],
+  },
+  {
+    name: "NullCoalescingOperator",
+    category: "null_coalescing",
+    precedence: 2,
+    symbols: ["??"],
+  },
+  {
+    name: "ImpliesOperator",
+    category: "implies",
+    precedence: 3,
+    symbols: ["implies"],
+  },
+  {
+    name: "OrOperator",
+    category: "or",
+    precedence: 4,
+    symbols: ["|"],
+  },
+  {
+    name: "ConditionalOrOperator",
+    category: "conditional_or",
+    precedence: 4,
+    symbols: ["or"],
+  },
+  {
+    name: "XorOperator",
+    category: "xor",
+    precedence: 5,
+    symbols: ["xor"],
+  },
+  {
+    name: "AndOperator",
+    category: "and",
+    precedence: 6,
+    symbols: ["&"],
+  },
+  {
+    name: "ConditionalAndOperator",
+    category: "conditional_and",
+    precedence: 6,
+    symbols: ["and"],
+  },
+  {
+    name: "EqualityOperator",
+    category: "equality",
+    precedence: 7,
+    symbols: ["==", "!=", "===", "!=="],
+  },
+  {
+    name: "ClassificationTestOperator",
+    category: "classification_test",
+    precedence: 8,
+    symbols: ["hastype", "istype", "@"],
+  },
+  {
+    name: "MetaClassificationTestOperator",
+    category: "meta_classification_test",
+    precedence: 9,
+    symbols: ["@@"],
+  },
+  {
+    name: "CastOperator",
+    category: "cast",
+    precedence: 10,
+    symbols: ["as"],
+  },
+  {
+    name: "MetaCastOperator",
+    category: "meta_cast",
+    precedence: 10,
+    symbols: ["meta"],
+  },
+  {
+    name: "RelationalOperator",
+    category: "relational",
+    precedence: 11,
+    symbols: ["<", ">", "<=", ">="],
+  },
+  {
+    name: "AdditiveOperator",
+    category: "additive",
+    precedence: 13,
+    symbols: ["+", "-"],
+  },
+  {
+    name: "MultiplicativeOperator",
+    category: "multiplicative",
+    precedence: 14,
+    symbols: ["*", "/", "%"],
+  },
+  {
+    name: "ExponentiationOperator",
+    category: "exponentiation",
+    precedence: 15,
+    symbols: ["**", "^"],
+  },
+  {
+    name: "UnaryOperator",
+    category: "unary",
+    precedence: 16,
+    symbols: ["+", "-", "~", "not"],
+  },
+];

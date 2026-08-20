@@ -1,0 +1,15 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "enable_stdlib": false,
+    "roots": []
+  },
+  "response": {
+    "projects": [],
+    "roots_count": 0,
+    "stdlib_loaded": false
+  }
+}

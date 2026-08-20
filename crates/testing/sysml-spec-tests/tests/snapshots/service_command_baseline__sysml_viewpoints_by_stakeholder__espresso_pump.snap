@@ -1,0 +1,12 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "stakeholder_id": "<UUID>",
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+  },
+  "response": []
+}

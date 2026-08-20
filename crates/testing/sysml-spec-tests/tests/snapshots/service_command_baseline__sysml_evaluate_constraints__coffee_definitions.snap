@@ -1,0 +1,866 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1121
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "grindWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 18
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": ">="
+            }
+          },
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "grindWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 22
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "<="
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "and"
+        }
+      },
+      "detail": "ERROR (grindWeight >= 18 and grindWeight <= 22): undefined variable: `grindWeight`",
+      "display": "ERR",
+      "error": "undefined variable: `grindWeight`",
+      "expr": "grindWeight >= 18 and grindWeight <= 22",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "grindWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 18
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": ">="
+            }
+          },
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "grindWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 22
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "<="
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "and"
+        }
+      },
+      "detail": "ERROR (grindWeight >= 18 and grindWeight <= 22): undefined variable: `grindWeight`",
+      "display": "ERR",
+      "error": "undefined variable: `grindWeight`",
+      "expr": "grindWeight >= 18 and grindWeight <= 22",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "shotWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 18
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": ">="
+            }
+          },
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "shotWeight"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 44
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "<="
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "and"
+        }
+      },
+      "detail": "ERROR (shotWeight >= 18 and shotWeight <= 44): undefined variable: `shotWeight`",
+      "display": "ERR",
+      "error": "undefined variable: `shotWeight`",
+      "expr": "shotWeight >= 18 and shotWeight <= 44",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "waterPressure"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 10
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "<="
+            }
+          },
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "waterPressure"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 1
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": ">="
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "and"
+        }
+      },
+      "detail": "ERROR (waterPressure >= 1 and waterPressure <= 10): undefined variable: `waterPressure`",
+      "display": "ERR",
+      "error": "undefined variable: `waterPressure`",
+      "expr": "waterPressure >= 1 and waterPressure <= 10",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "waterPressure"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 10
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": "<="
+            }
+          },
+          {
+            "children": [
+              {
+                "kind": "FeatureReferenceExpression",
+                "name": "waterPressure"
+              },
+              {
+                "kind": "LiteralInteger",
+                "props": {
+                  "value": 8
+                }
+              }
+            ],
+            "kind": "OperatorExpression",
+            "props": {
+              "operator": ">="
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "and"
+        }
+      },
+      "detail": "ERROR (waterPressure >= 8 and waterPressure <= 10): undefined variable: `waterPressure`",
+      "display": "ERR",
+      "error": "undefined variable: `waterPressure`",
+      "expr": "waterPressure >= 8 and waterPressure <= 10",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "ambientTemp",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">="
+        }
+      },
+      "detail": "ERROR (ambientTemp >= 0): undefined variable: `ambientTemp (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `ambientTemp (attribute has no assigned value)`",
+      "expr": "ambientTemp >= 0",
+      "kind": "AssertConstraintUsage",
+      "name": "ambientRealistic",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "boilerTemp"
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 100
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<"
+        }
+      },
+      "detail": "ERROR (boilerTemp < 100): undefined variable: `boilerTemp`",
+      "display": "ERR",
+      "error": "undefined variable: `boilerTemp`",
+      "expr": "boilerTemp < 100",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "boilerTemp"
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 100
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<"
+        }
+      },
+      "detail": "ERROR (boilerTemp < 100): undefined variable: `boilerTemp`",
+      "display": "ERR",
+      "error": "undefined variable: `boilerTemp`",
+      "expr": "boilerTemp < 100",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "boilerTemp"
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 100
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<"
+        }
+      },
+      "detail": "ERROR (boilerTemp < 100): undefined variable: `boilerTemp`",
+      "display": "ERR",
+      "error": "undefined variable: `boilerTemp`",
+      "expr": "boilerTemp < 100",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "brewActive"
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "=="
+        }
+      },
+      "detail": "ERROR (brewActive == 0): undefined variable: `brewActive`",
+      "display": "ERR",
+      "error": "undefined variable: `brewActive`",
+      "expr": "brewActive == 0",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "config1Power",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">"
+        }
+      },
+      "detail": "ERROR (config1Power > 0): undefined variable: `config1Power (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `config1Power (attribute has no assigned value)`",
+      "expr": "config1Power > 0",
+      "kind": "AssertConstraintUsage",
+      "name": "config1Positive",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "config1Power",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 2000
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<="
+        }
+      },
+      "detail": "ERROR (config1Power <= 2000): undefined variable: `config1Power (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `config1Power (attribute has no assigned value)`",
+      "expr": "config1Power <= 2000",
+      "kind": "AssertConstraintUsage",
+      "name": "config1InBudget",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "config2Power",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">"
+        }
+      },
+      "detail": "ERROR (config2Power > 0): undefined variable: `config2Power (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `config2Power (attribute has no assigned value)`",
+      "expr": "config2Power > 0",
+      "kind": "AssertConstraintUsage",
+      "name": "config2Positive",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "config2Power",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 2000
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<="
+        }
+      },
+      "detail": "ERROR (config2Power <= 2000): undefined variable: `config2Power (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `config2Power (attribute has no assigned value)`",
+      "expr": "config2Power <= 2000",
+      "kind": "AssertConstraintUsage",
+      "name": "config2InBudget",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "grinderDraw",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">="
+        }
+      },
+      "detail": "ERROR (grinderDraw >= 0): undefined variable: `grinderDraw (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `grinderDraw (attribute has no assigned value)`",
+      "expr": "grinderDraw >= 0",
+      "kind": "AssertConstraintUsage",
+      "name": "grinderNonNegative",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "grinderDraw",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 500
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<="
+        }
+      },
+      "detail": "ERROR (grinderDraw <= 500): undefined variable: `grinderDraw (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `grinderDraw (attribute has no assigned value)`",
+      "expr": "grinderDraw <= 500",
+      "kind": "AssertConstraintUsage",
+      "name": "grinderInSpec",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "heaterDraw",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 2000
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<"
+        }
+      },
+      "detail": "ERROR (heaterDraw < 2000): undefined variable: `heaterDraw (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `heaterDraw (attribute has no assigned value)`",
+      "expr": "heaterDraw < 2000",
+      "kind": "AssertConstraintUsage",
+      "name": "heaterUnderRatedLimit",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "heaterPower",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 1000
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">="
+        }
+      },
+      "detail": "ERROR (heaterPower >= 1000): undefined variable: `heaterPower (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `heaterPower (attribute has no assigned value)`",
+      "expr": "heaterPower >= 1000",
+      "kind": "AssertConstraintUsage",
+      "name": "heaterInRange",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "heaterPower",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 2000
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "<="
+        }
+      },
+      "detail": "ERROR (heaterPower <= 2000): undefined variable: `heaterPower (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `heaterPower (attribute has no assigned value)`",
+      "expr": "heaterPower <= 2000",
+      "kind": "AssertConstraintUsage",
+      "name": "heaterMaxPower",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "machine.cupSensor.cupDetected"
+          },
+          {
+            "kind": "LiteralBoolean",
+            "props": {
+              "value": true
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": "=="
+        }
+      },
+      "detail": "ERROR (machine.cupSensor.cupDetected == true): undefined variable: `machine`",
+      "display": "ERR",
+      "error": "undefined variable: `machine`",
+      "expr": "machine.cupSensor.cupDetected == true",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "machineReady"
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">"
+        }
+      },
+      "detail": "ERROR (machineReady > 0): undefined variable: `machineReady`",
+      "display": "ERR",
+      "error": "undefined variable: `machineReady`",
+      "expr": "machineReady > 0",
+      "kind": "ConstraintUsage",
+      "name": "<unnamed>",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "pumpDraw",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">="
+        }
+      },
+      "detail": "ERROR (pumpDraw >= 0): undefined variable: `pumpDraw (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `pumpDraw (attribute has no assigned value)`",
+      "expr": "pumpDraw >= 0",
+      "kind": "AssertConstraintUsage",
+      "name": "pumpNonNegative",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    },
+    {
+      "ast": {
+        "children": [
+          {
+            "kind": "FeatureReferenceExpression",
+            "name": "waterVolume",
+            "props": {
+              "featureReference": "<UUID>"
+            }
+          },
+          {
+            "kind": "LiteralInteger",
+            "props": {
+              "value": 0
+            }
+          }
+        ],
+        "kind": "OperatorExpression",
+        "props": {
+          "operator": ">"
+        }
+      },
+      "detail": "ERROR (waterVolume > 0): undefined variable: `waterVolume (attribute has no assigned value)`",
+      "display": "ERR",
+      "error": "undefined variable: `waterVolume (attribute has no assigned value)`",
+      "expr": "waterVolume > 0",
+      "kind": "AssertConstraintUsage",
+      "name": "volumePositive",
+      "satisfied": false,
+      "verdict": {
+        "verdict": "Error"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+[package]
+name = "sysml-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Core model types for SysML v2: Element, Relationship, and ModelGraph"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[features]
+default = ["parallel"]
+parallel = ["dep:rayon"]
+serde = ["dep:serde", "dep:serde_json", "dep:sha2", "sysml-id/serde", "sysml-span/serde"]
+schemars = ["dep:schemars", "sysml-id/schemars", "sysml-span/schemars"]
+# Enable detailed resolution tracing for debugging
+resolution-tracing = ["dep:tracing"]
+
+[dependencies]
+sysml-id = { workspace = true }
+sysml-span = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+sha2 = { workspace = true, optional = true }
+schemars = { workspace = true, optional = true }
+rustc-hash = { workspace = true }
+rayon = { workspace = true, optional = true }
+tracing = { workspace = true, optional = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
+sysml-parser-trait = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+proptest = { workspace = true }
+
+[build-dependencies]
+sysml-codegen = { workspace = true }
+
+[[bench]]
+name = "core_benchmarks"
+harness = false
+
+[[bench]]
+name = "resolution_library_benches"
+harness = false
+
+[[bench]]
+name = "resolution_scope_benches"
+harness = false
+
+[[bench]]
+name = "resolution_inheritance_benches"
+harness = false
+
+[[bench]]
+name = "resolution_import_benches"
+harness = false
+
+[[bench]]
+name = "resolution_full_benches"
+harness = false
+
+[lints]
+workspace = true

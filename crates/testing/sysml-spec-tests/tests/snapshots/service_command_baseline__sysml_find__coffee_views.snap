@@ -1,0 +1,1064 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "kind": null,
+    "pattern": "",
+    "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 3975,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4003,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4423,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4392
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4453,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4392
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5200,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5242,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5242,
+          "file":"<FILE>",
+          "line": 98,
+          "start": 5216
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5294,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5294,
+          "file":"<FILE>",
+          "line": 99,
+          "start": 5258
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5341,
+          "file":"<FILE>",
+          "line": 100,
+          "start": 5310
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5341,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 38,
+          "end": 4003,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3979
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 50,
+          "end": 4453,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4427
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 3975,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4003,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4423,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4392
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 4453,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4392
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5200,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5242,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5242,
+          "file":"<FILE>",
+          "line": 98,
+          "start": 5216
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5294,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5294,
+          "file":"<FILE>",
+          "line": 99,
+          "start": 5258
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5341,
+          "file":"<FILE>",
+          "line": 100,
+          "start": 5310
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 15,
+          "end": 5341,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 38,
+          "end": 4003,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3979
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 50,
+          "end": 4453,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4427
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 3960,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 4396,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4392
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 5173,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 5220,
+          "file":"<FILE>",
+          "line": 98,
+          "start": 5216
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 5262,
+          "file":"<FILE>",
+          "line": 99,
+          "start": 5258
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 15,
+          "end": 5314,
+          "file":"<FILE>",
+          "line": 100,
+          "start": 5310
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 3983,
+          "file":"<FILE>",
+          "line": 68,
+          "start": 3979
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "kind",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 50,
+          "end": 4431,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 4427
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Package",
+      "name": "Views",
+      "name_span": {
+        "col": 8,
+        "end": 498,
+        "file":"<FILE>",
+        "line": 11,
+        "start": 493
+      },
+      "owner": null,
+      "spans": [
+        {
+          "col": 0,
+          "end": 6137,
+          "file":"<FILE>",
+          "line": 11,
+          "start": 485
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "SafetyEngineer",
+      "name_span": {
+        "col": 13,
+        "end": 1173,
+        "file":"<FILE>",
+        "line": 21,
+        "start": 1159
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1174,
+          "file":"<FILE>",
+          "line": 21,
+          "start": 1150
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "SystemArchitect",
+      "name_span": {
+        "col": 13,
+        "end": 1144,
+        "file":"<FILE>",
+        "line": 20,
+        "start": 1129
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1145,
+          "file":"<FILE>",
+          "line": 20,
+          "start": 1120
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "TestEngineer",
+      "name_span": {
+        "col": 13,
+        "end": 1200,
+        "file":"<FILE>",
+        "line": 22,
+        "start": 1188
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1201,
+          "file":"<FILE>",
+          "line": 22,
+          "start": 1179
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "RenderingDefinition",
+      "name": "StandardInterconnection",
+      "name_span": {
+        "col": 18,
+        "end": 2993,
+        "file":"<FILE>",
+        "line": 54,
+        "start": 2970
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 2994,
+          "file":"<FILE>",
+          "line": 54,
+          "start": 2956
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "RenderingDefinition",
+      "name": "TraceabilityTable",
+      "name_span": {
+        "col": 18,
+        "end": 3030,
+        "file":"<FILE>",
+        "line": 55,
+        "start": 3013
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 3031,
+          "file":"<FILE>",
+          "line": 55,
+          "start": 2999
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "StakeholderMembership",
+      "name": "architect",
+      "name_span": {
+        "col": 20,
+        "end": 1823,
+        "file":"<FILE>",
+        "line": 30,
+        "start": 1814
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1842,
+          "file":"<FILE>",
+          "line": 30,
+          "start": 1802
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "StakeholderMembership",
+      "name": "reviewer",
+      "name_span": {
+        "col": 20,
+        "end": 2072,
+        "file":"<FILE>",
+        "line": 37,
+        "start": 2064
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2090,
+          "file":"<FILE>",
+          "line": 37,
+          "start": 2052
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "StakeholderMembership",
+      "name": "tester",
+      "name_span": {
+        "col": 20,
+        "end": 2314,
+        "file":"<FILE>",
+        "line": 44,
+        "start": 2308
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2330,
+          "file":"<FILE>",
+          "line": 44,
+          "start": 2296
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "BrewSequenceView",
+      "name_span": {
+        "col": 13,
+        "end": 5648,
+        "file":"<FILE>",
+        "line": 110,
+        "start": 5632
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 5714,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 5623
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "SafetyReviewView",
+      "name_span": {
+        "col": 13,
+        "end": 4278,
+        "file":"<FILE>",
+        "line": 77,
+        "start": 4262
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 4727,
+          "file":"<FILE>",
+          "line": 77,
+          "start": 4253
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "StructuralOverviewView",
+      "name_span": {
+        "col": 13,
+        "end": 3826,
+        "file":"<FILE>",
+        "line": 65,
+        "start": 3804
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 4010,
+          "file":"<FILE>",
+          "line": 65,
+          "start": 3795
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "VerificationDashboardView",
+      "name_span": {
+        "col": 13,
+        "end": 5051,
+        "file":"<FILE>",
+        "line": 94,
+        "start": 5026
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 5348,
+          "file":"<FILE>",
+          "line": 94,
+          "start": 5017
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "brewSequence",
+      "name_span": {
+        "col": 9,
+        "end": 5737,
+        "file":"<FILE>",
+        "line": 114,
+        "start": 5725
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 5799,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 5720
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "safetyReview",
+      "name_span": {
+        "col": 9,
+        "end": 4750,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 4738
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 4809,
+          "file":"<FILE>",
+          "line": 87,
+          "start": 4733
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "scratch",
+      "name_span": {
+        "col": 9,
+        "end": 6070,
+        "file":"<FILE>",
+        "line": 122,
+        "start": 6063
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 6135,
+          "file":"<FILE>",
+          "line": 122,
+          "start": 6058
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "structuralOverview",
+      "name_span": {
+        "col": 9,
+        "end": 4039,
+        "file":"<FILE>",
+        "line": 71,
+        "start": 4021
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 4102,
+          "file":"<FILE>",
+          "line": 71,
+          "start": 4016
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "verificationDashboard",
+      "name_span": {
+        "col": 9,
+        "end": 5380,
+        "file":"<FILE>",
+        "line": 103,
+        "start": 5359
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 5480,
+          "file":"<FILE>",
+          "line": 103,
+          "start": 5354
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewpointDefinition",
+      "name": "SafetyComplianceViewpoint",
+      "name_span": {
+        "col": 18,
+        "end": 2041,
+        "file":"<FILE>",
+        "line": 36,
+        "start": 2016
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 2236,
+          "file":"<FILE>",
+          "line": 36,
+          "start": 2002
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewpointDefinition",
+      "name": "StructuralCompletenessViewpoint",
+      "name_span": {
+        "col": 18,
+        "end": 1791,
+        "file":"<FILE>",
+        "line": 29,
+        "start": 1760
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1996,
+          "file":"<FILE>",
+          "line": 29,
+          "start": 1746
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewpointDefinition",
+      "name": "VerificationCoverageViewpoint",
+      "name_span": {
+        "col": 18,
+        "end": 2285,
+        "file":"<FILE>",
+        "line": 43,
+        "start": 2256
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 2464,
+          "file":"<FILE>",
+          "line": 43,
+          "start": 2242
+        }
+      ]
+    }
+  ]
+}

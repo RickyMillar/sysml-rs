@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "rust-analyzer": {
+      "command": "rust-analyzer-mcp"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.79",
+        "--isolated",
+        "--test-id-attribute=data-testid",
+        "--viewport-size=1440x1024",
+        "--output-dir=editors/simulation-app/test-results/agent-browser"
+      ],
+      "lifecycle": "lazy",
+      "idleTimeout": 10
+    }
+  }
+}

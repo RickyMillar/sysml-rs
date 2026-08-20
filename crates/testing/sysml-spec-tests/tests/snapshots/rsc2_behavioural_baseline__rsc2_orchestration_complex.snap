@@ -1,0 +1,295 @@
+---
+source: crates/testing/sysml-spec-tests/tests/rsc2_behavioural_baseline.rs
+expression: report
+---
+RSC-2.B0 parity baseline :: orchestration-complex
+subsystems (3):
+  BoilerController
+  ThermalBody
+  WaterPump
+== tick 1 ==
+clock: tick=1 time_ms=10.0
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+subsystem-state: ThermalBody :: kind=ode45 state=0.0000 completed=false
+subsystem-state: WaterPump :: kind=stateMachine state=off completed=false
+ode-state: temperature = 2.1999989000003665e-5
+derivatives-keys: [temperature]
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint: maxPressure verdict=pass
+constraint: maxTemp verdict=pass
+constraint: pumpAndBoiler verdict=pass
+constraint: safeTemp verdict=pass
+variables-key-count: 118
+var-key: BoilerController
+var-key: BoilerUnit
+var-key: BrewCycle
+var-key: CoffeeMachine
+var-key: ExtractAction
+var-key: FrothAction
+var-key: FullBrewTest
+var-key: GrindAction
+var-key: HeatAction
+var-key: MixAction
+var-key: PressureSafe
+var-key: PressureSensor
+var-key: SensorPort
+var-key: StressOrchestrationComplex
+var-key: TampAction
+var-key: TempDerivative
+var-key: TempSafe
+var-key: ThermalBody
+var-key: ThermalBody.temperature
+var-key: WaterPort
+var-key: WaterPump
+var-key: WaterReservoir
+var-key: __active_substates
+var-key: __clock_time
+var-key: __recent_transitions
+var-key: ambientTemp
+var-key: boilerController
+var-key: boilerReady
+var-key: boilerSafe
+var-key: boilerTemp
+var-key: boilerUnit
+var-key: brewActive
+var-key: brewComplete
+var-key: calibrated
+var-key: coffeeMachine
+var-key: coldStart
+var-key: coldStart_to_preheating
+var-key: espresso
+var-key: extract
+var-key: faulted
+var-key: faulted_to_off
+var-key: flowRate
+var-key: froth
+var-key: grind
+var-key: grounds
+var-key: heat
+var-key: heaterPower
+var-key: hotWater
+var-key: latte
+var-key: level
+var-key: lossCoefficient
+var-key: machine
+var-key: maxPressure
+var-key: maxTemp
+var-key: milk
+var-key: mix
+var-key: off
+var-key: off_to_coldStart
+var-key: off_to_priming
+var-key: overtemp
+var-key: overtemp_to_off
+var-key: powerOff
+var-key: powerOn
+var-key: preheating
+var-key: preheating_to_overtemp
+var-key: preheating_to_ready
+var-key: prepFork
+var-key: prepJoin
+var-key: pressure
+var-key: pressureFeedback
+var-key: pressureIn
+var-key: pressureSafe
+var-key: pressureSensor
+var-key: primeComplete
+var-key: priming
+var-key: priming_to_running
+var-key: puck
+var-key: pumpActive
+var-key: pumpAndBoiler
+var-key: pumpPressure
+var-key: reading
+var-key: ready
+var-key: ready_to_off
+var-key: ready_to_steaming
+var-key: reservoir
+var-key: running
+var-key: running_to_faulted
+var-key: running_to_off
+var-key: safeTemp
+var-key: serveFork
+var-key: serveJoin
+var-key: startPump
+var-key: status
+var-key: steamActive
+var-key: steamOut
+var-key: steamRequest
+var-key: steaming
+var-key: steaming_to_overtemp
+var-key: steaming_to_ready
+var-key: stopPump
+var-key: t_ms
+var-key: tamp
+var-key: temperature
+var-key: testScript
+var-key: thermalBody
+var-key: thermalMass
+var-key: tick
+var-key: toolName
+var-key: value
+var-key: waterFlow
+var-key: waterIn
+var-key: waterOut
+var-key: waterPump
+var-key: waterSupply
+var-key: x
+var-key: y
+var-key: ~SensorPort
+var-key: ~WaterPort
+== tick 10 ==
+clock: tick=10 time_ms=100.0
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+subsystem-state: ThermalBody :: kind=ode45 state=0.0002 completed=false
+subsystem-state: WaterPump :: kind=stateMachine state=off completed=false
+ode-state: temperature = 0.00021999890000366662
+derivatives-keys: [temperature]
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint: maxPressure verdict=pass
+constraint: maxTemp verdict=pass
+constraint: pumpAndBoiler verdict=pass
+constraint: safeTemp verdict=pass
+== tick 100 ==
+clock: tick=100 time_ms=1000.0
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+subsystem-state: ThermalBody :: kind=ode45 state=0.0022 completed=false
+subsystem-state: WaterPump :: kind=stateMachine state=off completed=false
+ode-state: temperature = 0.0021998900036665765
+derivatives-keys: [temperature]
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint:  verdict=pass
+constraint: maxPressure verdict=pass
+constraint: maxTemp verdict=pass
+constraint: pumpAndBoiler verdict=pass
+constraint: safeTemp verdict=pass
+variables-key-count: 118
+var-key: BoilerController
+var-key: BoilerUnit
+var-key: BrewCycle
+var-key: CoffeeMachine
+var-key: ExtractAction
+var-key: FrothAction
+var-key: FullBrewTest
+var-key: GrindAction
+var-key: HeatAction
+var-key: MixAction
+var-key: PressureSafe
+var-key: PressureSensor
+var-key: SensorPort
+var-key: StressOrchestrationComplex
+var-key: TampAction
+var-key: TempDerivative
+var-key: TempSafe
+var-key: ThermalBody
+var-key: ThermalBody.temperature
+var-key: WaterPort
+var-key: WaterPump
+var-key: WaterReservoir
+var-key: __active_substates
+var-key: __clock_time
+var-key: __recent_transitions
+var-key: ambientTemp
+var-key: boilerController
+var-key: boilerReady
+var-key: boilerSafe
+var-key: boilerTemp
+var-key: boilerUnit
+var-key: brewActive
+var-key: brewComplete
+var-key: calibrated
+var-key: coffeeMachine
+var-key: coldStart
+var-key: coldStart_to_preheating
+var-key: espresso
+var-key: extract
+var-key: faulted
+var-key: faulted_to_off
+var-key: flowRate
+var-key: froth
+var-key: grind
+var-key: grounds
+var-key: heat
+var-key: heaterPower
+var-key: hotWater
+var-key: latte
+var-key: level
+var-key: lossCoefficient
+var-key: machine
+var-key: maxPressure
+var-key: maxTemp
+var-key: milk
+var-key: mix
+var-key: off
+var-key: off_to_coldStart
+var-key: off_to_priming
+var-key: overtemp
+var-key: overtemp_to_off
+var-key: powerOff
+var-key: powerOn
+var-key: preheating
+var-key: preheating_to_overtemp
+var-key: preheating_to_ready
+var-key: prepFork
+var-key: prepJoin
+var-key: pressure
+var-key: pressureFeedback
+var-key: pressureIn
+var-key: pressureSafe
+var-key: pressureSensor
+var-key: primeComplete
+var-key: priming
+var-key: priming_to_running
+var-key: puck
+var-key: pumpActive
+var-key: pumpAndBoiler
+var-key: pumpPressure
+var-key: reading
+var-key: ready
+var-key: ready_to_off
+var-key: ready_to_steaming
+var-key: reservoir
+var-key: running
+var-key: running_to_faulted
+var-key: running_to_off
+var-key: safeTemp
+var-key: serveFork
+var-key: serveJoin
+var-key: startPump
+var-key: status
+var-key: steamActive
+var-key: steamOut
+var-key: steamRequest
+var-key: steaming
+var-key: steaming_to_overtemp
+var-key: steaming_to_ready
+var-key: stopPump
+var-key: t_ms
+var-key: tamp
+var-key: temperature
+var-key: testScript
+var-key: thermalBody
+var-key: thermalMass
+var-key: tick
+var-key: toolName
+var-key: value
+var-key: waterFlow
+var-key: waterIn
+var-key: waterOut
+var-key: waterPump
+var-key: waterSupply
+var-key: x
+var-key: y
+var-key: ~SensorPort
+var-key: ~WaterPort

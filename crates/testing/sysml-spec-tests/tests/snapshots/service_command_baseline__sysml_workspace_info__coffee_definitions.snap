@@ -1,0 +1,4379 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uris": null
+  },
+  "response": [
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AcceptActionUsage": 14,
+          "ActionUsage": 16,
+          "Documentation": 14,
+          "Expression": 1,
+          "FeatureTyping": 2,
+          "NamespaceImport": 2,
+          "OwningMembership": 53,
+          "Package": 1,
+          "StateDefinition": 3,
+          "StateSubactionMembership": 16,
+          "StateUsage": 11,
+          "SuccessionAsUsage": 3,
+          "TransitionFeatureMembership": 15,
+          "TransitionUsage": 18
+        },
+        "relationships_by_kind": {},
+        "total_elements": 169,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "off",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "operating",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "dimDisplay",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "wakeDisplay",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "standby",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "monitorBoilerTemp",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startHeater",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "warmingUp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "MachinePowerStates",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "off_to_warmingUp",
+                  "source": "off",
+                  "target": "warmingUp"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "operating_to_off",
+                  "source": "operating",
+                  "target": "off"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "operating_to_standby",
+                  "source": "operating",
+                  "target": "standby"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "operating_to_warmingUp",
+                  "source": "operating",
+                  "target": "warmingUp"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "standby_to_off",
+                  "source": "standby",
+                  "target": "off"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "standby_to_operating",
+                  "source": "standby",
+                  "target": "operating"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "warmingUp_to_off",
+                  "source": "warmingUp",
+                  "target": "off"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "warmingUp_to_operating",
+                  "source": "warmingUp",
+                  "target": "operating"
+                }
+              ]
+            },
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "operatingStates",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "powerStates",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "CoffeeMachineLifecycle",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "ops_to_power",
+                  "source": "operatingStates",
+                  "target": "powerStates"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "power_to_ops",
+                  "source": "powerStates",
+                  "target": "operatingStates"
+                }
+              ]
+            },
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "closeSteamValve",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "openSteamValve",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "regulateSteam",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "steaming",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "displayError",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "error",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "monitorTemp",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startBrew",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "stopPump",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "brewing",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "resetDisplay",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "idle",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startClean",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "cleaning",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "MachineStates",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "any_to_error",
+                  "source": "idle",
+                  "target": "error"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "brewing_to_idle",
+                  "source": "brewing",
+                  "target": "idle"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "cleaning_to_idle",
+                  "source": "cleaning",
+                  "target": "idle"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "error_to_idle",
+                  "source": "error",
+                  "target": "idle"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "idle_to_brewing",
+                  "source": "idle",
+                  "target": "brewing"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "idle_to_cleaning",
+                  "source": "idle",
+                  "target": "cleaning"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "idle_to_steaming",
+                  "source": "idle",
+                  "target": "steaming"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "steaming_to_idle",
+                  "source": "steaming",
+                  "target": "idle"
+                }
+              ]
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "States",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/states.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AcceptActionUsage": 14,
+          "ActionUsage": 36,
+          "AssignmentActionUsage": 31,
+          "AttributeUsage": 8,
+          "ConstraintDefinition": 4,
+          "ConstraintUsage": 10,
+          "Documentation": 17,
+          "ExhibitStateUsage": 3,
+          "Expression": 1,
+          "Feature": 40,
+          "FeatureReferenceExpression": 15,
+          "FeatureTyping": 11,
+          "FeatureValue": 40,
+          "LiteralInteger": 15,
+          "OperatorExpression": 20,
+          "OwningMembership": 296,
+          "Package": 1,
+          "PartDefinition": 1,
+          "RequirementUsage": 6,
+          "ResultExpressionMembership": 10,
+          "StateDefinition": 3,
+          "StateSubactionMembership": 17,
+          "StateUsage": 14,
+          "SubjectMembership": 3,
+          "SuccessionAsUsage": 17,
+          "TransitionFeatureMembership": 15,
+          "TransitionUsage": 16,
+          "VerificationCaseDefinition": 3
+        },
+        "relationships_by_kind": {},
+        "total_elements": 667,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "brewingDone",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "clearDose",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "doseReached",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "extractionDone",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "powerOn",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "preInfusionComplete",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "resetBrew",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startBrew",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startGrind",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "tempReached",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "testScript",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "extractionPressureOk",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "goodDose",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "safeOperation",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "FullBrewCycleTest",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "cooledDown",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "powerOn",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "tempOverLimit",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "tempReached",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "testScript",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "recoveredSafely",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "tempNormal",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "OverheatRecoveryTest",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": "startBrew",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "testScript",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [
+                    {
+                      "archetype": "constraint",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ConstraintUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "RequirementUsage",
+                  "name": "brewBlocked",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "BrewWithoutHeatTest",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ConstraintUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "ExtractionPressure",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ConstraintUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "GrindDoseWeight",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ConstraintUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "SafeTemperature",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ConstraintUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "ShotWeightTarget",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "machineReady",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 1.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 8.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 10.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 10.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "waterPressure",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 18.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 18.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 22.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 22.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "grindWeight",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 18.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 44.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "shotWeight",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "target",
+                      "operator": "==",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "brewActive",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<",
+                      "y": 100.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<",
+                      "y": 100.0
+                    },
+                    {
+                      "constraint_name": "(constraint)",
+                      "kind": "upper",
+                      "operator": "<",
+                      "y": 100.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "boilerTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "grinderRunning",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heaterOn",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ExhibitStateUsage",
+                  "name": "boilerController",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ExhibitStateUsage",
+                  "name": "brewController",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ExhibitStateUsage",
+                  "name": "grinderController",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "EspressoMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+            },
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "boilerTemp",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "heaterOn",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "machineReady",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "cold",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "boilerTemp",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "heaterOn",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "machineReady",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "overheated",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "boilerTemp",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "heaterOn",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "machineReady",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "ready",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "boilerTemp",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "heaterOn",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "heating",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "BoilerController",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "cold_to_heating",
+                  "source": "cold",
+                  "target": "heating"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "heating_to_overheated",
+                  "source": "heating",
+                  "target": "overheated"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "heating_to_ready",
+                  "source": "heating",
+                  "target": "ready"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "overheated_to_cold",
+                  "source": "overheated",
+                  "target": "cold"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "ready_to_cold",
+                  "source": "ready",
+                  "target": "cold"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "ready_to_heating",
+                  "source": "ready",
+                  "target": "heating"
+                }
+              ]
+            },
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "brewActive",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "shotWeight",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "waterPressure",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "error",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "brewActive",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "shotWeight",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "waterPressure",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "standby",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "brewActive",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "waterPressure",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "complete",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "brewActive",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "sm",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "shotWeight",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            },
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "waterPressure",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            }
+                          ],
+                          "id": "<UUID>",
+                          "kind": "ActionUsage",
+                          "name": null,
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "StateUsage",
+                      "name": "draining",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "sm",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "shotWeight",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            },
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "waterPressure",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            }
+                          ],
+                          "id": "<UUID>",
+                          "kind": "ActionUsage",
+                          "name": null,
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "StateUsage",
+                      "name": "extraction",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    },
+                    {
+                      "archetype": "sm",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "shotWeight",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            },
+                            {
+                              "archetype": "action",
+                              "children": [],
+                              "id": "<UUID>",
+                              "kind": "AssignmentActionUsage",
+                              "name": "waterPressure",
+                              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                            }
+                          ],
+                          "id": "<UUID>",
+                          "kind": "ActionUsage",
+                          "name": null,
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "StateUsage",
+                      "name": "preInfusion",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "brewing",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
+                  "transitions": [
+                    {
+                      "id": "<UUID>",
+                      "name": "extraction_to_draining",
+                      "source": "extraction",
+                      "target": "draining"
+                    },
+                    {
+                      "id": "<UUID>",
+                      "name": "preInfusion_to_extraction",
+                      "source": "preInfusion",
+                      "target": "extraction"
+                    }
+                  ]
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "BrewController",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "brewing_to_complete",
+                  "source": "brewing",
+                  "target": "complete"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "brewing_to_error",
+                  "source": "brewing",
+                  "target": "error"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "complete_to_standby",
+                  "source": "complete",
+                  "target": "standby"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "error_to_standby",
+                  "source": "error",
+                  "target": "standby"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "standby_to_brewing",
+                  "source": "standby",
+                  "target": "brewing"
+                }
+              ]
+            },
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "grindWeight",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "grinderRunning",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "dosed",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "grindWeight",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        },
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "grinderRunning",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "grinding",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [
+                    {
+                      "archetype": "action",
+                      "children": [
+                        {
+                          "archetype": "action",
+                          "children": [],
+                          "id": "<UUID>",
+                          "kind": "AssignmentActionUsage",
+                          "name": "grinderRunning",
+                          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                        }
+                      ],
+                      "id": "<UUID>",
+                      "kind": "ActionUsage",
+                      "name": null,
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "idle",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "GrinderController",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "dosed_to_idle",
+                  "source": "dosed",
+                  "target": "idle"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "grinding_to_dosed",
+                  "source": "grinding",
+                  "target": "dosed"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "idle_to_grinding",
+                  "source": "idle",
+                  "target": "grinding"
+                }
+              ]
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Orchestration",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/orchestration.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ActionDefinition": 1,
+          "ActionUsage": 5,
+          "AttributeUsage": 1,
+          "DecisionNode": 1,
+          "FeatureTyping": 1,
+          "ForkNode": 1,
+          "JoinNode": 1,
+          "MergeNode": 1,
+          "OwningMembership": 23,
+          "SuccessionAsUsage": 12
+        },
+        "relationships_by_kind": {},
+        "total_elements": 47,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "action",
+          "children": [
+            {
+              "archetype": "action",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ActionUsage",
+              "name": "dispense",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ActionUsage",
+              "name": "dripExtract",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ActionUsage",
+              "name": "espressoExtract",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ActionUsage",
+              "name": "grind",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ActionUsage",
+              "name": "heat",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "espressoMode",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "ActionDefinition",
+          "name": "BrewCycle",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ActionDefinition": 7,
+          "ActionUsage": 8,
+          "AttributeUsage": 4,
+          "DecisionNode": 1,
+          "Documentation": 6,
+          "FeatureReferenceExpression": 2,
+          "FeatureTyping": 21,
+          "ForkNode": 1,
+          "ItemUsage": 12,
+          "JoinNode": 1,
+          "MergeNode": 1,
+          "NamespaceImport": 1,
+          "OwningMembership": 83,
+          "Package": 1,
+          "Redefinition": 2,
+          "SuccessionAsUsage": 16
+        },
+        "relationships_by_kind": {},
+        "total_elements": 167,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "dispense",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "dripExtract",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "espressoExtract",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "targetTemp",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "heat",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "beans",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "grind",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "espressoMode",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "targetTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "beans",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "BrewCycle",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "dry",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "flush",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "rinse",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "CleanCycle",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "targetTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "hotWater",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "HeatWater",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "beans",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "grounds",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "GrindBeans",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "coffee",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "grounds",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "hotWater",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "ExtractDrip",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "coffee",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "grounds",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "hotWater",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "ExtractEspresso",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            },
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "coffee",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "DispenseCoffee",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Actions",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/actions.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ActionUsage": 2,
+          "ConstraintUsage": 4,
+          "Documentation": 9,
+          "Feature": 2,
+          "FeatureReferenceExpression": 1,
+          "FeatureTyping": 3,
+          "FeatureValue": 2,
+          "LiteralBoolean": 1,
+          "NamespaceImport": 4,
+          "ObjectiveMembership": 2,
+          "OperatorExpression": 1,
+          "OwningMembership": 59,
+          "Package": 2,
+          "PartDefinition": 3,
+          "RequirementConstraintMembership": 4,
+          "RequirementDefinition": 5,
+          "RequirementVerificationMembership": 2,
+          "ResultExpressionMembership": 1,
+          "SatisfyRequirementUsage": 3,
+          "Subclassification": 5,
+          "SubjectMembership": 7,
+          "SuccessionAsUsage": 1,
+          "VerificationCaseDefinition": 2
+        },
+        "relationships_by_kind": {},
+        "total_elements": 125,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "case",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "BrewTempTest",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "evaluateResult",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+                },
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": "measureBrewTime",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "BrewTimeTest",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Verification",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+        },
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "BrewTempReq",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "BrewTimeReq",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "CoffeeMachineRequirements",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "GrindConsistency",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "SafetyInterlock",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "Barista",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "Customer",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "VerifiedCoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Requirements",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/requirements.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AnalysisCaseDefinition": 3,
+          "AnalysisCaseUsage": 3,
+          "AssertConstraintUsage": 12,
+          "AttributeUsage": 29,
+          "BindingConnectorAsUsage": 5,
+          "Documentation": 5,
+          "Feature": 24,
+          "FeatureReferenceExpression": 12,
+          "FeatureTyping": 22,
+          "FeatureValue": 24,
+          "LiteralInteger": 21,
+          "LiteralString": 2,
+          "MetadataUsage": 1,
+          "OperatorExpression": 12,
+          "OwningMembership": 177,
+          "Package": 1,
+          "PartDefinition": 2,
+          "ResultExpressionMembership": 12
+        },
+        "relationships_by_kind": {},
+        "total_elements": 367,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "ambientRealistic",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "ambientTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "heaterInRange",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 1000.0
+                    },
+                    {
+                      "constraint_name": "heaterMaxPower",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heaterPower",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "volumePositive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "waterVolume",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "brewTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "chamberHeatLoss",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "steadyStateTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "connection",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "BindingConnectorAsUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "ambientRealistic",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "heaterInRange",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "heaterMaxPower",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "volumePositive",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseDefinition",
+              "name": "ThermalAnalysis",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "ambientRealistic",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "ambientTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "heaterInRange",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 1000.0
+                    },
+                    {
+                      "constraint_name": "heaterMaxPower",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heaterPower",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "volumePositive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "waterVolume",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "chamberHeatLoss",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseUsage",
+              "name": "thermalCheck",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "config1InBudget",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    },
+                    {
+                      "constraint_name": "config1Positive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config1Power",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "config2InBudget",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    },
+                    {
+                      "constraint_name": "config2Positive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config2Power",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config1Temp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config2Temp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "connection",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "BindingConnectorAsUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "config1InBudget",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "config1Positive",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "config2InBudget",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "config2Positive",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseDefinition",
+              "name": "HeaterTradeStudy",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "config1InBudget",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    },
+                    {
+                      "constraint_name": "config1Positive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config1Power",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "config2InBudget",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 2000.0
+                    },
+                    {
+                      "constraint_name": "config2Positive",
+                      "kind": "lower",
+                      "operator": ">",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "config2Power",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseUsage",
+              "name": "compareHeaters",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "grinderInSpec",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 500.0
+                    },
+                    {
+                      "constraint_name": "grinderNonNegative",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "grinderDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "heaterUnderRatedLimit",
+                      "kind": "upper",
+                      "operator": "<",
+                      "y": 2000.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heaterDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "pumpNonNegative",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pumpDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "totalDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "connection",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "BindingConnectorAsUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "grinderInSpec",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "grinderNonNegative",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "heaterUnderRatedLimit",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "pumpNonNegative",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseDefinition",
+              "name": "PowerBudgetAnalysis",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "grinderInSpec",
+                      "kind": "upper",
+                      "operator": "<=",
+                      "y": 500.0
+                    },
+                    {
+                      "constraint_name": "grinderNonNegative",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "grinderDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "heaterUnderRatedLimit",
+                      "kind": "upper",
+                      "operator": "<",
+                      "y": 2000.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heaterDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "bounds": [
+                    {
+                      "constraint_name": "pumpNonNegative",
+                      "kind": "lower",
+                      "operator": ">=",
+                      "y": 0.0
+                    }
+                  ],
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pumpDraw",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "AnalysisCaseUsage",
+              "name": "powerCheck",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "efficiency",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "power",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "Heater",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "heatLoss",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "volume",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "BrewChamber",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "CoffeeMachineAnalysis",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AssertConstraintUsage": 3,
+          "CalculationDefinition": 2,
+          "ConstraintDefinition": 3,
+          "Documentation": 3,
+          "Feature": 26,
+          "FeatureReferenceExpression": 10,
+          "FeatureTyping": 12,
+          "FeatureValue": 26,
+          "InvocationExpression": 1,
+          "LiteralRational": 11,
+          "NamespaceImport": 3,
+          "OperatorExpression": 13,
+          "OwningMembership": 131,
+          "Package": 1,
+          "PartDefinition": 1,
+          "ReferenceUsage": 14,
+          "ResultExpressionMembership": 3,
+          "ReturnParameterMembership": 2,
+          "Subclassification": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 266,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "calc",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "CalculationDefinition",
+              "name": "ExtractionTime",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            },
+            {
+              "archetype": "calc",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "CalculationDefinition",
+              "name": "WaterVolume",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "BrewTempConstraint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "BrewTimeConstraint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "GrindConsistencyConstraint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "brewTempOk",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "brewTimeFast",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+                },
+                {
+                  "archetype": "constraint",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AssertConstraintUsage",
+                  "name": "grindOk",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "ConstrainedCoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Calculations",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/calculations.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeDefinition": 4,
+          "AttributeUsage": 14,
+          "Documentation": 3,
+          "EnumerationDefinition": 1,
+          "EnumerationUsage": 4,
+          "FeatureTyping": 25,
+          "ItemDefinition": 5,
+          "NamespaceImport": 2,
+          "OwningMembership": 73,
+          "Package": 1,
+          "PartDefinition": 8,
+          "PartUsage": 7,
+          "Subclassification": 4,
+          "VariantMembership": 4
+        },
+        "relationships_by_kind": {},
+        "total_elements": 155,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeDefinition",
+              "name": "Duration",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeDefinition",
+              "name": "Mass",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeDefinition",
+              "name": "Pressure",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeDefinition",
+              "name": "Temperature",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "EnumerationUsage",
+                  "name": "americano",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "EnumerationUsage",
+                  "name": "cappuccino",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "EnumerationUsage",
+                  "name": "espresso",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "EnumerationUsage",
+                  "name": "latte",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "EnumerationDefinition",
+              "name": "DrinkType",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "BrewedCoffee",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "CoffeeBeans",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "GroundCoffee",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "Steam",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "Water",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "brewPressure",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "Pressure"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "capacity",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "Mass"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "waterTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "Temperature"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "Brewer",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "cupDetected",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "CupSensor",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "currentLevel",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "maxCapacity",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "Mass"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "WaterTank",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "grindSize",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "motorSpeed",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "Grinder",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "isActive",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "steamTemp",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "Temperature"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "SteamWand",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "isFull",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "DripTray",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "isReady",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "selectedDrink",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "unit": "DrinkType"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "ControlPanel",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "serialNumber",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "brewPressure",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "Pressure"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "capacity",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "Mass"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "waterTemp",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "Temperature"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "brewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "cupDetected",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "cupSensor",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "currentLevel",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "maxCapacity",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "Mass"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "waterTank",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "grindSize",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "motorSpeed",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "grinder",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "isActive",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "steamTemp",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "Temperature"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "steamWand",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "isFull",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "dripTray",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "isReady",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "selectedDrink",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                      "unit": "DrinkType"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "controlPanel",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "CoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Definitions",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 2,
+          "BindingConnectorAsUsage": 1,
+          "ConjugatedPortTyping": 1,
+          "ConnectionDefinition": 1,
+          "ConnectionUsage": 2,
+          "Documentation": 1,
+          "FeatureTyping": 6,
+          "NamespaceImport": 2,
+          "OwningMembership": 24,
+          "Package": 1,
+          "PartDefinition": 1,
+          "PartUsage": 2,
+          "Redefinition": 2,
+          "ReferenceUsage": 2,
+          "Subclassification": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 49,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "connection",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pipeDiameter",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pipeLength",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "ConnectionDefinition",
+              "name": "WaterPipe",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "connection",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "BindingConnectorAsUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                },
+                {
+                  "archetype": "connection",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ConnectionUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                },
+                {
+                  "archetype": "connection",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "pipeDiameter",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "pipeLength",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "ConnectionUsage",
+                  "name": "waterLine",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "brewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "waterTank",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "ConnectedCoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Connections",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/connections.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 3,
+          "Documentation": 2,
+          "FeatureTyping": 5,
+          "LiteralString": 1,
+          "NamespaceImport": 1,
+          "OwningMembership": 30,
+          "Package": 1,
+          "PartDefinition": 4,
+          "PartUsage": 5,
+          "Redefinition": 4,
+          "Subclassification": 4,
+          "Subsetting": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 61,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "LargeWaterTank",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "brewPressure",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "maxPressure",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "PressureBrewer",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "serialNumber",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "brewPressure",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "maxPressure",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "brewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartUsage",
+              "name": "myEspresso",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+              "typed_as": "<UUID>"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "coarseGrinder",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "fineGrinder",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "waterTank",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "CommercialMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "brewPressure",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "maxPressure",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "brewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "EspressoMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "TypingAndSpecialization",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 5,
+          "Comment": 1,
+          "Documentation": 1,
+          "FeatureTyping": 7,
+          "LiteralString": 5,
+          "MetadataDefinition": 2,
+          "MetadataUsage": 2,
+          "NamespaceImport": 1,
+          "OwningMembership": 39,
+          "Package": 1,
+          "PartDefinition": 1,
+          "PartUsage": 1,
+          "Redefinition": 6,
+          "ReferenceUsage": 6,
+          "Subclassification": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 79,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "date",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "level",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "reviewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "MetadataDefinition",
+              "name": "ModelMaturity",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "level",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": null,
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "MetadataDefinition",
+              "name": "SafetyClassification",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "cupSensor",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "AnnotatedCoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "CoffeeMachineMetadata",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/metadata.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 6,
+          "ConjugatedPortDefinition": 5,
+          "ConjugatedPortTyping": 6,
+          "Documentation": 6,
+          "FeatureTyping": 12,
+          "InterfaceDefinition": 2,
+          "ItemUsage": 2,
+          "NamespaceImport": 1,
+          "OwningMembership": 59,
+          "Package": 1,
+          "PartDefinition": 2,
+          "PortDefinition": 5,
+          "PortUsage": 6,
+          "ReferenceUsage": 4,
+          "Subclassification": 2
+        },
+        "relationships_by_kind": {},
+        "total_elements": 119,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "connection",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "InterfaceDefinition",
+              "name": "PowerInterface",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "connection",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "InterfaceDefinition",
+              "name": "WaterInterface",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "port",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "controlIn",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "port",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "powerIn",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "port",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "waterIn",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "brewedCoffee",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "coffeeOut",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "BrewerWithPorts",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "port",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "controlIn",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "flowRate",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                    },
+                    {
+                      "archetype": "attribute",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "AttributeUsage",
+                      "name": "temperature",
+                      "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "waterOut",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "WaterTankWithPorts",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "command",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "status",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "ControlPort",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "current",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "voltage",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "PowerPort",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "flowRate",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "temperature",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "WaterPort",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "brewedCoffee",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "CoffeeOutPort",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "steam",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "SteamPort",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Ports",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ConjugatedPortTyping": 1,
+          "Documentation": 1,
+          "EndFeatureMembership": 2,
+          "FeatureMembership": 2,
+          "FeatureTyping": 10,
+          "FlowDefinition": 3,
+          "FlowEnd": 2,
+          "FlowUsage": 2,
+          "ItemUsage": 3,
+          "NamespaceImport": 2,
+          "OwningMembership": 40,
+          "Package": 1,
+          "PartDefinition": 1,
+          "PartUsage": 2,
+          "Redefinition": 4,
+          "ReferenceSubsetting": 2,
+          "ReferenceUsage": 9,
+          "Subclassification": 1,
+          "SuccessionFlowUsage": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 89,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "brewer",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/flows.sysml"
+                },
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "PartUsage",
+                  "name": "waterTank",
+                  "source_uri": "file://<BOOK>/examples/coffee-machine/flows.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "FlowingCoffeeMachine",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/flows.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Flows",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/flows.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/flows.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "Documentation": 3,
+          "ElementFilterMembership": 3,
+          "Feature": 26,
+          "FeatureReferenceExpression": 8,
+          "FeatureTyping": 7,
+          "FeatureValue": 26,
+          "LiteralString": 8,
+          "MembershipExpose": 3,
+          "NamespaceExpose": 3,
+          "NamespaceImport": 2,
+          "OperatorExpression": 13,
+          "OwningMembership": 134,
+          "Package": 1,
+          "PartDefinition": 3,
+          "RenderingDefinition": 2,
+          "SatisfyRequirementUsage": 3,
+          "StakeholderMembership": 3,
+          "Subclassification": 4,
+          "Subsetting": 1,
+          "ViewDefinition": 4,
+          "ViewRenderingMembership": 4,
+          "ViewUsage": 5,
+          "ViewpointDefinition": 3
+        },
+        "relationships_by_kind": {},
+        "total_elements": 269,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewpointDefinition",
+              "name": "SafetyComplianceViewpoint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewpointDefinition",
+              "name": "StructuralCompletenessViewpoint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewpointDefinition",
+              "name": "VerificationCoverageViewpoint",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "SafetyEngineer",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "SystemArchitect",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "TestEngineer",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RenderingDefinition",
+              "name": "StandardInterconnection",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RenderingDefinition",
+              "name": "TraceabilityTable",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewDefinition",
+              "name": "BrewSequenceView",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewDefinition",
+              "name": "SafetyReviewView",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewDefinition",
+              "name": "StructuralOverviewView",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewDefinition",
+              "name": "VerificationDashboardView",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "Views",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "Documentation": 4,
+          "NamespaceImport": 9,
+          "OwningMembership": 17,
+          "Package": 5
+        },
+        "relationships_by_kind": {},
+        "total_elements": 35,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "other",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "Package",
+              "name": "Behavior",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+            },
+            {
+              "archetype": "other",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "Package",
+              "name": "Internal",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+            },
+            {
+              "archetype": "other",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "Package",
+              "name": "QualityModel",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+            },
+            {
+              "archetype": "other",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "Package",
+              "name": "Structure",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "CoffeeMachineDomain",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+    }
+  ]
+}

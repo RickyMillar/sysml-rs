@@ -1,0 +1,7 @@
+lock_version = 1
+
+[[package]]
+name = "archive-lib"
+version = "1.0.0"
+source = "kpar:../deps/archive-lib.kpar"
+checksum = "{{CHECKSUM}}"

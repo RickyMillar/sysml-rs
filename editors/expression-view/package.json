@@ -1,0 +1,33 @@
+{
+  "name": "@sysml-rs/expression-view",
+  "version": "0.1.0",
+  "description": "SysML v2 expression AST → KaTeX renderer (shared frontend module)",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RickyMillar/sysml-rs.git",
+    "directory": "editors/expression-view"
+  },
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "vite",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "katex": "^0.16.11"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "@types/node": "^22.0.0",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.4.0",
+    "vite": "^8.0.0",
+    "vitest": "^4.1.0"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "Package": {
+    "prefix": ["pkg", "package"],
+    "body": ["package ${1:Name} {", "    $0", "}"],
+    "description": "Create a package"
+  },
+  "Namespace": {
+    "prefix": ["ns", "namespace"],
+    "body": ["namespace ${1:Name} {", "    $0", "}"],
+    "description": "Create a namespace"
+  },
+  "Type": {
+    "prefix": "type",
+    "body": ["type ${1:Name} {", "    $0", "}"],
+    "description": "Create a type"
+  },
+  "Classifier": {
+    "prefix": "classifier",
+    "body": ["classifier ${1:Name} {", "    $0", "}"],
+    "description": "Create a classifier"
+  },
+  "Class": {
+    "prefix": "class",
+    "body": ["class ${1:Name} {", "    $0", "}"],
+    "description": "Create a class"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": ["struct ${1:Name} {", "    $0", "}"],
+    "description": "Create a struct (value type)"
+  },
+  "Feature": {
+    "prefix": "feature",
+    "body": "feature ${1:name} : ${2:Type};$0",
+    "description": "Create a feature"
+  },
+  "Function": {
+    "prefix": "function",
+    "body": [
+      "function ${1:Name} {",
+      "    in ${2:input} : ${3:InputType};",
+      "    return : ${4:ReturnType};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a function"
+  },
+  "Predicate": {
+    "prefix": "predicate",
+    "body": [
+      "predicate ${1:Name} {",
+      "    in ${2:input} : ${3:InputType};",
+      "    $0",
+      "}"
+    ],
+    "description": "Create a predicate"
+  },
+  "Behavior": {
+    "prefix": "behavior",
+    "body": ["behavior ${1:Name} {", "    $0", "}"],
+    "description": "Create a behavior"
+  },
+  "Step": {
+    "prefix": "step",
+    "body": "step ${1:name} : ${2:Type};$0",
+    "description": "Create a step"
+  },
+  "Expression": {
+    "prefix": "expr",
+    "body": "expr ${1:name} = ${2:expression};$0",
+    "description": "Create an expression"
+  },
+  "Connector": {
+    "prefix": "connector",
+    "body": "connector ${1:name} from ${2:source} to ${3:target};$0",
+    "description": "Create a connector"
+  },
+  "Binding Connector": {
+    "prefix": ["binding", "bind"],
+    "body": "binding ${1:name} of ${2:source} = ${3:target};$0",
+    "description": "Create a binding connector"
+  },
+  "Succession": {
+    "prefix": "succession",
+    "body": "succession ${1:name} first ${2:source} then ${3:target};$0",
+    "description": "Create a succession"
+  },
+  "Import All": {
+    "prefix": "import",
+    "body": "import ${1:QualifiedName}::*;$0",
+    "description": "Import all members from a namespace"
+  },
+  "Import Single": {
+    "prefix": "imports",
+    "body": "import ${1:QualifiedName};$0",
+    "description": "Import a single element"
+  },
+  "Comment": {
+    "prefix": "comment",
+    "body": "comment /* ${1:text} */$0",
+    "description": "Create a comment element"
+  },
+  "Doc Comment": {
+    "prefix": "doc",
+    "body": "doc /* ${1:description} */$0",
+    "description": "Create a documentation comment"
+  }
+}

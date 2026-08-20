@@ -1,0 +1,119 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "Documentation",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "body": "* Anything is the top level generalized type in the language."
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 301,
+          "file":"<FILE>",
+          "line": 9,
+          "start": 215
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Documentation",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "body": "* The source of a SelfLink of this thing to itself. self is thus a feature that\n\t\t\t * relates everything to itself. It is also the value of the nested \"that\" feature\n\t\t\t * of all other things featured by this thing."
+      },
+      "spans": [
+        {
+          "col": 3,
+          "end": 608,
+          "file":"<FILE>",
+          "line": 15,
+          "start": 372
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Anything"
+      },
+      "spans": [
+        {
+          "col": 16,
+          "end": 329,
+          "file":"<FILE>",
+          "line": 14,
+          "start": 321
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "self",
+      "name_span": {
+        "col": 10,
+        "end": 319,
+        "file":"<FILE>",
+        "line": 14,
+        "start": 315
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 612,
+          "file":"<FILE>",
+          "line": 14,
+          "start": 307
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subsetting",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "subsettingFeature": "<UUID>",
+        "unresolved_subsettedFeature": "things"
+      },
+      "spans": [
+        {
+          "col": 36,
+          "end": 347,
+          "file":"<FILE>",
+          "line": 14,
+          "start": 341
+        }
+      ]
+    }
+  ]
+}

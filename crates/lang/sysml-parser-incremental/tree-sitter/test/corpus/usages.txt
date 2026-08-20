@@ -1,0 +1,587 @@
+====================================
+part-usage-minimal
+====================================
+
+part engine;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)))
+
+====================================
+part-usage-with-typing
+====================================
+
+part engine : Engine;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+part-usage-with-multiplicity
+====================================
+
+part wheels : Wheel[4];
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier)))
+      (multiplicity
+        (number
+          (integer_literal))))))
+
+====================================
+part-usage-with-default-value
+====================================
+
+part p = initialValue;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (default_value
+      (primary_expression
+        (feature_chain
+          (identifier))))))
+
+====================================
+attribute-usage-with-value
+====================================
+
+attribute mass : Real = 100;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))
+    (default_value
+      (primary_expression
+        (literal
+          (integer_literal))))))
+
+====================================
+port-in-usage
+====================================
+
+in port dataIn : DataPort;
+
+---
+
+(source_file
+  (port_usage
+    (usage_prefix)
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+port-out-usage
+====================================
+
+out port dataOut : DataPort;
+
+---
+
+(source_file
+  (port_usage
+    (usage_prefix)
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+port-usage-keyword-name
+====================================
+
+package P {
+    part def Gateway {
+        port composite : CompositePort;
+    }
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (standard_def
+        name: (identifier)
+        (definition_body
+          (port_usage
+            name: (identifier)
+            (typing
+              type: (type_ref
+                (feature_chain
+                  (identifier))))))))))
+
+====================================
+connection-usage-connect
+====================================
+
+connect a to b;
+
+---
+
+(source_file
+  (connection_usage
+    (connection_ends
+      source: (feature_chain
+        (identifier))
+      target: (feature_chain
+        (identifier)))))
+
+====================================
+flow-usage-basic
+====================================
+
+flow of Data from source to sink;
+
+---
+
+(source_file
+  (flow_connection_usage
+    flow_type: (type_ref
+      (feature_chain
+        (identifier)))
+    (flow_ends
+      source: (feature_chain
+        (identifier))
+      target: (feature_chain
+        (identifier)))))
+
+====================================
+flow-usage-compact-source-target
+====================================
+
+flow source.out to sink.in;
+
+---
+
+(source_file
+  (flow_connection_usage
+    (flow_ends
+      source: (feature_chain
+        (identifier)
+        (identifier))
+      target: (feature_chain
+        (identifier)
+        (identifier)))))
+
+====================================
+item-usage
+====================================
+
+item payload : Payload;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+occurrence-usage
+====================================
+
+occurrence impact : Impact;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+event-occurrence-usage
+====================================
+
+event occurrence boilingReached : ZeroCrossingEventDef;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+ref-usage
+====================================
+
+ref self : Vehicle;
+
+---
+
+(source_file
+  (standard_usage
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+feature-declaration-bare
+====================================
+
+feature x : Real;
+
+---
+
+(source_file
+  (feature_declaration
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+feature-redefinition
+====================================
+
+:>> name = "hello";
+
+---
+
+(source_file
+  (feature_redefinition
+    (redefinition
+      target: (feature_chain
+        (identifier)))
+    (default_value
+      (primary_expression
+        (literal
+          (string_literal))))))
+
+====================================
+supertype-redefinition
+====================================
+
+:> base;
+
+---
+
+(source_file
+  (feature_redefinition
+    (supertype_list
+      (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+succession-usage-first
+====================================
+
+first start;
+
+---
+
+(source_file
+  (succession_usage
+    successor: (feature_chain)))
+
+====================================
+succession-usage-then
+====================================
+
+then next;
+
+---
+
+(source_file
+  (succession_usage
+    successor: (feature_chain
+      (identifier))))
+
+====================================
+return-feature
+====================================
+
+return result : Real;
+
+---
+
+(source_file
+  (return_feature
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+allocation-usage
+====================================
+
+allocate func to hw;
+
+---
+
+(source_file
+  (allocation_usage
+    (allocation_ends
+      from: (feature_chain
+        (identifier))
+      to: (feature_chain
+        (identifier)))))
+
+====================================
+dependency-usage
+====================================
+
+dependency from client to server;
+
+---
+
+(source_file
+  (dependency_usage
+    client: (feature_chain
+      (identifier))
+    supplier: (feature_chain
+      (identifier))))
+
+====================================
+dependency-client-supplier-lists
+====================================
+
+dependency trace from a, b to c, d;
+
+---
+
+(source_file
+  (dependency_usage
+    name: (identifier)
+    client: (feature_chain
+      (identifier))
+    client: (feature_chain
+      (identifier))
+    supplier: (feature_chain
+      (identifier))
+    supplier: (feature_chain
+      (identifier))))
+
+====================================
+usage-prefix-readonly
+====================================
+
+readonly attribute x : Real;
+
+---
+
+(source_file
+  (standard_usage
+    (usage_prefix)
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+usage-prefix-derived
+====================================
+
+derived attribute computed : Real;
+
+---
+
+(source_file
+  (standard_usage
+    (usage_prefix)
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+multiplicity-range
+====================================
+
+part items : Item[0..*];
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier)))
+      (multiplicity
+        (number
+          (integer_literal))))))
+
+====================================
+abstract-usage
+====================================
+
+abstract part vehicle;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)))
+
+====================================
+calc-usage-keyword-field
+====================================
+
+calc myCalc { }
+
+---
+
+(source_file
+  (usage
+    name: (identifier)
+    (usage_body)))
+
+====================================
+exhibit-usage-bare-subsetting-form
+====================================
+
+exhibit myState;
+
+---
+
+(source_file
+  (exhibit_state_usage
+    name: (identifier)))
+
+====================================
+exhibit-state-usage-with-typing
+====================================
+
+exhibit state oscillator : RealSM;
+
+---
+
+(source_file
+  (exhibit_state_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+exhibit-state-usage-bare-no-name
+====================================
+
+exhibit state;
+
+---
+
+(source_file
+  (exhibit_state_usage))
+
+====================================
+succession-flow-usage
+====================================
+
+succession flow myFlow from a to b;
+
+---
+
+(source_file
+  (flow_connection_usage
+    name: (identifier)
+    (flow_ends
+      source: (feature_chain
+        (identifier))
+      target: (feature_chain
+        (identifier)))))
+
+====================================
+assert-constraint-usage
+====================================
+
+assert constraint myCheck;
+
+---
+
+(source_file
+  (assert_constraint_usage
+    name: (identifier)))
+
+====================================
+assert-not-constraint-usage
+====================================
+
+assert not constraint negated;
+
+---
+
+(source_file
+  (assert_constraint_usage
+    name: (identifier)))
+
+====================================
+feature-inverse-of
+====================================
+
+part x inverse of y;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (inverting
+      (feature_chain
+        (identifier)))))
+
+====================================
+feature-featured-by
+====================================
+
+part x featured by T;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (featuring
+      (feature_chain
+        (identifier)))))

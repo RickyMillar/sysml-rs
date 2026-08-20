@@ -1,0 +1,56 @@
+[package]
+name = "sysml-parser-incremental"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Tree-sitter based CST parsing for SysML v2 (IDE-focused, fast)"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-span = { workspace = true }
+tree-sitter = { workspace = true }
+tracing = { workspace = true, optional = true }
+
+[dependencies.tree-sitter-sysml]
+path = "tree-sitter"
+
+[dependencies.sysml-parser-trait]
+workspace = true
+optional = true
+
+[dependencies.sysml-core]
+workspace = true
+optional = true
+
+[dependencies.sysml-codegen]
+workspace = true
+optional = true
+
+[features]
+default = []
+# Enable semantic model building (requires sysml-core dependency)
+semantic = ["sysml-parser-trait", "sysml-core"]
+codegen = ["sysml-codegen"]
+tracing = ["dep:tracing"]
+
+[dev-dependencies]
+# TS-3.7a: sysml-parser-batch removed — expression_parity{,_non_constraint}.rs
+# (its sole consumers here) were the Pest-vs-TS oracle tests; deleted alongside
+# the runtime Pest fallback removal.
+sysml-parser-trait = { workspace = true }
+
+[[bin]]
+name = "generate_ts_tokens"
+path = "src/bin/generate_ts_tokens.rs"
+required-features = ["codegen"]
+
+[[bin]]
+name = "validate_ts_coverage"
+path = "src/bin/validate_ts_coverage.rs"
+required-features = ["codegen"]
+
+[lints]
+workspace = true

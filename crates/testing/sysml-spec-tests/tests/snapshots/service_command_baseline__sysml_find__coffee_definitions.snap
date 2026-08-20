@@ -1,0 +1,1029 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "kind": null,
+    "pattern": "",
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "AttributeDefinition",
+      "name": "Duration",
+      "name_span": {
+        "col": 18,
+        "end": 422,
+        "file":"<FILE>",
+        "line": 12,
+        "start": 414
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 445,
+          "file":"<FILE>",
+          "line": 12,
+          "start": 400
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeDefinition",
+      "name": "Mass",
+      "name_span": {
+        "col": 18,
+        "end": 376,
+        "file":"<FILE>",
+        "line": 11,
+        "start": 372
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 395,
+          "file":"<FILE>",
+          "line": 11,
+          "start": 358
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeDefinition",
+      "name": "Pressure",
+      "name_span": {
+        "col": 18,
+        "end": 330,
+        "file":"<FILE>",
+        "line": 10,
+        "start": 322
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 353,
+          "file":"<FILE>",
+          "line": 10,
+          "start": 308
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeDefinition",
+      "name": "Temperature",
+      "name_span": {
+        "col": 18,
+        "end": 277,
+        "file":"<FILE>",
+        "line": 9,
+        "start": 266
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 303,
+          "file":"<FILE>",
+          "line": 9,
+          "start": 252
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "brewPressure",
+      "name_span": {
+        "col": 18,
+        "end": 1443,
+        "file":"<FILE>",
+        "line": 47,
+        "start": 1431
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1455,
+          "file":"<FILE>",
+          "line": 47,
+          "start": 1421
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "capacity",
+      "name_span": {
+        "col": 18,
+        "end": 1482,
+        "file":"<FILE>",
+        "line": 48,
+        "start": 1474
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1490,
+          "file":"<FILE>",
+          "line": 48,
+          "start": 1464
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "cupDetected",
+      "name_span": {
+        "col": 18,
+        "end": 1911,
+        "file":"<FILE>",
+        "line": 67,
+        "start": 1900
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1922,
+          "file":"<FILE>",
+          "line": 67,
+          "start": 1890
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "currentLevel",
+      "name_span": {
+        "col": 18,
+        "end": 1553,
+        "file":"<FILE>",
+        "line": 52,
+        "start": 1541
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1561,
+          "file":"<FILE>",
+          "line": 52,
+          "start": 1531
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "grindSize",
+      "name_span": {
+        "col": 18,
+        "end": 1197,
+        "file":"<FILE>",
+        "line": 39,
+        "start": 1188
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1205,
+          "file":"<FILE>",
+          "line": 39,
+          "start": 1178
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "isActive",
+      "name_span": {
+        "col": 18,
+        "end": 1721,
+        "file":"<FILE>",
+        "line": 58,
+        "start": 1713
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1732,
+          "file":"<FILE>",
+          "line": 58,
+          "start": 1703
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "isFull",
+      "name_span": {
+        "col": 18,
+        "end": 1978,
+        "file":"<FILE>",
+        "line": 71,
+        "start": 1972
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1989,
+          "file":"<FILE>",
+          "line": 71,
+          "start": 1962
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "isReady",
+      "name_span": {
+        "col": 18,
+        "end": 1838,
+        "file":"<FILE>",
+        "line": 63,
+        "start": 1831
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1849,
+          "file":"<FILE>",
+          "line": 63,
+          "start": 1821
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "maxCapacity",
+      "name_span": {
+        "col": 18,
+        "end": 1611,
+        "file":"<FILE>",
+        "line": 53,
+        "start": 1600
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1619,
+          "file":"<FILE>",
+          "line": 53,
+          "start": 1590
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "motorSpeed",
+      "name_span": {
+        "col": 18,
+        "end": 1253,
+        "file":"<FILE>",
+        "line": 40,
+        "start": 1243
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1261,
+          "file":"<FILE>",
+          "line": 40,
+          "start": 1233
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "selectedDrink",
+      "name_span": {
+        "col": 18,
+        "end": 1799,
+        "file":"<FILE>",
+        "line": 62,
+        "start": 1786
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1812,
+          "file":"<FILE>",
+          "line": 62,
+          "start": 1776
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "serialNumber",
+      "name_span": {
+        "col": 18,
+        "end": 1066,
+        "file":"<FILE>",
+        "line": 33,
+        "start": 1054
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1076,
+          "file":"<FILE>",
+          "line": 33,
+          "start": 1044
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "steamTemp",
+      "name_span": {
+        "col": 18,
+        "end": 1679,
+        "file":"<FILE>",
+        "line": 57,
+        "start": 1670
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1694,
+          "file":"<FILE>",
+          "line": 57,
+          "start": 1660
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "waterTemp",
+      "name_span": {
+        "col": 18,
+        "end": 1397,
+        "file":"<FILE>",
+        "line": 46,
+        "start": 1388
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1412,
+          "file":"<FILE>",
+          "line": 46,
+          "start": 1378
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "EnumerationDefinition",
+      "name": "DrinkType",
+      "name_span": {
+        "col": 13,
+        "end": 2058,
+        "file":"<FILE>",
+        "line": 75,
+        "start": 2049
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isAbstract": true,
+        "isVariation": true
+      },
+      "spans": [
+        {
+          "col": 4,
+          "end": 2138,
+          "file":"<FILE>",
+          "line": 75,
+          "start": 2040
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "EnumerationUsage",
+      "name": "americano",
+      "name_span": {
+        "col": 8,
+        "end": 2096,
+        "file":"<FILE>",
+        "line": 77,
+        "start": 2087
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2097,
+          "file":"<FILE>",
+          "line": 77,
+          "start": 2087
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "EnumerationUsage",
+      "name": "cappuccino",
+      "name_span": {
+        "col": 8,
+        "end": 2116,
+        "file":"<FILE>",
+        "line": 78,
+        "start": 2106
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2117,
+          "file":"<FILE>",
+          "line": 78,
+          "start": 2106
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "EnumerationUsage",
+      "name": "espresso",
+      "name_span": {
+        "col": 8,
+        "end": 2077,
+        "file":"<FILE>",
+        "line": 76,
+        "start": 2069
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2078,
+          "file":"<FILE>",
+          "line": 76,
+          "start": 2069
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "EnumerationUsage",
+      "name": "latte",
+      "name_span": {
+        "col": 8,
+        "end": 2131,
+        "file":"<FILE>",
+        "line": 79,
+        "start": 2126
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 2132,
+          "file":"<FILE>",
+          "line": 79,
+          "start": 2126
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ItemDefinition",
+      "name": "BrewedCoffee",
+      "name_span": {
+        "col": 13,
+        "end": 609,
+        "file":"<FILE>",
+        "line": 18,
+        "start": 597
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 610,
+          "file":"<FILE>",
+          "line": 18,
+          "start": 588
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ItemDefinition",
+      "name": "CoffeeBeans",
+      "name_span": {
+        "col": 13,
+        "end": 555,
+        "file":"<FILE>",
+        "line": 16,
+        "start": 544
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 556,
+          "file":"<FILE>",
+          "line": 16,
+          "start": 535
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ItemDefinition",
+      "name": "GroundCoffee",
+      "name_span": {
+        "col": 13,
+        "end": 582,
+        "file":"<FILE>",
+        "line": 17,
+        "start": 570
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 583,
+          "file":"<FILE>",
+          "line": 17,
+          "start": 561
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ItemDefinition",
+      "name": "Steam",
+      "name_span": {
+        "col": 13,
+        "end": 629,
+        "file":"<FILE>",
+        "line": 19,
+        "start": 624
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 630,
+          "file":"<FILE>",
+          "line": 19,
+          "start": 615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ItemDefinition",
+      "name": "Water",
+      "name_span": {
+        "col": 13,
+        "end": 529,
+        "file":"<FILE>",
+        "line": 15,
+        "start": 524
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 530,
+          "file":"<FILE>",
+          "line": 15,
+          "start": 515
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Package",
+      "name": "Definitions",
+      "name_span": {
+        "col": 8,
+        "end": 143,
+        "file":"<FILE>",
+        "line": 4,
+        "start": 132
+      },
+      "owner": null,
+      "spans": [
+        {
+          "col": 0,
+          "end": 2140,
+          "file":"<FILE>",
+          "line": 4,
+          "start": 124
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "Brewer",
+      "name_span": {
+        "col": 13,
+        "end": 1298,
+        "file":"<FILE>",
+        "line": 43,
+        "start": 1292
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1496,
+          "file":"<FILE>",
+          "line": 43,
+          "start": 1283
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "CoffeeMachine",
+      "name_span": {
+        "col": 13,
+        "end": 706,
+        "file":"<FILE>",
+        "line": 22,
+        "start": 693
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1082,
+          "file":"<FILE>",
+          "line": 22,
+          "start": 684
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "ControlPanel",
+      "name_span": {
+        "col": 13,
+        "end": 1765,
+        "file":"<FILE>",
+        "line": 61,
+        "start": 1753
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1855,
+          "file":"<FILE>",
+          "line": 61,
+          "start": 1744
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "CupSensor",
+      "name_span": {
+        "col": 13,
+        "end": 1879,
+        "file":"<FILE>",
+        "line": 66,
+        "start": 1870
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1928,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 1861
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "DripTray",
+      "name_span": {
+        "col": 13,
+        "end": 1951,
+        "file":"<FILE>",
+        "line": 70,
+        "start": 1943
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1995,
+          "file":"<FILE>",
+          "line": 70,
+          "start": 1934
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "Grinder",
+      "name_span": {
+        "col": 13,
+        "end": 1104,
+        "file":"<FILE>",
+        "line": 36,
+        "start": 1097
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1277,
+          "file":"<FILE>",
+          "line": 36,
+          "start": 1088
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "SteamWand",
+      "name_span": {
+        "col": 13,
+        "end": 1649,
+        "file":"<FILE>",
+        "line": 56,
+        "start": 1640
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1738,
+          "file":"<FILE>",
+          "line": 56,
+          "start": 1631
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "WaterTank",
+      "name_span": {
+        "col": 13,
+        "end": 1520,
+        "file":"<FILE>",
+        "line": 51,
+        "start": 1511
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 1625,
+          "file":"<FILE>",
+          "line": 51,
+          "start": 1502
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "brewer",
+      "name_span": {
+        "col": 13,
+        "end": 840,
+        "file":"<FILE>",
+        "line": 26,
+        "start": 834
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 850,
+          "file":"<FILE>",
+          "line": 26,
+          "start": 829
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "controlPanel",
+      "name_span": {
+        "col": 13,
+        "end": 948,
+        "file":"<FILE>",
+        "line": 29,
+        "start": 936
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 964,
+          "file":"<FILE>",
+          "line": 29,
+          "start": 931
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "cupSensor",
+      "name_span": {
+        "col": 13,
+        "end": 987,
+        "file":"<FILE>",
+        "line": 30,
+        "start": 978
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1000,
+          "file":"<FILE>",
+          "line": 30,
+          "start": 973
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "dripTray",
+      "name_span": {
+        "col": 13,
+        "end": 1022,
+        "file":"<FILE>",
+        "line": 31,
+        "start": 1014
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 1034,
+          "file":"<FILE>",
+          "line": 31,
+          "start": 1009
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "grinder",
+      "name_span": {
+        "col": 13,
+        "end": 809,
+        "file":"<FILE>",
+        "line": 25,
+        "start": 802
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 820,
+          "file":"<FILE>",
+          "line": 25,
+          "start": 797
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "steamWand",
+      "name_span": {
+        "col": 13,
+        "end": 909,
+        "file":"<FILE>",
+        "line": 28,
+        "start": 900
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 922,
+          "file":"<FILE>",
+          "line": 28,
+          "start": 895
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartUsage",
+      "name": "waterTank",
+      "name_span": {
+        "col": 13,
+        "end": 873,
+        "file":"<FILE>",
+        "line": 27,
+        "start": 864
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 886,
+          "file":"<FILE>",
+          "line": 27,
+          "start": 859
+        }
+      ]
+    }
+  ]
+}

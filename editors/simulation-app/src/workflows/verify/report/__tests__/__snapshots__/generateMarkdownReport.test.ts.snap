@@ -1,0 +1,66 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateMarkdownReport > whole-document snapshot (stable) 1`] = `
+"# Espresso Production Cell — Verification Report
+
+**Overall:** ⚠ Error  
+**Run:** 2026-04-19 14:07:32 UTC  
+**Duration:** 4.321 s  
+**Verdict counts:** 1 pass · 1 fail · 0 inconclusive · 2 error
+
+## Environment
+
+- **Backend:** sysml-runtime 0.3.1 (rev abc1234)
+- **Suite:** Espresso cell acceptance suite
+- **Sim dt:** 0.001 s
+- **Seeds:** 42, 1729
+
+## Provenance
+
+- **Evaluation:** —
+- **Model revision:** sha256:deadbeefcafe
+- **Workspace root:** /models/espresso-production-cell
+- **Files (2):**
+  - \`ProductQuality.sysml\` — \`sha256:aaaa1111\`
+  - \`ScenarioVerification.sysml\` — \`sha256:bbbb2222\`
+- **Session:** sess-001
+- **Archive:** arch-0042
+- **Origin:** user
+- **Sim dt:** 0.001 s
+- **Scenario:** nominal
+- **View:** Interconnection
+- **Started:** 2026-04-19T14:07:28.000Z
+- **Stopped:** 2026-04-19T14:07:32.000Z
+- **Cases:** Brew quality — station 1, Pressure safety
+- **Overrides:** ambient_c=40
+
+## Cases
+
+| Case | Verdict | Actual | Expected | Margin | Runtime |
+|---|---|---|---|---|---|
+| Brew quality — station 1 | ✗ Fail | 5.4 | 5 | 0.4 | 100 ms |
+| Pressure safety | ⚠ Error | — | — | — | 12 ms |
+| Demand binding | ⚠ Error | — | — | — | 1 ms |
+
+## Requirement detail
+
+### Brew quality — station 1 — ✗ Fail
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Group-head temperature within 90–96 °C | ✓ Pass | 92.4 |  | [Open in Run](/run?session=sess-001&tick=482&element=station1.groupHeadTemp) |
+| Station reaches Ready within 5 s | ✗ Fail | 5.4 | warm-up exceeded budget by 0.4 s | [Open in Run](/run?session=sess-001&tick=137&element=station1.readyTime) |
+
+### Pressure safety — ⚠ Error
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Manifold pressure stays ≤ 20 bar | ⚠ Error | — | solver failed to converge on the demand-surge scenario | _no evidence_ |
+
+### Demand binding — ⚠ Error
+
+| Requirement | Verdict | Actual | Reason | Evidence |
+|---|---|---|---|---|
+| Aggregate demand binding resolves | ⚠ Error | — |  | _no evidence_ |
+"
+`;

@@ -1,0 +1,143 @@
+name: Resolver Dependency CI
+
+on:
+  # The crate lives at crates/tooling/sysml-resolve. These filters previously
+  # said "sysml-resolve/**", which matches nothing, so the workflow never ran.
+  push:
+    paths:
+      - "crates/tooling/sysml-resolve/**"
+      - ".github/workflows/resolve-lock-fixtures.yml"
+  pull_request:
+    paths:
+      - "crates/tooling/sysml-resolve/**"
+      - ".github/workflows/resolve-lock-fixtures.yml"
+  workflow_dispatch:
+
+jobs:
+  lock-fixtures:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      # This job builds sysml-resolve, which pulls in the tree-sitter-sysml
+      # crate, whose cc build compiles src/parser.c. That file is GITIGNORED and
+      # generated, so without the steps below the job fails at
+      # `cc1: fatal error: src/parser.c: No such file or directory` — which is
+      # invisible to a local `cargo test`, where a previously generated
+      # parser.c is sitting in the working tree.
+      #
+      # The key expression below is duplicated LITERALLY from
+      # vscode-extension.yml so both workflows share one cache entry: whichever
+      # runs first pays the generation cost and the other gets a hit in seconds.
+      # Parity is load-bearing — edit both or neither. Both workflow paths are
+      # inside the hash list precisely so that a tree-sitter-cli bump in EITHER
+      # file busts the shared entry.
+      - name: Cache generated parser
+        id: parser-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            crates/lang/sysml-parser-incremental/tree-sitter/src/parser.c
+            crates/lang/sysml-parser-incremental/tree-sitter/src/grammar.json
+            crates/lang/sysml-parser-incremental/tree-sitter/src/node-types.json
+          # No restore-keys: a near-miss must regenerate, never approximate.
+          key: >-
+            ts-parser-${{ runner.os }}-${{ hashFiles(
+            'crates/lang/sysml-parser-incremental/tree-sitter/grammar.js',
+            'crates/lang/sysml-parser-incremental/tree-sitter/rules/**',
+            'crates/lang/sysml-parser-incremental/tree-sitter/helpers/**',
+            'crates/lang/sysml-parser-incremental/tree-sitter/generated/*.js',
+            'crates/lang/sysml-parser-incremental/tree-sitter/src/tree_sitter/**',
+            'crates/lang/sysml-parser-incremental/tree-sitter/tree-sitter.json',
+            'crates/lang/sysml-parser-incremental/tree-sitter/package.json',
+            'crates/lang/sysml-parser-incremental/tree-sitter/generate_from_xtext.sh',
+            'tools/fetch-references/manifest.toml',
+            '.github/workflows/vscode-extension.yml',
+            '.github/workflows/resolve-lock-fixtures.yml') }}
+
+      # Deliberately the SAME key as vscode-extension.yml's build-server job:
+      # identical item set into identical paths, so the two share one entry on
+      # Linux/X64 and whichever runs first warms the other. Safe for the reason
+      # that makes all of these safe: fetch.sh runs after the restore and
+      # verifies every item
+      # against its manifest checksum, so a stale or corrupted entry is
+      # re-fetched rather than used. Paths are the manifest destinations, not
+      # references/sysmlv2 wholesale, so a restore cannot overwrite the
+      # git-tracked derived/ and spec-drop.toml beside them.
+      - name: Cache fetched references
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            references/sysmlv2/SysML-v2-Pilot-Implementation
+            references/sysmlv2/SysML-v2-API-Services
+            references/sysmlv2/Kerml-Vocab.ttl
+            references/sysmlv2/SysML-vocab.ttl
+            references/sysmlv2/KerML-shapes.ttl
+            references/sysmlv2/SysML-shapes.ttl
+            references/sysmlv2/KerML/20250201/KerML.xmi
+            references/sysmlv2/SysML/20250201/SysML.xmi
+          key: refs-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/fetch-references/manifest.toml') }}
+          restore-keys: |
+            refs-build-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Fetch build-required pinned references
+        # sysml-resolve depends on sysml-core, whose build script panics
+        # without the vocabulary TTLs and also reads the shapes, the
+        # API-Services metamodel schemas and both XMI files. references/ is not
+        # vendored, so without this step the job cannot compile at all. Same
+        # item set as vscode-extension.yml's build-server job, for the same
+        # reason — this is a build prerequisite, not a test fixture.
+        #
+        # standard-library is deliberately absent: neither fixture runner
+        # resolves stdlib types.
+        #
+        # This pulls the 112 MB pilot tree for what is mostly three grammar
+        # files. The planned remedy is a grammar-subset manifest item
+        # path-level fetching.
+        run: |
+          tools/fetch-references/fetch.sh fetch \
+            --item pilot-implementation \
+            --item api-services \
+            --item kerml-vocab --item sysml-vocab \
+            --item kerml-shapes --item sysml-shapes \
+            --item kerml-xmi --item sysml-xmi
+
+      # Generation runs only on a parser-cache miss. It needs no fetch of its
+      # own: the Xtext grammars arrive inside pilot-implementation, which the
+      # step above already pulls because sysml-core's build script needs it.
+      #
+      # These must precede the cargo steps — the tree-sitter-sysml build script
+      # compiles src/parser.c, so the file has to exist before anything cargo
+      # does, not merely before the tests run.
+      - name: Set up Node
+        if: steps.parser-cache.outputs.cache-hit != 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+
+      - name: Generate tree-sitter constants from Xtext
+        if: steps.parser-cache.outputs.cache-hit != 'true'
+        working-directory: crates/lang/sysml-parser-incremental/tree-sitter
+        env:
+          SYSML_REFS_DIR: ${{ github.workspace }}/references/sysmlv2
+        run: ./generate_from_xtext.sh
+
+      - name: Generate tree-sitter parser (C)
+        if: steps.parser-cache.outputs.cache-hit != 'true'
+        working-directory: crates/lang/sysml-parser-incremental/tree-sitter
+        run: |
+          npm install -g tree-sitter-cli@0.26.5
+          tree-sitter generate --abi 14
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+
+      - name: Cache Rust artifacts
+        uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+
+      - name: Run resolver lock fixture tests
+        run: cargo test -p sysml-resolve --test lock_fixture_runner
+
+      - name: Run resolver git integration tests
+        run: cargo test -p sysml-resolve --test git_resolution

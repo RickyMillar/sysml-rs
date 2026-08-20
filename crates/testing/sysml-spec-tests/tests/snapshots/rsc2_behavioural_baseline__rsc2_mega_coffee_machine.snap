@@ -1,0 +1,169 @@
+---
+source: crates/testing/sysml-spec-tests/tests/rsc2_behavioural_baseline.rs
+expression: report
+---
+RSC-2.B0 parity baseline :: sim-mega-coffee-machine
+subsystems (2):
+  Boiler
+  BoilerController
+== tick 1 ==
+clock: tick=1 time_ms=10.0
+subsystem-state: Boiler :: kind=ode state=0.0000 completed=false
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+ode-state: temperature = 1.9999990000003335e-5
+derivatives-keys: [temperature]
+constraint: brewQuality verdict=fail
+constraint: pressureOk verdict=pass
+constraint: safeTemp verdict=pass
+constraint: tempSafe verdict=pass
+constraint: timeSufficient verdict=pass
+variables-key-count: 63
+var-key: Boiler
+var-key: Boiler.temperature
+var-key: BoilerController
+var-key: BrewAction
+var-key: BrewCycle
+var-key: Brewer
+var-key: FillWaterAction
+var-key: GrindBeansAction
+var-key: MegaCoffeeMachine
+var-key: QualityModel
+var-key: TemperatureDerivative
+var-key: WaterPort
+var-key: WaterTank
+var-key: __active_substates
+var-key: __clock_time
+var-key: __recent_transitions
+var-key: ambientTemp
+var-key: boiler
+var-key: brew
+var-key: brewDuration
+var-key: brewQuality
+var-key: brewTime
+var-key: brewer
+var-key: capacity
+var-key: coffee
+var-key: controller
+var-key: fillWater
+var-key: flowRate
+var-key: grindBeans
+var-key: grounds
+var-key: heaterPower
+var-key: heating
+var-key: heating_to_off
+var-key: heating_to_ready
+var-key: lossCoefficient
+var-key: machine
+var-key: off
+var-key: off_to_heating
+var-key: overtemp
+var-key: overtemp_to_heating
+var-key: prepFork
+var-key: prepJoin
+var-key: pressure
+var-key: pressureOk
+var-key: quality
+var-key: ready
+var-key: ready_to_overtemp
+var-key: safeTemp
+var-key: t_ms
+var-key: tank
+var-key: tempSafe
+var-key: temperature
+var-key: thermalMass
+var-key: tick
+var-key: timeSufficient
+var-key: toolName
+var-key: water
+var-key: waterFlow
+var-key: waterIn
+var-key: waterOut
+var-key: x
+var-key: y
+var-key: ~WaterPort
+== tick 10 ==
+clock: tick=10 time_ms=100.0
+subsystem-state: Boiler :: kind=ode state=0.0002 completed=false
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+ode-state: temperature = 0.00019999900000333332
+derivatives-keys: [temperature]
+constraint: brewQuality verdict=fail
+constraint: pressureOk verdict=pass
+constraint: safeTemp verdict=pass
+constraint: tempSafe verdict=pass
+constraint: timeSufficient verdict=pass
+== tick 100 ==
+clock: tick=100 time_ms=1000.0
+subsystem-state: Boiler :: kind=ode state=0.0020 completed=false
+subsystem-state: BoilerController :: kind=stateMachine state=off completed=false
+ode-state: temperature = 0.0019999000033332505
+derivatives-keys: [temperature]
+constraint: brewQuality verdict=fail
+constraint: pressureOk verdict=pass
+constraint: safeTemp verdict=pass
+constraint: tempSafe verdict=pass
+constraint: timeSufficient verdict=pass
+variables-key-count: 63
+var-key: Boiler
+var-key: Boiler.temperature
+var-key: BoilerController
+var-key: BrewAction
+var-key: BrewCycle
+var-key: Brewer
+var-key: FillWaterAction
+var-key: GrindBeansAction
+var-key: MegaCoffeeMachine
+var-key: QualityModel
+var-key: TemperatureDerivative
+var-key: WaterPort
+var-key: WaterTank
+var-key: __active_substates
+var-key: __clock_time
+var-key: __recent_transitions
+var-key: ambientTemp
+var-key: boiler
+var-key: brew
+var-key: brewDuration
+var-key: brewQuality
+var-key: brewTime
+var-key: brewer
+var-key: capacity
+var-key: coffee
+var-key: controller
+var-key: fillWater
+var-key: flowRate
+var-key: grindBeans
+var-key: grounds
+var-key: heaterPower
+var-key: heating
+var-key: heating_to_off
+var-key: heating_to_ready
+var-key: lossCoefficient
+var-key: machine
+var-key: off
+var-key: off_to_heating
+var-key: overtemp
+var-key: overtemp_to_heating
+var-key: prepFork
+var-key: prepJoin
+var-key: pressure
+var-key: pressureOk
+var-key: quality
+var-key: ready
+var-key: ready_to_overtemp
+var-key: safeTemp
+var-key: t_ms
+var-key: tank
+var-key: tempSafe
+var-key: temperature
+var-key: thermalMass
+var-key: tick
+var-key: timeSufficient
+var-key: toolName
+var-key: water
+var-key: waterFlow
+var-key: waterIn
+var-key: waterOut
+var-key: x
+var-key: y
+var-key: ~WaterPort

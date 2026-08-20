@@ -1,0 +1,90 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "code": "S001",
+      "message": "'multiplicity': duplicate definition 'multiplicity' is already defined in this scope",
+      "notes": [],
+      "related": [
+        {
+          "message": "'multiplicity' first defined here",
+          "span": {
+            "col": 1,
+            "end": 1774,
+            "file":"<FILE>",
+            "line": 66,
+            "start": 1762
+          }
+        }
+      ],
+      "severity": "warning",
+      "span": {
+        "col": 1,
+        "end": 1910,
+        "file":"<FILE>",
+        "line": 73,
+        "start": 1898
+      },
+      "tier": "StructuralLocal"
+    },
+    {
+      "code": "S001",
+      "message": "'multiplicity': duplicate definition 'multiplicity' is already defined in this scope",
+      "notes": [],
+      "related": [
+        {
+          "message": "'multiplicity' first defined here",
+          "span": {
+            "col": 1,
+            "end": 1774,
+            "file":"<FILE>",
+            "line": 66,
+            "start": 1762
+          }
+        }
+      ],
+      "severity": "warning",
+      "span": {
+        "col": 1,
+        "end": 2046,
+        "file":"<FILE>",
+        "line": 80,
+        "start": 2034
+      },
+      "tier": "StructuralLocal"
+    },
+    {
+      "code": "S001",
+      "message": "'multiplicity': duplicate definition 'multiplicity' is already defined in this scope",
+      "notes": [],
+      "related": [
+        {
+          "message": "'multiplicity' first defined here",
+          "span": {
+            "col": 1,
+            "end": 1774,
+            "file":"<FILE>",
+            "line": 66,
+            "start": 1762
+          }
+        }
+      ],
+      "severity": "warning",
+      "span": {
+        "col": 1,
+        "end": 2181,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 2169
+      },
+      "tier": "StructuralLocal"
+    }
+  ]
+}

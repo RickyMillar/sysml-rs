@@ -1,0 +1,8 @@
+[project]
+name = "espresso-production-cell"
+version = "1.0.0"
+description = "Large deterministic synthetic replacement fixture (D8/D9): a coffee-production cell of N reusable brew stations sharing a hydraulic plant and a multi-zone thermal source. Exercises multi-file load, repeated-instance multiplication, coupled physics, link classification, supervisor coordination, requirements/verification, and performance at parameterized scale."
+license = "MIT"
+
+[package]
+iri = "urn:espresso:production-cell"

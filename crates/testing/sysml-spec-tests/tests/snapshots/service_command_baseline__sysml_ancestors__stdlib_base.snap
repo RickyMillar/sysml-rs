@@ -1,0 +1,38 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "LibraryPackage",
+      "name": "Base",
+      "name_span": {
+        "col": 25,
+        "end": 29,
+        "file":"<FILE>",
+        "line": 1,
+        "start": 25
+      },
+      "owner": null,
+      "props": {
+        "isStandard": true
+      },
+      "spans": [
+        {
+          "col": 0,
+          "end": 2338,
+          "file":"<FILE>",
+          "line": 1,
+          "start": 0
+        }
+      ]
+    }
+  ]
+}

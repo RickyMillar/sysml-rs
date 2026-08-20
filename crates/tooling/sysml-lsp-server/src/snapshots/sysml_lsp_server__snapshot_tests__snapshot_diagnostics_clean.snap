@@ -1,0 +1,5 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+(no diagnostics)

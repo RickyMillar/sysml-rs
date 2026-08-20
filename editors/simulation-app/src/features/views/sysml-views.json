@@ -1,0 +1,82 @@
+{
+  "View def — General projection": {
+    "prefix": ["gview", "view-general"],
+    "body": [
+      "view def ${1:Name} :> General {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `General` (generic projection — tables, lists, ad-hoc layouts). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — Interconnection (IBD)": {
+    "prefix": ["iview", "view-interconnection"],
+    "body": [
+      "view def ${1:Name} :> Interconnection {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `Interconnection` (parts and the connections between them). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — ActionFlow": {
+    "prefix": ["aview", "view-actionflow"],
+    "body": [
+      "view def ${1:Name} :> ActionFlow {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `ActionFlow` (actions, their flow, decision/merge nodes). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — StateTransition": {
+    "prefix": ["sview", "view-state"],
+    "body": [
+      "view def ${1:Name} :> StateTransition {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `StateTransition` (states and the transitions between them). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — Sequence": {
+    "prefix": ["seqview", "view-sequence"],
+    "body": [
+      "view def ${1:Name} :> Sequence {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `Sequence` (time-ordered message exchange between participants). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — UseCase": {
+    "prefix": ["ucview", "view-usecase"],
+    "body": [
+      "view def ${1:Name} :> UseCase {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `UseCase` (actors, use cases, and their relationships). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — Browser": {
+    "prefix": ["brview", "view-browser"],
+    "body": [
+      "view def ${1:Name} :> Browser {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `Browser` (model-tree projection — containment hierarchy). One of the 8 standard supertypes documented in book ch13."
+  },
+  "View def — Requirement": {
+    "prefix": ["reqview", "view-requirement"],
+    "body": [
+      "view def ${1:Name} :> Requirement {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `Requirement` (requirements with satisfaction and verification links). One of the 8 standard supertypes documented in book ch13."
+  }
+}

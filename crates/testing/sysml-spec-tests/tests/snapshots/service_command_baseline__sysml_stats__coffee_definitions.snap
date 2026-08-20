@@ -1,0 +1,31 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+  },
+  "response": {
+    "elements_by_kind": {
+      "AttributeDefinition": 4,
+      "AttributeUsage": 14,
+      "Documentation": 3,
+      "EnumerationDefinition": 1,
+      "EnumerationUsage": 4,
+      "FeatureTyping": 25,
+      "ItemDefinition": 5,
+      "NamespaceImport": 2,
+      "OwningMembership": 73,
+      "Package": 1,
+      "PartDefinition": 8,
+      "PartUsage": 7,
+      "Subclassification": 4,
+      "VariantMembership": 4
+    },
+    "relationships_by_kind": {},
+    "total_elements": 155,
+    "total_relationships": 0
+  }
+}

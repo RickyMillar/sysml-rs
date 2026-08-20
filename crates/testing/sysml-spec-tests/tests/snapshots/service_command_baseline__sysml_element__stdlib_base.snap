@@ -1,0 +1,37 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": {
+    "id": "<UUID>",
+    "kind": "Classifier",
+    "name": "Anything",
+    "name_span": {
+      "col": 21,
+      "end": 210,
+      "file":"<FILE>",
+      "line": 8,
+      "start": 202
+    },
+    "owner": "<UUID>",
+    "owning_membership": "<UUID>",
+    "props": {
+      "isAbstract": true
+    },
+    "spans": [
+      {
+        "col": 1,
+        "end": 615,
+        "file":"<FILE>",
+        "line": 8,
+        "start": 182
+      }
+    ]
+  }
+}

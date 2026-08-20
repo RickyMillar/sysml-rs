@@ -1,0 +1,89 @@
+name: License Policy
+
+# OSL-12 — automated license-policy enforcement.
+#
+# Config:   deny.toml, scripts/license-policy-check.sh
+#
+# This lives in its own workflow rather than as a job inside an existing one
+# because it is the only repository-WIDE gate here: every other workflow is
+# scoped to a subsystem (the VS Code extension, the simulation app, the
+# resolver, pilot conformance) and several run on expensive WarpBuild runners.
+# A license regression can arrive through any Cargo.toml or package.json in the
+# tree, so the gate must not inherit another workflow's path filter — and at
+# ~1 minute on a free GitHub runner it must not inherit their cost either.
+#
+# It deliberately does NOT run `cargo deny check advisories` or `bans`.
+# Vulnerability triage is separate work with a different review cadence and a
+# different failure mode; see the comments in deny.toml.
+
+on:
+  pull_request:
+    # No path filter: a new dependency can enter through any manifest, and a
+    # gate that fails closed cannot be allowed to skip itself.
+    branches: [main]
+  push:
+    paths:
+      - '**/Cargo.toml'
+      - 'Cargo.lock'
+      - '**/package.json'
+      - '**/package-lock.json'
+      - '**/pyproject.toml'
+      - '**/tree-sitter.json'
+      - 'deny.toml'
+      - 'LICENSE-MIT'
+      - 'LICENSE-APACHE'
+      - 'scripts/license-policy-check.sh'
+      - '.github/workflows/license-policy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  license-policy:
+    name: cargo-deny + declaration invariants
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # references/** is stripped from the public tree (OS0 decision 4) and is
+        # pruned by the invariant script regardless, so no LFS or reference
+        # fetch is needed here.
+
+      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+
+      - name: Install cargo-deny
+        uses: taiki-e/install-action@5b4d68e2e660441203ab128a23676f1e4faf1532 # v2
+        with:
+          tool: cargo-deny
+
+      # Both the invariant script and the NOTICE scan run `cargo metadata
+      # --offline` and inspect each dependency's unpacked source directory.
+      # This step is what puts those directories on disk: reading a registry
+      # crate's manifest forces Cargo to unpack the whole .crate, which is
+      # exactly the state the NOTICE scan needs. Without it the script exits 2
+      # ("cannot run") rather than passing vacuously.
+      - name: Hydrate the dependency graph
+        run: cargo metadata --format-version 1 --locked > /dev/null
+
+      # Inbound licenses: every third-party crate must resolve to a license on
+      # the reviewed allow-list, or to one of the crate-scoped exceptions that
+      # cite a decision-register entry. Fails closed on anything unknown.
+      #
+      # `sources` and `bans` ride along because both are licensing assertions
+      # in this configuration: an unreviewed git or alternate-registry
+      # dependency carries an unreviewed license by construction, and a
+      # wildcard version requirement means the license you audited is not
+      # necessarily the one you resolve tomorrow. `advisories` is NOT run —
+      # see deny.toml for why that stays out of this gate.
+      - name: cargo-deny (licenses + sources + bans)
+        run: cargo deny --offline check licenses sources bans
+
+      # Outbound declarations plus the two invariants the policy rests on.
+      # Covers the pyproject.toml and tree-sitter.json declaration sites, which
+      # neither cargo nor npm tooling can see (inventory §3.1).
+      - name: License declaration invariants
+        run: ./scripts/license-policy-check.sh

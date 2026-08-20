@@ -1,0 +1,318 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "max_depth": 3,
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+    "view": "user_facing"
+  },
+  "response": [
+    {
+      "archetype": "other",
+      "children": [
+        {
+          "archetype": "part",
+          "children": [
+            {
+              "archetype": "action",
+              "children": [
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "is_ode": true,
+                  "kind": "CalculationDefinition",
+                  "name": "AccumulatorDerivative",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "is_ode": true,
+                  "kind": "CalculationDefinition",
+                  "name": "ChamberDerivative",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "is_ode": true,
+                  "kind": "CalculationDefinition",
+                  "name": "ExposureDerivative",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "is_ode": true,
+                  "kind": "CalculationDefinition",
+                  "name": "StrokeDerivative",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "is_ode": true,
+                  "kind": "CalculationDefinition",
+                  "name": "VelocityDerivative",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "CalculationDefinition",
+                  "name": "AreaOutput",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "CalculationDefinition",
+                  "name": "CommandOutput",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "calc",
+                  "children": [
+                    {
+                      "archetype": "other",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "Comment",
+                      "name": "... (2 children)"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "CalculationDefinition",
+                  "name": "OrificeOutput",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ActionDefinition",
+              "name": "PumpFieldDynamics",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "accumulatorGain",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "accumulatorPressure",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "chamberGain",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "chamberPressure",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "dischargeCoeff",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "dpRef",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "epsRoot",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "exposure",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "exposureTrip",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "leakCoeff",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "omega",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "pWarning",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "pistonArea",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "restrictionConductance",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "stroke",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "velocity",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+              "unit": "Real"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "PartDefinition",
+          "name": "ReciprocatingPump",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+        }
+      ],
+      "id": "<UUID>",
+      "kind": "Package",
+      "name": "PumpDynamics",
+      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+    }
+  ]
+}

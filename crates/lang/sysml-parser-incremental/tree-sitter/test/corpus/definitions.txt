@@ -1,0 +1,376 @@
+============================
+part-definition-minimal
+============================
+
+part def Engine;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+============================
+part-definition-with-body
+============================
+
+part def Engine {
+  attribute power : Real;
+}
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (definition_body
+      (standard_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+================================
+part-definition-abstract
+================================
+
+abstract part def Vehicle;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+part-definition-with-supertype
+================================
+
+part def Car :> Vehicle;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (supertype_list
+      (type_ref
+        (feature_chain
+          (identifier))))))
+
+================================
+attribute-definition
+================================
+
+attribute def mass :> ISQ::mass;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (supertype_list
+      (type_ref
+        (qualified_name
+          (identifier)
+          (identifier))))))
+
+================================
+action-definition-with-body
+================================
+
+action def Drive {
+  action accelerate;
+  action brake;
+}
+
+---
+
+(source_file
+  (action_def
+    name: (identifier)
+    (action_body
+      (action_usage
+        name: (identifier))
+      (action_usage
+        name: (identifier)))))
+
+================================
+state-definition-with-states
+================================
+
+state def OnOff {
+  state on;
+  state off;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (state_usage
+        name: (identifier))
+      (state_usage
+        name: (identifier)))))
+
+================================
+port-definition
+================================
+
+port def DataPort;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+connection-definition
+================================
+
+connection def Link;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+interface-definition
+================================
+
+interface def USB;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+item-definition
+================================
+
+item def Payload;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+requirement-definition
+================================
+
+requirement def SafetyReq;
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)))
+
+================================
+constraint-definition
+================================
+
+constraint def Positive;
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)))
+
+================================
+enum-definition-with-members
+================================
+
+enum def Color {
+  enum red;
+  enum green;
+  enum blue;
+}
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    (enum_body
+      (enum_member
+        name: (identifier))
+      (enum_member
+        name: (identifier))
+      (enum_member
+        name: (identifier)))))
+
+================================
+calc-definition-with-result
+================================
+
+calc def Area {
+  in width : Real;
+  in height : Real;
+  return area : Real;
+  width * height
+}
+
+---
+
+(source_file
+  (calc_def
+    name: (identifier)
+    (calc_body
+      (feature_declaration
+        (usage_prefix)
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (feature_declaration
+        (usage_prefix)
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (return_feature
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (result_expression
+        (multiplicative_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+occurrence-definition
+================================
+
+occurrence def Event;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+allocation-definition
+================================
+
+allocation def Mapping;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+flow-definition
+================================
+
+flow def DataFlow;
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)))
+
+================================
+definition-with-short-name
+================================
+
+part def <'P1'> Pump;
+
+---
+
+(source_file
+  (standard_def
+    (short_name
+      (quoted_name))
+    name: (identifier)))
+
+================================
+definition-with-visibility
+================================
+
+private part def InternalPart;
+
+---
+
+(source_file
+  (standard_def
+    (visibility_indicator)
+    name: (identifier)))
+
+================================
+definition-with-doc-comment
+================================
+
+part def Documented {
+  doc /* This is a documented part */
+}
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (definition_body
+      (doc_comment
+        (doc_string)))))
+
+================================
+calc-definition-keyword-field
+================================
+
+calc def MyCalc { }
+
+---
+
+(source_file
+  (calc_def
+    name: (identifier)
+    (calc_body)))
+
+================================
+viewpoint-definition-keyword-field
+================================
+
+viewpoint def Safety { }
+
+---
+
+(source_file
+  (viewpoint_def
+    name: (identifier)
+    (requirement_body)))
+
+================================
+analysis-definition-keyword-field
+================================
+
+analysis def TradeStudy;
+
+---
+
+(source_file
+  (definition
+    name: (identifier)))

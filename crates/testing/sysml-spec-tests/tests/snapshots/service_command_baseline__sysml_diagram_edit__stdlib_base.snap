@@ -1,0 +1,40 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "request": {
+      "action": "create",
+      "containerId": null,
+      "elementTypeId": "PartDefinition",
+      "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+    }
+  },
+  "response": {
+    "action": "create",
+    "status_message": "Created PartDefinition in <WS>/libraries/standard/library.kernel/Base.kerml",
+    "status_payload": {
+      "elementType": "PartDefinition",
+      "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+    },
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml",
+    "workspace_edit": {
+      "changes": [
+        {
+          "edits": [
+            {
+              "col_end": 0,
+              "col_start": 0,
+              "line_end": 94,
+              "line_start": 94,
+              "new_text": "    part def NewPart {\n    }\n\n"
+            }
+          ],
+          "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SysML Project Meta",
+  "description": "Schema for .meta.json files containing project metadata.",
+  "type": "object",
+  "required": ["index"],
+  "properties": {
+    "index": {
+      "type": "object",
+      "description": "Mapping of element qualified names to file paths.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "string",
+      "description": "Creation timestamp.",
+      "format": "date-time"
+    },
+    "metamodel": {
+      "type": "string",
+      "description": "URI of the metamodel version.",
+      "format": "uri"
+    },
+    "checksum": {
+      "type": "object",
+      "description": "File checksums.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The checksum value."
+          },
+          "algorithm": {
+            "type": "string",
+            "description": "The hash algorithm used."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,87 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 764
+expression: rendered
+---
+[E200] error @ "BrewedCoffee"
+  no definition 'BrewedCoffee' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "BrewerWithPorts"
+  no definition 'BrewerWithPorts' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeMachine"
+  no definition 'CoffeeMachine' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeOutPort"
+  no definition 'CoffeeOutPort' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Steam"
+  no definition 'Steam' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "SteamPort"
+  no definition 'SteamPort' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Water"
+  no definition 'Water' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "~WaterPort"
+  no definition 'WaterPort' found in scope of conjugated port typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterPort"
+  no definition 'WaterPort' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterTankWithPorts"
+  no definition 'WaterTankWithPorts' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "waterIn"
+  no definition 'waterIn' found in scope of redefinition
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "waterOut"
+  no definition 'waterOut' found in scope of redefinition
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM006] error @ "import Ports::*;"
+  import references unknown standard library namespace 'Ports'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[FL007] warning @ "flow waterToBrewer : WaterFlow\n            from waterTan..."
+  flow 'waterToBrewer' endpoint 'waterTank.waterOut' does not resolve to a known part or port
+  note: for dot-path endpoints like `tank.waterOut`, ensure part `tank` exists and contains port/feature `waterOut`
+  note: check spelling and that the referenced part is visible in this scope
+[FL001] info @ "flow coffeeOutput : CoffeeFlow;"
+  flow 'coffeeOutput' has no explicit source endpoint
+  note: this flow is typed by a definition that may provide endpoints
+  note: to make endpoints explicit, add `from <port>`
+[FL001] info @ "succession flow waterThenCoffee\n            from waterTo..."
+  flow 'waterThenCoffee' has no explicit source endpoint
+  note: succession flows order other flows and may not need explicit endpoints
+  note: to make endpoints explicit, add `from <port>`
+[FL002] info @ "flow coffeeOutput : CoffeeFlow;"
+  flow 'coffeeOutput' has no explicit target endpoint
+  note: this flow is typed by a definition that may provide endpoints
+  note: to make endpoints explicit, add `to <port>`
+[FL002] info @ "succession flow waterThenCoffee\n            from waterTo..."
+  flow 'waterThenCoffee' has no explicit target endpoint
+  note: succession flows order other flows and may not need explicit endpoints
+  note: to make endpoints explicit, add `to <port>`
+[FL006] info @ "succession flow waterThenCoffee\n            from waterTo..."
+  flow 'waterThenCoffee' is a succession flow — delivery blocked until source completes
+  note: succession flows enforce ordering between actions
+  note: if ordering is not intended, use `flow` instead of `succession flow`
+[FL008] info @ "flow waterToBrewer : WaterFlow\n            from waterTan..."
+  flow 'waterToBrewer' has payload type 'WaterFlow' but endpoints lack matching feature type
+  note: you can add a type annotation to the endpoint ports to match
+  note: example: `port outPort : WaterFlow;`
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed

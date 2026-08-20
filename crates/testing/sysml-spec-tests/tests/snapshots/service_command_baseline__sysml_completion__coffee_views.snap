@@ -1,0 +1,636 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "col": 4,
+    "ctx_in_comment_or_string": false,
+    "ctx_in_feature_chain": false,
+    "ctx_in_import": false,
+    "ctx_in_type_ref": false,
+    "line": 109,
+    "trigger": null,
+    "uri": "<PATH>"
+  },
+  "response": [
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "Package",
+      "insert_text_is_snippet": false,
+      "kind": 9,
+      "label": "Views",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "SafetyEngineer",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "SystemArchitect",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "TestEngineer",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "architect",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "reviewer",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "PartUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "tester",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "RenderingDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "StandardInterconnection",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "RenderingDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "TraceabilityTable",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "BrewSequenceView",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "SafetyReviewView",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "StructuralOverviewView",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "VerificationDashboardView",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "brewSequence",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "safetyReview",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "scratch",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "structuralOverview",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewUsage",
+      "insert_text_is_snippet": false,
+      "kind": 5,
+      "label": "verificationDashboard",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewpointDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "SafetyComplianceViewpoint",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewpointDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "StructuralCompletenessViewpoint",
+      "preselect": false
+    },
+    {
+      "data_document_uri": "<PATH>",
+      "data_element_id": "<UUID>",
+      "detail": "ViewpointDefinition",
+      "insert_text_is_snippet": false,
+      "kind": 7,
+      "label": "VerificationCoverageViewpoint",
+      "preselect": false
+    },
+    {
+      "detail": "Abstract modifier",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "abstract",
+      "preselect": false
+    },
+    {
+      "detail": "Accept action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "accept",
+      "preselect": false
+    },
+    {
+      "detail": "Action definition (snippet)",
+      "insert_text": "action def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "action def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Action definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "action def",
+      "preselect": false
+    },
+    {
+      "detail": "Action usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "action",
+      "preselect": false
+    },
+    {
+      "detail": "Alias declaration",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "alias",
+      "preselect": false
+    },
+    {
+      "detail": "Allocation definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "allocation def",
+      "preselect": false
+    },
+    {
+      "detail": "Allocation usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "allocation",
+      "preselect": false
+    },
+    {
+      "detail": "Attribute definition (snippet)",
+      "insert_text": "attribute def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "attribute def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Attribute definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "attribute def",
+      "preselect": false
+    },
+    {
+      "detail": "Attribute usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "attribute",
+      "preselect": false
+    },
+    {
+      "detail": "Connection definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "connection def",
+      "preselect": false
+    },
+    {
+      "detail": "Connection usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "connection",
+      "preselect": false
+    },
+    {
+      "detail": "Constraint definition (snippet)",
+      "insert_text": "constraint def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "constraint def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Constraint definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "constraint def",
+      "preselect": false
+    },
+    {
+      "detail": "Constraint usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "constraint",
+      "preselect": false
+    },
+    {
+      "detail": "Derived modifier",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "derived",
+      "preselect": false
+    },
+    {
+      "detail": "Do action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "do",
+      "preselect": false
+    },
+    {
+      "detail": "Else clause",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "else",
+      "preselect": false
+    },
+    {
+      "detail": "End modifier",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "end",
+      "preselect": false
+    },
+    {
+      "detail": "Entry action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "entry",
+      "preselect": false
+    },
+    {
+      "detail": "Exit action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "exit",
+      "preselect": false
+    },
+    {
+      "detail": "For action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "for",
+      "preselect": false
+    },
+    {
+      "detail": "If action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "if",
+      "preselect": false
+    },
+    {
+      "detail": "Import declaration",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "import",
+      "preselect": false
+    },
+    {
+      "detail": "Input feature",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "in",
+      "preselect": false
+    },
+    {
+      "detail": "Input/output feature",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "inout",
+      "preselect": false
+    },
+    {
+      "detail": "Interface definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "interface def",
+      "preselect": false
+    },
+    {
+      "detail": "Interface usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "interface",
+      "preselect": false
+    },
+    {
+      "detail": "Item definition (snippet)",
+      "insert_text": "item def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "item def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Item definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "item def",
+      "preselect": false
+    },
+    {
+      "detail": "Item usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "item",
+      "preselect": false
+    },
+    {
+      "detail": "Output feature",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "out",
+      "preselect": false
+    },
+    {
+      "detail": "Package (snippet)",
+      "insert_text": "package ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "package { }",
+      "preselect": false
+    },
+    {
+      "detail": "Package declaration",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "package",
+      "preselect": false
+    },
+    {
+      "detail": "Part definition (snippet)",
+      "insert_text": "part def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "part def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Part definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "part def",
+      "preselect": false
+    },
+    {
+      "detail": "Part usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "part",
+      "preselect": false
+    },
+    {
+      "detail": "Port definition (snippet)",
+      "insert_text": "port def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "port def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Port definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "port def",
+      "preselect": false
+    },
+    {
+      "detail": "Port usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "port",
+      "preselect": false
+    },
+    {
+      "detail": "Private visibility",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "private",
+      "preselect": false
+    },
+    {
+      "detail": "Protected visibility",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "protected",
+      "preselect": false
+    },
+    {
+      "detail": "Public visibility",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "public",
+      "preselect": false
+    },
+    {
+      "detail": "Readonly modifier",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "readonly",
+      "preselect": false
+    },
+    {
+      "detail": "Redefines relationship",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "redefines",
+      "preselect": false
+    },
+    {
+      "detail": "Reference usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "ref",
+      "preselect": false
+    },
+    {
+      "detail": "Requirement definition (snippet)",
+      "insert_text": "requirement def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "requirement def { }",
+      "preselect": false
+    },
+    {
+      "detail": "Requirement definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "requirement def",
+      "preselect": false
+    },
+    {
+      "detail": "Requirement usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "requirement",
+      "preselect": false
+    },
+    {
+      "detail": "Return action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "return",
+      "preselect": false
+    },
+    {
+      "detail": "Send action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "send",
+      "preselect": false
+    },
+    {
+      "detail": "Specializes relationship",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "specializes",
+      "preselect": false
+    },
+    {
+      "detail": "State definition (snippet)",
+      "insert_text": "state def ${1:Name} {\n\t$0\n}",
+      "insert_text_is_snippet": true,
+      "kind": 15,
+      "label": "state def { }",
+      "preselect": false
+    },
+    {
+      "detail": "State definition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "state def",
+      "preselect": false
+    },
+    {
+      "detail": "State usage",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "state",
+      "preselect": false
+    },
+    {
+      "detail": "Subsets relationship",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "subsets",
+      "preselect": false
+    },
+    {
+      "detail": "Then clause",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "then",
+      "preselect": false
+    },
+    {
+      "detail": "Transition",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "transition",
+      "preselect": false
+    },
+    {
+      "detail": "While action",
+      "insert_text_is_snippet": false,
+      "kind": 14,
+      "label": "while",
+      "preselect": false
+    }
+  ]
+}

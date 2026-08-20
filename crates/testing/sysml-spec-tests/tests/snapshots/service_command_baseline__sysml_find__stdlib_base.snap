@@ -1,0 +1,460 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "kind": null,
+    "pattern": "",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "Classifier",
+      "name": "Anything",
+      "name_span": {
+        "col": 21,
+        "end": 210,
+        "file":"<FILE>",
+        "line": 8,
+        "start": 202
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isAbstract": true
+      },
+      "spans": [
+        {
+          "col": 1,
+          "end": 615,
+          "file":"<FILE>",
+          "line": 8,
+          "start": 182
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "DataType",
+      "name": "DataValue",
+      "name_span": {
+        "col": 19,
+        "end": 646,
+        "file":"<FILE>",
+        "line": 24,
+        "start": 637
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isAbstract": true
+      },
+      "spans": [
+        {
+          "col": 1,
+          "end": 849,
+          "file":"<FILE>",
+          "line": 24,
+          "start": 619
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LibraryPackage",
+      "name": "Base",
+      "name_span": {
+        "col": 25,
+        "end": 29,
+        "file":"<FILE>",
+        "line": 1,
+        "start": 25
+      },
+      "owner": null,
+      "props": {
+        "isStandard": true
+      },
+      "spans": [
+        {
+          "col": 0,
+          "end": 2338,
+          "file":"<FILE>",
+          "line": 1,
+          "start": 0
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "dataValues",
+      "name_span": {
+        "col": 18,
+        "end": 1276,
+        "file":"<FILE>",
+        "line": 50,
+        "start": 1266
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isUnique": false,
+        "multiplicity": "0..* nonunique",
+        "multiplicity_lower": 0,
+        "multiplicity_upper": "*"
+      },
+      "spans": [
+        {
+          "col": 1,
+          "end": 1416,
+          "file":"<FILE>",
+          "line": 50,
+          "start": 1249
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "exactlyOne",
+      "name_span": {
+        "col": 14,
+        "end": 1785,
+        "file":"<FILE>",
+        "line": 66,
+        "start": 1775
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 14,
+          "end": 1894,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 1775
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "multiplicity",
+      "name_span": {
+        "col": 1,
+        "end": 1774,
+        "file":"<FILE>",
+        "line": 66,
+        "start": 1762
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 1,
+          "end": 1774,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 1762
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "multiplicity",
+      "name_span": {
+        "col": 1,
+        "end": 1910,
+        "file":"<FILE>",
+        "line": 73,
+        "start": 1898
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 1,
+          "end": 1910,
+          "file":"<FILE>",
+          "line": 73,
+          "start": 1898
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "multiplicity",
+      "name_span": {
+        "col": 1,
+        "end": 2046,
+        "file":"<FILE>",
+        "line": 80,
+        "start": 2034
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 1,
+          "end": 2046,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 2034
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "multiplicity",
+      "name_span": {
+        "col": 1,
+        "end": 2181,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 2169
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 1,
+          "end": 2181,
+          "file":"<FILE>",
+          "line": 87,
+          "start": 2169
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "naturals",
+      "name_span": {
+        "col": 18,
+        "end": 1447,
+        "file":"<FILE>",
+        "line": 57,
+        "start": 1439
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "0..*",
+        "multiplicity_lower": 0,
+        "multiplicity_upper": "*"
+      },
+      "spans": [
+        {
+          "col": 1,
+          "end": 1758,
+          "file":"<FILE>",
+          "line": 57,
+          "start": 1422
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "oneToMany",
+      "name_span": {
+        "col": 14,
+        "end": 2056,
+        "file":"<FILE>",
+        "line": 80,
+        "start": 2047
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1..*",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": "*"
+      },
+      "spans": [
+        {
+          "col": 14,
+          "end": 2165,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 2047
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "self",
+      "name_span": {
+        "col": 10,
+        "end": 319,
+        "file":"<FILE>",
+        "line": 14,
+        "start": 315
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 612,
+          "file":"<FILE>",
+          "line": 14,
+          "start": 307
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "self",
+      "name_span": {
+        "col": 10,
+        "end": 809,
+        "file":"<FILE>",
+        "line": 31,
+        "start": 805
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 2,
+          "end": 846,
+          "file":"<FILE>",
+          "line": 31,
+          "start": 797
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "that",
+      "name_span": {
+        "col": 10,
+        "end": 992,
+        "file":"<FILE>",
+        "line": 40,
+        "start": 988
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "1",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 2,
+          "end": 1242,
+          "file":"<FILE>",
+          "line": 40,
+          "start": 980
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "things",
+      "name_span": {
+        "col": 18,
+        "end": 876,
+        "file":"<FILE>",
+        "line": 34,
+        "start": 870
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isUnique": false,
+        "multiplicity": "1..* nonunique",
+        "multiplicity_lower": 1,
+        "multiplicity_upper": "*"
+      },
+      "spans": [
+        {
+          "col": 1,
+          "end": 1245,
+          "file":"<FILE>",
+          "line": 34,
+          "start": 853
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "zeroOrOne",
+      "name_span": {
+        "col": 14,
+        "end": 1920,
+        "file":"<FILE>",
+        "line": 73,
+        "start": 1911
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "0..1",
+        "multiplicity_lower": 0,
+        "multiplicity_upper": 1
+      },
+      "spans": [
+        {
+          "col": 14,
+          "end": 2030,
+          "file":"<FILE>",
+          "line": 73,
+          "start": 1911
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReferenceUsage",
+      "name": "zeroToMany",
+      "name_span": {
+        "col": 14,
+        "end": 2192,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 2182
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "multiplicity": "0..*",
+        "multiplicity_lower": 0,
+        "multiplicity_upper": "*"
+      },
+      "spans": [
+        {
+          "col": 14,
+          "end": 2334,
+          "file":"<FILE>",
+          "line": 87,
+          "start": 2182
+        }
+      ]
+    }
+  ]
+}

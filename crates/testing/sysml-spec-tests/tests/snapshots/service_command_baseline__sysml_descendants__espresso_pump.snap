@@ -1,0 +1,4438 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "ActionDefinition",
+      "name": "PumpFieldDynamics",
+      "name_span": {
+        "col": 19,
+        "end": 5167,
+        "file":"<FILE>",
+        "line": 80,
+        "start": 5150
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 7163,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 5139
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "accumulatorGain",
+      "name_span": {
+        "col": 18,
+        "end": 3398,
+        "file":"<FILE>",
+        "line": 53,
+        "start": 3383
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 2.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3418,
+          "file":"<FILE>",
+          "line": 53,
+          "start": 3373
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "accumulatorPressure",
+      "name_span": {
+        "col": 22,
+        "end": 4905,
+        "file":"<FILE>",
+        "line": 76,
+        "start": 4886
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "direction": "out",
+        "isDefault": true,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4925,
+          "file":"<FILE>",
+          "line": 76,
+          "start": 4872
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "chamberGain",
+      "name_span": {
+        "col": 18,
+        "end": 3309,
+        "file":"<FILE>",
+        "line": 52,
+        "start": 3298
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 4.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3329,
+          "file":"<FILE>",
+          "line": 52,
+          "start": 3288
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "chamberPressure",
+      "name_span": {
+        "col": 22,
+        "end": 4843,
+        "file":"<FILE>",
+        "line": 75,
+        "start": 4828
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "direction": "out",
+        "isDefault": true,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4863,
+          "file":"<FILE>",
+          "line": 75,
+          "start": 4814
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "dischargeCoeff",
+      "name_span": {
+        "col": 18,
+        "end": 2965,
+        "file":"<FILE>",
+        "line": 48,
+        "start": 2951
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 2.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 2985,
+          "file":"<FILE>",
+          "line": 48,
+          "start": 2941
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "dpRef",
+      "name_span": {
+        "col": 18,
+        "end": 3046,
+        "file":"<FILE>",
+        "line": 49,
+        "start": 3041
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 1.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3066,
+          "file":"<FILE>",
+          "line": 49,
+          "start": 3031
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "epsRoot",
+      "name_span": {
+        "col": 18,
+        "end": 3142,
+        "file":"<FILE>",
+        "line": 50,
+        "start": 3135
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 0.0001
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3165,
+          "file":"<FILE>",
+          "line": 50,
+          "start": 3125
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "exposure",
+      "name_span": {
+        "col": 22,
+        "end": 4956,
+        "file":"<FILE>",
+        "line": 77,
+        "start": 4948
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "direction": "out",
+        "isDefault": true,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4976,
+          "file":"<FILE>",
+          "line": 77,
+          "start": 4934
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "exposureTrip",
+      "name_span": {
+        "col": 18,
+        "end": 4302,
+        "file":"<FILE>",
+        "line": 66,
+        "start": 4290
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 1.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4322,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 4280
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "leakCoeff",
+      "name_span": {
+        "col": 18,
+        "end": 3225,
+        "file":"<FILE>",
+        "line": 51,
+        "start": 3216
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 0.05
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3246,
+          "file":"<FILE>",
+          "line": 51,
+          "start": 3206
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "omega",
+      "name_span": {
+        "col": 18,
+        "end": 2618,
+        "file":"<FILE>",
+        "line": 44,
+        "start": 2613
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 6.2832
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 2641,
+          "file":"<FILE>",
+          "line": 44,
+          "start": 2603
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "pWarning",
+      "name_span": {
+        "col": 18,
+        "end": 4207,
+        "file":"<FILE>",
+        "line": 65,
+        "start": 4199
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 0.5
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4227,
+          "file":"<FILE>",
+          "line": 65,
+          "start": 4189
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "pistonArea",
+      "name_span": {
+        "col": 18,
+        "end": 2864,
+        "file":"<FILE>",
+        "line": 47,
+        "start": 2854
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 0.5
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 2884,
+          "file":"<FILE>",
+          "line": 47,
+          "start": 2844
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "restrictionConductance",
+      "name_span": {
+        "col": 18,
+        "end": 3709,
+        "file":"<FILE>",
+        "line": 58,
+        "start": 3687
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "isDefault": true,
+        "value": 1.5
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 3729,
+          "file":"<FILE>",
+          "line": 58,
+          "start": 3677
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "stroke",
+      "name_span": {
+        "col": 22,
+        "end": 4733,
+        "file":"<FILE>",
+        "line": 73,
+        "start": 4727
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "direction": "out",
+        "isDefault": true,
+        "value": -0.5
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4754,
+          "file":"<FILE>",
+          "line": 73,
+          "start": 4713
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "AttributeUsage",
+      "name": "velocity",
+      "name_span": {
+        "col": 22,
+        "end": 4785,
+        "file":"<FILE>",
+        "line": 74,
+        "start": 4777
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "direction": "out",
+        "isDefault": true,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 8,
+          "end": 4805,
+          "file":"<FILE>",
+          "line": 74,
+          "start": 4763
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "AccumulatorDerivative",
+      "name_span": {
+        "col": 21,
+        "end": 6709,
+        "file":"<FILE>",
+        "line": 113,
+        "start": 6688
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 6927,
+          "file":"<FILE>",
+          "line": 113,
+          "start": 6679
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "AreaOutput",
+      "name_span": {
+        "col": 21,
+        "end": 5457,
+        "file":"<FILE>",
+        "line": 86,
+        "start": 5447
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 5655,
+          "file":"<FILE>",
+          "line": 86,
+          "start": 5438
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "ChamberDerivative",
+      "name_span": {
+        "col": 21,
+        "end": 6256,
+        "file":"<FILE>",
+        "line": 105,
+        "start": 6239
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 6666,
+          "file":"<FILE>",
+          "line": 105,
+          "start": 6230
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "CommandOutput",
+      "name_span": {
+        "col": 21,
+        "end": 5300,
+        "file":"<FILE>",
+        "line": 83,
+        "start": 5287
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 5425,
+          "file":"<FILE>",
+          "line": 83,
+          "start": 5278
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "ExposureDerivative",
+      "name_span": {
+        "col": 21,
+        "end": 7041,
+        "file":"<FILE>",
+        "line": 120,
+        "start": 7023
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 7153,
+          "file":"<FILE>",
+          "line": 120,
+          "start": 7014
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "OrificeOutput",
+      "name_span": {
+        "col": 21,
+        "end": 5690,
+        "file":"<FILE>",
+        "line": 91,
+        "start": 5677
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 5852,
+          "file":"<FILE>",
+          "line": 91,
+          "start": 5668
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "StrokeDerivative",
+      "name_span": {
+        "col": 21,
+        "end": 5959,
+        "file":"<FILE>",
+        "line": 97,
+        "start": 5943
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 6037,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5934
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "CalculationDefinition",
+      "name": "VelocityDerivative",
+      "name_span": {
+        "col": 21,
+        "end": 6077,
+        "file":"<FILE>",
+        "line": 100,
+        "start": 6059
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 12,
+          "end": 6179,
+          "file":"<FILE>",
+          "line": 100,
+          "start": 6050
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Documentation",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "body": "Reciprocating-pump hybrid dynamics.\n     *\n     * Continuous states (all `out attribute`, integrated by the SSR pattern):\n     *   stroke        centered actuator position; physical position x = stroke + 0.5 in [0,1]\n     *   strokeRate    actuator velocity (dx/dt)\n     *   chamberPressure     p_c, chamber pressure                    (pressure)\n     *   accumulatorPressure p_a, downstream/accumulator pressure     (pressure)\n     *   exposure      z, integral of sustained over-pressure         (pressure*time)\n     *\n     * Actuator: an undamped harmonic oscillator about the mid-stroke, so it\n     * self-sustains a phase-normalized cosine position with NO manual seed:\n     *   stroke''   = -omega^2 * stroke        =>   x(t) = 0.5*(1 - cos(omega t))\n     * released from stroke = -0.5, strokeRate = 0. Energy is conserved, so the\n     * unforced actuator neither grows nor decays (bounded-drift invariant).\n     *\n     * Hydraulics (first principles; see README for the full derivation):\n     *   q_src   = pistonArea * max(0, strokeRate)          delivery-stroke inflow\n     *   u       = clamp(dP / dpRef, 0, 1)                  normalized valve command\n     *   A_eff   = interpolate(opening|closing branch, u)   sampled check-valve area\n     *   q_out   = Cq * A_eff * sqrt(max(dP, epsRoot))      regularized orifice outflow\n     *   q_leak  = kLeak * chamberPressure                  linear chamber leak\n     *   q_rest  = restrictionConductance * sqrt(max(accumulatorPressure, epsRoot))\n     *   p_c'    = Kc * (q_src - q_out - q_leak)\n     *   p_a'    = Ka * (q_out - q_rest)\n     *   z'      = max(0, chamberPressure - pWarning)       exposure accumulation\n     *\n     * The check valve is forward-only: dP = p_c - p_a is clamped by max(dP, epsRoot)\n     * so the orifice never draws fluid backwards, and epsRoot regularizes the\n     * square root's otherwise-infinite slope at dP = 0 (bounded slope 1/(2*sqrt(epsRoot))).\n     * The branch is chosen by the sign of strokeRate: rising command (advancing\n     * stroke, strokeRate >= 0) uses the opening branch, falling command uses the\n     * closing branch. strokeRate >= 0 is the explicit initial branch (strokeRate\n     * starts at 0)."
+      },
+      "spans": [
+        {
+          "col": 4,
+          "end": 2239,
+          "file":"<FILE>",
+          "line": 2,
+          "start": 27
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6650,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 27,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 31,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 34,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 37,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 37,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 38,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 44,
+          "end": 6651,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 45,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5361
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 46,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 46,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "x",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 48,
+          "end": 6912,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6650,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 23,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 27,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 30,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 31,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 34,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 37,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 37,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 38,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 44,
+          "end": 6651,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 45,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5361
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 46,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 46,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "y",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 48,
+          "end": 6912,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Feature",
+      "name": "z",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "aEff",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 47,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5753
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "accumulatorGain",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 48,
+          "end": 6792,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "accumulatorPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 35,
+          "end": 6900,
+          "file":"<FILE>",
+          "line": 116,
+          "start": 6881
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "accumulatorPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 7126,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "accumulatorPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 49,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5807
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "accumulatorPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 64,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5380
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "chamberGain",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 6532,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "chamberPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 5804,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "chamberPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 5377,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "chamberPressure",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6634
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "closingBranch",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 43,
+          "end": 5636,
+          "file":"<FILE>",
+          "line": 89,
+          "start": 5623
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "dischargeCoeff",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5750,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "dpRef",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 87,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5403
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "epsRoot",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 56,
+          "end": 6909,
+          "file":"<FILE>",
+          "line": 116,
+          "start": 6902
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "epsRoot",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 70,
+          "end": 5835,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5828
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "leakCoeff",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 34,
+          "end": 6631,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "omega",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6141
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "omega",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 53,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6150
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "openingBranch",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 59,
+          "end": 5575,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5562
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "pWarning",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 68,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7129
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "pistonArea",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6566,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "qOut",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6820,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "qOut",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 27,
+          "end": 6619,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "restrictionConductance",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 6845,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "stroke",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 61,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6158
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "u",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 58,
+          "end": 5639,
+          "file":"<FILE>",
+          "line": 89,
+          "start": 5638
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "u",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 74,
+          "end": 5578,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5577
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "velocity",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 5534,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "velocity",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 45,
+          "end": 6586,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6578
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureReferenceExpression",
+      "name": "velocity",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 35,
+          "end": 6022,
+          "file":"<FILE>",
+          "line": 98,
+          "start": 6014
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 26,
+          "end": 2625,
+          "file":"<FILE>",
+          "line": 44,
+          "start": 2621
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 26,
+          "end": 3053,
+          "file":"<FILE>",
+          "line": 49,
+          "start": 3049
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 28,
+          "end": 3149,
+          "file":"<FILE>",
+          "line": 50,
+          "start": 3145
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 29,
+          "end": 4214,
+          "file":"<FILE>",
+          "line": 65,
+          "start": 4210
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 3232,
+          "file":"<FILE>",
+          "line": 51,
+          "start": 3228
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 2871,
+          "file":"<FILE>",
+          "line": 47,
+          "start": 2867
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 4740,
+          "file":"<FILE>",
+          "line": 73,
+          "start": 4736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 32,
+          "end": 3316,
+          "file":"<FILE>",
+          "line": 52,
+          "start": 3312
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 33,
+          "end": 4309,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 4305
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 33,
+          "end": 4792,
+          "file":"<FILE>",
+          "line": 74,
+          "start": 4788
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 33,
+          "end": 4963,
+          "file":"<FILE>",
+          "line": 77,
+          "start": 4959
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 35,
+          "end": 2972,
+          "file":"<FILE>",
+          "line": 48,
+          "start": 2968
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 36,
+          "end": 3405,
+          "file":"<FILE>",
+          "line": 53,
+          "start": 3401
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 40,
+          "end": 4850,
+          "file":"<FILE>",
+          "line": 75,
+          "start": 4846
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 43,
+          "end": 3716,
+          "file":"<FILE>",
+          "line": 58,
+          "start": 3712
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureTyping",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "typedFeature": "<UUID>",
+        "unresolved_type": "Real"
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 4912,
+          "file":"<FILE>",
+          "line": 76,
+          "start": 4908
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6650,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6650,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 27,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 27,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 34,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 34,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 6651,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 6651,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 45,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5361
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 45,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5361
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 48,
+          "end": 6912,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "FeatureValue",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "general": "<UUID>",
+        "specific": "<UUID>"
+      },
+      "spans": [
+        {
+          "col": 48,
+          "end": 6912,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "interpolateLinear",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 41,
+          "end": 5579,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5544
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "interpolateLinear",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 2
+      },
+      "spans": [
+        {
+          "col": 25,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 89,
+          "start": 5605
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "max",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 27,
+          "end": 5836,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5785
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "max",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 6910,
+          "file":"<FILE>",
+          "line": 116,
+          "start": 6877
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "max",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 36,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6569
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "max",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 27,
+          "end": 5410,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5343
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "max",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 37,
+          "end": 7138,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7098
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "min",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 36,
+          "end": 5409,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5352
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "sqrt",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 22,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5780
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "InvocationExpression",
+      "name": "sqrt",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1
+      },
+      "spans": [
+        {
+          "col": 26,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 116,
+          "start": 6872
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 5350,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5347
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 6138,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 40,
+          "end": 6576,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6573
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 41,
+          "end": 7105,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7102
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "value": 1.0
+      },
+      "spans": [
+        {
+          "col": 40,
+          "end": 5359,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5356
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 35,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5538
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": -0.5
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 4753,
+          "file":"<FILE>",
+          "line": 73,
+          "start": 4749
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.0001
+      },
+      "spans": [
+        {
+          "col": 41,
+          "end": 3164,
+          "file":"<FILE>",
+          "line": 50,
+          "start": 3158
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.05
+      },
+      "spans": [
+        {
+          "col": 43,
+          "end": 3245,
+          "file":"<FILE>",
+          "line": 51,
+          "start": 3241
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 4804,
+          "file":"<FILE>",
+          "line": 74,
+          "start": 4801
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 4975,
+          "file":"<FILE>",
+          "line": 77,
+          "start": 4972
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 53,
+          "end": 4862,
+          "file":"<FILE>",
+          "line": 75,
+          "start": 4859
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.0
+      },
+      "spans": [
+        {
+          "col": 57,
+          "end": 4924,
+          "file":"<FILE>",
+          "line": 76,
+          "start": 4921
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.5
+      },
+      "spans": [
+        {
+          "col": 42,
+          "end": 4226,
+          "file":"<FILE>",
+          "line": 65,
+          "start": 4223
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 0.5
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 2883,
+          "file":"<FILE>",
+          "line": 47,
+          "start": 2880
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 1.0
+      },
+      "spans": [
+        {
+          "col": 39,
+          "end": 3065,
+          "file":"<FILE>",
+          "line": 49,
+          "start": 3062
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 1.0
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 4321,
+          "file":"<FILE>",
+          "line": 66,
+          "start": 4318
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 1.5
+      },
+      "spans": [
+        {
+          "col": 56,
+          "end": 3728,
+          "file":"<FILE>",
+          "line": 58,
+          "start": 3725
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 2.0
+      },
+      "spans": [
+        {
+          "col": 48,
+          "end": 2984,
+          "file":"<FILE>",
+          "line": 48,
+          "start": 2981
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 2.0
+      },
+      "spans": [
+        {
+          "col": 49,
+          "end": 3417,
+          "file":"<FILE>",
+          "line": 53,
+          "start": 3414
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 4.0
+      },
+      "spans": [
+        {
+          "col": 45,
+          "end": 3328,
+          "file":"<FILE>",
+          "line": 52,
+          "start": 3325
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "LiteralRational",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "value": 6.2832
+      },
+      "spans": [
+        {
+          "col": 39,
+          "end": 2640,
+          "file":"<FILE>",
+          "line": 44,
+          "start": 2634
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "PumpCharacteristic",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "PumpCharacteristic",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2406,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2369
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "SampledFunctions",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "SampledFunctions",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2364,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2329
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "ScalarValues",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "ScalarValues",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2276,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2245
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "StateSpaceRepresentation",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "StateSpaceRepresentation",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2324,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2281
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6587,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5757,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6155,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 31,
+          "end": 5826,
+          "file":"<FILE>",
+          "line": 93,
+          "start": 5789
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 6146,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6135
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 5399,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5362
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 0,
+        "operator": ">="
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 5541,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5526
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6823
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 34,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6622
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "+"
+      },
+      "spans": [
+        {
+          "col": 27,
+          "end": 6649,
+          "file":"<FILE>",
+          "line": 111,
+          "start": 6615
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6650,
+          "file":"<FILE>",
+          "line": 110,
+          "start": 6556
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 23,
+          "end": 6911,
+          "file":"<FILE>",
+          "line": 115,
+          "start": 6816
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "-"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 7137,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7107
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "argIndex": 1,
+        "operator": "/"
+      },
+      "spans": [
+        {
+          "col": 45,
+          "end": 5408,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5361
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 30,
+          "end": 5837,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5736
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 37,
+          "end": 6164,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6134
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 44,
+          "end": 6651,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6521
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "operator": "*"
+      },
+      "spans": [
+        {
+          "col": 48,
+          "end": 6912,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6777
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "OperatorExpression",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "operator": "if"
+      },
+      "spans": [
+        {
+          "col": 20,
+          "end": 5640,
+          "file":"<FILE>",
+          "line": 88,
+          "start": 5523
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "ReciprocatingPump",
+      "name_span": {
+        "col": 13,
+        "end": 2438,
+        "file":"<FILE>",
+        "line": 41,
+        "start": 2421
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 7169,
+          "file":"<FILE>",
+          "line": 41,
+          "start": 2412
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "aEff",
+      "name_span": {
+        "col": 23,
+        "end": 5500,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 5496
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 5641,
+          "file":"<FILE>",
+          "line": 87,
+          "start": 5489
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "daccumulatorPressuredt",
+      "name_span": {
+        "col": 23,
+        "end": 6774,
+        "file":"<FILE>",
+        "line": 114,
+        "start": 6752
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 6913,
+          "file":"<FILE>",
+          "line": 114,
+          "start": 6745
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "dchamberPressuredt",
+      "name_span": {
+        "col": 23,
+        "end": 6518,
+        "file":"<FILE>",
+        "line": 109,
+        "start": 6500
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 6652,
+          "file":"<FILE>",
+          "line": 109,
+          "start": 6493
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "dexposuredt",
+      "name_span": {
+        "col": 23,
+        "end": 7095,
+        "file":"<FILE>",
+        "line": 121,
+        "start": 7084
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 7139,
+          "file":"<FILE>",
+          "line": 121,
+          "start": 7077
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "dstrokedt",
+      "name_span": {
+        "col": 23,
+        "end": 6011,
+        "file":"<FILE>",
+        "line": 98,
+        "start": 6002
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 6023,
+          "file":"<FILE>",
+          "line": 98,
+          "start": 5995
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "dvelocitydt",
+      "name_span": {
+        "col": 23,
+        "end": 6131,
+        "file":"<FILE>",
+        "line": 101,
+        "start": 6120
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 6165,
+          "file":"<FILE>",
+          "line": 101,
+          "start": 6113
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "qOut",
+      "name_span": {
+        "col": 23,
+        "end": 5733,
+        "file":"<FILE>",
+        "line": 92,
+        "start": 5729
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 5838,
+          "file":"<FILE>",
+          "line": 92,
+          "start": 5722
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ReturnParameterMembership",
+      "name": "u",
+      "name_span": {
+        "col": 23,
+        "end": 5340,
+        "file":"<FILE>",
+        "line": 84,
+        "start": 5339
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 16,
+          "end": 5411,
+          "file":"<FILE>",
+          "line": 84,
+          "start": 5332
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "ContinuousStateSpaceDynamics"
+      },
+      "spans": [
+        {
+          "col": 40,
+          "end": 5199,
+          "file":"<FILE>",
+          "line": 80,
+          "start": 5171
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetDerivative"
+      },
+      "spans": [
+        {
+          "col": 41,
+          "end": 5976,
+          "file":"<FILE>",
+          "line": 97,
+          "start": 5963
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetDerivative"
+      },
+      "spans": [
+        {
+          "col": 42,
+          "end": 6273,
+          "file":"<FILE>",
+          "line": 105,
+          "start": 6260
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetDerivative"
+      },
+      "spans": [
+        {
+          "col": 43,
+          "end": 6094,
+          "file":"<FILE>",
+          "line": 100,
+          "start": 6081
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetDerivative"
+      },
+      "spans": [
+        {
+          "col": 43,
+          "end": 7058,
+          "file":"<FILE>",
+          "line": 120,
+          "start": 7045
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetDerivative"
+      },
+      "spans": [
+        {
+          "col": 46,
+          "end": 6726,
+          "file":"<FILE>",
+          "line": 113,
+          "start": 6713
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetOutput"
+      },
+      "spans": [
+        {
+          "col": 35,
+          "end": 5470,
+          "file":"<FILE>",
+          "line": 86,
+          "start": 5461
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetOutput"
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 5313,
+          "file":"<FILE>",
+          "line": 83,
+          "start": 5304
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "Subclassification",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "specific": "<UUID>",
+        "subclassifier": "<UUID>",
+        "unresolved_superclassifier": "GetOutput"
+      },
+      "spans": [
+        {
+          "col": 38,
+          "end": 5703,
+          "file":"<FILE>",
+          "line": 91,
+          "start": 5694
+        }
+      ]
+    }
+  ]
+}

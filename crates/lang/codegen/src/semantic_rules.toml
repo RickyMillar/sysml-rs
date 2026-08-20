@@ -1,0 +1,939 @@
+# Semantic Validation Rules for SysML v2
+#
+# Hand-curated catalog of semantic constraints derived from:
+# - KerMLValidator.xtend (pilot implementation)
+# - SysMLValidator.xtend (pilot implementation)
+# - KerML/SysML specification prose
+#
+# Each rule maps to a hand-implemented check function in
+# sysml-core/src/semantic_checks/.
+#
+# Error codes: S001-S999 (semantic validation range)
+#
+# Categories:
+#   distinguishability - Duplicate name detection
+#   typing             - Usage/feature typing constraints
+#   ownership          - Membership/ownership context rules
+#   cardinality        - Member count constraints
+#   specialization     - Type hierarchy constraints
+#   variation          - Variation point rules
+#   connector          - Connection/association rules
+#   state              - State machine rules
+#   action             - Action/control flow rules
+#   requirement        - Requirement/case rules
+#   expression         - Expression validation rules
+
+# =====================================================================
+# DISTINGUISHABILITY (Namespace)
+# =====================================================================
+
+[[rule]]
+id = "S001"
+element_type = "Namespace"
+category = "distinguishability"
+severity = "warning"
+message = "Duplicate owned member name '{name}'"
+check = "unique_owned_member_names"
+spec_ref = "KerML 8.3.2.4.5 validateNamespaceDistinguishibility"
+
+[[rule]]
+id = "S002"
+element_type = "Namespace"
+category = "distinguishability"
+severity = "warning"
+message = "Member name '{name}' duplicates an alias"
+check = "no_name_alias_conflict"
+spec_ref = "KerML 8.3.2.4.5 validateNamespaceDistinguishibility"
+
+[[rule]]
+id = "S003"
+element_type = "Namespace"
+category = "distinguishability"
+severity = "warning"
+message = "Member name '{name}' conflicts with inherited member"
+check = "no_inherited_name_conflict"
+spec_ref = "KerML 8.3.2.4.5 validateNamespaceDistinguishibility"
+
+# =====================================================================
+# TYPING (Usage must be typed by appropriate Definitions)
+# =====================================================================
+
+[[rule]]
+id = "S010"
+element_type = "Usage"
+category = "typing"
+severity = "error"
+message = "A usage must be typed by definitions"
+check = "usage_typed_by_definitions"
+spec_ref = "SysML 8.3.6.4"
+
+[[rule]]
+id = "S011"
+element_type = "AttributeUsage"
+category = "typing"
+severity = "error"
+message = "An attribute must be typed by attribute definitions"
+check = "attribute_typed_by_datatypes"
+spec_ref = "SysML 8.3.7.3"
+
+[[rule]]
+id = "S012"
+element_type = "EnumerationUsage"
+category = "typing"
+severity = "error"
+message = "An enumeration must be typed by one enumeration definition"
+check = "enumeration_typed_by_one_enum_def"
+spec_ref = "SysML 8.3.8.3"
+
+[[rule]]
+id = "S013"
+element_type = "OccurrenceUsage"
+category = "typing"
+severity = "error"
+message = "An occurrence must be typed by occurrence definitions"
+check = "occurrence_typed_by_occurrence_defs"
+spec_ref = "SysML 8.3.9.4"
+
+[[rule]]
+id = "S014"
+element_type = "ItemUsage"
+category = "typing"
+severity = "error"
+message = "An item must be typed by item definitions"
+check = "item_typed_by_item_defs"
+spec_ref = "SysML 8.3.10.3"
+
+[[rule]]
+id = "S015"
+element_type = "PartUsage"
+category = "typing"
+severity = "error"
+message = "A part must be typed by at least one part definition"
+check = "part_typed_by_part_defs"
+spec_ref = "SysML 8.3.11.3"
+
+[[rule]]
+id = "S016"
+element_type = "PortUsage"
+category = "typing"
+severity = "error"
+message = "A port must be typed by port definitions"
+check = "port_typed_by_port_defs"
+spec_ref = "SysML 8.3.12.6"
+
+[[rule]]
+id = "S017"
+element_type = "ActionUsage"
+category = "typing"
+severity = "error"
+message = "An action must be typed by action definitions"
+check = "action_typed_by_behavior"
+spec_ref = "SysML 8.3.17.4"
+
+[[rule]]
+id = "S018"
+element_type = "ConnectionUsage"
+category = "typing"
+severity = "error"
+message = "A connection must be typed by connection definitions"
+check = "connection_typed_by_association"
+spec_ref = "SysML 8.3.13.4"
+
+[[rule]]
+id = "S019"
+element_type = "StateUsage"
+category = "typing"
+severity = "error"
+message = "A state must be typed by state definitions"
+check = "state_typed_by_state_defs"
+spec_ref = "SysML 8.3.18.6"
+
+[[rule]]
+id = "S020"
+element_type = "ConstraintUsage"
+category = "typing"
+severity = "error"
+message = "A constraint must be typed by one constraint definition"
+check = "constraint_typed_by_predicate"
+spec_ref = "SysML 8.3.20.4"
+
+[[rule]]
+id = "S021"
+element_type = "RequirementUsage"
+category = "typing"
+severity = "error"
+message = "A requirement must be typed by one requirement definition"
+check = "requirement_typed_by_one_req_def"
+spec_ref = "SysML 8.3.21.9"
+
+[[rule]]
+id = "S022"
+element_type = "InterfaceUsage"
+category = "typing"
+severity = "error"
+message = "An interface must be typed by interface definitions"
+check = "interface_typed_by_interface_defs"
+spec_ref = "SysML 8.3.14.3"
+
+[[rule]]
+id = "S023"
+element_type = "FlowUsage"
+category = "typing"
+severity = "error"
+message = "A flow connection must be typed by flow connection definitions"
+check = "flow_typed_by_interaction"
+spec_ref = "SysML 8.3.16.3"
+
+[[rule]]
+id = "S024"
+element_type = "CalculationUsage"
+category = "typing"
+severity = "error"
+message = "A calculation must be typed by one calculation definition"
+check = "calculation_typed_by_one_calc_def"
+spec_ref = "SysML 8.3.19.3"
+
+[[rule]]
+id = "S025"
+element_type = "CaseUsage"
+category = "typing"
+severity = "error"
+message = "A case must be typed by one case definition"
+check = "case_typed_by_one_case_def"
+spec_ref = "SysML 8.3.22.3"
+
+[[rule]]
+id = "S026"
+element_type = "AllocationUsage"
+category = "typing"
+severity = "error"
+message = "An allocation must be typed by allocation definitions"
+check = "allocation_typed_by_allocation_defs"
+spec_ref = "SysML 8.3.15.3"
+
+# =====================================================================
+# SPECIALIZATION BOUNDARIES
+# =====================================================================
+
+[[rule]]
+id = "S030"
+element_type = "DataType"
+category = "specialization"
+severity = "error"
+message = "A data type cannot specialize a class or association"
+check = "datatype_not_specialize_class"
+spec_ref = "KerML 8.3.4.1.2 validateDataTypeSpecialization"
+
+[[rule]]
+id = "S031"
+element_type = "Class"
+category = "specialization"
+severity = "error"
+message = "A class cannot specialize a data type or association"
+check = "class_not_specialize_datatype"
+spec_ref = "KerML 8.3.4.2.2 validateClassSpecialization"
+
+[[rule]]
+id = "S032"
+element_type = "Structure"
+category = "specialization"
+severity = "error"
+message = "A structure cannot specialize a behavior"
+check = "structure_not_specialize_behavior"
+spec_ref = "KerML 8.3.4.3.2 validateStructureSpecialization"
+
+[[rule]]
+id = "S033"
+element_type = "Behavior"
+category = "specialization"
+severity = "error"
+message = "A behavior cannot specialize a structure"
+check = "behavior_not_specialize_structure"
+spec_ref = "KerML 8.3.4.6.2 validateBehaviorSpecialization"
+
+[[rule]]
+id = "S034"
+element_type = "AttributeDefinition"
+category = "specialization"
+severity = "error"
+message = "An attribute definition cannot specialize an item definition"
+check = "attribute_def_not_specialize_item_def"
+spec_ref = "SysML 8.3.7.2"
+
+[[rule]]
+id = "S035"
+element_type = "ItemDefinition"
+category = "specialization"
+severity = "error"
+message = "An item definition cannot specialize an attribute definition"
+check = "item_def_not_specialize_attribute_def"
+spec_ref = "SysML 8.3.10.2"
+
+# =====================================================================
+# OWNERSHIP CONTEXT
+# =====================================================================
+
+[[rule]]
+id = "S040"
+element_type = "ParameterMembership"
+category = "ownership"
+severity = "error"
+message = "Parameter membership is only allowed in behaviors and steps"
+check = "parameter_membership_owning_type"
+spec_ref = "KerML 8.3.4.6.4 validateParameterMembershipOwningType"
+
+[[rule]]
+id = "S041"
+element_type = "ReturnParameterMembership"
+category = "ownership"
+severity = "error"
+message = "Return parameter membership is only allowed in functions and expressions"
+check = "return_parameter_membership_owning_type"
+spec_ref = "KerML 8.3.4.7.8 validateReturnParameterMembershipOwningType"
+
+[[rule]]
+id = "S042"
+element_type = "StateSubactionMembership"
+category = "ownership"
+severity = "error"
+message = "Entry, do, and exit actions can only appear in state definitions or usages"
+check = "state_subaction_owned_by_state"
+spec_ref = "SysML 8.3.18.4 validateStateSubactionMembershipOwningType"
+
+[[rule]]
+id = "S043"
+element_type = "SubjectMembership"
+category = "ownership"
+severity = "error"
+message = "Only requirements and cases can have subjects"
+check = "subject_membership_in_req_or_case"
+spec_ref = "SysML 8.3.21.11 validateSubjectMembershipOwningType"
+
+[[rule]]
+id = "S044"
+element_type = "ObjectiveMembership"
+category = "ownership"
+severity = "error"
+message = "Only cases can have objectives"
+check = "objective_membership_in_case"
+spec_ref = "SysML 8.3.22.4 validateObjectiveMembershipOwningType"
+
+[[rule]]
+id = "S045"
+element_type = "ActorMembership"
+category = "ownership"
+severity = "error"
+message = "Only requirements and cases can have actors"
+check = "actor_membership_in_req_or_case"
+spec_ref = "SysML 8.3.21.2 validateActorMembershipOwningType"
+
+[[rule]]
+id = "S046"
+element_type = "StakeholderMembership"
+category = "ownership"
+severity = "error"
+message = "Only requirements can have stakeholders"
+check = "stakeholder_membership_in_requirement"
+spec_ref = "SysML 8.3.21.12 validateStakeholderMembershipOwningType"
+
+[[rule]]
+id = "S047"
+element_type = "RequirementConstraintMembership"
+category = "ownership"
+severity = "error"
+message = "Only requirements can have assumed or required constraints"
+check = "requirement_constraint_in_requirement"
+spec_ref = "SysML 8.3.21.7 validateRequirementConstraintMembershipOwningType"
+
+[[rule]]
+id = "S048"
+element_type = "ViewRenderingMembership"
+category = "ownership"
+severity = "error"
+message = "Only views can have view renderings"
+check = "view_rendering_in_view"
+spec_ref = "SysML 8.3.26.10 validateViewRenderingMembershipOwningType"
+
+[[rule]]
+id = "S049"
+element_type = "TransitionFeatureMembership"
+category = "ownership"
+severity = "error"
+message = "Transition feature membership is only allowed in transitions"
+check = "transition_feature_in_transition"
+spec_ref = "SysML 8.3.18.8 validateTransitionFeatureMembershipOwningType"
+
+[[rule]]
+id = "S050"
+element_type = "VariantMembership"
+category = "ownership"
+severity = "error"
+message = "A variant must be an owned member of a variation"
+check = "variant_membership_in_variation"
+spec_ref = "SysML 8.3.6.5 validateVariantMembershipOwningNamespace"
+
+[[rule]]
+id = "S051"
+element_type = "ResultExpressionMembership"
+category = "ownership"
+severity = "error"
+message = "Result expression membership is only allowed in functions and expressions"
+check = "result_expression_in_function_or_expression"
+spec_ref = "KerML 8.3.4.7.7 validateResultExpressionMembershipOwningType"
+
+# =====================================================================
+# CARDINALITY (Member Count Constraints)
+# =====================================================================
+
+[[rule]]
+id = "S060"
+element_type = "RequirementDefinition"
+category = "cardinality"
+severity = "error"
+message = "A requirement definition can have at most one subject"
+check = "at_most_one_subject"
+spec_ref = "SysML 8.3.21.8 validateRequirementDefinitionOnlyOneSubject"
+
+[[rule]]
+id = "S061"
+element_type = "RequirementUsage"
+category = "cardinality"
+severity = "error"
+message = "A requirement usage can have at most one subject"
+check = "at_most_one_subject"
+spec_ref = "SysML 8.3.21.9 validateRequirementUsageOnlyOneSubject"
+
+[[rule]]
+id = "S062"
+element_type = "CaseDefinition"
+category = "cardinality"
+severity = "error"
+message = "A case definition can have at most one subject"
+check = "at_most_one_subject"
+spec_ref = "SysML 8.3.22.2 validateCaseDefinitionOnlyOneSubject"
+
+[[rule]]
+id = "S063"
+element_type = "CaseUsage"
+category = "cardinality"
+severity = "error"
+message = "A case usage can have at most one subject"
+check = "at_most_one_subject"
+spec_ref = "SysML 8.3.22.3 validateCaseUsageOnlyOneSubject"
+
+[[rule]]
+id = "S141"
+element_type = "RequirementDefinition"
+category = "requirement"
+severity = "error"
+message = "The subject must be the first parameter (input) of a requirement definition"
+check = "subject_is_first_parameter"
+spec_ref = "SysML 8.3.21.8 validateRequirementDefinitionSubjectParameterPosition"
+
+[[rule]]
+id = "S142"
+element_type = "RequirementUsage"
+category = "requirement"
+severity = "error"
+message = "The subject must be the first parameter (input) of a requirement usage"
+check = "subject_is_first_parameter"
+spec_ref = "SysML 8.3.21.9 validateRequirementUsageSubjectParameterPosition"
+
+[[rule]]
+id = "S143"
+element_type = "CaseDefinition"
+category = "requirement"
+severity = "error"
+message = "The subject must be the first parameter (input) of a case definition"
+check = "subject_is_first_parameter"
+spec_ref = "SysML 8.3.22.2 validateCaseDefinitionSubjectParameterPosition"
+
+[[rule]]
+id = "S144"
+element_type = "CaseUsage"
+category = "requirement"
+severity = "error"
+message = "The subject must be the first parameter (input) of a case usage"
+check = "subject_is_first_parameter"
+spec_ref = "SysML 8.3.22.3 validateCaseUsageSubjectParameterPosition"
+
+[[rule]]
+id = "S145"
+element_type = "PortUsage"
+category = "port"
+severity = "error"
+message = "The non-port nested usages of a port usage must be referential (non-composite)"
+check = "port_usage_nested_usages_referential"
+spec_ref = "SysML 8.3.12.6 validatePortUsageNestedUsagesNotComposite"
+
+[[rule]]
+id = "S146"
+element_type = "PortDefinition"
+category = "port"
+severity = "error"
+message = "The non-port owned usages of a port definition must be referential (non-composite)"
+check = "port_definition_owned_usages_referential"
+spec_ref = "SysML 8.3.12.5 validatePortDefinitionOwnedUsagesNotComposite"
+
+[[rule]]
+id = "S064"
+element_type = "CaseDefinition"
+category = "cardinality"
+severity = "error"
+message = "A case definition can have at most one objective"
+check = "at_most_one_objective"
+spec_ref = "SysML 8.3.22.2 validateCaseDefinitionOnlyOneObjective"
+
+[[rule]]
+id = "S065"
+element_type = "CaseUsage"
+category = "cardinality"
+severity = "error"
+message = "A case usage can have at most one objective"
+check = "at_most_one_objective"
+spec_ref = "SysML 8.3.22.3 validateCaseUsageOnlyOneObjective"
+
+[[rule]]
+id = "S066"
+element_type = "Function"
+category = "cardinality"
+severity = "error"
+message = "A function can have at most one return parameter"
+check = "at_most_one_return_parameter"
+spec_ref = "KerML 8.3.4.7.4 validateFunctionResultParameterMembership"
+
+[[rule]]
+id = "S067"
+element_type = "Expression"
+category = "cardinality"
+severity = "error"
+message = "An expression can have at most one return parameter"
+check = "at_most_one_return_parameter"
+spec_ref = "KerML 8.3.4.7.3 validateExpressionResultParameterMembership"
+
+[[rule]]
+id = "S068"
+element_type = "StateDefinition"
+category = "cardinality"
+severity = "error"
+message = "A state definition may have at most one entry, one do, and one exit action"
+check = "at_most_one_state_subaction"
+spec_ref = "SysML 8.3.18.5 validateStateDefinitionStateSubactionKind"
+
+[[rule]]
+id = "S069"
+element_type = "StateUsage"
+category = "cardinality"
+severity = "error"
+message = "A state usage may have at most one entry, one do, and one exit action"
+check = "at_most_one_state_subaction"
+spec_ref = "SysML 8.3.18.6 validateStateUsageStateSubactionKind"
+
+[[rule]]
+id = "S070"
+element_type = "ViewDefinition"
+category = "cardinality"
+severity = "error"
+message = "A view definition may have at most one view rendering"
+check = "at_most_one_view_rendering"
+spec_ref = "SysML 8.3.26.7 validateViewDefinitionOnlyOneViewRendering"
+
+[[rule]]
+id = "S071"
+element_type = "ViewUsage"
+category = "cardinality"
+severity = "error"
+message = "A view usage may have at most one view rendering"
+check = "at_most_one_view_rendering"
+spec_ref = "SysML 8.3.26.11 validateViewUsageOnlyOneViewRendering"
+
+# =====================================================================
+# CONNECTOR & ASSOCIATION
+# =====================================================================
+
+[[rule]]
+id = "S100"
+element_type = "Connector"
+category = "connector"
+severity = "error"
+message = "A binary connector must have exactly two end features"
+check = "binary_connector_two_ends"
+spec_ref = "KerML 8.3.4.5.3 validateConnectorRelatedFeatures"
+
+[[rule]]
+id = "S101"
+element_type = "BindingConnector"
+category = "connector"
+severity = "error"
+message = "A binding connector must have exactly two end features"
+check = "binding_connector_two_ends"
+spec_ref = "KerML 8.3.4.5.2 validateBindingConnectorIsBinary"
+
+[[rule]]
+id = "S102"
+element_type = "ConnectionUsage"
+category = "connector"
+severity = "error"
+message = "A connection must have at least two end features"
+check = "connection_has_ends"
+spec_ref = "SysML 8.3.13.4"
+
+[[rule]]
+id = "S103"
+element_type = "InterfaceUsage"
+category = "connector"
+severity = "error"
+message = "An interface must have at least two end features"
+check = "interface_has_ends"
+spec_ref = "SysML 8.3.14.3"
+
+[[rule]]
+id = "S104"
+element_type = "AllocationUsage"
+category = "connector"
+severity = "error"
+message = "An allocation must have at least two end features"
+check = "allocation_has_ends"
+spec_ref = "SysML 8.3.15.3"
+
+[[rule]]
+id = "S105"
+element_type = "Succession"
+category = "connector"
+severity = "error"
+message = "A succession must have exactly two end features"
+check = "succession_two_ends"
+spec_ref = "KerML 8.3.4.5.4"
+
+[[rule]]
+id = "S106"
+element_type = "ConnectionUsage"
+category = "connector"
+severity = "warning"
+message = "A connection must be owned by a type (part, action, etc.), not a package"
+check = "connector_owned_by_type"
+spec_ref = "KerML 8.3.4.5.3"
+
+[[rule]]
+id = "S107"
+element_type = "InterfaceUsage"
+category = "connector"
+severity = "warning"
+message = "An interface must be owned by a type (part, action, etc.), not a package"
+check = "connector_owned_by_type"
+spec_ref = "KerML 8.3.4.5.3"
+
+[[rule]]
+id = "S108"
+element_type = "FlowUsage"
+category = "connector"
+severity = "warning"
+message = "A flow must be owned by a type (part, action, etc.), not a package"
+check = "connector_owned_by_type"
+spec_ref = "KerML 8.3.4.5.3"
+
+# =====================================================================
+# STATE MACHINE
+# =====================================================================
+
+[[rule]]
+id = "S110"
+element_type = "StateDefinition"
+category = "state"
+severity = "error"
+message = "A parallel state cannot have transitions"
+check = "parallel_state_no_transitions"
+spec_ref = "SysML 8.3.18.5 validateStateDefinitionParallelSubactions"
+
+[[rule]]
+id = "S111"
+element_type = "StateUsage"
+category = "state"
+severity = "error"
+message = "A parallel state cannot have transitions"
+check = "parallel_state_no_transitions"
+spec_ref = "SysML 8.3.18.6 validateStateUsageParallelSubactions"
+
+[[rule]]
+id = "S112"
+element_type = "TransitionUsage"
+category = "state"
+severity = "error"
+message = "A transition must be owned by a state or an action"
+check = "transition_owned_by_state_or_action"
+spec_ref = "SysML 8.3.18.9"
+
+[[rule]]
+id = "S113"
+element_type = "TransitionUsage"
+category = "state"
+severity = "error"
+message = "A transition must have a source"
+check = "transition_has_source"
+spec_ref = "SysML 8.3.18.9"
+
+[[rule]]
+id = "S114"
+element_type = "ExhibitStateUsage"
+category = "state"
+severity = "error"
+message = "An exhibit state must be typed by exactly one state definition"
+check = "exhibit_state_one_type"
+spec_ref = "SysML 8.3.18.2"
+
+# =====================================================================
+# ACTION & CONTROL FLOW
+# =====================================================================
+
+[[rule]]
+id = "S120"
+element_type = "MergeNode"
+category = "action"
+severity = "error"
+message = "A merge node must have at most one outgoing succession"
+check = "merge_node_one_outgoing"
+spec_ref = "SysML 8.3.17.13 validateMergeNodeOutgoingSuccessions"
+
+[[rule]]
+id = "S121"
+element_type = "DecisionNode"
+category = "action"
+severity = "error"
+message = "A decision node must have at most one incoming succession"
+check = "decision_node_one_incoming"
+spec_ref = "SysML 8.3.17.7 validateDecisionNodeIncomingSuccessions"
+
+[[rule]]
+id = "S122"
+element_type = "ForkNode"
+category = "action"
+severity = "error"
+message = "A fork node must have at most one incoming succession"
+check = "fork_node_one_incoming"
+spec_ref = "SysML 8.3.17.8 validateForkNodeIncomingSuccessions"
+
+[[rule]]
+id = "S123"
+element_type = "JoinNode"
+category = "action"
+severity = "error"
+message = "A join node must have at most one outgoing succession"
+check = "join_node_one_outgoing"
+spec_ref = "SysML 8.3.17.11 validateJoinNodeOutgoingSuccessions"
+
+[[rule]]
+id = "S124"
+element_type = "PerformActionUsage"
+category = "action"
+severity = "error"
+message = "A perform action must be typed by exactly one action definition"
+check = "perform_action_one_type"
+spec_ref = "SysML 8.3.17.14"
+
+[[rule]]
+id = "S125"
+element_type = "SendActionUsage"
+category = "action"
+severity = "error"
+message = "A send action must have a payload parameter"
+check = "send_action_has_payload"
+spec_ref = "SysML 8.3.17.15 validateSendActionParameters"
+
+[[rule]]
+id = "S126"
+element_type = "AcceptActionUsage"
+category = "action"
+severity = "error"
+message = "An accept action must have a payload parameter"
+check = "accept_action_has_payload"
+spec_ref = "SysML 8.3.17.2 validateAcceptActionUsageParameters"
+
+[[rule]]
+id = "S127"
+element_type = "AssignmentActionUsage"
+category = "action"
+severity = "error"
+message = "An assignment action must have a target feature"
+check = "assignment_action_has_target"
+spec_ref = "SysML 8.3.17.5 validateAssignmentActionUsageReferent"
+
+# =====================================================================
+# REQUIREMENT & CASE
+# =====================================================================
+
+[[rule]]
+id = "S130"
+element_type = "RequirementDefinition"
+category = "requirement"
+severity = "error"
+message = "Assumed constraints must be composite"
+check = "requirement_constraints_composite"
+spec_ref = "SysML 8.3.21.8"
+
+[[rule]]
+id = "S131"
+element_type = "RequirementUsage"
+category = "requirement"
+severity = "error"
+message = "Assumed constraints must be composite"
+check = "requirement_constraints_composite"
+spec_ref = "SysML 8.3.21.9"
+
+[[rule]]
+id = "S132"
+element_type = "SatisfyRequirementUsage"
+category = "requirement"
+severity = "error"
+message = "A satisfy requirement must be typed by one requirement definition"
+check = "satisfy_req_one_type"
+spec_ref = "SysML 8.3.21.10 validateSatisfyRequirementUsageReference"
+
+[[rule]]
+id = "S133"
+element_type = "ConcernDefinition"
+category = "requirement"
+severity = "error"
+message = "A concern can have at most one subject"
+check = "concern_at_most_one_subject"
+spec_ref = "SysML 8.3.21.3"
+
+[[rule]]
+id = "S134"
+element_type = "ConcernUsage"
+category = "requirement"
+severity = "error"
+message = "A concern can have at most one subject"
+check = "concern_at_most_one_subject"
+spec_ref = "SysML 8.3.21.4"
+
+[[rule]]
+id = "S135"
+element_type = "VerificationCaseDefinition"
+category = "requirement"
+severity = "error"
+message = "A verification case can have at most one subject"
+check = "verification_case_at_most_one_subject"
+spec_ref = "SysML 8.3.24.3"
+
+[[rule]]
+id = "S136"
+element_type = "VerificationCaseUsage"
+category = "requirement"
+severity = "error"
+message = "A verification case can have at most one subject"
+check = "verification_case_at_most_one_subject"
+spec_ref = "SysML 8.3.24.4"
+
+[[rule]]
+id = "S137"
+element_type = "AnalysisCaseDefinition"
+category = "requirement"
+severity = "error"
+message = "An analysis case can have at most one subject"
+check = "analysis_case_at_most_one_subject"
+spec_ref = "SysML 8.3.23.2"
+
+[[rule]]
+id = "S138"
+element_type = "AnalysisCaseUsage"
+category = "requirement"
+severity = "error"
+message = "An analysis case can have at most one subject"
+check = "analysis_case_at_most_one_subject"
+spec_ref = "SysML 8.3.23.3"
+
+[[rule]]
+id = "S139"
+element_type = "UseCaseDefinition"
+category = "requirement"
+severity = "error"
+message = "A use case can have at most one subject"
+check = "use_case_at_most_one_subject"
+spec_ref = "SysML 8.3.25.3"
+
+[[rule]]
+id = "S140"
+element_type = "UseCaseUsage"
+category = "requirement"
+severity = "error"
+message = "A use case can have at most one subject"
+check = "use_case_at_most_one_subject"
+spec_ref = "SysML 8.3.25.4"
+
+# =====================================================================
+# VARIATION CONSTRAINTS
+# =====================================================================
+
+[[rule]]
+id = "S080"
+element_type = "Definition"
+category = "variation"
+severity = "error"
+message = "A variation definition must be abstract"
+check = "variation_must_be_abstract"
+spec_ref = "SysML 8.3.6.2 validateDefinitionVariationIsAbstract"
+
+[[rule]]
+id = "S081"
+element_type = "Usage"
+category = "variation"
+severity = "error"
+message = "A variation usage must be abstract"
+check = "variation_must_be_abstract"
+spec_ref = "SysML 8.3.6.4 validateUsageVariationIsAbstract"
+
+[[rule]]
+id = "S082"
+element_type = "Definition"
+category = "variation"
+severity = "error"
+message = "An owned usage of a variation must be a variant"
+check = "variation_members_are_variants"
+spec_ref = "SysML 8.3.6.2 validateDefinitionVariationOwnedFeatureMembership"
+
+[[rule]]
+id = "S083"
+element_type = "Usage"
+category = "variation"
+severity = "error"
+message = "An owned usage of a variation must be a variant"
+check = "variation_members_are_variants"
+spec_ref = "SysML 8.3.6.4 validateUsageVariationOwnedFeatureMembership"
+
+[[rule]]
+id = "S084"
+element_type = "Definition"
+category = "variation"
+severity = "error"
+message = "A variation must not specialize another variation"
+check = "variation_no_chain"
+spec_ref = "SysML 8.3.6.2 validateDefinitionVariationSpecialization"
+
+[[rule]]
+id = "S085"
+element_type = "Usage"
+category = "variation"
+severity = "error"
+message = "A variation must not specialize another variation"
+check = "variation_no_chain"
+spec_ref = "SysML 8.3.6.4 validateUsageVariationSpecialization"
+
+# ── Structural property constraints ──────────────────────
+
+[[rule]]
+id = "S090"
+element_type = "AttributeUsage"
+category = "typing"
+severity = "error"
+message = "An AttributeUsage must not be composite"
+check = "attribute_must_not_be_composite"
+spec_ref = "SysML 8.3.7.3 validateAttributeUsageIsReference"
+
+[[rule]]
+id = "S091"
+element_type = "AttributeDefinition"
+category = "typing"
+severity = "error"
+message = "An AttributeDefinition must not be composite"
+check = "attribute_must_not_be_composite"
+spec_ref = "SysML 8.3.7.2 validateAttributeDefinitionFeatures"

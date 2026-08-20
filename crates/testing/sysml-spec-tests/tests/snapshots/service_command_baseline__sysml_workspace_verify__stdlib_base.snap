@@ -1,0 +1,18 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "timeout_secs": 5
+  },
+  "response": {
+    "elapsed_ms": "<MS>",
+    "failed": 0,
+    "model_digest": "335688dfcd47eedf57ba3539810b8dd3d2f10085197a8475c32b24d40a80d6d9",
+    "passed": 0,
+    "per_file": [],
+    "total_cases": 0
+  }
+}

@@ -1,0 +1,27 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": {
+    "elements_by_kind": {
+      "Classifier": 1,
+      "DataType": 1,
+      "Documentation": 12,
+      "FeatureTyping": 6,
+      "LibraryPackage": 1,
+      "OwningMembership": 39,
+      "Redefinition": 1,
+      "ReferenceUsage": 14,
+      "Subclassification": 1,
+      "Subsetting": 3
+    },
+    "relationships_by_kind": {},
+    "total_elements": 79,
+    "total_relationships": 0
+  }
+}

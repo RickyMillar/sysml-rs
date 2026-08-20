@@ -1,0 +1,281 @@
+====================================
+state-definition-with-entry-do-exit
+====================================
+
+state def Active {
+  entry action start;
+  do action run;
+  exit action stop;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (entry_action)
+      (action_usage)
+      (do_action)
+      (action_usage
+        name: (identifier))
+      (exit_action)
+      (action_usage
+        name: (identifier)))))
+
+====================================
+state-usage-minimal
+====================================
+
+state idle;
+
+---
+
+(source_file
+  (state_usage
+    name: (identifier)))
+
+====================================
+state-usage-with-typing
+====================================
+
+state active : ActiveState;
+
+---
+
+(source_file
+  (state_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+state-with-nested-states
+====================================
+
+state def Machine {
+  state idle;
+  state running;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (state_usage
+        name: (identifier))
+      (state_usage
+        name: (identifier)))))
+
+====================================
+state-entry-semicolon
+====================================
+
+state def S {
+  entry;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (entry_action))))
+
+====================================
+state-exit-semicolon
+====================================
+
+state def S {
+  exit;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (exit_action))))
+
+====================================
+entry-with-send-action
+====================================
+
+state def S {
+  entry send Signal() via port1;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (entry_action
+        (send_inline
+          (primary_expression
+            (invocation_expression
+              (feature_chain
+                (identifier))))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+====================================
+transition-chain-basic
+====================================
+
+state def S {
+  state a;
+  state b;
+  accept Evt then b;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (state_usage
+        name: (identifier))
+      (state_usage
+        name: (identifier))
+      (state_transition_chain
+        (trigger_accept
+          trigger_name: (identifier))
+        (transition_target
+          target: (identifier))))))
+
+====================================
+transition-chain-with-guard
+====================================
+
+state def S {
+  state a;
+  state b;
+  accept Evt if [ready] then b;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (state_usage
+        name: (identifier))
+      (state_usage
+        name: (identifier))
+      (state_transition_chain
+        (trigger_accept
+          trigger_name: (identifier))
+        (guard_expression
+          (primary_expression
+            (feature_chain
+              (identifier))))
+        (transition_target
+          target: (identifier))))))
+
+====================================
+transition-usage-full
+====================================
+
+transition t1
+  first stateA
+  accept Signal
+  if [isReady]
+  do action handleIt;
+  then stateB;
+
+---
+
+(source_file
+  (transition_usage
+    name: (identifier)
+    (transition_source
+      source: (identifier))
+    (trigger_action))
+  (feature_declaration
+    name: (identifier))
+  (target_transition_usage
+    (guard_expression
+      (primary_expression
+        (feature_chain
+          (identifier))))
+    (effect_do
+      action: (identifier))
+    target: (identifier)))
+
+====================================
+parallel-state
+====================================
+
+state parallel dualMode;
+
+---
+
+(source_file
+  (state_usage)
+  (feature_declaration
+    name: (identifier)))
+
+====================================
+state-with-do-body
+====================================
+
+state def S {
+  do action {
+    send Ping() via port1;
+  }
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (do_action)
+      (action_usage
+        (action_body
+          (send_action
+            (primary_expression
+              (invocation_expression
+                (feature_chain
+                  (identifier))))
+            (primary_expression
+              (feature_chain
+                (identifier)))))))))
+
+====================================
+target-transition-usage
+====================================
+
+state def S {
+  state Off;
+  state On;
+  accept evt then On;
+}
+
+---
+
+(source_file
+  (state_def
+    name: (identifier)
+    (state_body
+      (state_usage
+        name: (identifier))
+      (state_usage
+        name: (identifier))
+      (state_transition_chain
+        (trigger_accept
+          trigger_name: (identifier))
+        (transition_target
+          target: (identifier))))))

@@ -1,0 +1,138 @@
+================================
+global-qualification-prefix
+================================
+
+package P {
+  import $::RootPackage::Element;
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (import_decl
+        target: (import_target
+          (import_qualified_name
+            (global_qualification)
+            (identifier)
+            (identifier)))))))
+
+================================
+global-qualified-name-in-typing
+================================
+
+part p : $::Pkg::MyType;
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (qualified_name
+          (global_qualification)
+          (identifier)
+          (identifier))))))
+
+================================
+infinity-literal-in-default-value
+================================
+
+part p {
+  attribute x : Real = *;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))
+        (default_value
+          (primary_expression
+            (literal
+              (infinity_literal))))))))
+
+================================
+leading-dot-real-literal
+================================
+
+part p {
+  attribute x = .5;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (real_literal))))))))
+
+================================
+leading-dot-real-literal-with-exponent
+================================
+
+part p {
+  attribute x = .5e3;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (real_literal))))))))
+
+================================
+quoted-name-with-escape-sequences
+================================
+
+part 'name\'s thing' {
+  attribute 'tab\there' = 1;
+}
+
+---
+
+(source_file
+  (standard_usage
+    (quoted_name)
+    (usage_body
+      (standard_usage
+        (quoted_name)
+        (default_value
+          (primary_expression
+            (literal
+              (integer_literal))))))))
+
+================================
+quoted-name-with-backslash-escape
+================================
+
+part 'path\\to\\file';
+
+---
+
+(source_file
+  (standard_usage
+    (quoted_name)))

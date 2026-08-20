@@ -1,0 +1,6 @@
+[project]
+name = "dep-right"
+version = "0.2.0"
+
+[dependencies]
+dep-base = { path = "../dep-base" }

@@ -1,0 +1,989 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uris": null
+  },
+  "response": [
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AcceptActionUsage": 8,
+          "ActionUsage": 1,
+          "AttributeUsage": 4,
+          "Documentation": 1,
+          "FeatureTyping": 4,
+          "NamespaceImport": 1,
+          "OwningMembership": 27,
+          "Package": 1,
+          "StateDefinition": 1,
+          "StateSubactionMembership": 1,
+          "StateUsage": 6,
+          "SuccessionAsUsage": 1,
+          "TransitionFeatureMembership": 8,
+          "TransitionUsage": 9
+        },
+        "relationships_by_kind": {},
+        "total_elements": 73,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "sm",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ActionUsage",
+                  "name": null,
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "exposure",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "exposureTrip",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "stroke",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "velocity",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "compress",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "discharge",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "idle",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "intake",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "recover",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                },
+                {
+                  "archetype": "sm",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "StateUsage",
+                  "name": "relieved",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "StateDefinition",
+              "name": "PumpCycle",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml",
+              "transitions": [
+                {
+                  "id": "<UUID>",
+                  "name": "compress_to_discharge",
+                  "source": "compress",
+                  "target": "discharge"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "compress_to_relieved",
+                  "source": "compress",
+                  "target": "relieved"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "discharge_to_recover",
+                  "source": "discharge",
+                  "target": "recover"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "discharge_to_relieved",
+                  "source": "discharge",
+                  "target": "relieved"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "idle_to_intake",
+                  "source": "idle",
+                  "target": "intake"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "intake_to_compress",
+                  "source": "intake",
+                  "target": "compress"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "intake_to_relieved",
+                  "source": "intake",
+                  "target": "relieved"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "recover_to_intake",
+                  "source": "recover",
+                  "target": "intake"
+                },
+                {
+                  "id": "<UUID>",
+                  "name": "recover_to_relieved",
+                  "source": "recover",
+                  "target": "relieved"
+                }
+              ]
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpCycleBehaviour",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ActionDefinition": 1,
+          "AttributeUsage": 16,
+          "CalculationDefinition": 8,
+          "Documentation": 1,
+          "Feature": 39,
+          "FeatureReferenceExpression": 30,
+          "FeatureTyping": 16,
+          "FeatureValue": 39,
+          "InvocationExpression": 10,
+          "LiteralRational": 22,
+          "NamespaceImport": 4,
+          "OperatorExpression": 19,
+          "OwningMembership": 223,
+          "Package": 1,
+          "PartDefinition": 1,
+          "ReturnParameterMembership": 8,
+          "Subclassification": 9
+        },
+        "relationships_by_kind": {},
+        "total_elements": 447,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "action",
+                  "children": [
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "is_ode": true,
+                      "kind": "CalculationDefinition",
+                      "name": "AccumulatorDerivative",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "is_ode": true,
+                      "kind": "CalculationDefinition",
+                      "name": "ChamberDerivative",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "is_ode": true,
+                      "kind": "CalculationDefinition",
+                      "name": "ExposureDerivative",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "is_ode": true,
+                      "kind": "CalculationDefinition",
+                      "name": "StrokeDerivative",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "is_ode": true,
+                      "kind": "CalculationDefinition",
+                      "name": "VelocityDerivative",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "CalculationDefinition",
+                      "name": "AreaOutput",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "CalculationDefinition",
+                      "name": "CommandOutput",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    },
+                    {
+                      "archetype": "calc",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "CalculationDefinition",
+                      "name": "OrificeOutput",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                    }
+                  ],
+                  "id": "<UUID>",
+                  "kind": "ActionDefinition",
+                  "name": "PumpFieldDynamics",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "accumulatorGain",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "accumulatorPressure",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "chamberGain",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "chamberPressure",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "dischargeCoeff",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "dpRef",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "epsRoot",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "exposure",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "exposureTrip",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "leakCoeff",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "omega",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pWarning",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pistonArea",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "restrictionConductance",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "stroke",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "velocity",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "ReciprocatingPump",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpDynamics",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 2,
+          "Documentation": 1,
+          "FeatureTyping": 2,
+          "ItemDefinition": 1,
+          "NamespaceImport": 1,
+          "OwningMembership": 7,
+          "Package": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 15,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "flowRate",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "pressure",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "ItemDefinition",
+              "name": "HydraulicSample",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpTypes",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 2,
+          "Documentation": 1,
+          "FeatureTyping": 4,
+          "LiteralBoolean": 2,
+          "LiteralInteger": 4,
+          "LiteralString": 2,
+          "MetadataUsage": 2,
+          "NamespaceImport": 3,
+          "OwningMembership": 28,
+          "Package": 1,
+          "ReferenceUsage": 8
+        },
+        "relationships_by_kind": {},
+        "total_elements": 57,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "closingBranch",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "openingBranch",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpCharacteristic",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 3,
+          "Documentation": 1,
+          "FeatureTyping": 3,
+          "LiteralRational": 3,
+          "NamespaceImport": 1,
+          "OwningMembership": 11,
+          "Package": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 23,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "moderateConductance",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "nominalConductance",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml"
+            },
+            {
+              "archetype": "attribute",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "AttributeUsage",
+              "name": "severeConductance",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpScenarios",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "AttributeUsage": 4,
+          "Documentation": 2,
+          "FeatureTyping": 4,
+          "MetadataDefinition": 1,
+          "NamespaceImport": 1,
+          "OwningMembership": 12,
+          "Package": 1
+        },
+        "relationships_by_kind": {},
+        "total_elements": 25,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "domainColumn",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "file",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "hasHeader",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+                },
+                {
+                  "archetype": "attribute",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "AttributeUsage",
+                  "name": "rangeColumn",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "MetadataDefinition",
+              "name": "DataSource",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpTooling",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ConjugatedPortDefinition": 2,
+          "Documentation": 1,
+          "FeatureTyping": 6,
+          "ItemUsage": 2,
+          "NamespaceImport": 1,
+          "OwningMembership": 21,
+          "Package": 1,
+          "PartDefinition": 3,
+          "PortDefinition": 2,
+          "PortUsage": 4
+        },
+        "relationships_by_kind": {},
+        "total_elements": 43,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "fluid",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "inlet",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml",
+                  "typed_as": "<UUID>"
+                },
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "fluid",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "outlet",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "PumpStage",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "fluid",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "inlet",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "FluidLoad",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+            },
+            {
+              "archetype": "part",
+              "children": [
+                {
+                  "archetype": "port",
+                  "children": [
+                    {
+                      "archetype": "part",
+                      "children": [],
+                      "id": "<UUID>",
+                      "kind": "ItemUsage",
+                      "name": "fluid",
+                      "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                    }
+                  ],
+                  "default_collapsed": true,
+                  "id": "<UUID>",
+                  "kind": "PortUsage",
+                  "name": "outlet",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml",
+                  "typed_as": "<UUID>"
+                }
+              ],
+              "id": "<UUID>",
+              "kind": "PartDefinition",
+              "name": "FluidSupply",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "fluid",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "FluidIn",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+            },
+            {
+              "archetype": "port",
+              "children": [
+                {
+                  "archetype": "part",
+                  "children": [],
+                  "id": "<UUID>",
+                  "kind": "ItemUsage",
+                  "name": "fluid",
+                  "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+                }
+              ],
+              "default_collapsed": true,
+              "id": "<UUID>",
+              "kind": "PortDefinition",
+              "name": "FluidOut",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpInterfaces",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ConstraintDefinition": 3,
+          "Documentation": 4,
+          "Feature": 10,
+          "FeatureReferenceExpression": 4,
+          "FeatureValue": 10,
+          "LiteralRational": 4,
+          "NamespaceImport": 1,
+          "OperatorExpression": 5,
+          "OwningMembership": 41,
+          "Package": 1,
+          "ResultExpressionMembership": 3
+        },
+        "relationships_by_kind": {},
+        "total_elements": 86,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "NonNegativeThresholds",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "PositiveConductance",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ConstraintDefinition",
+              "name": "RegularizedRoot",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "HydraulicConstraints",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ConstraintUsage": 3,
+          "Documentation": 7,
+          "Feature": 8,
+          "FeatureReferenceExpression": 6,
+          "FeatureTyping": 3,
+          "FeatureValue": 8,
+          "LiteralRational": 1,
+          "NamespaceImport": 1,
+          "ObjectiveMembership": 3,
+          "OperatorExpression": 4,
+          "OwningMembership": 59,
+          "Package": 1,
+          "RequirementConstraintMembership": 3,
+          "RequirementDefinition": 3,
+          "RequirementUsage": 3,
+          "RequirementVerificationMembership": 3,
+          "ResultExpressionMembership": 3,
+          "SubjectMembership": 3,
+          "VerificationCaseDefinition": 3
+        },
+        "relationships_by_kind": {},
+        "total_elements": 125,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "case",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "NominalSafetyCase",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "SevereProtectionCase",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            },
+            {
+              "archetype": "case",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "VerificationCaseDefinition",
+              "name": "StabilityCase",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "BoundedChamberPressure",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "ProtectsUnderSevere",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            },
+            {
+              "archetype": "constraint",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "RequirementDefinition",
+              "name": "SafeUnderNominal",
+              "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "PumpSafety",
+          "source_uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+        }
+      ],
+      "uri": "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+    }
+  ]
+}

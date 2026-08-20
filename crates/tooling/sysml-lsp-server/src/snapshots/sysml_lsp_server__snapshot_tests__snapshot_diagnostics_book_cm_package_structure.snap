@@ -1,0 +1,31 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[IM006] error @ "public import Actions::*;"
+  import references unknown standard library namespace 'Actions'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "import ISQ::*;"
+  import references unknown standard library namespace 'ISQ'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "public import Ports::*;"
+  import references unknown standard library namespace 'Ports'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "public import Requirements::*;"
+  import references unknown standard library namespace 'Requirements'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "import SI::*;"
+  import references unknown standard library namespace 'SI'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "import ScalarValues::*;"
+  import references unknown standard library namespace 'ScalarValues'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "public import States::*;"
+  import references unknown standard library namespace 'States'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM001] info @ "public import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed
+[IM001] info @ "public import Verification::*;"
+  import references namespace 'Verification' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed

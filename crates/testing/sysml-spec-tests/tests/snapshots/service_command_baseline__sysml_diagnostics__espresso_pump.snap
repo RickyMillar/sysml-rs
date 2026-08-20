@@ -1,0 +1,105 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+  },
+  "response": [
+    {
+      "code": "AX001",
+      "message": "action 'PumpFieldDynamics' is atomic (no steps) — it will not decompose during execution",
+      "notes": [
+        "to make it composite, add action steps inside the body, e.g. `action step1;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 8,
+        "end": 7163,
+        "file":"<FILE>",
+        "line": 80,
+        "start": 5139
+      },
+      "tier": "Parse"
+    },
+    {
+      "code": "PH006",
+      "message": "did you mean `ISQ::AreaValue`? attribute 'pistonArea' in 'ReciprocatingPump' is typed as Real",
+      "notes": [
+        "ISQ types enable domain detection, conservation laws, and simulation",
+        "area quantity — using the ISQ type unlocks automatic physics classification",
+        "try: `attribute pistonArea : ISQ::AreaValue;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 18,
+        "end": 2864,
+        "file":"<FILE>",
+        "line": 47,
+        "start": 2854
+      },
+      "tier": "Semantic"
+    },
+    {
+      "code": "PH006",
+      "message": "did you mean `ISQ::PressureValue`? attribute 'accumulatorPressure' in 'ReciprocatingPump' is typed as Real",
+      "notes": [
+        "ISQ types enable domain detection, conservation laws, and simulation",
+        "hydraulic effort — enables pressure propagation — using the ISQ type unlocks automatic physics classification",
+        "try: `attribute accumulatorPressure : ISQ::PressureValue;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 22,
+        "end": 4905,
+        "file":"<FILE>",
+        "line": 76,
+        "start": 4886
+      },
+      "tier": "Semantic"
+    },
+    {
+      "code": "PH006",
+      "message": "did you mean `ISQ::PressureValue`? attribute 'chamberPressure' in 'ReciprocatingPump' is typed as Real",
+      "notes": [
+        "ISQ types enable domain detection, conservation laws, and simulation",
+        "hydraulic effort — enables pressure propagation — using the ISQ type unlocks automatic physics classification",
+        "try: `attribute chamberPressure : ISQ::PressureValue;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 22,
+        "end": 4843,
+        "file":"<FILE>",
+        "line": 75,
+        "start": 4828
+      },
+      "tier": "Semantic"
+    },
+    {
+      "code": "PH006",
+      "message": "did you mean `ISQ::SpeedValue`? attribute 'velocity' in 'ReciprocatingPump' is typed as Real",
+      "notes": [
+        "ISQ types enable domain detection, conservation laws, and simulation",
+        "mechanical effort — using the ISQ type unlocks automatic physics classification",
+        "try: `attribute velocity : ISQ::SpeedValue;`"
+      ],
+      "related": [],
+      "severity": "info",
+      "span": {
+        "col": 22,
+        "end": 4785,
+        "file":"<FILE>",
+        "line": 74,
+        "start": 4777
+      },
+      "tier": "Semantic"
+    }
+  ]
+}

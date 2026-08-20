@@ -1,0 +1,15 @@
+---
+source: crates/testing/sysml-spec-tests/tests/rsc5_quantity_baseline.rs
+expression: report
+---
+SlidingBlock.position = 0.110286
+SlidingBlock.velocity = 1.205712
+appliedForce = 5.000000
+frictionCoeff = 0.300000
+gravity = 9.810000
+mass = 1.000000
+position = 0.110286
+smoothingThreshold = 0.010000
+t_ms = 100.000000
+tick = 10.000000
+velocity = 1.205712

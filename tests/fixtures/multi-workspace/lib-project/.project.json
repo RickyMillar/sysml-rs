@@ -1,0 +1,6 @@
+{
+    "name": "Shared Library",
+    "description": "Shared definitions used by the app",
+    "version": "1.0.0",
+    "topic": ["Library"]
+}

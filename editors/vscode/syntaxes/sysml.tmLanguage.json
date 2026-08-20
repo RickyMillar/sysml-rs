@@ -1,0 +1,337 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SysML",
+  "scopeName": "source.sysml",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#quoted-names" },
+    { "include": "#package-with-name" },
+    { "include": "#definition-with-name" },
+    { "include": "#metadata-annotation" },
+    { "include": "#multiplicity" },
+    { "include": "#definition-keywords" },
+    { "include": "#usage-keywords" },
+    { "include": "#relationship-keywords" },
+    { "include": "#visibility-keywords" },
+    { "include": "#modifier-keywords" },
+    { "include": "#control-keywords" },
+    { "include": "#import-keywords" },
+    { "include": "#action-keywords" },
+    { "include": "#parameter-keywords" },
+    { "include": "#type-keywords" },
+    { "include": "#builtin-variables" },
+    { "include": "#other-keywords" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#qualified-name" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "match": "/\\*\\*/",
+          "name": "comment.block.empty.sysml",
+          "captures": {
+            "0": { "name": "punctuation.definition.comment.sysml" }
+          }
+        },
+        {
+          "name": "comment.block.documentation.sysml",
+          "begin": "/\\*\\*",
+          "end": "\\*/",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.sysml" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.sysml" }
+          }
+        },
+        {
+          "name": "comment.block.sysml",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.sysml" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.sysml" }
+          }
+        },
+        {
+          "name": "comment.line.double-slash.sysml",
+          "begin": "//",
+          "end": "$",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.sysml" }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.sysml",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.sysml" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.sysml" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.sysml",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "quoted-names": {
+      "match": "'[^'\\\\]*(?:\\\\.[^'\\\\]*)*'",
+      "name": "variable.name.quoted.sysml"
+    },
+    "package-with-name": {
+      "match": "\\b(package|namespace)\\s+([A-Za-z_]\\w*|'[^']*')",
+      "captures": {
+        "1": { "name": "keyword.other.sysml" },
+        "2": { "name": "entity.name.namespace.sysml" }
+      }
+    },
+    "definition-with-name": {
+      "patterns": [
+        {
+          "comment": "Multi-word case def keywords: use case def, verification case def, analysis case def",
+          "match": "\\b(use\\s+case|verification\\s+case|analysis\\s+case)\\s+(def)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.sysml" },
+            "2": { "name": "keyword.other.definition.sysml" },
+            "3": { "name": "entity.name.type.definition.sysml" }
+          }
+        },
+        {
+          "comment": "Standard 'xxx def Name' pattern for all SysML definition keywords",
+          "match": "\\b(part|action|state|port|interface|requirement|constraint|item|enum|attribute|calc|allocation|connection|concern|case|view|viewpoint|rendering|metadata|occurrence)\\s+(def)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.sysml" },
+            "2": { "name": "keyword.other.definition.sysml" },
+            "3": { "name": "entity.name.type.definition.sysml" }
+          }
+        },
+        {
+          "comment": "Bare 'def Name' for KerML-style definitions",
+          "match": "\\b(def)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.sysml" },
+            "2": { "name": "entity.name.type.definition.sysml" }
+          }
+        }
+      ]
+    },
+    "metadata-annotation": {
+      "match": "@([A-Za-z_]\\w*(?:::[A-Za-z_]\\w*)*)",
+      "name": "entity.name.type.annotation.sysml"
+    },
+    "multiplicity": {
+      "comment": "Multiplicity brackets like [0..*], [1], [0..1]",
+      "begin": "\\[",
+      "end": "\\]",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.multiplicity.begin.sysml" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.multiplicity.end.sysml" }
+      },
+      "patterns": [
+        {
+          "match": "\\*",
+          "name": "constant.language.multiplicity.sysml"
+        },
+        {
+          "match": "\\.\\.",
+          "name": "keyword.operator.range.sysml"
+        },
+        {
+          "match": "\\d+",
+          "name": "constant.numeric.sysml"
+        }
+      ]
+    },
+    "definition-keywords": {
+      "comment": "Multi-word and single-word definition keywords (without name capture)",
+      "patterns": [
+        {
+          "match": "\\b(use\\s+case|verification\\s+case|analysis\\s+case)\\s+(def)\\b",
+          "captures": {
+            "1": { "name": "keyword.other.definition.sysml" },
+            "2": { "name": "keyword.other.definition.sysml" }
+          }
+        },
+        {
+          "match": "\\b(part|action|state|port|interface|requirement|constraint|item|enum|attribute|calc|allocation|connection|concern|case|view|viewpoint|rendering|metadata|occurrence)\\s+(def)\\b",
+          "captures": {
+            "1": { "name": "keyword.other.definition.sysml" },
+            "2": { "name": "keyword.other.definition.sysml" }
+          }
+        }
+      ]
+    },
+    "usage-keywords": {
+      "patterns": [
+        {
+          "comment": "Multi-word usage keywords with name: 'use case myCase'",
+          "match": "\\b(use\\s+case|verification\\s+case|analysis\\s+case)\\s+([A-Za-z_]\\w*|'[^']*')(?!\\s+def\\b)",
+          "captures": {
+            "1": { "name": "keyword.other.usage.sysml" },
+            "2": { "name": "variable.other.usage.sysml" }
+          }
+        },
+        {
+          "comment": "Standard usage keywords with name: 'state warmingUp', 'part engine'",
+          "match": "\\b(part|action|state|port|interface|requirement|constraint|item|enum|attribute|calc|allocation|connection|concern|case|view|viewpoint|rendering|metadata|occurrence|ref|flow|message|transition)\\s+([A-Za-z_]\\w*|'[^']*')(?!\\s+def\\b)",
+          "captures": {
+            "1": { "name": "keyword.other.usage.sysml" },
+            "2": { "name": "variable.other.usage.sysml" }
+          }
+        },
+        {
+          "comment": "Bare usage keywords (no name follows)",
+          "match": "\\b(part|action|state|port|interface|requirement|constraint|item|enum|attribute|calc|allocation|connection|concern|case|view|viewpoint|rendering|metadata|occurrence|ref|flow|message|binding|connector|step|expr)\\b(?!\\s+def\\b)",
+          "name": "keyword.other.usage.sysml"
+        }
+      ]
+    },
+    "relationship-keywords": {
+      "match": "\\b(specializes|specialization|subsets|subset|redefines|redefinition|redefine|references|chains|conjugates|conjugation|conjugate|inverses|inverse|inverting|disjoining|disjoint|differences|intersects|unions|featuring|featured|multiplicity|typed\\s+by|defined\\s+by|typing|superset)\\b",
+      "name": "keyword.other.relationship.sysml"
+    },
+    "visibility-keywords": {
+      "match": "\\b(public|private|protected)\\b",
+      "name": "keyword.other.visibility.sysml"
+    },
+    "modifier-keywords": {
+      "match": "\\b(abstract|derived|readonly|ordered|nonunique|individual|variation|variant|constant|const|default|snapshot|timeslice|composite|portion)\\b",
+      "name": "keyword.other.modifier.sysml"
+    },
+    "control-keywords": {
+      "match": "\\b(if|else|then|while|for|loop|until|do|decide|fork|join|merge|parallel|entry|exit|first|accept|send|transition|succession|via|after|when|event|crosses)\\b",
+      "name": "keyword.control.sysml"
+    },
+    "import-keywords": {
+      "match": "\\b(import|alias|expose|from|library|standard)\\b",
+      "name": "keyword.other.import.sysml"
+    },
+    "action-keywords": {
+      "match": "\\b(assign|perform|exhibit|include|assert|assume|satisfy|require|bind|connect|allocate|terminate|verify|collect|select|start)\\b",
+      "name": "keyword.other.action.sysml"
+    },
+    "parameter-keywords": {
+      "match": "\\b(in|out|inout|return)\\b",
+      "name": "keyword.other.parameter.sysml"
+    },
+    "type-keywords": {
+      "comment": "KerML-level type/classifier keywords used within SysML",
+      "match": "\\b(type|classifier|class|struct|datatype|assoc\\s+struct|assoc|interaction|behavior|function|predicate|metaclass|bool|feature)\\b",
+      "name": "keyword.other.type.sysml"
+    },
+    "other-keywords": {
+      "match": "\\b(about|of|to|by|at|end|all|new|subject|objective|actor|stakeholder|filter|package|namespace|doc|comment|rep|language|locale|dependency|render|frame|member|inv|that|analysis|verification|use)\\b",
+      "name": "keyword.other.sysml"
+    },
+    "builtin-variables": {
+      "match": "\\b(self|this)\\b",
+      "name": "variable.language.sysml"
+    },
+    "constants": {
+      "match": "\\b(true|false|null)\\b",
+      "name": "constant.language.sysml"
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "comment": "Hex integer literals",
+          "match": "\\b0[xX][0-9a-fA-F_]+\\b",
+          "name": "constant.numeric.hex.sysml"
+        },
+        {
+          "comment": "Floating point and integer literals with optional exponent",
+          "match": "\\b\\d[\\d_]*(?:\\.[\\d_]+)?(?:[eE][+-]?\\d[\\d_]*)?\\b",
+          "name": "constant.numeric.sysml"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "===|!==|==|!=|<=|>=|<|>",
+          "name": "keyword.operator.comparison.sysml"
+        },
+        {
+          "match": "\\*\\*|[+\\-*/%]",
+          "name": "keyword.operator.arithmetic.sysml"
+        },
+        {
+          "match": "\\b(and|or|not|xor|implies)\\b",
+          "name": "keyword.operator.logical.sysml"
+        },
+        {
+          "match": "[&|^]|\\?\\?|\\?",
+          "name": "keyword.operator.logical.sysml"
+        },
+        {
+          "match": "\\b(hastype|istype|as|meta)\\b",
+          "name": "keyword.operator.other.sysml"
+        },
+        {
+          "match": "::\\>|:\\>\\>|:\\>|::|:=|=>|->|\\.\\.|\\.\\.\\?|\\.\\?|~|@@|@|#|\\$",
+          "name": "keyword.operator.other.sysml"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.sysml"
+        }
+      ]
+    },
+    "qualified-name": {
+      "comment": "Qualified name references like Parts::Wheel or ScalarValues::Real",
+      "match": "\\b([A-Za-z_]\\w*)\\s*(::)\\s*([A-Za-z_]\\w*(?:\\s*::\\s*[A-Za-z_]\\w*)*)",
+      "captures": {
+        "1": { "name": "entity.name.namespace.sysml" },
+        "2": { "name": "punctuation.accessor.sysml" },
+        "3": { "name": "entity.name.type.sysml" }
+      }
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": ";",
+          "name": "punctuation.terminator.sysml"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.type.sysml"
+        },
+        {
+          "match": "\\{",
+          "name": "punctuation.definition.block.begin.sysml"
+        },
+        {
+          "match": "\\}",
+          "name": "punctuation.definition.block.end.sysml"
+        },
+        {
+          "match": "\\(",
+          "name": "punctuation.definition.group.begin.sysml"
+        },
+        {
+          "match": "\\)",
+          "name": "punctuation.definition.group.end.sysml"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.sysml"
+        }
+      ]
+    }
+  }
+}

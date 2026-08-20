@@ -1,0 +1,10 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+assertion_line: 457
+expression: rendered
+---
+[S015] error @ "part myPart : DoSomething;"
+  'myPart': must be typed by item definitions, found action definition
+[AX001] info @ "action def DoSomething;"
+  action 'DoSomething' is atomic (no steps) — it will not decompose during execution
+  note: to make it composite, add action steps inside the body, e.g. `action step1;`

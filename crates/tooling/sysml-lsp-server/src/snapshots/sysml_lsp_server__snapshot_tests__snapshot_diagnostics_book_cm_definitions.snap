@@ -1,0 +1,15 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[IM006] error @ "import SI::*;"
+  import references unknown standard library namespace 'SI'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM006] error @ "import ScalarValues::*;"
+  import references unknown standard library namespace 'ScalarValues'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[PH006] info @ "motorSpeed"
+  did you mean `ISQ::SpeedValue`? attribute 'motorSpeed' in 'Grinder' is typed as Real
+  note: mechanical effort — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute motorSpeed : ISQ::SpeedValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation

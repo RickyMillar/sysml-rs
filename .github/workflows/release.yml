@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  # Reuse the CI workflow for building + packaging (LSP server binaries + VSIX)
+  ci:
+    uses: ./.github/workflows/vscode-extension.yml
+
+  # ---------- Create GitHub Release with VSIX + server binaries ----------
+  release:
+    needs: [ci]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: |
+            vsix-*
+            server-*
+          path: release-artifacts/
+          merge-multiple: false
+
+      - name: Collect VSIX and rename server binaries
+        run: |
+          mkdir -p release/vsix release/server
+
+          # VSIX artifacts
+          find release-artifacts -name '*.vsix' -exec cp {} release/vsix/ \;
+
+          # Server binaries → renamed to match the VS Code extension's
+          # installServer / getPlatformSuffix naming convention:
+          #   sysml-lsp-server-<rust-target-triple>[.exe]
+          mv release-artifacts/server-linux-x64/sysml-lsp-server        release/server/sysml-lsp-server-x86_64-unknown-linux-gnu
+          mv release-artifacts/server-linux-arm64/sysml-lsp-server      release/server/sysml-lsp-server-aarch64-unknown-linux-gnu
+          mv release-artifacts/server-darwin-arm64/sysml-lsp-server    release/server/sysml-lsp-server-aarch64-apple-darwin
+          mv release-artifacts/server-darwin-x64/sysml-lsp-server      release/server/sysml-lsp-server-x86_64-apple-darwin
+          mv release-artifacts/server-win32-x64/sysml-lsp-server.exe   release/server/sysml-lsp-server-x86_64-pc-windows-msvc.exe
+
+          echo "## Release artifacts:"
+          ls -lhR release/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          files: |
+            release/vsix/*.vsix
+            release/server/*
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}

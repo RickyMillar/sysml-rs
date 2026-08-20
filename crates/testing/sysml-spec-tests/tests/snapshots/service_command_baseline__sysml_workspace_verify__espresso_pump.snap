@@ -1,0 +1,20 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "timeout_secs": 5
+  },
+  "response": {
+    "elapsed_ms": "<MS>",
+    "failed": 0,
+    "model_digest": "4d6b1962c3700277318949af787b2b92a5606a06c709e608f98616fa14648a15",
+    "passed": 0,
+    "per_file": [
+      "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+    ],
+    "total_cases": 3
+  }
+}

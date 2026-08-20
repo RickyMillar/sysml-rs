@@ -1,0 +1,67 @@
+[package]
+name = "sysml-service"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Unified service layer for SysML v2 — owns all domain state, 48 registered commands"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+# Lang crates
+sysml-core = { workspace = true, features = ["serde", "schemars"] }
+sysml-id = { workspace = true, features = ["schemars"] }
+sysml-span = { workspace = true }
+sysml-parser-trait = { workspace = true }
+sysml-runtime = { workspace = true, features = ["serde", "schemars", "montecarlo"] }
+sysml-diagram = { workspace = true, features = ["serde"] }
+
+# Tooling crates
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+tree-sitter = { workspace = true }
+sysml-ide-db = { workspace = true }
+salsa = { workspace = true }
+sysml-store = { workspace = true }
+sysml-manifest = { workspace = true }
+sysml-project = { workspace = true }
+sysml-resolve = { workspace = true }
+sysml-query = { workspace = true }
+
+# External
+thiserror = { workspace = true }
+tracing = { workspace = true }
+dashmap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+schemars = { workspace = true }
+inventory = { workspace = true }
+uuid = { workspace = true }
+tokio = { workspace = true }
+rayon = "1.10"
+sha2 = { workspace = true }
+bincode = { workspace = true }
+directories = { workspace = true }
+
+# Proc macro
+sysml-service-macros = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+criterion = { workspace = true }
+
+[[bench]]
+name = "bench_check_constraints"
+harness = false
+
+[[bench]]
+name = "bench_sim_start"
+harness = false
+
+[build-dependencies]
+sysml-codegen = { workspace = true }
+
+[lints]
+workspace = true

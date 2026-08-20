@@ -1,0 +1,23 @@
+---
+source: crates/testing/sysml-spec-tests/tests/rsc3_exchange_baseline.rs
+expression: report
+---
+RSC-3.B0 exchange parity baseline :: sim-mega-coffee-machine
+subsystems (2):
+  Boiler
+  BoilerController
+== sim-mega-coffee-machine tick 1 ==
+message-count: 0
+port-key: Brewer.waterIn -> []
+port-key: WaterTank.waterOut -> []
+flow-drop-warnings: 0
+== sim-mega-coffee-machine tick 10 ==
+message-count: 0
+port-key: Brewer.waterIn -> []
+port-key: WaterTank.waterOut -> []
+flow-drop-warnings: 0
+== sim-mega-coffee-machine tick 100 ==
+message-count: 0
+port-key: Brewer.waterIn -> []
+port-key: WaterTank.waterOut -> []
+flow-drop-warnings: 0

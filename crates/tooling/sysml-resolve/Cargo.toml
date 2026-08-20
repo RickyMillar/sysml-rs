@@ -1,0 +1,30 @@
+[package]
+name = "sysml-resolve"
+description = "SysML project dependency resolution"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-id = { workspace = true }
+sysml-manifest = { workspace = true }
+sysml-project = { workspace = true }
+sha2 = { workspace = true }
+semver = { workspace = true }
+thiserror = { workspace = true }
+directories = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+ureq = { version = "2.12", default-features = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+tempfile = "3"
+
+[lints]
+workspace = true

@@ -1,0 +1,35 @@
+[package]
+name = "sysml-codegen"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Code generation utilities for sysml-rs, including TTL vocabulary parsing"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+# This is a build-time only crate, not a runtime dependency
+[lib]
+path = "src/lib.rs"
+
+# Helper binary: regenerates the TS classification module checked into the FE.
+# Run via `cargo run -p sysml-codegen --bin emit-ts-classification` whenever
+# `src/archetype_rules.toml` changes.
+[[bin]]
+name = "emit-ts-classification"
+path = "src/bin/emit_ts_classification.rs"
+
+[dependencies]
+# Build-time dependencies for parsing specification files
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+quick-xml = { workspace = true }
+regex = { workspace = true }
+
+[dev-dependencies]
+
+[lints]
+workspace = true

@@ -1,0 +1,19 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "element_id": "<UUID>",
+    "overrides": []
+  },
+  "response": {
+    "context": {},
+    "diagnostics": [
+      "element `BrewSequenceView` has no compilable expression children"
+    ],
+    "element_name": "BrewSequenceView",
+    "source": "",
+    "verdict": "error"
+  }
+}

@@ -1,0 +1,409 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "case_id": "<UUID>",
+      "case_name": "BrewTempTest",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "Verification::BrewTempTest",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `temp`",
+              "expected": true,
+              "expression": "(temp >= 90) and (temp <= 96)",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [
+                {
+                  "actual": null,
+                  "error": "undefined variable: `temp`",
+                  "expected": 90.0,
+                  "expression": "temp >= 90",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "temp"
+                  ]
+                },
+                {
+                  "actual": null,
+                  "error": "undefined variable: `temp`",
+                  "expected": 96.0,
+                  "expression": "temp <= 96",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "temp"
+                  ]
+                }
+              ],
+              "satisfied": null,
+              "symbols": [
+                "temp"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `temp`",
+          "expected": true,
+          "margin": null,
+          "message": "undefined variable in constraint: `temp`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "BrewTempReq",
+          "requirement_name": "BrewTempReq",
+          "requirement_text": "Water temperature shall be maintained between 90 and 96 C\n             * during extraction.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "machine",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "BrewTimeTest",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "Verification::BrewTimeTest",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `totalTime`",
+              "expected": 60.0,
+              "expression": "totalTime < 60",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "totalTime"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `totalTime`",
+          "expected": 60.0,
+          "margin": null,
+          "message": "undefined variable in constraint: `totalTime`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "BrewTimeReq",
+          "requirement_name": "BrewTimeReq",
+          "requirement_text": "The machine shall complete a brew cycle in under 60 seconds.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "machine",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "BrewWithoutHeatTest",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "Orchestration::BrewWithoutHeatTest",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `brewActive`",
+              "expected": 0,
+              "expression": "brewActive == 0",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "brewActive"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `brewActive`",
+          "expected": 0,
+          "margin": null,
+          "message": "undefined variable in constraint: `brewActive`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "brewBlocked",
+          "requirement_name": "brewBlocked",
+          "requirement_text": "Brew controller should remain in standby.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "brewSystem",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "FullBrewCycleTest",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "Orchestration::FullBrewCycleTest",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `boilerTemp`",
+              "expected": 100,
+              "expression": "boilerTemp < 100",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "boilerTemp"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `boilerTemp`",
+          "expected": 100,
+          "margin": null,
+          "message": "undefined variable in constraint: `boilerTemp`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "safeOperation",
+          "requirement_name": "safeOperation",
+          "requirement_text": "Temperature stays safe throughout.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        },
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `grindWeight`",
+              "expected": true,
+              "expression": "(grindWeight >= 18) and (grindWeight <= 22)",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [
+                {
+                  "actual": null,
+                  "error": "undefined variable: `grindWeight`",
+                  "expected": 18,
+                  "expression": "grindWeight >= 18",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "grindWeight"
+                  ]
+                },
+                {
+                  "actual": null,
+                  "error": "undefined variable: `grindWeight`",
+                  "expected": 22,
+                  "expression": "grindWeight <= 22",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "grindWeight"
+                  ]
+                }
+              ],
+              "satisfied": null,
+              "symbols": [
+                "grindWeight"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `grindWeight`",
+          "expected": true,
+          "margin": null,
+          "message": "undefined variable in constraint: `grindWeight`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "goodDose",
+          "requirement_name": "goodDose",
+          "requirement_text": "Grind dose is within range.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        },
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `waterPressure`",
+              "expected": true,
+              "expression": "(waterPressure >= 1) and (waterPressure <= 10)",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [
+                {
+                  "actual": null,
+                  "error": "undefined variable: `waterPressure`",
+                  "expected": 1,
+                  "expression": "waterPressure >= 1",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "waterPressure"
+                  ]
+                },
+                {
+                  "actual": null,
+                  "error": "undefined variable: `waterPressure`",
+                  "expected": 10,
+                  "expression": "waterPressure <= 10",
+                  "margin": null,
+                  "satisfied": null,
+                  "symbols": [
+                    "waterPressure"
+                  ]
+                }
+              ],
+              "satisfied": null,
+              "symbols": [
+                "waterPressure"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `waterPressure`",
+          "expected": true,
+          "margin": null,
+          "message": "undefined variable in constraint: `waterPressure`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "extractionPressureOk",
+          "requirement_name": "extractionPressureOk",
+          "requirement_text": "Pressure is correct during extraction.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "brewSystem",
+      "total_requirements": 3,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "OverheatRecoveryTest",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "Orchestration::OverheatRecoveryTest",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `boilerTemp`",
+              "expected": 100,
+              "expression": "boilerTemp < 100",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "boilerTemp"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `boilerTemp`",
+          "expected": 100,
+          "margin": null,
+          "message": "undefined variable in constraint: `boilerTemp`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "tempNormal",
+          "requirement_name": "tempNormal",
+          "requirement_text": "Temperature is normal after recovery.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        },
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `machineReady`",
+              "expected": 0,
+              "expression": "machineReady > 0",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "machineReady"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `machineReady`",
+          "expected": 0,
+          "margin": null,
+          "message": "undefined variable in constraint: `machineReady`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "recoveredSafely",
+          "requirement_name": "recoveredSafely",
+          "requirement_text": "Machine returns to ready state after recovery.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "brewSystem",
+      "total_requirements": 2,
+      "verdict": "Inconclusive"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[package]
+name = "sysml-id"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Element identifiers, qualified names, and project/commit IDs for SysML v2"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[features]
+default = ["uuid"]
+uuid = ["dep:uuid"]
+serde = ["dep:serde", "uuid?/serde"]
+schemars = ["dep:schemars"]
+
+[dependencies]
+thiserror = { workspace = true }
+uuid = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+schemars = { workspace = true, optional = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+proptest = { workspace = true }
+
+[lints]
+workspace = true

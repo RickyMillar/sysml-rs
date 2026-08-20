@@ -1,0 +1,33 @@
+---
+source: crates/testing/sysml-spec-tests/tests/rsc3_exchange_baseline.rs
+expression: report
+---
+RSC-3.B0 exchange parity baseline :: orchestration-complex
+subsystems (3):
+  BoilerController
+  ThermalBody
+  WaterPump
+== orchestration-complex tick 1 ==
+message-count: 0
+port-key: BoilerUnit.pressureIn -> []
+port-key: BoilerUnit.steamOut -> []
+port-key: BoilerUnit.waterIn -> []
+port-key: PressureSensor.reading -> []
+port-key: WaterReservoir.waterOut -> []
+flow-drop-warnings: 0
+== orchestration-complex tick 10 ==
+message-count: 0
+port-key: BoilerUnit.pressureIn -> []
+port-key: BoilerUnit.steamOut -> []
+port-key: BoilerUnit.waterIn -> []
+port-key: PressureSensor.reading -> []
+port-key: WaterReservoir.waterOut -> []
+flow-drop-warnings: 0
+== orchestration-complex tick 100 ==
+message-count: 0
+port-key: BoilerUnit.pressureIn -> []
+port-key: BoilerUnit.steamOut -> []
+port-key: BoilerUnit.waterIn -> []
+port-key: PressureSensor.reading -> []
+port-key: WaterReservoir.waterOut -> []
+flow-drop-warnings: 0

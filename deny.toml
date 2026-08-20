@@ -1,0 +1,233 @@
+# cargo-deny configuration — OSL-12 automated license policy
+#
+#
+# Every allowance below traces to a specific section of the inventory. The
+# allow-list is *derived from the reviewed inventory*, not from whatever
+# happens to resolve in the graph today — a new license expression entering
+# the graph must fail this gate and be reviewed, which is the whole point.
+#
+# Run:  cargo deny check licenses
+# The companion invariant checks (workspace/npm/pyproject/tree-sitter.json
+# declarations, and the no-NOTICE-dependency assertion) live in
+# scripts/license-policy-check.sh, because cargo metadata cannot see the
+# pyproject.toml or tree-sitter.json declaration sites — see inventory §3.1.
+
+# ---------------------------------------------------------------------------
+# Graph scope
+# ---------------------------------------------------------------------------
+[graph]
+# Empty `targets` means every target triple is evaluated, not just the host.
+# That is deliberate: it keeps target-gated crates visible to the gate rather
+# than letting a copyleft dependency hide behind a cfg. It is also why
+# `r-efi` (cfg(target_os = "uefi")) shows up below.
+targets = []
+
+# Dev-dependencies participate. They are not redistributed, but an unreviewed
+# license appearing in the build toolchain is still something a human should
+# see rather than something the gate silently drops.
+exclude-dev = false
+
+[output]
+feature-depth = 1
+
+# ---------------------------------------------------------------------------
+# Licenses — the OSL-12 deliverable
+# ---------------------------------------------------------------------------
+[licenses]
+# Fail closed. cargo-deny 0.18+ denies anything not explicitly allowed and
+# treats an undeclared or unparseable license as an error, which is
+# release-plan principle 10 ("the gate must fail closed on an unknown or
+# undeclared license"). Inventory §3.2 records that zero of the 679
+# third-party crates lack an SPDX expression today; this keeps it that way.
+confidence-threshold = 0.93
+
+# First-party workspace packages are checked too (not skipped as "private"),
+# so the `MIT OR Apache-2.0` declaration in [workspace.package] is asserted
+# here as well as in scripts/license-policy-check.sh. Written inline because a
+# `[licenses.private]` header here would capture every key below it.
+private = { ignore = false }
+
+# The permissive allow-list. Each entry is present in the graph today per
+# inventory §3.2 / Appendix A; nothing is allow-listed speculatively.
+#
+# Note on disjunctions: cargo-deny satisfies `A OR B` if *either* branch is
+# allowed, so most of the graph's 33 distinct expressions resolve through MIT
+# or Apache-2.0 alone. The remaining entries exist because some crate declares
+# that license on its own or inside an `AND`.
+allow = [
+    # Bulk of the graph: 325 `MIT OR Apache-2.0`, 169 bare `MIT`, 41
+    # `Apache-2.0 OR MIT`, 30 legacy `MIT/Apache-2.0`, 15 bare `Apache-2.0`.
+    "MIT",
+    "Apache-2.0",
+
+    # `Apache-2.0 WITH LLVM-exception` — required on its own by
+    # `target-lexicon` 0.12.16 (desktop-only). The 14-crate rustix/wasm family
+    # declares `Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT` and would
+    # resolve through MIT anyway. Inventory Appendix A.
+    "Apache-2.0 WITH LLVM-exception",
+
+    # Attribution-bearing permissive families. Inventory §3.3 "Other
+    # attribution-bearing families": these require the copyright notice and
+    # disclaimer to travel with binary distributions, which the per-artifact
+    # THIRD-PARTY-NOTICES bundle (licensing-policy.md §5) provides.
+    #
+    # BSD-2-Clause: `atomic-wait`. Also inside `BSD-2-Clause OR Apache-2.0 OR MIT`.
+    "BSD-2-Clause",
+    # BSD-3-Clause: `subtle`, `alloc-no-stdlib`, `alloc-stdlib`; and required
+    # by the conjunctions `BSD-3-Clause AND MIT` (brotli) and
+    # `MIT AND BSD-3-Clause` (matchit).
+    "BSD-3-Clause",
+    # ISC: `rustls-webpki`, `untrusted`, `libloading`; and required by the
+    # conjunction `Apache-2.0 AND ISC` (ring).
+    "ISC",
+    # Zlib: `foldhash` (both major versions).
+    "Zlib",
+    # Unicode-3.0: the 18-crate ICU4X family, plus the conjunction
+    # `(MIT OR Apache-2.0) AND Unicode-3.0` (unicode-ident). Permissive with an
+    # attribution requirement satisfied by the notice bundle. Inventory §3.3.
+    "Unicode-3.0",
+
+    # CDLA-Permissive-2.0: `webpki-roots` 0.26.11 and 1.0.6 — a compiled copy
+    # of the Mozilla CA root store, reached from `ureq` in `sysml-resolve`.
+    # A permissive *data* license: no copyleft, no share-alike, and no
+    # notice-retention duty beyond keeping the license text with any
+    # redistributed copy of the data. Inventory §3.3.
+    "CDLA-Permissive-2.0",
+]
+
+# NOT allow-listed, deliberately, and each for a reason:
+#
+#   MPL-2.0 — weak copyleft. Allowed only per-crate below (decision D-1) so a
+#             *new* MPL dependency entering the graph fails this gate instead
+#             of inheriting a blanket allowance.
+#
+#   LGPL-2.1-or-later — appears in exactly one disjunction, `r-efi` 5.3.0's
+#             `MIT OR Apache-2.0 OR LGPL-2.1-or-later`. We elect MIT (or
+#             Apache-2.0), so the LGPL branch never applies and no exception is
+#             needed; cargo-deny resolves the disjunction through an allowed
+#             branch. `r-efi` is additionally cfg(target_os = "uefi")-gated via
+#             `getrandom` and is never compiled for a platform we ship.
+#             Recorded here so a keyword scan for "LGPL" has an answer.
+#             Inventory §3.3.
+#
+#   BSL-1.0, Unlicense, 0BSD, CC0-1.0, MIT-0 — each appears only as one branch
+#             of a disjunction that also offers MIT or Apache-2.0
+#             (`Apache-2.0 OR BSL-1.0`, `Unlicense OR MIT`,
+#             `0BSD OR MIT OR Apache-2.0`, `CC0-1.0 OR MIT-0 OR Apache-2.0`).
+#             Allow-listing them would be dead policy surface.
+#
+#   No GPL, AGPL, or SSPL crate appears anywhere in the graph — not required,
+#   not optional, and not in a disjunction. Inventory §3.3.
+
+# --- Reviewed exceptions: weak copyleft accepted per-crate (decision D-1) ---
+#
+# MPL-2.0 is file-level copyleft: it attaches to the MPL-licensed files
+# themselves, not to the work that links them, and §3.3 of the MPL explicitly
+# permits distributing a Larger Work under other terms. All five crates are
+# used unmodified, so the only obligation is source availability for the MPL
+# files, discharged by the crates' own published sources.
+#
+# These are crate-scoped rather than a blanket `MPL-2.0` allowance so that any
+# *sixth* MPL crate arriving in the graph fails the gate and gets reviewed.
+
+# D-1: the only MPL-2.0 crate that links into a core (non-desktop) binary,
+# reached via `directories` 5.0.1 -> `dirs-sys`, a direct dependency of
+# sysml-cli, sysml-lsp-server, sysml-resolve, and sysml-service. Accepted
+# unmodified. If a zero-copyleft core ever becomes a stated goal, the
+# substitution is mechanical (`etcetera`, or `dirs` 6).
+[[licenses.exceptions]]
+name = "option-ext"
+version = "=0.2.0"
+allow = ["MPL-2.0"]
+
+# D-1 (desktop-only): the four MPL-2.0 crates in the Tauri/`wry` web stack.
+# Unreachable from the core `default-members` set; they exist only in the
+# desktop shell's graph. Same weak-copyleft analysis as above.
+[[licenses.exceptions]]
+name = "cssparser"
+version = "=0.36.0"
+allow = ["MPL-2.0"]
+
+[[licenses.exceptions]]
+name = "cssparser-macros"
+version = "=0.6.1"
+allow = ["MPL-2.0"]
+
+[[licenses.exceptions]]
+name = "dtoa-short"
+version = "=0.3.5"
+allow = ["MPL-2.0"]
+
+[[licenses.exceptions]]
+name = "selectors"
+version = "=0.36.1"
+allow = ["MPL-2.0"]
+
+# ---------------------------------------------------------------------------
+# Sources — trivially green, so it is enforced rather than deferred
+# ---------------------------------------------------------------------------
+# Every dependency in Cargo.lock today resolves from crates.io: there are zero
+# `git+` sources and zero alternate registries. Enforcing that is free and it
+# closes a real supply-chain-shaped hole in a *license* gate — an unreviewed
+# git dependency carries an unreviewed license by construction.
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+
+# ---------------------------------------------------------------------------
+# Bans — duplicate versions ignored, wildcards enforced
+# ---------------------------------------------------------------------------
+# Duplicate-version hygiene is not a licensing question and this workspace has
+# many legitimate duplicates (two `webpki-roots` majors, two `foldhash`
+# majors, the usual `bitflags`/`syn` splits). Turning it on here would mean
+# either a large skip-list or a red gate on day one, and neither belongs in a
+# license slice.
+[bans]
+multiple-versions = "allow"
+
+# Wildcards ARE denied, and that needed a decision rather than a default.
+#
+# The licensing argument for denying them: a `version = "*"` on a crates.io
+# crate means the license you audited is not necessarily the license you
+# resolve tomorrow. That makes it a licensing problem, not merely a hygiene
+# one, which is why it lives in this gate at all.
+#
+# The complication was that every wildcard cargo-deny reports here — 169 across
+# 19 crates, measured with the exemption off — is one of the workspace's OWN
+# path dependencies declared as `{ workspace = true }`, which carries no
+# version by design. `allow-wildcard-paths` exempts exactly those, but only for
+# crates marked `publish = false`, and at the time this file was written none
+# were. Whether these crates publish at all was a release-packaging question,
+# not a licensing one, so the rule was left off rather than papered over with a
+# skip-list.
+#
+# That question is now answered: OSA-04 (commits ba35b871, d72adf6e) set
+# `publish = false` on all workspace packages (25 at the time; 24 since
+# `sysml-layout` was retired on 2026-08-13 under OS-D2 decision 4), per the Stage A
+# crates.
+# The exemption applies, so the rule is on.
+#
+# Note what this does NOT do: the exemption is scoped by construction, not a
+# blanket pass. When Stage B selects a crate for publication it loses
+# `publish = false`, loses the exemption, and this gate immediately demands
+# real version requirements on its path dependencies — which is OSC-03. The
+# rule reasserts itself precisely when it starts to matter.
+#
+# Verified rather than assumed, because a green that comes from a config
+# accident is worth nothing: with `allow-wildcard-paths` removed, `cargo deny
+# check bans` fails with 19 crates reporting wildcards; with it, `bans ok`.
+wildcards = "deny"
+allow-wildcard-paths = true
+
+# ---------------------------------------------------------------------------
+# Advisories — OUT OF SCOPE for OSL-12, on purpose
+# ---------------------------------------------------------------------------
+# Vulnerability and unmaintained-crate triage is a separate body of work with
+# its own review cadence and its own failure mode (a gate that goes red on
+# somebody else's disclosure schedule). This slice deliberately does not open
+# it. `cargo deny check advisories` is NOT wired into CI, and the empty
+# `ignore` list below is a placeholder for whoever does that work — it is not
+# a claim that the graph is advisory-clean.
+[advisories]
+ignore = []

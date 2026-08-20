@@ -1,0 +1,24 @@
+[package]
+name = "sysml-span"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Source locations, diagnostics, and severity levels for SysML v2"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[features]
+default = ["pretty"]
+serde = ["dep:serde"]
+schemars = ["dep:schemars"]
+pretty = ["dep:annotate-snippets"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+schemars = { workspace = true, optional = true }
+annotate-snippets = { workspace = true, optional = true }
+
+[lints]
+workspace = true

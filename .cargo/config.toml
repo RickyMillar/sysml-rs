@@ -1,0 +1,9 @@
+[alias]
+test-corpus = "test -p sysml-spec-tests -- --ignored"
+
+# Benchmark aliases
+bench-all = "bench --workspace"
+bench-core = "bench -p sysml-core"
+bench-id = "bench -p sysml-id --bench id_benchmarks"
+bench-span = "bench -p sysml-span --bench span_benchmarks"
+bench-lsp-profile = "run -p sysml-lsp-server --bin lsp_profile_harness --release --"

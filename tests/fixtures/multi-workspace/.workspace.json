@@ -1,0 +1,6 @@
+{
+    "projects": [
+        {"path": "lib-project", "iris": ["urn:test:lib-project"]},
+        {"path": "app-project", "iris": ["urn:test:app-project"]}
+    ]
+}

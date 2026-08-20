@@ -1,0 +1,6 @@
+[project]
+name = "registry-range-root"
+version = "0.1.0"
+
+[dependencies]
+units = "^1.4"

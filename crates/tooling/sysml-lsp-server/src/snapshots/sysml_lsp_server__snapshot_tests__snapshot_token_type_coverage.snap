@@ -1,0 +1,23 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: coverage_report
+---
+Token type coverage from comprehensive.sysml:
+
+   0  NAMESPACE     SEEN
+   1  TYPE          SEEN
+   2  CLASS         SEEN
+   3  STRUCT        SEEN
+   4  PROPERTY      SEEN
+   5  VARIABLE      SEEN
+   6  PARAMETER     ----
+   7  FUNCTION      SEEN
+   8  KEYWORD       SEEN
+   9  COMMENT       SEEN
+  10  STRING        SEEN
+  11  NUMBER        SEEN
+  12  OPERATOR      SEEN
+  13  INTERFACE     SEEN
+  14  ENUM          SEEN
+
+Total: 14/15 types seen

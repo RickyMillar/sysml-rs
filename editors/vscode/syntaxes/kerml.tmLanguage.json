@@ -1,0 +1,305 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "KerML",
+  "scopeName": "source.kerml",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#quoted-names" },
+    { "include": "#package-with-name" },
+    { "include": "#definition-with-name" },
+    { "include": "#metadata-annotation" },
+    { "include": "#multiplicity" },
+    { "include": "#definition-keywords" },
+    { "include": "#classifier-keywords" },
+    { "include": "#feature-keywords" },
+    { "include": "#relationship-keywords" },
+    { "include": "#modifier-keywords" },
+    { "include": "#control-keywords" },
+    { "include": "#import-keywords" },
+    { "include": "#parameter-keywords" },
+    { "include": "#builtin-variables" },
+    { "include": "#other-keywords" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#qualified-name" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "match": "/\\*\\*/",
+          "name": "comment.block.empty.kerml",
+          "captures": {
+            "0": { "name": "punctuation.definition.comment.kerml" }
+          }
+        },
+        {
+          "name": "comment.block.documentation.kerml",
+          "begin": "/\\*\\*",
+          "end": "\\*/",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.kerml" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.kerml" }
+          }
+        },
+        {
+          "name": "comment.block.kerml",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.kerml" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.kerml" }
+          }
+        },
+        {
+          "name": "comment.line.double-slash.kerml",
+          "begin": "//",
+          "end": "$",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.kerml" }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.kerml",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.kerml" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.kerml" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.kerml",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "quoted-names": {
+      "match": "'[^'\\\\]*(?:\\\\.[^'\\\\]*)*'",
+      "name": "variable.name.quoted.kerml"
+    },
+    "package-with-name": {
+      "match": "\\b(package|namespace|library)\\s+([A-Za-z_]\\w*|'[^']*')",
+      "captures": {
+        "1": { "name": "keyword.other.kerml" },
+        "2": { "name": "entity.name.namespace.kerml" }
+      }
+    },
+    "definition-with-name": {
+      "patterns": [
+        {
+          "comment": "Multi-word def: 'metadata def Name'",
+          "match": "\\b(metadata)\\s+(def)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.kerml" },
+            "2": { "name": "keyword.other.definition.kerml" },
+            "3": { "name": "entity.name.type.definition.kerml" }
+          }
+        },
+        {
+          "comment": "assoc struct with name",
+          "match": "\\b(assoc)\\s+(struct)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.kerml" },
+            "2": { "name": "keyword.other.definition.kerml" },
+            "3": { "name": "entity.name.type.definition.kerml" }
+          }
+        },
+        {
+          "comment": "Classifier/type definition with name",
+          "match": "\\b(type|classifier|class|struct|datatype|assoc|interaction|behavior|function|predicate|metaclass)\\s+([A-Za-z_]\\w*|'[^']*')",
+          "captures": {
+            "1": { "name": "keyword.other.definition.kerml" },
+            "2": { "name": "entity.name.type.definition.kerml" }
+          }
+        }
+      ]
+    },
+    "metadata-annotation": {
+      "match": "@([A-Za-z_]\\w*(?:::[A-Za-z_]\\w*)*)",
+      "name": "entity.name.type.annotation.kerml"
+    },
+    "multiplicity": {
+      "comment": "Multiplicity brackets like [0..*], [1], [0..1]",
+      "begin": "\\[",
+      "end": "\\]",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.multiplicity.begin.kerml" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.multiplicity.end.kerml" }
+      },
+      "patterns": [
+        {
+          "match": "\\*",
+          "name": "constant.language.multiplicity.kerml"
+        },
+        {
+          "match": "\\.\\.",
+          "name": "keyword.operator.range.kerml"
+        },
+        {
+          "match": "\\d+",
+          "name": "constant.numeric.kerml"
+        }
+      ]
+    },
+    "definition-keywords": {
+      "patterns": [
+        {
+          "comment": "assoc struct without name",
+          "match": "\\b(assoc)\\s+(struct)\\b",
+          "captures": {
+            "1": { "name": "keyword.other.definition.kerml" },
+            "2": { "name": "keyword.other.definition.kerml" }
+          }
+        },
+        {
+          "match": "\\b(metadata)\\s+(def)\\b",
+          "captures": {
+            "1": { "name": "keyword.other.definition.kerml" },
+            "2": { "name": "keyword.other.definition.kerml" }
+          }
+        }
+      ]
+    },
+    "classifier-keywords": {
+      "match": "\\b(type|classifier|class|struct|datatype|assoc|interaction|behavior|function|predicate|metaclass)\\b",
+      "name": "keyword.other.definition.kerml"
+    },
+    "feature-keywords": {
+      "match": "\\b(feature|step|expr|bool|binding|succession|connector|flow|subclassifier|inv)\\b",
+      "name": "keyword.other.usage.kerml"
+    },
+    "relationship-keywords": {
+      "match": "\\b(specialization|specializes|subsets|subset|subtype|redefines|redefinition|redefine|references|chains|conjugates|conjugation|conjugate|inverses|inverse|inverting|disjoining|disjoint|differences|intersects|unions|featuring|featured|multiplicity|typed\\s+by|defined\\s+by|typing|superset)\\b",
+      "name": "keyword.other.relationship.kerml"
+    },
+    "modifier-keywords": {
+      "match": "\\b(abstract|derived|readonly|ordered|nonunique|default|composite|portion)\\b",
+      "name": "keyword.other.modifier.kerml"
+    },
+    "control-keywords": {
+      "match": "\\b(if|else|while|for|loop)\\b",
+      "name": "keyword.control.kerml"
+    },
+    "import-keywords": {
+      "match": "\\b(import|alias|from|library)\\b",
+      "name": "keyword.other.import.kerml"
+    },
+    "parameter-keywords": {
+      "match": "\\b(in|out|inout|return)\\b",
+      "name": "keyword.other.parameter.kerml"
+    },
+    "other-keywords": {
+      "match": "\\b(package|namespace|end|all|to|of|by|about|comment|doc|rep|language|locale|metadata|member|new)\\b",
+      "name": "keyword.other.kerml"
+    },
+    "builtin-variables": {
+      "match": "\\b(self|this)\\b",
+      "name": "variable.language.kerml"
+    },
+    "constants": {
+      "match": "\\b(true|false|null)\\b",
+      "name": "constant.language.kerml"
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "comment": "Hex integer literals",
+          "match": "\\b0[xX][0-9a-fA-F_]+\\b",
+          "name": "constant.numeric.hex.kerml"
+        },
+        {
+          "comment": "Floating point and integer literals with optional exponent",
+          "match": "\\b\\d[\\d_]*(?:\\.[\\d_]+)?(?:[eE][+-]?\\d[\\d_]*)?\\b",
+          "name": "constant.numeric.kerml"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "===|!==|==|!=|<=|>=|<|>",
+          "name": "keyword.operator.comparison.kerml"
+        },
+        {
+          "match": "\\*\\*|[+\\-*/%]",
+          "name": "keyword.operator.arithmetic.kerml"
+        },
+        {
+          "match": "\\b(and|or|not|xor|implies)\\b",
+          "name": "keyword.operator.logical.kerml"
+        },
+        {
+          "match": "[&|^]|\\?\\?|\\?",
+          "name": "keyword.operator.logical.kerml"
+        },
+        {
+          "match": "\\b(hastype|istype|as|meta)\\b",
+          "name": "keyword.operator.other.kerml"
+        },
+        {
+          "match": "::\\>|:\\>\\>|:\\>|::|:=|=>|->|\\.\\.|\\.\\.\\?|\\.\\?|~|@@|@|#|\\$",
+          "name": "keyword.operator.other.kerml"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.kerml"
+        }
+      ]
+    },
+    "qualified-name": {
+      "comment": "Qualified name references like ScalarValues::Real",
+      "match": "\\b([A-Za-z_]\\w*)\\s*(::)\\s*([A-Za-z_]\\w*(?:\\s*::\\s*[A-Za-z_]\\w*)*)",
+      "captures": {
+        "1": { "name": "entity.name.namespace.kerml" },
+        "2": { "name": "punctuation.accessor.kerml" },
+        "3": { "name": "entity.name.type.kerml" }
+      }
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": ";",
+          "name": "punctuation.terminator.kerml"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.type.kerml"
+        },
+        {
+          "match": "\\{",
+          "name": "punctuation.definition.block.begin.kerml"
+        },
+        {
+          "match": "\\}",
+          "name": "punctuation.definition.block.end.kerml"
+        },
+        {
+          "match": "\\(",
+          "name": "punctuation.definition.group.begin.kerml"
+        },
+        {
+          "match": "\\)",
+          "name": "punctuation.definition.group.end.kerml"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.kerml"
+        }
+      ]
+    }
+  }
+}

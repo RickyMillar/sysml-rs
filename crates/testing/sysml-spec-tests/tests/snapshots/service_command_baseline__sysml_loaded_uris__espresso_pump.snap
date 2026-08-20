@@ -1,0 +1,19 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    "file://<WS>/examples/espresso-pump-hybrid/Behaviour/PumpCycle.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Libraries/Interfaces.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Libraries/Tooling.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Libraries/Types.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Scenarios/Restrictions.sysml",
+    "file://<WS>/examples/espresso-pump-hybrid/Verification/PumpSafety.sysml"
+  ]
+}

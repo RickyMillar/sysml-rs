@@ -1,0 +1,31 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "max_depth": 2,
+    "root": "<WS>/examples/espresso-pump-hybrid/Physics"
+  },
+  "response": {
+    "entries": [
+      {
+        "name": "HydraulicConstraints.sysml",
+        "path": "<WS>/examples/espresso-pump-hybrid/Physics/HydraulicConstraints.sysml",
+        "type": "file"
+      },
+      {
+        "name": "PumpCharacteristic.sysml",
+        "path": "<WS>/examples/espresso-pump-hybrid/Physics/PumpCharacteristic.sysml",
+        "type": "file"
+      },
+      {
+        "name": "PumpODE.sysml",
+        "path": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml",
+        "type": "file"
+      }
+    ],
+    "root": "<WS>/examples/espresso-pump-hybrid/Physics"
+  }
+}

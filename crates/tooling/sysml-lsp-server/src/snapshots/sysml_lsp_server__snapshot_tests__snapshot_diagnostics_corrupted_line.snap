@@ -1,0 +1,7 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[----] error @ "Bad"
+  Syntax error near `Bad` in definition of `Goodpackage`
+  note: after `Goodpackage`

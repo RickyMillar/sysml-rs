@@ -1,0 +1,31 @@
+[package]
+name = "sysml-mcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MCP server exposing SysML v2 model intelligence to AI agents"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[[bin]]
+name = "sysml-mcp"
+path = "src/main.rs"
+
+[dependencies]
+sysml-service = { workspace = true }
+sysml-core = { workspace = true, features = ["serde"] }
+sysml-id = { workspace = true }
+rmcp = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

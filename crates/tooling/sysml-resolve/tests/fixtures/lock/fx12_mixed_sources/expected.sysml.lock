@@ -1,0 +1,24 @@
+lock_version = 1
+
+[[package]]
+name = "dep-git"
+version = "2.0.0"
+source = "git:{{GIT_URL}}#{{GIT_COMMIT}}"
+
+[[package]]
+name = "dep-kpar"
+version = "3.0.0"
+source = "kpar:../deps/dep-kpar.kpar"
+checksum = "{{KPAR_CHECKSUM}}"
+
+[[package]]
+name = "dep-path"
+version = "1.0.0"
+source = "path:../deps/dep-path"
+
+[[package]]
+name = "dep-reg"
+version = "4.5.6"
+source = "registry:sysand:dep-reg@4.5.6"
+checksum = "{{REGISTRY_CHECKSUM}}"
+requested = "4.5.6"

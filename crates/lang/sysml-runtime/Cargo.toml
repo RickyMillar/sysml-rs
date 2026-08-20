@@ -1,0 +1,64 @@
+[package]
+name = "sysml-runtime"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "SysML v2 model execution runtime"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-core = { workspace = true }
+sysml-span = { workspace = true }
+regex = { workspace = true }
+smallvec = "1.13"
+thiserror = { workspace = true }
+tracing = { workspace = true, optional = true }
+rand = { version = "0.8", optional = true }
+rand_distr = { version = "0.4", optional = true }
+rayon = { version = "1.10", optional = true }
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+schemars = { workspace = true, optional = true }
+diffsol = { workspace = true }
+
+[features]
+default = []
+tracing = ["dep:tracing"]
+montecarlo = ["dep:rand", "dep:rand_distr", "dep:rayon"]
+serde = ["dep:serde", "dep:serde_json", "sysml-core/serde"]
+schemars = ["dep:schemars", "sysml-core/schemars"]
+
+[dev-dependencies]
+sysml-parser-trait = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+# Dev-only cycle: sysml-ide-db (which itself depends on sysml-runtime)
+# provides the `eval_context_seed::context_from_graph` helper that tests
+# and benches need to build an EvalContext seed for
+# `ModelCompiler::build_workspace_orchestrator`. Cargo allows dev-dep
+# cycles because they only apply when building this crate's own
+# test/bench/example targets — sysml-runtime's library has no
+# dependency on sysml-ide-db.
+sysml-ide-db = { workspace = true }
+criterion = { workspace = true }
+
+[[bench]]
+name = "bench_espresso_cell_24h"
+harness = false
+
+[[bench]]
+name = "bench_espresso_pump_oscillation"
+harness = false
+
+[[bench]]
+name = "bench_orchestrator_long_run"
+harness = false
+
+[[bench]]
+name = "bench_dense_constraints"
+harness = false
+
+[lints]
+workspace = true

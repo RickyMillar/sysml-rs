@@ -1,0 +1,42 @@
+[package]
+name = "sysml-ide-db"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Salsa-based incremental computation database for SysML v2"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+salsa = { workspace = true }
+rustc-hash = { workspace = true }
+tracing = { workspace = true }
+# URL parsing for canonicalising file:// URIs in `source::canonicalize_uri`.
+# Same crate the LSP uses via tower-lsp; no new transitive surface area.
+url = "2"
+
+# Layer 0-1 deps for input/parse types
+sysml-span = { workspace = true }
+sysml-id = { workspace = true }
+sysml-core = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+sysml-parser-trait = { workspace = true }
+sysml-project = { workspace = true }
+# Layer 3 dep — Layer 3 lang crate, used by tracked queries that need
+# evaluation contexts (S2.T17). tooling → lang Layer 3 is allowed.
+sysml-runtime = { workspace = true }
+# Layer 3 dep — Layer 3 lang crate. Needed by the `diagram_query`
+# tracked queries (S3.T5) so the SGraph cache lives next to the
+# elaborated-graph queries it depends on.
+sysml-diagram = { workspace = true }
+
+# tree-sitter for parsing (same version as sysml-ts)
+tree-sitter = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

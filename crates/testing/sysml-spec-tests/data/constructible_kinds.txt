@@ -1,0 +1,92 @@
+# SysML v2 Constructible Element Kinds
+#
+# This file lists the 77 element kinds that have grammar rules
+# that can produce them during parsing.
+#
+# Derived from the SysML v2 spec vocabulary files:
+# - Kerml-Vocab.ttl (84 base types)
+# - SysML-vocab.ttl (182 domain types)
+#
+# Filtered to types ending in Definition/Usage plus:
+# Package, LibraryPackage, Import, Comment, Documentation, Dependency
+#
+# Format: One kind per line, sorted alphabetically
+# Lines starting with # are comments
+
+AcceptActionUsage
+ActionDefinition
+ActionUsage
+AllocationDefinition
+AllocationUsage
+AnalysisCaseDefinition
+AnalysisCaseUsage
+AssertConstraintUsage
+AssignmentActionUsage
+AttributeDefinition
+AttributeUsage
+BindingConnectorAsUsage
+CalculationDefinition
+CalculationUsage
+CaseDefinition
+CaseUsage
+Comment
+ConcernDefinition
+ConcernUsage
+ConjugatedPortDefinition
+ConnectionDefinition
+ConnectionUsage
+ConnectorAsUsage
+ConstraintDefinition
+ConstraintUsage
+Definition
+Dependency
+Documentation
+EnumerationDefinition
+EnumerationUsage
+EventOccurrenceUsage
+ExhibitStateUsage
+FlowDefinition
+FlowUsage
+ForLoopActionUsage
+IfActionUsage
+Import
+IncludeUseCaseUsage
+InterfaceDefinition
+InterfaceUsage
+ItemDefinition
+ItemUsage
+LibraryPackage
+LoopActionUsage
+MetadataDefinition
+MetadataUsage
+OccurrenceDefinition
+OccurrenceUsage
+Package
+PartDefinition
+PartUsage
+PerformActionUsage
+PortDefinition
+PortUsage
+ReferenceUsage
+RenderingDefinition
+RenderingUsage
+RequirementDefinition
+RequirementUsage
+SatisfyRequirementUsage
+SendActionUsage
+StateDefinition
+StateUsage
+SuccessionAsUsage
+SuccessionFlowUsage
+TerminateActionUsage
+TransitionUsage
+Usage
+UseCaseDefinition
+UseCaseUsage
+VerificationCaseDefinition
+VerificationCaseUsage
+ViewDefinition
+ViewpointDefinition
+ViewpointUsage
+ViewUsage
+WhileLoopActionUsage

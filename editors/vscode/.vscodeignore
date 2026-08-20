@@ -1,0 +1,19 @@
+.vscode/**
+.vscode-test/**
+src/**
+out/**
+node_modules/**
+../sysml-diagram/node_modules/**
+test/**
+.gitignore
+tsconfig.json
+esbuild.mjs
+deploy-dev.sh
+.vscode-test.mjs
+jest.config.js
+**/*.ts
+**/*.map
+.eslintrc*
+!server/**
+# Agent-facing instructions are not product documentation.
+**/CLAUDE.md

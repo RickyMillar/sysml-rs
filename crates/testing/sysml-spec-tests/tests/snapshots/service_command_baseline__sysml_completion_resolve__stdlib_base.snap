@@ -1,0 +1,12 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "element_id": "<UUID>",
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml"
+  },
+  "response": {}
+}

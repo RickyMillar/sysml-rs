@@ -1,0 +1,214 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+  },
+  "response": [
+    {
+      "exposed": [],
+      "filters": [
+        "<UUID>"
+      ],
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "SafetyReviewView",
+      "renderings": [
+        {
+          "id": "<UUID>",
+          "name": null
+        }
+      ],
+      "source_span": {
+        "col": 4,
+        "end": 4727,
+        "file":"<FILE>",
+        "line": 77,
+        "start": 4253
+      }
+    },
+    {
+      "exposed": [],
+      "filters": [
+        "<UUID>"
+      ],
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "StructuralOverviewView",
+      "renderings": [
+        {
+          "id": "<UUID>",
+          "name": null
+        }
+      ],
+      "source_span": {
+        "col": 4,
+        "end": 4010,
+        "file":"<FILE>",
+        "line": 65,
+        "start": 3795
+      }
+    },
+    {
+      "exposed": [],
+      "filters": [
+        "<UUID>"
+      ],
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "VerificationDashboardView",
+      "renderings": [
+        {
+          "id": "<UUID>",
+          "name": null
+        }
+      ],
+      "source_span": {
+        "col": 4,
+        "end": 5348,
+        "file":"<FILE>",
+        "line": 94,
+        "start": 5017
+      }
+    },
+    {
+      "exposed": [],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
+      "name": "BrewSequenceView",
+      "renderings": [
+        {
+          "id": "<UUID>",
+          "name": null
+        }
+      ],
+      "source_span": {
+        "col": 4,
+        "end": 5714,
+        "file":"<FILE>",
+        "line": 110,
+        "start": 5623
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": false,
+          "qualified_name": "Actions::BrewCycle"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "brewSequence",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 5799,
+        "file":"<FILE>",
+        "line": 114,
+        "start": 5720
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": false,
+          "qualified_name": "CoffeeMachine"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "structuralOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 4102,
+        "file":"<FILE>",
+        "line": 71,
+        "start": 4016
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": false,
+          "qualified_name": "CoffeeMachine::brewer"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "scratch",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 6135,
+        "file":"<FILE>",
+        "line": 122,
+        "start": 6058
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Requirements"
+        },
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Verification"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "verificationDashboard",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 5480,
+        "file":"<FILE>",
+        "line": 103,
+        "start": 5354
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Requirements"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "safetyReview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 4809,
+        "file":"<FILE>",
+        "line": 87,
+        "start": 4733
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+../../../../tests/fixtures/shared/test_action.sysml

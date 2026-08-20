@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-05-25T11:56:20+12:00",
+  "parser_c_size_mb": 48,
+  "parser_c_size_bytes": 51193454,
+  "STATE_COUNT": 12187,
+  "LARGE_STATE_COUNT": 8243,
+  "SYMBOL_COUNT": 407,
+  "ALIAS_COUNT": 0,
+  "TOKEN_COUNT": 217,
+  "PRODUCTION_ID_COUNT": 189,
+  "FIELD_COUNT": 27,
+  "MAX_ALIAS_SEQUENCE_LENGTH": 16
+}

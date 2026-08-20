@@ -1,0 +1,74 @@
+/*
+ * Vendored fonts (D-B5 / task C8): IBM Plex Sans/Mono + the Material Symbols
+ * Outlined variable font, served from the app itself — no Google Fonts
+ * network dependency. Offline and the Tauri desktop shell (Bucket 4) render
+ * identically to online: without this, every icon degraded to raw ligature
+ * text ("expand_more", "push_pin", …).
+ *
+ * Sources (checked in under public/fonts/):
+ *   IBM Plex 6.x — github.com/IBM/plex (OFL-1.1)
+ *   Material Symbols Outlined [FILL,GRAD,opsz,wght] variable font —
+ *     github.com/google/material-design-icons (Apache-2.0)
+ *
+ * These are third-party works, not covered by the project's own license.
+ * The upstream license texts are checked in beside them —
+ * LICENSE-IBMPlex-OFL-1.1.txt and LICENSE-MaterialSymbols-Apache-2.0.txt —
+ * and README.md in this directory records the per-file attribution.
+ */
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IBMPlexSans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  /* block: an icon flashing as ligature TEXT is worse than a brief blank. */
+  font-display: block;
+  src: url('/fonts/MaterialSymbolsOutlined.woff2') format('woff2');
+}
+
+/* The icon class Google's stylesheet used to provide — ligatures on, so
+ * `<span class="material-symbols-outlined">push_pin</span>` renders the
+ * glyph, never the text. */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga';
+}

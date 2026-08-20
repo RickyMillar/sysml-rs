@@ -1,0 +1,8 @@
+[project]
+name = "espresso-pump-hybrid"
+version = "1.0.0"
+description = "Compact synthetic hybrid model: sampled check-valve characteristics, reciprocating actuator + chamber/accumulator pressure ODEs, cycle state machine, and simulation-backed safety-relief verification."
+license = "MIT"
+
+[package]
+iri = "urn:example:espresso-pump-hybrid"

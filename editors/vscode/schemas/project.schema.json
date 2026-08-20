@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SysML Project",
+  "description": "Schema for .project.json files describing a SysML v2 project.",
+  "type": "object",
+  "required": ["name", "version"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The project name."
+    },
+    "version": {
+      "type": "string",
+      "description": "The project version (semver).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.]+)?(\\+[\\w.]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the project."
+    },
+    "topic": {
+      "type": "array",
+      "description": "Topic tags for the project.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "usage": {
+      "type": "array",
+      "description": "Dependencies used by this project.",
+      "items": {
+        "type": "object",
+        "required": ["resource", "versionConstraint"],
+        "properties": {
+          "resource": {
+            "type": "string",
+            "description": "The resource identifier of the dependency."
+          },
+          "versionConstraint": {
+            "type": "string",
+            "description": "The version constraint for the dependency."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

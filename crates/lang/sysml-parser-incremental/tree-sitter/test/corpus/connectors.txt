@@ -1,0 +1,78 @@
+====================================
+connector-usage-basic
+====================================
+
+connector c : Link from a to b;
+
+---
+
+(source_file
+  (connector_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))
+    (connector_ends
+      source: (feature_chain
+        (identifier))
+      target: (feature_chain
+        (identifier)))))
+
+====================================
+binding-usage-of-pattern
+====================================
+
+binding of inner.port = outer.port;
+
+---
+
+(source_file
+  (binding_usage
+    source: (feature_chain
+      (identifier)
+      (identifier))
+    target: (feature_chain
+      (identifier)
+      (identifier))))
+
+====================================
+succession-declaration
+====================================
+
+succession s first a then b;
+
+---
+
+(source_file
+  (succession_decl
+    name: (identifier)
+    source: (feature_chain
+      (identifier))
+    target: (feature_chain
+      (identifier))))
+
+====================================
+succession-with-multiplicity
+====================================
+
+succession first [0..1] a then [0..1] b;
+
+---
+
+(source_file
+  (succession_decl
+    (multiplicity
+      (number
+        (integer_literal))
+      (number
+        (integer_literal)))
+    source: (feature_chain
+      (identifier))
+    (multiplicity
+      (number
+        (integer_literal))
+      (number
+        (integer_literal)))
+    target: (feature_chain
+      (identifier))))

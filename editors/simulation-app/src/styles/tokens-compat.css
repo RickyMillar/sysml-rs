@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ninebar — COMPAT ALIASES (Phase 0, audit F17). DELETE IN PHASE 8.
+
+   Every pre-ninebar token name, re-pointed at the new primitives so the
+   legacy shell (`AppLayout`, `UtilityDrawer`, `ResultsWorkbench`, …)
+   renders unchanged-but-warm while Phases 1–7 build behind the flag.
+
+   Rules:
+   · New code must NEVER reference these names — semantic tokens only.
+   · Deliberately ABSENT: --glass-bg/--glass-blur/--glass-border. Their
+     consumers (.glass-hud/.gradient-cta/.sim-glow) died in Phase 0.
+   · CI gate: references to these names must be monotonically
+     non-increasing; count must be zero before this file is deleted.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Surface hierarchy (old Obsidian names → warm-ink ramp) */
+  --surface-dim:               var(--nb-n-950);
+  --surface:                   var(--nb-n-950);
+  --surface-container-lowest:  var(--nb-n-950);
+  --surface-container-low:     var(--nb-n-900);
+  --surface-container:         var(--nb-n-900);
+  --surface-container-high:    var(--nb-n-800);
+  --surface-container-highest: var(--nb-n-700);
+  --surface-bright:            var(--nb-n-700);
+
+  /* Text / lines */
+  --on-surface:         var(--nb-n-50);
+  --on-surface-variant: var(--nb-n-300);
+  /* Despite the Material name this is NOT a border token in this codebase:
+     198 call sites use it as `color:` and zero as a border (checked). On
+     the paper ground n-400 measured 2.88:1, so live labels — tree section
+     headers, empty-state copy, detail captions — sat under the AA floor
+     (finding 23). Made theme-aware rather than rewriting 198 sites: n-400
+     stays on the ink ground where it reads at range, light drops a rung. */
+  --outline:            var(--nb-n-400);
+  --outline-variant:    var(--nb-n-700);
+
+  /* Primary (was indigo/periwinkle) → accent family. Amber = primacy. */
+  --primary:              var(--nb-a-300);
+  /* a-700, not a-600: this is the SOLID fill behind `--on-primary-container`
+     (white) on every primary button — Reload, Run analysis, the study
+     header. On a-600 that pairing measured 3.64:1 in both themes; a-700
+     takes it to 5.55:1 while staying inside the reserved accent wedge
+     (finding 22). `--primary`/`--tertiary` keep a-300 for accent-as-text. */
+  --primary-container:    var(--nb-a-700);
+  --on-primary:           var(--nb-n-950);
+  --on-primary-container: var(--nb-n-0);
+
+  /* Secondary (was blue) → neutral. Colour is rationed now. */
+  --secondary:           var(--nb-n-300);
+  --secondary-container: var(--nb-n-700);
+
+  /* Tertiary (was amber) → the accent it always wanted to be */
+  --tertiary:           var(--nb-a-300);
+  --tertiary-container: var(--nb-a-600);
+
+  /* Semantic status */
+  --success:         var(--nb-st-verified-fg);
+  --warning:         var(--nb-st-warning-fg);
+  --error:           var(--nb-st-error-fg);
+  --error-container: var(--nb-st-error);
+  --info:            var(--nb-n-300);
+
+  /* Sim states (old names; chrome-side) */
+  --sim-active:     var(--sim-state-active);
+  --sim-visited:    var(--sim-state-completed);
+  --sim-available:  var(--sim-state-available);
+  --sim-blocked:    var(--sim-state-blocked);
+  --sim-breakpoint: var(--sim-breakpoint-mark);
+
+  /* Sim aux names referenced with fallbacks in panels/components.
+     The per-panel accent identities collapse to neutral here —
+     that IS the Phase 0 de-rainbow. */
+  --sim-fg:           var(--text-primary);
+  --sim-muted:        var(--text-muted);
+  --sim-border:       var(--border-default);
+  --sim-accent:       var(--accent-fg);
+  --sim-causal-trace: var(--text-secondary);
+  --sim-diagnostics:  var(--text-secondary);
+  --sim-archive:      var(--text-secondary);
+
+  /* Typography */
+  --font-headline: var(--font-body); /* Manrope retired; Plex Sans 500 */
+
+  /* Layout (old shell dimensions) */
+  --sidebar-width: 48px;
+  --toolbar-height: var(--frame-top-height);
+  --panel-right-width: var(--rail-right-width);
+  --panel-bottom-height: 200px;
+
+  /* Radii (old 4-step scale → new 3-step; xl folds into lg) */
+  --radius-xl: var(--radius-lg);
+
+  /* Names that were dangling even BEFORE ninebar (referenced with inline
+     fallbacks, never defined). Defined here so the coverage gate is exact:
+     every var() in src resolves. */
+  --danger:                 var(--nb-st-error-fg);
+  --font-sans:              var(--font-body);
+  --mono-font:              var(--font-mono);
+  --on-error-container:     var(--nb-n-0);
+  --on-secondary-container: var(--nb-n-50);
+  --on-tertiary:            var(--nb-n-950);
+  --sim-error:              var(--nb-st-error-fg);
+  --sim-input-bg:           var(--surface-sunken);
+  --sim-row-bg:             var(--surface-panel);
+  --sim-row-selected:       var(--accent-tint);
+  --text:                   var(--text-primary);
+}
+
+/* Light ground: the compat aliases that are read as TEXT need a darker rung.
+   See the note on `--outline` above — measured 2.88:1 on paper at n-400,
+   6.54:1 at n-600. */
+:root[data-theme='light'] {
+  /* Surfaces: the whole compat family was pinned to the dark ramp with no
+     light peer, so every component still on these Material-era names — the
+     Analyze landing, its config panels, the pickers — kept painting DARK
+     panels inside the light theme. That is the same class of leak as the
+     canvas (finding 19), just wider, and it is why the light theme carried
+     more contrast failures than dark (finding 20). Mirrors the ninebar
+     surface ladder: dim/base lowest, containers stepping up toward the
+     hairline end. */
+  --surface-dim:               var(--nb-n-100);
+  --surface:                   var(--nb-n-0);
+  --surface-container-lowest:  var(--nb-n-0);
+  --surface-container-low:     var(--nb-n-25);
+  --surface-container:         var(--nb-n-25);
+  --surface-container-high:    var(--nb-n-100);
+  --surface-container-highest: var(--nb-n-200);
+  --surface-bright:            var(--nb-n-0);
+
+  --on-surface:         var(--nb-n-900);
+  /* Safe to darken ONLY because the surfaces above now flip too: on the
+     dark-panel-in-light-theme state this measured 1.31:1 and took Analyze
+     from 8 failures to 18 before the surface ladder was added. */
+  --on-surface-variant: var(--nb-n-600);
+  --outline:            var(--nb-n-600);
+
+  /* Accent-as-text/icon on paper. a-300 is the bright rung meant for the ink
+     ground; on white it measured 1.72:1 (the Workspace folder glyph). a-700
+     matches `--accent-fg` in the ninebar light block. */
+  --primary:            var(--nb-a-700);
+  --tertiary:           var(--nb-a-700);
+}

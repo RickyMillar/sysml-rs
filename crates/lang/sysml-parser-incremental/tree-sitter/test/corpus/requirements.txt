@@ -1,0 +1,489 @@
+====================================
+requirement-with-subject
+====================================
+
+requirement def SafetyReq {
+  subject sys : System;
+  require constraint {
+    sys.isOperational == true
+  }
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (require_constraint
+        (constraint_body
+          (result_expression
+            (equality_expression
+              (primary_expression
+                (feature_chain
+                  (identifier)
+                  (identifier)))
+              (primary_expression
+                (literal
+                  (boolean_literal))))))))))
+
+====================================
+requirement-with-assume
+====================================
+
+requirement def R {
+  subject x : T;
+  assume constraint {
+    x.value >= 0
+  }
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (assume_constraint
+        (constraint_body
+          (result_expression
+            (relational_expression
+              (primary_expression
+                (feature_chain
+                  (identifier)
+                  (identifier)))
+              (primary_expression
+                (literal
+                  (integer_literal))))))))))
+
+====================================
+requirement-with-short-name
+====================================
+
+requirement def <'R1'> TopReq;
+
+---
+
+(source_file
+  (requirement_def
+    (short_name
+      (quoted_name))
+    name: (identifier)))
+
+====================================
+satisfy-requirement
+====================================
+
+satisfy requirement check : SafetyReq;
+
+---
+
+(source_file
+  (satisfy_requirement
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+verify-requirement
+====================================
+
+verify requirement test : PerformanceReq;
+
+---
+
+(source_file
+  (satisfy_requirement
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+====================================
+constraint-with-result
+====================================
+
+constraint def Positive {
+  attribute val : Real;
+  val > 0
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (standard_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (result_expression
+        (relational_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (literal
+              (integer_literal))))))))
+
+====================================
+inv-constraint
+====================================
+
+part x {
+  inv { value > 0 }
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (inv_constraint
+        (constraint_body
+          (result_expression
+            (relational_expression
+              (primary_expression
+                (feature_chain
+                  (identifier)))
+              (primary_expression
+                (literal
+                  (integer_literal))))))))))
+
+====================================
+textual-representation
+====================================
+
+requirement def DocReq {
+  require constraint {
+    language "English"
+    /* The system shall work */
+  }
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (require_constraint
+        (constraint_body
+          (textual_representation
+            language: (string_literal)
+            (doc_string)))))))
+
+====================================
+objective-requirement
+====================================
+
+requirement def R {
+  subject s : S;
+  objective obj {
+    require constraint {
+      s.score >= 90
+    }
+  };
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (objective_requirement
+        name: (identifier)
+        (requirement_body
+          (require_constraint
+            (constraint_body
+              (result_expression
+                (relational_expression
+                  (primary_expression
+                    (feature_chain
+                      (identifier)
+                      (identifier)))
+                  (primary_expression
+                    (literal
+                      (integer_literal))))))))))))
+
+====================================
+require-constraint-with-typing
+====================================
+
+requirement def R {
+  subject s : System;
+  require constraint c : SafetyConstraint;
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (require_constraint
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+====================================
+satisfy-requirement-by-subject
+====================================
+
+satisfy requirement r : SafetyReq by mySystem;
+
+---
+
+(source_file
+  (satisfy_requirement
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))
+    subject: (feature_chain
+      (identifier))))
+
+====================================
+satisfy-direct-ref
+====================================
+
+satisfy SafetyReq by mySystem;
+
+---
+
+(source_file
+  (satisfy_requirement
+    ref: (identifier)
+    subject: (feature_chain
+      (identifier))))
+
+====================================
+satisfy-qualified-ref
+====================================
+
+satisfy Pkg::SafetyReq by mySystem;
+
+---
+
+(source_file
+  (satisfy_requirement
+    ref: (qualified_name
+      (identifier)
+      (identifier))
+    subject: (feature_chain
+      (identifier))))
+
+====================================
+require-constraint-typed-no-name
+====================================
+
+requirement def R {
+  require constraint : MaxSpeed;
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (require_constraint
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier))))))))
+
+====================================
+metadata-annotation-block
+====================================
+
+part def Vehicle {
+  @Metadata {
+    attribute x : String;
+  }
+}
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (definition_body
+      (metadata_usage
+        type: (type_ref
+          (feature_chain
+            (identifier)))
+        (standard_usage
+          name: (identifier)
+          (typing
+            type: (type_ref
+              (feature_chain
+                (identifier)))))))))
+
+====================================
+metadata-annotation-semicolon
+====================================
+
+part def P {
+  @Safety;
+}
+
+---
+
+(source_file
+  (standard_def
+    name: (identifier)
+    (definition_body
+      (metadata_usage
+        type: (type_ref
+          (feature_chain
+            (identifier)))))))
+
+====================================
+frame-constraint
+====================================
+
+requirement def R {
+  subject s : S;
+  frame concern {
+    s.temp >= -40 and s.temp <= 85
+  }
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (frame_constraint
+        (constraint_body
+          (result_expression
+            (and_expression
+              (relational_expression
+                (primary_expression
+                  (feature_chain
+                    (identifier)
+                    (identifier)))
+                (unary_expression
+                  (primary_expression
+                    (literal
+                      (integer_literal)))))
+              (relational_expression
+                (primary_expression
+                  (feature_chain
+                    (identifier)
+                    (identifier)))
+                (primary_expression
+                  (literal
+                    (integer_literal)))))))))))
+
+====================================
+keyword-derivation-connection
+====================================
+
+#derivation connection {
+  end #original ::> vehicleMassRequirement;
+  end #derive ::> chassisMassRequirement;
+}
+
+---
+
+(source_file
+  (annotated_connection_usage
+    (prefix_metadata_annotation
+      type: (type_ref
+        (feature_chain
+          (identifier))))
+    (usage_body
+      (connection_end_usage
+        (prefix_metadata_annotation
+          type: (type_ref
+            (feature_chain
+              (identifier))))
+        (references_clause
+          (feature_chain
+            (identifier))))
+      (connection_end_usage
+        (prefix_metadata_annotation
+          type: (type_ref
+            (feature_chain
+              (identifier))))
+        (references_clause
+          (feature_chain
+            (identifier)))))))
+
+====================================
+requirement-body-untyped-part
+====================================
+
+requirement def R {
+  part chassis;
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (standard_usage
+        name: (identifier)))))
+
+====================================
+requirement-body-part-named-frame
+====================================
+
+requirement def R {
+  part frame;
+}
+
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (standard_usage
+        name: (identifier)))))

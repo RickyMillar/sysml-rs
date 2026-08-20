@@ -1,0 +1,150 @@
+diff --color -ruN pa/models/SE_Models/EIT_System_Use_Cases.sysml pb/models/SE_Models/EIT_System_Use_Cases.sysml
+--- pa/models/SE_Models/EIT_System_Use_Cases.sysml	2026-08-13 03:15:55.441578757 +1200
++++ pb/models/SE_Models/EIT_System_Use_Cases.sysml	2026-08-13 03:15:55.451045758 +1200
+@@ -7,42 +7,42 @@
+     actor EITSystem;
+ 
+     // Define use cases
+-    usecase ApplyElectrodeBelt;
+-    usecase StartMonitoring;
+-    usecase CollectImpedanceData;
+-    usecase GenerateEITImages;
+-    usecase AnalyzeEITImages;
+-    usecase CalibrateSystem;
++    use case ApplyElectrodeBelt;
++    use case StartMonitoring;
++    use case CollectImpedanceData;
++    use case GenerateEITImages;
++    use case AnalyzeEITImages;
++    use case CalibrateSystem;
+ 
+     // Relationships between actors and use cases
+     association ApplyElectrodeBeltAssoc {
+-        memberEnd actor: EngineerTechnician;
+-        memberEnd usecase: ApplyElectrodeBelt;
++        end actor: EngineerTechnician;
++        end usecase: ApplyElectrodeBelt;
+     }
+ 
+     association StartMonitoringAssoc {
+-        memberEnd actor: Doctor;
+-        memberEnd usecase: StartMonitoring;
++        end actor: Doctor;
++        end usecase: StartMonitoring;
+     }
+ 
+     association CollectImpedanceDataAssoc {
+-        memberEnd actor: EITSystem;
+-        memberEnd usecase: CollectImpedanceData;
++        end actor: EITSystem;
++        end usecase: CollectImpedanceData;
+     }
+ 
+     association GenerateEITImagesAssoc {
+-        memberEnd actor: EITSystem;
+-        memberEnd usecase: GenerateEITImages;
++        end actor: EITSystem;
++        end usecase: GenerateEITImages;
+     }
+ 
+     association AnalyzeEITImagesAssoc {
+-        memberEnd actor: Doctor;
+-        memberEnd usecase: AnalyzeEITImages;
++        end actor: Doctor;
++        end usecase: AnalyzeEITImages;
+     }
+ 
+     association CalibrateSystemAssoc {
+-        memberEnd actor: EngineerTechnician;
+-        memberEnd usecase: CalibrateSystem;
++        end actor: EngineerTechnician;
++        end usecase: CalibrateSystem;
+     }
+ 
+     // System boundary
+diff --color -ruN pa/models/SE_Models/eVehicleLibrary.sysml pb/models/SE_Models/eVehicleLibrary.sysml
+--- pa/models/SE_Models/eVehicleLibrary.sysml	1970-01-01 12:00:00.000000000 +1200
++++ pb/models/SE_Models/eVehicleLibrary.sysml	2026-08-13 03:15:55.450971007 +1200
+@@ -0,0 +1,48 @@
++/**
++ * eVehicleLibrary - Stub library for HVAC and vehicle-related requirements.
++ *
++ * This stub provides placeholder type definitions to support HVACSystemRequirements.sysml
++ * and other vehicle system models. These types extend the ISQ (International System of
++ * Quantities) definitions for proper unit compatibility.
++ */
++standard library package eVehicleLibrary {
++    import ISQ::*;
++    import SI::*;
++    import ScalarValues::*;
++
++    /**
++     * Temperature type for thermal measurements.
++     * Extends ISQ ThermodynamicTemperatureValue for unit compatibility.
++     */
++    attribute def Temperature :> ISQ::ThermodynamicTemperatureValue;
++
++    /**
++     * Time duration type.
++     * Extends ISQ DurationValue for time measurements.
++     */
++    attribute def Time :> ISQ::DurationValue;
++
++    /**
++     * Percentage type for ratio measurements (0-100%).
++     * Extends ISQ DimensionOneValue as a dimensionless ratio.
++     */
++    attribute def Percentage :> ISQ::DimensionOneValue;
++
++    /**
++     * Distance type for spatial measurements.
++     * Extends ISQ LengthValue for distance/length measurements.
++     */
++    attribute def Distance :> ISQ::LengthValue;
++
++    /**
++     * Power type for energy rate measurements.
++     * Extends ISQ PowerValue for power consumption tracking.
++     */
++    attribute def Power :> ISQ::PowerValue;
++
++    /**
++     * Decibel type for sound level measurements.
++     * Extends ISQ DimensionOneValue as a logarithmic ratio.
++     */
++    attribute def Decibel :> ISQ::DimensionOneValue;
++}
+diff --color -ruN pa/models/SE_Models/VehicleModel.sysml pb/models/SE_Models/VehicleModel.sysml
+--- pa/models/SE_Models/VehicleModel.sysml	2026-08-13 03:15:55.441834918 +1200
++++ pb/models/SE_Models/VehicleModel.sysml	2026-08-13 03:15:55.450816658 +1200
+@@ -198,20 +198,20 @@
+             import ScalarFunctions::*;
+             import ISQ::*;
+             import SI::*;
+-            alias ISQ::TorqueValue as Torque;
++            alias Torque for ISQ::TorqueValue;
+             //quantity used in analysis
+             attribute def DistancePerVolumeValue :> Quantities::QuantityValue;
+         }
+         package IndividualDefinitions {
+-            individual def SpatialTemporalReference_1 :> SpatialTemporalReference;
+-            individual def VehicleRoadContext_1 :> VehicleRoadContext;
+-            individual def Vehicle_1 :> Vehicle;
+-            individual def FrontAxleAssembly_1 :> AxleAssembly;
+-            individual def FrontAxle_1 :> FrontAxle;
+-            individual def Wheel_1 :> Wheel;
+-            individual def Wheel_2 :> Wheel;
+-            individual def RearAxleAssembly_1 :> AxleAssembly;
+-            individual def Road_1 :> Road;
++            individual SpatialTemporalReference_1 :> SpatialTemporalReference;
++            individual VehicleRoadContext_1 :> VehicleRoadContext;
++            individual Vehicle_1 :> Vehicle;
++            individual FrontAxleAssembly_1 :> AxleAssembly;
++            individual FrontAxle_1 :> FrontAxle;
++            individual Wheel_1 :> Wheel;
++            individual Wheel_2 :> Wheel;
++            individual RearAxleAssembly_1 :> AxleAssembly;
++            individual Road_1 :> Road;
+         }
+     }
+     package VehicleConfigurations {

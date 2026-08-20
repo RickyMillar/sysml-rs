@@ -1,0 +1,10 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "element_id": "<UUID>"
+  },
+  "response": "2"
+}

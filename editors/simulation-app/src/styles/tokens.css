@@ -1,0 +1,444 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ninebar — Design Tokens
+   + the ninebar token sheet (OKLCH is authoritative; hex are renderings).
+
+   Three tiers. A component may NEVER reference a primitive (--nb-*):
+     primitive (--nb-*)  →  semantic (--surface-*, --verdict-*, …)  →  component
+
+   Hard rules the tokens encode:
+   · The reserved wedge: hue 40–95 belongs to the accent (selection /
+     active / primacy). No element type, chart series, or status may
+     enter it. Sole scoped exception: --chart-heat-* inside a chart
+     container, never on the canvas.
+   · Status owns badge + tint + dash; selection owns border weight +
+     handles + halo. They never compete for the same pixel.
+   · Info is neutral — it doesn't need a hue.
+   · The app default is DARK-WARM ("warm ink instrument"); light
+     ("warm paper") ships as an explicit override block below.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Primitives: warm neutral ramp (n-*) — the brand lives here ── */
+  --nb-n-0:   oklch(0.99  0.004 75);  /* #FDFBF7 highest surface        */
+  --nb-n-25:  oklch(0.975 0.006 75);  /* #F8F4EC chalk — node fills     */
+  --nb-n-50:  oklch(0.955 0.008 75);  /* #F0EAE0 paper — light canvas   */
+  --nb-n-100: oklch(0.92  0.010 75);  /* #E4DCCE sunken, zebra          */
+  --nb-n-200: oklch(0.86  0.012 72);  /* #D2C7B5 hairlines              */
+  --nb-n-300: oklch(0.78  0.014 70);  /* #BBAD97 borders                */
+  --nb-n-400: oklch(0.66  0.016 68);  /* #9B8B74 disabled text          */
+  --nb-n-500: oklch(0.55  0.018 65);  /* #7E6E58 muted text             */
+  --nb-n-600: oklch(0.45  0.018 62);  /* #64553F secondary text         */
+  --nb-n-700: oklch(0.36  0.016 58);  /* #4C3F2C strong border (dark)   */
+  --nb-n-800: oklch(0.27  0.014 55);  /* #362C1D dark panel             */
+  --nb-n-900: oklch(0.20  0.012 52);  /* #241C15 ink — primary text     */
+  --nb-n-950: oklch(0.15  0.010 50);  /* #1A140F dark canvas            */
+
+  /* ── Primitives: accent — crema/ochre (a-*) — RESERVED WEDGE ── */
+  --nb-a-100: oklch(0.94 0.04 75);    /* #F7E7CD */
+  --nb-a-300: oklch(0.82 0.10 70);    /* #E5B269 */
+  --nb-a-500: oklch(0.70 0.14 66);    /* #CE8B2A */
+  --nb-a-600: oklch(0.62 0.13 62);    /* #BA7517 — the accent           */
+  --nb-a-700: oklch(0.52 0.12 58);    /* #985E0F */
+  --nb-a-900: oklch(0.32 0.08 55);    /* #5A380A */
+
+  /* ── Primitives: categorical ramp (cat-*) — fixed lightness ──
+     Element types + chart series. cat-1/cat-5 are close under
+     deuteranopia: never the only channel distinguishing two things. */
+  --nb-cat-1: oklch(0.50 0.09 185);   /* teal    */
+  --nb-cat-2: oklch(0.50 0.11 250);   /* blue    */
+  --nb-cat-3: oklch(0.50 0.13 290);   /* violet  */
+  --nb-cat-4: oklch(0.50 0.13 340);   /* magenta */
+  --nb-cat-5: oklch(0.50 0.10 145);   /* green   */
+  --nb-cat-6: oklch(0.50 0.05 230);   /* slate   */
+  --nb-cat-7: oklch(0.50 0.10 315);   /* plum    */
+  --nb-cat-8: oklch(0.50 0.08 210);   /* cyan    */
+  /* derived stops: -fill (tinted bg) and -text (on the fill) */
+  /* -fg rung: the same hues lifted to read as GLYPHS on the ink ground, the
+     way `--nb-st-*-fg` does for status. The base ramp is fixed-lightness 0.50
+     and tuned for fills — as icon colour it measured 3.05–3.43:1 on the dark
+     ground, i.e. at or under the 3:1 floor (finding 44). At 0.72 the same
+     hues read 7.47–8.26:1 while staying the same colour family. */
+  --nb-cat-1-fg: oklch(0.72 0.09 185); --nb-cat-2-fg: oklch(0.72 0.11 250);
+  --nb-cat-3-fg: oklch(0.72 0.13 290); --nb-cat-4-fg: oklch(0.72 0.13 340);
+  --nb-cat-5-fg: oklch(0.72 0.10 145); --nb-cat-6-fg: oklch(0.72 0.05 230);
+  --nb-cat-7-fg: oklch(0.72 0.10 315); --nb-cat-8-fg: oklch(0.72 0.08 210);
+  --nb-cat-1-fill: oklch(0.94 0.03 185); --nb-cat-1-text: oklch(0.32 0.09 185);
+  --nb-cat-2-fill: oklch(0.94 0.03 250); --nb-cat-2-text: oklch(0.32 0.11 250);
+  --nb-cat-3-fill: oklch(0.94 0.03 290); --nb-cat-3-text: oklch(0.32 0.13 290);
+  --nb-cat-4-fill: oklch(0.94 0.03 340); --nb-cat-4-text: oklch(0.32 0.13 340);
+  --nb-cat-5-fill: oklch(0.94 0.03 145); --nb-cat-5-text: oklch(0.32 0.10 145);
+  --nb-cat-6-fill: oklch(0.94 0.03 230); --nb-cat-6-text: oklch(0.32 0.05 230);
+  --nb-cat-7-fill: oklch(0.94 0.03 315); --nb-cat-7-text: oklch(0.32 0.10 315);
+  --nb-cat-8-fill: oklch(0.94 0.03 210); --nb-cat-8-text: oklch(0.32 0.08 210);
+
+  /* ── Primitives: status (st-*) — outside the reserved wedge ── */
+  --nb-st-error:    oklch(0.48 0.16 25);   /* #9B2C2C redder+darker than crema */
+  --nb-st-warning:  oklch(0.55 0.09 105);  /* #6E6A24 brass/olive              */
+  --nb-st-verified: oklch(0.50 0.10 150);  /* #2F6B4A                          */
+  /* bright variants for text/icons on the dark ground */
+  --nb-st-error-fg:    oklch(0.68 0.14 25);
+  --nb-st-warning-fg:  oklch(0.72 0.09 105);
+  --nb-st-verified-fg: oklch(0.68 0.10 150);
+
+  /* ═══════════════ SEMANTIC — dark-warm default ═══════════════ */
+
+  /* Surfaces */
+  --surface-canvas:  var(--nb-n-950);
+  --surface-panel:   var(--nb-n-900);
+  --surface-chrome:  var(--nb-n-800);
+  --surface-raised:  var(--nb-n-800);
+  --surface-sunken:  var(--nb-n-950);
+  --surface-overlay: var(--nb-n-800);
+  --surface-scrim:   oklch(0.20 0.012 52 / 0.55);
+
+  /* Text */
+  --text-primary:   var(--nb-n-50);
+  --text-secondary: var(--nb-n-300);
+  --text-muted:     var(--nb-n-400);
+  --text-disabled:  var(--nb-n-600);
+  --text-inverse:   var(--nb-n-900);
+  --text-accent:    var(--nb-a-300);
+
+  /* Borders — 3-token contrast cascade (calm-pass §4a, ratified 2026-07-24):
+     hairline nb-n-800 (1.00 on raised, invisible) → nb-n-700 (1.34, visible);
+     default/strong shift one rung down to keep the three rungs distinct. */
+  --border-hairline: var(--nb-n-700);
+  --border-default:  var(--nb-n-600);
+  --border-strong:   var(--nb-n-500);
+  --border-focus:    var(--nb-a-600);
+
+  /* Accent (selection / active / primacy — amber is never decorative) */
+  --accent:        var(--nb-a-600);
+  --accent-fg:     var(--nb-a-300);  /* accent as text/icon on dark ground */
+  --accent-hover:  var(--nb-a-700);
+  --accent-active: var(--nb-a-900);
+  --accent-tint:   oklch(0.32 0.08 55 / 0.30); /* a-900 @ 30% — row selection */
+  --on-accent:     var(--nb-n-0);
+
+  /* Verdicts (4-valued per spec + UI-only running/pending).
+     Colour is never the only channel: pass=filled ✓, fail=filled ✗,
+     inconclusive=hollow ?, error=hatched ⨯, running=ninebar pulse. */
+  /* The status ramp has two rungs by design: `--nb-st-*` are FILL values tuned
+     to work as small solid badges, `--nb-st-*-fg` are the same hues lifted to
+     read as text/glyph on the ink ground (mirroring `--accent-fg`). Verdicts
+     are overwhelmingly rendered as glyphs here — the ✗ and ✓ in the verify
+     counts — so they take the -fg rung. On the fill rung they measured 2.77:1
+     and 3.44:1 against the canvas, i.e. the most important mark in a
+     verification tool was the least readable thing on screen (finding 21).
+     The light theme keeps the fill rung, which already reads on paper. */
+  --verdict-pass:         var(--nb-st-verified-fg);
+  --verdict-fail:         var(--nb-st-error-fg);
+  --verdict-inconclusive: var(--nb-n-400);   /* doubles as not-yet-evaluated */
+  --verdict-error:        var(--nb-n-300);   /* + hatch pattern channel      */
+  --verdict-running:      var(--accent);     /* ninebar pulse                */
+  --on-verdict:           var(--nb-n-0);
+
+  /* Diagnostic severities (error/warning/info/hint — info is neutral) */
+  --severity-error:   var(--nb-st-error-fg);
+  --severity-warning: var(--nb-st-warning-fg);
+  --severity-info:    var(--nb-n-400);
+  --severity-hint:    var(--nb-n-500);
+
+  /* Physics health (a distinct ladder from severities — never mix) */
+  --health-nominal:  var(--nb-st-verified-fg);
+  --health-warning:  var(--nb-st-warning-fg);
+  --health-critical: var(--nb-st-error-fg);
+
+  /* Diff (its own semantic layer — never borrows verdict tokens) */
+  --diff-added:    oklch(0.60 0.10 145);
+  --diff-removed:  oklch(0.62 0.14 25);
+  --diff-modified: oklch(0.62 0.11 250);
+  --diff-missing:  var(--nb-n-600);
+
+  /* Physics domains (8) → categorical ramp. types/physics.ts carries the
+     same values as literal hex for canvas consumers — keep in sync. */
+  --domain-electrical:               var(--nb-cat-2);
+  --domain-signal:                   var(--nb-cat-1);
+  --domain-thermal:                  var(--nb-cat-4);
+  --domain-hydraulic:                var(--nb-cat-8);
+  --domain-mechanical-translational: var(--nb-cat-6);
+  --domain-mechanical-rotational:    var(--nb-cat-3);
+  --domain-protection:               var(--nb-cat-7);
+  --domain-uncategorized:            var(--nb-n-500);
+
+  /* Charts (chrome; series = cat ramp; heat is the ONE wedge exception,
+     chart-container-scoped, never on the canvas) */
+  --chart-grid:       var(--nb-n-900);
+  --chart-axis:       var(--nb-n-700);
+  --chart-label:      var(--text-secondary);
+  --chart-annotation: var(--accent-fg);
+  /* Element-kind GLYPHS in the tree. These were reaching for
+     `--chart-series-*`, which are data-series FILLS — a series colour and an
+     icon colour are different jobs and only one of them has a contrast floor
+     to meet. Dark takes the -fg rung; light keeps the base ramp, which
+     measures 5.01–5.63:1 on paper. */
+  --glyph-part:        var(--nb-cat-6-fg);
+  --glyph-state:       var(--nb-cat-3-fg);
+  --glyph-constraint:  var(--nb-cat-7-fg);
+  --glyph-ode:         var(--nb-cat-2-fg);
+
+  --chart-series-1: var(--nb-cat-1); --chart-series-2: var(--nb-cat-2);
+  --chart-series-3: var(--nb-cat-3); --chart-series-4: var(--nb-cat-4);
+  --chart-series-5: var(--nb-cat-5); --chart-series-6: var(--nb-cat-6);
+  --chart-series-7: var(--nb-cat-7); --chart-series-8: var(--nb-cat-8);
+  --chart-heat-lo:  var(--nb-n-50);
+  --chart-heat-mid: var(--nb-a-300);
+  --chart-heat-hi:  var(--nb-a-700);
+  --chart-heat-max: var(--nb-st-error);
+
+  /* Sim overlay (chrome-side consumers; canvas palette is Rust-emitted) */
+  --sim-state-active:    var(--accent-fg);           /* amber = active. Full stop. */
+  --sim-state-completed: var(--nb-st-verified-fg);
+  --sim-state-available: oklch(0.68 0.11 250);       /* cat-2, brightened */
+  --sim-state-blocked:   var(--nb-st-error-fg);
+  --sim-breakpoint-mark: var(--nb-st-error-fg);
+
+  /* ── Typography ── */
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  /* scale: 11/12/13/14/16/20/24/32 · weights 400 & 500 only */
+  --text-xs:   0.6875rem;  /* 11px badges, metadata      */
+  --text-sm:   0.75rem;    /* 12px labels, table cells   */
+  --text-base: 0.8125rem;  /* 13px body                  */
+  --text-md:   0.875rem;   /* 14px emphasized body       */
+  --text-lg:   1rem;       /* 16px section headers       */
+  --text-xl:   1.25rem;    /* 20px pane titles           */
+  --text-2xl:  1.5rem;     /* 24px display values        */
+  --text-3xl:  2rem;       /* 32px hero numerals         */
+
+  /* ── Space (4px base) + density tiers ── */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem;
+  --row-compact: 24px;      /* matrices, trees, property grids (default) */
+  --row-default: 32px;      /* panels, menus, forms                      */
+  --row-comfortable: 40px;  /* docs, settings                            */
+  --row-dense: 16px;        /* data-dense tree/table/matrix rows (demo
+                               trees; crib-sheet reconciliation #1) —
+                               the scale is 16/24/32/40, snap to it     */
+
+  /* ── Layout rhythm ── */
+  --frame-top-height: 40px;
+  --statusbar-height: 24px;
+  --rail-left-width: 300px;
+  --rail-right-width: 320px;
+  --strip-min-height: 200px;
+  --strip-max-height: 400px;
+  /* legacy names still consumed by the old shell live in tokens-compat.css */
+
+  /* ── Radii: 0 canvas grid · 4 nodes/inputs/buttons · 8 panels · 12 overlays ── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* ── Motion (ease-out enter, ease-in exit; reduced-motion → opacity only) ── */
+  --motion-state: 80ms;
+  --motion-menu: 140ms;
+  --motion-panel: 220ms;
+  --transition-fast: 80ms ease-out;
+  --transition-base: 140ms ease-out;
+
+  /* ── Elevation: borders over shadows; shadow = warm ink, never black ── */
+  --shadow-float: 0 4px 16px oklch(0.15 0.010 50 / 0.45);
+}
+
+/* ═══════════════ Light — "warm paper" (explicit opt-in) ═══════════════ */
+:root[data-theme='light'] {
+  --surface-canvas:  var(--nb-n-50);
+  --surface-panel:   var(--nb-n-25);
+  --surface-chrome:  var(--nb-n-0);
+  --surface-raised:  var(--nb-n-0);
+  --surface-sunken:  var(--nb-n-100);
+  --surface-overlay: var(--nb-n-0);
+
+  --text-primary:   var(--nb-n-900);
+  /* One rung darker than the mirror of dark: on paper, n-500 muted measured
+     4.24:1 and n-400 2.88:1, both under the 4.5 floor while carrying live
+     content (tab labels, tree section headers — finding 23). Shifting
+     secondary/muted down a rung puts every live tier above AA and keeps the
+     three rungs monotonic. `--text-disabled` stays light: disabled controls
+     are explicitly exempt from the contrast minimum, and it must stay
+     visibly weaker than muted to still read as unavailable. */
+  --text-secondary: var(--nb-n-700);
+  --text-muted:     var(--nb-n-600);
+  --text-disabled:  var(--nb-n-400);
+  --text-inverse:   var(--nb-n-25);
+  --text-accent:    var(--nb-a-700);
+
+  /* Light mirror of the §4a border cascade (verified 2026-07-24: hairline
+     1.62→2.13 on raised, three rungs stay distinct, none goes heavy). */
+  --border-hairline: var(--nb-n-300);
+  --border-default:  var(--nb-n-400);
+  --border-strong:   var(--nb-n-500);
+
+  --accent-fg:    var(--nb-a-700);
+  --accent-tint:  var(--nb-a-100);
+
+  --severity-error:   var(--nb-st-error);
+  --severity-warning: var(--nb-st-warning);
+  --severity-info:    var(--nb-n-500);
+  --severity-hint:    var(--nb-n-400);
+  --health-nominal:  var(--nb-st-verified);
+  --health-warning:  var(--nb-st-warning);
+  --health-critical: var(--nb-st-error);
+  /* Verdicts on paper keep the FILL rung (the dark theme lifts them to -fg):
+     measured 6.21:1 fail / 4.99:1 pass here. Inconclusive moves off n-400,
+     which was 2.71:1 — the "?" and "N inconclusive" counts are live content,
+     not disabled text. */
+  --verdict-pass:         var(--nb-st-verified);
+  --verdict-fail:         var(--nb-st-error);
+  --verdict-inconclusive: var(--nb-n-600);
+  --verdict-error:   var(--nb-n-800);
+
+  --diff-added:    oklch(0.50 0.10 145);
+  --diff-removed:  var(--nb-st-error);
+  --diff-modified: var(--nb-cat-2);
+
+  --sim-state-active:    var(--nb-a-600);
+  --sim-state-completed: var(--nb-st-verified);
+  --sim-state-available: var(--nb-cat-2);
+  --sim-state-blocked:   var(--nb-st-error);
+  --sim-breakpoint-mark: var(--nb-st-error);
+
+  --glyph-part:       var(--nb-cat-6);
+  --glyph-state:      var(--nb-cat-3);
+  --glyph-constraint: var(--nb-cat-7);
+  --glyph-ode:        var(--nb-cat-2);
+
+  --chart-grid: var(--nb-n-100);
+  --chart-axis: var(--nb-n-300);
+}
+
+/* ═══════════════ Light canvas — "warm paper" instrument ground ═══════════════
+   The diagram canvas is emitted from Rust (`DesignTokens::canonical()`), which
+   is deliberately a SINGLE dark table: the palette rides in the salsa-cached
+   ViewModel, so a theme parameter there would leak into the cache key and make
+   a theme flip a re-elaboration. That table's doc comment names the intended
+   escape hatch — "a future light canvas belongs in a frontend CSS-variable
+   indirection layer" — and this is it. `themeableCanvasPalette()` rewrites each
+   emitted colour to `var(--canvas-<slot>, <emitted>)`, so:
+
+     · defining nothing here  → canvas renders the dark table, exactly as before
+     · defining these         → light theme gets a paper ground, pure CSS
+
+   Dark is therefore untouchable by construction: these are declared under the
+   light selector ONLY, and the dark values remain the Rust fallbacks.
+
+   "Run light"). Where the crib sheet gives a demo hex it is matched to its
+   token (bg/grids/selection are exact); the per-family header tints are
+   DERIVED from the `--nb-cat-*` fill/text stops rather than hand-copied, per
+   that section's explicit instruction.
+
+   Mirror of the dark construction: on ink, node bodies sit just ABOVE the paper
+   and strokes are bright; on paper, bodies sit just BELOW white and strokes go
+   mid-dark, holding the §11 ≥3:1 stroke-vs-paper contract in both directions. */
+:root[data-theme='light'] {
+  /* ── Ground ── */
+  --canvas-bg:         oklch(0.92  0.010 75);   /* #E4DCCE — nb-n-100, crib-sheet exact */
+  --canvas-text:       oklch(0.20  0.012 52);   /* ink */
+  --canvas-muted:      oklch(0.45  0.018 62);
+  --canvas-grid-minor: oklch(0.86  0.012 72);   /* #D2C7B5 — nb-n-200, exact */
+  --canvas-grid-major: oklch(0.78  0.014 70);   /* #BBAD97 — nb-n-300, exact */
+
+  /* ── The seven canvas families: fill just below white, tinted header, mid-dark stroke ── */
+  --canvas-block-fill:            oklch(0.975 0.012 250);
+  --canvas-block-header:          oklch(0.93  0.030 250);
+  --canvas-block-stroke:          oklch(0.52  0.090 250);
+  --canvas-action-fill:           oklch(0.975 0.012 290);
+  --canvas-action-header:         oklch(0.93  0.030 290);
+  --canvas-action-stroke:         oklch(0.52  0.090 290);
+  --canvas-state-fill:            oklch(0.975 0.012 185);
+  --canvas-state-header:          oklch(0.93  0.030 185);
+  --canvas-state-stroke:          oklch(0.50  0.080 185);
+  --canvas-requirement-fill:      oklch(0.975 0.012 340);
+  --canvas-requirement-header:    oklch(0.93  0.030 340);
+  --canvas-requirement-stroke:    oklch(0.52  0.090 340);
+  --canvas-constraint-fill:       oklch(0.975 0.012 145);
+  --canvas-constraint-header:     oklch(0.93  0.030 145);
+  --canvas-constraint-stroke:     oklch(0.50  0.080 145);
+  --canvas-interface-fill:        oklch(0.975 0.012 210);
+  --canvas-interface-header:      oklch(0.93  0.028 210);
+  --canvas-interface-stroke:      oklch(0.50  0.075 210);
+  --canvas-flow-fill:             oklch(0.975 0.012 315);
+  --canvas-flow-header:           oklch(0.93  0.028 315);
+  --canvas-flow-stroke:           oklch(0.50  0.070 315);
+
+  /* ── Long tail: neutral warm, shape + label only (no family hue) ── */
+  --canvas-package-fill:          oklch(0.975 0.006 75);
+  --canvas-package-header:        oklch(0.92  0.010 75);
+  --canvas-package-stroke:        oklch(0.55  0.014 62);
+  --canvas-item-fill:             oklch(0.975 0.006 75);
+  --canvas-item-header:           oklch(0.92  0.010 75);
+  --canvas-item-stroke:           oklch(0.55  0.014 62);
+  --canvas-attribute-fill:        oklch(0.975 0.006 75);
+  --canvas-attribute-header:      oklch(0.92  0.010 75);
+  --canvas-attribute-stroke:      oklch(0.55  0.014 62);
+  --canvas-enumeration-fill:      oklch(0.975 0.006 75);
+  --canvas-enumeration-header:    oklch(0.92  0.010 75);
+  --canvas-enumeration-stroke:    oklch(0.55  0.014 62);
+  --canvas-usecase-fill:          oklch(0.975 0.006 75);
+  --canvas-usecase-header:        oklch(0.92  0.010 75);
+  --canvas-usecase-stroke:        oklch(0.55  0.014 62);
+  --canvas-allocation-fill:       oklch(0.975 0.006 75);
+  --canvas-allocation-header:     oklch(0.92  0.010 75);
+  --canvas-allocation-stroke:     oklch(0.55  0.014 62);
+  --canvas-occurrence-fill:       oklch(0.975 0.006 75);
+  --canvas-occurrence-header:     oklch(0.92  0.010 75);
+  --canvas-occurrence-stroke:     oklch(0.55  0.014 62);
+  --canvas-view-fill:             oklch(0.975 0.006 75);
+  --canvas-view-header:           oklch(0.92  0.010 75);
+  --canvas-view-stroke:           oklch(0.55  0.014 62);
+  --canvas-metadata-fill:         oklch(0.975 0.006 75);
+  --canvas-metadata-header:       oklch(0.92  0.010 75);
+  --canvas-metadata-stroke:       oklch(0.55  0.014 62);
+  --canvas-node-fallback-fill:    oklch(0.975 0.006 75);
+  --canvas-node-fallback-header:  oklch(0.92  0.010 75);
+  --canvas-node-fallback-stroke:  oklch(0.55  0.014 62);
+  --canvas-comment-fill:          oklch(0.96  0.008 60);
+  --canvas-comment-stroke:        oklch(0.58  0.014 62);
+
+  /* ── Ports, actors, links ── */
+  --canvas-port-in:            oklch(0.50 0.090 155);
+  --canvas-port-out:           oklch(0.52 0.110 25);
+  --canvas-port-inout:         oklch(0.48 0.070 210);
+  --canvas-actor-stroke:       oklch(0.36 0.016 58);
+  --canvas-link-ownership:     oklch(0.55 0.014 60);
+  --canvas-link-typing:        oklch(0.55 0.014 60);
+  --canvas-link-specialization:oklch(0.55 0.014 60);
+  --canvas-link-req:           oklch(0.48 0.070 340);
+  --canvas-link-verify:        oklch(0.48 0.070 340);
+  --canvas-link-derive:        oklch(0.52 0.060 340);
+  --canvas-link-flow:          oklch(0.50 0.060 315);
+  --canvas-link-dependency:    oklch(0.55 0.014 60);
+  --canvas-link-connection:    oklch(0.48 0.060 210);
+  --canvas-link-succession:    oklch(0.55 0.014 60);
+  --canvas-lifeline-fill:      oklch(0.94 0.020 230);
+  --canvas-lifeline-stroke:    oklch(0.50 0.060 230);
+
+  /* ── Selection: the reserved-wedge accent. Crib sheet §3 gives the light
+        ring as #BA7517 = --nb-a-600 exactly; keep the token, not the hex. ── */
+  --canvas-select:         oklch(0.62 0.13 62);
+  --canvas-edge-label-bg:  oklch(0.92 0.010 75 / 0.85);
+
+  /* ── Control glyphs + container bodies are DARK on the paper ground
+        (the dark table's light inks would vanish here). ── */
+  --canvas-control-fill:      oklch(0.27 0.014 55);
+  --canvas-control-stroke:    oklch(0.27 0.014 55);
+  --canvas-compartment-text:  oklch(0.45 0.018 62);
+  --canvas-body-fill:         oklch(0.975 0.006 75);
+
+  /* ── Live simulation channel: "amber means now", darkened to read on paper ── */
+  --canvas-sim-active:      oklch(0.62 0.14 62);
+  --canvas-sim-active-glow: oklch(0.62 0.14 62 / 0.30);
+  --canvas-sim-transition:  oklch(0.58 0.13 62);
+  --canvas-sim-completed:   oklch(0.50 0.11 150);
+
+  /* ── Diagnostic + verdict ramps, light-tuned (the dark table's stops are
+        brightened for ink and wash out as small solid marks on paper). ── */
+  --canvas-sev-info:            oklch(0.50 0.020 60);
+  --canvas-sev-warning:         oklch(0.58 0.110 85);
+  --canvas-sev-error:           oklch(0.52 0.170 25);
+  --canvas-verdict-pass:        oklch(0.48 0.110 150);
+  --canvas-verdict-fail:        oklch(0.50 0.170 25);
+  --canvas-verdict-inconclusive:oklch(0.52 0.014 60);
+  --canvas-verdict-error:       oklch(0.36 0.012 55);
+}

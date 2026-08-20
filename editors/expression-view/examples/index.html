@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@sysml-rs/expression-view — dev harness</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0e1014;
+        --panel: #16191f;
+        --border: #2a2f39;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #7dd3fc;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      h1 { font-weight: 600; letter-spacing: -0.01em; margin: 0 0 0.25rem; }
+      header p { margin: 0 0 2rem; color: var(--muted); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+        gap: 1.25rem;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .card h2 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--accent);
+      }
+      .source {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.85rem;
+        color: var(--muted);
+        background: #0a0c10;
+        padding: 0.5rem 0.7rem;
+        border-radius: 6px;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .math {
+        min-height: 2.2rem;
+        font-size: 1.05rem;
+        padding: 0.6rem 0.4rem;
+      }
+      .math .katex { color: var(--text); }
+      details summary {
+        cursor: pointer;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      pre.ast {
+        font-size: 0.72rem;
+        color: var(--muted);
+        overflow-x: auto;
+        margin: 0.4rem 0 0;
+        padding: 0.5rem;
+        background: #0a0c10;
+        border-radius: 4px;
+      }
+      pre.tex {
+        font-size: 0.72rem;
+        color: #86efac;
+        overflow-x: auto;
+        margin: 0.4rem 0 0;
+        padding: 0.5rem;
+        background: #0a0c10;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>@sysml-rs/expression-view</h1>
+      <p>Dev harness — renders handcrafted <code>ExpressionAstResult</code> fixtures via <code>astToKatex</code>.</p>
+    </header>
+    <div id="grid" class="grid"></div>
+    <script type="module" src="./showcase.ts"></script>
+  </body>
+</html>

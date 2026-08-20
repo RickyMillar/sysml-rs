@@ -1,0 +1,8 @@
+lock_version = 1
+
+[[package]]
+name = "units"
+version = "1.9.3"
+source = "registry:sysand:units@1.9.3"
+checksum = "{{CHECKSUM}}"
+requested = "^1.4"

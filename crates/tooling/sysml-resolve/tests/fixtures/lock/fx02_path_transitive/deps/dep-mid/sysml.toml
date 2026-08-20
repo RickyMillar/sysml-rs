@@ -1,0 +1,6 @@
+[project]
+name = "dep-mid"
+version = "0.2.0"
+
+[dependencies]
+dep-leaf = { path = "../dep-leaf" }

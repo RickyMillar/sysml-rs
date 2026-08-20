@@ -1,0 +1,22 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "roots": []
+  },
+  "response": {
+    "roots": [],
+    "summary": {
+      "failed_dependencies": 0,
+      "hydrated_dependencies": 0,
+      "hydrated_packages": 0,
+      "hydrated_path_dependencies": 0,
+      "invalid_dependencies": 0,
+      "roots": 0,
+      "total_dependencies": 0,
+      "unsupported_dependencies": 0
+    }
+  }
+}

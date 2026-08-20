@@ -1,0 +1,73 @@
+[package]
+name = "sysml-spec-tests"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+description = "Parser coverage validation tests for SysML v2"
+
+[dependencies]
+# TS-3.7a: `sysml-parser-batch` removed — `rule_coverage.rs` (its sole consumer
+# here) was deleted alongside the Pest-as-oracle equivalence tests. A future
+# tree-sitter rule-coverage tracker can replace it if needed.
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+sysml-parser-trait = { workspace = true }
+sysml-core = { workspace = true }
+sysml-codegen = { workspace = true }
+sysml-span = { workspace = true, features = ["serde"] }
+walkdir = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rayon = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+sysml-runtime = { workspace = true }
+# rsc2_behavioural_baseline's collision inventory seeds EvalContexts with the
+# production seeder (eval_context_seed injects @DataSource/__sf_* sampled-
+# function keys) — same pattern as sysml-runtime's own integration tests.
+sysml-ide-db = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+sysml-service = { workspace = true }
+sysml-project = { workspace = true }
+sysml-id = { workspace = true }
+tree-sitter = { workspace = true }
+insta = { workspace = true, features = ["json", "filters"] }
+regex = { workspace = true }
+# In-process LSP drivers (identity_invariants, perf_baseline,
+# semantic_tokens_invariants) go through the ONE supported harness exported
+# by sysml-lsp-server under its non-default `test-harness` feature
+# (`test_harness::{TestServer, TestServerOptions}`) — no hand-rolled
+# tower-lsp service/socket/auto-responder wiring here. These exercise the
+# full handler chain in-process without spawning wire transports.
+sysml-lsp-server = { path = "../../tooling/sysml-lsp-server", features = [
+    "test-harness",
+] }
+sysml-api = { workspace = true }
+tower-lsp = { workspace = true }
+tower = { version = "0.5", features = ["util"] }
+axum = { workspace = true }
+http-body-util = "0.1"
+tokio = { workspace = true }
+chrono = { workspace = true }
+futures = { workspace = true }
+sha2 = { workspace = true }
+toml = { workspace = true }
+
+[features]
+default = []
+corpus = []
+
+[[example]]
+name = "categorize_failures"
+path = "examples/categorize_failures.rs"
+
+[[example]]
+name = "resolution_debug"
+path = "examples/resolution_debug.rs"
+
+[lints]
+workspace = true

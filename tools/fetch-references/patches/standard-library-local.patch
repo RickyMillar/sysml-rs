@@ -1,0 +1,147 @@
+sysml-rs local modifications to the SysML v2 standard model library.
+
+Applied by tools/fetch-references/fetch.sh to the `sysml.library/` subtree of
+the pilot implementation at commit 5a954377cd81e58f8ef8aba6222a2ce860d7787c,
+AFTER the manifest's rename rules, so the paths below are the local layout.
+
+Four files, two of them substantive:
+
+  library.domain/Analysis/AnalysisTooling.sysml   cosmetic — trailing
+      whitespace stripped on 10 lines.
+  library.kernel/Collections.kerml                editorial — the Collection
+      doc comment reworded and extended.
+  library.domain/Geometry/ShapeItems.sysml        WORKAROUND — qualified
+      redefinition targets (`Shell::edges::x`) reduced to bare `edges::x`
+      because our resolver does not yet handle the qualified form. This masks
+      an engine gap inside material presented as normative; it is an open
+      conformance item, not a licensing one.
+  library.systems/StandardViewDefinitions.sysml   NON-NORMATIVE ADDITION — 45
+      lines defining UseCaseView, RequirementView and the bare-name view defs.
+      SysML v2 does not define these; the added block says so itself.
+
+The last two are tracked as conformance items (references-fetch-design.md §9
+row 4). Do not silence this divergence by re-pinning the item's `sha256` —
+`upstream_sha256` is what a pristine fetch produces, `sha256` is what a correct
+local tree must have, and the gap between them is the disclosure.
+
+diff --git a/library.domain/Analysis/AnalysisTooling.sysml b/library.domain/Analysis/AnalysisTooling.sysml
+index fb92b90..f886e91 100644
+--- a/library.domain/Analysis/AnalysisTooling.sysml
++++ b/library.domain/Analysis/AnalysisTooling.sysml
+@@ -6,18 +6,18 @@ standard library package AnalysisTooling {
+ 	 */
+ 
+ 	private import ScalarValues::*;
+-	
++
+ 	metadata def ToolExecution {
+ 		doc
+ 		/*
+ 		 * ToolExecution metadata identifies an external analysis tool to be
+ 		 * used to implement the annotated action.
+ 		 */
+-	
++
+ 		attribute toolName : String;
+ 		attribute uri : String;
+ 	}
+-	
++
+ 	metadata def ToolVariable {
+ 		doc
+ 		/*
+@@ -27,8 +27,8 @@ standard library package AnalysisTooling {
+ 		 * variable in the tool that is to correspond to the annotated
+ 		 * feature.
+ 		 */
+-	
++
+ 		attribute name : String;
+ 	}
+-	
++
+ }
+\ No newline at end of file
+diff --git a/library.domain/Geometry/ShapeItems.sysml b/library.domain/Geometry/ShapeItems.sysml
+index 9cd6cd2..31db75f 100644
+--- a/library.domain/Geometry/ShapeItems.sysml
++++ b/library.domain/Geometry/ShapeItems.sysml
+@@ -252,8 +252,8 @@ standard library package ShapeItems {
+ 			item :>> edges [1];
+ 		}
+ 		item :>> edges : Ellipse [1] = shape {
+-            attribute :>> Shell::edges::innerSpaceDimension, Ellipse::innerSpaceDimension;
+-            ref item :>> Shell::edges::vertices, Ellipse::vertices;
++            attribute :>> edges::innerSpaceDimension, Ellipse::innerSpaceDimension;
++            ref item :>> edges::vertices, Ellipse::vertices;
+ 		}
+ 		item :>> vertices [0];
+ 	}
+diff --git a/library.kernel/Collections.kerml b/library.kernel/Collections.kerml
+index 169b6c6..b14cba4 100644
+--- a/library.kernel/Collections.kerml
++++ b/library.kernel/Collections.kerml
+@@ -16,7 +16,8 @@ standard library package Collections {
+ 		doc
+ 		/*
+ 		 * Collection is the top level abstract supertype of all collection types.
+-		 * The name elements is used to denote the members or contents of the collection.
++		 * The name `elements` is used to denote the elements, members or items of the collection.
++		 * Note: In many programming languages `items` is used but that would be confusing because of the SysML v2 Item concept.
+ 		 */
+ 		
+ 		feature elements[0..*] nonunique;
+diff --git a/library.systems/StandardViewDefinitions.sysml b/library.systems/StandardViewDefinitions.sysml
+index 94f975f..77bc435 100644
+--- a/library.systems/StandardViewDefinitions.sysml
++++ b/library.systems/StandardViewDefinitions.sysml
+@@ -120,4 +120,49 @@ standard library package StandardViewDefinitions {
+              * branches and leaves of the tree, as in graphical user interface widgets.
+              */
+     }
++
++    view def UseCaseView specializes InterconnectionView {
++        doc /*
++             * View definition to present actors, use cases, and the include / extend
++             * relationships between them. The typical rendering is the UML use-case
++             * diagram shape: stick-figure actors at the boundary, use-case ovals in the
++             * subject system, and labelled associations between them.
++             */
++    }
++
++    // sysml-rs note: SysML v2 (Table 34 / clause 9.2.20) does NOT define a
++    // standard RequirementView. The GeneralView doc (above) models a
++    // "requirement view" as a GeneralView specialization selected by a
++    // filter. This def encodes exactly that — GeneralView + the documented
++    // requirement filter set — so `view def X :> Requirement` resolves to a
++    // filtered General view via the normal supertype walk.
++    view def RequirementView :> GeneralView {
++        doc /*
++             * Requirement view: a GeneralView filtered to requirement-related
++             * elements — requirement definitions/usages and the satisfy /
++             * derive / allocation relationships between them. Mirrors the
++             * "requirement view" filter listed in the GeneralView doc above.
++             */
++        // The spec requirement filter (per the GeneralView doc above). The
++        // inert relationship metaclasses (Specialization, FeatureTyping) listed
++        // in the doc are omitted: element-membership filtering ignores them
++        // either way, so including them would only add noise.
++        filter @SysML::RequirementDefinition or @SysML::RequirementUsage
++            or @SysML::SatisfyRequirementUsage
++            or @SysML::AllocationDefinition or @SysML::AllocationUsage;
++    }
++
++    // Bare-name view defs, the canonical spelling used in book/fixtures.
++    // Each :> its suffixed counterpart so the spec stdlib stays intact;
++    // `view def Foo :> Interconnection` resolves through to `InterconnectionView`.
++    view def General         :> GeneralView;
++    view def Interconnection :> InterconnectionView;
++    view def ActionFlow      :> ActionFlowView;
++    view def StateTransition :> StateTransitionView;
++    view def Sequence        :> SequenceView;
++    view def Geometry        :> GeometryView;
++    view def Grid            :> GridView;
++    view def Browser         :> BrowserView;
++    view def UseCase         :> UseCaseView;
++    view def Requirement     :> RequirementView;
+ }

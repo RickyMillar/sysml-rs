@@ -1,0 +1,378 @@
+{
+  "name": "sysml",
+  "displayName": "SysML v2 (LSP)",
+  "description": "SysML v2 / KerML language support: syntax highlighting + LSP (diagnostics, hover, completion, go-to-definition, semantic tokens). Lightweight LSP-only build; diagramming returns later.",
+  "version": "0.1.0",
+  "license": "MIT OR Apache-2.0",
+  "publisher": "sysml-rs",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RickyMillar/sysml-rs.git",
+    "directory": "editors/vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/RickyMillar/sysml-rs/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "icon": "icon.png",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:sysml",
+    "onLanguage:kerml",
+    "workspaceContains:**/*.sysml",
+    "workspaceContains:**/sysml.toml"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "sysml",
+        "aliases": [
+          "SysML",
+          "sysml"
+        ],
+        "extensions": [
+          ".sysml"
+        ],
+        "configuration": "./sysml-language-configuration.json"
+      },
+      {
+        "id": "kerml",
+        "aliases": [
+          "KerML",
+          "kerml"
+        ],
+        "extensions": [
+          ".kerml"
+        ],
+        "configuration": "./kerml-language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sysml",
+        "scopeName": "source.sysml",
+        "path": "./syntaxes/sysml.tmLanguage.json",
+        "semanticHighlighting": true
+      },
+      {
+        "language": "kerml",
+        "scopeName": "source.kerml",
+        "path": "./syntaxes/kerml.tmLanguage.json",
+        "semanticHighlighting": true
+      },
+      {
+        "path": "./syntaxes/sysml.md.tmLanguage.json",
+        "scopeName": "markdown.sysml.codeblock",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.sysml": "sysml"
+        }
+      },
+      {
+        "path": "./syntaxes/kerml.md.tmLanguage.json",
+        "scopeName": "markdown.kerml.codeblock",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.kerml": "kerml"
+        }
+      }
+    ],
+    "semanticTokenTypes": [],
+    "semanticTokenModifiers": [],
+    "semanticTokenScopes": [
+      {
+        "language": "sysml",
+        "scopes": {
+          "namespace": [
+            "entity.name.namespace.sysml"
+          ],
+          "type": [
+            "entity.name.type.sysml"
+          ],
+          "class": [
+            "entity.name.type.class.sysml"
+          ],
+          "struct": [
+            "entity.name.type.struct.sysml"
+          ],
+          "property": [
+            "variable.other.property.sysml"
+          ],
+          "variable": [
+            "variable.other.sysml"
+          ],
+          "parameter": [
+            "variable.parameter.sysml"
+          ],
+          "function": [
+            "entity.name.function.sysml"
+          ],
+          "keyword": [
+            "keyword.control.sysml"
+          ],
+          "comment": [
+            "comment.sysml"
+          ],
+          "string": [
+            "string.quoted.double.sysml"
+          ],
+          "number": [
+            "constant.numeric.sysml"
+          ],
+          "operator": [
+            "keyword.operator.sysml"
+          ],
+          "interface": [
+            "entity.name.type.interface.sysml"
+          ],
+          "enum": [
+            "entity.name.type.enum.sysml"
+          ]
+        }
+      },
+      {
+        "language": "kerml",
+        "scopes": {
+          "namespace": [
+            "entity.name.namespace.kerml"
+          ],
+          "type": [
+            "entity.name.type.kerml"
+          ],
+          "class": [
+            "entity.name.type.class.kerml"
+          ],
+          "struct": [
+            "entity.name.type.struct.kerml"
+          ],
+          "property": [
+            "variable.other.property.kerml"
+          ],
+          "variable": [
+            "variable.other.kerml"
+          ],
+          "parameter": [
+            "variable.parameter.kerml"
+          ],
+          "function": [
+            "entity.name.function.kerml"
+          ],
+          "keyword": [
+            "keyword.control.kerml"
+          ],
+          "comment": [
+            "comment.kerml"
+          ],
+          "string": [
+            "string.quoted.double.kerml"
+          ],
+          "number": [
+            "constant.numeric.kerml"
+          ],
+          "operator": [
+            "keyword.operator.kerml"
+          ],
+          "interface": [
+            "entity.name.type.interface.kerml"
+          ],
+          "enum": [
+            "entity.name.type.enum.kerml"
+          ]
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "sysml",
+        "path": "./snippets/sysml.json"
+      },
+      {
+        "language": "sysml",
+        "path": "./snippets/sysml-views.json"
+      },
+      {
+        "language": "kerml",
+        "path": "./snippets/kerml.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sysml.restartServer",
+        "title": "SysML: Restart Language Server"
+      },
+      {
+        "command": "sysml.installServer",
+        "title": "SysML: Install/Update Language Server"
+      },
+      {
+        "command": "sysml.showOutput",
+        "title": "SysML: Show Output"
+      }
+    ],
+    "configuration": {
+      "title": "SysML",
+      "properties": {
+        "sysml.server.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "description": "Path to the sysml-lsp-server binary. Leave empty for auto-detection."
+        },
+        "sysml.server.trace": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "scope": "window",
+          "description": "Trace level for LSP communication (shown in Output channel)."
+        },
+        "sysml.server.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "scope": "window",
+          "description": "Additional command-line arguments for the language server."
+        },
+        "sysml.library.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Load the SysML v2 standard library on startup."
+        },
+        "sysml.library.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "description": "Custom path to the SysML v2 standard library. Leave empty for bundled library."
+        },
+        "sysml.resolution.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Enable name resolution for go-to-definition, hover, and cross-file navigation."
+        },
+        "sysml.resolution.timeoutMs": {
+          "type": "number",
+          "default": 500,
+          "minimum": 100,
+          "maximum": 10000,
+          "scope": "window",
+          "description": "Timeout (ms) for synchronous name resolution. Increase for large workspaces."
+        },
+        "sysml.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Enable semantic validation (constraint checking, type checking)."
+        },
+        "sysml.workspace.maxIndexFiles": {
+          "type": "number",
+          "default": 500,
+          "minimum": 0,
+          "scope": "window",
+          "description": "Maximum number of workspace files to index. 0 = unlimited."
+        },
+        "sysml.inlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Show inlay hints for inferred types and multiplicities."
+        },
+        "sysml.inlayHints.showTypes": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Show inferred type annotations as inlay hints."
+        },
+        "sysml.inlayHints.showMultiplicities": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Show multiplicity annotations as inlay hints."
+        },
+        "sysml.formatting.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Enable document formatting."
+        },
+        "sysml.formatting.indentSize": {
+          "type": "number",
+          "default": 4,
+          "enum": [
+            2,
+            4
+          ],
+          "scope": "window",
+          "description": "Number of spaces per indentation level."
+        },
+        "sysml.codeLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Show code lenses for verification and simulation."
+        },
+        "sysml.project.autoDetect": {
+          "type": "boolean",
+          "default": true,
+          "scope": "window",
+          "description": "Automatically detect and load sysml.toml project manifests."
+        }
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": ".project.json",
+        "url": "./schemas/project.schema.json"
+      },
+      {
+        "fileMatch": ".workspace.json",
+        "url": "./schemas/workspace.schema.json"
+      },
+      {
+        "fileMatch": ".meta.json",
+        "url": "./schemas/meta.schema.json"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "lint": "eslint src --ext ts --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package",
+    "vscode:prepublish": "node esbuild.mjs --production",
+    "test:grammar": "vscode-tmgrammar-test -g syntaxes/sysml.tmLanguage.json -g syntaxes/kerml.tmLanguage.json test/grammar/*.test.*",
+    "test": "npm run typecheck && npm run lint"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.0",
+    "vscode-tmgrammar-test": "^0.1.3"
+  }
+}

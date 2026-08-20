@@ -1,0 +1,147 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<WS>/examples/espresso-pump-hybrid/Physics/PumpODE.sysml"
+  },
+  "response": [
+    {
+      "id": "<UUID>",
+      "kind": "Documentation",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "body": "Reciprocating-pump hybrid dynamics.\n     *\n     * Continuous states (all `out attribute`, integrated by the SSR pattern):\n     *   stroke        centered actuator position; physical position x = stroke + 0.5 in [0,1]\n     *   strokeRate    actuator velocity (dx/dt)\n     *   chamberPressure     p_c, chamber pressure                    (pressure)\n     *   accumulatorPressure p_a, downstream/accumulator pressure     (pressure)\n     *   exposure      z, integral of sustained over-pressure         (pressure*time)\n     *\n     * Actuator: an undamped harmonic oscillator about the mid-stroke, so it\n     * self-sustains a phase-normalized cosine position with NO manual seed:\n     *   stroke''   = -omega^2 * stroke        =>   x(t) = 0.5*(1 - cos(omega t))\n     * released from stroke = -0.5, strokeRate = 0. Energy is conserved, so the\n     * unforced actuator neither grows nor decays (bounded-drift invariant).\n     *\n     * Hydraulics (first principles; see README for the full derivation):\n     *   q_src   = pistonArea * max(0, strokeRate)          delivery-stroke inflow\n     *   u       = clamp(dP / dpRef, 0, 1)                  normalized valve command\n     *   A_eff   = interpolate(opening|closing branch, u)   sampled check-valve area\n     *   q_out   = Cq * A_eff * sqrt(max(dP, epsRoot))      regularized orifice outflow\n     *   q_leak  = kLeak * chamberPressure                  linear chamber leak\n     *   q_rest  = restrictionConductance * sqrt(max(accumulatorPressure, epsRoot))\n     *   p_c'    = Kc * (q_src - q_out - q_leak)\n     *   p_a'    = Ka * (q_out - q_rest)\n     *   z'      = max(0, chamberPressure - pWarning)       exposure accumulation\n     *\n     * The check valve is forward-only: dP = p_c - p_a is clamped by max(dP, epsRoot)\n     * so the orifice never draws fluid backwards, and epsRoot regularizes the\n     * square root's otherwise-infinite slope at dP = 0 (bounded slope 1/(2*sqrt(epsRoot))).\n     * The branch is chosen by the sign of strokeRate: rising command (advancing\n     * stroke, strokeRate >= 0) uses the opening branch, falling command uses the\n     * closing branch. strokeRate >= 0 is the explicit initial branch (strokeRate\n     * starts at 0)."
+      },
+      "spans": [
+        {
+          "col": 4,
+          "end": 2239,
+          "file":"<FILE>",
+          "line": 2,
+          "start": 27
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "PumpCharacteristic",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "PumpCharacteristic",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2406,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2369
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "SampledFunctions",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "SampledFunctions",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2364,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2329
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "ScalarValues",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "ScalarValues",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2276,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2245
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "NamespaceImport",
+      "name": null,
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "props": {
+        "importedReference": "StateSpaceRepresentation",
+        "isNamespace": true,
+        "isRecursive": true,
+        "unresolved_importedNamespace": "StateSpaceRepresentation",
+        "visibility": "private"
+      },
+      "spans": [
+        {
+          "col": null,
+          "end": 2324,
+          "file":"<FILE>",
+          "line": null,
+          "start": 2281
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "PartDefinition",
+      "name": "ReciprocatingPump",
+      "name_span": {
+        "col": 13,
+        "end": 2438,
+        "file":"<FILE>",
+        "line": 41,
+        "start": 2421
+      },
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 4,
+          "end": 7169,
+          "file":"<FILE>",
+          "line": 41,
+          "start": 2412
+        }
+      ]
+    }
+  ]
+}

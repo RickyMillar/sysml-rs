@@ -1,0 +1,22 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "max_depth": 3,
+    "uri": "<WS>/libraries/standard/library.kernel/Base.kerml",
+    "view": "user_facing"
+  },
+  "response": [
+    {
+      "archetype": "other",
+      "children": [],
+      "id": "<UUID>",
+      "kind": "LibraryPackage",
+      "name": "Base",
+      "source_uri": "file://<WS>/libraries/standard/library.kernel/Base.kerml"
+    }
+  ]
+}

@@ -1,0 +1,831 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+  },
+  "response": [
+    {
+      "children": [
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ItemDefinition",
+          "name": "BrewedCoffee",
+          "range_end": 610,
+          "range_start": 588,
+          "selection_end": 600,
+          "selection_start": 588
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ItemDefinition",
+          "name": "CoffeeBeans",
+          "range_end": 556,
+          "range_start": 535,
+          "selection_end": 546,
+          "selection_start": 535
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ItemDefinition",
+          "name": "GroundCoffee",
+          "range_end": 583,
+          "range_start": 561,
+          "selection_end": 573,
+          "selection_start": 561
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ItemDefinition",
+          "name": "Steam",
+          "range_end": 630,
+          "range_start": 615,
+          "selection_end": 620,
+          "selection_start": 615
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "ItemDefinition",
+          "name": "Water",
+          "range_end": 530,
+          "range_start": 515,
+          "selection_end": 520,
+          "selection_start": 515
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 173,
+          "range_start": 150,
+          "selection_end": 173,
+          "selection_start": 150
+        },
+        {
+          "children": [],
+          "detail": null,
+          "kind": "NamespaceImport",
+          "name": "<unnamed>",
+          "range_end": 191,
+          "range_start": 178,
+          "selection_end": 191,
+          "selection_start": 178
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 1168,
+              "range_start": 1115,
+              "selection_end": 1168,
+              "selection_start": 1115
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1204,
+                  "range_start": 1200,
+                  "selection_end": 1204,
+                  "selection_start": 1200
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "grindSize",
+              "range_end": 1205,
+              "range_start": 1178,
+              "selection_end": 1187,
+              "selection_start": 1178
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1260,
+                  "range_start": 1256,
+                  "selection_end": 1260,
+                  "selection_start": 1256
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "motorSpeed",
+              "range_end": 1261,
+              "range_start": 1233,
+              "selection_end": 1243,
+              "selection_start": 1233
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "Grinder",
+          "range_end": 1277,
+          "range_start": 1088,
+          "selection_end": 1095,
+          "selection_start": 1088
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 1368,
+              "range_start": 1309,
+              "selection_end": 1368,
+              "selection_start": 1309
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1411,
+                  "range_start": 1400,
+                  "selection_end": 1411,
+                  "selection_start": 1400
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "waterTemp",
+              "range_end": 1412,
+              "range_start": 1378,
+              "selection_end": 1387,
+              "selection_start": 1378
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1454,
+                  "range_start": 1446,
+                  "selection_end": 1454,
+                  "selection_start": 1446
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "brewPressure",
+              "range_end": 1455,
+              "range_start": 1421,
+              "selection_end": 1433,
+              "selection_start": 1421
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1489,
+                  "range_start": 1485,
+                  "selection_end": 1489,
+                  "selection_start": 1485
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "capacity",
+              "range_end": 1490,
+              "range_start": 1464,
+              "selection_end": 1472,
+              "selection_start": 1464
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "Brewer",
+          "range_end": 1496,
+          "range_start": 1283,
+          "selection_end": 1289,
+          "selection_start": 1283
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Documentation",
+              "name": "<unnamed>",
+              "range_end": 787,
+              "range_start": 717,
+              "selection_end": 787,
+              "selection_start": 717
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1033,
+                  "range_start": 1025,
+                  "selection_end": 1033,
+                  "selection_start": 1025
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "dripTray",
+              "range_end": 1034,
+              "range_start": 1009,
+              "selection_end": 1017,
+              "selection_start": 1009
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1075,
+                  "range_start": 1069,
+                  "selection_end": 1075,
+                  "selection_start": 1069
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "serialNumber",
+              "range_end": 1076,
+              "range_start": 1044,
+              "selection_end": 1056,
+              "selection_start": 1044
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 819,
+                  "range_start": 812,
+                  "selection_end": 819,
+                  "selection_start": 812
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "grinder",
+              "range_end": 820,
+              "range_start": 797,
+              "selection_end": 804,
+              "selection_start": 797
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 849,
+                  "range_start": 843,
+                  "selection_end": 849,
+                  "selection_start": 843
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "brewer",
+              "range_end": 850,
+              "range_start": 829,
+              "selection_end": 835,
+              "selection_start": 829
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 885,
+                  "range_start": 876,
+                  "selection_end": 885,
+                  "selection_start": 876
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "waterTank",
+              "range_end": 886,
+              "range_start": 859,
+              "selection_end": 868,
+              "selection_start": 859
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 921,
+                  "range_start": 912,
+                  "selection_end": 921,
+                  "selection_start": 912
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "steamWand",
+              "range_end": 922,
+              "range_start": 895,
+              "selection_end": 904,
+              "selection_start": 895
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 963,
+                  "range_start": 951,
+                  "selection_end": 963,
+                  "selection_start": 951
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "controlPanel",
+              "range_end": 964,
+              "range_start": 931,
+              "selection_end": 943,
+              "selection_start": 931
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 999,
+                  "range_start": 990,
+                  "selection_end": 999,
+                  "selection_start": 990
+                }
+              ],
+              "detail": null,
+              "kind": "PartUsage",
+              "name": "cupSensor",
+              "range_end": 1000,
+              "range_start": 973,
+              "selection_end": 982,
+              "selection_start": 973
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "CoffeeMachine",
+          "range_end": 1082,
+          "range_start": 684,
+          "selection_end": 697,
+          "selection_start": 684
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subclassification",
+              "name": "<unnamed>",
+              "range_end": 302,
+              "range_start": 281,
+              "selection_end": 302,
+              "selection_start": 281
+            }
+          ],
+          "detail": null,
+          "kind": "AttributeDefinition",
+          "name": "Temperature",
+          "range_end": 303,
+          "range_start": 252,
+          "selection_end": 263,
+          "selection_start": 252
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subclassification",
+              "name": "<unnamed>",
+              "range_end": 352,
+              "range_start": 334,
+              "selection_end": 352,
+              "selection_start": 334
+            }
+          ],
+          "detail": null,
+          "kind": "AttributeDefinition",
+          "name": "Pressure",
+          "range_end": 353,
+          "range_start": 308,
+          "selection_end": 316,
+          "selection_start": 308
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subclassification",
+              "name": "<unnamed>",
+              "range_end": 394,
+              "range_start": 380,
+              "selection_end": 394,
+              "selection_start": 380
+            }
+          ],
+          "detail": null,
+          "kind": "AttributeDefinition",
+          "name": "Mass",
+          "range_end": 395,
+          "range_start": 358,
+          "selection_end": 362,
+          "selection_start": 358
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "Subclassification",
+              "name": "<unnamed>",
+              "range_end": 444,
+              "range_start": 426,
+              "selection_end": 444,
+              "selection_start": 426
+            }
+          ],
+          "detail": null,
+          "kind": "AttributeDefinition",
+          "name": "Duration",
+          "range_end": 445,
+          "range_start": 400,
+          "selection_end": 408,
+          "selection_start": 400
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1560,
+                  "range_start": 1556,
+                  "selection_end": 1560,
+                  "selection_start": 1556
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "currentLevel",
+              "range_end": 1561,
+              "range_start": 1531,
+              "selection_end": 1543,
+              "selection_start": 1531
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1618,
+                  "range_start": 1614,
+                  "selection_end": 1618,
+                  "selection_start": 1614
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "maxCapacity",
+              "range_end": 1619,
+              "range_start": 1590,
+              "selection_end": 1601,
+              "selection_start": 1590
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "WaterTank",
+          "range_end": 1625,
+          "range_start": 1502,
+          "selection_end": 1511,
+          "selection_start": 1502
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1693,
+                  "range_start": 1682,
+                  "selection_end": 1693,
+                  "selection_start": 1682
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "steamTemp",
+              "range_end": 1694,
+              "range_start": 1660,
+              "selection_end": 1669,
+              "selection_start": 1660
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1731,
+                  "range_start": 1724,
+                  "selection_end": 1731,
+                  "selection_start": 1724
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "isActive",
+              "range_end": 1732,
+              "range_start": 1703,
+              "selection_end": 1711,
+              "selection_start": 1703
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "SteamWand",
+          "range_end": 1738,
+          "range_start": 1631,
+          "selection_end": 1640,
+          "selection_start": 1631
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1811,
+                  "range_start": 1802,
+                  "selection_end": 1811,
+                  "selection_start": 1802
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "selectedDrink",
+              "range_end": 1812,
+              "range_start": 1776,
+              "selection_end": 1789,
+              "selection_start": 1776
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1848,
+                  "range_start": 1841,
+                  "selection_end": 1848,
+                  "selection_start": 1841
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "isReady",
+              "range_end": 1849,
+              "range_start": 1821,
+              "selection_end": 1828,
+              "selection_start": 1821
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "ControlPanel",
+          "range_end": 1855,
+          "range_start": 1744,
+          "selection_end": 1756,
+          "selection_start": 1744
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1921,
+                  "range_start": 1914,
+                  "selection_end": 1921,
+                  "selection_start": 1914
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "cupDetected",
+              "range_end": 1922,
+              "range_start": 1890,
+              "selection_end": 1901,
+              "selection_start": 1890
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "CupSensor",
+          "range_end": 1928,
+          "range_start": 1861,
+          "selection_end": 1870,
+          "selection_start": 1861
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 1988,
+                  "range_start": 1981,
+                  "selection_end": 1988,
+                  "selection_start": 1981
+                }
+              ],
+              "detail": null,
+              "kind": "AttributeUsage",
+              "name": "isFull",
+              "range_end": 1989,
+              "range_start": 1962,
+              "selection_end": 1968,
+              "selection_start": 1962
+            }
+          ],
+          "detail": null,
+          "kind": "PartDefinition",
+          "name": "DripTray",
+          "range_end": 1995,
+          "range_start": 1934,
+          "selection_end": 1942,
+          "selection_start": 1934
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2078,
+                  "range_start": 2069,
+                  "selection_end": 2078,
+                  "selection_start": 2069
+                }
+              ],
+              "detail": null,
+              "kind": "EnumerationUsage",
+              "name": "espresso",
+              "range_end": 2078,
+              "range_start": 2069,
+              "selection_end": 2077,
+              "selection_start": 2069
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2097,
+                  "range_start": 2087,
+                  "selection_end": 2097,
+                  "selection_start": 2087
+                }
+              ],
+              "detail": null,
+              "kind": "EnumerationUsage",
+              "name": "americano",
+              "range_end": 2097,
+              "range_start": 2087,
+              "selection_end": 2096,
+              "selection_start": 2087
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2117,
+                  "range_start": 2106,
+                  "selection_end": 2117,
+                  "selection_start": 2106
+                }
+              ],
+              "detail": null,
+              "kind": "EnumerationUsage",
+              "name": "cappuccino",
+              "range_end": 2117,
+              "range_start": 2106,
+              "selection_end": 2116,
+              "selection_start": 2106
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "detail": null,
+                  "kind": "FeatureTyping",
+                  "name": "<unnamed>",
+                  "range_end": 2132,
+                  "range_start": 2126,
+                  "selection_end": 2132,
+                  "selection_start": 2126
+                }
+              ],
+              "detail": null,
+              "kind": "EnumerationUsage",
+              "name": "latte",
+              "range_end": 2132,
+              "range_start": 2126,
+              "selection_end": 2131,
+              "selection_start": 2126
+            }
+          ],
+          "detail": null,
+          "kind": "EnumerationDefinition",
+          "name": "DrinkType",
+          "range_end": 2138,
+          "range_start": 2040,
+          "selection_end": 2049,
+          "selection_start": 2040
+        }
+      ],
+      "detail": null,
+      "kind": "Package",
+      "name": "Definitions",
+      "range_end": 2140,
+      "range_start": 124,
+      "selection_end": 135,
+      "selection_start": 124
+    }
+  ]
+}

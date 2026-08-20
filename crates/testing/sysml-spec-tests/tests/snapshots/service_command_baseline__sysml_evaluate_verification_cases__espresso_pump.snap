@@ -1,0 +1,152 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "case_id": "<UUID>",
+      "case_name": "NominalSafetyCase",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "PumpSafety::NominalSafetyCase",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `exposure`",
+              "expected": null,
+              "expression": "exposure < exposureTrip",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "exposure",
+                "exposureTrip"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `exposure`",
+          "expected": true,
+          "margin": null,
+          "message": "undefined variable in constraint: `exposure`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "nominalCheck",
+          "requirement_name": "nominalCheck",
+          "requirement_text": "Under nominal (free) discharge the accumulated over-pressure\n         * exposure shall stay below the relief trip level, i.e. relief is never\n         * latched. Nominal PASSES (exposure ~ 0); a restricted run FAILS.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "pump",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "SevereProtectionCase",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "PumpSafety::SevereProtectionCase",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `exposure`",
+              "expected": null,
+              "expression": "exposure >= exposureTrip",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "exposure",
+                "exposureTrip"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `exposure`",
+          "expected": true,
+          "margin": null,
+          "message": "undefined variable in constraint: `exposure`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "severeCheck",
+          "requirement_name": "severeCheck",
+          "requirement_text": "Under a severe synthetic restriction the exposure integral shall\n         * reach the relief trip level within the horizon, i.e. the latched\n         * safety path engages. Severe PASSES; nominal FAILS (exposure ~ 0).",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "pump",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    },
+    {
+      "case_id": "<UUID>",
+      "case_name": "StabilityCase",
+      "diagnostics": [],
+      "display": "INCONCLUSIVE",
+      "evaluation_mode": "static",
+      "methods": [],
+      "passed_requirements": 0,
+      "qualified_name": "PumpSafety::StabilityCase",
+      "requirements": [
+        {
+          "actual": true,
+          "assumptions_met": [],
+          "constraints": [
+            {
+              "actual": null,
+              "constraint_id": "<UUID>",
+              "error": "undefined variable: `chamberPressure`",
+              "expected": 100.0,
+              "expression": "(chamberPressure * chamberPressure) <= 100",
+              "expression_id": "<UUID>",
+              "index": 0,
+              "margin": null,
+              "parts": [],
+              "satisfied": null,
+              "symbols": [
+                "chamberPressure"
+              ]
+            }
+          ],
+          "constraints_met": [],
+          "error": "undefined variable: `chamberPressure`",
+          "expected": 100.0,
+          "margin": null,
+          "message": "undefined variable in constraint: `chamberPressure`",
+          "requirement_element_id": "<UUID>",
+          "requirement_id": "stabilityCheck",
+          "requirement_name": "stabilityCheck",
+          "requirement_text": "Sanity envelope: the chamber pressure stays finite and bounded\n         * across the run for every restriction level in the study grid — a\n         * numerically unstable configuration fails loudly here instead of\n         * masquerading as merely relieved/unrelieved.",
+          "subrequirements": [],
+          "verdict": "inconclusive"
+        }
+      ],
+      "subject": "pump",
+      "total_requirements": 1,
+      "verdict": "Inconclusive"
+    }
+  ]
+}

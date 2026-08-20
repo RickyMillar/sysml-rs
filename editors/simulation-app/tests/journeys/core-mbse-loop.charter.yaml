@@ -1,0 +1,132 @@
+version: 1
+name: ninebar-core-mbse-loop
+purpose: >
+  Browser-agent charter for the first UX/evidence loop. It tests whether the
+  local application exposes and connects engineering evidence. It does not
+  determine whether the synthetic models represent a real physical product.
+
+execution:
+  app_origin: http://localhost:3010
+  api_origin: http://localhost:8080
+  shell_flag: ninebar
+  browser:
+    profile: isolated
+    viewport: 1440x1024
+    selector_preference: data-testid
+  artifact_root: editors/simulation-app/test-results/agent-browser
+  required_provenance:
+    - git_commit
+    - workspace_path
+    - fixture_content_hash_or_model_digest
+    - browser_mcp_version
+    - browser_version
+    - session_ids
+  safety:
+    - Use a fresh sysml-api process for one workspace only.
+    - Do not use a personal browser profile or external login.
+    - Do not modify checked-in fixtures, workflow state, baselines, approvals, or attestations.
+    - Stop and request human approval before any mutation, export, upload, or sharing action.
+
+artifact_contract:
+  each_step:
+    - accessibility_snapshot
+    - screenshot
+    - action_and_observation_in_run_markdown
+  each_run:
+    - provenance_json
+    - console_ndjson
+    - network_ndjson
+    - completion_classification # completed | blocked | harness_failure | ambiguous_charter
+
+journeys:
+  - id: J1
+    name: Establish a shared understanding of the system
+    fixture: examples/espresso-production-cell
+    start_path: /browse?flag=ninebar&workspace={absolute_fixture_path}
+    participant_prompt: >
+      Identify the system boundary, significant constituents and interfaces,
+      one operationally meaningful view, and a requirement that merits review.
+    preconditions:
+      - A fresh local backend is running on api_origin.
+      - The production-cell workspace has not been replaced by another workspace.
+    agent_actions:
+      - Open start_path and wait for workspace readiness; record any readiness state.
+      - Capture the Browse tree and select a non-library model element.
+      - Open one declared model view and inspect its selection/source context.
+      - Navigate to a requirement or traceability surface associated with the selection.
+    observable_invariants:
+      - The application shell and Browse tree render after workspace loading completes.
+      - A selected model element has inspectable contextual information, not only a label.
+      - A declared view can be reached without creating a simulation session.
+      - A requirement or traceability relation can be reached from the browsing context.
+    retain:
+      - browse-tree-and-selection.png
+      - declared-view.png
+      - requirement-or-trace.png
+    human_judgment: >
+      Decide whether the displayed material lets an engineer correctly explain
+      scope, interfaces, uncertainty, and an appropriate review question.
+
+  - id: J3
+    name: Explore an off-nominal operational scenario
+    fixture: examples/espresso-pump-hybrid
+    start_path: /run?flag=ninebar&workspace={absolute_fixture_path}
+    participant_prompt: >
+      Compare nominal and severe downstream restriction. Determine whether the
+      relief response occurs, when it occurs, and what evidence limits the claim.
+    preconditions:
+      - Restart the local backend for this workspace; do not switch a live backend from J1.
+      - A severe run is configured with restrictionConductance = 0.3.
+    agent_actions:
+      - Create or select one nominal and one severe run, recording configuration and session IDs.
+      - Observe accumulator pressure/exposure and PumpCycle state over time.
+      - Locate the safety-relief transition or show that it does not occur.
+      - Capture current values, timeline evidence, and scenario/run context.
+    observable_invariants:
+      - The active session's phase, simulated time/tick, and selected run are visible.
+      - A scenario/override is distinguishable from the underlying model source.
+      - At least one time-varying observable and state/timeline context are reachable.
+      - Nominal and severe evidence is retained separately; no universal safety claim is inferred.
+    retain:
+      - nominal-run.png
+      - severe-run.png
+      - relief-state-or-timeline.png
+      - session-configurations.json
+    human_judgment: >
+      Decide whether causality, scenario assumptions, and synthetic-model limits
+      are clear enough to make an engineering investigation credible.
+
+  - id: J5
+    name: Make a verification claim and prepare reviewable evidence
+    fixture: examples/espresso-production-cell
+    start_path: /verify?flag=ninebar&workspace={absolute_fixture_path}
+    participant_prompt: >
+      Decide whether the quality, safety, throughput and resource claims are
+      adequately supported. Investigate one result in the supporting execution.
+    preconditions:
+      - Restart the local backend for this workspace.
+      - A whole-workspace session has been created and advanced sufficiently to produce trajectory evidence.
+    agent_actions:
+      - Open the verification matrix and record each visible verdict state and evaluation-mode label.
+      - Select one result and drill to its associated run, witness, or visible supporting context.
+      - Inspect the corresponding model/session provenance and return to Verify/history/report context.
+      - Capture the exact evidence state; do not export a report without human approval.
+    observable_invariants:
+      - Matrix states distinguish pass, fail, error, inconclusive, and not-run when present.
+      - The evaluation mode is visible with the verdict; it is not inferred from colour alone.
+      - A verdict can lead to a supporting execution/witness or clearly declare that none exists.
+      - The evidence exposes model/session provenance or honestly displays its absence.
+    retain:
+      - verdict-matrix.png
+      - selected-verdict-and-mode.png
+      - witness-run.png
+      - evidence-history-or-report.png
+    human_judgment: >
+      Decide whether the shown evidence supports the stated requirement under a
+      defined method and model revision, rather than treating a green pill as validation.
+
+completion_policy:
+  - An invariant failure is a product finding only after the agent rules out setup/readiness failure.
+  - An agent must report ambiguity rather than invent a mapping between UI labels and engineering meaning.
+  - Human review classifies every finding as UX, product defect, test/fixture issue, or charter revision.
+  - Only stable DOM/API invariants become deterministic Playwright CI tests.

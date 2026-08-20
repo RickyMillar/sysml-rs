@@ -1,0 +1,22 @@
+[package]
+name = "sysml-service-macros"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Proc-macro crate for #[service_command] — generates request types, metadata, and inventory registrations"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2", features = ["full", "extra-traits"] }
+quote = "1"
+proc-macro2 = "1"
+convert_case = "0.6"
+
+[lints]
+workspace = true

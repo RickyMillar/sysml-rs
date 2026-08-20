@@ -1,0 +1,192 @@
+[workspace]
+resolver = "2"
+members = [
+    # Language implementation (SysML v2 spec)
+    "crates/lang/codegen",
+    "crates/lang/sysml-id",
+    "crates/lang/sysml-span",
+    "crates/lang/sysml-project",
+    "crates/lang/sysml-core",
+    "crates/lang/sysml-parser-trait",
+    "crates/lang/sysml-runtime",
+    "crates/lang/sysml-diagram",
+    "crates/lang/sysml-manifest",
+    "crates/lang/sysml-parser-incremental",
+    # Developer tooling
+    "crates/tooling/sysml-resolve",
+    "crates/tooling/sysml-query",
+    "crates/tooling/sysml-ide-db",
+    "crates/tooling/sysml-lsp-server",
+    "crates/tooling/sysml-cli",
+    "crates/tooling/sysml-store",
+    "crates/tooling/sysml-service",
+    "crates/tooling/sysml-service-macros",
+    "crates/tooling/sysml-api",
+    "crates/tooling/sysml-mcp",
+    # Testing
+    "crates/testing/sysml-spec-tests",
+    # Desktop shell
+    "editors/simulation-app/src-tauri",
+]
+
+# Everyday builds skip the Tauri desktop shell (~30% of the dependency
+# graph exists only for it). Build it explicitly with
+# `cargo build -p sysml-desktop` or `cargo build --workspace`.
+default-members = [
+    "crates/lang/codegen",
+    "crates/lang/sysml-id",
+    "crates/lang/sysml-span",
+    "crates/lang/sysml-project",
+    "crates/lang/sysml-core",
+    "crates/lang/sysml-parser-trait",
+    "crates/lang/sysml-runtime",
+    "crates/lang/sysml-diagram",
+    "crates/lang/sysml-manifest",
+    "crates/lang/sysml-parser-incremental",
+    "crates/tooling/sysml-resolve",
+    "crates/tooling/sysml-query",
+    "crates/tooling/sysml-ide-db",
+    "crates/tooling/sysml-lsp-server",
+    "crates/tooling/sysml-cli",
+    "crates/tooling/sysml-store",
+    "crates/tooling/sysml-service",
+    "crates/tooling/sysml-service-macros",
+    "crates/tooling/sysml-api",
+    "crates/tooling/sysml-mcp",
+    "crates/testing/sysml-spec-tests",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/RickyMillar/sysml-rs"
+
+[workspace.dependencies]
+# Internal crates — lang/
+sysml-codegen = { path = "crates/lang/codegen" }
+sysml-id = { path = "crates/lang/sysml-id" }
+sysml-span = { path = "crates/lang/sysml-span" }
+sysml-project = { path = "crates/lang/sysml-project" }
+sysml-core = { path = "crates/lang/sysml-core" }
+sysml-parser-trait = { path = "crates/lang/sysml-parser-trait" }
+sysml-runtime = { path = "crates/lang/sysml-runtime" }
+sysml-diagram = { path = "crates/lang/sysml-diagram" }
+sysml-manifest = { path = "crates/lang/sysml-manifest" }
+sysml-parser-incremental = { path = "crates/lang/sysml-parser-incremental" }
+
+# Internal crates — tooling/
+sysml-resolve = { path = "crates/tooling/sysml-resolve" }
+sysml-query = { path = "crates/tooling/sysml-query" }
+sysml-ide-db = { path = "crates/tooling/sysml-ide-db" }
+sysml-store = { path = "crates/tooling/sysml-store" }
+sysml-service = { path = "crates/tooling/sysml-service" }
+sysml-service-macros = { path = "crates/tooling/sysml-service-macros" }
+sysml-api = { path = "crates/tooling/sysml-api" }
+sysml-mcp = { path = "crates/tooling/sysml-mcp" }
+
+# External dependencies
+clap = { version = "4", features = ["derive"] }
+uuid = { version = "1.6", features = ["v4", "js"] }
+schemars = "0.8"
+serde = { version = "1.0", features = ["derive", "rc"] }
+# `float_roundtrip`: serde_json's default float parser is fast but not
+# correctly-rounded — e.g. `1e-24` serializes to "1e-24" yet parses back one ULP
+# higher, so an f64 does NOT survive a JSON write→read. That silently breaks the
+# stdlib library cache (a warm cache-hit graph drifts from the cold parse on
+# float-valued props, moving `ModelGraph::content_digest` and therefore
+# content-addressed CommitIds). This feature makes f64 round-trip bit-exact.
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+thiserror = "1.0"
+tower-lsp = "0.20"
+axum = "0.7"
+tower-http = { version = "0.6", features = ["cors"] }
+tokio = { version = "1.35", features = ["rt-multi-thread", "macros", "io-util", "io-std", "fs", "sync", "time", "net"] }
+sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"] }
+criterion = { version = "0.5", features = ["html_reports"] }
+walkdir = "2.4"
+rustc-hash = "2.0"
+rayon = "1.10"
+salsa = "0.26"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "std"] }
+tracing-appender = "0.2"
+regex = "1.10"
+anyhow = "1"
+proptest = { version = "1", default-features = false, features = ["std"] }
+insta = { version = "1", features = ["glob"] }
+tree-sitter = "0.22"
+pretty_assertions = "1.4"
+dashmap = "6.0"
+futures = "0.3"
+annotate-snippets = "0.11"
+bincode = "1.3"
+directories = "5.0"
+sha2 = "0.10"
+toml = "0.8"
+quick-xml = "0.37"
+semver = { version = "1", features = ["serde"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+tempfile = "3"
+hex = "0.4"
+rmcp = { version = "1.3", features = ["server", "transport-io"] }
+inventory = "0.3"
+diffsol = "0.11"
+base64 = "0.22"
+
+[workspace.lints.clippy]
+# Error handling strictness — prevent panic-prone patterns
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+indexing_slicing = "deny"
+
+# Production hygiene — no debug artifacts or raw IO in shipped code
+dbg_macro = "deny"
+print_stdout = "deny"
+print_stderr = "deny"
+
+# Error quality
+map_err_ignore = "deny"
+
+# Code quality
+needless_pass_by_value = "deny"
+large_enum_variant = "deny"
+result_large_err = "deny"
+redundant_clone = "deny"
+wildcard_imports = "deny"
+clone_on_ref_ptr = "deny"
+implicit_clone = "deny"
+str_to_string = "deny"
+semicolon_if_nothing_returned = "deny"
+manual_let_else = "deny"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[profile.dev]
+split-debuginfo = "unpacked"
+
+[profile.release-debug]
+inherits = "release"
+debug = true
+
+# The daily loop runs release (physics is too slow in dev), so `release`
+# optimises for ITERATION: thin LTO + parallel codegen. Shipping/benchmark
+# builds use `--profile release-max` (the old fat-LTO settings).
+[profile.release]
+lto = "thin"
+codegen-units = 16
+
+[profile.release-max]
+inherits = "release"
+lto = true
+codegen-units = 1
+
+# The generated tree-sitter parser is one 71 MB table-driven C file —
+# optimising it buys ~nothing and costs minutes of single-threaded cc.
+[profile.release.package.tree-sitter-sysml]
+opt-level = 0

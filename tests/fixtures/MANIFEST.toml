@@ -1,0 +1,396 @@
+# Test Fixture Manifest
+# Machine-readable catalog of all test fixtures in the sysml-rs project.
+# Updated: 2026-03-17
+
+# =============================================================================
+# Shared cross-crate fixtures
+# =============================================================================
+
+[directories.shared]
+path = "tests/fixtures/shared"
+description = "Cross-crate .sysml fixtures used by multiple test suites"
+files = [
+    # Used by: sysml-lsp-server (diagnostic_ux_tests, feature_tests), sysml-cli (inspect)
+    "sensemetry.sysml",          # Real-world package with stdlib-qualified units/types (from Sensmetry Advent Day 23)
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests), sysml-cli (cli_integration, symlink)
+    "simple_vehicle.sysml",      # Constraint violation diagnostics, hover, code lenses
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests)
+    "sysml-rs-model.sysml",     # Large multi-package model of the sysml-rs project itself
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests), sysml-cli (symlink)
+    "test_action.sysml",         # Action execution and visualization
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests)
+    "test_all_features.sysml",   # Smoke test exercising every major LSP feature
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests), sysml-cli (symlink)
+    "test_flow.sysml",           # Flow visualization
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests)
+    "test_health_diagnostics.sysml", # Health diagnostics showcase (AX / FL / VC categories)
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests)
+    "test_hover.sysml",          # Hover information display
+
+    # Used by: sysml-lsp-server (diagnostic_ux_tests, protocol_tests)
+    "test_whatif.sysml",         # What-If analysis and parameter sweep
+]
+
+# =============================================================================
+# Book examples (frozen copies from sysmlv2-book)
+# =============================================================================
+
+[directories.book-examples]
+path = "tests/fixtures/book-examples"
+description = "Frozen copies from the SysML v2 book examples"
+
+[directories.book-examples.subdirs.coffee-machine]
+path = "tests/fixtures/book-examples/coffee-machine"
+description = "Single-project coffee machine example covering core SysML v2 features"
+files = [
+    "actions.sysml",                  # Action definitions and usage
+    "calculations.sysml",             # Calculation definitions
+    "connections.sysml",              # Connection definitions and bindings
+    "definitions.sysml",              # Part/item definitions
+    "flows.sysml",                    # Flow connections between ports
+    "metadata.sysml",                 # Metadata definitions and annotations
+    "package-structure.sysml",        # Package hierarchy and imports
+    "ports-and-interfaces.sysml",     # Port definitions and interface blocks
+    "requirements.sysml",             # Requirement definitions and satisfaction
+    "states.sysml",                   # State machine definitions
+    "typing-and-specialization.sysml", # Type hierarchies and specialization
+    "views.sysml",                    # View and viewpoint definitions
+]
+
+[directories.book-examples.subdirs.beverage-workspace]
+path = "tests/fixtures/book-examples/beverage-workspace"
+description = "Multi-package workspace example with cross-package dependencies"
+
+[directories.book-examples.subdirs.beverage-workspace.subdirs.beverage-types]
+path = "tests/fixtures/book-examples/beverage-workspace/beverage-types/src"
+description = "Shared type definitions for beverage domain"
+files = [
+    "types.sysml",  # Beverage type definitions shared across packages
+]
+
+[directories.book-examples.subdirs.beverage-workspace.subdirs.coffee-machine]
+path = "tests/fixtures/book-examples/beverage-workspace/coffee-machine/src"
+description = "Coffee machine implementation consuming shared types"
+files = [
+    "parts.sysml",  # Part usages referencing beverage-types
+]
+
+# =============================================================================
+# Vehicle project (multi-file with cross-file references)
+# =============================================================================
+
+[directories.vehicle-project]
+path = "tests/fixtures/vehicle-project"
+description = "Multi-file test project with cross-file references and project metadata"
+files = [
+    ".meta.json",     # Element-to-file index mapping
+    ".project.json",  # Project name and description metadata
+    "Engine.sysml",   # Engine part definition
+    "Vehicle.sysml",  # Vehicle part definition (references Engine, Wheel)
+    "Wheel.sysml",    # Wheel part definition
+]
+
+# =============================================================================
+# Multi-workspace (cross-project dependencies)
+# =============================================================================
+
+[directories.multi-workspace]
+path = "tests/fixtures/multi-workspace"
+description = "Multi-project workspace testing cross-project dependency resolution"
+files = [
+    ".workspace.json",  # Workspace-level project listing and IRI mapping
+]
+
+[directories.multi-workspace.subdirs.lib-project]
+path = "tests/fixtures/multi-workspace/lib-project"
+description = "Shared library project with sensor and actuator definitions"
+files = [
+    ".meta.json",       # Element-to-file index
+    ".project.json",    # Project metadata (Shared Library)
+    "Actuators.sysml",  # Actuator part definitions
+    "Sensors.sysml",    # Sensor part definitions
+]
+
+[directories.multi-workspace.subdirs.app-project]
+path = "tests/fixtures/multi-workspace/app-project"
+description = "Application project that depends on lib-project"
+files = [
+    ".meta.json",         # Element-to-file index
+    ".project.json",      # Project metadata (Control App)
+    "Controller.sysml",   # Controller using Sensors/Actuators from lib-project
+]
+
+# =============================================================================
+# LSP Server fixtures (valid / invalid / regression)
+# =============================================================================
+
+[directories.lsp-valid]
+path = "crates/tooling/sysml-lsp-server/fixtures/valid"
+description = "Valid .sysml files for LSP feature and conformance testing"
+files = [
+    "action_control_flow.sysml",         # Action definitions with control flow (fork/join/decision)
+    "actions_and_flows.sysml",           # Action and flow usage combinations
+    "calc_constraint_conformance.sysml", # Calculation and constraint conformance checks
+    "clean.sysml",                       # Minimal clean file (baseline for zero-diagnostic tests)
+    "comprehensive.sysml",              # Comprehensive model exercising many element kinds
+    "connectors_and_allocations.sysml",  # Connector bindings and allocation relationships
+    "constraints_and_requirements.sysml", # Constraint expressions and requirement text
+    "domain_library_conformance.sysml",  # Domain library usage and conformance
+    "duplicate_name_different_scope.sysml", # Name scoping: same name in different packages (valid)
+    "enums_and_calculations.sysml",      # Enumeration definitions and calculation expressions
+    "flows_and_messages.sysml",          # Flow connections and message passing
+    "ports_and_interfaces.sysml",        # Port definitions, interface blocks, conjugation
+    "qualified_name_resolution.sysml",   # Qualified name resolution across packages
+    "requirement_case_conformance.sysml", # Requirement and use case conformance
+    "sensemetry.sysml",                  # Real-world package from Sensmetry Advent series
+    "simple_vehicle.sysml",             # Simple vehicle model (constraint violation test)
+    "state_machine_conformance.sysml",   # State machine conformance validation
+    "state_machine.sysml",              # State machine definitions and transitions
+    "stdlib_dependent.sysml",            # Model depending on standard library types
+    "stdlib_type_resolution.sysml",      # Standard library type resolution paths
+    "systems_library_conformance.sysml", # Systems library conformance checks
+    "use_case_conformance.sysml",        # Use case conformance validation
+    "view_rendering_conformance.sysml",  # View rendering and viewpoint conformance
+]
+
+[directories.lsp-invalid]
+path = "crates/tooling/sysml-lsp-server/fixtures/invalid"
+description = "Intentionally broken .sysml files for diagnostic and error-recovery testing"
+files = [
+    "corrupted_line.sysml",         # Corrupted/garbage content mid-file
+    "duplicate_names.sysml",        # Duplicate element names in same scope
+    "extra_brace.sysml",            # Extra closing brace (syntax error)
+    "missing_import.sysml",         # Reference to unimported element
+    "missing_semicolon.sysml",      # Missing semicolon (syntax error)
+    "ownership_violation.sysml",    # Invalid ownership relationship
+    "redefine_missing_target.sysml", # Redefine of non-existent member
+    "specialization_boundary.sysml", # Invalid specialization across type boundaries
+    "typo_reference.sysml",         # Typo in qualified name reference
+    "unclosed_brace.sysml",         # Unclosed brace (syntax error)
+    "unterminated_comment.sysml",   # Unterminated block comment
+    "wrong_typing.sysml",           # Type mismatch in typing relationship
+]
+
+[directories.lsp-regression]
+path = "crates/tooling/sysml-lsp-server/fixtures/regression"
+description = "Regression test fixtures for previously-reported LSP bugs"
+files = [
+    "cascading.sysml",                       # Cascading error propagation regression
+    "error_recovery_following_items.sysml",   # Items after syntax error should still parse
+    "partial_edit.sysml",                     # Partial edit mid-element regression
+]
+
+# =============================================================================
+# CLI fixtures
+# =============================================================================
+
+[directories.cli]
+path = "crates/tooling/sysml-cli/fixtures"
+description = "Fixtures for CLI integration tests (some are symlinks to shared/)"
+files = [
+    # Symlinks to tests/fixtures/shared/
+    { name = "simple_vehicle.sysml", symlink = "tests/fixtures/shared/simple_vehicle.sysml" },
+    { name = "test_action.sysml", symlink = "tests/fixtures/shared/test_action.sysml" },
+    { name = "test_flow.sysml", symlink = "tests/fixtures/shared/test_flow.sysml" },
+
+    # CLI-specific fixtures (not symlinks)
+    "bake_action.sysml",                     # Action execution (bake scenario)
+    "test_all_features.sysml",               # All-features smoke test for CLI
+    "test_health_diagnostics.sysml",         # Health diagnostic output validation
+    "test_hover.sysml",                      # Hover information via CLI inspect
+    "test_lsp_state_machine_diagnostics.sysml", # LSP state machine diagnostic edge cases
+    "test_state_machine.sysml",              # State machine parsing via CLI
+    "test_verification.sysml",               # Verification relationship testing
+    "test_whatif.sysml",                     # What-if analysis via CLI
+    "traffic_light.sysml",                   # Traffic light state machine example
+    "verification.sysml",                    # Verification and validation relationships
+]
+
+[directories.cli.subdirs.example-workspace]
+path = "crates/tooling/sysml-cli/fixtures/example-workspace"
+description = "Example workspace for CLI workspace-level commands"
+files = [
+    "sysml.toml",  # Workspace-level manifest
+]
+
+[directories.cli.subdirs.example-workspace.subdirs.beverage-types]
+path = "crates/tooling/sysml-cli/fixtures/example-workspace/beverage-types"
+description = "Beverage types package within CLI example workspace"
+files = [
+    "sysml.toml",      # Package manifest
+    "src/types.sysml",  # Beverage type definitions
+]
+
+[directories.cli.subdirs.example-workspace.subdirs.coffee-machine]
+path = "crates/tooling/sysml-cli/fixtures/example-workspace/coffee-machine"
+description = "Coffee machine package within CLI example workspace"
+files = [
+    "sysml.toml",      # Package manifest
+    "src/parts.sysml",  # Coffee machine parts
+]
+
+# =============================================================================
+# Spec-tests corpus (Advent of SysML v2 series)
+# =============================================================================
+
+[directories.spec-tests-advent]
+path = "crates/testing/sysml-spec-tests/corpus/advent"
+description = "Parser validation corpus from the Sensmetry Advent of SysML v2 series"
+files = [
+    # Day 1: Intro
+    "day01_christmas_tree_1.sysml",            # Basic part definition (Christmas tree)
+
+    # Day 2: Usages
+    "day02_santa_sleigh_1.sysml",              # Part usage (Santa's sleigh)
+
+    # Day 3: Definitions and refactoring
+    "day03_definitions_1.sysml",               # Part/item definitions
+    "day03_refactoring_2.sysml",               # Refactoring models
+    "day03_refactoring_3.sysml",               # Further refactoring patterns
+
+    # Day 4: Specialization / typing / subsetting / redefinition
+    "day04_redefinition_3.sysml",              # Redefinition of features
+    "day04_sleigh_design_5.sysml",             # Comprehensive sleigh design
+    "day04_specialization_1.sysml",            # Specialization relationships
+    "day04_subsetting_2.sysml",                # Subsetting relationships
+    "day04_typing_4.sysml",                    # Typing relationships
+
+    # Day 5: Modifiers
+    "day05_abstract_2.sysml",                  # Abstract definitions
+    "day05_constant_3.sysml",                  # Constant (readonly) features
+    "day05_modifiers_1.sysml",                 # Modifier keywords (in/out/inout)
+    "day05_multiplicities_4.sysml",            # Multiplicity expressions
+
+    # Day 8: Packages
+    "day08_packages_1.sysml",                  # Basic package structure
+    "day08_packages_2.sysml",                  # Package imports
+    "day08_packages_3.sysml",                  # Nested packages
+    "day08_packages_4.sysml",                  # Package visibility
+
+    # Day 10: Annotations
+    "day10_annotations_1.sysml",               # Comment annotations
+    "day10_annotations_2.sysml",               # Documentation comments
+    "day10_annotations_3.sysml",               # Metadata annotations
+
+    # Day 11: Attributes
+    "day11_attributes_1.sysml",                # Attribute definitions
+    "day11_attributes_2.sysml",                # Attribute usages with values
+    "day11_attributes_3.sysml",                # Attribute redefinition
+
+    # Day 12-13: Connections, ports, flows
+    "day12_connections_1.sysml",               # Basic connections
+    "day12_connections_2.sysml",               # Connection end features
+    "day13_complete_connections_3.sysml",       # Complete connection patterns
+    "day13_items_flows_2.sysml",               # Item flows through connections
+    "day13_ports_interfaces_1.sysml",          # Port and interface definitions
+
+    # Day 14: Recap (connections, docs, feature values)
+    "day14_recap_connections_3.sysml",         # Connection recap and patterns
+    "day14_recap_doc_locale_1.sysml",          # Documentation and locale metadata
+    "day14_recap_feature_values_2.sysml",      # Feature value expressions
+
+    # Day 15-16: Expressions
+    "day15_expression_evaluation_1.sysml",     # Expression evaluation
+    "day16_value_rollups_1.sysml",             # Value rollup calculations
+
+    # Day 17: Actions
+    "day17_actions_basic_1.sysml",             # Basic action definitions
+    "day17_actions_successions_2.sysml",       # Action successions (then)
+    "day17_actions_complete_3.sysml",          # Complete action patterns
+
+    # Day 18: States
+    "day18_states_items_1.sysml",              # State with entry/do/exit items
+    "day18_states_basic_2.sysml",              # Basic state definitions
+    "day18_states_parallel_3.sysml",           # Parallel (orthogonal) states
+    "day18_states_entry_exit_4.sysml",         # Entry/exit actions
+    "day18_states_complete_5.sysml",           # Complete state machine patterns
+
+    # Day 19: Simulation
+    "day19_state_machine_simulation_1.sysml",  # State machine simulation model
+
+    # Day 21: Recap
+    "day21_recap_structure_1.sysml",           # Structural recap
+    "day21_recap_actions_2.sysml",             # Actions recap
+    "day21_recap_action_params_3.sysml",       # Action parameters
+    "day21_recap_successions_4.sysml",         # Successions recap
+    "day21_recap_statemachine_5.sysml",        # State machine recap
+    "day21_recap_parallel_states_6.sysml",     # Parallel states recap
+    "day21_recap_state_actions_7.sysml",       # State actions recap
+
+    # Day 22-24: Requirements
+    "day22_requirements_basic_1.sysml",        # Basic requirement definitions
+    "day22_requirements_specialization_2.sysml", # Requirement specialization
+    "day22_requirements_breakdown_3.sysml",    # Requirement decomposition
+    "day23_formal_requirements_1.sysml",       # Formal constraint requirements
+    "day23_requirement_templates_2.sysml",     # Requirement templates (parameterized)
+    "day24_satisfaction_verification_1.sysml",  # Satisfy and verify relationships
+]
+
+# =============================================================================
+# Tree-sitter grammar test corpus
+# =============================================================================
+
+[directories.tree-sitter-corpus]
+path = "crates/lang/sysml-parser-incremental/tree-sitter/test/corpus"
+description = "Tree-sitter grammar test cases (input/output .txt format)"
+files = [
+    "actions.txt",            # Action definition and usage parsing
+    "basic.txt",              # Basic element parsing (parts, packages)
+    "connectors.txt",         # Connector and binding parsing
+    "definitions.txt",        # Definition keyword parsing (part def, item def, etc.)
+    "expressions.txt",        # Expression parsing (operators, literals, paths)
+    "namespaces.txt",         # Namespace and import parsing
+    "requirements.txt",       # Requirement definition parsing
+    "spec_conformance.txt",   # Spec conformance edge cases
+    "state_machines.txt",     # State machine parsing
+    "usages.txt",             # Usage keyword parsing (part, item, port, etc.)
+    "usecases.txt",           # Use case definition parsing
+]
+
+[directories.tree-sitter-execution]
+path = "crates/lang/sysml-parser-incremental/tree-sitter/test/execution_corpus"
+description = "SysML execution semantics parsed by tree-sitter (full .sysml files)"
+files = [
+    "actions.sysml",      # Action execution semantics
+    "allocations.sysml",  # Allocation relationships
+    "cases.sysml",        # Use case and analysis case parsing
+    "constraints.sysml",  # Constraint expressions
+    "expressions.sysml",  # Complex expressions
+    "flows.sysml",        # Flow connections
+    "requirements.sysml", # Requirement text and constraints
+    "state_machines.sysml", # State machine transitions and regions
+]
+
+# =============================================================================
+# Diagram (Sprotty + ELK) fixtures
+# =============================================================================
+
+[directories.diagram]
+path = "editors/diagram/fixtures"
+description = "SModel JSON fixtures for Sprotty diagram rendering (generated by sysml-diagram crate)"
+files = [
+    "action.json",          # ActionFlow view — action nodes, control flow edges
+    "browser.json",         # Browser view — tree-structured model exploration
+    "debug_states.json",    # Debug state machine — large state model for stress testing
+    "general.json",         # General (BDD) view — definitions, usages, relationships
+    "geometry.json",        # Geometry view — spatial layout of parts
+    "grid.json",            # Grid/matrix view — tabular requirement traceability
+    "interconnection.json", # Interconnection (IBD) view — parts, ports, connectors
+    "sequence.json",        # Sequence view — lifelines, messages, activations
+    "state.json",           # StateTransition view — states, transitions, regions
+]
+
+# =============================================================================
+# Cross-reference: symlinks
+# =============================================================================
+# The following CLI fixtures are symlinks to shared fixtures:
+#   crates/tooling/sysml-cli/fixtures/simple_vehicle.sysml -> ../../../../tests/fixtures/shared/simple_vehicle.sysml
+#   crates/tooling/sysml-cli/fixtures/test_action.sysml    -> ../../../../tests/fixtures/shared/test_action.sysml
+#   crates/tooling/sysml-cli/fixtures/test_flow.sysml      -> ../../../../tests/fixtures/shared/test_flow.sysml

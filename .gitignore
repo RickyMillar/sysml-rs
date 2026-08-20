@@ -1,0 +1,88 @@
+# Rust build artifacts
+/target/
+**/target/
+**/*.rs.bk
+
+# Editor files
+**/*.swp
+.DS_Store
+.idea/
+.vscode/
+.claude/settings.local.json
+.claude/plans/
+.claude/worktrees/
+.codex-tools/
+
+# Node.js
+node_modules/
+dist/
+*.log
+
+# Untracked package-lock.json files (sysml-diagram and sysml-vscode locks are committed for CI)
+/package-lock.json
+
+# Third-party specification sources are fetched locally at pinned revisions;
+# they are intentionally never part of this repository's distribution.
+/references/sysmlv2/
+/libraries/standard/
+
+
+# Generated files
+*.generated.rs
+*.svg
+
+# Diagram layout persistence (user preference, not source)
+*.sysml.layout.json
+
+# OS files
+Thumbs.db
+
+# Debug output
+sysml-route/visual_output/
+
+# Profiling artifacts
+perf.data
+perf.data.old
+benchmarks/profiles/
+scripts/__pycache__/
+
+# Tree-sitter grammar iteration infrastructure
+# Per-hash cache entries are ~50 MB each; the directory itself stays tracked
+# for the README + baseline-metrics.json. Worktrees never leak into parent
+# repo status (also enforced by .worktrees/.gitignore from inside).
+.tree-sitter-cache/*/
+.tree-sitter-cache/*.tmp
+.tree-sitter-cache/.generate.lock
+.worktrees/*
+!.worktrees/.gitignore
+
+# Local agent/run artifacts
+.claude/workflows/
+# Per-workspace Claude/MCP placeholders and generated model-index cache.
+# Repository-owned agent instructions live under .claude/agents/.
+.claude/hooks
+.claude/launch.json
+.claude/loop.md
+.claude/output-styles
+.claude/routines
+.claude/settings.json
+.claude/skills
+/editors/.claude/
+/editors/.mcp.json
+/editors/simulation-app/.claude/
+/editors/simulation-app/.mcp.json
+/.migb-tmp/
+.socraticodeignore
+/tmp/
+/.gate_*.txt
+/.ig*_bucket.txt
+/.p*_full.txt
+/test_meta.sysml
+**/.test_write
+
+
+# Generated service-command archive; insta snapshots are the regression gate.
+/crates/testing/sysml-spec-tests/fixtures/service-baseline/
+
+# Playwright output / local scratch
+test-results/

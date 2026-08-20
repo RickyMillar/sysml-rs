@@ -1,0 +1,60 @@
+[package]
+name = "sysml-lsp-server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "LSP server implementation for SysML v2"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[dependencies]
+sysml-ide-db = { workspace = true }
+sysml-core = { workspace = true, features = ["serde"] }
+sysml-id = { workspace = true, features = ["serde"] }
+sysml-parser-trait = { workspace = true }
+sysml-parser-incremental = { workspace = true, features = ["semantic"] }
+sysml-span = { workspace = true, features = ["serde"] }
+sysml-project = { workspace = true }
+sysml-manifest = { workspace = true }
+sysml-resolve = { workspace = true }
+semver = { workspace = true }
+toml = { workspace = true }
+sysml-runtime = { workspace = true, features = ["montecarlo"] }
+sysml-diagram = { workspace = true }
+sysml-service = { workspace = true }
+tower-lsp = { workspace = true }
+tokio = { workspace = true, features = ["time", "fs"] }
+tree-sitter = { workspace = true }
+bincode = { workspace = true }
+dashmap = { workspace = true }
+directories = { workspace = true }
+sha2 = { workspace = true }
+tracing = { workspace = true }
+tracing-appender = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+futures = { workspace = true }
+
+[features]
+# Exposes `test_harness::{TestServer, TestServerOptions}` and the
+# background-task-suppression knob to external integration crates. Explicit
+# and non-default: normal builds (CLI/API) never compile the harness. The
+# in-crate `#[cfg(test)]` suites get the same code for free. Pulls in the
+# tokio runtime/sync features the harness needs when the crate is NOT being
+# compiled as a test (dev-deps supply them under `cargo test`).
+test-harness = ["tokio/rt", "tokio/sync", "tokio/macros"]
+
+[dev-dependencies]
+tokio = { workspace = true, features = [
+    "test-util",
+    "macros",
+    "rt-multi-thread",
+] }
+insta = { workspace = true }
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

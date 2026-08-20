@@ -1,0 +1,34 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+assertion_line: 1150
+expression: bundle
+---
+{
+  "request": {
+    "id": "<UUID>",
+    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+  },
+  "response": {
+    "id": "<UUID>",
+    "kind": "ItemDefinition",
+    "name": "BrewedCoffee",
+    "name_span": {
+      "col": 13,
+      "end": 609,
+      "file":"<FILE>",
+      "line": 18,
+      "start": 597
+    },
+    "owner": "<UUID>",
+    "owning_membership": "<UUID>",
+    "spans": [
+      {
+        "col": 4,
+        "end": 610,
+        "file":"<FILE>",
+        "line": 18,
+        "start": 588
+      }
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+================
+Use case definition
+================
+use case def DriveToWork {
+  subject driver : Person;
+  objective obj {
+    doc /* arrive at work safely */
+  }
+}
+---
+
+(source_file
+  (case_def
+    name: (identifier)
+    (case_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (objective_requirement
+        name: (identifier)
+        (requirement_body
+          (doc_comment
+            (doc_string)))))))
+
+================
+Use case usage
+================
+use case driveToWork : DriveToWork;
+---
+
+(source_file
+  (case_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+================
+Use case usage with body
+================
+use case myCase {
+  actor user : Person;
+  include ref pickUpPhone;
+}
+---
+
+(source_file
+  (case_usage
+    name: (identifier)
+    (case_body
+      (actor_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (include_use_case_usage
+        name: (feature_chain
+          (identifier)))
+      (result_expression
+        (primary_expression
+          (feature_chain
+            (identifier)))))))
+
+================
+Include use case inline
+================
+include use case subCase : SubCaseType {
+  subject s;
+}
+---
+
+(source_file
+  (include_use_case_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))
+    (case_body
+      (subject_requirement
+        subject: (identifier)))))
+
+================
+Case definition with case body
+================
+case def AnalyzeData {
+  subject data : DataSet;
+  actor analyst : Person;
+  objective goal {
+    require constraint { true }
+  }
+}
+---
+
+(source_file
+  (case_def
+    name: (identifier)
+    (case_body
+      (subject_requirement
+        subject: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (actor_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (objective_requirement
+        name: (identifier)
+        (requirement_body
+          (require_constraint
+            (constraint_body
+              (result_expression
+                (primary_expression
+                  (literal
+                    (boolean_literal)))))))))))
+
+================
+Case usage
+================
+case testCase : TestSuite;
+---
+
+(source_file
+  (case_usage
+    name: (identifier)
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))
+
+================
+Actor in requirement
+================
+requirement def Safety {
+  actor driver : Person;
+  require constraint safeSpeed {
+    true
+  }
+}
+---
+
+(source_file
+  (requirement_def
+    name: (identifier)
+    (requirement_body
+      (actor_usage
+        name: (identifier)
+        (typing
+          type: (type_ref
+            (feature_chain
+              (identifier)))))
+      (require_constraint
+        name: (identifier)
+        (constraint_body
+          (result_expression
+            (primary_expression
+              (literal
+                (boolean_literal)))))))))
+
+================
+Ref use case usage
+================
+ref use case self : UseCase;
+---
+
+(source_file
+  (standard_usage)
+  (case_usage
+    (typing
+      type: (type_ref
+        (feature_chain
+          (identifier))))))

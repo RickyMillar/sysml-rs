@@ -1,0 +1,6 @@
+[project]
+name = "root-fx09"
+version = "0.1.0"
+
+[dependencies]
+archive-lib = { kpar = "../deps/archive-lib.kpar" }

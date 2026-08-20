@@ -1,0 +1,544 @@
+================================
+addition-expression
+================================
+
+constraint def C {
+  a + b >= 0
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (relational_expression
+          (additive_expression
+            (primary_expression
+              (feature_chain
+                (identifier)))
+            (primary_expression
+              (feature_chain
+                (identifier))))
+          (primary_expression
+            (literal
+              (integer_literal))))))))
+
+================================
+multiplication-expression
+================================
+
+constraint def C {
+  a * b + c
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (additive_expression
+          (multiplicative_expression
+            (primary_expression
+              (feature_chain
+                (identifier)))
+            (primary_expression
+              (feature_chain
+                (identifier))))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+comparison-expression
+================================
+
+constraint def C {
+  x > 0 and x < 100
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (and_expression
+          (relational_expression
+            (primary_expression
+              (feature_chain
+                (identifier)))
+            (primary_expression
+              (literal
+                (integer_literal))))
+          (relational_expression
+            (primary_expression
+              (feature_chain
+                (identifier)))
+            (primary_expression
+              (literal
+                (integer_literal)))))))))
+
+================================
+boolean-or-expression
+================================
+
+constraint def C {
+  a or b
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (or_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+not-expression
+================================
+
+constraint def C {
+  not active
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (unary_expression
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+invocation-expression
+================================
+
+part p {
+  attribute val = compute(1, 2);
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (invocation_expression
+              (feature_chain
+                (identifier))
+              (argument_list
+                (primary_expression
+                  (literal
+                    (integer_literal)))
+                (primary_expression
+                  (literal
+                    (integer_literal)))))))))))
+
+================================
+named-argument-expression
+================================
+
+part p {
+  attribute val = compute(x=1, y=2);
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (invocation_expression
+              (feature_chain
+                (identifier))
+              (argument_list
+                (named_argument
+                  name: (identifier)
+                  value: (primary_expression
+                    (literal
+                      (integer_literal))))
+                (named_argument
+                  name: (identifier)
+                  value: (primary_expression
+                    (literal
+                      (integer_literal))))))))))))
+
+================================
+parenthesized-expression
+================================
+
+constraint def C {
+  (a + b) * c
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (multiplicative_expression
+          (primary_expression
+            (parenthesized_expression
+              (additive_expression
+                (primary_expression
+                  (feature_chain
+                    (identifier)))
+                (primary_expression
+                  (feature_chain
+                    (identifier))))))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+string-literal
+================================
+
+part p {
+  attribute name = "hello";
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (string_literal))))))))
+
+================================
+boolean-literal
+================================
+
+part p {
+  attribute active = true;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (boolean_literal))))))))
+
+================================
+real-literal
+================================
+
+part p {
+  attribute pi = 3.14;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (real_literal))))))))
+
+================================
+null-literal
+================================
+
+part p {
+  attribute val = null;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (literal
+              (null_literal))))))))
+
+================================
+feature-chain-expression
+================================
+
+constraint def C {
+  a.b.c > 0
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (relational_expression
+          (primary_expression
+            (feature_chain
+              (identifier)
+              (identifier)
+              (identifier)))
+          (primary_expression
+            (literal
+              (integer_literal))))))))
+
+================================
+bracket-expression-with-unit
+================================
+
+part p {
+  attribute length = 100 [SI::m];
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (primary_expression
+            (bracket_expression
+              (literal
+                (integer_literal))
+              (primary_expression
+                (qualified_name
+                  (identifier)
+                  (identifier))))))))))
+
+================================
+conditional-expression
+================================
+
+constraint def C {
+  if x > 0 ? x else 0
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (conditional_expression
+          condition: (relational_expression
+            (primary_expression
+              (feature_chain
+                (identifier)))
+            (primary_expression
+              (literal
+                (integer_literal))))
+          then: (primary_expression
+            (feature_chain
+              (identifier)))
+          else: (primary_expression
+            (literal
+              (integer_literal))))))))
+
+================================
+implies-expression
+================================
+
+constraint def C {
+  a implies b
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (implies_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+equality-expression
+================================
+
+constraint def C {
+  a == b
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (equality_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+range-expression
+================================
+
+part p {
+  attribute range = 1..10;
+}
+
+---
+
+(source_file
+  (standard_usage
+    name: (identifier)
+    (usage_body
+      (standard_usage
+        name: (identifier)
+        (default_value
+          (range_expression
+            (primary_expression
+              (literal
+                (integer_literal)))
+            (primary_expression
+              (literal
+                (integer_literal)))))))))
+
+================================
+exponentiation-expression
+================================
+
+constraint def C {
+  x ** 2
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (exponentiation_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (literal
+              (integer_literal))))))))
+
+================================
+xor-expression
+================================
+
+constraint def C {
+  a xor b
+}
+
+---
+
+(source_file
+  (constraint_def
+    name: (identifier)
+    (constraint_body
+      (result_expression
+        (xor_expression
+          (primary_expression
+            (feature_chain
+              (identifier)))
+          (primary_expression
+            (feature_chain
+              (identifier))))))))
+
+================================
+arrow-for-all-lambda-expression
+================================
+
+package Test {
+  attribute def A {
+    attribute items;
+    assert constraint { items->forAll { in item; item == 0 } }
+  }
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (standard_def
+        name: (identifier)
+        (definition_body
+          (standard_usage
+            name: (identifier))
+          (assert_constraint_usage
+            (function_body
+              (result_expression
+                (primary_expression
+                  (arrow_body_expression
+                    (arrow_expression
+                      (feature_chain
+                        (identifier))
+                      (feature_chain
+                        (identifier)))
+                    (lambda_body
+                      (lambda_parameter
+                        name: (identifier))
+                      (result_expression
+                        (equality_expression
+                          (primary_expression
+                            (feature_chain
+                              (identifier)))
+                          (primary_expression
+                            (literal
+                              (integer_literal))))))))))))))))

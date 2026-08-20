@@ -1,0 +1,379 @@
+====================================
+package-empty
+====================================
+
+package Foo {
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body)))
+
+====================================
+package-with-parts
+====================================
+
+package Vehicle {
+  part engine;
+  part wheel;
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (standard_usage
+        name: (identifier))
+      (standard_usage
+        name: (identifier)))))
+
+====================================
+nested-packages
+====================================
+
+package Outer {
+  package Inner {
+    part x;
+  }
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (package_decl
+        name: (identifier)
+        (package_body
+          (standard_usage
+            name: (identifier)))))))
+
+====================================
+nested-package-with-doc-and-import
+====================================
+
+package Domain {
+  doc /* top */
+  import ScalarValues::*;
+
+  package Structure {
+    doc /* structural */
+    public import Definitions::*;
+  }
+
+  private package Internal {
+  }
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (doc_comment
+        (doc_string))
+      (import_decl
+        target: (import_target
+          (import_single_name
+            (identifier))))
+      (package_decl
+        name: (identifier)
+        (package_body
+          (doc_comment
+            (doc_string))
+          (import_decl
+            (visibility_indicator)
+            target: (import_target
+              (import_single_name
+                (identifier))))))
+      (package_decl
+        (visibility_indicator)
+        name: (identifier)
+        (package_body)))))
+
+====================================
+import-simple
+====================================
+
+import Foo::Bar;
+
+---
+
+(source_file
+  (import_decl
+    (import_target
+      (import_qualified_name
+        (identifier)
+        (identifier)))))
+
+====================================
+import-wildcard
+====================================
+
+import Foo::*;
+
+---
+
+(source_file
+  (import_decl
+    (import_target
+      (import_single_name
+        (identifier)))))
+
+====================================
+import-recursive-wildcard
+====================================
+
+import Foo::**;
+
+---
+
+(source_file
+  (import_decl
+    (import_target
+      (import_single_name
+        (identifier)))))
+
+====================================
+private-import
+====================================
+
+private import Bar::*;
+
+---
+
+(source_file
+  (import_decl
+    (visibility_indicator)
+    (import_target
+      (import_single_name
+        (identifier)))))
+
+====================================
+import-all
+====================================
+
+import all Foo::Bar;
+
+---
+
+(source_file
+  (import_decl
+    (import_target
+      (import_qualified_name
+        (identifier)
+        (identifier)))))
+
+====================================
+alias-declaration
+====================================
+
+package P {
+  alias MyPart for Lib::Part;
+}
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (alias_decl
+        name: (identifier)
+        target: (qualified_name
+          (identifier)
+          (identifier))))))
+
+====================================
+standard-library-package
+====================================
+
+standard library package MyLib {
+  part x;
+}
+
+---
+
+(source_file
+  (library_package
+    name: (identifier)
+    (package_body
+      (standard_usage
+        name: (identifier)))))
+
+====================================
+library-package
+====================================
+
+library package Lib {
+  part y;
+}
+
+---
+
+(source_file
+  (library_package
+    name: (identifier)
+    (package_body
+      (standard_usage
+        name: (identifier)))))
+
+====================================
+namespace-declaration
+====================================
+
+namespace N {
+  part x;
+}
+
+---
+
+(source_file
+  (namespace_decl
+    name: (identifier)
+    (namespace_body
+      (standard_usage
+        name: (identifier)))))
+
+====================================
+expose-membership
+====================================
+
+view def V {
+  expose SomePackage;
+}
+
+---
+
+(source_file
+  (definition
+    name: (identifier)
+    (definition_body
+      (expose_decl
+        target: (import_target
+          (import_single_name
+            (identifier)))))))
+
+====================================
+expose-namespace-wildcard
+====================================
+
+view def V {
+  expose SomePackage::*;
+}
+
+---
+
+(source_file
+  (definition
+    name: (identifier)
+    (definition_body
+      (expose_decl
+        target: (import_target
+          (import_single_name
+            (identifier)))))))
+
+====================================
+render-usage-subsetting
+====================================
+
+view def V {
+  render :>> StandardRendering;
+}
+
+---
+
+(source_file
+  (definition
+    name: (identifier)
+    (definition_body
+      (render_usage
+        (redefinition
+          target: (feature_chain
+            (identifier)))))))
+
+====================================
+render-usage-inline
+====================================
+
+view def V {
+  render rendering MyRenderer {
+  }
+}
+
+---
+
+(source_file
+  (definition
+    name: (identifier)
+    (definition_body
+      (render_usage
+        name: (identifier)
+        (usage_body)))))
+
+====================================
+comment-element
+====================================
+
+comment about Vehicle
+/* This is a comment about Vehicle */
+
+---
+
+(source_file
+  (comment_element
+    (identifier)
+    (doc_string)))
+
+====================================
+filter-decl-in-view-def-body
+====================================
+
+view def V :> GeneralView { filter @SysML::PartUsage; }
+
+---
+
+(source_file
+  (definition
+    name: (identifier)
+    (supertype_list
+      (type_ref
+        (feature_chain
+          (identifier))))
+    (definition_body
+      (filter_decl
+        expression: (filter_classification_lead
+          (type_ref
+            (qualified_name
+              (identifier)
+              (identifier))))))))
+
+====================================
+filter-classification-lead-or-chain
+====================================
+
+package P { filter @SysML::A or @SysML::B; }
+
+---
+
+(source_file
+  (package_decl
+    name: (identifier)
+    (package_body
+      (filter_decl
+        expression: (filter_classification_lead
+          (type_ref
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (type_ref
+            (qualified_name
+              (identifier)
+              (identifier))))))))

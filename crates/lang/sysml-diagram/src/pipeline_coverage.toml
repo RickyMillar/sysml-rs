@@ -1,0 +1,2542 @@
+# SysML v2 Visualization Pipeline Coverage Tracker
+#
+# Tracks every graphical concept through the 6-stage pipeline:
+#   1. Parser     — tree-sitter grammar rule parses the syntax
+#   2. AST        — AST builder produces correct ElementKind + properties
+#   3. SModel Gen — Rust generator emits SNode/SEdge/SCompartment
+#   4. TS Reg     — configureModelElement() in sysml-module.ts
+#   5. View       — SVG rendering correct (shape, CSS, children)
+#   6. ELK        — proper sizing, spacing, routing
+#
+# Status: "done" | "partial" | "stub" | "missing" | "n/a"
+#
+# Updated: 2026-03-16 — Phase 1 crash fixes complete
+# Coverage: 37 nodes, 37 edges, 59 compartments
+
+
+# =============================================================================
+#  NODES — 37 VisualKind variants
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+#  Structural
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Package"
+element_kinds = ["Package", "LibraryPackage"]
+node_type = "node:package"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[node]]
+name = "Part"
+element_kinds = ["PartDefinition", "PartUsage"]
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[node]]
+name = "Item"
+element_kinds = ["ItemDefinition", "ItemUsage"]
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[node]]
+name = "Connection"
+element_kinds = ["ConnectionDefinition", "ConnectionUsage", "BindingConnectorAsUsage", "ConnectorAsUsage"]
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Behavioral
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Action"
+element_kinds = [
+    "ActionDefinition", "ActionUsage", "PerformActionUsage",
+    "SendActionUsage", "AcceptActionUsage", "AssignmentActionUsage",
+    "ForLoopActionUsage", "WhileLoopActionUsage", "IfActionUsage",
+    "LoopActionUsage", "TerminateActionUsage",
+]
+node_type = "node:action"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "done"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "State"
+element_kinds = ["StateDefinition", "StateUsage", "ExhibitStateUsage"]
+node_type = "node:state"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Constraint"
+element_kinds = ["ConstraintDefinition", "ConstraintUsage", "AssertConstraintUsage"]
+node_type = "node:constraint"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Calculation"
+element_kinds = ["CalculationDefinition", "CalculationUsage"]
+node_type = "node:action"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Shares action view (node:action)"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Requirements Family
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Requirement"
+element_kinds = ["RequirementDefinition", "RequirementUsage", "SatisfyRequirementUsage"]
+node_type = "node:requirement"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[node]]
+name = "Concern"
+element_kinds = ["ConcernDefinition", "ConcernUsage"]
+node_type = "node:requirement"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Shares requirement view (node:requirement)"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "VerificationCase"
+element_kinds = ["VerificationCaseDefinition", "VerificationCaseUsage"]
+node_type = "node:requirement"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Shares requirement view (node:requirement)"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Cases
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "UseCase"
+element_kinds = ["UseCaseDefinition", "UseCaseUsage", "IncludeUseCaseUsage"]
+node_type = "node:usecase"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "AnalysisCase"
+element_kinds = ["AnalysisCaseDefinition", "AnalysisCaseUsage"]
+node_type = "node:usecase"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Shares use case view (node:usecase)"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Type-Specific
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Interface"
+element_kinds = ["InterfaceDefinition", "InterfaceUsage"]
+node_type = "node:interface"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Attribute"
+element_kinds = ["AttributeDefinition", "AttributeUsage"]
+node_type = "node:attribute"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Enumeration"
+element_kinds = ["EnumerationDefinition", "EnumerationUsage"]
+node_type = "node:enumeration"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Allocation"
+element_kinds = ["AllocationDefinition", "AllocationUsage"]
+node_type = "node:allocation"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[node]]
+name = "Occurrence"
+element_kinds = ["OccurrenceDefinition", "OccurrenceUsage", "EventOccurrenceUsage"]
+node_type = "node:occurrence"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Flow"
+element_kinds = ["FlowDefinition", "FlowUsage", "SuccessionFlowUsage"]
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "partial"
+elk = "done"
+notes = "Uses node:block — no dedicated flow node view"
+[node.generators]
+General = "done"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "View"
+element_kinds = ["ViewDefinition", "ViewUsage"]
+node_type = "node:view"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Viewpoint"
+element_kinds = ["ViewpointDefinition", "ViewpointUsage"]
+node_type = "node:view"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Shares view (node:view)"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Port"
+element_kinds = ["PortDefinition", "PortUsage", "ConjugatedPortDefinition"]
+node_type = "port"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Rendering"
+element_kinds = ["RenderingDefinition", "RenderingUsage"]
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "partial"
+elk = "done"
+notes = "Uses node:block — no dedicated rendering view"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Special Shapes
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Comment"
+element_kinds = ["Comment", "Documentation", "TextualRepresentation"]
+node_type = "node:comment"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Metadata"
+element_kinds = ["MetadataDefinition", "MetadataUsage", "MetadataFeature"]
+node_type = "node:metadata"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Actor"
+element_kinds = []
+node_type = "node:actor"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Context-aware: PartUsage via ActorMembership renders as Actor via effective_graphical_kind()"
+[node.generators]
+General = "done"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+# ---------------------------------------------------------------------------
+#  Control Nodes
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "InitialNode"
+element_kinds = []
+node_type = "node:initialNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "FinalNode"
+element_kinds = []
+node_type = "node:finalNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "DecisionNode"
+element_kinds = []
+node_type = "node:decisionNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "MergeNode"
+element_kinds = []
+node_type = "node:mergeNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "ForkNode"
+element_kinds = []
+node_type = "node:forkNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "JoinNode"
+element_kinds = []
+node_type = "node:joinNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized node — no direct ElementKind"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "TerminateNode"
+element_kinds = []
+node_type = "node:terminateNode"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "TerminateActionUsage is parsed but not emitted as control node in ActionFlow"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "missing"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "SendAction"
+element_kinds = []
+node_type = "node:sendAction"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized control node for SendActionUsage"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "AcceptAction"
+element_kinds = []
+node_type = "node:acceptAction"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized control node for AcceptActionUsage"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Sequence
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "Lifeline"
+element_kinds = []
+node_type = "node:lifeline"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Synthesized for sequence diagrams — uses LifelineNodeView"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "done"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "SqProxy"
+element_kinds = []
+node_type = "node:sqProxy"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[node.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "partial"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Special
+# ---------------------------------------------------------------------------
+
+[[node]]
+name = "NaryDot"
+element_kinds = []
+node_type = "node:naryDot"
+parser = "n/a"
+ast = "n/a"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts. Only for 3+ connections."
+[node.generators]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[node]]
+name = "Generic"
+element_kinds = []
+node_type = "node:block"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Catch-all for non-diagrammatic elements — falls through to BlockNodeView"
+[node.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+
+# =============================================================================
+#  EDGES — 37 RelationshipKind variants
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+#  Registered in TS (21 — all functional)
+# ---------------------------------------------------------------------------
+
+[[edge]]
+name = "Owning"
+edge_type = "edge:ownership"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "TypeOf"
+edge_type = "edge:typing"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Satisfy"
+edge_type = "edge:satisfy"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Verify"
+edge_type = "edge:verify"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Derive"
+edge_type = "edge:derive"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Trace"
+edge_type = "edge:trace"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Reference"
+edge_type = "edge:reference"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Specialize"
+edge_type = "edge:specialize"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Redefine"
+edge_type = "edge:redefine"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Subsetting"
+edge_type = "edge:subsetting"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Flow"
+edge_type = "edge:flow"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "n/a"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Transition"
+edge_type = "edge:transition"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Dependency"
+edge_type = "edge:dependency"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Import"
+edge_type = "edge:import"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Allocate"
+edge_type = "edge:allocate"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "n/a"
+
+[[edge]]
+name = "Binding"
+edge_type = "edge:binding"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "n/a"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Connection"
+edge_type = "edge:connection"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "n/a"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Perform"
+edge_type = "edge:perform"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Exhibit"
+edge_type = "edge:exhibit"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Include"
+edge_type = "edge:include"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[edge]]
+name = "Succession"
+edge_type = "edge:succession"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+[edge.generators]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  NOT registered in TS (16 — WILL CRASH if emitted)
+# ---------------------------------------------------------------------------
+
+[[edge]]
+name = "Composition"
+edge_type = "edge:composition"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Annotation"
+edge_type = "edge:annotation"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "SuccessionFlow"
+edge_type = "edge:successionFlow"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Message"
+edge_type = "edge:message"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "done"
+elk = "done"
+notes = "Rendered via PolylineEdgeView with pre-computed routing points"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "done"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "FeatureMembership"
+edge_type = "edge:featureMembership"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Membership"
+edge_type = "edge:membership"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "FlowOnConnection"
+edge_type = "edge:flowOnConnection"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "InterfaceConnection"
+edge_type = "edge:interfaceConnection"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Portion"
+edge_type = "edge:portion"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Expose"
+edge_type = "edge:expose"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Frame"
+edge_type = "edge:frame"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Assert"
+edge_type = "edge:assert"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Assume"
+edge_type = "edge:assume"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "Require"
+edge_type = "edge:require"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "ParameterLink"
+edge_type = "edge:parameterLink"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+[[edge]]
+name = "EventOccurrence"
+edge_type = "edge:eventOccurrence"
+parser = "done"
+ast = "done"
+ts_reg = "done"
+view = "missing"
+elk = "missing"
+notes = "TS registration added in sysml-module.ts"
+[edge.generators]
+General = "missing"
+Interconnection = "missing"
+StateTransition = "missing"
+ActionFlow = "missing"
+Browser = "missing"
+Sequence = "missing"
+Grid = "missing"
+Geometry = "missing"
+
+
+# =============================================================================
+#  COMPARTMENTS — 59 CompartmentKind variants
+# =============================================================================
+
+# All 59 compartment kinds are registered in sysml-module.ts (ts_reg = "done").
+# The [compartment.populated_in] table tracks which generators actually populate them.
+
+# ---------------------------------------------------------------------------
+#  Universal
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Header"
+comp_type = "comp:header"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "done"
+Sequence = "done"
+Grid = "done"
+Geometry = "done"
+
+[[compartment]]
+name = "General"
+comp_type = "comp:general"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "done"
+ActionFlow = "done"
+Browser = "done"
+Sequence = "n/a"
+Grid = "done"
+Geometry = "done"
+
+[[compartment]]
+name = "Features"
+comp_type = "comp:features"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "partial"
+ActionFlow = "partial"
+Browser = "done"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "done"
+
+[[compartment]]
+name = "Documentation"
+comp_type = "comp:documentation"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "partial"
+StateTransition = "partial"
+ActionFlow = "partial"
+Browser = "done"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "partial"
+
+# ---------------------------------------------------------------------------
+#  Package
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Packages"
+comp_type = "comp:packages"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Members"
+comp_type = "comp:members"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Relationships"
+comp_type = "comp:relationships"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Structural
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Attributes"
+comp_type = "comp:attributes"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[compartment]]
+name = "Enums"
+comp_type = "comp:enums"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Parts"
+comp_type = "comp:parts"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[compartment]]
+name = "Items"
+comp_type = "comp:items"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[compartment]]
+name = "Ports"
+comp_type = "comp:ports"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "done"
+
+[[compartment]]
+name = "DirectedFeatures"
+comp_type = "comp:directedFeatures"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Interconnection"
+comp_type = "comp:interconnection"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Connections"
+comp_type = "comp:connections"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Interfaces"
+comp_type = "comp:interfaces"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Ends"
+comp_type = "comp:ends"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "done"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Behavioral — Actions
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Actions"
+comp_type = "comp:actions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "done"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "PerformActions"
+comp_type = "comp:performActions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "PerformedBy"
+comp_type = "comp:performedBy"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Parameters"
+comp_type = "comp:parameters"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "ActionFlow"
+comp_type = "comp:actionFlow"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Behavioral — States
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "States"
+comp_type = "comp:states"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "StatesActions"
+comp_type = "comp:statesActions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "ExhibitStates"
+comp_type = "comp:exhibitStates"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Successions"
+comp_type = "comp:successions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "partial"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "StateTransition"
+comp_type = "comp:stateTransition"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Entry"
+comp_type = "comp:entry"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Do"
+comp_type = "comp:do"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Exit"
+comp_type = "comp:exit"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "done"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Transitions"
+comp_type = "comp:transitions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "partial"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Flows"
+comp_type = "comp:flows"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "partial"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "n/a"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Sequence"
+comp_type = "comp:sequence"
+ts_reg = "done"
+[compartment.populated_in]
+General = "n/a"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "n/a"
+Sequence = "partial"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Calculation
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Calculations"
+comp_type = "comp:calculations"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Results"
+comp_type = "comp:results"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Constraint
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Constraints"
+comp_type = "comp:constraints"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "AssertConstraints"
+comp_type = "comp:assertConstraints"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "AssumeConstraints"
+comp_type = "comp:assumeConstraints"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "RequireConstraints"
+comp_type = "comp:requireConstraints"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Requirement
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Requirements"
+comp_type = "comp:requirements"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[compartment]]
+name = "SatisfyRequirements"
+comp_type = "comp:satisfyRequirements"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Satisfies"
+comp_type = "comp:satisfies"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Frames"
+comp_type = "comp:frames"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Subject"
+comp_type = "comp:subject"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Actors"
+comp_type = "comp:actors"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Stakeholders"
+comp_type = "comp:stakeholders"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Concerns"
+comp_type = "comp:concerns"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Verification
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Verifications"
+comp_type = "comp:verifications"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Verifies"
+comp_type = "comp:verifies"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+[[compartment]]
+name = "VerificationMethods"
+comp_type = "comp:verificationMethods"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Case
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Objective"
+comp_type = "comp:objective"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Analyses"
+comp_type = "comp:analyses"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "UseCases"
+comp_type = "comp:useCases"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "IncludeActions"
+comp_type = "comp:includeActions"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "partial"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Includes"
+comp_type = "comp:includes"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Occurrence
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Occurrences"
+comp_type = "comp:occurrences"
+ts_reg = "done"
+[compartment.populated_in]
+General = "missing"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "missing"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+notes = "Need parser properties for occurrence subtypes"
+
+[[compartment]]
+name = "Individuals"
+comp_type = "comp:individuals"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+notes = "Parser now sets isIndividual from 'individual' keyword in usage_prefix"
+
+[[compartment]]
+name = "Timeslices"
+comp_type = "comp:timeslices"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+notes = "Parser sets isPortion+portionKind from 'timeslice' keyword in usage_prefix"
+
+[[compartment]]
+name = "Snapshots"
+comp_type = "comp:snapshots"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+notes = "Parser sets isPortion+portionKind from 'snapshot' keyword in usage_prefix"
+
+# ---------------------------------------------------------------------------
+#  Allocation
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Allocations"
+comp_type = "comp:allocations"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "partial"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  View
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Views"
+comp_type = "comp:views"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Viewpoints"
+comp_type = "comp:viewpoints"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Exposes"
+comp_type = "comp:exposes"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Filters"
+comp_type = "comp:filters"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "Renderings"
+comp_type = "comp:renderings"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+# ---------------------------------------------------------------------------
+#  Variation
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Variants"
+comp_type = "comp:variants"
+ts_reg = "done"
+[compartment.populated_in]
+General = "done"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "done"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+
+[[compartment]]
+name = "VariantUsages"
+comp_type = "comp:variantUsages"
+ts_reg = "done"
+[compartment.populated_in]
+General = "missing"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "missing"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"
+notes = "Requires graph context for ownership-based routing — future work"
+
+# ---------------------------------------------------------------------------
+#  Annotation
+# ---------------------------------------------------------------------------
+
+[[compartment]]
+name = "Metadata"
+comp_type = "comp:metadata"
+ts_reg = "done"
+[compartment.populated_in]
+General = "partial"
+Interconnection = "n/a"
+StateTransition = "n/a"
+ActionFlow = "n/a"
+Browser = "partial"
+Sequence = "n/a"
+Grid = "n/a"
+Geometry = "n/a"

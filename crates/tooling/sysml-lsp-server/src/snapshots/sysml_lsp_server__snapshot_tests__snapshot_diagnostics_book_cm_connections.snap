@@ -1,0 +1,30 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[E200] error @ "BrewerWithPorts"
+  no definition 'BrewerWithPorts' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeMachine"
+  no definition 'CoffeeMachine' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "~WaterPort"
+  no definition 'WaterPort' found in scope of conjugated port typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterPort"
+  no definition 'WaterPort' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterTankWithPorts"
+  no definition 'WaterTankWithPorts' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM006] error @ "import Ports::*;"
+  import references unknown standard library namespace 'Ports'
+  note: valid namespaces: ScalarValues, ISQ, SI, Collections, Performances, Parts, Connections, Ports, Interfaces, Items, Actions, States, Constraints, Requirements, Calculations, ...
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed

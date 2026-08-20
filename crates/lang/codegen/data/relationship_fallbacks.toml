@@ -1,0 +1,314 @@
+# Fallback relationship constraints for source/target type validation.
+#
+# These are used when JSON/XMI parsing doesn't yield specific constraints
+# for a relationship type. Each entry specifies the expected source and
+# target element types for a relationship kind.
+#
+# Format:
+#   [[constraint]]
+#   type_name    = "RelationshipTypeName"
+#   source_type  = "SourceElementType"
+#   target_type  = "TargetElementType"
+
+# === Base Relationship ===
+
+[[constraint]]
+type_name = "Relationship"
+source_type = "Element"
+target_type = "Element"
+
+# === Specialization relationships ===
+
+[[constraint]]
+type_name = "Specialization"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "FeatureTyping"
+source_type = "Feature"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Subsetting"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "Redefinition"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ReferenceSubsetting"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "Subclassification"
+source_type = "Classifier"
+target_type = "Classifier"
+
+[[constraint]]
+type_name = "Conjugation"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Disjoining"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Differencing"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Intersecting"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Unioning"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "CrossSubsetting"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ConjugatedPortTyping"
+source_type = "Feature"
+target_type = "ConjugatedPortDefinition"
+
+# === Feature relationships ===
+
+[[constraint]]
+type_name = "FeatureChaining"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "FeatureInverting"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "TypeFeaturing"
+source_type = "Feature"
+target_type = "Type"
+
+# === Membership relationships ===
+
+[[constraint]]
+type_name = "Membership"
+source_type = "Namespace"
+target_type = "Element"
+
+[[constraint]]
+type_name = "OwningMembership"
+source_type = "Namespace"
+target_type = "Element"
+
+[[constraint]]
+type_name = "FeatureMembership"
+source_type = "Type"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "EndFeatureMembership"
+source_type = "Type"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ParameterMembership"
+source_type = "Type"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ResultExpressionMembership"
+source_type = "Function"
+target_type = "Expression"
+
+[[constraint]]
+type_name = "ReturnParameterMembership"
+source_type = "Type"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ObjectiveMembership"
+source_type = "CaseDefinition"
+target_type = "RequirementUsage"
+
+[[constraint]]
+type_name = "SubjectMembership"
+source_type = "Type"
+target_type = "Usage"
+
+[[constraint]]
+type_name = "ActorMembership"
+source_type = "Type"
+target_type = "PartUsage"
+
+[[constraint]]
+type_name = "StakeholderMembership"
+source_type = "Type"
+target_type = "PartUsage"
+
+[[constraint]]
+type_name = "RequirementConstraintMembership"
+source_type = "RequirementDefinition"
+target_type = "ConstraintUsage"
+
+[[constraint]]
+type_name = "RequirementVerificationMembership"
+source_type = "RequirementDefinition"
+target_type = "RequirementUsage"
+
+[[constraint]]
+type_name = "FramedConcernMembership"
+source_type = "Type"
+target_type = "ConcernUsage"
+
+[[constraint]]
+type_name = "ViewRenderingMembership"
+source_type = "ViewDefinition"
+target_type = "RenderingUsage"
+
+[[constraint]]
+type_name = "ElementFilterMembership"
+source_type = "Namespace"
+target_type = "Expression"
+
+[[constraint]]
+type_name = "VariantMembership"
+source_type = "Type"
+target_type = "Usage"
+
+[[constraint]]
+type_name = "StateSubactionMembership"
+source_type = "StateDefinition"
+target_type = "ActionUsage"
+
+[[constraint]]
+type_name = "TransitionFeatureMembership"
+source_type = "Type"
+target_type = "Step"
+
+# === Import relationships ===
+
+[[constraint]]
+type_name = "Import"
+source_type = "Namespace"
+target_type = "Element"
+
+[[constraint]]
+type_name = "MembershipImport"
+source_type = "Namespace"
+target_type = "Membership"
+
+[[constraint]]
+type_name = "NamespaceImport"
+source_type = "Namespace"
+target_type = "Namespace"
+
+[[constraint]]
+type_name = "Expose"
+source_type = "ViewUsage"
+target_type = "Membership"
+
+# === Annotation relationships ===
+
+[[constraint]]
+type_name = "Annotation"
+source_type = "AnnotatingElement"
+target_type = "Element"
+
+# === Dependency ===
+
+[[constraint]]
+type_name = "Dependency"
+source_type = "Element"
+target_type = "Element"
+
+# === Port relationships ===
+
+[[constraint]]
+type_name = "PortConjugation"
+source_type = "ConjugatedPortDefinition"
+target_type = "PortDefinition"
+
+# === Connection and flow relationships ===
+
+[[constraint]]
+type_name = "ItemFlow"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "FlowConnectionUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "SuccessionFlowConnectionUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "Succession"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "SuccessionAsUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "ConnectionUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "InterfaceUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "BindingConnectorAsUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "AllocationUsage"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "BindingConnector"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "Connector"
+source_type = "Feature"
+target_type = "Feature"
+
+[[constraint]]
+type_name = "Association"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "AssociationStructure"
+source_type = "Type"
+target_type = "Type"
+
+[[constraint]]
+type_name = "Interaction"
+source_type = "Type"
+target_type = "Type"

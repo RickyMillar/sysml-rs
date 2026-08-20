@@ -1,0 +1,339 @@
+# manifest.toml — pinned upstream sources for the third-party trees.
+#
+# The public repository does not vendor OMG specification material, the OMG
+# pilot implementation, or the standard model library derived from it. Every
+# item below records where a piece of that material comes from and what it must
+# hash to once reconstructed, so `fetch.sh` can rebuild it and prove the result
+# byte-for-byte.
+#
+# DESTINATIONS. An item's `dest` is relative to its `base`: `references` (the
+# default) resolves under the references root, `repo` under the repository root.
+# Only `standard-library` uses `repo`, because the runtime loads the standard
+# model library from <repo>/libraries/standard rather than from references/.
+#
+# FORMAT: this file is read by an awk program in fetch.sh, so it is restricted
+# to a deliberately small TOML subset — `[[item]]` records containing
+# `key = "string"`, `key = integer` and `key = ["a", "b"]` lines only. No
+# nested tables, no multi-line values, no trailing comments after a value.
+# The subset is small on purpose: this step runs before anything compiles, so
+# it cannot depend on a TOML parser.
+#
+# CHECKSUMS. `sha256` for a `file` item is the plain SHA-256 of the file. For a
+# `git` item it is an aggregate over the reconstructed directory, using the
+# same algorithm spec-drop.toml documents: for every file under the directory,
+# sorted by BYTE ORDER of the forward-slash relative path, feed
+# `<relpath> NUL <lowercase-hex-sha256-of-file> LF` into one SHA-256. The two
+# manifests therefore produce comparable directory hashes, and fetch.sh's
+# implementation is checked against the Rust one by recomputing the
+# `SysML-v2-API-Services/conf/json/schema/metamodel` hash recorded in
+# spec-drop.toml.
+#
+# RELATIONSHIP TO spec-drop.toml. That file pins the individual sources the
+# build and codegen consume and is the provenance gate (L1). This file pins
+# where those bytes are *obtained*. spec-drop.toml stays authoritative for
+# which spec drop we target; this manifest must reproduce a tree that
+# satisfies it.
+#
+# `upstream_sha256` + `patch` mark an item whose vendored form is NOT pristine
+# upstream. `sha256` is always the value a correct local tree must have;
+# `upstream_sha256` is what a pristine fetch produces before the patch applies.
+# Any such divergence is a modification of third-party material and must stay
+# visible to the licensing review — do not silence one by re-pinning `sha256`.
+
+[manifest]
+version = 1
+spec_drop = "2025-04"
+metamodel_drop = "20250201"
+
+# ---------------------------------------------------------------------------
+# Git-cloned source trees
+# ---------------------------------------------------------------------------
+
+# The OMG reference tool implementation: the three Xtext grammars, the
+# normative spec HTML, the standard model library, and the example corpus.
+#
+# This item is NOT what makes a build fail without it. sysml-core's build.rs
+# guards both grammar reads behind an exists() check and only downgrades
+# cross-reference validation to a cargo:warning when they are absent; the items
+# it actually panics without are the vocab/shape TTLs, the XMIs and the
+# api-services metamodel schemas. Fetch this one anyway in any build job — the
+# skipped validation is a silent loss — and in the tree-sitter regeneration job,
+# which reads the grammars directly.
+#
+# The pinned commit is the one that set the version to 0.56.0-SNAPSHOT; it was
+# confirmed by hashing all 4210 vendored files against the upstream tree at
+# this SHA (4210/4210 match). The excludes reproduce the vendoring decision:
+# the repository's own .gitignore drops *.log and *.svg, which is exactly the
+# 291 upstream files under tool-support/bnf_grammar_tools that are absent here.
+[[item]]
+id = "pilot-implementation"
+kind = "git"
+dest = "SysML-v2-Pilot-Implementation"
+repo = "https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation.git"
+commit = "5a954377cd81e58f8ef8aba6222a2ce860d7787c"
+exclude = ["*.log", "*.svg"]
+sha256 = "1ae9fd59d0edc77e29692a93b312ce8a061763ba39a9e30c3fa891c70c083472"
+files = 4210
+license = "LGPL-3.0-or-later"
+
+# The OMG reference REST implementation. Only the JSON-schema metamodel slice
+# is consumed (sysml-core build.rs enum coverage); the Scala/Java application
+# is not vendored, hence the include list.
+#
+# A build without this item fails MISLEADINGLY: the schema reader swallows a
+# missing directory and returns zero enums, so the build dies later in enum
+# coverage validation listing every TTL enum as "in TTL but not JSON" — a
+# spec-drift message for what is really an absent directory.
+#
+# Pinned at tag 2025-02; all 197
+# vendored files match that commit. The metamodel schemas change only on a
+# metamodel-baseline bump (2-4x/year) and are in fact unchanged from this
+# commit through upstream master, so the pin is stable rather than tight.
+[[item]]
+id = "api-services"
+kind = "git"
+dest = "SysML-v2-API-Services"
+repo = "https://github.com/Systems-Modeling/SysML-v2-API-Services.git"
+commit = "9484b6f3753a27f3cbe58ced3d015ab7460e9bf6"
+include = ["conf/*", "README.md", "LICENSE", "LICENSE-GPL", ".gitignore"]
+sha256 = "e0a575bd9d03ef59dfc6f29cd58846488f92dd9f006cb5fab476593d35c6f752"
+files = 197
+license = "LGPL-3.0-or-later"
+
+# Community example-model corpus, used as a no-regression parse/typecheck
+# input. NOT normative and NOT provenance-pinned in spec-drop.toml.
+#
+# NOTE the upstream owner: GfSE, not Systems-Modeling. The repository has no
+# tags or releases, so the pin is a plain commit on main.
+#
+# This tree is NOT pristine: one file was added locally (eVehicleLibrary.sysml)
+# and two were edited to correct pre-release syntax. The patch reproduces those
+# three deltas, and applying it to a pristine clone at the pinned commit
+# reproduces `sha256` exactly (verified). Re-vendoring without the patch would
+# silently revert them.
+[[item]]
+id = "example-models"
+kind = "git"
+dest = "SysML-v2-Models"
+repo = "https://github.com/GfSE/SysML-v2-Models.git"
+commit = "ebbb0c39f4813b059e0bf14270ec58618aa012ca"
+patch = "patches/sysml-v2-models-local.patch"
+upstream_sha256 = "9d72aa97f1e83b2e9731b102ba1806f94e4deffc930243a7034953925c2a3371"
+sha256 = "81652fe3d9e6b78de89c408e985a094b023b02f5cfacce4948fa9852b9d24c0b"
+files = 49
+license = "Apache-2.0"
+
+# The SysML v2 standard model library that the runtime loads whenever
+# SYSML_LIBRARY_PATH is unset. It is NOT a separate upstream: it is the
+# `sysml.library/` subtree of the pilot implementation at the SAME pinned
+# commit as `pilot-implementation` above, restructured (OS-D2 owner decision 1;
+# the directory itself is stripped from the public tree and history).
+#
+# The restructure is carried as DATA, not as script logic:
+#   subdir  narrows the clone to `sysml.library/` before anything else runs.
+#   include/exclude drop the 25 Eclipse workspace files (.project, .settings/,
+#           .index.json, .workspace.json, .gitignore, and the per-project
+#           .meta.json/.project.json pairs) that were never vendored.
+#   rename  rewrites the three roots; the three `Kernel Libraries/<group>/`
+#           directories all fold into `library.kernel/`, which is the one-level
+#           flattening. A path no rule claims is a hard error, so a new
+#           upstream directory cannot land silently at either layout.
+#
+# `base = "repo"` because the destination is repo-relative, not
+# references-relative — the loader looks for it at <repo>/libraries/standard.
+#
+# NOT pristine: four of the 94 files are locally modified (two cosmetic/
+# editorial, one resolver workaround in ShapeItems.sysml, one 46-line
+# non-normative addition to StandardViewDefinitions.sysml). The patch is
+# applied AFTER the rename, so it reads against the local layout. Two of the
+# four are open conformance items — do not silence them by re-pinning sha256.
+[[item]]
+id = "standard-library"
+kind = "git"
+base = "repo"
+dest = "libraries/standard"
+repo = "https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation.git"
+commit = "5a954377cd81e58f8ef8aba6222a2ce860d7787c"
+subdir = "sysml.library"
+include = ["Systems Library/*", "Kernel Libraries/*", "Domain Libraries/*"]
+exclude = ["*.meta.json", "*.project.json"]
+rename = ["Systems Library/=library.systems/", "Kernel Libraries/Kernel Data Type Library/=library.kernel/", "Kernel Libraries/Kernel Function Library/=library.kernel/", "Kernel Libraries/Kernel Semantic Library/=library.kernel/", "Domain Libraries/=library.domain/"]
+patch = "patches/standard-library-local.patch"
+upstream_sha256 = "85800b6c951072881a6e06cd12996b289d4b1cb5795eed37b0740ff323809aed"
+sha256 = "a0f9a03d39aee3af214ada358fdac42e404702309420751da37bcd532ae589bb"
+files = 94
+license = "LGPL-3.0-or-later"
+
+# Sensmetry's SysML package manager. Vendored for exactly two test fixtures
+# consumed by sysml-project: core/src/stdlib_assets/20250201/ and
+# sysand/tests/data/test_lib.kpar. The excludes reproduce the vendoring:
+# .vscode/ is editor state and bindings/js/package-lock.json is dropped by
+# this repository's .gitignore.
+[[item]]
+id = "sysand"
+kind = "git"
+dest = "sysand"
+repo = "https://github.com/sensmetry/sysand.git"
+commit = "ce40848d8c2e673140ec3cd36409cab1f3741b81"
+exclude = [".vscode/*", "bindings/js/package-lock.json"]
+sha256 = "71c90fd8f9f07261fa98f75076fc87fd25a2b0a10aa18b75cffd96a486fba586"
+files = 273
+license = "Apache-2.0"
+
+# ---------------------------------------------------------------------------
+# OMG published artifacts
+#
+# The vocabularies and SHACL shapes are published under the SystemsModelingAPI
+# spec, not under SysML/KerML — that is not a mistake in these URLs. Note also
+# that our local Kerml-Vocab.ttl differs in case from the published
+# KerML-vocab.ttl; the `dest` preserves the local spelling that build.rs reads.
+#
+# Every URL below was fetched and confirmed byte-identical to the vendored
+# copy, except sysml-specification.pdf (see its note).
+# ---------------------------------------------------------------------------
+
+[[item]]
+id = "kerml-vocab"
+kind = "file"
+dest = "Kerml-Vocab.ttl"
+url = "https://www.omg.org/spec/SystemsModelingAPI/20250201/KerML-vocab.ttl"
+sha256 = "da13e961361cf8844449cfa417c64239f52925936a00fcd96ae8546462ce2b4a"
+license = "OMG"
+
+[[item]]
+id = "sysml-vocab"
+kind = "file"
+dest = "SysML-vocab.ttl"
+url = "https://www.omg.org/spec/SystemsModelingAPI/20250201/SysML-vocab.ttl"
+sha256 = "03592b7e61d4bf81797da6cf8ad10dd9d15949d4e4430f52fdb1969c6e478aba"
+license = "OMG"
+
+[[item]]
+id = "kerml-shapes"
+kind = "file"
+dest = "KerML-shapes.ttl"
+url = "https://www.omg.org/spec/SystemsModelingAPI/20250201/KerML-shapes.ttl"
+sha256 = "8a2c5eba8c76ec0906995a5628dbcdc470d712c9430111115d9af3ef479627aa"
+license = "OMG"
+
+[[item]]
+id = "sysml-shapes"
+kind = "file"
+dest = "SysML-shapes.ttl"
+url = "https://www.omg.org/spec/SystemsModelingAPI/20250201/SysML-shapes.ttl"
+sha256 = "d2cecf07b66657e5a4bc81c5a7fc301f0da43f53201687e1d16d9ecb63d8bd9a"
+license = "OMG"
+
+[[item]]
+id = "kerml-xmi"
+kind = "file"
+dest = "KerML/20250201/KerML.xmi"
+url = "https://www.omg.org/spec/KerML/20250201/KerML.xmi"
+sha256 = "45b18775afe2b2fcdc70e24f37c6d2f344defcc3f38a02075a193354e2d7b466"
+license = "OMG"
+
+[[item]]
+id = "kerml-json"
+kind = "file"
+dest = "KerML/20250201/KerML.json"
+url = "https://www.omg.org/spec/KerML/20250201/KerML.json"
+sha256 = "e454fe4b7c04f3d95874b6c1a4e6ef056ea5874c71fd3d17e3180319c2f58ab2"
+license = "OMG"
+
+[[item]]
+id = "sysml-xmi"
+kind = "file"
+dest = "SysML/20250201/SysML.xmi"
+url = "https://www.omg.org/spec/SysML/20250201/SysML.xmi"
+sha256 = "caa65d54f56798bf7582d173f7567e1eea37a49c45984f8bd7df145011cf8c6f"
+license = "OMG"
+
+[[item]]
+id = "sysml-json"
+kind = "file"
+dest = "SysML/20250201/SysML.json"
+url = "https://www.omg.org/spec/SysML/20250201/SysML.json"
+sha256 = "bb0d8af159cf2cbe4a0df4ed6b903505a57e33d047068e5a50a7008a18d546c5"
+license = "OMG"
+
+[[item]]
+id = "sysml-v1-to-v2"
+kind = "file"
+dest = "SysML/20250201/SysMLv1Tov2.xmi"
+url = "https://www.omg.org/spec/SysML/20250201/SysMLv1Tov2.xmi"
+sha256 = "093359439fb62cb3a9b1e89fd850ac4ac0b4bbe135b4b54f7861492722cc8459"
+license = "OMG"
+
+[[item]]
+id = "kpar-systems"
+kind = "file"
+dest = "SysML/20250201/Systems-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Systems-Library.kpar"
+sha256 = "df7d8b2c6e08232ca7ce123a63148949c383fcbeaeba8d89c27ceece43793a1f"
+license = "OMG"
+
+[[item]]
+id = "kpar-analysis"
+kind = "file"
+dest = "SysML/20250201/Analysis-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Analysis-Domain-Library.kpar"
+sha256 = "96f0230cd7091faa2d27345b7f7748e0249fb42cfbdc48265ce6e82d6ecc1b38"
+license = "OMG"
+
+[[item]]
+id = "kpar-cause-and-effect"
+kind = "file"
+dest = "SysML/20250201/Cause-and-Effect-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Cause-and-Effect-Domain-Library.kpar"
+sha256 = "c097c70232b8c9d38acbc92b402d8caa3b67f4d847dade0f29994164a4e25e94"
+license = "OMG"
+
+[[item]]
+id = "kpar-geometry"
+kind = "file"
+dest = "SysML/20250201/Geometry-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Geometry-Domain-Library.kpar"
+sha256 = "9cc40d628dfe8717b79af74297a7115103e3469708a54221cac0e42344ed8427"
+license = "OMG"
+
+[[item]]
+id = "kpar-metadata"
+kind = "file"
+dest = "SysML/20250201/Metadata-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Metadata-Domain-Library.kpar"
+sha256 = "5c51cd3b21b60c89742dbba0f59f25bdbc34224d05e32975d77bb93092458b9b"
+license = "OMG"
+
+[[item]]
+id = "kpar-quantities-and-units"
+kind = "file"
+dest = "SysML/20250201/Quantities-and-Units-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Quantities-and-Units-Domain-Library.kpar"
+sha256 = "81a6e7264a9f287e482ec5b35f8ef98725b81f393e0b2e82dae3599511c0adc7"
+license = "OMG"
+
+[[item]]
+id = "kpar-requirement-derivation"
+kind = "file"
+dest = "SysML/20250201/Requirement-Derivation-Domain-Library.kpar"
+url = "https://www.omg.org/spec/SysML/20250201/Requirement-Derivation-Domain-Library.kpar"
+sha256 = "a136e72ac6afbd96ede220cfec77fd54c75242d577d3f5ab9e5278b25baee6e5"
+license = "OMG"
+
+# DROPPED — sysml-specification.pdf (OS-D2 owner decision 5).
+#
+# `references/sysmlv2/sysml-specification.pdf` is the OMG *API & Services*
+# specification, not the language spec, and no code reads it: it is absent from
+# spec-drop.toml and cited by nothing. It was also the one item that could not
+# be pinned — OMG re-rendered the PDF in place at its stable URL, so a fetch
+# served different bytes than the vendored copy and the item failed by
+# construction. Keeping it meant either a permanently red item or a checksum
+# upstream could invalidate again without notice, so it is out of the fetch set
+# rather than re-pinned.
+#
+# Humans who want the document download it from the OMG specification page:
+#   https://www.omg.org/spec/SystemsModelingAPI/1.0/PDF
+# (index: https://www.omg.org/spec/SystemsModelingAPI/1.0/)
+#
+# Nothing replaces it here. If a future item needs the API spec, pin the
+# versioned artifact rather than the "/1.0/PDF" alias.

@@ -1,0 +1,9 @@
+{
+    "name": "Control App",
+    "description": "Application that uses the shared library",
+    "version": "2.0.0",
+    "topic": ["Application"],
+    "usage": [
+        {"resource": "urn:test:lib-project", "versionConstraint": "1.0.0"}
+    ]
+}

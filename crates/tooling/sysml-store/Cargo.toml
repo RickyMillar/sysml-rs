@@ -1,0 +1,30 @@
+[package]
+name = "sysml-store"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Storage trait and types for SysML v2 model snapshots"
+repository.workspace = true
+# OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
+# (first public preview ships binaries/VSIX only). Tier and rationale:
+publish = false
+
+[features]
+default = []
+postgres = ["sqlx", "tokio"]
+
+[dependencies]
+schemars = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sysml-core = { workspace = true, features = ["serde"] }
+sysml-id = { workspace = true, features = ["serde"] }
+thiserror = { workspace = true }
+sqlx = { workspace = true, optional = true }
+tokio = { workspace = true, optional = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

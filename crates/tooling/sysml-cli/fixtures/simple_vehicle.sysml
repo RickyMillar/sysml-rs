@@ -1,0 +1,1 @@
+../../../../tests/fixtures/shared/simple_vehicle.sysml

@@ -1,0 +1,11 @@
+[project]
+name = "beverage-workspace"
+version = "0.1.0"
+description = "Example workspace with shared beverage types and a coffee machine model"
+
+[workspace]
+members = ["beverage-types", "coffee-machine"]
+
+[workspace.project]
+sysml-edition = "2025"
+license = "MIT"

@@ -1,0 +1,379 @@
+{
+  "collections": {
+    "book-coffee": {
+      "files": [
+        "actions.sysml",
+        "calculations.sysml",
+        "connections.sysml",
+        "definitions.sysml",
+        "flows.sysml",
+        "metadata.sysml",
+        "package-structure.sysml",
+        "ports-and-interfaces.sysml",
+        "requirements.sysml",
+        "states.sysml",
+        "typing-and-specialization.sysml",
+        "views.sysml"
+      ],
+      "diagnostics": {
+        "actions.sysml": [
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "IM001:info"
+        ],
+        "calculations.sysml": [
+          "E200:error",
+          "IM001:info"
+        ],
+        "connections.sysml": [
+          "E200:error",
+          "E200:error",
+          "IM001:info"
+        ],
+        "definitions.sysml": [],
+        "flows.sysml": [
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "FL001:error",
+          "FL002:error",
+          "FL002:error",
+          "FL006:info",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL008:info",
+          "IM001:info"
+        ],
+        "metadata.sysml": [
+          "IM001:info"
+        ],
+        "package-structure.sysml": [
+          "IM001:info",
+          "IM001:info"
+        ],
+        "ports-and-interfaces.sysml": [
+          "E200:error",
+          "E200:error",
+          "E200:error",
+          "IM001:info"
+        ],
+        "requirements.sysml": [
+          "IM001:info",
+          "IM001:info",
+          "NOCODE:error",
+          "NOCODE:error",
+          "NOCODE:error",
+          "NOCODE:error",
+          "NOCODE:error",
+          "NOCODE:error",
+          "VC001:error",
+          "VC001:error"
+        ],
+        "states.sysml": [
+          "E200:error",
+          "E200:error",
+          "IM001:info",
+          "SM004:warning",
+          "SM004:warning",
+          "SM006:error"
+        ],
+        "typing-and-specialization.sysml": [
+          "E200:error",
+          "E200:error",
+          "IM001:info"
+        ],
+        "views.sysml": [
+          "IM001:info"
+        ]
+      }
+    },
+    "book-beverage": {
+      "files": [
+        "types.sysml",
+        "parts.sysml"
+      ],
+      "diagnostics": {
+        "types.sysml": [],
+        "parts.sysml": [
+          "E200:error",
+          "IM001:info"
+        ]
+      }
+    },
+    "cli-fixtures": {
+      "files": [
+        "bake_action.sysml",
+        "types.sysml",
+        "parts.sysml",
+        "simple_vehicle.sysml",
+        "test_action.sysml",
+        "test_all_features.sysml",
+        "test_flow.sysml",
+        "test_health_diagnostics.sysml",
+        "test_hover.sysml",
+        "test_lsp_state_machine_diagnostics.sysml",
+        "test_state_machine.sysml",
+        "test_verification.sysml",
+        "test_whatif.sysml",
+        "traffic_light.sysml",
+        "verification.sysml"
+      ],
+      "diagnostics": {
+        "bake_action.sysml": [
+          "E004:error"
+        ],
+        "types.sysml": [],
+        "parts.sysml": [],
+        "simple_vehicle.sysml": [
+          "E004:error",
+          "E004:error",
+          "E004:error"
+        ],
+        "test_action.sysml": [
+          "AX002:warning"
+        ],
+        "test_all_features.sysml": [
+          "AX001:error",
+          "AX001:error",
+          "AX001:error",
+          "AX002:warning",
+          "E004:error",
+          "E004:error",
+          "E004:error",
+          "VC001:error",
+          "VC008:info"
+        ],
+        "test_flow.sysml": [
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning"
+        ],
+        "test_health_diagnostics.sysml": [
+          "AX001:error",
+          "AX002:warning",
+          "AX002:warning",
+          "AX003:error",
+          "AX004:warning",
+          "AX005:warning",
+          "AX006:error",
+          "AX012:warning",
+          "E200:error",
+          "FL001:error",
+          "FL002:error",
+          "FL003:warning",
+          "FL004:warning",
+          "FL005:warning",
+          "FL006:info",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL008:info",
+          "FL009:warning",
+          "VC001:error",
+          "VC001:error",
+          "VC008:info",
+          "VC008:info"
+        ],
+        "test_hover.sysml": [
+          "IM003:info",
+          "IM003:info"
+        ],
+        "test_lsp_state_machine_diagnostics.sysml": [
+          "SM001:error",
+          "SM003:warning",
+          "SM003:warning",
+          "SM003:warning",
+          "SM004:warning",
+          "SM005:warning",
+          "SM005:warning",
+          "SM005:warning",
+          "SM006:error",
+          "SM006:error"
+        ],
+        "test_state_machine.sysml": [],
+        "test_verification.sysml": [
+          "E004:error",
+          "E004:error",
+          "E004:error",
+          "E004:error",
+          "VC001:error",
+          "VC001:error",
+          "VC008:info",
+          "VC008:info"
+        ],
+        "test_whatif.sysml": [
+          "E004:error",
+          "E004:error",
+          "E004:error",
+          "E004:error"
+        ],
+        "traffic_light.sysml": [],
+        "verification.sysml": [
+          "E004:error",
+          "E004:error",
+          "VC001:error"
+        ]
+      }
+    },
+    "lsp-valid": {
+      "files": [
+        "action_control_flow.sysml",
+        "actions_and_flows.sysml",
+        "calc_constraint_conformance.sysml",
+        "clean.sysml",
+        "comprehensive.sysml",
+        "connectors_and_allocations.sysml",
+        "constraints_and_requirements.sysml",
+        "domain_library_conformance.sysml",
+        "duplicate_name_different_scope.sysml",
+        "enums_and_calculations.sysml",
+        "flows_and_messages.sysml",
+        "ports_and_interfaces.sysml",
+        "qualified_name_resolution.sysml",
+        "requirement_case_conformance.sysml",
+        "sensemetry.sysml",
+        "simple_vehicle.sysml",
+        "state_machine_conformance.sysml",
+        "state_machine.sysml",
+        "stdlib_dependent.sysml",
+        "stdlib_type_resolution.sysml",
+        "systems_library_conformance.sysml",
+        "use_case_conformance.sysml",
+        "view_rendering_conformance.sysml"
+      ],
+      "diagnostics": {
+        "action_control_flow.sysml": [
+          "AX002:warning",
+          "AX003:error",
+          "AX005:warning",
+          "AX005:warning",
+          "AX005:warning",
+          "AX005:warning",
+          "AX005:warning",
+          "AX005:warning",
+          "AX005:warning",
+          "AX006:error",
+          "AX007:error",
+          "AX008:error",
+          "AX009:error",
+          "AX010:warning",
+          "AX011:warning",
+          "AX012:warning",
+          "E200:error",
+          "S126:error",
+          "V002:warning"
+        ],
+        "actions_and_flows.sysml": [
+          "AX002:warning",
+          "AX002:warning",
+          "AX002:warning",
+          "AX002:warning",
+          "AX002:warning",
+          "AX007:error",
+          "AX008:error",
+          "AX009:error",
+          "AX010:warning",
+          "AX011:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "NOCODE:error",
+          "S126:error"
+        ],
+        "calc_constraint_conformance.sysml": [
+          "E004:error",
+          "E004:error",
+          "E004:error"
+        ],
+        "clean.sysml": [],
+        "comprehensive.sysml": [
+          "AX002:warning",
+          "AX010:warning",
+          "AX011:warning",
+          "NOCODE:error",
+          "NOCODE:error",
+          "S126:error"
+        ],
+        "connectors_and_allocations.sysml": [
+          "AX001:error",
+          "AX001:error",
+          "E004:error",
+          "E004:error",
+          "E004:error",
+          "E004:error"
+        ],
+        "constraints_and_requirements.sysml": [
+          "NOCODE:error"
+        ],
+        "domain_library_conformance.sysml": [
+          "E005:error",
+          "S011:error",
+          "S011:error",
+          "S011:error"
+        ],
+        "duplicate_name_different_scope.sysml": [],
+        "enums_and_calculations.sysml": [],
+        "flows_and_messages.sysml": [
+          "AX002:warning",
+          "FL001:error",
+          "FL001:error",
+          "FL002:error",
+          "FL002:error",
+          "FL006:info",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning",
+          "FL007:warning"
+        ],
+        "ports_and_interfaces.sysml": [],
+        "qualified_name_resolution.sysml": [],
+        "requirement_case_conformance.sysml": [
+          "VC001:error",
+          "VC008:info"
+        ],
+        "sensemetry.sysml": [],
+        "simple_vehicle.sysml": [
+          "E004:error"
+        ],
+        "state_machine_conformance.sysml": [
+          "SM003:warning",
+          "SM003:warning",
+          "SM005:warning",
+          "SM005:warning",
+          "SM005:warning",
+          "SM005:warning"
+        ],
+        "state_machine.sysml": [],
+        "stdlib_dependent.sysml": [],
+        "stdlib_type_resolution.sysml": [
+          "E200:error"
+        ],
+        "systems_library_conformance.sysml": [
+          "AX001:error",
+          "SM001:error"
+        ],
+        "use_case_conformance.sysml": [],
+        "view_rendering_conformance.sysml": []
+      }
+    }
+  },
+  "generated": "2026-03-01T20:13:14.408615+00:00"
+}

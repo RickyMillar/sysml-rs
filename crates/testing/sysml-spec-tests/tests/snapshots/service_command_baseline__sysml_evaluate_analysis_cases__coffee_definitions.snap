@@ -1,0 +1,255 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {},
+  "response": [
+    {
+      "case_name": "AnalysisCase",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "HeaterTradeStudy",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "config1Power",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "config2Power",
+          "tool_name": null,
+          "value": null
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "PowerBudgetAnalysis",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "grinderDraw",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "heaterDraw",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "pumpDraw",
+          "tool_name": null,
+          "value": null
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "ThermalAnalysis",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "ambientTemp",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "chamberHeatLoss",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "heaterPower",
+          "tool_name": null,
+          "value": null
+        },
+        {
+          "direction": "in",
+          "name": "waterVolume",
+          "tool_name": null,
+          "value": null
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "TradeStudy",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": "tradeStudyObjective",
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "analysisCases",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "compareHeaters",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 2 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "config1Power",
+          "tool_name": null,
+          "value": 1200
+        },
+        {
+          "direction": "in",
+          "name": "config2Power",
+          "tool_name": null,
+          "value": 1400
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "powerCheck",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 3 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "grinderDraw",
+          "tool_name": null,
+          "value": 200
+        },
+        {
+          "direction": "in",
+          "name": "heaterDraw",
+          "tool_name": null,
+          "value": 1400
+        },
+        {
+          "direction": "in",
+          "name": "pumpDraw",
+          "tool_name": null,
+          "value": 65
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "self",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "subAnalysisCases",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 0 outputs",
+      "objective": null,
+      "parameters": [],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    },
+    {
+      "case_name": "thermalCheck",
+      "constraints": [],
+      "diagnostics": [],
+      "display": "✓ 4 outputs",
+      "objective": null,
+      "parameters": [
+        {
+          "direction": "in",
+          "name": "ambientTemp",
+          "tool_name": null,
+          "value": 20
+        },
+        {
+          "direction": "in",
+          "name": "chamberHeatLoss",
+          "tool_name": null,
+          "value": 50
+        },
+        {
+          "direction": "in",
+          "name": "heaterPower",
+          "tool_name": null,
+          "value": 1400
+        },
+        {
+          "direction": "in",
+          "name": "waterVolume",
+          "tool_name": null,
+          "value": 250
+        }
+      ],
+      "result_expression": null,
+      "subject": null,
+      "tool_name": null,
+      "tool_uri": null
+    }
+  ]
+}

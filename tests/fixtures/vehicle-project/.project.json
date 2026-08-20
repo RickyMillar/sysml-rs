@@ -1,0 +1,10 @@
+{
+    "name": "Vehicle Project",
+    "description": "A multi-file test project with cross-file references",
+    "version": "1.0.0",
+    "topic": ["Test"],
+    "usage": [
+        {"resource": "urn:kpar:semantic-library", "versionConstraint": "1.0.0"},
+        {"resource": "urn:kpar:systems-library", "versionConstraint": "1.0.0"}
+    ]
+}

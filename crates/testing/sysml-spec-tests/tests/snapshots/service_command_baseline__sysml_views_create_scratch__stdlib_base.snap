@@ -1,0 +1,15 @@
+---
+source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
+expression: bundle
+---
+{
+  "request": {
+    "names": [
+      "P1::p1",
+      "P1::p2"
+    ]
+  },
+  "response": {
+    "error": "invalid input: missing field `expose`"
+  }
+}

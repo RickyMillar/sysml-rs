@@ -1,0 +1,32 @@
+---
+source: crates/tooling/sysml-lsp-server/src/snapshot_tests.rs
+expression: rendered
+---
+[E200] error @ "Brewer"
+  no definition 'Brewer' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "CoffeeMachine"
+  no definition 'CoffeeMachine' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "Grinder"
+  no definition 'Grinder' found in scope of feature typing
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "WaterTank"
+  no definition 'WaterTank' found in scope of subclassification
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[E200] error @ "grinder"
+  no definition 'grinder' found in scope of subsetting
+  note: ensure the name is defined or imported in scope
+  note: resolution performed without standard library
+[IM001] info @ "import Definitions::*;"
+  import references namespace 'Definitions' (unresolved in current workspace context)
+  note: checked current file and loaded standard library only; open the project/workspace folder so cross-file imports can be indexed
+[PH006] info @ "maxPressure"
+  did you mean `ISQ::PressureValue`? attribute 'maxPressure' in 'PressureBrewer' is typed as Real
+  note: hydraulic effort — enables pressure propagation — using the ISQ type unlocks automatic physics classification
+  note: try: `attribute maxPressure : ISQ::PressureValue;`
+  note: ISQ types enable domain detection, conservation laws, and simulation
