@@ -10,6 +10,11 @@ on:
       - 'editors/simulation-app/**'
       - 'editors/expression-view/**'
 
+# Least privilege: these jobs only read the repository. The release workflow is
+# the one place that needs `contents: write`, and it declares that itself.
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest

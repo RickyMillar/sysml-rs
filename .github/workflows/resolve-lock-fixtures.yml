@@ -13,6 +13,11 @@ on:
       - ".github/workflows/resolve-lock-fixtures.yml"
   workflow_dispatch:
 
+# Least privilege: these jobs only read the repository. The release workflow is
+# the one place that needs `contents: write`, and it declares that itself.
+permissions:
+  contents: read
+
 jobs:
   lock-fixtures:
     runs-on: ubuntu-latest

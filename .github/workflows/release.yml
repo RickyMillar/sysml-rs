@@ -9,18 +9,99 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
+# Least privilege by default. Only the publication job below widens this, and
+# it is the only job that writes anything to the repository.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # Reuse the CI workflow for building + packaging (LSP server binaries + VSIX)
   ci:
     uses: ./.github/workflows/vscode-extension.yml
+    permissions:
+      contents: read
+
+  # ---------- Blocking Rust test gate ----------
+  # A release must not be publishable through a red test suite. The build jobs
+  # in `ci` only prove the LSP server COMPILES for each target; nothing there
+  # runs a Rust test. This job is the gate that does, and `release` needs it.
+  #
+  # Scope is `cargo test` with no --workspace: that runs the workspace's
+  # default-members, which is every crate except the Tauri desktop shell. The
+  # shell is not part of a release artifact — the release publishes VSIXes and
+  # sysml-lsp-server binaries — and it drags in about a third of the dependency
+  # graph, so testing it here would cost a lot to prove nothing about what
+  # ships.
+  test:
+    needs: [ci]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Cache fetched references
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            references/sysmlv2/SysML-v2-Pilot-Implementation
+            references/sysmlv2/SysML-v2-API-Services
+            references/sysmlv2/Kerml-Vocab.ttl
+            references/sysmlv2/SysML-vocab.ttl
+            references/sysmlv2/KerML-shapes.ttl
+            references/sysmlv2/SysML-shapes.ttl
+            references/sysmlv2/KerML/20250201/KerML.xmi
+            references/sysmlv2/SysML/20250201/SysML.xmi
+            libraries/standard
+          key: refs-test-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/fetch-references/manifest.toml') }}
+          restore-keys: |
+            refs-test-${{ runner.os }}-${{ runner.arch }}-
+
+      # Unlike the build jobs, this one RUNS the tests, so it also needs the
+      # standard model library: the runtime resolves it at test time from
+      # ./libraries/standard, and post-rewrite the tree has none until fetch
+      # puts it there.
+      #
+      # fetch verifies every restored item against the manifest checksum, so a
+      # stale cache entry is re-fetched rather than used.
+      - name: Fetch pinned references
+        run: |
+          tools/fetch-references/fetch.sh fetch \
+            --item pilot-implementation \
+            --item api-services \
+            --item kerml-vocab --item sysml-vocab \
+            --item kerml-shapes --item sysml-shapes \
+            --item kerml-xmi --item sysml-xmi \
+            --item standard-library
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+        with:
+          toolchain: "1.92.0"
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+        with:
+          key: release-test
+
+      # src/parser.c is gitignored and generated. `ci`'s generate-parser job
+      # already produced it for this run; downloading it here costs seconds
+      # instead of the ~50 minutes a regeneration would.
+      - name: Download tree-sitter parser
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: tree-sitter-generated
+          path: crates/lang/sysml-parser-incremental/tree-sitter/src/
+
+      - name: Test (workspace default-members)
+        run: cargo test --release --no-fail-fast
 
   # ---------- Create GitHub Release with VSIX + server binaries ----------
   release:
-    needs: [ci]
+    needs: [ci, test]
     runs-on: ubuntu-latest
+    # The one job that needs write: it creates the GitHub Release.
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4

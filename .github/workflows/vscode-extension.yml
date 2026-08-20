@@ -16,6 +16,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Least privilege: these jobs only read the repository. The release workflow is
+# the one place that needs `contents: write`, and it declares that itself.
+permissions:
+  contents: read
+
 jobs:
   # ---------- Test (TypeScript only, fast) ----------
   # The extension is a lightweight LSP-only client — no webview, no diagram
@@ -51,9 +56,6 @@ jobs:
 
       - name: Grammar tests
         run: npm run test:grammar
-        # 2 pre-existing action-keyword scope failures; grammar files are
-        # byte-identical to before the extension slim-down, so not regressions.
-        continue-on-error: true
 
   # ---------- Generate tree-sitter parser (once, shared) ----------
   # Generates `generated/{keywords,operators,enums}.js` from the Xtext grammars

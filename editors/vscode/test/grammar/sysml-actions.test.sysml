@@ -6,19 +6,19 @@ action def MyAction {
 //         ^^^^^^^^ entity.name.type.definition.sysml
 
     entry;
-//  ^^^^^ keyword.other.action.sysml
+//  ^^^^^ keyword.control.sysml
 
     exit;
-//  ^^^^ keyword.other.action.sysml
+//  ^^^^ keyword.control.sysml
 
     first start;
-//  ^^^^^ keyword.other.action.sysml
+//  ^^^^^ keyword.control.sysml
 
     send x to y;
-//  ^^^^ keyword.other.action.sysml
+//  ^^^^ keyword.control.sysml
 
     accept a;
-//  ^^^^^^ keyword.other.action.sysml
+//  ^^^^^^ keyword.control.sysml
 
     assign x;
 //  ^^^^^^ keyword.other.action.sysml
@@ -42,10 +42,10 @@ action def MyAction {
 //  ^^^^^^^^ keyword.other.action.sysml
 
     succession s;
-//  ^^^^^^^^^^ keyword.other.action.sysml
+//  ^^^^^^^^^^ keyword.control.sysml
 
     transition t;
-//  ^^^^^^^^^^ keyword.other.action.sysml
+//  ^^^^^^^^^^ keyword.other.usage.sysml
 
     verify v;
 //  ^^^^^^ keyword.other.action.sysml

@@ -177,19 +177,22 @@ import Pkg1::*;
 alias A = B;
 // <-- keyword.other.import.sysml
 
-// --- Action keywords ---
+// --- Control-flow and action keywords ---
+//
+// entry/exit/first/send/accept/succession/transition are control flow and
+// carry keyword.control; assign/perform/exhibit/... are actions.
 
 entry; first; succession;
-// <-- keyword.other.action.sysml
+// <-- keyword.control.sysml
 
 exit; transition;
-// <- keyword.other.action.sysml
+// <- keyword.control.sysml
 
 send x to y;
-// <- keyword.other.action.sysml
+// <- keyword.control.sysml
 
 accept a;
-// <--- keyword.other.action.sysml
+// <--- keyword.control.sysml
 
 perform p;
 // <---- keyword.other.action.sysml

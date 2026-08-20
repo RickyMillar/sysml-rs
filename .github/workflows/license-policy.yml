@@ -40,6 +40,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Least privilege: these jobs only read the repository. The release workflow is
+# the one place that needs `contents: write`, and it declares that itself.
+permissions:
+  contents: read
+
 jobs:
   license-policy:
     name: cargo-deny + declaration invariants
