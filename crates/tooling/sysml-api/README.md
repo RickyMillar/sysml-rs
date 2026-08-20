@@ -22,7 +22,7 @@ The server speaks three protocols on one router:
 
 `GET /v1/progress` streams `ProgressEvent`s (library load, workspace index, dependency fetch, ready).
 
-The binary (`src/main.rs`) runs the HTTP API on `0.0.0.0:8080` by default; passing `--mcp` additionally spawns an MCP stdio handler that *shares the same service instance*, so files loaded over HTTP are visible to an AI agent and vice versa.
+The binary (`src/main.rs`) runs the HTTP API on `127.0.0.1:8080` by default — loopback only, because writes are unauthenticated unless `SYSML_API_TOKEN` is set. Pass a positional address to bind wider; passing `--mcp` additionally spawns an MCP stdio handler that *shares the same service instance*, so files loaded over HTTP are visible to an AI agent and vice versa.
 
 ## Where it sits
 
@@ -54,7 +54,7 @@ Holds an opaque `SessionReaperGuard`. The reaper is spawned at construction *onl
 
 #### `— *fn create_router(state: Arc<AppState>) -> Router` — *router*
 
-Assembles three route groups — `read_routes` (no auth), `write_routes` (auth layer), and `inventory_routes()` (auth layer) — then applies a global 50 MB body limit and a wide-open CORS layer. Returns the full `axum::Router`.
+Assembles three route groups — `read_routes` (no auth), `write_routes` (auth layer), and `inventory_routes()` (auth layer) — then applies a global 50 MB body limit and the CORS layer for the active `CorsPolicy` (loopback origins only unless told otherwise). Returns the full `axum::Router`. `create_router_with_cors` takes the policy explicitly.
 
 #### `— *async fn run_server(addr: &str) -> Result<(), Box<dyn Error>>` — *entry*
 
@@ -146,7 +146,7 @@ GET /models/coffee.sysml/diagnostics?with_readiness=1
 
 | File | Responsibility | Key items |
 |---|---|---|
-| src/lib.rs | Request/response types, all REST handlers, error mapping, router assembly, auth/CORS/body-limit middleware, test module | AppState · create_router · inventory_routes · require_auth · service_err_response |
+| src/lib.rs | Request/response types, all REST handlers, error mapping, router assembly, auth/CORS/body-limit middleware, test module | AppState · create_router · create_router_with_cors · CorsPolicy · inventory_routes · require_auth · service_err_response |
 | src/main.rs | Binary entry point; default HTTP server, optional shared MCP stdio handler via `--mcp` | main · AppState::new · sysml_mcp::serve |
 | src/lsp_ws.rs | WebSocket transport bridging an LSP session over WS at `/lsp` | lsp_ws_handler |
 | src/progress_sse.rs | SSE stream over `SysmlService::subscribe_progress` | progress_sse_handler |
@@ -166,7 +166,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let state = Arc::new(AppState::new());
     let app = create_router(state);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await?;
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await?;
     axum::serve(listener, app).await?;
     Ok(())
 }
@@ -175,8 +175,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 Or just run the shipped binary:
 
 ```
-# REST API on 0.0.0.0:8080
+# REST API on 127.0.0.1:8080 (loopback only)
 cargo run -p sysml-api
+
+# Bind every interface — warns on startup, and warns again with no token set
+cargo run -p sysml-api -- 0.0.0.0:8080
 
 # REST + shared MCP stdio (same service instance)
 cargo run -p sysml-api -- --mcp
@@ -228,7 +231,7 @@ None inside the workspace — `sysml-api` is a terminal transport. It is consume
 
 - **Auth is off by default.** With `SYSML_API_TOKEN` unset, all mutations are open (back-compat). When set, write/inventory routes require `Authorization: Bearer <token>`.
 
-- **CORS is wide open.** `allow_origin/methods/headers(Any)` applied globally — intended for local development, not a hardened deployment.
+- **CORS admits loopback origins only.** The default `CorsPolicy::LocalhostOnly` grants `localhost` / `127.0.0.1` / `[::1]` on any port and either scheme; every other origin gets no allow-origin header back. `--permissive-cors` or `SYSML_API_CORS=permissive` restores allow-any — appropriate behind a trusted proxy, not on an open port.
 
 - **Error mapping.** `service_err_response` maps `ServiceError::{ElementNotFound,NotFound}` → 404, `InvalidInput` → 400, `Store("no store configured")` → 503, everything else → 500, with body `{ "error": String }`.
 

@@ -63,19 +63,29 @@ any way to escape the intended working directory.
 The `sysml-api` server (REST + WebSocket, also the host for the MCP server) is
 a **local development server**. It ships with:
 
-- **no authentication and no authorization** — every endpoint is open;
-- **fully permissive CORS** (any origin, method, and header);
-- a **default bind address of `0.0.0.0:8080`**, so it is reachable from the
-  network unless you bind it somewhere narrower;
+- **no authentication unless you ask for it** — set `SYSML_API_TOKEN` and write
+  and command routes require `Authorization: Bearer <token>`; leave it unset and
+  they are open. Read routes are never authenticated.
 - **no rate limiting**, and a 50 MB request body limit that is a resource
   guard rather than a security control.
 
+Two defaults are deliberately narrow, and both widen only when you say so:
+
+- **Bind address `127.0.0.1:8080`** — reachable from this machine only. Pass a
+  different address (`sysml-api 0.0.0.0:8080`, or `sysml serve --host`) to go
+  wider; the server warns on startup when it binds a non-loopback address, and
+  warns again if it does so without a token set.
+- **Browser origins restricted to loopback** — `localhost`, `127.0.0.1`, and
+  `[::1]` on any port. `--permissive-cors` (or `SYSML_API_CORS=permissive`)
+  restores allow-any, which is appropriate behind a trusted proxy and nowhere
+  else.
+
 Anyone who can reach the port can read and modify the loaded model and run
-simulations on your machine. Bind it to `127.0.0.1`, or put it behind your own
-authenticating proxy, and do not expose it to an untrusted network. Reports
-that consist of "the API has no auth" will be closed with a pointer to this
-section; reports that it fails to honour a bind address you asked for, or that
-it reaches outside the project directory, are in scope.
+simulations on your machine, so keep it on loopback or put it behind your own
+authenticating proxy. Reports that consist of "the API has no auth" will be
+closed with a pointer to this section; reports that it fails to honour a bind
+address you asked for, that a non-loopback origin gets past the default CORS
+policy, or that it reaches outside the project directory, are in scope.
 
 Similarly out of scope: vulnerabilities in third-party dependencies with no
 demonstrated impact on sysml-rs (report those upstream, and tell us if we

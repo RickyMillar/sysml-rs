@@ -60,8 +60,10 @@ Honest about the edges, because you will hit them:
 - **No stable Rust API yet.** The workspace crates are not on crates.io and
   depend on each other by path. Do not build against the internal crates
   expecting semver until a facade crate lands.
-- **`sysml-api` is a local development server** with no authentication and
-  permissive CORS. See [SECURITY.md](SECURITY.md) before you expose a port.
+- **`sysml-api` is a local development server.** It binds `127.0.0.1:8080` and
+  accepts browser requests only from loopback origins; writes are
+  unauthenticated unless you set `SYSML_API_TOKEN`. Widening either of those is
+  opt-in — read [SECURITY.md](SECURITY.md) before you do.
 
 ## Quick start
 

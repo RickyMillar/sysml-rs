@@ -1313,13 +1313,102 @@ fn inventory_routes() -> Router<Arc<AppState>> {
     router
 }
 
+// ── CORS policy ─────────────────────────────────────────────────────────
+
+/// Which browser origins may call this server.
+///
+/// The API is a development tool: writes are unauthenticated unless
+/// `SYSML_API_TOKEN` is set, and every command route can load files from disk
+/// and execute model behaviour. A permissive CORS policy therefore lets *any*
+/// web page the operator happens to visit drive that surface, so it is not the
+/// default — it has to be asked for.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum CorsPolicy {
+    /// Allow only browser origins served from the loopback interface —
+    /// `localhost`, `127.0.0.1`, `[::1]`, on any port and either scheme.
+    ///
+    /// This covers the intended development setup (the simulation app's Vite
+    /// server, the VS Code webview) while leaving a page on the open web
+    /// unable to read a response from this server.
+    #[default]
+    LocalhostOnly,
+    /// Allow any origin, method, and header.
+    ///
+    /// Only appropriate behind a trusted proxy, or when the operator has
+    /// consciously accepted that any origin may drive the API. Opt in with
+    /// `--permissive-cors` / `SYSML_API_CORS=permissive`.
+    Permissive,
+}
+
+impl CorsPolicy {
+    /// Read the policy from `SYSML_API_CORS`. Unset or unrecognised means the
+    /// safe default — an operator typo must not silently widen access.
+    #[must_use]
+    pub fn from_env() -> Self {
+        match std::env::var("SYSML_API_CORS").as_deref() {
+            Ok("permissive") => Self::Permissive,
+            _ => Self::LocalhostOnly,
+        }
+    }
+
+    /// Build the tower-http layer this policy describes.
+    #[must_use]
+    pub fn layer(self) -> tower_http::cors::CorsLayer {
+        match self {
+            Self::Permissive => tower_http::cors::CorsLayer::new()
+                .allow_origin(tower_http::cors::Any)
+                .allow_methods(tower_http::cors::Any)
+                .allow_headers(tower_http::cors::Any),
+            Self::LocalhostOnly => tower_http::cors::CorsLayer::new()
+                .allow_origin(tower_http::cors::AllowOrigin::predicate(
+                    |origin, _req| origin.to_str().is_ok_and(is_loopback_origin),
+                ))
+                .allow_methods(tower_http::cors::Any)
+                .allow_headers(tower_http::cors::Any),
+        }
+    }
+}
+
+/// Is this `Origin` header value served from the loopback interface?
+///
+/// Matched on the host alone: the port is free (dev servers move around) and
+/// the scheme may be `http` or `https`. A host that merely *contains*
+/// "localhost" (`localhost.example.com`, `notlocalhost`) is not loopback, so
+/// the host is compared exactly after the optional `:port` is stripped.
+fn is_loopback_origin(origin: &str) -> bool {
+    let rest = match origin.split_once("://") {
+        Some(("http" | "https", rest)) => rest,
+        _ => return false,
+    };
+    // `[::1]:3010` — an IPv6 literal keeps its brackets; split after them.
+    let host = if let Some(after) = rest.strip_prefix('[') {
+        match after.split_once(']') {
+            Some((h, tail)) if tail.is_empty() || tail.starts_with(':') => h,
+            _ => return false,
+        }
+    } else {
+        match rest.split_once(':') {
+            Some((h, port)) if port.chars().all(|c| c.is_ascii_digit()) => h,
+            Some(_) => return false,
+            None => rest,
+        }
+    };
+    matches!(host, "localhost" | "127.0.0.1" | "::1")
+}
+
 // ── Router construction ─────────────────────────────────────────────────
 
-/// Create the API router backed by a [`SysmlService`].
+/// Create the API router backed by a [`SysmlService`], with the default
+/// ([`CorsPolicy::LocalhostOnly`]) browser-origin policy.
 ///
 /// If you need backward-compatible construction (empty in-memory store),
 /// use `create_router(Arc::new(AppState::new()))`.
 pub fn create_router(state: Arc<AppState>) -> Router {
+    create_router_with_cors(state, CorsPolicy::default())
+}
+
+/// Create the API router with an explicit browser-origin policy.
+pub fn create_router_with_cors(state: Arc<AppState>, cors: CorsPolicy) -> Router {
     // Read-only routes (no auth required)
     let read_routes = Router::new()
         .route("/health", get(health))
@@ -1409,12 +1498,7 @@ pub fn create_router(state: Arc<AppState>) -> Router {
         .merge(write_routes)
         .merge(command_routes)
         .layer(DefaultBodyLimit::max(50_000_000))
-        .layer(
-            tower_http::cors::CorsLayer::new()
-                .allow_origin(tower_http::cors::Any)
-                .allow_methods(tower_http::cors::Any)
-                .allow_headers(tower_http::cors::Any),
-        )
+        .layer(cors.layer())
         .with_state(state)
 }
 
@@ -1463,6 +1547,106 @@ mod tests {
         let state = AppState::new();
         state.service.load_source(uri, source).unwrap();
         Arc::new(state)
+    }
+
+    // ── CORS policy ─────────────────────────────────────────────────────
+    //
+    // The API previously allowed every origin. It is a development server
+    // whose write and command routes are unauthenticated unless
+    // `SYSML_API_TOKEN` is set, so an allow-any header let any page the
+    // operator visited read model data and drive commands out of it. These
+    // pin the narrowed default and the shape of the opt-out.
+
+    /// Ask the router what it will grant a given browser origin.
+    async fn allowed_origin_for(app: Router, origin: &str) -> Option<String> {
+        let response = app
+            .oneshot(
+                Request::builder()
+                    .uri("/health")
+                    .header("origin", origin)
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        response
+            .headers()
+            .get("access-control-allow-origin")
+            .map(|v| v.to_str().unwrap().to_owned())
+    }
+
+    #[tokio::test]
+    async fn default_router_admits_loopback_browser_origins() {
+        // The intended development setup: the simulation app's dev server and
+        // anything else served from this machine must keep working.
+        for origin in [
+            "http://localhost:3010",
+            "http://127.0.0.1:8080",
+            "http://[::1]:5173",
+            "https://localhost:443",
+        ] {
+            assert_eq!(
+                allowed_origin_for(create_router(test_state()), origin).await,
+                Some(origin.to_owned()),
+                "{origin} should be allowed by the default policy"
+            );
+        }
+    }
+
+    #[tokio::test]
+    async fn default_router_refuses_a_remote_browser_origin() {
+        // The whole point of the change: a page on the open web gets no
+        // allow-origin header back, so the browser withholds the response.
+        for origin in [
+            "https://example.com",
+            "http://evil.test",
+            // Hosts that merely *contain* a loopback name are not loopback.
+            "http://localhost.example.com",
+            "http://notlocalhost",
+            "http://127.0.0.1.example.com",
+        ] {
+            assert_eq!(
+                allowed_origin_for(create_router(test_state()), origin).await,
+                None,
+                "{origin} must not be granted access by the default policy"
+            );
+        }
+    }
+
+    #[tokio::test]
+    async fn permissive_policy_still_admits_any_origin() {
+        // The opt-out has to actually restore the old behaviour, or operators
+        // behind a trusted proxy have no way back.
+        let app = create_router_with_cors(test_state(), CorsPolicy::Permissive);
+        assert_eq!(
+            allowed_origin_for(app, "https://example.com").await,
+            Some("*".to_owned())
+        );
+    }
+
+    #[test]
+    fn the_safe_policy_is_the_default() {
+        assert_eq!(CorsPolicy::default(), CorsPolicy::LocalhostOnly);
+    }
+
+    #[test]
+    fn loopback_origin_matching_is_exact_on_the_host() {
+        // Scheme and port are free; the host is not.
+        assert!(is_loopback_origin("http://localhost"));
+        assert!(is_loopback_origin("http://localhost:3010"));
+        assert!(is_loopback_origin("https://127.0.0.1:8080"));
+        assert!(is_loopback_origin("http://[::1]:5173"));
+        assert!(is_loopback_origin("http://[::1]"));
+
+        assert!(!is_loopback_origin("http://localhost.evil.test"));
+        assert!(!is_loopback_origin("http://sub.localhost"));
+        assert!(!is_loopback_origin("http://127.0.0.1.evil.test"));
+        assert!(!is_loopback_origin("http://127.0.0.2"));
+        // Non-HTTP schemes never match — a file:// or extension origin is not
+        // "this machine's dev server".
+        assert!(!is_loopback_origin("file://localhost"));
+        assert!(!is_loopback_origin("null"));
+        assert!(!is_loopback_origin("localhost:3010"));
     }
 
     #[tokio::test]

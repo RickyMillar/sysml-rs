@@ -82,7 +82,7 @@ core sysml-runtime sysml-parser-incremental sysml-resolve sysml-project sysml-ma
 | Project | `cache clean` | cache.rs | --all --quiet --json | Remove cached dependency artifacts. |
 | Project | `package` | package.rs | --manifest-path PATH -o/--output DIR | Build a `.kpar` distribution archive. |
 | Legacy | `project init\|info\|stdlib` | project.rs | --name --version --symbols | Legacy project group; prefer top-level `init`/`info`. Retained for `project stdlib` (lists standard-library projects/symbols), which has no top-level equivalent. |
-| Server | `serve` | serve.rs | --port (3000) --host (0.0.0.0) | Start the REST API server. **Feature-gated**: only compiled with `--features server`. |
+| Server | `serve` | serve.rs | --port (3000) --host (127.0.0.1) | Start the REST API server, loopback only by default; a non-loopback `--host` warns on startup. **Feature-gated**: only compiled with `--features server`. |
 
 ## Cross-cutting flags & conventions
 

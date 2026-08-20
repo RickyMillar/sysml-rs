@@ -321,8 +321,10 @@ enum Commands {
         /// Port to listen on
         #[arg(long, default_value_t = 3000)]
         port: u16,
-        /// Host address to bind to
-        #[arg(long, default_value = "0.0.0.0")]
+        /// Host address to bind to. Defaults to loopback: the API has
+        /// unauthenticated writes unless SYSML_API_TOKEN is set, so reaching
+        /// beyond this machine is opt-in.
+        #[arg(long, default_value = "127.0.0.1")]
         host: String,
     },
     /// Inspect semantic tokens and diagnostics for a SysML file

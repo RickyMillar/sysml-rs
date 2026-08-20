@@ -14,7 +14,7 @@ Two processes — the backend on **:8080**, this app's Vite dev server on
 ```bash
 # from the repo root
 cargo build --release -p sysml-api
-./target/release/sysml-api 0.0.0.0:8080
+./target/release/sysml-api
 
 # in a second terminal
 cd editors/simulation-app && npm install && npm run dev   # http://localhost:3010
