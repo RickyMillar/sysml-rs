@@ -56,10 +56,12 @@ mod tests {
     }
 
     /// Ratchet: the `__workspace__` string may appear in `lib.rs` only as
-    /// doc text, the `loaded_uris` mint (via [`WORKSPACE_URI`]), and the
-    /// execution/views-family sites still awaiting waves W2/W3 of the
-    /// collapse plan. Every collapsed wave lowers the pin; it must never
-    /// rise. Final target: zero raw occurrences outside this module.
+    /// doc text — the generated command docs quote the URI, so a reader has
+    /// to be able to see it. Live code compares and passes [`WORKSPACE_URI`].
+    ///
+    /// The pin may fall and must never rise. Final target: zero raw
+    /// occurrences outside this module, which needs the remaining doc strings
+    /// to interpolate the constant rather than spell it.
     #[test]
     fn sentinel_string_has_one_home() {
         let lib = include_str!("lib.rs");
@@ -71,5 +73,5 @@ mod tests {
         );
     }
 
-    const SENTINEL_PIN: usize = 32;
+    const SENTINEL_PIN: usize = 26;
 }

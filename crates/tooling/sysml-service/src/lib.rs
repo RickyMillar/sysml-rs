@@ -3401,7 +3401,7 @@ impl SysmlService {
 
         let named = target
             .map(str::trim)
-            .filter(|t| !t.is_empty() && *t != "__workspace__");
+            .filter(|t| !t.is_empty() && *t != WORKSPACE_URI);
 
         let pick = match named {
             None => Pick::Orchestrator,
@@ -6547,7 +6547,7 @@ impl SysmlService {
             "view usage {} not found in workspace",
             view_usage_id
         )))?;
-        self.diagram_with_cached("__workspace__", &request)
+        self.diagram_with_cached(WORKSPACE_URI, &request)
     }
 
     /// Views-family scope resolution (scope-collapse W3): query against
@@ -6803,7 +6803,7 @@ impl SysmlService {
         .ok_or_else(|| {
             ServiceError::NotFound(format!("view usage {view_usage_id} not found in workspace"))
         })?;
-        self.view_model_with_cached("__workspace__", &request)
+        self.view_model_with_cached(WORKSPACE_URI, &request)
     }
 
     /// Return the per-tick **simulation overlay** for a live session, joined to
@@ -6979,7 +6979,7 @@ impl SysmlService {
         let diags: Vec<sysml_span::Diagnostic> = self
             .loaded_uris()
             .into_iter()
-            .filter(|u| u != "__workspace__")
+            .filter(|u| u != WORKSPACE_URI)
             .filter_map(|u| self.diagnostics(&u).ok())
             .flatten()
             .collect();
@@ -8206,7 +8206,7 @@ impl SysmlService {
         &self,
         uri: &str,
     ) -> Result<std::collections::HashSet<sysml_id::ElementId>, ServiceError> {
-        if uri == "__workspace__" {
+        if uri == WORKSPACE_URI {
             // Intentional: empty filter = no scoping. This is the
             // documented sentinel, not a soft fallback.
             return Ok(std::collections::HashSet::new());
@@ -9039,7 +9039,7 @@ impl SysmlService {
         let target_uris: Vec<String> = match uris {
             Some(list) => list
                 .iter()
-                .filter(|u| u.as_str() != "__workspace__" && u.as_str() != "__stdlib__")
+                .filter(|u| u.as_str() != WORKSPACE_URI && u.as_str() != "__stdlib__")
                 .cloned()
                 .collect(),
             None => {
@@ -9047,7 +9047,7 @@ impl SysmlService {
                 host.files()
                     .user_file_ids()
                     .filter_map(|fid| host.files().uri(fid).map(ToString::to_string))
-                    .filter(|u| u != "__workspace__" && u != "__stdlib__")
+                    .filter(|u| u != WORKSPACE_URI && u != "__stdlib__")
                     .collect()
             }
         };
