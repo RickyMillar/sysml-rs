@@ -38,9 +38,12 @@
     "monaco-editor": "^0.55.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^6.30.3",
+    "react-router-dom": "^7.18.2",
     "uplot": "^1.6.32",
     "zustand": "^5.0.5"
+  },
+  "overrides": {
+    "dompurify": "^3.4.14"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
