@@ -142,11 +142,12 @@ license = "Apache-2.0"
 # `base = "repo"` because the destination is repo-relative, not
 # references-relative — the loader looks for it at <repo>/libraries/standard.
 #
-# NOT pristine: four of the 94 files are locally modified (two cosmetic/
-# editorial, one resolver workaround in ShapeItems.sysml, one 46-line
-# non-normative addition to StandardViewDefinitions.sysml). The patch is
-# applied AFTER the rename, so it reads against the local layout. Two of the
-# four are open conformance items — do not silence them by re-pinning sha256.
+# NOT pristine: three of the 94 files are locally modified (two cosmetic/
+# editorial, one resolver workaround in ShapeItems.sysml). The patch is
+# applied AFTER the rename, so it reads against the local layout. The
+# ShapeItems edit is an open conformance item — do not silence it by
+# re-pinning sha256. (A former StandardViewDefinitions.sysml addition was
+# retired by steward ruling; that file is vendored pristine now.)
 [[item]]
 id = "standard-library"
 kind = "git"
@@ -160,7 +161,7 @@ exclude = ["*.meta.json", "*.project.json"]
 rename = ["Systems Library/=library.systems/", "Kernel Libraries/Kernel Data Type Library/=library.kernel/", "Kernel Libraries/Kernel Function Library/=library.kernel/", "Kernel Libraries/Kernel Semantic Library/=library.kernel/", "Domain Libraries/=library.domain/"]
 patch = "patches/standard-library-local.patch"
 upstream_sha256 = "85800b6c951072881a6e06cd12996b289d4b1cb5795eed37b0740ff323809aed"
-sha256 = "a0f9a03d39aee3af214ada358fdac42e404702309420751da37bcd532ae589bb"
+sha256 = "ff6e666e2d39e1c353ecb60fa51c090aea95fe42a7f202fd38e7386ae602b236"
 files = 94
 license = "LGPL-3.0-or-later"
 
