@@ -16,10 +16,13 @@ fastest way to show what the tool actually saw.
 command to reach for, whether a behaviour is intended, whether something is
 implemented yet.
 
-**Learning the SysML v2 language itself** — the OMG specification at
-<https://www.omg.org/spec/SysML/> is the authority; sysml-rs follows it and does
-not extend it. The `examples/` directory is the practical starting point: every
-file there is a working model the test suite exercises.
+**Learning the SysML v2 language itself** — read
+[The SysML v2 Book](https://rickymillar.github.io/sysmlv2-book/), which teaches
+the textual notation in order and separates what the language says from what this
+tool does. The OMG specification at <https://www.omg.org/spec/SysML/> is the
+authority; sysml-rs follows it and does not extend it. The `examples/` directory
+is the practical starting point: every file there is a working model the test
+suite exercises.
 
 **A security vulnerability** — do not open a public issue. Follow
 [SECURITY.md](SECURITY.md).

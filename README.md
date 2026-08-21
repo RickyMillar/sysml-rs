@@ -205,10 +205,19 @@ illustrations, not normative sources, and are not evidence of conformance.
 
 ## Learning SysML v2
 
-If you are learning the language rather than the tool, the OMG specification is
-the authority: **[SysML v2](https://www.omg.org/spec/SysML/)** and the KerML
-layer beneath it. sysml-rs follows that specification and does not extend it, so
-anything the spec says about a construct is what this tool aims to do with it.
+If you are learning the language rather than the tool, start with
+**[The SysML v2 Book](https://rickymillar.github.io/sysmlv2-book/)** — a
+practical guide to the textual notation that builds one model across sixteen
+chapters, cites the specification clause where a claim is load-bearing, and
+marks tool-specific behaviour separately from the language. Its samples are
+parse-checked against this implementation before it ships, and its source is at
+[RickyMillar/sysmlv2-book](https://github.com/RickyMillar/sysmlv2-book). It is a
+pre-1.0 draft; corrections are welcome.
+
+The OMG specification remains the authority:
+**[SysML v2](https://www.omg.org/spec/SysML/)** and the KerML layer beneath it.
+sysml-rs follows that specification and does not extend it, so anything the spec
+says about a construct is what this tool aims to do with it.
 
 The `examples/` directory in this repository is the practical starting point —
 each file is a working model the test suite exercises, so it parses, resolves,
