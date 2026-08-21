@@ -5009,6 +5009,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "spec-index"
+version = "0.1.0"
+dependencies = [
+ "regex",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sysml-codegen",
+]
+
+[[package]]
 name = "spin"
 version = "0.9.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5730,6 +5741,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "spec-index",
  "sysml-api",
  "sysml-codegen",
  "sysml-core",

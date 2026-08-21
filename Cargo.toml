@@ -25,6 +25,8 @@ members = [
     "crates/tooling/sysml-mcp",
     # Testing
     "crates/testing/sysml-spec-tests",
+    # Spec-reference tooling
+    "tools/spec-index",
     # Desktop shell
     "editors/simulation-app/src-tauri",
 ]
@@ -54,6 +56,7 @@ default-members = [
     "crates/tooling/sysml-api",
     "crates/tooling/sysml-mcp",
     "crates/testing/sysml-spec-tests",
+    "tools/spec-index",
 ]
 
 [workspace.package]

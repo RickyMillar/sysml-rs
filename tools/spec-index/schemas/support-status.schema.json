@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysml-rs/language-pack/support-status.schema.json",
+  "title": "SupportStatus",
+  "description": "Implementation-support status for one concept across eight pipeline axes. Values are machine-derived by support.rs from evidence records at the manifest commit — never hand-written prose. See language-pack-design.md section 9 and plan section 11.3.6.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["axes", "derived_at_commit"],
+  "properties": {
+    "axes": { "$ref": "#/$defs/supportAxes" },
+    "derived_at_commit": {
+      "description": "Git OID the support values were derived at. MUST equal the manifest commit; otherwise every axis is forced to 'unknown'.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "axis_detail": {
+      "description": "Optional per-axis derivation detail (which evidence cases passed/failed, the named missing subset for 'partial').",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parse": { "$ref": "#/$defs/axisDetail" },
+        "lower": { "$ref": "#/$defs/axisDetail" },
+        "resolve": { "$ref": "#/$defs/axisDetail" },
+        "elaborate": { "$ref": "#/$defs/axisDetail" },
+        "validate": { "$ref": "#/$defs/axisDetail" },
+        "execute": { "$ref": "#/$defs/axisDetail" },
+        "format": { "$ref": "#/$defs/axisDetail" },
+        "lsp": { "$ref": "#/$defs/axisDetail" }
+      }
+    }
+  },
+  "$defs": {
+    "supportValue": {
+      "description": "validated=all required cases pass at manifest commit; partial=reviewed subset passes, missing subset named; unsupported=reviewed known-gap proves intentional absence/rejection; not-applicable=no operation on this axis (with rationale); spec-silent=normative sources make no claim (tooling facets only); unknown=no trustworthy current evidence. A generic parser fallback or stale/missing report can never be 'validated'.",
+      "type": "string",
+      "enum": [
+        "validated",
+        "partial",
+        "unsupported",
+        "not-applicable",
+        "spec-silent",
+        "unknown"
+      ]
+    },
+    "supportAxes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parse",
+        "lower",
+        "resolve",
+        "elaborate",
+        "validate",
+        "execute",
+        "format",
+        "lsp"
+      ],
+      "properties": {
+        "parse": { "$ref": "#/$defs/supportValue" },
+        "lower": { "$ref": "#/$defs/supportValue" },
+        "resolve": { "$ref": "#/$defs/supportValue" },
+        "elaborate": { "$ref": "#/$defs/supportValue" },
+        "validate": { "$ref": "#/$defs/supportValue" },
+        "execute": { "$ref": "#/$defs/supportValue" },
+        "format": { "$ref": "#/$defs/supportValue" },
+        "lsp": { "$ref": "#/$defs/supportValue" }
+      }
+    },
+    "axisDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value"],
+      "properties": {
+        "value": { "$ref": "#/$defs/supportValue" },
+        "evidence_case_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "missing_subset": {
+          "description": "Required for 'partial': the named cases/behaviors not yet passing.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "rationale": {
+          "description": "Required for 'not-applicable', 'unsupported', and 'spec-silent'.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "value": { "const": "partial" } } },
+          "then": { "required": ["missing_subset"] }
+        },
+        {
+          "if": { "properties": { "value": { "enum": ["not-applicable", "unsupported", "spec-silent"] } } },
+          "then": { "required": ["rationale"] }
+        }
+      ]
+    }
+  }
+}

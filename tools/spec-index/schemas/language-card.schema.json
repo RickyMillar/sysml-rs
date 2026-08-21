@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysml-rs/language-pack/language-card.schema.json",
+  "title": "LanguageCard",
+  "description": "One retrieval card describing a single normalized SysML/KerML language concept. Citation-only by design: summary is an original paraphrase, never reproduced normative prose.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "language",
+    "category",
+    "summary",
+    "keywords",
+    "aliases",
+    "normative_rules",
+    "normative_clauses",
+    "normalized_grammar",
+    "rule_dependencies",
+    "semantic_types",
+    "validation_rules",
+    "examples",
+    "support",
+    "known_gaps",
+    "related_cards",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Card schema version. Bumped only on concept split/merge or a field change. `1.1` is a v1.1 minor, strictly-additive bump for the optional `metamodel_facet` field; every `1` field is unchanged and cards without a facet omit it.",
+      "type": "string",
+      "enum": ["1", "1.1"]
+    },
+    "id": {
+      "description": "Stable concept ID: <authority>.<facet>.<slug>, exactly three lowercase dot-separated segments.",
+      "type": "string",
+      "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "language": {
+      "type": "string",
+      "enum": ["KerML", "SysML", "Expressions", "Tooling"]
+    },
+    "category": {
+      "description": "Facet tags for retrieval clustering; at least one, controlled vocabulary.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "structure",
+          "behavior",
+          "requirements",
+          "cases",
+          "views",
+          "expression",
+          "metadata",
+          "validation",
+          "library",
+          "state-machine",
+          "connection",
+          "implementation"
+        ]
+      }
+    },
+    "summary": {
+      "description": "Short, spec-faithful, original paraphrase (citation-only). Never reproduced normative prose.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "keywords": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "aliases": {
+      "description": "Superseded concept IDs and raw source rule names that map to this card.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "normative_rules": {
+      "description": "Grammar citations by rule name (resolvable via derived/xtext-rules.toml).",
+      "type": "array",
+      "items": { "$ref": "#/$defs/grammarRuleRef" }
+    },
+    "normative_clauses": {
+      "description": "Spec-clause citations resolved against the derived plaintext heading index (never raw line numbers).",
+      "type": "array",
+      "items": { "$ref": "#/$defs/clauseRef" }
+    },
+    "normalized_grammar": {
+      "description": "Serialized normalized Xtext IR expression tree for syntactic concepts, or null for non-syntactic cards.",
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/irNode" }
+      ]
+    },
+    "rule_dependencies": {
+      "description": "Flattened dependency rule names (folded structural/lexical helpers and rule/cross-ref targets).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "semantic_types": {
+      "description": "Metamodel / ElementKind type names this concept lowers to.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "validation_rules": {
+      "description": "Semantic-rule IDs (S0xx) and obligation IDs backing this concept.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "examples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positive", "negative", "composed"],
+      "properties": {
+        "positive": { "$ref": "#/$defs/positiveIdList" },
+        "negative": { "$ref": "#/$defs/negativeIdList" },
+        "composed": { "$ref": "#/$defs/composedIdList" }
+      }
+    },
+    "support": {
+      "description": "Eight-axis support object. See support-status.schema.json for value derivation.",
+      "$ref": "support-status.schema.json#/$defs/supportAxes"
+    },
+    "known_gaps": {
+      "description": "Machine-readable known-gap registry references.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "related_cards": {
+      "description": "Cross-links to related card IDs. tooling.implementation.* cards MUST list at least one normative (kerml/sysml) card.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+      }
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "metamodel_facet": {
+      "description": "Additive v1.1 field: the metamodel/SHACL view of this concept — inheritance, owned/reference properties with multiplicities, relationship endpoints (reference properties), and the applicable OSLC/SHACL shape — folded onto the ONE concept card instead of minted as a duplicate metamodel card. Absent (omitted, not null) on cards with no backing metaclass.",
+      "$ref": "#/$defs/metamodelFacet"
+    }
+  },
+  "$defs": {
+    "metamodelFacet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metaclass", "authority", "supertypes", "properties", "source_pointers"],
+      "properties": {
+        "metaclass": {
+          "description": "The abstract-syntax metaclass this concept lowers to (TTL vocabulary class name).",
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "description": "The vocabulary that declares the metaclass: KerML (base) or SysML (domain).",
+          "type": "string",
+          "enum": ["KerML", "SysML"]
+        },
+        "supertypes": {
+          "description": "Direct superclasses (rdfs:subClassOf) — the inheritance chain's first hop.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "shacl_shape": {
+          "description": "The OSLC ResourceShape carrying this metaclass's property constraints, when one exists.",
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "description": "Owned/reference properties with multiplicities and relationship endpoints, from the OSLC shape.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/metamodelProperty" }
+        },
+        "source_pointers": {
+          "description": "Repo-relative pointers into the pinned vocabulary + shapes TTLs.",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[^/].*" }
+        }
+      }
+    },
+    "metamodelProperty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "multiplicity", "kind"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "multiplicity": {
+          "description": "OSLC cardinality as min..max.",
+          "type": "string",
+          "enum": ["0..1", "1", "0..*", "1..*"]
+        },
+        "kind": {
+          "description": "reference (an element endpoint), boolean, string, datetime, or any.",
+          "type": "string",
+          "enum": ["reference", "boolean", "string", "datetime", "any"]
+        },
+        "reference_type": {
+          "description": "For a reference property, the target element type (a relationship endpoint / referenced element type).",
+          "type": "string",
+          "minLength": 1
+        },
+        "read_only": {
+          "description": "A read-only (derived-style) property per the OSLC shape.",
+          "type": "boolean"
+        }
+      }
+    },
+    "grammarRuleRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grammar", "name"],
+      "properties": {
+        "grammar": { "type": "string", "enum": ["kerml", "sysml", "expressions"] },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "clauseRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document", "clause", "anchor", "resolution"],
+      "properties": {
+        "document": { "type": "string", "enum": ["SysML", "KerML"] },
+        "clause": {
+          "description": "Clause number as it appears in the derived plaintext '## <clause> <title>' heading lines.",
+          "type": "string",
+          "minLength": 1
+        },
+        "anchor": {
+          "description": "Deterministic kebab-cased clause title; stable across upstream line renumbering.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "resolution": {
+          "description": "Citation precision: 'exact' when the cited clause is itself a heading; 'ancestor' when the fine sub-clause has no heading and was resolved to its deepest existing ancestor heading (precision loss made visible to consumers).",
+          "type": "string",
+          "enum": ["exact", "ancestor"]
+        }
+      }
+    },
+    "positiveIdList": {
+      "description": "Example IDs whose bucket segment must be 'positive'.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(kerml|sysml|tooling)\\.[a-z0-9-]+\\.[a-z0-9-]+\\.positive\\.[a-z0-9-]+$"
+      }
+    },
+    "negativeIdList": {
+      "description": "Example IDs whose bucket segment must be 'negative'.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(kerml|sysml|tooling)\\.[a-z0-9-]+\\.[a-z0-9-]+\\.negative\\.[a-z0-9-]+$"
+      }
+    },
+    "composedIdList": {
+      "description": "Example IDs whose bucket segment must be 'composed'.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(kerml|sysml|tooling)\\.[a-z0-9-]+\\.[a-z0-9-]+\\.composed\\.[a-z0-9-]+$"
+      }
+    },
+    "irNode": {
+      "description": "One normalized grammar IR node. Recursive. See language-pack-design.md section 5.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "sequence",
+            "choice",
+            "keyword",
+            "terminal-ref",
+            "rule-ref",
+            "cross-ref",
+            "assignment",
+            "optional",
+            "zero-or-more",
+            "one-or-more",
+            "unordered-group",
+            "action",
+            "predicate",
+            "unknown"
+          ]
+        },
+        "items": {
+          "description": "Children for sequence / choice / unordered-group.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/irNode" }
+        },
+        "item": {
+          "description": "Single child for optional / zero-or-more / one-or-more.",
+          "$ref": "#/$defs/irNode"
+        },
+        "value": {
+          "description": "Literal token text for keyword.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Target rule/terminal/type name for rule-ref / terminal-ref / cross-ref.",
+          "type": "string"
+        },
+        "feature": {
+          "description": "Assigned feature name for assignment.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Assignment operator.",
+          "type": "string",
+          "enum": ["=", "+=", "?="]
+        },
+        "raw": {
+          "description": "Verbatim source fragment for an unknown node (never dropped).",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Why an unknown node could not be classified.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "op": { "const": "keyword" } } },
+          "then": { "required": ["value"] }
+        },
+        {
+          "if": { "properties": { "op": { "enum": ["rule-ref", "terminal-ref", "cross-ref"] } } },
+          "then": { "required": ["name"] }
+        },
+        {
+          "if": { "properties": { "op": { "const": "assignment" } } },
+          "then": { "required": ["feature", "operator", "item"] }
+        },
+        {
+          "if": { "properties": { "op": { "enum": ["optional", "zero-or-more", "one-or-more"] } } },
+          "then": { "required": ["item"] }
+        },
+        {
+          "if": { "properties": { "op": { "enum": ["sequence", "choice"] } } },
+          "then": { "required": ["items"] }
+        },
+        {
+          "if": { "properties": { "op": { "const": "unknown" } } },
+          "then": { "required": ["raw", "reason"] }
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spec_drop", "source_paths", "source_hashes", "generated_by"],
+      "properties": {
+        "spec_drop": { "type": "string", "minLength": 1 },
+        "source_paths": {
+          "description": "Canonical repo-relative source paths; never developer-absolute.",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[^/].*" }
+        },
+        "source_hashes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        },
+        "generated_by": {
+          "description": "Generator identifier plus commit, e.g. 'tools/spec-index@<git-oid>'.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

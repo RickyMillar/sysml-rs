@@ -1,0 +1,24 @@
+[package]
+name = "spec-index"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Generates derived spec-reference indexes (clause-anchored spec plaintext, xtext rule->line map) from the pinned sources in references/sysmlv2"
+publish = false
+
+[dependencies]
+sha2 = { workspace = true }
+# language-pack generator. These are all crates already compiled
+# in the workspace graph — `sysml-codegen` is `sysml-core`'s build-dependency,
+# `regex` is codegen's dep, and serde/serde_json are ubiquitous — so adding
+# them as normal deps of spec-index reuses those artifacts and does not add any
+# new crate compilation to the default-members build. No network-fetched JSON-schema
+# crate is pulled: the schema gate reads the committed schema files directly.
+sysml-codegen = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+regex = { workspace = true }
+
+[lints]
+workspace = true

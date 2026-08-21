@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysml-rs/language-pack/denominator-record.schema.json",
+  "title": "DenominatorRecord",
+  "description": "One raw source concept in the normalization denominator (the 725 Xtext rows collapsing to 650 unique names, plus metamodel/SHACL/validation/obligation/stdlib concepts). Every raw concept gets exactly one record classifying it. unknown/blocked/unreviewed records stay in the denominator; excluding a helper requires a rationale and reviewer and can never inflate coverage. See language-pack-design.md section 6 and plan section 11.4.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "source_kind",
+    "raw_name",
+    "normalized_concept_id",
+    "classification",
+    "classification_rationale",
+    "review_state",
+    "source_pointer",
+    "mapping"
+  ],
+  "properties": {
+    "source_id": {
+      "description": "Stable sanitized identifier for this raw source concept, e.g. 'xtext:sysml:TransitionUsage'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "source_kind": {
+      "type": "string",
+      "enum": ["xtext", "metamodel", "shacl", "validation", "obligation", "stdlib"]
+    },
+    "raw_name": {
+      "description": "The raw rule/type/rule-ID name as it appears in the source.",
+      "type": "string",
+      "minLength": 1
+    },
+    "normalized_concept_id": {
+      "description": "The card concept ID this collapses into, or null when classification is 'excluded' or no card is minted.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "user-facing",
+        "lexical-helper",
+        "structural-helper",
+        "alias",
+        "inherited-duplicate",
+        "abstract-only",
+        "expression",
+        "operator",
+        "semantic-only",
+        "library-defined",
+        "excluded"
+      ]
+    },
+    "classification_rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_state": {
+      "type": "string",
+      "enum": ["unreviewed", "reviewed", "approved", "disputed"]
+    },
+    "mapping": {
+      "description": "The auditable disposition of this raw concept in the pack (the completeness contract). 'card': a card was minted (normalized_concept_id names it). 'helper-fold': a lexical/structural helper folded into a parent concept's grammar dependencies (mapping_target names the parent, when a carded parent references it). 'alias'/'duplicate': collapsed into another concept (mapping_target names it). 'exclusion': out of scope with rationale + reviewer. 'block': in scope but blocked from carding with rationale (e.g. a locator source not yet integrated). 'uncarded': an in-scope card-bearing concept that has NO card yet — the honest low-coverage state. A concept must never be silently dropped: absence of a record is a hard gate failure.",
+      "type": "string",
+      "enum": ["card", "helper-fold", "alias", "duplicate", "exclusion", "block", "uncarded"]
+    },
+    "mapping_target": {
+      "description": "For 'helper-fold' the parent concept id it folds into (when a carded parent references it); for 'alias'/'duplicate' the concept id it collapses into. Absent otherwise.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      ]
+    },
+    "reviewer": {
+      "description": "Required once review_state is 'approved' or 'disputed'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "source_pointer": {
+      "description": "Canonical repo-relative pointer (grammar section + rule name, file path, or rule ID). Never a developer-absolute path.",
+      "type": "string",
+      "pattern": "^[^/].*"
+    },
+    "merged_from": {
+      "description": "For inherited-duplicate/alias merges: the other raw source_ids folded into the same concept (audit trail for the 725->650 collapse).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    {
+      "description": "A 'card' mapping must name the concept it collapses into; every other mapping (uncarded/helper-fold/alias/duplicate/exclusion/block) leaves normalized_concept_id null — this is what lets an in-scope concept with no card lower coverage instead of being silently dropped.",
+      "if": {
+        "properties": { "mapping": { "const": "card" } },
+        "required": ["mapping"]
+      },
+      "then": {
+        "properties": { "normalized_concept_id": { "type": "string" } }
+      },
+      "else": {
+        "properties": { "normalized_concept_id": { "type": "null" } }
+      }
+    },
+    {
+      "description": "Exclusion and dispute require accountable review.",
+      "if": {
+        "properties": { "review_state": { "enum": ["approved", "disputed"] } }
+      },
+      "then": { "required": ["reviewer"] }
+    }
+  ]
+}

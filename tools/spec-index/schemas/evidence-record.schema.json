@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysml-rs/language-pack/evidence-record.schema.json",
+  "title": "EvidenceRecord",
+  "description": "One machine-readable implementation-support evidence datum: the outcome of a specific gate case for one card on one axis, at a named commit. support.rs consumes these to derive support values. The generator never invokes arbitrary repository test commands embedded in card data; it consumes emitted reports only. See language-pack-design.md section 9 and plan section 11.3.6.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["card_id", "axis", "commit", "gate", "case_id", "result"],
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "axis": {
+      "type": "string",
+      "enum": ["parse", "lower", "resolve", "elaborate", "validate", "execute", "format", "lsp"]
+    },
+    "commit": {
+      "description": "Git OID the gate ran at. Must equal the manifest commit for the result to count toward 'validated'.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "gate": {
+      "description": "Fully-qualified gate identifier, e.g. 'sysml-spec-tests::language_card_graph_shapes'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "description": "Example/case ID exercised by the gate.",
+      "type": "string",
+      "minLength": 1
+    },
+    "result": {
+      "type": "string",
+      "enum": ["pass", "fail", "skip", "not-run", "generic-fallback"]
+    },
+    "observed_kinds": {
+      "description": "ModelGraph element kinds observed (lower/elaborate axes).",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "observed_relationships": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "observed_diagnostics": {
+      "description": "Diagnostic codes/categories observed (validate/resolve axes; negative-example evidence).",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "known_gap_ref": {
+      "description": "Reviewed known-gap registry entry that authorizes downgrading an axis to 'unsupported'/'partial' rather than 'unknown'. Required for result 'generic-fallback' and for result 'fail' (see allOf).",
+      "type": "string",
+      "minLength": 1
+    },
+    "justifies": {
+      "description": "The support value this evidence record is offered to justify. When 'unsupported', a reviewed known_gap_ref is mandatory (allOf) — the same evidence bar as generic-fallback.",
+      "type": "string",
+      "enum": ["validated", "partial", "unsupported", "not-applicable", "spec-silent", "unknown"]
+    },
+    "report_hash": {
+      "description": "Content hash of the emitting report, so evidence is traceable and tamper-evident.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "duration_ms": { "type": "integer", "minimum": 0 }
+  },
+  "allOf": [
+    {
+      "description": "A generic-fallback acceptance can never stand in for a real pass.",
+      "if": { "properties": { "result": { "const": "generic-fallback" } } },
+      "then": { "required": ["known_gap_ref"] }
+    },
+    {
+      "description": "Reporting an axis 'unsupported' requires a reviewed known-gap record — the same bar as generic-fallback. A bare 'fail' with no known_gap_ref yields 'unknown', never 'unsupported'.",
+      "if": { "properties": { "justifies": { "const": "unsupported" } } },
+      "then": { "required": ["known_gap_ref"] }
+    }
+  ]
+}

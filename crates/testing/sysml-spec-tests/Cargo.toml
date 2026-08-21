@@ -56,6 +56,10 @@ chrono = { workspace = true }
 futures = { workspace = true }
 sha2 = { workspace = true }
 toml = { workspace = true }
+# Language-pack gates (language_card_examples, language_pack_evals,
+# retrieval_eval, language_pack_doc_links) drive the generator's own
+# manifest/retriever/pack-info code instead of re-implementing it.
+spec-index = { path = "../../../tools/spec-index" }
 
 [features]
 default = []

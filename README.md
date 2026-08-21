@@ -203,6 +203,13 @@ implementation. Where sysml-rs and the specification disagree, that is a bug in
 sysml-rs. Pilot-implementation examples and our own `examples/` corpus are
 illustrations, not normative sources, and are not evidence of conformance.
 
+For working *with* those sources, `tools/spec-index` generates a **language
+pack** — a machine-readable index of every language concept (grammar rules,
+clause citations, measured implementation support) designed for
+look-up-then-cite-the-primary-clause workflows, for people and agents alike.
+See [tools/spec-index/README.md](tools/spec-index/README.md) for generation
+commands and the consumption pattern.
+
 ## Learning SysML v2
 
 If you are learning the language rather than the tool, start with

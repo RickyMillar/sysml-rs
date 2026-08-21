@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysml-rs/language-pack/example.schema.json",
+  "title": "Example",
+  "description": "One validated example (positive, negative, or composed) referenced by a card. The same bytes are both tested and exported. Negative examples are authored or mutated from purpose-built positives, never derived from confidential source. See language-pack-design.md section 8 and plan section 11.5.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "card_id", "kind", "provenance"],
+  "properties": {
+    "id": {
+      "description": "<card-id>.<positive|negative|composed>.<slug>, e.g. sysml.behavior.transition-usage.positive.basic",
+      "type": "string",
+      "pattern": "^(kerml|sysml|tooling)\\.[a-z0-9-]+\\.[a-z0-9-]+\\.(positive|negative|composed)\\.[a-z0-9-]+$"
+    },
+    "card_id": {
+      "type": "string",
+      "pattern": "^(kerml|sysml|tooling)\\.(structure|behavior|requirements|cases|views|expression|metadata|validation|library|implementation)\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["positive", "negative", "composed"]
+    },
+    "source": {
+      "description": "The smallest standalone snippet proving the concept (single-file positive/negative). Mutually exclusive with 'files'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "files": {
+      "description": "Named fragments for a composed multi-file example (>=2). Mutually exclusive with 'source'.",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "role", "source"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "enum": ["primary", "supporting", "library-stub"] },
+          "source": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "wrapper_lines": {
+      "description": "Lines needed only to make a fragment parseable, recorded separately from the focal snippet.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "expected": {
+      "description": "Declared per-phase expectations for a positive/composed example. Phases run in order; an earlier-phase failure marks later phases not-run.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "syntax_errors": { "type": "integer", "minimum": 0 },
+        "element_kinds": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "relationships": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "resolution_errors": { "type": "integer", "minimum": 0 },
+        "semantic_diagnostics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "runtime": {
+          "type": "string",
+          "enum": ["optional", "required", "none"]
+        }
+      }
+    },
+    "expected_failure": {
+      "description": "Required for negative examples. Asserts a specific diagnostic or parse-failure class at a named phase. 'It failed somehow' is not sufficient.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase", "mutation_class"],
+      "properties": {
+        "phase": {
+          "type": "string",
+          "enum": ["parse", "lower", "resolve", "elaborate", "validate", "runtime"]
+        },
+        "mutation_class": {
+          "type": "string",
+          "enum": ["keyword-shape", "cardinality", "reference", "typing", "relationship", "runtime-precondition"]
+        },
+        "diagnostic_code": { "type": "string", "minLength": 1 },
+        "diagnostic_category": { "type": "string", "minLength": 1 },
+        "parse_failure_class": { "type": "string", "minLength": 1 }
+      },
+      "anyOf": [
+        { "required": ["diagnostic_code"] },
+        { "required": ["diagnostic_category"] },
+        { "required": ["parse_failure_class"] }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "license_mode", "content_hash"],
+      "properties": {
+        "origin": {
+          "type": "string",
+          "enum": ["synthetic", "purpose-built-public", "official-corpus"]
+        },
+        "license_mode": {
+          "type": "string",
+          "enum": ["public-safe", "citation-only", "official-corpus-approved"]
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "description": "Single-file examples carry 'source'; composed examples carry 'files'.",
+      "oneOf": [
+        { "required": ["source"], "not": { "required": ["files"] } },
+        { "required": ["files"], "not": { "required": ["source"] } }
+      ]
+    },
+    {
+      "if": { "properties": { "kind": { "const": "negative" } } },
+      "then": { "required": ["expected_failure"] },
+      "else": { "required": ["expected"] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "composed" } } },
+      "then": { "required": ["files"] }
+    }
+  ]
+}
