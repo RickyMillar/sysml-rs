@@ -16,9 +16,9 @@ Architecture, workflows, and conventions for the Rust implementation of the OMG 
 | 06 | [Execution Runtime](06-execution.md) | sysml-runtime modules, execution semantics, physics |
 | 07 | [LSP Architecture](07-lsp-architecture.md) | LSP server map, diagnostic sources, highlighting |
 | 08 | [Logging Contract](08-logging-contract.md) | Field vocabulary, volume controls |
-| 13 | [Vis Pipeline Architecture](13-vis-pipeline-architecture.md) | ModelGraph → generators → DiagramIR → ViewModel → React-SVG renderer |
-| 19 | [MCP Server Architecture](19-mcp-server-architecture.md) | sysml-mcp transport, one tool per service command |
-| 20 | [sysml-service Design](20-sysml-service-design.md) | #[service_command] dispatch, transport adapters, state model |
+| 09 | [Vis Pipeline Architecture](09-vis-pipeline-architecture.md) | ModelGraph → generators → DiagramIR → ViewModel → React-SVG renderer |
+| 10 | [MCP Server Architecture](10-mcp-server-architecture.md) | sysml-mcp transport, one tool per service command |
+| 11 | [sysml-service Design](11-sysml-service-design.md) | #[service_command] dispatch, transport adapters, state model |
 
 
 ## Architecture at a glance

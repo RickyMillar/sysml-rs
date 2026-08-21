@@ -96,7 +96,7 @@ LSP execution commands route through `SysmlService` (S2) wherever possible:
 
 **The LSP owns no execution state.** Simulation and action sessions, their
 limits and expiry, verification runs, and trade studies all live in
-`sysml-service` — see [20-sysml-service-design.md](20-sysml-service-design.md).
+`sysml-service` — see [11-sysml-service-design.md](11-sysml-service-design.md).
 Earlier revisions of this crate held them (`simulation.rs`, `action_session.rs`,
 `execution_runtime.rs`, `workspace_verify.rs`, `whatif.rs`); they moved when the
 service became the single owner of the model and the runtime. If you are looking
@@ -193,6 +193,6 @@ Provides **richer** highlighting on top of tree-sitter — uses the resolved `Mo
 - [00-architecture.md](00-architecture.md) — overall layering.
 - [03-resolution.md](03-resolution.md) — what the LSP's resolution queries do.
 - [08-logging-contract.md](08-logging-contract.md) — `ux_messages` channels and field vocabulary.
-- [20-sysml-service-design.md](20-sysml-service-design.md) — the service the LSP dispatches to.
+- [11-sysml-service-design.md](11-sysml-service-design.md) — the service the LSP dispatches to.
 - `crates/tooling/sysml-service/README.md` — the service surface the LSP dispatches into.
 - `crates/tooling/sysml-lsp-server/README.md` — quick-reference module map and pitfall list.

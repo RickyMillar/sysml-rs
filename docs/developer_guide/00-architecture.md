@@ -308,7 +308,7 @@ Two further points about the surface:
 - `sysml-api` → `sysml-service` + `sysml-lsp-server` + `sysml-mcp` + `axum`
 - `sysml-mcp` → `sysml-service` + `rmcp`
 
-See [20-sysml-service-design.md](20-sysml-service-design.md) for the macro,
+See [11-sysml-service-design.md](11-sysml-service-design.md) for the macro,
 dispatch chain, and the invariants to preserve when adding a command.
 
 ---
@@ -398,5 +398,5 @@ exist. Where they went:
 - [04-codegen.md](04-codegen.md) — build-time spec-to-Rust code generation
 - [06-execution.md](06-execution.md) — the execution runtime
 - [07-lsp-architecture.md](07-lsp-architecture.md) — LSP as a thin wrapper over the service
-- [19-mcp-server-architecture.md](19-mcp-server-architecture.md) — MCP server + AI-agent integration
-- [20-sysml-service-design.md](20-sysml-service-design.md) — `#[service_command]`, dispatch, transport adapters
+- [10-mcp-server-architecture.md](10-mcp-server-architecture.md) — MCP server + AI-agent integration
+- [11-sysml-service-design.md](11-sysml-service-design.md) — `#[service_command]`, dispatch, transport adapters
