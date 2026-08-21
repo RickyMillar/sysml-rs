@@ -2,7 +2,7 @@
 
 Architecture, workflows, and conventions for the Rust implementation of the OMG SysML v2 specification. Backend (lang + tooling) only — editor surfaces are documented under `editors/*`.
 
-`10 lang crates · 11 tooling crates` · `tree-sitter · salsa · service-hub`
+`10 lang crates · 10 tooling crates · 1 testing crate` · `tree-sitter · salsa · service-hub`
 ## Guides
 
 | # | Guide | Covers |

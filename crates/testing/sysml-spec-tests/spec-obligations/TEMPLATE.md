@@ -62,7 +62,7 @@ Row rules (from `README.md` "How an obligation is recorded"):
 
 (The derived plaintext is checksum-gated against the pinned spec HTML —
 `spec-drop.toml` + the `derived_indexes` gate. To re-derive from the HTML
-itself: `cargo run -p spec-index`, or the legacy tag-strip recipe in
+itself: the tag-strip recipe in
 `README.md`.)
 
 ---

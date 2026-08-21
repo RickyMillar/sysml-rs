@@ -475,7 +475,7 @@ fn is_valid_rule_name(name: &str) -> bool {
 // This is a NEW, purely additive parser: `parse_xtext_rules` above only
 // captures rule *metadata* (name/returns/flags) and is left byte-untouched.
 // `parse_grammar_ir` lowers each rule *body* into a serializable expression
-// tree that `tools/spec-index` normalizes into language-pack cards. It is
+// tree that the language-pack tooling normalizes into cards. It is
 // never reached from `build.rs` or the coverage panics in `spec_validation`,
 // so it cannot change any generated `.generated.rs` output.
 //

@@ -34,7 +34,7 @@ The crate is ~57 source files / ~45k lines. Know the map; don't read everything.
 | `diagnostic_pipeline.rs` | Per-URI task management. Replaces/aborts stale diagnostic tasks via `DashMap<String, JoinHandle>`. Generates correlation task IDs for telemetry. |
 | `diagnostics.rs` | Converts parse/resolve/validate errors to LSP `Diagnostic`. Calls `elaborate()` for elaboration-time diagnostics, runs health checks (import / action / flow / state machine / verification). |
 | `manifest_diagnostics.rs` | Diagnostics for `sysml.toml` manifest files. |
-| `constraint_monitor.rs` | Live constraint evaluation — publishes constraint pass/fail as diagnostics on every edit. |
+| `sysml-service`'s `constraint_monitor.rs` | Live constraint evaluation — publishes constraint pass/fail as diagnostics on every edit. Lives in the service, not here; listed because its output surfaces as LSP diagnostics. |
 
 Diagnostic sources live in lower crates:
 
@@ -89,11 +89,18 @@ LSP execution commands route through `SysmlService` (S2) wherever possible:
 
 | Module | Role |
 |--------|------|
-| `commands.rs` (~3400 lines) + `command_dispatch.rs` | All `sysml.*` command handlers + routing |
+| `commands.rs` (~2800 lines) + `command_dispatch.rs` | All `sysml.*` command handlers + routing |
 | `evaluation.rs` | `try_evaluate_value()` for hints/hover, `evaluate_constraints()` for lenses |
-| `simulation.rs` / `action_session.rs` | `SimulationSession` (state machines), `ActionSession` (action flows) |
-| `workspace_verify.rs`, `whatif.rs`, `aggregation.rs` | Verification runner, trade studies, model metrics |
-| `execution_runtime.rs` | Session limits (`MAX_SESSIONS`, expiry timeout) |
+| `aggregation.rs` | Model metrics rollups |
+| `service_edits.rs` | Turning service-side edits into LSP workspace edits |
+
+**The LSP owns no execution state.** Simulation and action sessions, their
+limits and expiry, verification runs, and trade studies all live in
+`sysml-service` — see [20-sysml-service-design.md](20-sysml-service-design.md).
+Earlier revisions of this crate held them (`simulation.rs`, `action_session.rs`,
+`execution_runtime.rs`, `workspace_verify.rs`, `whatif.rs`); they moved when the
+service became the single owner of the model and the runtime. If you are looking
+for session code, it is not here.
 
 `command_dispatch.rs` has a single registry; `dispatch_table_has_all_commands` keeps the registry honest against the `#[service_command]` set. When you add a `#[service_command]` to `sysml-service`, the LSP picks it up via the dispatch table — same handler, four transports (LSP, REST, MCP, CLI).
 
@@ -102,11 +109,17 @@ LSP execution commands route through `SysmlService` (S2) wherever possible:
 | Module | Role |
 |--------|------|
 | `workspace.rs`, `workspace_index.rs`, `workspace_snapshot.rs` | Library loading, file discovery, cross-file index, immutable snapshots |
-| `library_cache.rs`, `library_manager.rs` | Stdlib caching (`~/.cache/sysml-rs/`, 5s cold start → <500ms warm) and lifecycle |
-| `parser_cache.rs` | Tree-sitter tree cache and parser instances |
-| `project_discovery.rs`, `project_registry.rs` | `sysml.toml` discovery, workspace members, loaded manifest tracking |
-| `diagram.rs`, `diagram_manager.rs`, `diagram_edit.rs` | Diagram generation, state tracking, `sysml/diagram/setModel` notification |
+| `library_manager.rs` | Stdlib lifecycle on the LSP side |
+| `diagram.rs` | Diagram requests and the `sysml/diagram/setModel` notification |
+| `ranges.rs` | Span ↔ LSP range conversion |
+| `background.rs` | Work the server does off the request path |
 | `pending_requests.rs` | Request deduplication (prevents duplicate work on concurrent LSP requests) |
+| `diagnose_source_support.rs` | Diagnostic source plumbing |
+
+Also service-owned, not LSP-owned: the stdlib disk cache
+(`library_cache.rs`), `sysml.toml` discovery and the manifest registry
+(`project_discovery.rs`, `project_registry.rs`), and canonical diagram state
+(`diagram_manager.rs`, `diagram_edit.rs`). All are in `sysml-service`.
 | `telemetry_control.rs`, `telemetry_events.rs` | Rate-limited structured telemetry |
 | `ux_messages.rs` | **All** `window/logMessage` emission routes through here — see [08-logging-contract.md](08-logging-contract.md) |
 
@@ -119,6 +132,9 @@ LSP execution commands route through `SysmlService` (S2) wherever possible:
 | `diagnostic_ux_tests.rs` | Diagnostic UX: error messages, severity, code actions, related information |
 | `snapshot_tests.rs` | `insta` snapshot tests over LSP responses |
 | `feature_tests.rs`, `utils_tests.rs`, `ux_workflow_tests.rs` | Unit / utility / workflow tests |
+| `completion_ux_tests.rs`, `protocol_phase1_tests.rs` | Completion UX; early-protocol regression set |
+| `commands_fail_hard_tests.rs` | Commands must fail loudly, never degrade silently |
+| `import_resolution_lsp_tests.rs`, `library_conformance_tests.rs` | Import resolution and stdlib conformance through the LSP |
 | `test_harness.rs` | Mock tower-lsp server, shared test infra |
 
 ## Key design patterns / invariants

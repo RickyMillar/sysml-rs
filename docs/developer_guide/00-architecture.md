@@ -4,10 +4,9 @@ This is the structural map of the sysml-rs workspace: what the crates are, how
 they are layered, and which dependency directions are allowed. Read it before
 adding a crate, adding a dependency, or wiring a new transport.
 
-The workspace holds **10 lang crates** (`crates/lang/`), **11 tooling crates**
-(`crates/tooling/`), and **1 test-only crate** (`crates/testing/`). Two more
-workspace members sit outside that grouping: `tools/spec-index` (regenerates the
-derived spec indexes under `references/sysmlv2/derived/`) and
+The workspace holds **10 lang crates** (`crates/lang/`), **10 tooling crates**
+(`crates/tooling/`), and **1 test-only crate** (`crates/testing/`). One more
+workspace member sits outside that grouping:
 `editors/simulation-app/src-tauri` (the `sysml-desktop` shell, excluded from
 `default-members` because roughly a third of the dependency graph exists only
 for it).
@@ -18,7 +17,7 @@ To check the crate list yourself:
 cargo metadata --no-deps --format-version 1 | jq -r '.packages[].name' | sort
 ```
 
-That prints 25 names: the 22 above, plus `spec-index`, `sysml-desktop`, and
+That prints 23 names: the 21 above, plus `sysml-desktop` and
 `tree-sitter-sysml` — the last being the generated grammar package vendored
 inside `crates/lang/sysml-parser-incremental/tree-sitter/`.
 

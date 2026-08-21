@@ -603,26 +603,6 @@ EX-1 (Inline Eval) ──┬──► EX-2 (Verification) ──► EX-3 (Constr
 
 EX-1 is the critical first step — it establishes the LSP↔Runner integration pattern that all subsequent phases reuse.
 
-## Comparison with Other Tools
-
-| Feature | SysML v2 Pilot (Java) | Sensmetry LSP (TS) | sysml-rs |
-|---------|----------------------|--------------------|----------|
-| Expression eval | Jupyter `%eval` | Manual command → console | Full evaluator (20+ IR variants, stdlib, conditionals) |
-| Constraint check | Not implemented | Not implemented | Batch + monitoring + vacuous satisfaction |
-| State machines | Not implemented | Not implemented | Simple + parallel, guards, time triggers, guard-only |
-| Actions | Not implemented | Not implemented | Token-flow, fork/join, send/accept, port routing |
-| Verification | Not implemented | Not implemented | Verdict runner, nested requirements, aggregation |
-| Flows | Not implemented | Not implemented | Router, succession, port-aware, typed endpoints |
-| Solver | Not implemented | Not implemented | Propagation, bisection, DOF analysis, sensitivity |
-| **ODE simulation** | Not implemented | Not implemented | **RK4/RK45, expression-based RHS, signal expressions** |
-| **Orchestrator** | Not implemented | Not implemented | **Multi-subsystem tick loop, ODE↔SM coupling** |
-| **Parameter injection** | Not implemented | Not implemented | **Runtime overrides via step API + UI** |
-| Sequence trace | Not implemented | Not implemented | SequenceTraceBuilder, lifelines, events |
-| CLI | Jupyter kernel | N/A | `sysml parse/check/inspect/simulate/run/flow/trace` |
-| Sim app | Not implemented | Not implemented | React standalone, 5 modes, Sprotty diagram |
-
-We are significantly ahead of both reference implementations across all execution domains. The continuous ODE simulation with spec-aligned metadata, coupled state machines, and runtime parameter injection is a unique capability.
-
 ## Beyond EX-8: port flow, ODE, physics
 
 Phases 10–15 extended the runtime with port-aware simulation, parametric solving, plugin solvers, and ODE-with-state-machine coupling. Phases 16+ (Apr 12–14 2026) added the physics-aware layer and the SysML-to-Simulation pipeline. All of it has shipped; the module map above and the `sysml-runtime` source are the current description.

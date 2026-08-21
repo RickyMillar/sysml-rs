@@ -32,9 +32,9 @@ These constraints are summarized during build by the property validation coverag
 
 ### Where it lives
 
-- Generator: `sysml-rs/codegen/src/validation_generator.rs`
-- Constraint coverage logic: `sysml-rs/codegen/src/property_validation_validator.rs`
-- Runtime error types: `sysml-rs/sysml-core/src/validation.rs`
+- Generator: `crates/lang/codegen/src/validation_generator.rs`
+- Constraint coverage logic: `crates/lang/codegen/src/property_validation_validator.rs`
+- Runtime error types: `crates/lang/sysml-core/src/validation.rs`
 - Generated accessors: `target/*/build/sysml-core-*/out/properties.generated.rs`
 
 ### How to use it
@@ -63,7 +63,7 @@ Property validation errors are converted into diagnostics with codes:
 - `V004` MaxCardinality
 - `V005` ReadOnly
 
-See: `sysml-rs/sysml-core/src/validation.rs`
+See: `crates/lang/sysml-core/src/validation.rs`
 
 ---
 
@@ -124,7 +124,7 @@ Structural errors are converted into diagnostics with codes:
 - `E007` DanglingOwningMembership
 - `E008` InvalidOwningMembership
 
-See: `sysml-rs/sysml-core/src/structural_validation.rs`
+See: `crates/lang/sysml-core/src/structural_validation.rs`
 
 ---
 
@@ -247,8 +247,8 @@ This ensures that runtime validators are driven by **authoritative spec inputs**
 
 ## Related Files
 
-- `sysml-rs/sysml-core/src/validation.rs`
-- `sysml-rs/sysml-core/src/structural_validation.rs`
-- `sysml-rs/codegen/src/validation_generator.rs`
-- `sysml-rs/codegen/src/property_validation_validator.rs`
-- `sysml-rs/sysml-core/build.rs`
+- `crates/lang/sysml-core/src/validation.rs`
+- `crates/lang/sysml-core/src/structural_validation.rs`
+- `crates/lang/codegen/src/validation_generator.rs`
+- `crates/lang/codegen/src/property_validation_validator.rs`
+- `crates/lang/sysml-core/build.rs`

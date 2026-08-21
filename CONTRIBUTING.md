@@ -215,7 +215,6 @@ input is the most common first-contribution mistake.
 | `crates/lang/sysml-parser-incremental/tree-sitter/src/parser.c` | `grammar.js` via `tree-sitter generate --abi 14` | Gitignored. Never committed — it is ~80 MB. Regenerate locally; CI generates its own. |
 | `.../tree-sitter/generated/*.js` | OMG Xtext grammars via `generate_from_xtext.sh` | Gitignored. Regenerate rather than hand-editing keyword tables. |
 | `*.generated.rs` — the `ElementKind` enum, value enums, typed property accessors, cross-reference tables, and the semantic-validation dispatcher | TTL / XMI / Xtext via `crates/lang/sysml-core/build.rs` | Not in the source tree at all; they are written into `OUT_DIR` under `target/` and `include!`d. To change one, change the generator in `crates/lang/codegen/` or the spec input, then rebuild. |
-| `references/sysmlv2/derived/**` | The fetched normative sources via `spec-index` | Regenerate with `cargo run -p spec-index`. These are plain text, never binary blobs, specifically so that a regeneration diff can be read and reviewed. |
 | `references/sysmlv2/**` (everything else) | Upstream, via `tools/fetch-references` | Not ours. Never edit in place; a local edit will be silently overwritten and will not reproduce for anyone else. |
 
 ### When you change the grammar
