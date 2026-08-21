@@ -1,0 +1,990 @@
+{
+ "frame": {
+  "bottom_left": null,
+  "bottom_right": null,
+  "name": "structuralOverview",
+  "top_right": {
+   "text": "expose Definitions::Grinder\nexpose Definitions::WaterTank\nexpose Definitions::CoffeeMachine\nexpose Definitions::Brewer"
+  },
+  "type_name": "StructuralViewpoint",
+  "view_kind": "General"
+ },
+ "interactions": {
+  "entries": {
+   "11402c82-707d-49e9-bb88-53b887ea0c7b": {
+    "type_definition": "8e329b1e-90dd-473a-a4e5-070e18df92d6"
+   },
+   "92d1beb3-7a61-43fb-9d45-6f998bb926e3": {
+    "type_definition": "0c1cf029-04dc-42c3-804c-30abc6c58628"
+   },
+   "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4": {
+    "type_definition": "482df42c-fddc-42c8-8c79-23afe1c6860c"
+   },
+   "acfd94e8-766a-40be-ac38-54c8bf75b82f": {
+    "type_definition": "186808f6-61bd-4bcd-ad33-28c4f2b63496"
+   },
+   "b0e59392-49b0-4fce-8d36-17d479c55f31": {
+    "type_definition": "542afb32-dfcb-4e03-8d5a-0ac122dd846f"
+   },
+   "bdd38fab-8599-49bc-8f31-65d7726e8900": {
+    "type_definition": "fe64ff2e-214f-43fb-962c-11caf3ae000f"
+   },
+   "e4c991ad-6553-43fa-8653-67d27daa15b0": {
+    "type_definition": "23290221-dbce-43d1-904d-27bddefc9419"
+   }
+  }
+ },
+ "non_graph": null,
+ "scene": {
+  "buttons": [],
+  "edges": [
+   {
+    "endpoint_mode": "AutoSide",
+    "id": "c4b2d1a9-c021-4975-89d4-1c6d1aa00b82",
+    "kind": {
+     "Relationship": "typeOf"
+    },
+    "label": "",
+    "label_placement": {
+     "offset": null,
+     "position": 0.5,
+     "rotate": false,
+     "side": "on"
+    },
+    "precomputed_route": null,
+    "secondary_labels": [],
+    "source_id": "bdd38fab-8599-49bc-8f31-65d7726e8900",
+    "source_port_id": null,
+    "tags": [],
+    "target_id": "fe64ff2e-214f-43fb-962c-11caf3ae000f",
+    "target_port_id": null
+   },
+   {
+    "endpoint_mode": "AutoSide",
+    "id": "44bec2d2-ee0c-4666-a2a6-fe0b364fe20a",
+    "kind": {
+     "Relationship": "typeOf"
+    },
+    "label": "",
+    "label_placement": {
+     "offset": null,
+     "position": 0.5,
+     "rotate": false,
+     "side": "on"
+    },
+    "precomputed_route": null,
+    "secondary_labels": [],
+    "source_id": "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4",
+    "source_port_id": null,
+    "tags": [],
+    "target_id": "482df42c-fddc-42c8-8c79-23afe1c6860c",
+    "target_port_id": null
+   },
+   {
+    "endpoint_mode": "AutoSide",
+    "id": "eb7fc26d-3eca-4118-9ba9-e0ac71671a56",
+    "kind": {
+     "Relationship": "typeOf"
+    },
+    "label": "",
+    "label_placement": {
+     "offset": null,
+     "position": 0.5,
+     "rotate": false,
+     "side": "on"
+    },
+    "precomputed_route": null,
+    "secondary_labels": [],
+    "source_id": "acfd94e8-766a-40be-ac38-54c8bf75b82f",
+    "source_port_id": null,
+    "tags": [],
+    "target_id": "186808f6-61bd-4bcd-ad33-28c4f2b63496",
+    "target_port_id": null
+   }
+  ],
+  "nodes": [
+   {
+    "buttons": [
+     {
+      "button_type": "Expand",
+      "position": null,
+      "size": null
+     }
+    ],
+    "children": [
+     {
+      "Text": {
+       "compartment": "Documentation",
+       "element_id": "a1c6b8ea-6844-4cca-b53a-23c3f753be04/doc/0",
+       "source": "Owned",
+       "text": "/* A smart coffee machine with grinder, brewer,"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Documentation",
+       "element_id": "a1c6b8ea-6844-4cca-b53a-23c3f753be04/doc/1",
+       "source": "Owned",
+       "text": "   and steam wand. */"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "bdd38fab-8599-49bc-8f31-65d7726e8900",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "grinder",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb grinder\ntype: Grinder\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "acfd94e8-766a-40be-ac38-54c8bf75b82f",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "brewer",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb brewer\ntype: Brewer\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "waterTank",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb waterTank\ntype: WaterTank\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "92d1beb3-7a61-43fb-9d45-6f998bb926e3",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "steamWand",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb steamWand\ntype: SteamWand\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "11402c82-707d-49e9-bb88-53b887ea0c7b",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "controlPanel",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb controlPanel\ntype: ControlPanel\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "e4c991ad-6553-43fa-8653-67d27daa15b0",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "cupSensor",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb cupSensor\ntype: CupSensor\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Node": {
+       "buttons": [],
+       "children": [],
+       "diagnostic_severity": null,
+       "element_id": "b0e59392-49b0-4fce-8d36-17d479c55f31",
+       "element_kind": "PartUsage",
+       "expanded": null,
+       "header_style": "Normal",
+       "layout": "Free",
+       "name": "dripTray",
+       "node_kind": "Usage",
+       "ports": [],
+       "position": null,
+       "sequence_layout": null,
+       "size": null,
+       "solver_status": null,
+       "stereotype": "\u00abpart\u00bb",
+       "tags": [],
+       "tooltip": "\u00abpart\u00bb dripTray\ntype: DripTray\nhierarchy: parts",
+       "visual_kind": "Part"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "414a274a-b5d0-4a10-908b-4c96fec66b0d",
+       "source": "Owned",
+       "text": "serialNumber : String"
+      }
+     }
+    ],
+    "diagnostic_severity": null,
+    "element_id": "61437566-fb94-4c38-b2b2-96d93fc367f8",
+    "element_kind": "PartDefinition",
+    "expanded": true,
+    "header_style": "Normal",
+    "layout": "Free",
+    "name": "CoffeeMachine",
+    "node_kind": "Definition",
+    "ports": [],
+    "position": null,
+    "sequence_layout": null,
+    "size": null,
+    "solver_status": null,
+    "stereotype": "\u00abpart def\u00bb",
+    "tags": [],
+    "tooltip": "\u00abpart def\u00bb CoffeeMachine\nhierarchy: Part",
+    "visual_kind": "Part"
+   },
+   {
+    "buttons": [],
+    "children": [
+     {
+      "Text": {
+       "compartment": "Documentation",
+       "element_id": "fa76f89e-746d-430b-8dc8-11413a12cdbf/doc/0",
+       "source": "Owned",
+       "text": "/* Grinds coffee beans to a target coarseness. */"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "c9236fe1-c422-41e8-a11b-93cd93cc42f8",
+       "source": "Owned",
+       "text": "grindSize : Real"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "fd71f4ac-9e3c-4d0a-9fed-1b4b0d79a5fe",
+       "source": "Owned",
+       "text": "motorSpeed : Real"
+      }
+     }
+    ],
+    "diagnostic_severity": null,
+    "element_id": "fe64ff2e-214f-43fb-962c-11caf3ae000f",
+    "element_kind": "PartDefinition",
+    "expanded": true,
+    "header_style": "Normal",
+    "layout": "Free",
+    "name": "Grinder",
+    "node_kind": "Definition",
+    "ports": [],
+    "position": null,
+    "sequence_layout": null,
+    "size": null,
+    "solver_status": null,
+    "stereotype": "\u00abpart def\u00bb",
+    "tags": [],
+    "tooltip": "\u00abpart def\u00bb Grinder\nhierarchy: Part",
+    "visual_kind": "Part"
+   },
+   {
+    "buttons": [],
+    "children": [
+     {
+      "Text": {
+       "compartment": "Documentation",
+       "element_id": "ea8bc0c3-5b75-4b44-8bcf-e36956a7e462/doc/0",
+       "source": "Owned",
+       "text": "/* Heats water and forces it through coffee"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Documentation",
+       "element_id": "ea8bc0c3-5b75-4b44-8bcf-e36956a7e462/doc/1",
+       "source": "Owned",
+       "text": "   grounds. */"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "cef5b485-5993-41d2-a72e-61cd8cf51c71",
+       "source": "Owned",
+       "text": "waterTemp : Temperature"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "1a10d793-3853-43d4-ae28-917a6bfe5682",
+       "source": "Owned",
+       "text": "brewPressure : Pressure"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "88d9a89f-339d-4b72-b153-60c674674442",
+       "source": "Owned",
+       "text": "capacity : Mass"
+      }
+     }
+    ],
+    "diagnostic_severity": null,
+    "element_id": "186808f6-61bd-4bcd-ad33-28c4f2b63496",
+    "element_kind": "PartDefinition",
+    "expanded": true,
+    "header_style": "Normal",
+    "layout": "Free",
+    "name": "Brewer",
+    "node_kind": "Definition",
+    "ports": [],
+    "position": null,
+    "sequence_layout": null,
+    "size": null,
+    "solver_status": null,
+    "stereotype": "\u00abpart def\u00bb",
+    "tags": [],
+    "tooltip": "\u00abpart def\u00bb Brewer\nhierarchy: Part",
+    "visual_kind": "Part"
+   },
+   {
+    "buttons": [],
+    "children": [
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "3d69e63c-99a4-4c85-b371-07decebb3c16",
+       "source": "Owned",
+       "text": "currentLevel : Real"
+      }
+     },
+     {
+      "Text": {
+       "compartment": "Attributes",
+       "element_id": "fd9cf3b9-f61a-4bb3-9688-c2522b4f9edb",
+       "source": "Owned",
+       "text": "maxCapacity : Mass"
+      }
+     }
+    ],
+    "diagnostic_severity": null,
+    "element_id": "482df42c-fddc-42c8-8c79-23afe1c6860c",
+    "element_kind": "PartDefinition",
+    "expanded": true,
+    "header_style": "Normal",
+    "layout": "Free",
+    "name": "WaterTank",
+    "node_kind": "Definition",
+    "ports": [],
+    "position": null,
+    "sequence_layout": null,
+    "size": null,
+    "solver_status": null,
+    "stereotype": "\u00abpart def\u00bb",
+    "tags": [],
+    "tooltip": "\u00abpart def\u00bb WaterTank\nhierarchy: Part",
+    "visual_kind": "Part"
+   }
+  ],
+  "view_type": "General"
+ },
+ "text_map": {
+  "spans": {
+   "11402c82-707d-49e9-bb88-53b887ea0c7b": {
+    "col": 8,
+    "end": 964,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 29,
+    "start": 931
+   },
+   "186808f6-61bd-4bcd-ad33-28c4f2b63496": {
+    "col": 4,
+    "end": 1496,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 43,
+    "start": 1283
+   },
+   "44bec2d2-ee0c-4666-a2a6-fe0b364fe20a": {
+    "col": 25,
+    "end": 885,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 27,
+    "start": 876
+   },
+   "482df42c-fddc-42c8-8c79-23afe1c6860c": {
+    "col": 4,
+    "end": 1625,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 51,
+    "start": 1502
+   },
+   "61437566-fb94-4c38-b2b2-96d93fc367f8": {
+    "col": 4,
+    "end": 1082,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 22,
+    "start": 684
+   },
+   "92d1beb3-7a61-43fb-9d45-6f998bb926e3": {
+    "col": 8,
+    "end": 922,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 28,
+    "start": 895
+   },
+   "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4": {
+    "col": 8,
+    "end": 886,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 27,
+    "start": 859
+   },
+   "acfd94e8-766a-40be-ac38-54c8bf75b82f": {
+    "col": 8,
+    "end": 850,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 26,
+    "start": 829
+   },
+   "b0e59392-49b0-4fce-8d36-17d479c55f31": {
+    "col": 8,
+    "end": 1034,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 31,
+    "start": 1009
+   },
+   "bdd38fab-8599-49bc-8f31-65d7726e8900": {
+    "col": 8,
+    "end": 820,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 25,
+    "start": 797
+   },
+   "c4b2d1a9-c021-4975-89d4-1c6d1aa00b82": {
+    "col": 23,
+    "end": 819,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 25,
+    "start": 812
+   },
+   "e4c991ad-6553-43fa-8653-67d27daa15b0": {
+    "col": 8,
+    "end": 1000,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 30,
+    "start": 973
+   },
+   "eb7fc26d-3eca-4118-9ba9-e0ac71671a56": {
+    "col": 22,
+    "end": 849,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 26,
+    "start": 843
+   },
+   "fe64ff2e-214f-43fb-962c-11caf3ae000f": {
+    "col": 4,
+    "end": 1277,
+    "file": "file:///home/ricky/personal_repos/sysml-rs/sysml-rs/tests/fixtures/book-examples/coffee-machine/definitions.sysml",
+    "line": 36,
+    "start": 1088
+   }
+  }
+ },
+ "tokens": {
+  "categories": {
+   "AcceptAction": "action",
+   "Action": "action",
+   "Actor": "node_fallback",
+   "Allocation": "allocation",
+   "AnalysisCase": "usecase",
+   "Attribute": "attribute",
+   "Calculation": "action",
+   "Comment": "comment",
+   "Concern": "requirement",
+   "Connection": "block",
+   "Constraint": "constraint",
+   "DecisionNode": "node_fallback",
+   "Enumeration": "enumeration",
+   "FinalNode": "node_fallback",
+   "Flow": "flow",
+   "ForkNode": "node_fallback",
+   "Generic": "node_fallback",
+   "InitialNode": "node_fallback",
+   "Interface": "interface",
+   "Item": "item",
+   "JoinNode": "node_fallback",
+   "Lifeline": "node_fallback",
+   "MergeNode": "node_fallback",
+   "Metadata": "metadata",
+   "Occurrence": "occurrence",
+   "Package": "package",
+   "Part": "block",
+   "Port": "node_fallback",
+   "Rendering": "block",
+   "Requirement": "requirement",
+   "SendAction": "action",
+   "SqProxy": "node_fallback",
+   "State": "state",
+   "TerminateNode": "node_fallback",
+   "UseCase": "usecase",
+   "VerificationCase": "requirement",
+   "View": "view",
+   "Viewpoint": "view"
+  },
+  "edge_styles": {
+   "allocate": {
+    "arrowhead": "Open",
+    "label": "\u00aballocate\u00bb",
+    "line_style": "Dashed"
+   },
+   "annotation": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "assert": {
+    "arrowhead": "Open",
+    "label": "\u00abassert\u00bb",
+    "line_style": "Dashed"
+   },
+   "assume": {
+    "arrowhead": "Open",
+    "label": "\u00abassume\u00bb",
+    "line_style": "Dashed"
+   },
+   "binding": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "composition": {
+    "arrowhead": "Filled",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "connection": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "dependency": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "derive": {
+    "arrowhead": "Open",
+    "label": "\u00abderiveReqt\u00bb",
+    "line_style": "Dashed"
+   },
+   "eventOccurrence": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "exhibit": {
+    "arrowhead": "Open",
+    "label": "\u00abexhibit\u00bb",
+    "line_style": "Dashed"
+   },
+   "expose": {
+    "arrowhead": "Open",
+    "label": "\u00abexpose\u00bb",
+    "line_style": "Dashed"
+   },
+   "featureMembership": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "flow": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "flowOnConnection": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "frame": {
+    "arrowhead": "Open",
+    "label": "\u00abframe\u00bb",
+    "line_style": "Dashed"
+   },
+   "import": {
+    "arrowhead": "Open",
+    "label": "\u00abimport\u00bb",
+    "line_style": "Dashed"
+   },
+   "include": {
+    "arrowhead": "Open",
+    "label": "\u00abinclude\u00bb",
+    "line_style": "Dashed"
+   },
+   "interfaceConnection": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "membership": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "message": {
+    "arrowhead": "Filled",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "owning": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "parameterLink": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "perform": {
+    "arrowhead": "Open",
+    "label": "\u00abperform\u00bb",
+    "line_style": "Dashed"
+   },
+   "portion": {
+    "arrowhead": "Open",
+    "label": "\u00abportion\u00bb",
+    "line_style": "Dashed"
+   },
+   "redefine": {
+    "arrowhead": "Hollow",
+    "label": "\u00abredefines\u00bb",
+    "line_style": "Solid"
+   },
+   "reference": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "refine": {
+    "arrowhead": "Open",
+    "label": "\u00abrefine\u00bb",
+    "line_style": "Dashed"
+   },
+   "require": {
+    "arrowhead": "Open",
+    "label": "\u00abrequire\u00bb",
+    "line_style": "Dashed"
+   },
+   "satisfy": {
+    "arrowhead": "Open",
+    "label": "\u00absatisfy\u00bb",
+    "line_style": "Solid"
+   },
+   "specialize": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "subsetting": {
+    "arrowhead": "Open",
+    "label": "\u00absubsets\u00bb",
+    "line_style": "Dotted"
+   },
+   "succession": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "successionFlow": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "trace": {
+    "arrowhead": "Open",
+    "label": "\u00abtrace\u00bb",
+    "line_style": "Dashed"
+   },
+   "transition": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "typeOf": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "verify": {
+    "arrowhead": "Open",
+    "label": "\u00abverify\u00bb",
+    "line_style": "Solid"
+   }
+  },
+  "palette": {
+   "action": {
+    "fill": "oklch(29% 0.02 290)",
+    "header": "oklch(35% 0.05 290)",
+    "stroke": "oklch(62% 0.10 290)"
+   },
+   "actor_stroke": "oklch(80% 0.008 70)",
+   "allocation": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "attribute": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "bg": "oklch(24% 0.014 55)",
+   "block": {
+    "fill": "oklch(29% 0.02 250)",
+    "header": "oklch(35% 0.05 250)",
+    "stroke": "oklch(62% 0.10 250)"
+   },
+   "body_fill": "oklch(27% 0.012 55)",
+   "comment": {
+    "fill": "oklch(30% 0.012 60)",
+    "header": null,
+    "stroke": "oklch(55% 0.014 62)"
+   },
+   "compartment_text": "oklch(78% 0.014 70)",
+   "constraint": {
+    "fill": "oklch(30% 0.02 145)",
+    "header": "oklch(35% 0.05 145)",
+    "stroke": "oklch(62% 0.09 145)"
+   },
+   "control_fill": "oklch(85% 0.008 70)",
+   "control_stroke": "oklch(85% 0.008 70)",
+   "edge_label_bg": "oklch(24% 0.014 55 / 0.85)",
+   "enumeration": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "flow": {
+    "fill": "oklch(29% 0.02 315)",
+    "header": "oklch(35% 0.045 315)",
+    "stroke": "oklch(60% 0.07 315)"
+   },
+   "grid_major": "oklch(30% 0.014 55)",
+   "grid_minor": "oklch(27% 0.013 55)",
+   "interface": {
+    "fill": "oklch(29% 0.02 210)",
+    "header": "oklch(35% 0.045 210)",
+    "stroke": "oklch(62% 0.08 210)"
+   },
+   "item": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "lifeline_fill": "oklch(28% 0.012 230)",
+   "lifeline_stroke": "oklch(58% 0.06 230)",
+   "link": {
+    "connection": "oklch(55% 0.06 210)",
+    "dependency": "oklch(52% 0.014 60)",
+    "derive": "oklch(52% 0.06 340)",
+    "flow": "oklch(55% 0.06 315)",
+    "ownership": "oklch(52% 0.014 60)",
+    "req": "oklch(55% 0.07 340)",
+    "specialization": "oklch(52% 0.014 60)",
+    "succession": "oklch(52% 0.014 60)",
+    "typing": "oklch(52% 0.014 60)",
+    "verify": "oklch(55% 0.07 340)"
+   },
+   "metadata": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "muted": "oklch(66% 0.016 68)",
+   "node_fallback": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "occurrence": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "package": {
+    "fill": "oklch(28% 0.010 60)",
+    "header": "oklch(33% 0.010 60)",
+    "stroke": "oklch(50% 0.012 60)"
+   },
+   "port": {
+    "in_": "oklch(62% 0.09 155)",
+    "inout": "oklch(60% 0.07 210)",
+    "out": "oklch(64% 0.11 25)"
+   },
+   "requirement": {
+    "fill": "oklch(29% 0.02 340)",
+    "header": "oklch(35% 0.05 340)",
+    "stroke": "oklch(62% 0.10 340)"
+   },
+   "select": "oklch(75% 0.13 65)",
+   "sev": {
+    "error": "oklch(60% 0.15 25)",
+    "info": "oklch(58% 0.02 60)",
+    "warning": "oklch(68% 0.10 100)"
+   },
+   "sim": {
+    "active": "oklch(75% 0.14 65)",
+    "active_glow": "oklch(75% 0.14 65 / 0.35)",
+    "completed": "oklch(60% 0.11 150)",
+    "inactive_opacity": 0.45,
+    "transition": "oklch(70% 0.13 65)"
+   },
+   "state": {
+    "fill": "oklch(30% 0.02 185)",
+    "header": "oklch(35% 0.05 185)",
+    "stroke": "oklch(62% 0.09 185)"
+   },
+   "text": "oklch(95.5% 0.008 75)",
+   "usecase": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "verdict": {
+    "error": "oklch(33% 0.012 55)",
+    "fail": "oklch(52% 0.16 25)",
+    "inconclusive": "oklch(55% 0.014 60)",
+    "pass": "oklch(55% 0.10 150)"
+   },
+   "view": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   }
+  },
+  "shapes": {
+   "AcceptAction": "HourglassPentagon",
+   "Action": "RoundedRect",
+   "Actor": "Rect",
+   "Allocation": "Rect",
+   "AnalysisCase": "Rect",
+   "Attribute": "Rect",
+   "Calculation": "RoundedRect",
+   "Comment": "NoteRect",
+   "Concern": "Rect",
+   "Connection": "Rect",
+   "Constraint": "RoundedRect",
+   "DecisionNode": "Diamond",
+   "Enumeration": "Rect",
+   "FinalNode": "BullseyeCircle",
+   "Flow": "Rect",
+   "ForkNode": "HBar",
+   "Generic": "Rect",
+   "InitialNode": "FilledCircle",
+   "Interface": "Rect",
+   "Item": "Rect",
+   "JoinNode": "HBar",
+   "Lifeline": "Rect",
+   "MergeNode": "Diamond",
+   "Metadata": "DashedRect",
+   "Occurrence": "Rect",
+   "Package": "Rect",
+   "Part": "Rect",
+   "Port": "Rect",
+   "Rendering": "Rect",
+   "Requirement": "Rect",
+   "SendAction": "Pentagon",
+   "SqProxy": "FilledCircle",
+   "State": "RoundedRect",
+   "TerminateNode": "CrossCircle",
+   "UseCase": "Ellipse",
+   "VerificationCase": "Rect",
+   "View": "Rect",
+   "Viewpoint": "Rect"
+  },
+  "typography": {
+   "compartment_font_size_px": 11.0,
+   "compartment_line_stride_px": 16.0,
+   "label_font_size_px": 12.0
+  }
+ }
+}

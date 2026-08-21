@@ -1,0 +1,554 @@
+{
+ "frame": {
+  "bottom_left": null,
+  "bottom_right": null,
+  "name": "ComponentTreeView",
+  "top_right": {
+   "text": "expose Definitions::CoffeeMachine"
+  },
+  "type_name": "BrowserView",
+  "view_kind": "Browser"
+ },
+ "interactions": {
+  "entries": {}
+ },
+ "non_graph": {
+  "data": {
+   "kind": "containment_tree",
+   "roots": [
+    {
+     "children": [
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "bdd38fab-8599-49bc-8f31-65d7726e8900",
+       "id": "bdd38fab-8599-49bc-8f31-65d7726e8900",
+       "kindLabel": "PartUsage",
+       "label": "grinder"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "acfd94e8-766a-40be-ac38-54c8bf75b82f",
+       "id": "acfd94e8-766a-40be-ac38-54c8bf75b82f",
+       "kindLabel": "PartUsage",
+       "label": "brewer"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4",
+       "id": "96d4bbb3-7a6a-4fce-8249-589c8bb50ab4",
+       "kindLabel": "PartUsage",
+       "label": "waterTank"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "92d1beb3-7a61-43fb-9d45-6f998bb926e3",
+       "id": "92d1beb3-7a61-43fb-9d45-6f998bb926e3",
+       "kindLabel": "PartUsage",
+       "label": "steamWand"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "11402c82-707d-49e9-bb88-53b887ea0c7b",
+       "id": "11402c82-707d-49e9-bb88-53b887ea0c7b",
+       "kindLabel": "PartUsage",
+       "label": "controlPanel"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "e4c991ad-6553-43fa-8653-67d27daa15b0",
+       "id": "e4c991ad-6553-43fa-8653-67d27daa15b0",
+       "kindLabel": "PartUsage",
+       "label": "cupSensor"
+      },
+      {
+       "cssClasses": [
+        "partusage",
+        "usage",
+        "part"
+       ],
+       "elementId": "b0e59392-49b0-4fce-8d36-17d479c55f31",
+       "id": "b0e59392-49b0-4fce-8d36-17d479c55f31",
+       "kindLabel": "PartUsage",
+       "label": "dripTray"
+      },
+      {
+       "cssClasses": [
+        "attributeusage",
+        "usage",
+        "attribute"
+       ],
+       "elementId": "414a274a-b5d0-4a10-908b-4c96fec66b0d",
+       "id": "414a274a-b5d0-4a10-908b-4c96fec66b0d",
+       "kindLabel": "AttributeUsage",
+       "label": "serialNumber"
+      }
+     ],
+     "cssClasses": [
+      "partdefinition",
+      "definition",
+      "part"
+     ],
+     "elementId": "61437566-fb94-4c38-b2b2-96d93fc367f8",
+     "id": "61437566-fb94-4c38-b2b2-96d93fc367f8",
+     "kindLabel": "PartDefinition",
+     "label": "CoffeeMachine"
+    }
+   ],
+   "title": "Containment Tree"
+  },
+  "kind": "tree"
+ },
+ "scene": {
+  "buttons": [],
+  "edges": [],
+  "nodes": [],
+  "view_type": "Browser"
+ },
+ "text_map": {
+  "spans": {}
+ },
+ "tokens": {
+  "categories": {
+   "AcceptAction": "action",
+   "Action": "action",
+   "Actor": "node_fallback",
+   "Allocation": "allocation",
+   "AnalysisCase": "usecase",
+   "Attribute": "attribute",
+   "Calculation": "action",
+   "Comment": "comment",
+   "Concern": "requirement",
+   "Connection": "block",
+   "Constraint": "constraint",
+   "DecisionNode": "node_fallback",
+   "Enumeration": "enumeration",
+   "FinalNode": "node_fallback",
+   "Flow": "flow",
+   "ForkNode": "node_fallback",
+   "Generic": "node_fallback",
+   "InitialNode": "node_fallback",
+   "Interface": "interface",
+   "Item": "item",
+   "JoinNode": "node_fallback",
+   "Lifeline": "node_fallback",
+   "MergeNode": "node_fallback",
+   "Metadata": "metadata",
+   "Occurrence": "occurrence",
+   "Package": "package",
+   "Part": "block",
+   "Port": "node_fallback",
+   "Rendering": "block",
+   "Requirement": "requirement",
+   "SendAction": "action",
+   "SqProxy": "node_fallback",
+   "State": "state",
+   "TerminateNode": "node_fallback",
+   "UseCase": "usecase",
+   "VerificationCase": "requirement",
+   "View": "view",
+   "Viewpoint": "view"
+  },
+  "edge_styles": {
+   "allocate": {
+    "arrowhead": "Open",
+    "label": "\u00aballocate\u00bb",
+    "line_style": "Dashed"
+   },
+   "annotation": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "assert": {
+    "arrowhead": "Open",
+    "label": "\u00abassert\u00bb",
+    "line_style": "Dashed"
+   },
+   "assume": {
+    "arrowhead": "Open",
+    "label": "\u00abassume\u00bb",
+    "line_style": "Dashed"
+   },
+   "binding": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "composition": {
+    "arrowhead": "Filled",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "connection": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "dependency": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "derive": {
+    "arrowhead": "Open",
+    "label": "\u00abderiveReqt\u00bb",
+    "line_style": "Dashed"
+   },
+   "eventOccurrence": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "exhibit": {
+    "arrowhead": "Open",
+    "label": "\u00abexhibit\u00bb",
+    "line_style": "Dashed"
+   },
+   "expose": {
+    "arrowhead": "Open",
+    "label": "\u00abexpose\u00bb",
+    "line_style": "Dashed"
+   },
+   "featureMembership": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "flow": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "flowOnConnection": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "frame": {
+    "arrowhead": "Open",
+    "label": "\u00abframe\u00bb",
+    "line_style": "Dashed"
+   },
+   "import": {
+    "arrowhead": "Open",
+    "label": "\u00abimport\u00bb",
+    "line_style": "Dashed"
+   },
+   "include": {
+    "arrowhead": "Open",
+    "label": "\u00abinclude\u00bb",
+    "line_style": "Dashed"
+   },
+   "interfaceConnection": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "membership": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "message": {
+    "arrowhead": "Filled",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "owning": {
+    "arrowhead": "None",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "parameterLink": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Dashed"
+   },
+   "perform": {
+    "arrowhead": "Open",
+    "label": "\u00abperform\u00bb",
+    "line_style": "Dashed"
+   },
+   "portion": {
+    "arrowhead": "Open",
+    "label": "\u00abportion\u00bb",
+    "line_style": "Dashed"
+   },
+   "redefine": {
+    "arrowhead": "Hollow",
+    "label": "\u00abredefines\u00bb",
+    "line_style": "Solid"
+   },
+   "reference": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "refine": {
+    "arrowhead": "Open",
+    "label": "\u00abrefine\u00bb",
+    "line_style": "Dashed"
+   },
+   "require": {
+    "arrowhead": "Open",
+    "label": "\u00abrequire\u00bb",
+    "line_style": "Dashed"
+   },
+   "satisfy": {
+    "arrowhead": "Open",
+    "label": "\u00absatisfy\u00bb",
+    "line_style": "Solid"
+   },
+   "specialize": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "subsetting": {
+    "arrowhead": "Open",
+    "label": "\u00absubsets\u00bb",
+    "line_style": "Dotted"
+   },
+   "succession": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "successionFlow": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "trace": {
+    "arrowhead": "Open",
+    "label": "\u00abtrace\u00bb",
+    "line_style": "Dashed"
+   },
+   "transition": {
+    "arrowhead": "Open",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "typeOf": {
+    "arrowhead": "Hollow",
+    "label": null,
+    "line_style": "Solid"
+   },
+   "verify": {
+    "arrowhead": "Open",
+    "label": "\u00abverify\u00bb",
+    "line_style": "Solid"
+   }
+  },
+  "palette": {
+   "action": {
+    "fill": "oklch(29% 0.02 290)",
+    "header": "oklch(35% 0.05 290)",
+    "stroke": "oklch(62% 0.10 290)"
+   },
+   "actor_stroke": "oklch(80% 0.008 70)",
+   "allocation": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "attribute": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "bg": "oklch(24% 0.014 55)",
+   "block": {
+    "fill": "oklch(29% 0.02 250)",
+    "header": "oklch(35% 0.05 250)",
+    "stroke": "oklch(62% 0.10 250)"
+   },
+   "body_fill": "oklch(27% 0.012 55)",
+   "comment": {
+    "fill": "oklch(30% 0.012 60)",
+    "header": null,
+    "stroke": "oklch(55% 0.014 62)"
+   },
+   "compartment_text": "oklch(78% 0.014 70)",
+   "constraint": {
+    "fill": "oklch(30% 0.02 145)",
+    "header": "oklch(35% 0.05 145)",
+    "stroke": "oklch(62% 0.09 145)"
+   },
+   "control_fill": "oklch(85% 0.008 70)",
+   "control_stroke": "oklch(85% 0.008 70)",
+   "edge_label_bg": "oklch(24% 0.014 55 / 0.85)",
+   "enumeration": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "flow": {
+    "fill": "oklch(29% 0.02 315)",
+    "header": "oklch(35% 0.045 315)",
+    "stroke": "oklch(60% 0.07 315)"
+   },
+   "grid_major": "oklch(30% 0.014 55)",
+   "grid_minor": "oklch(27% 0.013 55)",
+   "interface": {
+    "fill": "oklch(29% 0.02 210)",
+    "header": "oklch(35% 0.045 210)",
+    "stroke": "oklch(62% 0.08 210)"
+   },
+   "item": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "lifeline_fill": "oklch(28% 0.012 230)",
+   "lifeline_stroke": "oklch(58% 0.06 230)",
+   "link": {
+    "connection": "oklch(55% 0.06 210)",
+    "dependency": "oklch(52% 0.014 60)",
+    "derive": "oklch(52% 0.06 340)",
+    "flow": "oklch(55% 0.06 315)",
+    "ownership": "oklch(52% 0.014 60)",
+    "req": "oklch(55% 0.07 340)",
+    "specialization": "oklch(52% 0.014 60)",
+    "succession": "oklch(52% 0.014 60)",
+    "typing": "oklch(52% 0.014 60)",
+    "verify": "oklch(55% 0.07 340)"
+   },
+   "metadata": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "muted": "oklch(66% 0.016 68)",
+   "node_fallback": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "occurrence": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "package": {
+    "fill": "oklch(28% 0.010 60)",
+    "header": "oklch(33% 0.010 60)",
+    "stroke": "oklch(50% 0.012 60)"
+   },
+   "port": {
+    "in_": "oklch(62% 0.09 155)",
+    "inout": "oklch(60% 0.07 210)",
+    "out": "oklch(64% 0.11 25)"
+   },
+   "requirement": {
+    "fill": "oklch(29% 0.02 340)",
+    "header": "oklch(35% 0.05 340)",
+    "stroke": "oklch(62% 0.10 340)"
+   },
+   "select": "oklch(75% 0.13 65)",
+   "sev": {
+    "error": "oklch(60% 0.15 25)",
+    "info": "oklch(58% 0.02 60)",
+    "warning": "oklch(68% 0.10 100)"
+   },
+   "sim": {
+    "active": "oklch(75% 0.14 65)",
+    "active_glow": "oklch(75% 0.14 65 / 0.35)",
+    "completed": "oklch(60% 0.11 150)",
+    "inactive_opacity": 0.45,
+    "transition": "oklch(70% 0.13 65)"
+   },
+   "state": {
+    "fill": "oklch(30% 0.02 185)",
+    "header": "oklch(35% 0.05 185)",
+    "stroke": "oklch(62% 0.09 185)"
+   },
+   "text": "oklch(95.5% 0.008 75)",
+   "usecase": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   },
+   "verdict": {
+    "error": "oklch(33% 0.012 55)",
+    "fail": "oklch(52% 0.16 25)",
+    "inconclusive": "oklch(55% 0.014 60)",
+    "pass": "oklch(55% 0.10 150)"
+   },
+   "view": {
+    "fill": "oklch(29% 0.012 60)",
+    "header": "oklch(34% 0.012 60)",
+    "stroke": "oklch(52% 0.014 62)"
+   }
+  },
+  "shapes": {
+   "AcceptAction": "HourglassPentagon",
+   "Action": "RoundedRect",
+   "Actor": "Rect",
+   "Allocation": "Rect",
+   "AnalysisCase": "Rect",
+   "Attribute": "Rect",
+   "Calculation": "RoundedRect",
+   "Comment": "NoteRect",
+   "Concern": "Rect",
+   "Connection": "Rect",
+   "Constraint": "RoundedRect",
+   "DecisionNode": "Diamond",
+   "Enumeration": "Rect",
+   "FinalNode": "BullseyeCircle",
+   "Flow": "Rect",
+   "ForkNode": "HBar",
+   "Generic": "Rect",
+   "InitialNode": "FilledCircle",
+   "Interface": "Rect",
+   "Item": "Rect",
+   "JoinNode": "HBar",
+   "Lifeline": "Rect",
+   "MergeNode": "Diamond",
+   "Metadata": "DashedRect",
+   "Occurrence": "Rect",
+   "Package": "Rect",
+   "Part": "Rect",
+   "Port": "Rect",
+   "Rendering": "Rect",
+   "Requirement": "Rect",
+   "SendAction": "Pentagon",
+   "SqProxy": "FilledCircle",
+   "State": "RoundedRect",
+   "TerminateNode": "CrossCircle",
+   "UseCase": "Ellipse",
+   "VerificationCase": "Rect",
+   "View": "Rect",
+   "Viewpoint": "Rect"
+  },
+  "typography": {
+   "compartment_font_size_px": 11.0,
+   "compartment_line_stride_px": 16.0,
+   "label_font_size_px": 12.0
+  }
+ }
+}
