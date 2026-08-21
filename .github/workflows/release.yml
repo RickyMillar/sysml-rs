@@ -45,12 +45,20 @@ jobs:
           path: |
             references/sysmlv2/SysML-v2-Pilot-Implementation
             references/sysmlv2/SysML-v2-API-Services
+            references/sysmlv2/sysand
             references/sysmlv2/Kerml-Vocab.ttl
             references/sysmlv2/SysML-vocab.ttl
             references/sysmlv2/KerML-shapes.ttl
             references/sysmlv2/SysML-shapes.ttl
             references/sysmlv2/KerML/20250201/KerML.xmi
             references/sysmlv2/SysML/20250201/SysML.xmi
+            references/sysmlv2/SysML/20250201/Systems-Library.kpar
+            references/sysmlv2/SysML/20250201/Analysis-Domain-Library.kpar
+            references/sysmlv2/SysML/20250201/Cause-and-Effect-Domain-Library.kpar
+            references/sysmlv2/SysML/20250201/Geometry-Domain-Library.kpar
+            references/sysmlv2/SysML/20250201/Metadata-Domain-Library.kpar
+            references/sysmlv2/SysML/20250201/Quantities-and-Units-Domain-Library.kpar
+            references/sysmlv2/SysML/20250201/Requirement-Derivation-Domain-Library.kpar
             libraries/standard
           key: refs-test-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/fetch-references/manifest.toml') }}
           restore-keys: |
@@ -61,6 +69,12 @@ jobs:
       # ./libraries/standard, and post-rewrite the tree has none until fetch
       # puts it there.
       #
+      # It also needs the TEST-ONLY fixture items the build jobs never read:
+      # sysand (sysml-project's stdlib round-trip JSONs + test_lib.kpar) and
+      # the seven OMG .kpar libraries (kpar::reader::read_all_official_kpars).
+      # Omitting them is exactly what failed the first v0.1.0 gate: the tests
+      # panic on the missing files rather than skip.
+      #
       # fetch verifies every restored item against the manifest checksum, so a
       # stale cache entry is re-fetched rather than used.
       - name: Fetch pinned references
@@ -68,9 +82,14 @@ jobs:
           tools/fetch-references/fetch.sh fetch \
             --item pilot-implementation \
             --item api-services \
+            --item sysand \
             --item kerml-vocab --item sysml-vocab \
             --item kerml-shapes --item sysml-shapes \
             --item kerml-xmi --item sysml-xmi \
+            --item kpar-systems --item kpar-analysis \
+            --item kpar-cause-and-effect --item kpar-geometry \
+            --item kpar-metadata --item kpar-quantities-and-units \
+            --item kpar-requirement-derivation \
             --item standard-library
 
       - name: Install Rust toolchain
