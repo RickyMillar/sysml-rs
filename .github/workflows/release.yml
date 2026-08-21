@@ -109,15 +109,17 @@ jobs:
       - name: Download all build artifacts
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          pattern: |
-            vsix-*
-            server-*
+          # ONE minimatch pattern, not a list: the action feeds this string to
+          # `new Minimatch(...)` verbatim, so a multiline block scalar here
+          # matches nothing and the release publishes empty. Brace alternation
+          # is the supported way to match several artifact families.
+          pattern: "{vsix,server,cli}-*"
           path: release-artifacts/
           merge-multiple: false
 
-      - name: Collect VSIX and rename server binaries
+      - name: Collect VSIX and rename server + CLI binaries
         run: |
-          mkdir -p release/vsix release/server
+          mkdir -p release/vsix release/server release/cli
 
           # VSIX artifacts
           find release-artifacts -name '*.vsix' -exec cp {} release/vsix/ \;
@@ -131,6 +133,14 @@ jobs:
           mv release-artifacts/server-darwin-x64/sysml-lsp-server      release/server/sysml-lsp-server-x86_64-apple-darwin
           mv release-artifacts/server-win32-x64/sysml-lsp-server.exe   release/server/sysml-lsp-server-x86_64-pc-windows-msvc.exe
 
+          # sysml CLI binaries, same naming convention (no win32 leg yet — the
+          # CLI has never been built for MSVC; see build-server's matrix note).
+          # The book's appendix-d download and its CI consume these names.
+          mv release-artifacts/cli-linux-x64/sysml       release/cli/sysml-x86_64-unknown-linux-gnu
+          mv release-artifacts/cli-linux-arm64/sysml     release/cli/sysml-aarch64-unknown-linux-gnu
+          mv release-artifacts/cli-darwin-arm64/sysml    release/cli/sysml-aarch64-apple-darwin
+          mv release-artifacts/cli-darwin-x64/sysml      release/cli/sysml-x86_64-apple-darwin
+
           echo "## Release artifacts:"
           ls -lhR release/
 
@@ -140,6 +150,7 @@ jobs:
           files: |
             release/vsix/*.vsix
             release/server/*
+            release/cli/*
           generate_release_notes: true
           draft: false
           prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}

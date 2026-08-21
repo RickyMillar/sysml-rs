@@ -176,6 +176,14 @@ jobs:
   # public repos — ubuntu-24.04-arm). darwin-x64 is cross-compiled from the
   # arm64 macos-latest runner (the Apple linker handles x86_64-apple-darwin
   # natively; macos-13 x64 is being retired — GH changelog 2025-09-19).
+  #
+  # Legs with a `cli-artifact` also build the `sysml` CLI (crates/tooling/
+  # sysml-cli) so the release can ship it alongside the server binaries — the
+  # companion book's "Getting the tool" appendix and its CI both download it.
+  # Same job rather than a separate matrix because the CLI shares almost the
+  # whole dependency graph with the server, so the extra build is incremental.
+  # win32 deliberately has no cli-artifact yet: the CLI has never been built
+  # for MSVC, and an untested leg must not be able to sink a release.
   build-server:
     if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/v')
     needs: [generate-parser]
@@ -186,18 +194,22 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             artifact: sysml-lsp-server
+            cli-artifact: sysml
             vsix-target: linux-x64
           - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
             artifact: sysml-lsp-server
+            cli-artifact: sysml
             vsix-target: linux-arm64
           - os: macos-latest
             target: aarch64-apple-darwin
             artifact: sysml-lsp-server
+            cli-artifact: sysml
             vsix-target: darwin-arm64
           - os: macos-latest
             target: x86_64-apple-darwin
             artifact: sysml-lsp-server
+            cli-artifact: sysml
             vsix-target: darwin-x64
           - os: windows-latest
             target: x86_64-pc-windows-msvc
@@ -288,11 +300,25 @@ jobs:
       - name: Build LSP server (release)
         run: cargo build --release --target ${{ matrix.target }} -p sysml-lsp-server
 
+      # Incremental over the server build above — it reuses the shared
+      # dependency graph and compiles only the CLI crate itself.
+      - name: Build sysml CLI (release)
+        if: matrix.cli-artifact
+        run: cargo build --release --target ${{ matrix.target }} -p sysml-cli
+
       - name: Upload server binary
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: server-${{ matrix.vsix-target }}
           path: target/${{ matrix.target }}/release/${{ matrix.artifact }}
+          if-no-files-found: error
+
+      - name: Upload CLI binary
+        if: matrix.cli-artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cli-${{ matrix.vsix-target }}
+          path: target/${{ matrix.target }}/release/${{ matrix.cli-artifact }}
           if-no-files-found: error
 
   # ---------- Package platform-specific VSIX ----------
