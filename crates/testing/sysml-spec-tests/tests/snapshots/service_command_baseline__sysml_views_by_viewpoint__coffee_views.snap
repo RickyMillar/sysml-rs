@@ -1,6 +1,5 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
@@ -10,25 +9,25 @@ expression: bundle
   },
   "response": [
     {
-      "exposed": [],
-      "filters": [
-        "<UUID>"
-      ],
-      "id": "<UUID>",
-      "kind": "ViewDefinition",
-      "name": "SafetyReviewView",
-      "renderings": [
+      "exposed": [
         {
+          "exposed_element_id": "<UUID>",
           "id": "<UUID>",
-          "name": null
+          "is_namespace": true,
+          "qualified_name": "Requirements"
         }
       ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "safetyReview",
+      "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 4727,
+        "end": 5679,
         "file":"<FILE>",
-        "line": 77,
-        "start": 4253
+        "line": 98,
+        "start": 5560
       }
     }
   ]

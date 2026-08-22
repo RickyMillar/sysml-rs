@@ -10,7 +10,7 @@ expression: bundle
   "response": {
     "elapsed_ms": "<MS>",
     "failed": 0,
-    "model_digest": "3cf03d79f3a0dcfc210777d522cbd927dcbdf827ce176a83ab3ae499b73b951f",
+    "model_digest": "18c47b54d851d33e871035947965d43d07812870c94b1e2acae5592c8e12daf1",
     "passed": 0,
     "per_file": [
       "file://<BOOK>/examples/coffee-machine/orchestration.sysml",

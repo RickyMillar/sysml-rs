@@ -1,12 +1,12 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
   "request": {},
   "response": [
     "file://<BOOK>/examples/coffee-machine/actions.sysml",
+    "file://<BOOK>/examples/coffee-machine/book-views.sysml",
     "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml",
     "file://<BOOK>/examples/coffee-machine/calculations.sysml",
     "file://<BOOK>/examples/coffee-machine/connections.sysml",

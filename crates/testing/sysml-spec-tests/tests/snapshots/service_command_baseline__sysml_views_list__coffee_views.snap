@@ -1,6 +1,5 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
@@ -15,19 +14,36 @@ expression: bundle
       ],
       "id": "<UUID>",
       "kind": "ViewDefinition",
+      "name": "RequirementsTraceView",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 2924,
+        "file":"<FILE>",
+        "line": 62,
+        "start": 2618
+      }
+    },
+    {
+      "exposed": [],
+      "filters": [
+        "<UUID>"
+      ],
+      "id": "<UUID>",
+      "kind": "ViewDefinition",
       "name": "SafetyReviewView",
       "renderings": [
         {
           "id": "<UUID>",
-          "name": null
+          "name": "safetyStyle"
         }
       ],
       "source_span": {
         "col": 4,
-        "end": 4727,
+        "end": 5554,
         "file":"<FILE>",
-        "line": 77,
-        "start": 4253
+        "line": 89,
+        "start": 5114
       }
     },
     {
@@ -41,15 +57,15 @@ expression: bundle
       "renderings": [
         {
           "id": "<UUID>",
-          "name": null
+          "name": "structuralStyle"
         }
       ],
       "source_span": {
         "col": 4,
-        "end": 4010,
+        "end": 4664,
         "file":"<FILE>",
-        "line": 65,
-        "start": 3795
+        "line": 75,
+        "start": 4445
       }
     },
     {
@@ -63,15 +79,15 @@ expression: bundle
       "renderings": [
         {
           "id": "<UUID>",
-          "name": null
+          "name": "dashboardStyle"
         }
       ],
       "source_span": {
         "col": 4,
-        "end": 5348,
+        "end": 6280,
         "file":"<FILE>",
-        "line": 94,
-        "start": 5017
+        "line": 107,
+        "start": 5948
       }
     },
     {
@@ -83,15 +99,15 @@ expression: bundle
       "renderings": [
         {
           "id": "<UUID>",
-          "name": null
+          "name": "brewStyle"
         }
       ],
       "source_span": {
         "col": 4,
-        "end": 5714,
+        "end": 6740,
         "file":"<FILE>",
-        "line": 110,
-        "start": 5623
+        "line": 123,
+        "start": 6602
       }
     },
     {
@@ -110,10 +126,10 @@ expression: bundle
       "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 5799,
+        "end": 6825,
         "file":"<FILE>",
-        "line": 114,
-        "start": 5720
+        "line": 127,
+        "start": 6746
       }
     },
     {
@@ -132,10 +148,10 @@ expression: bundle
       "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 4102,
+        "end": 4805,
         "file":"<FILE>",
-        "line": 71,
-        "start": 4016
+        "line": 80,
+        "start": 4670
       }
     },
     {
@@ -154,10 +170,264 @@ expression: bundle
       "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 6135,
+        "end": 7189,
         "file":"<FILE>",
-        "line": 122,
-        "start": 6058
+        "line": 135,
+        "start": 7084
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": false,
+          "qualified_name": "Connections::ConnectedCoffeeMachine"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "connectionOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 1527,
+        "file":"<FILE>",
+        "line": 33,
+        "start": 1397
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": false,
+          "qualified_name": "States::CoffeeMachineLifecycle"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "lifecycleStates",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 2087,
+        "file":"<FILE>",
+        "line": 48,
+        "start": 1965
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Actions"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "actionFlows",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 1883,
+        "file":"<FILE>",
+        "line": 43,
+        "start": 1790
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Actions"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "actionsOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 1701,
+        "file":"<FILE>",
+        "line": 38,
+        "start": 1607
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Calculations"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "calculationsOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 2270,
+        "file":"<FILE>",
+        "line": 53,
+        "start": 2166
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "CoffeeMachineDomain"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "packageTree",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 1147,
+        "file":"<FILE>",
+        "line": 23,
+        "start": 1045
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "CoffeeMachineMetadata"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "metadataOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 3798,
+        "file":"<FILE>",
+        "line": 92,
+        "start": 3689
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Definitions"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "definitionsOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 978,
+        "file":"<FILE>",
+        "line": 18,
+        "start": 876
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Ports"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "portsOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 1307,
+        "file":"<FILE>",
+        "line": 28,
+        "start": 1217
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Requirements"
+        },
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Verification"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "requirementsGrid",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 3251,
+        "file":"<FILE>",
+        "line": 76,
+        "start": 3122
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Requirements"
+        },
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Verification"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "requirementsTrace",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 3048,
+        "file":"<FILE>",
+        "line": 70,
+        "start": 2930
       }
     },
     {
@@ -182,10 +452,10 @@ expression: bundle
       "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 5480,
+        "end": 6459,
         "file":"<FILE>",
-        "line": 103,
-        "start": 5354
+        "line": 115,
+        "start": 6286
       }
     },
     {
@@ -204,10 +474,54 @@ expression: bundle
       "renderings": [],
       "source_span": {
         "col": 4,
-        "end": 4809,
+        "end": 5679,
+        "file":"<FILE>",
+        "line": 98,
+        "start": 5560
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "TypingAndSpecialization"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "specializationOverview",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 3432,
+        "file":"<FILE>",
+        "line": 82,
+        "start": 3315
+      }
+    },
+    {
+      "exposed": [
+        {
+          "exposed_element_id": "<UUID>",
+          "id": "<UUID>",
+          "is_namespace": true,
+          "qualified_name": "Views"
+        }
+      ],
+      "filters": [],
+      "id": "<UUID>",
+      "kind": "ViewUsage",
+      "name": "viewsTree",
+      "renderings": [],
+      "source_span": {
+        "col": 4,
+        "end": 3603,
         "file":"<FILE>",
         "line": 87,
-        "start": 4733
+        "start": 3517
       }
     }
   ]

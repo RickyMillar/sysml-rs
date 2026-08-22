@@ -16,6 +16,11 @@ expression: bundle
         "type": "file"
       },
       {
+        "name": "book-views.sysml",
+        "path": "<BOOK>/examples/coffee-machine/book-views.sysml",
+        "type": "file"
+      },
+      {
         "name": "brew-cycle-flow.sysml",
         "path": "<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml",
         "type": "file"

@@ -1,6 +1,5 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
@@ -13,6 +12,11 @@ expression: bundle
       {
         "name": "actions.sysml",
         "path": "<BOOK>/examples/coffee-machine/actions.sysml",
+        "type": "file"
+      },
+      {
+        "name": "book-views.sysml",
+        "path": "<BOOK>/examples/coffee-machine/book-views.sysml",
         "type": "file"
       },
       {

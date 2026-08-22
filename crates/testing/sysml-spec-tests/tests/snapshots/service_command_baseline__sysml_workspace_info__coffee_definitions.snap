@@ -2807,15 +2807,15 @@ expression: bundle
           "CalculationDefinition": 2,
           "ConstraintDefinition": 3,
           "Documentation": 3,
-          "Feature": 26,
-          "FeatureReferenceExpression": 10,
+          "Feature": 24,
+          "FeatureReferenceExpression": 9,
           "FeatureTyping": 12,
-          "FeatureValue": 26,
+          "FeatureValue": 24,
           "InvocationExpression": 1,
           "LiteralRational": 11,
           "NamespaceImport": 3,
-          "OperatorExpression": 13,
-          "OwningMembership": 131,
+          "OperatorExpression": 12,
+          "OwningMembership": 125,
           "Package": 1,
           "PartDefinition": 1,
           "ReferenceUsage": 14,
@@ -2824,7 +2824,7 @@ expression: bundle
           "Subclassification": 1
         },
         "relationships_by_kind": {},
-        "total_elements": 266,
+        "total_elements": 254,
         "total_relationships": 0
       },
       "tree": [
@@ -3918,7 +3918,7 @@ expression: bundle
                   "children": [],
                   "id": "<UUID>",
                   "kind": "PortUsage",
-                  "name": "waterIn",
+                  "name": "waterInlet",
                   "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml"
                 },
                 {
@@ -3936,7 +3936,7 @@ expression: bundle
                   "default_collapsed": true,
                   "id": "<UUID>",
                   "kind": "PortUsage",
-                  "name": "coffeeOut",
+                  "name": "brewOutput",
                   "source_uri": "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
                   "typed_as": "<UUID>"
                 }
@@ -4185,7 +4185,7 @@ expression: bundle
           "ElementFilterMembership": 3,
           "Feature": 26,
           "FeatureReferenceExpression": 8,
-          "FeatureTyping": 7,
+          "FeatureTyping": 8,
           "FeatureValue": 26,
           "LiteralString": 8,
           "MembershipExpose": 3,
@@ -4199,7 +4199,6 @@ expression: bundle
           "SatisfyRequirementUsage": 3,
           "StakeholderMembership": 3,
           "Subclassification": 4,
-          "Subsetting": 1,
           "ViewDefinition": 4,
           "ViewRenderingMembership": 4,
           "ViewUsage": 5,
@@ -4374,6 +4373,45 @@ expression: bundle
         }
       ],
       "uri": "file://<BOOK>/examples/coffee-machine/package-structure.sysml"
+    },
+    {
+      "stats": {
+        "elements_by_kind": {
+          "ElementFilterMembership": 1,
+          "FeatureReferenceExpression": 1,
+          "FeatureTyping": 13,
+          "MembershipExpose": 2,
+          "NamespaceExpose": 13,
+          "OwningMembership": 45,
+          "Package": 1,
+          "Subclassification": 1,
+          "ViewDefinition": 1,
+          "ViewUsage": 13
+        },
+        "relationships_by_kind": {},
+        "total_elements": 91,
+        "total_relationships": 0
+      },
+      "tree": [
+        {
+          "archetype": "other",
+          "children": [
+            {
+              "archetype": "part",
+              "children": [],
+              "id": "<UUID>",
+              "kind": "ViewDefinition",
+              "name": "RequirementsTraceView",
+              "source_uri": "file://<BOOK>/examples/coffee-machine/book-views.sysml"
+            }
+          ],
+          "id": "<UUID>",
+          "kind": "Package",
+          "name": "BookViews",
+          "source_uri": "file://<BOOK>/examples/coffee-machine/book-views.sysml"
+        }
+      ],
+      "uri": "file://<BOOK>/examples/coffee-machine/book-views.sysml"
     }
   ]
 }

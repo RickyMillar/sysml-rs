@@ -1,6 +1,5 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
@@ -27,8 +26,8 @@ expression: bundle
             {
               "col_end": 0,
               "col_start": 0,
-              "line_end": 124,
-              "line_start": 124,
+              "line_end": 137,
+              "line_start": 137,
               "new_text": "    part def NewPart {\n    }\n\n"
             }
           ],

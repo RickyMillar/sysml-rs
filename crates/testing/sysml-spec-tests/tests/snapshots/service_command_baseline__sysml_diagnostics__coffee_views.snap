@@ -18,10 +18,10 @@ expression: bundle
       "severity": "error",
       "span": {
         "col": 8,
-        "end": 4338,
+        "end": 5641,
         "file":"<FILE>",
-        "line": 78,
-        "start": 4304
+        "line": 99,
+        "start": 5607
       },
       "tier": "Parse"
     },
@@ -35,10 +35,10 @@ expression: bundle
       "severity": "error",
       "span": {
         "col": 8,
-        "end": 3896,
+        "end": 4769,
         "file":"<FILE>",
-        "line": 66,
-        "start": 3856
+        "line": 81,
+        "start": 4729
       },
       "tier": "Parse"
     },
@@ -52,10 +52,10 @@ expression: bundle
       "severity": "error",
       "span": {
         "col": 8,
-        "end": 5115,
+        "end": 6389,
         "file":"<FILE>",
-        "line": 95,
-        "start": 5077
+        "line": 116,
+        "start": 6351
       },
       "tier": "Parse"
     }

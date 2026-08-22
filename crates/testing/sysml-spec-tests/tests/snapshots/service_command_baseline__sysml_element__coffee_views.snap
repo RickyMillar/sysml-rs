@@ -14,20 +14,20 @@ expression: bundle
     "name": "BrewSequenceView",
     "name_span": {
       "col": 13,
-      "end": 5648,
+      "end": 6627,
       "file":"<FILE>",
-      "line": 110,
-      "start": 5632
+      "line": 123,
+      "start": 6611
     },
     "owner": "<UUID>",
     "owning_membership": "<UUID>",
     "spans": [
       {
         "col": 4,
-        "end": 5714,
+        "end": 6740,
         "file":"<FILE>",
-        "line": 110,
-        "start": 5623
+        "line": 123,
+        "start": 6602
       }
     ]
   }

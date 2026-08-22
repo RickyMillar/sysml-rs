@@ -19,10 +19,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 3975,
+          "end": 4629,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3956
+          "line": 77,
+          "start": 4610
         }
       ]
     },
@@ -35,10 +35,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4003,
+          "end": 4657,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3956
+          "line": 77,
+          "start": 4610
         }
       ]
     },
@@ -51,10 +51,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4423,
+          "end": 5286,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4392
+          "line": 91,
+          "start": 5255
         }
       ]
     },
@@ -67,10 +67,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4453,
+          "end": 5316,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4392
+          "line": 91,
+          "start": 5255
         }
       ]
     },
@@ -83,10 +83,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5200,
+          "end": 6132,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -99,10 +99,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5242,
+          "end": 6174,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -115,10 +115,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5242,
+          "end": 6174,
           "file":"<FILE>",
-          "line": 98,
-          "start": 5216
+          "line": 110,
+          "start": 6148
         }
       ]
     },
@@ -131,10 +131,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5294,
+          "end": 6226,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -147,10 +147,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5294,
+          "end": 6226,
           "file":"<FILE>",
-          "line": 99,
-          "start": 5258
+          "line": 111,
+          "start": 6190
         }
       ]
     },
@@ -163,10 +163,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5341,
+          "end": 6273,
           "file":"<FILE>",
-          "line": 100,
-          "start": 5310
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -179,10 +179,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5341,
+          "end": 6273,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 112,
+          "start": 6242
         }
       ]
     },
@@ -195,10 +195,10 @@ expression: bundle
       "spans": [
         {
           "col": 38,
-          "end": 4003,
+          "end": 4657,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3979
+          "line": 77,
+          "start": 4633
         }
       ]
     },
@@ -211,10 +211,10 @@ expression: bundle
       "spans": [
         {
           "col": 50,
-          "end": 4453,
+          "end": 5316,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4427
+          "line": 91,
+          "start": 5290
         }
       ]
     },
@@ -227,10 +227,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 3975,
+          "end": 4629,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3956
+          "line": 77,
+          "start": 4610
         }
       ]
     },
@@ -243,10 +243,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4003,
+          "end": 4657,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3956
+          "line": 77,
+          "start": 4610
         }
       ]
     },
@@ -259,10 +259,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4423,
+          "end": 5286,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4392
+          "line": 91,
+          "start": 5255
         }
       ]
     },
@@ -275,10 +275,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4453,
+          "end": 5316,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4392
+          "line": 91,
+          "start": 5255
         }
       ]
     },
@@ -291,10 +291,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5200,
+          "end": 6132,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -307,10 +307,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5242,
+          "end": 6174,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -323,10 +323,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5242,
+          "end": 6174,
           "file":"<FILE>",
-          "line": 98,
-          "start": 5216
+          "line": 110,
+          "start": 6148
         }
       ]
     },
@@ -339,10 +339,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5294,
+          "end": 6226,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -355,10 +355,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5294,
+          "end": 6226,
           "file":"<FILE>",
-          "line": 99,
-          "start": 5258
+          "line": 111,
+          "start": 6190
         }
       ]
     },
@@ -371,10 +371,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5341,
+          "end": 6273,
           "file":"<FILE>",
-          "line": 100,
-          "start": 5310
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -387,10 +387,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5341,
+          "end": 6273,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 112,
+          "start": 6242
         }
       ]
     },
@@ -403,10 +403,10 @@ expression: bundle
       "spans": [
         {
           "col": 38,
-          "end": 4003,
+          "end": 4657,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3979
+          "line": 77,
+          "start": 4633
         }
       ]
     },
@@ -419,10 +419,10 @@ expression: bundle
       "spans": [
         {
           "col": 50,
-          "end": 4453,
+          "end": 5316,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4427
+          "line": 91,
+          "start": 5290
         }
       ]
     },
@@ -438,10 +438,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 3960,
+          "end": 4614,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3956
+          "line": 77,
+          "start": 4610
         }
       ]
     },
@@ -457,10 +457,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 4396,
+          "end": 5259,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4392
+          "line": 91,
+          "start": 5255
         }
       ]
     },
@@ -476,10 +476,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5173,
+          "end": 6105,
           "file":"<FILE>",
-          "line": 97,
-          "start": 5169
+          "line": 109,
+          "start": 6101
         }
       ]
     },
@@ -495,10 +495,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5220,
+          "end": 6152,
           "file":"<FILE>",
-          "line": 98,
-          "start": 5216
+          "line": 110,
+          "start": 6148
         }
       ]
     },
@@ -514,10 +514,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5262,
+          "end": 6194,
           "file":"<FILE>",
-          "line": 99,
-          "start": 5258
+          "line": 111,
+          "start": 6190
         }
       ]
     },
@@ -533,10 +533,10 @@ expression: bundle
       "spans": [
         {
           "col": 15,
-          "end": 5314,
+          "end": 6246,
           "file":"<FILE>",
-          "line": 100,
-          "start": 5310
+          "line": 112,
+          "start": 6242
         }
       ]
     },
@@ -552,10 +552,10 @@ expression: bundle
       "spans": [
         {
           "col": 38,
-          "end": 3983,
+          "end": 4637,
           "file":"<FILE>",
-          "line": 68,
-          "start": 3979
+          "line": 77,
+          "start": 4633
         }
       ]
     },
@@ -571,10 +571,10 @@ expression: bundle
       "spans": [
         {
           "col": 50,
-          "end": 4431,
+          "end": 5294,
           "file":"<FILE>",
-          "line": 80,
-          "start": 4427
+          "line": 91,
+          "start": 5290
         }
       ]
     },
@@ -584,19 +584,19 @@ expression: bundle
       "name": "Views",
       "name_span": {
         "col": 8,
-        "end": 498,
+        "end": 782,
         "file":"<FILE>",
-        "line": 11,
-        "start": 493
+        "line": 16,
+        "start": 777
       },
       "owner": null,
       "spans": [
         {
           "col": 0,
-          "end": 6137,
+          "end": 7191,
           "file":"<FILE>",
-          "line": 11,
-          "start": 485
+          "line": 16,
+          "start": 769
         }
       ]
     },
@@ -606,20 +606,20 @@ expression: bundle
       "name": "SafetyEngineer",
       "name_span": {
         "col": 13,
-        "end": 1173,
+        "end": 1681,
         "file":"<FILE>",
-        "line": 21,
-        "start": 1159
+        "line": 29,
+        "start": 1667
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 1174,
+          "end": 1682,
           "file":"<FILE>",
-          "line": 21,
-          "start": 1150
+          "line": 29,
+          "start": 1658
         }
       ]
     },
@@ -629,20 +629,20 @@ expression: bundle
       "name": "SystemArchitect",
       "name_span": {
         "col": 13,
-        "end": 1144,
+        "end": 1652,
         "file":"<FILE>",
-        "line": 20,
-        "start": 1129
+        "line": 28,
+        "start": 1637
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 1145,
+          "end": 1653,
           "file":"<FILE>",
-          "line": 20,
-          "start": 1120
+          "line": 28,
+          "start": 1628
         }
       ]
     },
@@ -652,20 +652,20 @@ expression: bundle
       "name": "TestEngineer",
       "name_span": {
         "col": 13,
-        "end": 1200,
+        "end": 1708,
         "file":"<FILE>",
-        "line": 22,
-        "start": 1188
+        "line": 30,
+        "start": 1696
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 1201,
+          "end": 1709,
           "file":"<FILE>",
-          "line": 22,
-          "start": 1179
+          "line": 30,
+          "start": 1687
         }
       ]
     },
@@ -675,20 +675,20 @@ expression: bundle
       "name": "StandardInterconnection",
       "name_span": {
         "col": 18,
-        "end": 2993,
+        "end": 3570,
         "file":"<FILE>",
-        "line": 54,
-        "start": 2970
+        "line": 63,
+        "start": 3547
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 2994,
+          "end": 3571,
           "file":"<FILE>",
-          "line": 54,
-          "start": 2956
+          "line": 63,
+          "start": 3533
         }
       ]
     },
@@ -698,20 +698,20 @@ expression: bundle
       "name": "TraceabilityTable",
       "name_span": {
         "col": 18,
-        "end": 3030,
+        "end": 3607,
         "file":"<FILE>",
-        "line": 55,
-        "start": 3013
+        "line": 64,
+        "start": 3590
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 3031,
+          "end": 3608,
           "file":"<FILE>",
-          "line": 55,
-          "start": 2999
+          "line": 64,
+          "start": 3576
         }
       ]
     },
@@ -721,20 +721,20 @@ expression: bundle
       "name": "architect",
       "name_span": {
         "col": 20,
-        "end": 1823,
+        "end": 2331,
         "file":"<FILE>",
-        "line": 30,
-        "start": 1814
+        "line": 38,
+        "start": 2322
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 8,
-          "end": 1842,
+          "end": 2350,
           "file":"<FILE>",
-          "line": 30,
-          "start": 1802
+          "line": 38,
+          "start": 2310
         }
       ]
     },
@@ -744,20 +744,20 @@ expression: bundle
       "name": "reviewer",
       "name_span": {
         "col": 20,
-        "end": 2072,
+        "end": 2580,
         "file":"<FILE>",
-        "line": 37,
-        "start": 2064
+        "line": 45,
+        "start": 2572
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 8,
-          "end": 2090,
+          "end": 2598,
           "file":"<FILE>",
-          "line": 37,
-          "start": 2052
+          "line": 45,
+          "start": 2560
         }
       ]
     },
@@ -767,20 +767,20 @@ expression: bundle
       "name": "tester",
       "name_span": {
         "col": 20,
-        "end": 2314,
+        "end": 2822,
         "file":"<FILE>",
-        "line": 44,
-        "start": 2308
+        "line": 52,
+        "start": 2816
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 8,
-          "end": 2330,
+          "end": 2838,
           "file":"<FILE>",
-          "line": 44,
-          "start": 2296
+          "line": 52,
+          "start": 2804
         }
       ]
     },
@@ -790,20 +790,20 @@ expression: bundle
       "name": "BrewSequenceView",
       "name_span": {
         "col": 13,
-        "end": 5648,
+        "end": 6627,
         "file":"<FILE>",
-        "line": 110,
-        "start": 5632
+        "line": 123,
+        "start": 6611
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 5714,
+          "end": 6740,
           "file":"<FILE>",
-          "line": 110,
-          "start": 5623
+          "line": 123,
+          "start": 6602
         }
       ]
     },
@@ -813,20 +813,20 @@ expression: bundle
       "name": "SafetyReviewView",
       "name_span": {
         "col": 13,
-        "end": 4278,
+        "end": 5139,
         "file":"<FILE>",
-        "line": 77,
-        "start": 4262
+        "line": 89,
+        "start": 5123
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 4727,
+          "end": 5554,
           "file":"<FILE>",
-          "line": 77,
-          "start": 4253
+          "line": 89,
+          "start": 5114
         }
       ]
     },
@@ -836,20 +836,20 @@ expression: bundle
       "name": "StructuralOverviewView",
       "name_span": {
         "col": 13,
-        "end": 3826,
+        "end": 4476,
         "file":"<FILE>",
-        "line": 65,
-        "start": 3804
+        "line": 75,
+        "start": 4454
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 4010,
+          "end": 4664,
           "file":"<FILE>",
-          "line": 65,
-          "start": 3795
+          "line": 75,
+          "start": 4445
         }
       ]
     },
@@ -859,20 +859,84 @@ expression: bundle
       "name": "VerificationDashboardView",
       "name_span": {
         "col": 13,
-        "end": 5051,
+        "end": 5982,
         "file":"<FILE>",
-        "line": 94,
-        "start": 5026
+        "line": 107,
+        "start": 5957
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 5348,
+          "end": 6280,
           "file":"<FILE>",
-          "line": 94,
-          "start": 5017
+          "line": 107,
+          "start": 5948
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewRenderingMembership",
+      "name": "brewStyle",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 6734,
+          "file":"<FILE>",
+          "line": 124,
+          "start": 6681
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewRenderingMembership",
+      "name": "dashboardStyle",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 6085,
+          "file":"<FILE>",
+          "line": 108,
+          "start": 6033
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewRenderingMembership",
+      "name": "safetyStyle",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 5239,
+          "file":"<FILE>",
+          "line": 90,
+          "start": 5190
+        }
+      ]
+    },
+    {
+      "id": "<UUID>",
+      "kind": "ViewRenderingMembership",
+      "name": "structuralStyle",
+      "owner": "<UUID>",
+      "owning_membership": "<UUID>",
+      "spans": [
+        {
+          "col": 8,
+          "end": 4594,
+          "file":"<FILE>",
+          "line": 76,
+          "start": 4535
         }
       ]
     },
@@ -882,20 +946,20 @@ expression: bundle
       "name": "brewSequence",
       "name_span": {
         "col": 9,
-        "end": 5737,
+        "end": 6763,
         "file":"<FILE>",
-        "line": 114,
-        "start": 5725
+        "line": 127,
+        "start": 6751
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 5799,
+          "end": 6825,
           "file":"<FILE>",
-          "line": 114,
-          "start": 5720
+          "line": 127,
+          "start": 6746
         }
       ]
     },
@@ -905,20 +969,20 @@ expression: bundle
       "name": "safetyReview",
       "name_span": {
         "col": 9,
-        "end": 4750,
+        "end": 5577,
         "file":"<FILE>",
-        "line": 87,
-        "start": 4738
+        "line": 98,
+        "start": 5565
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 4809,
+          "end": 5679,
           "file":"<FILE>",
-          "line": 87,
-          "start": 4733
+          "line": 98,
+          "start": 5560
         }
       ]
     },
@@ -928,20 +992,20 @@ expression: bundle
       "name": "scratch",
       "name_span": {
         "col": 9,
-        "end": 6070,
+        "end": 7096,
         "file":"<FILE>",
-        "line": 122,
-        "start": 6063
+        "line": 135,
+        "start": 7089
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 6135,
+          "end": 7189,
           "file":"<FILE>",
-          "line": 122,
-          "start": 6058
+          "line": 135,
+          "start": 7084
         }
       ]
     },
@@ -951,20 +1015,20 @@ expression: bundle
       "name": "structuralOverview",
       "name_span": {
         "col": 9,
-        "end": 4039,
+        "end": 4693,
         "file":"<FILE>",
-        "line": 71,
-        "start": 4021
+        "line": 80,
+        "start": 4675
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 4102,
+          "end": 4805,
           "file":"<FILE>",
-          "line": 71,
-          "start": 4016
+          "line": 80,
+          "start": 4670
         }
       ]
     },
@@ -974,20 +1038,20 @@ expression: bundle
       "name": "verificationDashboard",
       "name_span": {
         "col": 9,
-        "end": 5380,
+        "end": 6312,
         "file":"<FILE>",
-        "line": 103,
-        "start": 5359
+        "line": 115,
+        "start": 6291
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 5480,
+          "end": 6459,
           "file":"<FILE>",
-          "line": 103,
-          "start": 5354
+          "line": 115,
+          "start": 6286
         }
       ]
     },
@@ -997,20 +1061,20 @@ expression: bundle
       "name": "SafetyComplianceViewpoint",
       "name_span": {
         "col": 18,
-        "end": 2041,
+        "end": 2549,
         "file":"<FILE>",
-        "line": 36,
-        "start": 2016
+        "line": 44,
+        "start": 2524
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 2236,
+          "end": 2744,
           "file":"<FILE>",
-          "line": 36,
-          "start": 2002
+          "line": 44,
+          "start": 2510
         }
       ]
     },
@@ -1020,20 +1084,20 @@ expression: bundle
       "name": "StructuralCompletenessViewpoint",
       "name_span": {
         "col": 18,
-        "end": 1791,
+        "end": 2299,
         "file":"<FILE>",
-        "line": 29,
-        "start": 1760
+        "line": 37,
+        "start": 2268
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 1996,
+          "end": 2504,
           "file":"<FILE>",
-          "line": 29,
-          "start": 1746
+          "line": 37,
+          "start": 2254
         }
       ]
     },
@@ -1043,20 +1107,20 @@ expression: bundle
       "name": "VerificationCoverageViewpoint",
       "name_span": {
         "col": 18,
-        "end": 2285,
+        "end": 2793,
         "file":"<FILE>",
-        "line": 43,
-        "start": 2256
+        "line": 51,
+        "start": 2764
       },
       "owner": "<UUID>",
       "owning_membership": "<UUID>",
       "spans": [
         {
           "col": 4,
-          "end": 2464,
+          "end": 2972,
           "file":"<FILE>",
-          "line": 43,
-          "start": 2242
+          "line": 51,
+          "start": 2750
         }
       ]
     }

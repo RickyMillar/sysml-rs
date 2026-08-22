@@ -1,6 +1,5 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
@@ -15,70 +14,70 @@ expression: bundle
           "detail": null,
           "kind": "NamespaceImport",
           "name": "<unnamed>",
-          "range_end": 527,
-          "range_start": 505,
-          "selection_end": 527,
-          "selection_start": 505
+          "range_end": 811,
+          "range_start": 789,
+          "selection_end": 811,
+          "selection_start": 789
         },
         {
           "children": [],
           "detail": null,
           "kind": "NamespaceImport",
           "name": "<unnamed>",
-          "range_end": 555,
-          "range_start": 532,
-          "selection_end": 555,
-          "selection_start": 532
+          "range_end": 839,
+          "range_start": 816,
+          "selection_end": 839,
+          "selection_start": 816
         },
         {
           "children": [],
           "detail": null,
           "kind": "PartDefinition",
           "name": "SafetyEngineer",
-          "range_end": 1174,
-          "range_start": 1150,
-          "selection_end": 1164,
-          "selection_start": 1150
+          "range_end": 1682,
+          "range_start": 1658,
+          "selection_end": 1672,
+          "selection_start": 1658
         },
         {
           "children": [],
           "detail": null,
           "kind": "PartDefinition",
           "name": "SystemArchitect",
-          "range_end": 1145,
-          "range_start": 1120,
-          "selection_end": 1135,
-          "selection_start": 1120
+          "range_end": 1653,
+          "range_start": 1628,
+          "selection_end": 1643,
+          "selection_start": 1628
         },
         {
           "children": [],
           "detail": null,
           "kind": "PartDefinition",
           "name": "TestEngineer",
-          "range_end": 1201,
-          "range_start": 1179,
-          "selection_end": 1191,
-          "selection_start": 1179
+          "range_end": 1709,
+          "range_start": 1687,
+          "selection_end": 1699,
+          "selection_start": 1687
         },
         {
           "children": [],
           "detail": null,
           "kind": "RenderingDefinition",
           "name": "StandardInterconnection",
-          "range_end": 2994,
-          "range_start": 2956,
-          "selection_end": 2979,
-          "selection_start": 2956
+          "range_end": 3571,
+          "range_start": 3533,
+          "selection_end": 3556,
+          "selection_start": 3533
         },
         {
           "children": [],
           "detail": null,
           "kind": "RenderingDefinition",
           "name": "TraceabilityTable",
-          "range_end": 3031,
-          "range_start": 2999,
-          "selection_end": 3016,
-          "selection_start": 2999
+          "range_end": 3608,
+          "range_start": 3576,
+          "selection_end": 3593,
+          "selection_start": 3576
         },
         {
           "children": [
@@ -87,10 +86,10 @@ expression: bundle
               "detail": null,
               "kind": "Documentation",
               "name": "<unnamed>",
-              "range_end": 1990,
-              "range_start": 1851,
-              "selection_end": 1990,
-              "selection_start": 1851
+              "range_end": 2498,
+              "range_start": 2359,
+              "selection_end": 2498,
+              "selection_start": 2359
             },
             {
               "children": [
@@ -99,28 +98,28 @@ expression: bundle
                   "detail": null,
                   "kind": "FeatureTyping",
                   "name": "<unnamed>",
-                  "range_end": 1841,
-                  "range_start": 1826,
-                  "selection_end": 1841,
-                  "selection_start": 1826
+                  "range_end": 2349,
+                  "range_start": 2334,
+                  "selection_end": 2349,
+                  "selection_start": 2334
                 }
               ],
               "detail": null,
               "kind": "StakeholderMembership",
               "name": "architect",
-              "range_end": 1842,
-              "range_start": 1802,
-              "selection_end": 1811,
-              "selection_start": 1802
+              "range_end": 2350,
+              "range_start": 2310,
+              "selection_end": 2319,
+              "selection_start": 2310
             }
           ],
           "detail": null,
           "kind": "ViewpointDefinition",
           "name": "StructuralCompletenessViewpoint",
-          "range_end": 1996,
-          "range_start": 1746,
-          "selection_end": 1777,
-          "selection_start": 1746
+          "range_end": 2504,
+          "range_start": 2254,
+          "selection_end": 2285,
+          "selection_start": 2254
         },
         {
           "children": [
@@ -129,10 +128,10 @@ expression: bundle
               "detail": null,
               "kind": "Documentation",
               "name": "<unnamed>",
-              "range_end": 2230,
-              "range_start": 2099,
-              "selection_end": 2230,
-              "selection_start": 2099
+              "range_end": 2738,
+              "range_start": 2607,
+              "selection_end": 2738,
+              "selection_start": 2607
             },
             {
               "children": [
@@ -141,28 +140,28 @@ expression: bundle
                   "detail": null,
                   "kind": "FeatureTyping",
                   "name": "<unnamed>",
-                  "range_end": 2089,
-                  "range_start": 2075,
-                  "selection_end": 2089,
-                  "selection_start": 2075
+                  "range_end": 2597,
+                  "range_start": 2583,
+                  "selection_end": 2597,
+                  "selection_start": 2583
                 }
               ],
               "detail": null,
               "kind": "StakeholderMembership",
               "name": "reviewer",
-              "range_end": 2090,
-              "range_start": 2052,
-              "selection_end": 2060,
-              "selection_start": 2052
+              "range_end": 2598,
+              "range_start": 2560,
+              "selection_end": 2568,
+              "selection_start": 2560
             }
           ],
           "detail": null,
           "kind": "ViewpointDefinition",
           "name": "SafetyComplianceViewpoint",
-          "range_end": 2236,
-          "range_start": 2002,
-          "selection_end": 2027,
-          "selection_start": 2002
+          "range_end": 2744,
+          "range_start": 2510,
+          "selection_end": 2535,
+          "selection_start": 2510
         },
         {
           "children": [
@@ -171,10 +170,10 @@ expression: bundle
               "detail": null,
               "kind": "Documentation",
               "name": "<unnamed>",
-              "range_end": 2458,
-              "range_start": 2339,
-              "selection_end": 2458,
-              "selection_start": 2339
+              "range_end": 2966,
+              "range_start": 2847,
+              "selection_end": 2966,
+              "selection_start": 2847
             },
             {
               "children": [
@@ -183,28 +182,28 @@ expression: bundle
                   "detail": null,
                   "kind": "FeatureTyping",
                   "name": "<unnamed>",
-                  "range_end": 2329,
-                  "range_start": 2317,
-                  "selection_end": 2329,
-                  "selection_start": 2317
+                  "range_end": 2837,
+                  "range_start": 2825,
+                  "selection_end": 2837,
+                  "selection_start": 2825
                 }
               ],
               "detail": null,
               "kind": "StakeholderMembership",
               "name": "tester",
-              "range_end": 2330,
-              "range_start": 2296,
-              "selection_end": 2302,
-              "selection_start": 2296
+              "range_end": 2838,
+              "range_start": 2804,
+              "selection_end": 2810,
+              "selection_start": 2804
             }
           ],
           "detail": null,
           "kind": "ViewpointDefinition",
           "name": "VerificationCoverageViewpoint",
-          "range_end": 2464,
-          "range_start": 2242,
-          "selection_end": 2271,
-          "selection_start": 2242
+          "range_end": 2972,
+          "range_start": 2750,
+          "selection_end": 2779,
+          "selection_start": 2750
         },
         {
           "children": [
@@ -213,29 +212,39 @@ expression: bundle
               "detail": null,
               "kind": "FeatureTyping",
               "name": "<unnamed>",
-              "range_end": 4064,
-              "range_start": 4042,
-              "selection_end": 4064,
-              "selection_start": 4042
+              "range_end": 4718,
+              "range_start": 4696,
+              "selection_end": 4718,
+              "selection_start": 4696
             },
             {
               "children": [],
               "detail": null,
               "kind": "MembershipExpose",
               "name": "<unnamed>",
-              "range_end": 4096,
-              "range_start": 4075,
-              "selection_end": 4096,
-              "selection_start": 4075
+              "range_end": 4799,
+              "range_start": 4778,
+              "selection_end": 4799,
+              "selection_start": 4778
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "SatisfyRequirementUsage",
+              "name": "<unnamed>",
+              "range_end": 4769,
+              "range_start": 4729,
+              "selection_end": 4769,
+              "selection_start": 4729
             }
           ],
           "detail": null,
           "kind": "ViewUsage",
           "name": "structuralOverview",
-          "range_end": 4102,
-          "range_start": 4016,
-          "selection_end": 4034,
-          "selection_start": 4016
+          "range_end": 4805,
+          "range_start": 4670,
+          "selection_end": 4688,
+          "selection_start": 4670
         },
         {
           "children": [
@@ -244,29 +253,39 @@ expression: bundle
               "detail": null,
               "kind": "FeatureTyping",
               "name": "<unnamed>",
-              "range_end": 4769,
-              "range_start": 4753,
-              "selection_end": 4769,
-              "selection_start": 4753
+              "range_end": 5596,
+              "range_start": 5580,
+              "selection_end": 5596,
+              "selection_start": 5580
             },
             {
               "children": [],
               "detail": null,
               "kind": "NamespaceExpose",
               "name": "<unnamed>",
-              "range_end": 4803,
-              "range_start": 4780,
-              "selection_end": 4803,
-              "selection_start": 4780
+              "range_end": 5673,
+              "range_start": 5650,
+              "selection_end": 5673,
+              "selection_start": 5650
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "SatisfyRequirementUsage",
+              "name": "<unnamed>",
+              "range_end": 5641,
+              "range_start": 5607,
+              "selection_end": 5641,
+              "selection_start": 5607
             }
           ],
           "detail": null,
           "kind": "ViewUsage",
           "name": "safetyReview",
-          "range_end": 4809,
-          "range_start": 4733,
-          "selection_end": 4745,
-          "selection_start": 4733
+          "range_end": 5679,
+          "range_start": 5560,
+          "selection_end": 5572,
+          "selection_start": 5560
         },
         {
           "children": [
@@ -275,39 +294,49 @@ expression: bundle
               "detail": null,
               "kind": "FeatureTyping",
               "name": "<unnamed>",
-              "range_end": 5408,
-              "range_start": 5383,
-              "selection_end": 5408,
-              "selection_start": 5383
+              "range_end": 6340,
+              "range_start": 6315,
+              "selection_end": 6340,
+              "selection_start": 6315
             },
             {
               "children": [],
               "detail": null,
               "kind": "NamespaceExpose",
               "name": "<unnamed>",
-              "range_end": 5442,
-              "range_start": 5419,
-              "selection_end": 5442,
-              "selection_start": 5419
+              "range_end": 6421,
+              "range_start": 6398,
+              "selection_end": 6421,
+              "selection_start": 6398
             },
             {
               "children": [],
               "detail": null,
               "kind": "NamespaceExpose",
               "name": "<unnamed>",
-              "range_end": 5474,
-              "range_start": 5451,
-              "selection_end": 5474,
-              "selection_start": 5451
+              "range_end": 6453,
+              "range_start": 6430,
+              "selection_end": 6453,
+              "selection_start": 6430
+            },
+            {
+              "children": [],
+              "detail": null,
+              "kind": "SatisfyRequirementUsage",
+              "name": "<unnamed>",
+              "range_end": 6389,
+              "range_start": 6351,
+              "selection_end": 6389,
+              "selection_start": 6351
             }
           ],
           "detail": null,
           "kind": "ViewUsage",
           "name": "verificationDashboard",
-          "range_end": 5480,
-          "range_start": 5354,
-          "selection_end": 5375,
-          "selection_start": 5354
+          "range_end": 6459,
+          "range_start": 6286,
+          "selection_end": 6307,
+          "selection_start": 6286
         },
         {
           "children": [
@@ -316,92 +345,82 @@ expression: bundle
               "detail": null,
               "kind": "FeatureTyping",
               "name": "<unnamed>",
-              "range_end": 5756,
-              "range_start": 5740,
-              "selection_end": 5756,
-              "selection_start": 5740
+              "range_end": 6782,
+              "range_start": 6766,
+              "selection_end": 6782,
+              "selection_start": 6766
             },
             {
               "children": [],
               "detail": null,
               "kind": "MembershipExpose",
               "name": "<unnamed>",
-              "range_end": 5793,
-              "range_start": 5767,
-              "selection_end": 5793,
-              "selection_start": 5767
+              "range_end": 6819,
+              "range_start": 6793,
+              "selection_end": 6819,
+              "selection_start": 6793
             }
           ],
           "detail": null,
           "kind": "ViewUsage",
           "name": "brewSequence",
-          "range_end": 5799,
-          "range_start": 5720,
-          "selection_end": 5732,
-          "selection_start": 5720
+          "range_end": 6825,
+          "range_start": 6746,
+          "selection_end": 6758,
+          "selection_start": 6746
         },
         {
           "children": [
+            {
+              "children": [],
+              "detail": null,
+              "kind": "FeatureTyping",
+              "name": "<unnamed>",
+              "range_end": 7143,
+              "range_start": 7099,
+              "selection_end": 7143,
+              "selection_start": 7099
+            },
             {
               "children": [],
               "detail": null,
               "kind": "MembershipExpose",
               "name": "<unnamed>",
-              "range_end": 6129,
-              "range_start": 6100,
-              "selection_end": 6129,
-              "selection_start": 6100
-            },
-            {
-              "children": [],
-              "detail": null,
-              "kind": "Subsetting",
-              "name": "<unnamed>",
-              "range_end": 6089,
-              "range_start": 6074,
-              "selection_end": 6089,
-              "selection_start": 6074
+              "range_end": 7183,
+              "range_start": 7154,
+              "selection_end": 7183,
+              "selection_start": 7154
             }
           ],
           "detail": null,
           "kind": "ViewUsage",
           "name": "scratch",
-          "range_end": 6135,
-          "range_start": 6058,
-          "selection_end": 6065,
-          "selection_start": 6058
+          "range_end": 7189,
+          "range_start": 7084,
+          "selection_end": 7091,
+          "selection_start": 7084
         },
         {
           "children": [
             {
               "children": [],
               "detail": null,
-              "kind": "SatisfyRequirementUsage",
-              "name": "<unnamed>",
-              "range_end": 3896,
-              "range_start": 3856,
-              "selection_end": 3896,
-              "selection_start": 3856
-            },
-            {
-              "children": [],
-              "detail": null,
               "kind": "Subclassification",
               "name": "<unnamed>",
-              "range_end": 3845,
-              "range_start": 3830,
-              "selection_end": 3845,
-              "selection_start": 3830
+              "range_end": 4524,
+              "range_start": 4480,
+              "selection_end": 4524,
+              "selection_start": 4480
             },
             {
               "children": [],
               "detail": null,
               "kind": "ViewRenderingMembership",
-              "name": "<unnamed>",
-              "range_end": 3940,
-              "range_start": 3905,
-              "selection_end": 3940,
-              "selection_start": 3905
+              "name": "structuralStyle",
+              "range_end": 4594,
+              "range_start": 4535,
+              "selection_end": 4550,
+              "selection_start": 4535
             },
             {
               "children": [
@@ -414,20 +433,20 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureReferenceExpression",
                           "name": "kind",
-                          "range_end": 3960,
-                          "range_start": 3956,
-                          "selection_end": 3960,
-                          "selection_start": 3956
+                          "range_end": 4614,
+                          "range_start": 4610,
+                          "selection_end": 4614,
+                          "selection_start": 4610
                         },
                         {
                           "children": [],
                           "detail": null,
                           "kind": "LiteralString",
                           "name": "<unnamed>",
-                          "range_end": 3975,
-                          "range_start": 3964,
-                          "selection_end": 3975,
-                          "selection_start": 3964
+                          "range_end": 4629,
+                          "range_start": 4618,
+                          "selection_end": 4629,
+                          "selection_start": 4618
                         },
                         {
                           "children": [
@@ -436,19 +455,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 3975,
-                              "range_start": 3956,
-                              "selection_end": 3975,
-                              "selection_start": 3956
+                              "range_end": 4629,
+                              "range_start": 4610,
+                              "selection_end": 4629,
+                              "selection_start": 4610
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 3975,
-                          "range_start": 3956,
-                          "selection_end": 3957,
-                          "selection_start": 3956
+                          "range_end": 4629,
+                          "range_start": 4610,
+                          "selection_end": 4611,
+                          "selection_start": 4610
                         },
                         {
                           "children": [
@@ -457,28 +476,28 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 3975,
-                              "range_start": 3956,
-                              "selection_end": 3975,
-                              "selection_start": 3956
+                              "range_end": 4629,
+                              "range_start": 4610,
+                              "selection_end": 4629,
+                              "selection_start": 4610
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 3975,
-                          "range_start": 3956,
-                          "selection_end": 3957,
-                          "selection_start": 3956
+                          "range_end": 4629,
+                          "range_start": 4610,
+                          "selection_end": 4611,
+                          "selection_start": 4610
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 3975,
-                      "range_start": 3956,
-                      "selection_end": 3975,
-                      "selection_start": 3956
+                      "range_end": 4629,
+                      "range_start": 4610,
+                      "selection_end": 4629,
+                      "selection_start": 4610
                     },
                     {
                       "children": [
@@ -487,20 +506,20 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureReferenceExpression",
                           "name": "kind",
-                          "range_end": 3983,
-                          "range_start": 3979,
-                          "selection_end": 3983,
-                          "selection_start": 3979
+                          "range_end": 4637,
+                          "range_start": 4633,
+                          "selection_end": 4637,
+                          "selection_start": 4633
                         },
                         {
                           "children": [],
                           "detail": null,
                           "kind": "LiteralString",
                           "name": "<unnamed>",
-                          "range_end": 4003,
-                          "range_start": 3987,
-                          "selection_end": 4003,
-                          "selection_start": 3987
+                          "range_end": 4657,
+                          "range_start": 4641,
+                          "selection_end": 4657,
+                          "selection_start": 4641
                         },
                         {
                           "children": [
@@ -509,19 +528,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4003,
-                              "range_start": 3979,
-                              "selection_end": 4003,
-                              "selection_start": 3979
+                              "range_end": 4657,
+                              "range_start": 4633,
+                              "selection_end": 4657,
+                              "selection_start": 4633
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 4003,
-                          "range_start": 3979,
-                          "selection_end": 3980,
-                          "selection_start": 3979
+                          "range_end": 4657,
+                          "range_start": 4633,
+                          "selection_end": 4634,
+                          "selection_start": 4633
                         },
                         {
                           "children": [
@@ -530,28 +549,28 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4003,
-                              "range_start": 3979,
-                              "selection_end": 4003,
-                              "selection_start": 3979
+                              "range_end": 4657,
+                              "range_start": 4633,
+                              "selection_end": 4657,
+                              "selection_start": 4633
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 4003,
-                          "range_start": 3979,
-                          "selection_end": 3980,
-                          "selection_start": 3979
+                          "range_end": 4657,
+                          "range_start": 4633,
+                          "selection_end": 4634,
+                          "selection_start": 4633
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 4003,
-                      "range_start": 3979,
-                      "selection_end": 4003,
-                      "selection_start": 3979
+                      "range_end": 4657,
+                      "range_start": 4633,
+                      "selection_end": 4657,
+                      "selection_start": 4633
                     },
                     {
                       "children": [
@@ -560,19 +579,19 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 4003,
-                          "range_start": 3956,
-                          "selection_end": 4003,
-                          "selection_start": 3956
+                          "range_end": 4657,
+                          "range_start": 4610,
+                          "selection_end": 4657,
+                          "selection_start": 4610
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "x",
-                      "range_end": 4003,
-                      "range_start": 3956,
-                      "selection_end": 3957,
-                      "selection_start": 3956
+                      "range_end": 4657,
+                      "range_start": 4610,
+                      "selection_end": 4611,
+                      "selection_start": 4610
                     },
                     {
                       "children": [
@@ -581,78 +600,68 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 4003,
-                          "range_start": 3956,
-                          "selection_end": 4003,
-                          "selection_start": 3956
+                          "range_end": 4657,
+                          "range_start": 4610,
+                          "selection_end": 4657,
+                          "selection_start": 4610
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "y",
-                      "range_end": 4003,
-                      "range_start": 3956,
-                      "selection_end": 3957,
-                      "selection_start": 3956
+                      "range_end": 4657,
+                      "range_start": 4610,
+                      "selection_end": 4611,
+                      "selection_start": 4610
                     }
                   ],
                   "detail": null,
                   "kind": "OperatorExpression",
                   "name": "<unnamed>",
-                  "range_end": 4003,
-                  "range_start": 3956,
-                  "selection_end": 4003,
-                  "selection_start": 3956
+                  "range_end": 4657,
+                  "range_start": 4610,
+                  "selection_end": 4657,
+                  "selection_start": 4610
                 }
               ],
               "detail": null,
               "kind": "ElementFilterMembership",
               "name": "<unnamed>",
-              "range_end": 4004,
-              "range_start": 3949,
-              "selection_end": 4004,
-              "selection_start": 3949
+              "range_end": 4658,
+              "range_start": 4603,
+              "selection_end": 4658,
+              "selection_start": 4603
             }
           ],
           "detail": null,
           "kind": "ViewDefinition",
           "name": "StructuralOverviewView",
-          "range_end": 4010,
-          "range_start": 3795,
-          "selection_end": 3817,
-          "selection_start": 3795
+          "range_end": 4664,
+          "range_start": 4445,
+          "selection_end": 4467,
+          "selection_start": 4445
         },
         {
           "children": [
             {
               "children": [],
               "detail": null,
-              "kind": "SatisfyRequirementUsage",
-              "name": "<unnamed>",
-              "range_end": 4338,
-              "range_start": 4304,
-              "selection_end": 4338,
-              "selection_start": 4304
-            },
-            {
-              "children": [],
-              "detail": null,
               "kind": "Subclassification",
               "name": "<unnamed>",
-              "range_end": 4293,
-              "range_start": 4282,
-              "selection_end": 4293,
-              "selection_start": 4282
+              "range_end": 5179,
+              "range_start": 5143,
+              "selection_end": 5179,
+              "selection_start": 5143
             },
             {
               "children": [],
               "detail": null,
               "kind": "ViewRenderingMembership",
-              "name": "<unnamed>",
-              "range_end": 4376,
-              "range_start": 4347,
-              "selection_end": 4376,
-              "selection_start": 4347
+              "name": "safetyStyle",
+              "range_end": 5239,
+              "range_start": 5190,
+              "selection_end": 5201,
+              "selection_start": 5190
             },
             {
               "children": [
@@ -665,20 +674,20 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureReferenceExpression",
                           "name": "kind",
-                          "range_end": 4396,
-                          "range_start": 4392,
-                          "selection_end": 4396,
-                          "selection_start": 4392
+                          "range_end": 5259,
+                          "range_start": 5255,
+                          "selection_end": 5259,
+                          "selection_start": 5255
                         },
                         {
                           "children": [],
                           "detail": null,
                           "kind": "LiteralString",
                           "name": "<unnamed>",
-                          "range_end": 4423,
-                          "range_start": 4400,
-                          "selection_end": 4423,
-                          "selection_start": 4400
+                          "range_end": 5286,
+                          "range_start": 5263,
+                          "selection_end": 5286,
+                          "selection_start": 5263
                         },
                         {
                           "children": [
@@ -687,19 +696,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4423,
-                              "range_start": 4392,
-                              "selection_end": 4423,
-                              "selection_start": 4392
+                              "range_end": 5286,
+                              "range_start": 5255,
+                              "selection_end": 5286,
+                              "selection_start": 5255
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 4423,
-                          "range_start": 4392,
-                          "selection_end": 4393,
-                          "selection_start": 4392
+                          "range_end": 5286,
+                          "range_start": 5255,
+                          "selection_end": 5256,
+                          "selection_start": 5255
                         },
                         {
                           "children": [
@@ -708,28 +717,28 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4423,
-                              "range_start": 4392,
-                              "selection_end": 4423,
-                              "selection_start": 4392
+                              "range_end": 5286,
+                              "range_start": 5255,
+                              "selection_end": 5286,
+                              "selection_start": 5255
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 4423,
-                          "range_start": 4392,
-                          "selection_end": 4393,
-                          "selection_start": 4392
+                          "range_end": 5286,
+                          "range_start": 5255,
+                          "selection_end": 5256,
+                          "selection_start": 5255
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 4423,
-                      "range_start": 4392,
-                      "selection_end": 4423,
-                      "selection_start": 4392
+                      "range_end": 5286,
+                      "range_start": 5255,
+                      "selection_end": 5286,
+                      "selection_start": 5255
                     },
                     {
                       "children": [
@@ -738,20 +747,20 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureReferenceExpression",
                           "name": "kind",
-                          "range_end": 4431,
-                          "range_start": 4427,
-                          "selection_end": 4431,
-                          "selection_start": 4427
+                          "range_end": 5294,
+                          "range_start": 5290,
+                          "selection_end": 5294,
+                          "selection_start": 5290
                         },
                         {
                           "children": [],
                           "detail": null,
                           "kind": "LiteralString",
                           "name": "<unnamed>",
-                          "range_end": 4453,
-                          "range_start": 4435,
-                          "selection_end": 4453,
-                          "selection_start": 4435
+                          "range_end": 5316,
+                          "range_start": 5298,
+                          "selection_end": 5316,
+                          "selection_start": 5298
                         },
                         {
                           "children": [
@@ -760,19 +769,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4453,
-                              "range_start": 4427,
-                              "selection_end": 4453,
-                              "selection_start": 4427
+                              "range_end": 5316,
+                              "range_start": 5290,
+                              "selection_end": 5316,
+                              "selection_start": 5290
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 4453,
-                          "range_start": 4427,
-                          "selection_end": 4428,
-                          "selection_start": 4427
+                          "range_end": 5316,
+                          "range_start": 5290,
+                          "selection_end": 5291,
+                          "selection_start": 5290
                         },
                         {
                           "children": [
@@ -781,28 +790,28 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 4453,
-                              "range_start": 4427,
-                              "selection_end": 4453,
-                              "selection_start": 4427
+                              "range_end": 5316,
+                              "range_start": 5290,
+                              "selection_end": 5316,
+                              "selection_start": 5290
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 4453,
-                          "range_start": 4427,
-                          "selection_end": 4428,
-                          "selection_start": 4427
+                          "range_end": 5316,
+                          "range_start": 5290,
+                          "selection_end": 5291,
+                          "selection_start": 5290
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 4453,
-                      "range_start": 4427,
-                      "selection_end": 4453,
-                      "selection_start": 4427
+                      "range_end": 5316,
+                      "range_start": 5290,
+                      "selection_end": 5316,
+                      "selection_start": 5290
                     },
                     {
                       "children": [
@@ -811,19 +820,19 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 4453,
-                          "range_start": 4392,
-                          "selection_end": 4453,
-                          "selection_start": 4392
+                          "range_end": 5316,
+                          "range_start": 5255,
+                          "selection_end": 5316,
+                          "selection_start": 5255
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "x",
-                      "range_end": 4453,
-                      "range_start": 4392,
-                      "selection_end": 4393,
-                      "selection_start": 4392
+                      "range_end": 5316,
+                      "range_start": 5255,
+                      "selection_end": 5256,
+                      "selection_start": 5255
                     },
                     {
                       "children": [
@@ -832,78 +841,68 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 4453,
-                          "range_start": 4392,
-                          "selection_end": 4453,
-                          "selection_start": 4392
+                          "range_end": 5316,
+                          "range_start": 5255,
+                          "selection_end": 5316,
+                          "selection_start": 5255
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "y",
-                      "range_end": 4453,
-                      "range_start": 4392,
-                      "selection_end": 4393,
-                      "selection_start": 4392
+                      "range_end": 5316,
+                      "range_start": 5255,
+                      "selection_end": 5256,
+                      "selection_start": 5255
                     }
                   ],
                   "detail": null,
                   "kind": "OperatorExpression",
                   "name": "<unnamed>",
-                  "range_end": 4453,
-                  "range_start": 4392,
-                  "selection_end": 4453,
-                  "selection_start": 4392
+                  "range_end": 5316,
+                  "range_start": 5255,
+                  "selection_end": 5316,
+                  "selection_start": 5255
                 }
               ],
               "detail": null,
               "kind": "ElementFilterMembership",
               "name": "<unnamed>",
-              "range_end": 4454,
-              "range_start": 4385,
-              "selection_end": 4454,
-              "selection_start": 4385
+              "range_end": 5317,
+              "range_start": 5248,
+              "selection_end": 5317,
+              "selection_start": 5248
             }
           ],
           "detail": null,
           "kind": "ViewDefinition",
           "name": "SafetyReviewView",
-          "range_end": 4727,
-          "range_start": 4253,
-          "selection_end": 4269,
-          "selection_start": 4253
+          "range_end": 5554,
+          "range_start": 5114,
+          "selection_end": 5130,
+          "selection_start": 5114
         },
         {
           "children": [
             {
               "children": [],
               "detail": null,
-              "kind": "SatisfyRequirementUsage",
-              "name": "<unnamed>",
-              "range_end": 5115,
-              "range_start": 5077,
-              "selection_end": 5115,
-              "selection_start": 5077
-            },
-            {
-              "children": [],
-              "detail": null,
               "kind": "Subclassification",
               "name": "<unnamed>",
-              "range_end": 5066,
-              "range_start": 5055,
-              "selection_end": 5066,
-              "selection_start": 5055
+              "range_end": 6022,
+              "range_start": 5986,
+              "selection_end": 6022,
+              "selection_start": 5986
             },
             {
               "children": [],
               "detail": null,
               "kind": "ViewRenderingMembership",
-              "name": "<unnamed>",
-              "range_end": 5153,
-              "range_start": 5124,
-              "selection_end": 5153,
-              "selection_start": 5124
+              "name": "dashboardStyle",
+              "range_end": 6085,
+              "range_start": 6033,
+              "selection_end": 6047,
+              "selection_start": 6033
             },
             {
               "children": [
@@ -916,20 +915,20 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureReferenceExpression",
                           "name": "kind",
-                          "range_end": 5314,
-                          "range_start": 5310,
-                          "selection_end": 5314,
-                          "selection_start": 5310
+                          "range_end": 6246,
+                          "range_start": 6242,
+                          "selection_end": 6246,
+                          "selection_start": 6242
                         },
                         {
                           "children": [],
                           "detail": null,
                           "kind": "LiteralString",
                           "name": "<unnamed>",
-                          "range_end": 5341,
-                          "range_start": 5318,
-                          "selection_end": 5341,
-                          "selection_start": 5318
+                          "range_end": 6273,
+                          "range_start": 6250,
+                          "selection_end": 6273,
+                          "selection_start": 6250
                         },
                         {
                           "children": [
@@ -938,19 +937,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 5341,
-                              "range_start": 5310,
-                              "selection_end": 5341,
-                              "selection_start": 5310
+                              "range_end": 6273,
+                              "range_start": 6242,
+                              "selection_end": 6273,
+                              "selection_start": 6242
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 5341,
-                          "range_start": 5310,
-                          "selection_end": 5311,
-                          "selection_start": 5310
+                          "range_end": 6273,
+                          "range_start": 6242,
+                          "selection_end": 6243,
+                          "selection_start": 6242
                         },
                         {
                           "children": [
@@ -959,28 +958,28 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 5341,
-                              "range_start": 5310,
-                              "selection_end": 5341,
-                              "selection_start": 5310
+                              "range_end": 6273,
+                              "range_start": 6242,
+                              "selection_end": 6273,
+                              "selection_start": 6242
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 5341,
-                          "range_start": 5310,
-                          "selection_end": 5311,
-                          "selection_start": 5310
+                          "range_end": 6273,
+                          "range_start": 6242,
+                          "selection_end": 6243,
+                          "selection_start": 6242
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 5341,
-                      "range_start": 5310,
-                      "selection_end": 5341,
-                      "selection_start": 5310
+                      "range_end": 6273,
+                      "range_start": 6242,
+                      "selection_end": 6273,
+                      "selection_start": 6242
                     },
                     {
                       "children": [
@@ -989,19 +988,19 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 5341,
-                          "range_start": 5169,
-                          "selection_end": 5341,
-                          "selection_start": 5169
+                          "range_end": 6273,
+                          "range_start": 6101,
+                          "selection_end": 6273,
+                          "selection_start": 6101
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "x",
-                      "range_end": 5341,
-                      "range_start": 5169,
-                      "selection_end": 5170,
-                      "selection_start": 5169
+                      "range_end": 6273,
+                      "range_start": 6101,
+                      "selection_end": 6102,
+                      "selection_start": 6101
                     },
                     {
                       "children": [
@@ -1010,19 +1009,19 @@ expression: bundle
                           "detail": null,
                           "kind": "FeatureValue",
                           "name": "<unnamed>",
-                          "range_end": 5341,
-                          "range_start": 5169,
-                          "selection_end": 5341,
-                          "selection_start": 5169
+                          "range_end": 6273,
+                          "range_start": 6101,
+                          "selection_end": 6273,
+                          "selection_start": 6101
                         }
                       ],
                       "detail": null,
                       "kind": "Feature",
                       "name": "y",
-                      "range_end": 5341,
-                      "range_start": 5169,
-                      "selection_end": 5170,
-                      "selection_start": 5169
+                      "range_end": 6273,
+                      "range_start": 6101,
+                      "selection_end": 6102,
+                      "selection_start": 6101
                     },
                     {
                       "children": [
@@ -1033,20 +1032,20 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureReferenceExpression",
                               "name": "kind",
-                              "range_end": 5262,
-                              "range_start": 5258,
-                              "selection_end": 5262,
-                              "selection_start": 5258
+                              "range_end": 6194,
+                              "range_start": 6190,
+                              "selection_end": 6194,
+                              "selection_start": 6190
                             },
                             {
                               "children": [],
                               "detail": null,
                               "kind": "LiteralString",
                               "name": "<unnamed>",
-                              "range_end": 5294,
-                              "range_start": 5266,
-                              "selection_end": 5294,
-                              "selection_start": 5266
+                              "range_end": 6226,
+                              "range_start": 6198,
+                              "selection_end": 6226,
+                              "selection_start": 6198
                             },
                             {
                               "children": [
@@ -1055,19 +1054,19 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureValue",
                                   "name": "<unnamed>",
-                                  "range_end": 5294,
-                                  "range_start": 5258,
-                                  "selection_end": 5294,
-                                  "selection_start": 5258
+                                  "range_end": 6226,
+                                  "range_start": 6190,
+                                  "selection_end": 6226,
+                                  "selection_start": 6190
                                 }
                               ],
                               "detail": null,
                               "kind": "Feature",
                               "name": "x",
-                              "range_end": 5294,
-                              "range_start": 5258,
-                              "selection_end": 5259,
-                              "selection_start": 5258
+                              "range_end": 6226,
+                              "range_start": 6190,
+                              "selection_end": 6191,
+                              "selection_start": 6190
                             },
                             {
                               "children": [
@@ -1076,28 +1075,28 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureValue",
                                   "name": "<unnamed>",
-                                  "range_end": 5294,
-                                  "range_start": 5258,
-                                  "selection_end": 5294,
-                                  "selection_start": 5258
+                                  "range_end": 6226,
+                                  "range_start": 6190,
+                                  "selection_end": 6226,
+                                  "selection_start": 6190
                                 }
                               ],
                               "detail": null,
                               "kind": "Feature",
                               "name": "y",
-                              "range_end": 5294,
-                              "range_start": 5258,
-                              "selection_end": 5259,
-                              "selection_start": 5258
+                              "range_end": 6226,
+                              "range_start": 6190,
+                              "selection_end": 6191,
+                              "selection_start": 6190
                             }
                           ],
                           "detail": null,
                           "kind": "OperatorExpression",
                           "name": "<unnamed>",
-                          "range_end": 5294,
-                          "range_start": 5258,
-                          "selection_end": 5294,
-                          "selection_start": 5258
+                          "range_end": 6226,
+                          "range_start": 6190,
+                          "selection_end": 6226,
+                          "selection_start": 6190
                         },
                         {
                           "children": [
@@ -1106,19 +1105,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 5294,
-                              "range_start": 5169,
-                              "selection_end": 5294,
-                              "selection_start": 5169
+                              "range_end": 6226,
+                              "range_start": 6101,
+                              "selection_end": 6226,
+                              "selection_start": 6101
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "x",
-                          "range_end": 5294,
-                          "range_start": 5169,
-                          "selection_end": 5170,
-                          "selection_start": 5169
+                          "range_end": 6226,
+                          "range_start": 6101,
+                          "selection_end": 6102,
+                          "selection_start": 6101
                         },
                         {
                           "children": [
@@ -1127,19 +1126,19 @@ expression: bundle
                               "detail": null,
                               "kind": "FeatureValue",
                               "name": "<unnamed>",
-                              "range_end": 5294,
-                              "range_start": 5169,
-                              "selection_end": 5294,
-                              "selection_start": 5169
+                              "range_end": 6226,
+                              "range_start": 6101,
+                              "selection_end": 6226,
+                              "selection_start": 6101
                             }
                           ],
                           "detail": null,
                           "kind": "Feature",
                           "name": "y",
-                          "range_end": 5294,
-                          "range_start": 5169,
-                          "selection_end": 5170,
-                          "selection_start": 5169
+                          "range_end": 6226,
+                          "range_start": 6101,
+                          "selection_end": 6102,
+                          "selection_start": 6101
                         },
                         {
                           "children": [
@@ -1150,20 +1149,20 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureReferenceExpression",
                                   "name": "kind",
-                                  "range_end": 5173,
-                                  "range_start": 5169,
-                                  "selection_end": 5173,
-                                  "selection_start": 5169
+                                  "range_end": 6105,
+                                  "range_start": 6101,
+                                  "selection_end": 6105,
+                                  "selection_start": 6101
                                 },
                                 {
                                   "children": [],
                                   "detail": null,
                                   "kind": "LiteralString",
                                   "name": "<unnamed>",
-                                  "range_end": 5200,
-                                  "range_start": 5177,
-                                  "selection_end": 5200,
-                                  "selection_start": 5177
+                                  "range_end": 6132,
+                                  "range_start": 6109,
+                                  "selection_end": 6132,
+                                  "selection_start": 6109
                                 },
                                 {
                                   "children": [
@@ -1172,19 +1171,19 @@ expression: bundle
                                       "detail": null,
                                       "kind": "FeatureValue",
                                       "name": "<unnamed>",
-                                      "range_end": 5200,
-                                      "range_start": 5169,
-                                      "selection_end": 5200,
-                                      "selection_start": 5169
+                                      "range_end": 6132,
+                                      "range_start": 6101,
+                                      "selection_end": 6132,
+                                      "selection_start": 6101
                                     }
                                   ],
                                   "detail": null,
                                   "kind": "Feature",
                                   "name": "x",
-                                  "range_end": 5200,
-                                  "range_start": 5169,
-                                  "selection_end": 5170,
-                                  "selection_start": 5169
+                                  "range_end": 6132,
+                                  "range_start": 6101,
+                                  "selection_end": 6102,
+                                  "selection_start": 6101
                                 },
                                 {
                                   "children": [
@@ -1193,28 +1192,28 @@ expression: bundle
                                       "detail": null,
                                       "kind": "FeatureValue",
                                       "name": "<unnamed>",
-                                      "range_end": 5200,
-                                      "range_start": 5169,
-                                      "selection_end": 5200,
-                                      "selection_start": 5169
+                                      "range_end": 6132,
+                                      "range_start": 6101,
+                                      "selection_end": 6132,
+                                      "selection_start": 6101
                                     }
                                   ],
                                   "detail": null,
                                   "kind": "Feature",
                                   "name": "y",
-                                  "range_end": 5200,
-                                  "range_start": 5169,
-                                  "selection_end": 5170,
-                                  "selection_start": 5169
+                                  "range_end": 6132,
+                                  "range_start": 6101,
+                                  "selection_end": 6102,
+                                  "selection_start": 6101
                                 }
                               ],
                               "detail": null,
                               "kind": "OperatorExpression",
                               "name": "<unnamed>",
-                              "range_end": 5200,
-                              "range_start": 5169,
-                              "selection_end": 5200,
-                              "selection_start": 5169
+                              "range_end": 6132,
+                              "range_start": 6101,
+                              "selection_end": 6132,
+                              "selection_start": 6101
                             },
                             {
                               "children": [
@@ -1223,20 +1222,20 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureReferenceExpression",
                                   "name": "kind",
-                                  "range_end": 5220,
-                                  "range_start": 5216,
-                                  "selection_end": 5220,
-                                  "selection_start": 5216
+                                  "range_end": 6152,
+                                  "range_start": 6148,
+                                  "selection_end": 6152,
+                                  "selection_start": 6148
                                 },
                                 {
                                   "children": [],
                                   "detail": null,
                                   "kind": "LiteralString",
                                   "name": "<unnamed>",
-                                  "range_end": 5242,
-                                  "range_start": 5224,
-                                  "selection_end": 5242,
-                                  "selection_start": 5224
+                                  "range_end": 6174,
+                                  "range_start": 6156,
+                                  "selection_end": 6174,
+                                  "selection_start": 6156
                                 },
                                 {
                                   "children": [
@@ -1245,19 +1244,19 @@ expression: bundle
                                       "detail": null,
                                       "kind": "FeatureValue",
                                       "name": "<unnamed>",
-                                      "range_end": 5242,
-                                      "range_start": 5216,
-                                      "selection_end": 5242,
-                                      "selection_start": 5216
+                                      "range_end": 6174,
+                                      "range_start": 6148,
+                                      "selection_end": 6174,
+                                      "selection_start": 6148
                                     }
                                   ],
                                   "detail": null,
                                   "kind": "Feature",
                                   "name": "x",
-                                  "range_end": 5242,
-                                  "range_start": 5216,
-                                  "selection_end": 5217,
-                                  "selection_start": 5216
+                                  "range_end": 6174,
+                                  "range_start": 6148,
+                                  "selection_end": 6149,
+                                  "selection_start": 6148
                                 },
                                 {
                                   "children": [
@@ -1266,28 +1265,28 @@ expression: bundle
                                       "detail": null,
                                       "kind": "FeatureValue",
                                       "name": "<unnamed>",
-                                      "range_end": 5242,
-                                      "range_start": 5216,
-                                      "selection_end": 5242,
-                                      "selection_start": 5216
+                                      "range_end": 6174,
+                                      "range_start": 6148,
+                                      "selection_end": 6174,
+                                      "selection_start": 6148
                                     }
                                   ],
                                   "detail": null,
                                   "kind": "Feature",
                                   "name": "y",
-                                  "range_end": 5242,
-                                  "range_start": 5216,
-                                  "selection_end": 5217,
-                                  "selection_start": 5216
+                                  "range_end": 6174,
+                                  "range_start": 6148,
+                                  "selection_end": 6149,
+                                  "selection_start": 6148
                                 }
                               ],
                               "detail": null,
                               "kind": "OperatorExpression",
                               "name": "<unnamed>",
-                              "range_end": 5242,
-                              "range_start": 5216,
-                              "selection_end": 5242,
-                              "selection_start": 5216
+                              "range_end": 6174,
+                              "range_start": 6148,
+                              "selection_end": 6174,
+                              "selection_start": 6148
                             },
                             {
                               "children": [
@@ -1296,19 +1295,19 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureValue",
                                   "name": "<unnamed>",
-                                  "range_end": 5242,
-                                  "range_start": 5169,
-                                  "selection_end": 5242,
-                                  "selection_start": 5169
+                                  "range_end": 6174,
+                                  "range_start": 6101,
+                                  "selection_end": 6174,
+                                  "selection_start": 6101
                                 }
                               ],
                               "detail": null,
                               "kind": "Feature",
                               "name": "x",
-                              "range_end": 5242,
-                              "range_start": 5169,
-                              "selection_end": 5170,
-                              "selection_start": 5169
+                              "range_end": 6174,
+                              "range_start": 6101,
+                              "selection_end": 6102,
+                              "selection_start": 6101
                             },
                             {
                               "children": [
@@ -1317,64 +1316,64 @@ expression: bundle
                                   "detail": null,
                                   "kind": "FeatureValue",
                                   "name": "<unnamed>",
-                                  "range_end": 5242,
-                                  "range_start": 5169,
-                                  "selection_end": 5242,
-                                  "selection_start": 5169
+                                  "range_end": 6174,
+                                  "range_start": 6101,
+                                  "selection_end": 6174,
+                                  "selection_start": 6101
                                 }
                               ],
                               "detail": null,
                               "kind": "Feature",
                               "name": "y",
-                              "range_end": 5242,
-                              "range_start": 5169,
-                              "selection_end": 5170,
-                              "selection_start": 5169
+                              "range_end": 6174,
+                              "range_start": 6101,
+                              "selection_end": 6102,
+                              "selection_start": 6101
                             }
                           ],
                           "detail": null,
                           "kind": "OperatorExpression",
                           "name": "<unnamed>",
-                          "range_end": 5242,
-                          "range_start": 5169,
-                          "selection_end": 5242,
-                          "selection_start": 5169
+                          "range_end": 6174,
+                          "range_start": 6101,
+                          "selection_end": 6174,
+                          "selection_start": 6101
                         }
                       ],
                       "detail": null,
                       "kind": "OperatorExpression",
                       "name": "<unnamed>",
-                      "range_end": 5294,
-                      "range_start": 5169,
-                      "selection_end": 5294,
-                      "selection_start": 5169
+                      "range_end": 6226,
+                      "range_start": 6101,
+                      "selection_end": 6226,
+                      "selection_start": 6101
                     }
                   ],
                   "detail": null,
                   "kind": "OperatorExpression",
                   "name": "<unnamed>",
-                  "range_end": 5341,
-                  "range_start": 5169,
-                  "selection_end": 5341,
-                  "selection_start": 5169
+                  "range_end": 6273,
+                  "range_start": 6101,
+                  "selection_end": 6273,
+                  "selection_start": 6101
                 }
               ],
               "detail": null,
               "kind": "ElementFilterMembership",
               "name": "<unnamed>",
-              "range_end": 5200,
-              "range_start": 5162,
-              "selection_end": 5200,
-              "selection_start": 5162
+              "range_end": 6132,
+              "range_start": 6094,
+              "selection_end": 6132,
+              "selection_start": 6094
             }
           ],
           "detail": null,
           "kind": "ViewDefinition",
           "name": "VerificationDashboardView",
-          "range_end": 5348,
-          "range_start": 5017,
-          "selection_end": 5042,
-          "selection_start": 5017
+          "range_end": 6280,
+          "range_start": 5948,
+          "selection_end": 5973,
+          "selection_start": 5948
         },
         {
           "children": [
@@ -1383,38 +1382,38 @@ expression: bundle
               "detail": null,
               "kind": "Subclassification",
               "name": "<unnamed>",
-              "range_end": 5662,
-              "range_start": 5652,
-              "selection_end": 5662,
-              "selection_start": 5652
+              "range_end": 6670,
+              "range_start": 6631,
+              "selection_end": 6670,
+              "selection_start": 6631
             },
             {
               "children": [],
               "detail": null,
               "kind": "ViewRenderingMembership",
-              "name": "<unnamed>",
-              "range_end": 5708,
-              "range_start": 5673,
-              "selection_end": 5708,
-              "selection_start": 5673
+              "name": "brewStyle",
+              "range_end": 6734,
+              "range_start": 6681,
+              "selection_end": 6690,
+              "selection_start": 6681
             }
           ],
           "detail": null,
           "kind": "ViewDefinition",
           "name": "BrewSequenceView",
-          "range_end": 5714,
-          "range_start": 5623,
-          "selection_end": 5639,
-          "selection_start": 5623
+          "range_end": 6740,
+          "range_start": 6602,
+          "selection_end": 6618,
+          "selection_start": 6602
         }
       ],
       "detail": null,
       "kind": "Package",
       "name": "Views",
-      "range_end": 6137,
-      "range_start": 485,
-      "selection_end": 490,
-      "selection_start": 485
+      "range_end": 7191,
+      "range_start": 769,
+      "selection_end": 774,
+      "selection_start": 769
     }
   ]
 }
