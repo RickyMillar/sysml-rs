@@ -1,0 +1,6 @@
+[project]
+name = "coffee-machine"
+version = "0.1.0"
+description = "Smart coffee machine system model"
+license = "MIT"
+sysml-edition = "2025"

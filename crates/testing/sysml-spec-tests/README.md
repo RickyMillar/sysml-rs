@@ -24,6 +24,10 @@ constructible `ElementKind` variants tracked (`data/constructible_kinds.txt`)
 
 pilot-implementation JSON dump fixtures (`fixtures/pilot-dumps/`)
 
+**25.**
+
+vendored book example fixtures (`examples/the-book-corpus/` at the workspace root — source repo, commit, and resync procedure in its README)
+
 **188.**
 
 `insta` snapshots (`tests/snapshots/`)
