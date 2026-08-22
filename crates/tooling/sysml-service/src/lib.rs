@@ -6679,14 +6679,14 @@ impl SysmlService {
         )
     }
 
-    /// Build a `view scratch :> Interconnection { expose ...; }`
+    /// Build a `view scratch : InterconnectionView { expose ...; }`
     /// snippet from a list of qualified names or element references,
     /// for the editor's "create view def from selection" affordance.
     /// Pure string formatting — no graph access.
     #[service_command(
         name = "sysml.views.create_scratch",
         category = Visualization,
-        description = "Build a 'view scratch :> Interconnection { expose ...; }' source snippet from a list of qualified names",
+        description = "Build a 'view scratch : InterconnectionView { expose ...; }' source snippet from a list of qualified names",
         returns = "string (SysML source)",
     )]
     pub fn views_create_scratch(

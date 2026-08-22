@@ -802,7 +802,7 @@ pub struct CreateScratchRequest {
     pub expose: Vec<String>,
 }
 
-/// Build a `view scratch :> Interconnection { expose ...; }` source
+/// Build a `view scratch : InterconnectionView { expose ...; }` source
 /// snippet for the editor's "create view def from selection" command.
 async fn views_create_scratch(
     State(state): State<Arc<AppState>>,

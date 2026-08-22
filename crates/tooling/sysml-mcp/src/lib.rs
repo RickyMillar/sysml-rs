@@ -599,7 +599,7 @@ impl SysmlMcpHandler {
         dispatch_to_service(&self.service, "sysml.viewpoints.by_stakeholder", json)
     }
 
-    /// Build a `view scratch :> Interconnection { expose ...; }`
+    /// Build a `view scratch : InterconnectionView { expose ...; }`
     /// snippet from a list of qualified names. For the editor's
     /// "create view def from selection" affordance.
     #[tool(name = "sysml_views_create_scratch")]

@@ -254,23 +254,25 @@ pub fn viewpoints_by_stakeholder(graph: &ModelGraph, stakeholder_id: &ElementId)
     out
 }
 
-/// Build a `view scratch : Interconnection { expose <ids>; }` snippet
-/// that the editor can paste into a buffer at the user's cursor. Pure
-/// string formatting — does not consult any graph state.
+/// Build a `view scratch : InterconnectionView { expose <ids>; }`
+/// snippet that the editor can paste into a buffer at the user's cursor.
+/// Pure string formatting — does not consult any graph state.
 ///
-/// `scratch` is a view *usage*, so it is *typed by* `Interconnection`
+/// `scratch` is a view *usage*, so it is *typed by* `InterconnectionView`
 /// with `:` (FeatureTyping) — not specialized with `:>` (which requires
 /// a feature target and fires E005 on a usage; see views-first-class
-/// roadmap 3.8). `Interconnection` is the most generally applicable spec
-/// view kind and matches the Bucket 5 "Create view def from selection"
-/// UX. Authors can edit the type after insertion.
+/// roadmap 3.8). `InterconnectionView` is the canonical standard-library
+/// name (the pristine stdlib defines no bare `Interconnection`) and the
+/// most generally applicable spec view kind, matching the Bucket 5
+/// "Create view def from selection" UX. Authors can edit the type after
+/// insertion.
 ///
 /// Each id is rendered as a single `expose` line; callers that have
 /// resolved qualified names should pass those instead of raw element
 /// ids when integrating the snippet into source.
 pub fn views_create_scratch_snippet(expose_refs: &[String]) -> String {
     use std::fmt::Write;
-    let mut out = String::from("view scratch : Interconnection {\n");
+    let mut out = String::from("view scratch : InterconnectionView {\n");
     for r in expose_refs {
         let _ = writeln!(out, "    expose {};", r);
     }
@@ -630,7 +632,7 @@ mod tests {
     fn create_scratch_snippet_round_trip() {
         let snippet =
             views_create_scratch_snippet(&["engine".to_string(), "Vehicle::wheels".to_string()]);
-        assert!(snippet.starts_with("view scratch : Interconnection {\n"));
+        assert!(snippet.starts_with("view scratch : InterconnectionView {\n"));
         assert!(snippet.contains("    expose engine;\n"));
         assert!(snippet.contains("    expose Vehicle::wheels;\n"));
         assert!(snippet.ends_with("}\n"));
@@ -639,6 +641,6 @@ mod tests {
     #[test]
     fn create_scratch_snippet_no_exposes() {
         let snippet = views_create_scratch_snippet(&[]);
-        assert_eq!(snippet, "view scratch : Interconnection {\n}\n");
+        assert_eq!(snippet, "view scratch : InterconnectionView {\n}\n");
     }
 }
