@@ -43,18 +43,12 @@ pub fn view_type_name(vt: ViewType) -> &'static str {
 
 /// Parse a view-type string from command arguments. Defaults to
 /// `ViewType::General` for unrecognised inputs.
+///
+/// Thin wrapper over [`ViewType::from_request_str`] — the tolerant
+/// wire-parameter mapping. Request deserialisation only; model/graph
+/// resolution never goes through here.
 pub fn parse_view_type(s: &str) -> ViewType {
-    match s {
-        "GeneralView" | "general" => ViewType::General,
-        "InterconnectionView" | "interconnection" => ViewType::Interconnection,
-        "StateTransitionView" | "state" => ViewType::StateTransition,
-        "ActionFlowView" | "action" => ViewType::ActionFlow,
-        "BrowserView" | "browser" => ViewType::Browser,
-        "SequenceView" | "sequence" => ViewType::Sequence,
-        "GridView" | "grid" => ViewType::Grid,
-        "GeometryView" | "geometry" => ViewType::Geometry,
-        _ => ViewType::General,
-    }
+    ViewType::from_request_str(s).unwrap_or(ViewType::General)
 }
 
 /// Drop expanded ids whose elements no longer exist in `graph`.

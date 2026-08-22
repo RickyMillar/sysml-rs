@@ -521,3 +521,53 @@ fn mixed_expose_scene_is_self_consistent() {
     };
     check(&vm.scene.edges);
 }
+
+// ── Grammar defect #11: def-owned expose ─────────────────────────────────
+//
+// The pilot grammar (SysML.xtext) admits `Expose` only as a ViewBodyItem —
+// view USAGE bodies; `ViewDefinitionBodyItem` has no Expose alternative. Our
+// tree-sitter grammar admits expose_decl in every definition body, so
+// `view def Bad { expose X; }` parses cleanly today AND elaboration carries
+// the def-owned expose into `ViewSummary.exposed`. The grammar fix is
+// scheduled with the next tree-sitter regen (rules/*.js are not edited
+// out-of-band). An elaboration-side guard (def-owned expose contributes
+// nothing) was assessed and DEFERRED: the example corpus
+// (examples/view-showcase, examples/espresso-production-cell) authors
+// def-owned expose throughout, so the guard is a corpus-wide behaviour
+// change, not a contained fix.
+//
+// This test asserts the DESIRED shape and stays #[ignore]d until either fix
+// lands (repo convention: contract_resolution_features_baseline.rs). When
+// one does, drop the #[ignore] so the test pins it.
+#[test]
+#[ignore = "grammar defect #11: tree-sitter admits expose_decl in definition bodies; flips when the scheduled grammar regen (or an elaboration-side guard) makes def-owned expose fail or go inert"]
+fn def_owned_expose_is_rejected_or_inert() {
+    use sysml_parser_incremental::TreeSitterParser;
+    use sysml_parser_trait::{Parser, SysmlFile};
+
+    let src = "package P { part def X; view def Bad { expose X; } }";
+    let parser = TreeSitterParser::new();
+    let files = vec![SysmlFile::new("test.sysml", src)];
+    let result = parser.parse(&files);
+
+    let has_parse_error = result
+        .diagnostics
+        .iter()
+        .any(|d| d.severity == sysml_span::Severity::Error);
+
+    let mut graph = result.graph;
+    sysml_core::elaborate::elaborate(&mut graph);
+    let summaries = sysml_core::build_view_index(&graph);
+    let bad = summaries
+        .iter()
+        .find(|s| s.name.as_deref() == Some("Bad"));
+    let def_expose_inert = bad.map(|s| s.exposed.is_empty()).unwrap_or(true);
+
+    assert!(
+        has_parse_error || def_expose_inert,
+        "def-owned expose must fail to parse or contribute nothing to \
+         ViewSummary.exposed; got parse_error={has_parse_error}, \
+         exposed={:?}",
+        bad.map(|s| s.exposed.len())
+    );
+}

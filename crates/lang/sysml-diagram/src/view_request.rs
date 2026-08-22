@@ -155,9 +155,9 @@ impl ViewRequest {
     /// user-authored `ViewUsage` / `ViewDefinition`:
     ///
     /// - **`view_type`**: inferred via [`resolve_view_kind`] from the
-    ///   view's typedAs ViewDefinition, render member name, or the
-    ///   view's own name — only against the spec-aligned supertype
-    ///   names. No suffix-stripping, no preset overlays. Falls back to
+    ///   view's `:>` / `:` supertype chain or render member name — only
+    ///   against the canonical standard `*View` def names. No own-name
+    ///   matching, no suffix-stripping, no preset overlays. Falls back to
     ///   [`ViewType::General`].
     /// - **`expose`**: the first `ExposeRef` whose `exposed_element_id`
     ///   resolved. Generators centre the canvas on this element when
@@ -185,8 +185,8 @@ impl ViewRequest {
         // its own." So the effective filter is the view's OWN
         // ElementFilterMembership children (summary.filters) AND every filter
         // declared on a view definition reached through the `:>` / `:`
-        // supertype chain (e.g. `view def X :> Requirement` inherits
-        // `RequirementView`'s requirement filter). All compose as
+        // supertype chain (e.g. `view def X :> Base` inherits any `filter`
+        // clauses `Base` declares). All compose as
         // conjunction — every Boolean criterion must hold — which is exactly
         // how `GeneratorContext::passes_filter` evaluates the expression list.
         let mut filter_ids: Vec<ElementId> = summary.filters.iter().cloned().collect();
@@ -322,39 +322,18 @@ impl DiagramRequestKey {
     }
 }
 
-/// Map a **bare** standard view-definition name to a [`ViewType`] — the
-/// canonical author-facing tokens (`Interconnection`, `StateTransition`,
-/// …). These are the bare-name std-lib aliases
-/// (`view def Interconnection :> InterconnectionView`) authors write after
-/// `:>`, and they are also the only spelling honoured as a view's *own*
-/// name (an exact own-name match is intentional; a `FooInterconnection`
-/// suffix is NOT — that heuristic was deleted in Bucket 4).
-///
-/// Only the 8 standard view kinds are recognised. A "requirement view" is
-/// not a kind here: `view def X :> Requirement` resolves to `General` via
-/// the stdlib supertype walk (`Requirement` -> `RequirementView` ->
-/// `GeneralView`). Likewise there is no `Parametric` kind — constraint /
-/// binding notation renders in `Interconnection`. See
-fn bare_name_to_view_type(name: &str) -> Option<ViewType> {
-    match name {
-        "General" => Some(ViewType::General),
-        "Interconnection" => Some(ViewType::Interconnection),
-        "ActionFlow" => Some(ViewType::ActionFlow),
-        "StateTransition" => Some(ViewType::StateTransition),
-        "Sequence" => Some(ViewType::Sequence),
-        "Browser" => Some(ViewType::Browser),
-        "Grid" => Some(ViewType::Grid),
-        "Geometry" => Some(ViewType::Geometry),
-        _ => None,
-    }
-}
-
 /// Map a standard view-definition name reached via a `:>` / `:` supertype
-/// (or a rendering reference) to a [`ViewType`]. Recognises **both**
-/// spellings: the bare-name alias *and* the canonical `...View` def it
-/// aliases — so `:> Interconnection` and `:> InterconnectionView` resolve
-/// identically. This is supertype recognition, not a name heuristic on the
-/// view's own name (that path uses [`bare_name_to_view_type`]).
+/// (or a rendering reference) to a [`ViewType`]. Only the canonical names
+/// of the 8 standard ViewDefinitions the OMG standard library actually
+/// defines are recognised (`GeneralView`, `InterconnectionView`, …).
+///
+/// Bare-name spellings (`:> Interconnection`) do NOT classify: they were
+/// aliases invented by a retired local patch to the standard library, not
+/// spec names. A model writing one now carries a dangling supertype and
+/// falls through [`resolve_view_kind`]'s unresolved branch (General, with
+/// a warning). There is likewise no `RequirementView` and no `Parametric`
+/// kind — a "requirement view" is a filtered General view, and constraint /
+/// binding notation renders in `Interconnection`.
 fn name_to_view_type(name: &str) -> Option<ViewType> {
     match name {
         "GeneralView" => Some(ViewType::General),
@@ -365,23 +344,16 @@ fn name_to_view_type(name: &str) -> Option<ViewType> {
         "BrowserView" => Some(ViewType::Browser),
         "GridView" => Some(ViewType::Grid),
         "GeometryView" => Some(ViewType::Geometry),
-        other => bare_name_to_view_type(other),
+        _ => None,
     }
 }
 
-/// Match a possibly-qualified supertype/rendering name (`Pkg::Interconnection`)
-/// by stripping to its last path segment before running [`name_to_view_type`].
+/// Match a possibly-qualified supertype/rendering name
+/// (`StandardViewDefinitions::InterconnectionView`) by stripping to its
+/// last path segment before running [`name_to_view_type`].
 fn match_view_name(name: &str) -> Option<ViewType> {
     let leaf = name.rsplit("::").next().unwrap_or(name).trim();
     name_to_view_type(leaf)
-}
-
-/// Match a view's *own* name — bare-name tokens only (no `...View`
-/// canonical spelling), honouring the "no name-suffix / no implicit
-/// `...View`" anti-pattern. Qualifier-stripped like [`match_view_name`].
-fn match_own_view_name(name: &str) -> Option<ViewType> {
-    let leaf = name.rsplit("::").next().unwrap_or(name).trim();
-    bare_name_to_view_type(leaf)
 }
 
 /// Walk the `:>` specialization / `:` typing chain of a view element to the
@@ -393,8 +365,14 @@ fn match_own_view_name(name: &str) -> Option<ViewType> {
 /// `StateTransition` and never walks on to its `InterconnectionView`
 /// supertype, preserving the spec distinction. Names that don't match are
 /// resolved to their own declaration (if present in the graph) and their
-/// supertypes enqueued, so user-defined aliases chain through. Depth-capped
-/// to guard against specialization cycles.
+/// supertypes enqueued, so user-defined intermediate view defs chain
+/// through. Depth-capped to guard against specialization cycles.
+///
+/// The name check matches only the canonical `*View` spellings of the 8
+/// standard ViewDefinitions ([`name_to_view_type`]) — the names the OMG
+/// standard library really declares. A dangling supertype (e.g.
+/// `:> Interconnection`, which names nothing in the pristine stdlib) has
+/// no declaration to descend into and never classifies.
 fn walk_supertypes_for_view_type(graph: &ModelGraph, start: &sysml_core::Element) -> Option<ViewType> {
     use crate::visual_kind::{definition_by_name, supertype_names};
 
@@ -473,17 +451,17 @@ fn collect_inherited_filter_ids(graph: &ModelGraph, start: &Element) -> Vec<Elem
 /// 1. The view element's `:>` / `:` supertype chain, walked to the first
 ///    standard view definition ([`walk_supertypes_for_view_type`]).
 /// 2. Any `ViewRenderingMembership` child's name.
-/// 3. The view's own name (an exact bare-name match against the 8
-///    standard view kinds — e.g. a view literally named `Interconnection`).
 ///
 /// Each candidate goes through [`match_view_name`], which only recognises
-/// the spec-aligned standard view-def names. No preset overlays, no
+/// the canonical `*View` names of the 8 standard ViewDefinitions. The
+/// view's own name never classifies — a view def named `Interconnection`
+/// is just a name, not a kind declaration. No preset overlays, no
 /// name-suffix heuristic.
 ///
 /// **Default vs. failure (no silent fallback).** Reaching the end without a
 /// match has two distinct meanings, which this function keeps separate:
 ///  - The view declares *no* kind signal at all (no `:>` / `:` supertype,
-///    no rendering kind, no recognised own-name). Per spec clause 9.2.20
+///    no rendering kind). Per spec clause 9.2.20
 ///    `GeneralView` is the root ("the most general view"), so an
 ///    unspecialised view *is* a General view — returning [`ViewType::General`]
 ///    here is the correct spec default, not a fallback.
@@ -504,9 +482,6 @@ fn resolve_view_kind(graph: &ModelGraph, summary: &ViewSummary) -> ViewType {
         if let Some(vt) = r.name.as_deref().and_then(match_view_name) {
             return vt;
         }
-    }
-    if let Some(vt) = summary.name.as_deref().and_then(match_own_view_name) {
-        return vt;
     }
 
     // No standard view kind resolved. Distinguish "nothing declared" (legit
@@ -694,10 +669,10 @@ mod tests {
     }
 
     #[test]
-    fn from_view_usage_infers_kind_from_view_name_exact_match() {
-        // The view's own name is matched against the spec supertypes
-        // directly — `Interconnection`, not `InterconnectionView`. The
-        // suffix heuristic was deleted in Bucket 4.
+    fn from_view_usage_own_name_never_classifies() {
+        // A view's own name is just a name, not a kind declaration. A view
+        // def literally named `Interconnection` with no `:>` supertype is an
+        // unspecialised view — the spec root, General.
         let graph = ModelGraph::new();
         let summary = ViewSummary {
             id: ElementFactory::create(ElementKind::ViewDefinition).id,
@@ -709,14 +684,14 @@ mod tests {
             source_span: None,
         };
         let r = ViewRequest::from_view_usage(&graph, &summary);
-        assert_eq!(r.view_type, ViewType::Interconnection);
+        assert_eq!(r.view_type, ViewType::General);
     }
 
     #[test]
-    fn from_view_usage_view_suffix_no_longer_matches() {
-        // Ensures the deleted suffix heuristic stays gone — a view named
-        // `InterconnectionView` (without `:> Interconnection`) falls
-        // through to General.
+    fn from_view_usage_canonical_own_name_never_classifies_either() {
+        // The canonical spelling as an own name is equally inert — a view
+        // named `InterconnectionView` (without `:> InterconnectionView`)
+        // falls through to General.
         let graph = ModelGraph::new();
         let summary = ViewSummary {
             id: ElementFactory::create(ElementKind::ViewDefinition).id,
@@ -756,16 +731,19 @@ mod tests {
     }
 
     #[test]
-    fn resolve_kind_follows_bare_supertype() {
-        // `view def MyView :> Interconnection` → Interconnection.
+    fn resolve_kind_bare_supertype_does_not_classify() {
+        // `view def MyView :> Interconnection` — the pristine stdlib defines
+        // no `Interconnection` (only `InterconnectionView`), so the
+        // supertype dangles and must NOT silently classify. It takes the
+        // declared-but-unresolved branch: General, with a warning.
         let (graph, summary) = view_with_supertype("Interconnection");
-        assert_eq!(resolve_view_kind(&graph, &summary), ViewType::Interconnection);
+        assert_eq!(resolve_view_kind(&graph, &summary), ViewType::General);
     }
 
     #[test]
     fn resolve_kind_follows_canonical_view_supertype() {
         // `view def MyView :> InterconnectionView` → Interconnection (the
-        // canonical std-lib spelling resolves identically to the alias).
+        // canonical std-lib spelling, the only one that classifies).
         let (graph, summary) = view_with_supertype("InterconnectionView");
         assert_eq!(resolve_view_kind(&graph, &summary), ViewType::Interconnection);
     }
@@ -782,7 +760,8 @@ mod tests {
     #[test]
     fn resolve_kind_strips_qualified_supertype() {
         // A qualified supertype name resolves by its last path segment.
-        let (graph, summary) = view_with_supertype("ShowcaseViews::Interconnection");
+        let (graph, summary) =
+            view_with_supertype("StandardViewDefinitions::InterconnectionView");
         assert_eq!(resolve_view_kind(&graph, &summary), ViewType::Interconnection);
     }
 
@@ -820,8 +799,7 @@ mod tests {
     fn from_view_usage_inherits_supertype_filter() {
         // `view def MyView :> Base`, where `Base` declares a filter. MyView
         // has no OWN filter, but must INHERIT Base's via the `:>` chain
-        // (spec 7.26.2). This is the mechanism that makes
-        // `view def X :> Requirement` filter to requirements.
+        // (spec 7.26.2).
         let mut graph = ModelGraph::new();
         let base = ElementFactory::create(ElementKind::ViewDefinition).with_name("Base");
         let base_id = base.id.clone();
@@ -901,9 +879,9 @@ mod tests {
     #[test]
     fn from_view_usage_inherits_filter_transitively_two_levels() {
         // `Reqs :> Mid`, `Mid :> Base`, `Base { filter }`. Reqs must inherit
-        // Base's filter through the 2-level chain — this is the real stdlib
-        // shape: `view def X :> Requirement`, `Requirement :> RequirementView`,
-        // `RequirementView :> GeneralView { filter @SysML::RequirementUsage ... }`.
+        // Base's filter through the 2-level chain — the shape a model uses
+        // to build a filtered "requirement view" on top of an intermediate
+        // view def of its own.
         let mut graph = ModelGraph::new();
         let base = ElementFactory::create(ElementKind::ViewDefinition).with_name("Base");
         let base_id = base.id.clone();
@@ -947,15 +925,15 @@ mod tests {
     }
 
     #[test]
-    fn resolve_kind_walks_transitively_through_user_alias() {
-        // view def MyView :> Mid ; view def Mid :> Interconnection.
+    fn resolve_kind_walks_transitively_through_user_view_def() {
+        // view def MyView :> Mid ; view def Mid :> InterconnectionView.
         let mut graph = ModelGraph::new();
         let mid = ElementFactory::create(ElementKind::ViewDefinition).with_name("Mid");
         let mid_id = mid.id.clone();
         graph.add_element(mid);
         let mut mid_sub =
             ElementFactory::create(ElementKind::Subclassification).with_owner(mid_id.clone());
-        mid_sub.set_prop("unresolved_superclassifier", "Interconnection");
+        mid_sub.set_prop("unresolved_superclassifier", "InterconnectionView");
         graph.add_element(mid_sub);
 
         let v = ElementFactory::create(ElementKind::ViewDefinition).with_name("MyView");
@@ -985,49 +963,13 @@ mod tests {
     }
 
     #[test]
-    fn resolve_kind_requirement_resolves_to_general_via_stdlib_chain() {
-        // Retirement: `:> Requirement` is no longer a special view kind.
-        // It resolves to General through the spec-shaped stdlib chain
-        // `Requirement :> RequirementView :> GeneralView` via the
-        // supertype walk (the same mechanism as UseCaseView). See
-        let mut graph = ModelGraph::new();
-
-        // view def RequirementView :> GeneralView
-        let rv = ElementFactory::create(ElementKind::ViewDefinition).with_name("RequirementView");
-        let rv_id = rv.id.clone();
-        graph.add_element(rv);
-        let mut rv_sub =
-            ElementFactory::create(ElementKind::Subclassification).with_owner(rv_id.clone());
-        rv_sub.set_prop("unresolved_superclassifier", "GeneralView");
-        graph.add_element(rv_sub);
-
-        // view def Requirement :> RequirementView
-        let req = ElementFactory::create(ElementKind::ViewDefinition).with_name("Requirement");
-        let req_id = req.id.clone();
-        graph.add_element(req);
-        let mut req_sub =
-            ElementFactory::create(ElementKind::Subclassification).with_owner(req_id.clone());
-        req_sub.set_prop("unresolved_superclassifier", "RequirementView");
-        graph.add_element(req_sub);
-
-        // view def MyReqs :> Requirement
-        let v = ElementFactory::create(ElementKind::ViewDefinition).with_name("MyReqs");
-        let view_id = v.id.clone();
-        graph.add_element(v);
-        let mut sub =
-            ElementFactory::create(ElementKind::Subclassification).with_owner(view_id.clone());
-        sub.set_prop("unresolved_superclassifier", "Requirement");
-        graph.add_element(sub);
-
-        let summary = ViewSummary {
-            id: view_id,
-            name: Some("MyReqs".into()),
-            kind: ElementKind::ViewDefinition,
-            exposed: vec![],
-            renderings: vec![],
-            filters: vec![],
-            source_span: None,
-        };
+    fn resolve_kind_dangling_requirement_supertype_falls_to_general() {
+        // The pristine stdlib defines no `Requirement` / `RequirementView`
+        // view defs (those were inventions of a retired local patch), so
+        // `view def MyReqs :> Requirement` is a dangling supertype: it must
+        // NOT classify as anything, taking the declared-but-unresolved
+        // branch (General + warning) instead.
+        let (graph, summary) = view_with_supertype("Requirement");
         assert_eq!(resolve_view_kind(&graph, &summary), ViewType::General);
     }
 
@@ -1041,7 +983,7 @@ mod tests {
             exposed: vec![],
             renderings: vec![RenderingRef {
                 id: ElementFactory::create(ElementKind::ViewRenderingMembership).id,
-                name: Some("ActionFlow".into()),
+                name: Some("ActionFlowView".into()),
             }],
             filters: vec![],
             source_span: None,

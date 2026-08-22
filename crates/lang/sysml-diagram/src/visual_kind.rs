@@ -1512,6 +1512,20 @@ pub(crate) fn supertype_names(graph: &ModelGraph, element: &Element) -> Vec<Stri
             {
                 names.push(t.to_owned());
             }
+        } else if child.kind == ElementKind::Subsetting
+            || child.kind.is_subtype_of(ElementKind::Subsetting)
+        {
+            // Usage-form `:>` — an owned Subsetting (or its reference/cross
+            // refinements), not a Subclassification. Same usage-form pair as
+            // sysml_runtime::compiler::specializes_name strategy 3: `:>` on a
+            // usage carries the name under unresolved_subsettedFeature, `: T`
+            // under FeatureTyping's unresolved_type (handled above).
+            if let Some(t) = child
+                .get_prop("unresolved_subsettedFeature")
+                .and_then(|v| v.as_str())
+            {
+                names.push(t.to_owned());
+            }
         }
     }
     names

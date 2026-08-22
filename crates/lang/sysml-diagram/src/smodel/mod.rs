@@ -31,8 +31,8 @@ use tracing::instrument;
 /// `Sequence`, `Geometry`, `Grid`, `Browser`).
 ///
 /// There are no other view kinds: a "requirement view" is a `General`
-/// view with a requirement-shaped filter (resolved via the stdlib
-/// `RequirementView :> GeneralView` supertype walk), and constraint /
+/// view with a requirement-shaped filter (declared on the view def
+/// itself or inherited through its `:>` chain), and constraint /
 /// binding ("parametric") notation renders in `Interconnection`.
 /// Requirement and constraint notation is gated on element kind in the
 /// shared render path, not on a dedicated view kind. See
@@ -47,6 +47,33 @@ pub enum ViewType {
     Sequence,
     Grid,
     Geometry,
+}
+
+impl ViewType {
+    /// Map a caller-supplied wire/request string to a `ViewType`,
+    /// tolerantly: the canonical standard-library def name
+    /// (`"InterconnectionView"`), the lowercase kind token
+    /// (`"interconnection"`), and the short CLI aliases (`"state"`,
+    /// `"action"`) all parse.
+    ///
+    /// This is a TRANSPORT convenience for deserialising request
+    /// parameters in tool crates (LSP commands, HTTP/MCP params). It must
+    /// never be used to classify names found in a model or graph — model
+    /// resolution recognises only the canonical `*View` standard defs (see
+    /// `view_request::resolve_view_kind`).
+    pub fn from_request_str(s: &str) -> Option<Self> {
+        match s {
+            "GeneralView" | "general" => Some(Self::General),
+            "InterconnectionView" | "interconnection" => Some(Self::Interconnection),
+            "StateTransitionView" | "statetransition" | "state" => Some(Self::StateTransition),
+            "ActionFlowView" | "actionflow" | "action" => Some(Self::ActionFlow),
+            "BrowserView" | "browser" => Some(Self::Browser),
+            "SequenceView" | "sequence" => Some(Self::Sequence),
+            "GridView" | "grid" => Some(Self::Grid),
+            "GeometryView" | "geometry" => Some(Self::Geometry),
+            _ => None,
+        }
+    }
 }
 
 /// Generate an SModel graph honoring a structured [`crate::ViewRequest`].

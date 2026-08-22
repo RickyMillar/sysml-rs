@@ -30,7 +30,7 @@ fn sequence_serializes() {
 
 // ── Corpus-driven: view-showcase CommsView (expose Vehicle) ──────────────
 //
-// R2-9 regression gates: the showcase's `CommsView :> Sequence { expose
+// R2-9 regression gates: the showcase's `CommsView :> SequenceView { expose
 // Vehicle; }` must render a REAL sequence — typed lifeline heads, a message
 // arrow for the corpus `flow torqueFlow of Torque` exchange, and no
 // occurrence dot left without an incident message edge.
