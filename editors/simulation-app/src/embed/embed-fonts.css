@@ -1,0 +1,73 @@
+/*
+ * Fonts for the standalone diagram embed.
+ *
+ * The app shell serves public/fonts/fonts.css from its public/ dir; the embed
+ * build sets `publicDir: false` (a copy-anywhere dist must not depend on an
+ * absolute /fonts/ mount), so the same faces are declared here with Vite
+ * asset URLs — the .woff2 files are emitted into dist-embed/assets/ with
+ * relative paths.
+ *
+ * IBM Plex Sans/Mono are referenced straight from public/fonts/ (one checked-in
+ * copy). Material Symbols is NOT: the full variable font is 4 MB, and the
+ * embed's component set uses exactly two ligatures (BrowserView's disclosure
+ * chevrons), so ./fonts/ holds a 1.5 KB pyftsubset cut — see ./fonts/README.md
+ * for provenance, regeneration, and licenses.
+ */
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../public/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../public/fonts/IBMPlexSans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../public/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../public/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  /* The subset is instanced to a static wght=400 (see ./fonts/README.md). */
+  font-weight: 400;
+  /* block: an icon flashing as ligature TEXT is worse than a brief blank. */
+  font-display: block;
+  src: url('./fonts/MaterialSymbolsOutlined-embed.woff2') format('woff2');
+}
+
+/* The icon class the app gets from public/fonts/fonts.css — ligatures on, so
+ * `<span class="material-symbols-outlined">expand_more</span>` renders the
+ * glyph, never the text. */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga';
+}

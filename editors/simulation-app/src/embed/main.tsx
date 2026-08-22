@@ -1,19 +1,26 @@
 /**
- * Standalone diagram-embed entry (spike).
+ * Standalone diagram-embed entry.
  *
  * Boots the app's real view pipeline — SelectedViewRenderer (ViewModel fetch +
- * non-graph dispatch) → DiagramHost (renderer dispatch) → SvgCanvas /
- * BrowserView / TableView / GeometryView — against a baked ViewModel fixture,
- * with no app shell and no backend. Intended to be built by
- * `vite.embed.config.ts` into a self-contained static dist an <iframe> can load.
+ * non-graph dispatch) → EmbedDiagramHost (renderer dispatch) → SvgCanvas /
+ * BrowserView / TableView / GeometryView — against a ViewModel fixture, with
+ * no app shell and no backend. Built by `vite.embed.config.ts` into a
+ * self-contained static dist an <iframe> can load from any mount path.
  *
- * URL parameters:
- *   - `?fixture=<name>`  one of the bundled fixtures in ./fixtures/ (basename,
- *                        no extension). Default: the first bundled fixture.
- *   - `?src=<url>`       fetch an arbitrary ViewModel JSON instead (relative to
- *                        the page) — the shape a host like the book would use.
+ * URL parameters and the embedding contract (CSS hooks, fixture format) are
+ * documented in ./README.md. In short:
+ *   - `?src=<url>`       fetch a ViewModel JSON (relative to the page) — the
+ *                        primary path for hosts like the book, which serve
+ *                        fixtures as plain .json files next to the viewer.
+ *   - `?fixture=<name>`  one of the demo fixtures bundled from ./fixtures/
+ *                        (basename, no extension). Default: the first one.
  *   - `?theme=light`     set data-theme="light" on <html> (the app's existing
  *                        light-canvas ramp in tokens.css picks it up).
+ *
+ * Interactions: pan/zoom, drag, hover, and expand/collapse are fully live.
+ * Element click / double-click only move the visual selection highlight — the
+ * fixture transport answers the selection store's element-detail fetches with
+ * an empty stub, and no inspector ever renders.
  */
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -22,8 +29,9 @@ import { installFixtureFetch, realFetch, setFixtureViewModel } from './fixture-t
 import { useWorkspaceStore } from '@/store/workspace';
 import { WORKSPACE_URI } from '@/shared/api/model';
 import { SelectedViewRenderer } from '@/features/views/SelectedViewRenderer';
-import { DiagramHost } from '@/components/diagram/DiagramHost';
+import { EmbedDiagramHost } from './EmbedDiagramHost';
 import '@/styles/global.css';
+import './embed-fonts.css';
 
 // Patch fetch before anything renders (module init itself never fetches; the
 // REST transport resolves `window.fetch` per call).
@@ -86,7 +94,7 @@ async function boot() {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <SelectedViewRenderer />
-        <DiagramHost />
+        <EmbedDiagramHost />
       </QueryClientProvider>
     </StrictMode>,
   );

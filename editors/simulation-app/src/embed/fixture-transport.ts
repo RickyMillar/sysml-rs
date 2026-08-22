@@ -16,6 +16,13 @@
  *   - anything else                      → null + a console.warn (a warn, not an
  *     error — the embed proof asserts a clean error console)
  *
+ * Served REST paths:
+ *   - `/models/:uri/elements/:id`           → a minimal element stub — clicking
+ *     a node makes the selection store fetch detail for a (never-rendered)
+ *     inspector; a stub keeps selection purely visual with a quiet console
+ *   - `/models/:uri/elements/:id/children`  → empty list
+ *   - `/health`                             → ok
+ *
  * Non-backend URLs (the fixture JSON itself, hashed assets) pass through to
  * the real fetch untouched.
  */
@@ -96,6 +103,19 @@ export function installFixtureFetch(): void {
       return answerCommand(body);
     }
     if (url.startsWith('/health')) return jsonResponse({ status: 'ok' });
+
+    // Selection detail (selection store's fetchDetail, fired by node clicks).
+    const elementMatch = /^\/models\/[^/]+\/elements\/([^/?]+)(\/children)?(?:\?|$)/.exec(url);
+    if (elementMatch) {
+      if (elementMatch[2]) return jsonResponse([]);
+      return jsonResponse({
+        id: decodeURIComponent(elementMatch[1]),
+        kind: 'Element',
+        name: null,
+        props: {},
+        spans: [],
+      });
+    }
 
     console.warn(`[embed fixture] unhandled backend request "${url}" — returning null`);
     return jsonResponse(null);
