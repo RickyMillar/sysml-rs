@@ -48,10 +48,6 @@ fn workspace_root() -> PathBuf {
         .to_path_buf()
 }
 
-fn the_book_root() -> PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 // ---------------------------------------------------------------------------
 // Fixtures
 // ---------------------------------------------------------------------------
@@ -59,13 +55,13 @@ fn the_book_root() -> PathBuf {
 /// Returns the absolute fixture paths used by this test.
 ///
 /// Mix of:
-/// - the-book coffee-machine examples (the originally-affected files)
-/// - the-book views-library (small, varied)
-/// - the-book gate examples (broader spec construct coverage)
+/// - vendored book-corpus coffee-machine examples (the originally-affected
+///   files)
+/// - vendored book-corpus views-library exemplars (small, varied)
 /// - espresso-production-cell (synthetic multi-file model)
 /// - stdlib slice (large files, dense type surface)
 fn fixtures() -> Vec<PathBuf> {
-    let book = the_book_root();
+    let book = workspace_root().join("examples/the-book-corpus");
     let repo = workspace_root();
     let cell = repo.join("examples/espresso-production-cell");
     let stdlib =
@@ -73,7 +69,7 @@ fn fixtures() -> Vec<PathBuf> {
 
     let mut out = Vec::new();
 
-    // the-book coffee-machine — only the canonical sample files, not every
+    // book-corpus coffee-machine — only the canonical sample files, not every
     // SysML file in the dir (some are partial / pedagogical fragments).
     for name in [
         "actions.sysml",
@@ -85,10 +81,10 @@ fn fixtures() -> Vec<PathBuf> {
         "typing-and-specialization.sysml",
         "views.sysml",
     ] {
-        out.push(book.join("examples/coffee-machine").join(name));
+        out.push(book.join("coffee-machine").join(name));
     }
 
-    // the-book views-library — the eight numbered exemplars.
+    // book-corpus views-library — the eight numbered exemplars.
     for name in [
         "01-minimal-view-def.sysml",
         "02-view-usage-instance.sysml",
@@ -99,7 +95,7 @@ fn fixtures() -> Vec<PathBuf> {
         "08-viewpoint-satisfaction.sysml",
         "09-eight-supertypes.sysml",
     ] {
-        out.push(book.join("examples/views-library").join(name));
+        out.push(book.join("views-library").join(name));
     }
 
     // espresso-production-cell — synthetic multi-file model with libraries,

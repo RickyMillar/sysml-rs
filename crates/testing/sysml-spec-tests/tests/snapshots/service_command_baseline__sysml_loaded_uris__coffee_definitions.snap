@@ -5,21 +5,21 @@ expression: bundle
 {
   "request": {},
   "response": [
-    "file://<BOOK>/examples/coffee-machine/actions.sysml",
-    "file://<BOOK>/examples/coffee-machine/book-views.sysml",
-    "file://<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml",
-    "file://<BOOK>/examples/coffee-machine/calculations.sysml",
-    "file://<BOOK>/examples/coffee-machine/connections.sysml",
-    "file://<BOOK>/examples/coffee-machine/definitions.sysml",
-    "file://<BOOK>/examples/coffee-machine/demo-analysis.sysml",
-    "file://<BOOK>/examples/coffee-machine/flows.sysml",
-    "file://<BOOK>/examples/coffee-machine/metadata.sysml",
-    "file://<BOOK>/examples/coffee-machine/orchestration.sysml",
-    "file://<BOOK>/examples/coffee-machine/package-structure.sysml",
-    "file://<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
-    "file://<BOOK>/examples/coffee-machine/requirements.sysml",
-    "file://<BOOK>/examples/coffee-machine/states.sysml",
-    "file://<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
-    "file://<BOOK>/examples/coffee-machine/views.sysml"
+    "file://<WS>/examples/the-book-corpus/coffee-machine/actions.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/book-views.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/brew-cycle-flow.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/calculations.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/connections.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/demo-analysis.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/flows.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/metadata.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/orchestration.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/package-structure.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/ports-and-interfaces.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/requirements.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/states.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/typing-and-specialization.sysml",
+    "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
   ]
 }

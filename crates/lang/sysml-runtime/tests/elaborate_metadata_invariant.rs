@@ -34,21 +34,18 @@ fn workspace_root() -> PathBuf {
         .to_path_buf()
 }
 
-/// `the-book/` sits ABOVE the workspace root in this monorepo layout.
-fn the_book_root() -> PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 fn coffee_definitions_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("definitions.sysml")
 }
 
 fn coffee_views_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("views.sysml")
 }
@@ -80,7 +77,8 @@ package SolverSelectionDemo {
 }
 "#;
 
-/// The fixture set: two file-based generic sources (the-book coffee-machine),
+/// The fixture set: two file-based generic sources (vendored book corpus
+/// coffee-machine),
 /// one inline solver-selection model, and the standard-library base. Each is a
 /// `(label, source_text)` pair — no product example is referenced.
 fn fixture_sources() -> Vec<(&'static str, String)> {

@@ -5,91 +5,91 @@ expression: bundle
 {
   "request": {
     "max_depth": 2,
-    "root": "<BOOK>/examples/coffee-machine"
+    "root": "<WS>/examples/the-book-corpus/coffee-machine"
   },
   "response": {
     "entries": [
       {
         "name": "actions.sysml",
-        "path": "<BOOK>/examples/coffee-machine/actions.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/actions.sysml",
         "type": "file"
       },
       {
         "name": "book-views.sysml",
-        "path": "<BOOK>/examples/coffee-machine/book-views.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/book-views.sysml",
         "type": "file"
       },
       {
         "name": "brew-cycle-flow.sysml",
-        "path": "<BOOK>/examples/coffee-machine/brew-cycle-flow.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/brew-cycle-flow.sysml",
         "type": "file"
       },
       {
         "name": "calculations.sysml",
-        "path": "<BOOK>/examples/coffee-machine/calculations.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/calculations.sysml",
         "type": "file"
       },
       {
         "name": "connections.sysml",
-        "path": "<BOOK>/examples/coffee-machine/connections.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/connections.sysml",
         "type": "file"
       },
       {
         "name": "definitions.sysml",
-        "path": "<BOOK>/examples/coffee-machine/definitions.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
         "type": "file"
       },
       {
         "name": "demo-analysis.sysml",
-        "path": "<BOOK>/examples/coffee-machine/demo-analysis.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/demo-analysis.sysml",
         "type": "file"
       },
       {
         "name": "flows.sysml",
-        "path": "<BOOK>/examples/coffee-machine/flows.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/flows.sysml",
         "type": "file"
       },
       {
         "name": "metadata.sysml",
-        "path": "<BOOK>/examples/coffee-machine/metadata.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/metadata.sysml",
         "type": "file"
       },
       {
         "name": "orchestration.sysml",
-        "path": "<BOOK>/examples/coffee-machine/orchestration.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/orchestration.sysml",
         "type": "file"
       },
       {
         "name": "package-structure.sysml",
-        "path": "<BOOK>/examples/coffee-machine/package-structure.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/package-structure.sysml",
         "type": "file"
       },
       {
         "name": "ports-and-interfaces.sysml",
-        "path": "<BOOK>/examples/coffee-machine/ports-and-interfaces.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/ports-and-interfaces.sysml",
         "type": "file"
       },
       {
         "name": "requirements.sysml",
-        "path": "<BOOK>/examples/coffee-machine/requirements.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/requirements.sysml",
         "type": "file"
       },
       {
         "name": "states.sysml",
-        "path": "<BOOK>/examples/coffee-machine/states.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/states.sysml",
         "type": "file"
       },
       {
         "name": "typing-and-specialization.sysml",
-        "path": "<BOOK>/examples/coffee-machine/typing-and-specialization.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/typing-and-specialization.sysml",
         "type": "file"
       },
       {
         "name": "views.sysml",
-        "path": "<BOOK>/examples/coffee-machine/views.sysml",
+        "path": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml",
         "type": "file"
       }
     ],
-    "root": "<BOOK>/examples/coffee-machine"
+    "root": "<WS>/examples/the-book-corpus/coffee-machine"
   }
 }

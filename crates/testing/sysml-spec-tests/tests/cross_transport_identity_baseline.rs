@@ -56,21 +56,16 @@ fn workspace_root() -> PathBuf {
         .to_path_buf()
 }
 
-fn the_book_root() -> PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 /// Absolute-checkout-path → stable-token substitutions applied to every
 /// response bundle before it is snapshotted or archived, so the committed
 /// baselines carry no developer-specific absolute path (fresh-clone /
 /// relocated-checkout portability). Most specific prefix first — the shared
 /// repo parent must come last or it would partially rewrite the longer
-/// workspace/the-book paths. See `sysml_spec_tests::path_canon`.
+/// workspace paths. See `sysml_spec_tests::path_canon`.
 fn path_replacements() -> Vec<sysml_spec_tests::path_canon::PathReplacement> {
     use sysml_spec_tests::path_canon::PathReplacement;
     vec![
         PathReplacement::new(workspace_root().to_string_lossy().into_owned(), "<WS>"),
-        PathReplacement::new(the_book_root().to_string_lossy().into_owned(), "<BOOK>"),
         PathReplacement::new(
             workspace_root()
                 .parent()
@@ -94,15 +89,17 @@ struct Fixture {
 }
 
 fn coffee_definitions_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("definitions.sysml")
 }
 
 fn coffee_views_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("views.sysml")
 }

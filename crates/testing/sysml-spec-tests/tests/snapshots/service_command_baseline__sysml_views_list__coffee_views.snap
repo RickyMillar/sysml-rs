@@ -4,7 +4,7 @@ expression: bundle
 ---
 {
   "request": {
-    "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
   },
   "response": [
     {

@@ -31,13 +31,8 @@ fn workspace_root() -> std::path::PathBuf {
         .to_path_buf()
 }
 
-/// `the-book/` lives one level above the workspace root in this monorepo.
-fn the_book_root() -> std::path::PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 fn coffee_definitions_path() -> std::path::PathBuf {
-    the_book_root().join("examples/coffee-machine/definitions.sysml")
+    workspace_root().join("examples/the-book-corpus/coffee-machine/definitions.sysml")
 }
 
 fn coffee_definitions_uri(service: &SysmlService) -> String {

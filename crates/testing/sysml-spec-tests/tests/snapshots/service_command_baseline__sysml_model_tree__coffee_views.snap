@@ -1,12 +1,11 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
   "request": {
     "max_depth": 3,
-    "uri": "<BOOK>/examples/coffee-machine/views.sysml",
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml",
     "view": "user_facing"
   },
   "response": [
@@ -19,7 +18,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewpointDefinition",
           "name": "SafetyComplianceViewpoint",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "constraint",
@@ -27,7 +26,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewpointDefinition",
           "name": "StructuralCompletenessViewpoint",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "constraint",
@@ -35,7 +34,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewpointDefinition",
           "name": "VerificationCoverageViewpoint",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -43,7 +42,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "SafetyEngineer",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -51,7 +50,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "SystemArchitect",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -59,7 +58,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "TestEngineer",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -67,7 +66,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "RenderingDefinition",
           "name": "StandardInterconnection",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -75,7 +74,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "RenderingDefinition",
           "name": "TraceabilityTable",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -83,7 +82,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewDefinition",
           "name": "BrewSequenceView",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -91,7 +90,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewDefinition",
           "name": "SafetyReviewView",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -99,7 +98,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewDefinition",
           "name": "StructuralOverviewView",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         },
         {
           "archetype": "part",
@@ -107,13 +106,13 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ViewDefinition",
           "name": "VerificationDashboardView",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         }
       ],
       "id": "<UUID>",
       "kind": "Package",
       "name": "Views",
-      "source_uri": "file://<BOOK>/examples/coffee-machine/views.sysml"
+      "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
     }
   ]
 }

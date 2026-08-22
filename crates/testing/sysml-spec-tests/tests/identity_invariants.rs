@@ -86,12 +86,6 @@ fn workspace_root() -> PathBuf {
         .to_path_buf()
 }
 
-/// Path to `the-book/` (the directory ABOVE the workspace root in this
-/// monorepo layout).
-fn the_book_root() -> PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 /// Where the raw-id JSON archive is written. This is a human-inspection
 /// diagnostic, NOT a committed baseline: the ids are deterministic per
 /// code-state but shift whenever elaboration changes the element set, so a
@@ -116,15 +110,17 @@ struct Fixture {
 }
 
 fn coffee_definitions_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("definitions.sysml")
 }
 
 fn coffee_views_path() -> PathBuf {
-    the_book_root()
+    workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("views.sysml")
 }

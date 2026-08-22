@@ -95,10 +95,6 @@ fn workspace_root() -> PathBuf {
         .to_path_buf()
 }
 
-fn the_book_root() -> PathBuf {
-    workspace_root().parent().unwrap().join("the-book")
-}
-
 fn architectural_cleanup_dir() -> PathBuf {
     workspace_root().join("Architectural-cleanup")
 }
@@ -194,8 +190,9 @@ const M1_TOTAL_SAMPLES: usize = 20;
 const M1_WARMUP: usize = 5;
 
 async fn run_m1_lsp() -> JsonValue {
-    let fixture_path = the_book_root()
+    let fixture_path = workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("definitions.sysml");
     let source = std::fs::read_to_string(&fixture_path).expect("read coffee-machine definitions");
@@ -289,8 +286,9 @@ async fn run_m1_lsp() -> JsonValue {
 const M2_WARM_SAMPLES: usize = 10;
 
 async fn run_m2_rest() -> JsonValue {
-    let fixture_path = the_book_root()
+    let fixture_path = workspace_root()
         .join("examples")
+        .join("the-book-corpus")
         .join("coffee-machine")
         .join("definitions.sysml");
     let source = std::fs::read_to_string(&fixture_path).expect("read coffee-machine definitions");

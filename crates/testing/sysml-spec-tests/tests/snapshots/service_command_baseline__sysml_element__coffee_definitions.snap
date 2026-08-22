@@ -1,12 +1,11 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
   "request": {
     "id": "<UUID>",
-    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml"
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
   },
   "response": {
     "id": "<UUID>",

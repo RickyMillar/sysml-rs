@@ -1,12 +1,11 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
   "request": {
     "max_depth": 3,
-    "uri": "<BOOK>/examples/coffee-machine/definitions.sysml",
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
     "view": "user_facing"
   },
   "response": [
@@ -19,7 +18,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "AttributeDefinition",
           "name": "Duration",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "attribute",
@@ -27,7 +26,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "AttributeDefinition",
           "name": "Mass",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "attribute",
@@ -35,7 +34,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "AttributeDefinition",
           "name": "Pressure",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "attribute",
@@ -43,7 +42,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "AttributeDefinition",
           "name": "Temperature",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "attribute",
@@ -54,7 +53,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "EnumerationUsage",
               "name": "americano",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
             },
             {
               "archetype": "attribute",
@@ -62,7 +61,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "EnumerationUsage",
               "name": "cappuccino",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
             },
             {
               "archetype": "attribute",
@@ -70,7 +69,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "EnumerationUsage",
               "name": "espresso",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
             },
             {
               "archetype": "attribute",
@@ -78,13 +77,13 @@ expression: bundle
               "id": "<UUID>",
               "kind": "EnumerationUsage",
               "name": "latte",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
             }
           ],
           "id": "<UUID>",
           "kind": "EnumerationDefinition",
           "name": "DrinkType",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -92,7 +91,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ItemDefinition",
           "name": "BrewedCoffee",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -100,7 +99,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ItemDefinition",
           "name": "CoffeeBeans",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -108,7 +107,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ItemDefinition",
           "name": "GroundCoffee",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -116,7 +115,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ItemDefinition",
           "name": "Steam",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -124,7 +123,7 @@ expression: bundle
           "id": "<UUID>",
           "kind": "ItemDefinition",
           "name": "Water",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -135,7 +134,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "brewPressure",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Pressure"
             },
             {
@@ -144,7 +143,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "capacity",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Mass"
             },
             {
@@ -153,14 +152,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "waterTemp",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Temperature"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "Brewer",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -171,14 +170,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "cupDetected",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Boolean"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "CupSensor",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -189,7 +188,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "currentLevel",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Real"
             },
             {
@@ -198,14 +197,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "maxCapacity",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Mass"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "WaterTank",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -216,7 +215,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "grindSize",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Real"
             },
             {
@@ -225,14 +224,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "motorSpeed",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Real"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "Grinder",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -243,7 +242,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "isActive",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Boolean"
             },
             {
@@ -252,14 +251,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "steamTemp",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Temperature"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "SteamWand",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -270,14 +269,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "isFull",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Boolean"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "DripTray",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -288,7 +287,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "isReady",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "Boolean"
             },
             {
@@ -297,14 +296,14 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "selectedDrink",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "DrinkType"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "ControlPanel",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         },
         {
           "archetype": "part",
@@ -315,7 +314,7 @@ expression: bundle
               "id": "<UUID>",
               "kind": "AttributeUsage",
               "name": "serialNumber",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "unit": "String"
             },
             {
@@ -335,7 +334,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "brewPressure",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Pressure"
                 },
                 {
@@ -352,7 +351,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "capacity",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Mass"
                 },
                 {
@@ -369,14 +368,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "waterTemp",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Temperature"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "brewer",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -396,14 +395,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "cupDetected",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Boolean"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "cupSensor",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -423,7 +422,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "currentLevel",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Real"
                 },
                 {
@@ -440,14 +439,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "maxCapacity",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Mass"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "waterTank",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -467,7 +466,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "grindSize",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Real"
                 },
                 {
@@ -484,14 +483,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "motorSpeed",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Real"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "grinder",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -511,7 +510,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "isActive",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Boolean"
                 },
                 {
@@ -528,14 +527,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "steamTemp",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Temperature"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "steamWand",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -555,14 +554,14 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "isFull",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Boolean"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "dripTray",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             },
             {
@@ -582,7 +581,7 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "isReady",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "Boolean"
                 },
                 {
@@ -599,27 +598,27 @@ expression: bundle
                   "id": "<UUID>",
                   "kind": "AttributeUsage",
                   "name": "selectedDrink",
-                  "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+                  "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
                   "unit": "DrinkType"
                 }
               ],
               "id": "<UUID>",
               "kind": "PartUsage",
               "name": "controlPanel",
-              "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml",
+              "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml",
               "typed_as": "<UUID>"
             }
           ],
           "id": "<UUID>",
           "kind": "PartDefinition",
           "name": "CoffeeMachine",
-          "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+          "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
         }
       ],
       "id": "<UUID>",
       "kind": "Package",
       "name": "Definitions",
-      "source_uri": "file://<BOOK>/examples/coffee-machine/definitions.sysml"
+      "source_uri": "file://<WS>/examples/the-book-corpus/coffee-machine/definitions.sysml"
     }
   ]
 }

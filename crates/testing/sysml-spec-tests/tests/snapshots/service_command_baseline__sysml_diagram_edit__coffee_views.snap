@@ -8,17 +8,17 @@ expression: bundle
       "action": "create",
       "containerId": null,
       "elementTypeId": "PartDefinition",
-      "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+      "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
     }
   },
   "response": {
     "action": "create",
-    "status_message": "Created PartDefinition in <BOOK>/examples/coffee-machine/views.sysml",
+    "status_message": "Created PartDefinition in <WS>/examples/the-book-corpus/coffee-machine/views.sysml",
     "status_payload": {
       "elementType": "PartDefinition",
-      "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+      "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
     },
-    "uri": "<BOOK>/examples/coffee-machine/views.sysml",
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml",
     "workspace_edit": {
       "changes": [
         {
@@ -31,7 +31,7 @@ expression: bundle
               "new_text": "    part def NewPart {\n    }\n\n"
             }
           ],
-          "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+          "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
         }
       ]
     }

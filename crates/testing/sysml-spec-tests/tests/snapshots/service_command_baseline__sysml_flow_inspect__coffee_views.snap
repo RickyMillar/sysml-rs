@@ -1,11 +1,10 @@
 ---
 source: crates/testing/sysml-spec-tests/tests/service_command_baseline.rs
-assertion_line: 1150
 expression: bundle
 ---
 {
   "request": {
-    "uri": "<BOOK>/examples/coffee-machine/views.sysml"
+    "uri": "<WS>/examples/the-book-corpus/coffee-machine/views.sysml"
   },
   "response": {
     "delivery": [],
