@@ -2818,8 +2818,22 @@ impl SysmlService {
         uri: &str,
         request: &sysml_diagram::ViewRequest,
     ) -> Result<serde_json::Value, ServiceError> {
+        let view_model = self.resolve_view_model(uri, request)?;
+        Ok(serde_json::to_value(&view_model).unwrap_or_default())
+    }
+
+    /// The typed [`sysml_diagram::ViewModel`] behind [`Self::view_model_with_cached`]
+    /// — same two-tier dispatch, before serialization. Export paths use this to
+    /// prune the whole-graph sidecars to the view's referenced ids
+    /// (`ViewModel::pruned_to_referenced`) before writing JSON; the returned
+    /// value is a cheap clone of the cached artifact (`Arc` bumps).
+    pub fn resolve_view_model(
+        &self,
+        uri: &str,
+        request: &sysml_diagram::ViewRequest,
+    ) -> Result<sysml_diagram::ViewModel, ServiceError> {
         if let Some(view_model) = self.cached_view_model(request)? {
-            return Ok(serde_json::to_value(&*view_model).unwrap_or_default());
+            return Ok((*view_model).clone());
         }
         // Tier 2: filter-bearing request bypasses the cache. Thread the precompiled
         // filter-expression cache, same as `diagram_with_cached`.
@@ -2863,7 +2877,7 @@ impl SysmlService {
                 }
             }
         }
-        Ok(serde_json::to_value(&view_model).unwrap_or_default())
+        Ok(view_model)
     }
 
     /// Resolve the salsa-cached `Vec<ViewSummary>` for the workspace
@@ -6804,6 +6818,72 @@ impl SysmlService {
             ServiceError::NotFound(format!("view usage {view_usage_id} not found in workspace"))
         })?;
         self.view_model_with_cached(WORKSPACE_URI, &request)
+    }
+
+    /// Headless ViewModel export for a declared view — the fixture-baking peer
+    /// of [`Self::diagram_view_model`] (CLI `sysml export viewmodel`).
+    ///
+    /// Same request composition, two differences for the export use-case:
+    /// - `expand_all` forces every element id into the expanded set (mirrors
+    ///   [`Self::export_smodel`]); otherwise `expanded_ids` is used as given.
+    /// - The whole-graph `text_map` / `interactions` sidecars are pruned to the
+    ///   ids the scene / non-graph payload references
+    ///   ([`sysml_diagram::ViewModel::pruned_to_referenced`]) — serialized
+    ///   unpruned they carry a span for every workspace element (megabytes for
+    ///   a handful of nodes). The live `sysml.diagram.viewmodel` wire is
+    ///   unchanged: there the maps are shared `Arc`s and pruning would cost a
+    ///   per-view copy for no transport win.
+    ///
+    /// Helper, not a `#[service_command]`; MCP coverage gate unaffected.
+    pub fn export_view_model(
+        &self,
+        view_usage_id: &sysml_core::ElementId,
+        expanded_ids: &HashSet<String>,
+        expand_all: bool,
+    ) -> Result<serde_json::Value, ServiceError> {
+        let ws_graph = self.workspace_aware_graph()?;
+        let expanded: HashSet<String> = if expand_all {
+            ws_graph.elements.keys().map(|id| id.to_string()).collect()
+        } else {
+            expanded_ids.clone()
+        };
+        let summaries = self.workspace_view_index()?;
+        let request = visualization::build_view_request_for_view_usage_with_summaries(
+            &ws_graph,
+            &summaries,
+            view_usage_id,
+            &expanded,
+        )
+        .ok_or_else(|| {
+            ServiceError::NotFound(format!("view usage {view_usage_id} not found in workspace"))
+        })?;
+        let view_model = self.resolve_view_model(WORKSPACE_URI, &request)?;
+        Ok(serde_json::to_value(view_model.pruned_to_referenced()).unwrap_or_default())
+    }
+
+    /// Every declared view in the workspace as `(qualified_name, id)` pairs,
+    /// sorted by qualified name. The lookup table CLI export uses to resolve a
+    /// `--view <qualified-name>` argument (and to list the alternatives when
+    /// resolution fails). Anonymous views fall back to their bare name or id
+    /// string, so every declared view is addressable.
+    pub fn workspace_declared_views(
+        &self,
+    ) -> Result<Vec<(String, sysml_core::ElementId)>, ServiceError> {
+        let graph = self.workspace_aware_graph()?;
+        let summaries = self.workspace_view_index()?;
+        let mut views: Vec<(String, sysml_core::ElementId)> = summaries
+            .iter()
+            .map(|s| {
+                let qname = graph
+                    .build_qualified_name(&s.id)
+                    .map(|q| q.to_string())
+                    .or_else(|| s.name.clone())
+                    .unwrap_or_else(|| s.id.to_string());
+                (qname, s.id.clone())
+            })
+            .collect();
+        views.sort();
+        Ok(views)
     }
 
     /// Return the per-tick **simulation overlay** for a live session, joined to

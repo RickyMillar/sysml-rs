@@ -11,7 +11,7 @@
 //! `render` adapter — there is no parallel generate path: [`to_view_model`] and
 //! `smodel::to_smodel_with` both build the scene through [`build_scene`].
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
 use sysml_core::{ElementId, ModelGraph, ViewSummary};
@@ -236,6 +236,138 @@ impl ViewModel {
     pub fn scene_arc(&self) -> Arc<DiagramIR> {
         Arc::clone(&self.scene)
     }
+
+    /// Every id the scene or the non-graph payload references: node / port /
+    /// compartment-item / edge-endpoint ids (recursively, islands included) plus
+    /// tree-node / table row-column-cell / geometry-primitive ids. This is the
+    /// join domain of the `text_map` / `interactions` sidecars for THIS view.
+    pub fn referenced_element_ids(&self) -> HashSet<String> {
+        let mut ids = HashSet::new();
+        collect_scene_ids(&self.scene, &mut ids);
+        if let Some(non_graph) = self.non_graph.as_ref() {
+            collect_non_graph_ids(non_graph, &mut ids);
+        }
+        ids
+    }
+
+    /// A copy of this `ViewModel` with the `text_map` / `interactions` sidecars
+    /// scoped to [`Self::referenced_element_ids`].
+    ///
+    /// The sidecars are whole-graph maps (one salsa query per graph, shared by
+    /// every view), so a serialized `ViewModel` carries a span for every element
+    /// in the workspace — megabytes for a view whose scene holds a handful of
+    /// nodes. Export paths (CLI `sysml export viewmodel`, fixture baking) call
+    /// this before serializing; the live service keeps the unpruned shared
+    /// `Arc`s, where the duplication is free.
+    pub fn pruned_to_referenced(&self) -> ViewModel {
+        let keep = self.referenced_element_ids();
+        let mut pruned = self.clone();
+        pruned.text_map = self.text_map.as_deref().map(|tm| Arc::new(tm.retained(&keep)));
+        pruned.interactions = self
+            .interactions
+            .as_deref()
+            .map(|im| Arc::new(im.retained(&keep)));
+        pruned
+    }
+}
+
+fn collect_scene_ids(scene: &DiagramIR, out: &mut HashSet<String>) {
+    for node in &scene.nodes {
+        collect_node_ids(node, out);
+    }
+    for edge in &scene.edges {
+        collect_edge_ids(edge, out);
+    }
+}
+
+fn collect_node_ids(node: &ir::DiagramNode, out: &mut HashSet<String>) {
+    out.insert(node.element_id.clone());
+    for port in &node.ports {
+        collect_port_ids(port, out);
+    }
+    for child in &node.children {
+        collect_child_ids(child, out);
+    }
+}
+
+fn collect_port_ids(port: &ir::DiagramPort, out: &mut HashSet<String>) {
+    out.insert(port.element_id.clone());
+    for sub in &port.sub_ports {
+        collect_port_ids(sub, out);
+    }
+}
+
+fn collect_child_ids(child: &ir::DiagramChild, out: &mut HashSet<String>) {
+    match child {
+        ir::DiagramChild::Node(node) => collect_node_ids(node, out),
+        ir::DiagramChild::Text { element_id, .. } => {
+            out.insert(element_id.clone());
+        }
+        ir::DiagramChild::Compartment { children, .. } => {
+            for c in children {
+                collect_child_ids(c, out);
+            }
+        }
+        ir::DiagramChild::Island { subtree, .. } => collect_scene_ids(subtree, out),
+        ir::DiagramChild::Edge(edge) => collect_edge_ids(edge, out),
+    }
+}
+
+fn collect_edge_ids(edge: &ir::DiagramEdge, out: &mut HashSet<String>) {
+    out.insert(edge.id.clone());
+    out.insert(edge.source_id.clone());
+    out.insert(edge.target_id.clone());
+    if let Some(id) = edge.source_port_id.as_ref() {
+        out.insert(id.clone());
+    }
+    if let Some(id) = edge.target_port_id.as_ref() {
+        out.insert(id.clone());
+    }
+}
+
+fn collect_non_graph_ids(non_graph: &crate::NonGraphModel, out: &mut HashSet<String>) {
+    match non_graph {
+        crate::NonGraphModel::Table(table) => {
+            for col in &table.columns {
+                out.insert(col.id.clone());
+            }
+            for row in &table.rows {
+                out.insert(row.id.clone());
+                for cell in &row.cells {
+                    if let Some(id) = cell.element_id.as_ref() {
+                        out.insert(id.clone());
+                    }
+                }
+            }
+        }
+        crate::NonGraphModel::Geometry(geometry) => {
+            for primitive in &geometry.primitives {
+                match primitive {
+                    crate::GeometryPrimitive::Rect { id, element_id, .. } => {
+                        out.insert(id.clone());
+                        if let Some(eid) = element_id.as_ref() {
+                            out.insert(eid.clone());
+                        }
+                    }
+                }
+            }
+        }
+        crate::NonGraphModel::Tree(tree) => {
+            for root in &tree.roots {
+                collect_tree_node_ids(root, out);
+            }
+        }
+    }
+}
+
+fn collect_tree_node_ids(node: &crate::TreeNode, out: &mut HashSet<String>) {
+    out.insert(node.id.clone());
+    if let Some(id) = node.element_id.as_ref() {
+        out.insert(id.clone());
+    }
+    for child in &node.children {
+        collect_tree_node_ids(child, out);
+    }
 }
 
 /// Build the diagram scene for a request. This is the single generate path
@@ -406,6 +538,86 @@ mod tests {
         let frame = view_frame_from_summary(&graph, &s, ViewType::StateTransition);
         assert_eq!(frame.name, "DriveModesView");
         assert_eq!(frame.type_name.as_deref(), Some("StateTransition"));
+    }
+
+    #[test]
+    fn pruned_to_referenced_scopes_text_map_to_scene_ids() {
+        use crate::ir::{DiagramChild, DiagramNode};
+        use crate::VisualKind;
+        use crate::text_map::build_text_map;
+        use sysml_core::Element;
+        use sysml_span::Span;
+
+        // Graph with three spanned elements; the scene references only two.
+        // Scene ids are `ElementId::to_string()` — mint them the same way.
+        let [a, b, offscene] =
+            ["a", "b", "offscene"].map(|n| ElementId::from_string(n).to_string());
+        let mut graph = ModelGraph::new();
+        for id in [&a, &b, &offscene] {
+            let mut el = Element::new(ElementId::from_string(id.clone()), ElementKind::PartUsage);
+            el.spans.push(Span::new("m.sysml", 0, 1));
+            graph.add_element(el);
+        }
+        let text_map = build_text_map(&graph);
+        assert_eq!(text_map.len(), 3);
+
+        let mut node = DiagramNode::new(a.clone(), VisualKind::Part, "a");
+        node.children.push(DiagramChild::Text {
+            compartment: crate::CompartmentKind::Attributes,
+            text: "b".into(),
+            element_id: b.clone(),
+            source: crate::ir::types::CompartmentItemSource::Owned,
+        });
+        let vm = ViewModel::new(DiagramIR {
+            view_type: ViewType::General,
+            nodes: vec![node],
+            edges: Vec::new(),
+            buttons: Vec::new(),
+        })
+        .with_text_map(Arc::new(text_map));
+
+        let ids = vm.referenced_element_ids();
+        assert!(ids.contains(&a) && ids.contains(&b) && !ids.contains(&offscene));
+
+        let pruned = vm.pruned_to_referenced();
+        let tm = pruned.text_map().expect("text_map survives pruning");
+        assert_eq!(tm.len(), 2);
+        assert!(tm.span_for(&a).is_some() && tm.span_for(&b).is_some());
+        assert!(tm.span_for(&offscene).is_none(), "off-scene span pruned");
+        // Every retained id is a referenced id (pruned map ⊆ scene ids).
+        assert!(tm.iter().all(|(id, _)| ids.contains(id)));
+    }
+
+    #[test]
+    fn referenced_ids_cover_non_graph_tree_payload() {
+        use crate::{NonGraphModel, TreeModel, TreeNode};
+
+        let tree = TreeModel {
+            title: None,
+            kind: Some("containment_tree".into()),
+            roots: vec![TreeNode {
+                id: "root".into(),
+                element_id: Some("root".into()),
+                label: "Root".into(),
+                kind_label: None,
+                stereotype: None,
+                css_classes: Vec::new(),
+                children: vec![TreeNode {
+                    id: "leaf".into(),
+                    element_id: Some("leaf".into()),
+                    label: "Leaf".into(),
+                    kind_label: None,
+                    stereotype: None,
+                    css_classes: Vec::new(),
+                    children: Vec::new(),
+                }],
+            }],
+        };
+        let vm = ViewModel::new(DiagramIR::new_fixed(ViewType::Browser))
+            .with_non_graph(NonGraphModel::Tree(tree));
+
+        let ids = vm.referenced_element_ids();
+        assert!(ids.contains("root") && ids.contains("leaf"));
     }
 
     #[test]

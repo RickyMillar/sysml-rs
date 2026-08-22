@@ -104,6 +104,21 @@ impl InteractionMap {
     pub fn iter(&self) -> impl Iterator<Item = (&String, &InteractionEntry)> {
         self.entries.iter()
     }
+
+    /// A copy of this map retaining only the entries whose id is in `keep`.
+    ///
+    /// Like the text-map, this is a whole-graph sidecar; export paths scope it
+    /// to one view's referenced ids (see `ViewModel::pruned_to_referenced`).
+    pub fn retained(&self, keep: &std::collections::HashSet<String>) -> InteractionMap {
+        InteractionMap {
+            entries: self
+                .entries
+                .iter()
+                .filter(|(id, _)| keep.contains(*id))
+                .map(|(id, entry)| (id.clone(), entry.clone()))
+                .collect(),
+        }
+    }
 }
 
 /// Build the [`InteractionMap`] for a model graph. Pure function of the graph

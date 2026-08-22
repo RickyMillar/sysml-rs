@@ -71,6 +71,28 @@ pub enum ExportCommand {
         #[arg(long)]
         expand_all: bool,
     },
+    /// Export a declared view's ViewModel JSON (scene + tokens + text-map +
+    /// interactions + frame / non-graph payload), sidecars pruned to the
+    /// view's referenced ids
+    Viewmodel {
+        /// Workspace directory to load (declared views render against the
+        /// whole workspace)
+        #[arg(long)]
+        workspace: PathBuf,
+        /// Qualified name of the declared view to export
+        /// (e.g. ShowcaseViews::OverviewView; a unique bare name also resolves)
+        #[arg(long)]
+        view: String,
+        /// Expand every expandable node
+        #[arg(long, conflicts_with = "expand")]
+        expand_all: bool,
+        /// Element id to render expanded (repeatable)
+        #[arg(long)]
+        expand: Vec<String>,
+        /// Write the JSON to this file instead of stdout
+        #[arg(short, long)]
+        output: Option<PathBuf>,
+    },
 }
 
 pub fn run(command: ExportCommand) -> Result<(), CliError> {
@@ -78,6 +100,13 @@ pub fn run(command: ExportCommand) -> Result<(), CliError> {
         ExportCommand::Plantuml { file, view } => run_plantuml(&file, &view),
         ExportCommand::Json { file, pretty } => run_json(&file, pretty),
         ExportCommand::Smodel { file, view, expand_all } => run_smodel(&file, &view, expand_all),
+        ExportCommand::Viewmodel {
+            workspace,
+            view,
+            expand_all,
+            expand,
+            output,
+        } => run_viewmodel(&workspace, &view, expand_all, &expand, output.as_deref()),
     }
 }
 
@@ -111,6 +140,62 @@ fn run_json(file: &std::path::Path, pretty: bool) -> Result<(), CliError> {
     Ok(())
 }
 
+fn run_viewmodel(
+    workspace: &std::path::Path,
+    view: &str,
+    expand_all: bool,
+    expand: &[String],
+    output: Option<&std::path::Path>,
+) -> Result<(), CliError> {
+    let service = SysmlService::from_workspace(workspace)?;
+    let views = service.workspace_declared_views()?;
+    let view_id = resolve_view_arg(&views, view)?.clone();
+
+    let expanded: std::collections::HashSet<String> = expand.iter().cloned().collect();
+    let value = service.export_view_model(&view_id, &expanded, expand_all)?;
+    let json = serde_json::to_string_pretty(&value).unwrap_or_default();
+    match output {
+        Some(path) => std::fs::write(path, json)
+            .map_err(|e| CliError::internal(format!("write {}: {e}", path.display())))?,
+        None => println!("{json}"),
+    }
+    Ok(())
+}
+
+/// Resolve a `--view` argument against the workspace's declared views
+/// (`(qualified_name, id)` pairs). An exact qualified-name match wins; a bare
+/// name resolves when it names exactly one view; anything else is a user error
+/// listing the alternatives.
+fn resolve_view_arg<'a, T>(views: &'a [(String, T)], arg: &str) -> Result<&'a T, CliError> {
+    let exact: Vec<&(String, T)> = views.iter().filter(|(qname, _)| qname == arg).collect();
+    let matches = if exact.is_empty() {
+        let suffix = format!("::{arg}");
+        views
+            .iter()
+            .filter(|(qname, _)| qname.ends_with(&suffix))
+            .collect()
+    } else {
+        exact
+    };
+    match matches.as_slice() {
+        [(_, id)] => Ok(id),
+        [] => {
+            let available: Vec<&str> = views.iter().map(|(q, _)| q.as_str()).collect();
+            Err(CliError::user(format!(
+                "view '{arg}' not found in workspace. Declared views:\n  {}",
+                available.join("\n  ")
+            )))
+        }
+        many => {
+            let names: Vec<&str> = many.iter().map(|(q, _)| q.as_str()).collect();
+            Err(CliError::user(format!(
+                "view '{arg}' is ambiguous; use a qualified name:\n  {}",
+                names.join("\n  ")
+            )))
+        }
+    }
+}
+
 fn run_smodel(file: &std::path::Path, view: &SmodelView, expand_all: bool) -> Result<(), CliError> {
     // Bucket B / B5 P1: SModel pipeline lives on the service. CLI is a thin
     // load → dispatch → print shell.
@@ -133,4 +218,49 @@ fn run_smodel(file: &std::path::Path, view: &SmodelView, expand_all: bool) -> Re
     let output = serde_json::to_string_pretty(&value).unwrap_or_default();
     println!("{output}");
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::resolve_view_arg;
+
+    fn views() -> Vec<(String, u32)> {
+        vec![
+            ("Pkg::OverviewView".to_owned(), 1),
+            ("Pkg::CatalogView".to_owned(), 2),
+            ("Other::CatalogView".to_owned(), 3),
+        ]
+    }
+
+    #[test]
+    fn qualified_name_resolves_exactly() {
+        assert_eq!(resolve_view_arg(&views(), "Pkg::OverviewView").unwrap(), &1);
+    }
+
+    #[test]
+    fn unique_bare_name_resolves() {
+        assert_eq!(resolve_view_arg(&views(), "OverviewView").unwrap(), &1);
+    }
+
+    #[test]
+    fn ambiguous_bare_name_lists_candidates() {
+        let err = resolve_view_arg(&views(), "CatalogView").unwrap_err();
+        assert!(err.message.contains("ambiguous"), "{}", err.message);
+        assert!(err.message.contains("Pkg::CatalogView"));
+        assert!(err.message.contains("Other::CatalogView"));
+    }
+
+    #[test]
+    fn unknown_name_lists_available_views() {
+        let err = resolve_view_arg(&views(), "NoSuchView").unwrap_err();
+        assert!(err.message.contains("not found"), "{}", err.message);
+        assert!(err.message.contains("Pkg::OverviewView"));
+    }
+
+    #[test]
+    fn bare_name_never_matches_mid_segment() {
+        // "View" is a suffix of every name but a full segment of none.
+        let err = resolve_view_arg(&views(), "View").unwrap_err();
+        assert!(err.message.contains("not found"), "{}", err.message);
+    }
 }

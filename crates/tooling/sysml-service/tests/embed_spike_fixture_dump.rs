@@ -1,8 +1,10 @@
 //! Embed-viewer spike fixture dump (ignored; run manually).
 //!
-//! Regenerates the real `sysml.diagram.viewmodel` JSON baked into
-//! `editors/simulation-app/src/embed/fixtures/` (after pruning the text_map /
-//! interactions sidecars to scene ids — they carry whole-workspace spans).
+//! Regenerates the real ViewModel JSON baked into
+//! `editors/simulation-app/src/embed/fixtures/`, via the shared pruned export
+//! path (`SysmlService::export_view_model` — the same function behind the CLI
+//! `sysml export viewmodel`), so the text_map / interactions sidecars are
+//! scoped to the ids each view references rather than whole-workspace spans.
 //! Dumps every declared coffee-machine view (plus a scratch Browser-typed view
 //! for the non-graph family) into `target/embed-spike-fixtures/`. Run with:
 //!
@@ -40,7 +42,7 @@ fn dump_embed_spike_fixtures() {
     for s in &views {
         let name = s.name.clone().unwrap_or_else(|| s.id.to_string());
         let value = svc
-            .diagram_view_model("__workspace__", &s.id, &expanded)
+            .export_view_model(&s.id, &expanded, false)
             .expect("viewmodel renders");
         let path = out_dir.join(format!("coffee-machine-{name}.json"));
         fs::write(&path, serde_json::to_string_pretty(&value).unwrap()).expect("write fixture");
@@ -73,7 +75,7 @@ fn dump_embed_spike_fixtures() {
         .find(|s| s.name.as_deref() == Some("ComponentTreeView"))
         .expect("ComponentTreeView view present");
     let value = svc2
-        .diagram_view_model("__workspace__", &tree.id, &expanded)
+        .export_view_model(&tree.id, &expanded, false)
         .expect("browser viewmodel renders");
     let path = out_dir.join("coffee-machine-componentTree.json");
     fs::write(&path, serde_json::to_string_pretty(&value).unwrap()).expect("write fixture");

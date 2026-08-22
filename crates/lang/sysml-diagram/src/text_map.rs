@@ -75,6 +75,23 @@ impl TextMap {
     pub fn iter(&self) -> impl Iterator<Item = (&String, &TextSpan)> {
         self.spans.iter()
     }
+
+    /// A copy of this map retaining only the entries whose id is in `keep`.
+    ///
+    /// The map is built once per graph and carries a span for **every** element
+    /// in the workspace; export paths that serialize one view's `ViewModel`
+    /// scope it down to the ids the scene / non-graph payload actually
+    /// references (see `ViewModel::pruned_to_referenced`).
+    pub fn retained(&self, keep: &std::collections::HashSet<String>) -> TextMap {
+        TextMap {
+            spans: self
+                .spans
+                .iter()
+                .filter(|(id, _)| keep.contains(*id))
+                .map(|(id, span)| (id.clone(), span.clone()))
+                .collect(),
+        }
+    }
 }
 
 /// Build the [`TextMap`] for a model graph. Pure function of the graph — keyed by
