@@ -106,11 +106,11 @@ describe('defaultViewName / isValidViewName', () => {
 describe('rewriteScratchSnippet', () => {
   it('rewrites name + supertype, preserving expose refs; null on unknown shape', () => {
     expect(
-      rewriteScratchSnippet('view scratch : Interconnection {\n    expose P::motor;\n}\n', 'MotorView', 'StateTransition'),
-    ).toBe('view MotorView : StateTransition {\n    expose P::motor;\n}\n');
+      rewriteScratchSnippet('view scratch : InterconnectionView {\n    expose P::motor;\n}\n', 'MotorView', 'StateTransitionView'),
+    ).toBe('view MotorView : StateTransitionView {\n    expose P::motor;\n}\n');
     expect(
-      rewriteScratchSnippet('view def scratch :> General {\n    expose A;\n}\n', 'AView', 'Sequence'),
-    ).toBe('view def AView :> Sequence {\n    expose A;\n}\n');
+      rewriteScratchSnippet('view def scratch :> GeneralView {\n    expose A;\n}\n', 'AView', 'SequenceView'),
+    ).toBe('view def AView :> SequenceView {\n    expose A;\n}\n');
     expect(rewriteScratchSnippet('something else', 'X', 'General')).toBeNull();
   });
 });

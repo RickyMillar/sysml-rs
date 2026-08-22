@@ -3,9 +3,9 @@
 //
 // View kind is declared the spec-canonical way: each `view def`
 // specializes a standard view definition with `:>` (e.g.
-// `:> Interconnection`). There is NO name-suffix inference — the view's
-// name is free-form; the `:>` supertype picks the diagram shape. See
-// heuristic").
+// `:> InterconnectionView` — the canonical std-lib names; the stdlib
+// defines no bare-name aliases). There is NO name-suffix inference — the
+// view's name is free-form; the `:>` supertype picks the diagram shape.
 //
 // Each view below is annotated with WHAT IT TESTS so a reader can map a
 // specific feature to a specific declaration.
@@ -27,36 +27,36 @@ package ShowcaseViews {
 
     // ── 2. Interconnection view ──────────────────────────────────────
     // Tests:
-    //  - `:> Interconnection` supertype → ViewType::Interconnection
+    //  - `:> InterconnectionView` supertype → ViewType::Interconnection
     //  - canvas centred on the exposed subject — siblings hidden
-    view def PowertrainView :> Interconnection {
+    view def PowertrainView :> InterconnectionView {
         expose Vehicle;
     }
 
     // ── 3. State transition view ─────────────────────────────────────
     // Tests:
-    //  - `:> StateTransition` supertype
+    //  - `:> StateTransitionView` supertype
     //  - Expose pointing at a StateDefinition
-    view def DriveModesView :> StateTransition {
+    view def DriveModesView :> StateTransitionView {
         expose DriveStateMachine;
     }
 
     // ── 4. Action flow view ──────────────────────────────────────────
     // Tests:
-    //  - `:> ActionFlow` supertype
-    view def StartFlowView :> ActionFlow {
+    //  - `:> ActionFlowView` supertype
+    view def StartFlowView :> ActionFlowView {
         expose StartSequence;
     }
 
     // ── 5. Requirement view ──────────────────────────────────────────
     // Tests:
-    //  - `:> Requirement` resolves to a GeneralView via the stdlib
-    //    supertype chain (Requirement :> RequirementView :> GeneralView).
-    //    Requirement notation renders in the General path, gated on
-    //    element kind. The requirement filter is pending grammar support
-    //    (see requirements-parametric-retirement.md §9.2).
+    //  - SysML v2 defines no RequirementView: a "requirement view" is a
+    //    GeneralView selected down to requirement elements. Requirement
+    //    notation renders in the General path, gated on element kind.
+    //    The requirement filter is pending grammar support (see
+    //    requirements-parametric-retirement.md §9.2).
     //  - multiple Expose clauses (every requirement listed)
-    view def AllReqsView :> Requirement {
+    view def AllReqsView :> GeneralView {
         expose SafetyReq;
         expose PerformanceReq;
         expose DurabilityReq;
@@ -64,22 +64,22 @@ package ShowcaseViews {
 
     // ── 6. Sequence view ─────────────────────────────────────────────
     // Tests:
-    //  - `:> Sequence` supertype
-    view def CommsView :> Sequence {
+    //  - `:> SequenceView` supertype
+    view def CommsView :> SequenceView {
         expose Vehicle;
     }
 
     // ── 7. Browser view ──────────────────────────────────────────────
     // Tests:
-    //  - `:> Browser` supertype
+    //  - `:> BrowserView` supertype
     //  - recursive Expose (`Foo::*`) — exposes the whole Showcase namespace
-    view def CatalogView :> Browser {
+    view def CatalogView :> BrowserView {
         expose Showcase::*;
     }
 
     // ── 8. Grid view (traceability matrix) ───────────────────────────
     // Tests:
-    //  - `:> Grid` supertype
+    //  - `:> GridView` supertype
     //  - a REAL 2D matrix: requirement rows × verification-case columns,
     //    marked from the `verify requirement` members in
     //    `ShowcaseVerification` (see Model.sysml for the spec citations).
@@ -90,15 +90,15 @@ package ShowcaseViews {
     //    requirement (and Vehicle contributed nothing — it owns no
     //    requirements). Columns are NOT scope-restricted: the cases live
     //    in the sibling `ShowcaseVerification` package and still appear.
-    view def TraceMatrixView :> Grid {
+    view def TraceMatrixView :> GridView {
         expose Showcase::*;
     }
 
     // ── 9. Geometry view ─────────────────────────────────────────────
     // Tests:
-    //  - `:> Geometry` supertype
+    //  - `:> GeometryView` supertype
     //  - exposing an element whose attrs include x/y/width/height
-    view def LayoutView :> Geometry {
+    view def LayoutView :> GeometryView {
         expose Vehicle;
     }
 
@@ -109,9 +109,9 @@ package ShowcaseViews {
     //    + constraint blocks), so a "parametric" view is just an
     //    Interconnection view exposing the constraint(s). The retired
     //    `Parametric` own-name escape hatch is gone; declare the base kind
-    //    explicitly with `:> Interconnection`. See
+    //    explicitly with `:> InterconnectionView`. See
     //    requirements-parametric-retirement.md §1.4 / §3.2.
-    view def ConstraintView :> Interconnection {
+    view def ConstraintView :> InterconnectionView {
         expose MaxPowerConstraint;
         expose TorqueBalance;
     }
@@ -153,8 +153,8 @@ package ShowcaseViews {
     // ── 14. View typed-as a user view def (transitive supertype) ─────
     // Tests:
     //  - `:>` specialization chained through a user view def: TypedAsView
-    //    :> PowertrainView :> Interconnection, so the kind walk resolves
-    //    TRANSITIVELY to Interconnection.
+    //    :> PowertrainView :> InterconnectionView, so the kind walk
+    //    resolves TRANSITIVELY to Interconnection.
     view def TypedAsView :> PowertrainView {
         expose Vehicle;
     }

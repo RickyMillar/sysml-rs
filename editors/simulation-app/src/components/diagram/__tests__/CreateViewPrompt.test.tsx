@@ -10,7 +10,7 @@ import type { ModelTreeNode } from '@/features/sessions/tree/types';
 afterEach(cleanup);
 
 const mutate = vi.fn((_refs: string[], opts?: { onSuccess?: (s: string) => void }) => {
-  opts?.onSuccess?.('view scratch : General {\n    expose P::MotorStates;\n}');
+  opts?.onSuccess?.('view scratch : GeneralView {\n    expose P::MotorStates;\n}');
 });
 vi.mock('@/features/views/queries', () => ({
   useCreateScratchView: () => ({ mutate, isPending: false, isError: false, error: null }),
@@ -97,7 +97,7 @@ describe('CreateViewPrompt (v2 — projection first)', () => {
     await waitFor(() => expect(updateSource).toHaveBeenCalledTimes(1));
     const [uri, source] = updateSource.mock.calls[0];
     expect(uri).toBe('file:///models/m.sysml');
-    expect(source).toContain('view MotorStatesView : StateTransition {');
+    expect(source).toContain('view MotorStatesView : StateTransitionView {');
     expect(source).toContain('expose P::MotorStates;');
     await waitFor(() => expect(screen.getByText(/unsaved/i)).toBeTruthy());
   });

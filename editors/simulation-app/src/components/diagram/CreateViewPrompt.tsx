@@ -33,6 +33,7 @@ import {
   isValidViewName,
   kindAvailability,
   rewriteScratchSnippet,
+  sourceTokenFor,
 } from './createViewFlow';
 
 const FIELD_LABEL: React.CSSProperties = {
@@ -113,7 +114,7 @@ export function CreateViewPrompt({
     setFlowError(null);
     create.mutate(pickedRows.map((r) => r.node.elementId), {
       onSuccess: async (snippet) => {
-        const rewritten = rewriteScratchSnippet(snippet, effectiveName, chosenType);
+        const rewritten = rewriteScratchSnippet(snippet, effectiveName, sourceTokenFor(chosenType));
         if (!rewritten) {
           setFlowError(
             'The generated view snippet had an unexpected shape — nothing was written. ' +

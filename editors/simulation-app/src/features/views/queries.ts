@@ -221,13 +221,13 @@ export function useViewpointSearch(uri: string | null, query: string) {
  * expected to drop it into `useWorkspaceStore.setDiagramPayload(...)`.
  */
 /**
- * Build a `view scratch :> Interconnection { expose ...; }` source
+ * Build a `view scratch : InterconnectionView { expose ...; }` source
  * snippet from the qualified names (or ids) of selected elements.
  *
  * Bucket 5.A2 — wraps the backend's `sysml.views.create_scratch` /
  * `POST /views/scratch` command. Returns plain text: the snippet the
  * user can paste into their `.sysml` file. The backend takes care of
- * spec-correct shaping (`view scratch :> Interconnection` per the
+ * spec-correct shaping (`view scratch : InterconnectionView` per the
  * roadmap).
  */
 export function useCreateScratchView() {

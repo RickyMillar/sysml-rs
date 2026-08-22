@@ -47,13 +47,14 @@ describe('frameExtents', () => {
 
 describe('frameHeadingParts', () => {
   it('suffixes the LITERAL declared type, not the render-word (R7, §8.2.3.26)', () => {
-    // `view def DriveModesView :> StateTransition` → the declared supertype is
-    // the heading suffix, even though the view renders through the State kind.
+    // `view def DriveModesView :> StateTransitionView` → the declared
+    // supertype is the heading suffix, even though the view renders through
+    // the State kind.
     expect(
-      frameHeadingParts(frame({ view_kind: 'StateTransition', name: 'DriveModesView', type_name: 'StateTransition' })),
+      frameHeadingParts(frame({ view_kind: 'StateTransition', name: 'DriveModesView', type_name: 'StateTransitionView' })),
     ).toEqual({
       main: '«view» DriveModesView',
-      suffix: ' : StateTransition',
+      suffix: ' : StateTransitionView',
     });
   });
 

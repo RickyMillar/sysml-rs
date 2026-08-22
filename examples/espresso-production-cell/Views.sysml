@@ -17,17 +17,17 @@ package CellViews {
     }
 
     // 2. Interconnection view — plants, stations, and their exchange planes.
-    view def CellInterconnectionView :> Interconnection {
+    view def CellInterconnectionView :> InterconnectionView {
         expose ProductionCell;
     }
 
     // 3. State-transition view — a station's lifecycle SM.
-    view def StationStateView :> StateTransition {
+    view def StationStateView :> StateTransitionView {
         expose BrewStation;
     }
 
     // 4. Action view — the fork/join extraction recipe.
-    view def RecipeActionView :> Action {
+    view def RecipeActionView :> ActionFlowView {
         expose RecipeExecution;
     }
 

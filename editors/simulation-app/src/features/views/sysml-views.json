@@ -2,81 +2,91 @@
   "View def — General projection": {
     "prefix": ["gview", "view-general"],
     "body": [
-      "view def ${1:Name} :> General {",
+      "view def ${1:Name} :> GeneralView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `General` (generic projection — tables, lists, ad-hoc layouts). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `GeneralView` (generic projection — tables, lists, ad-hoc layouts). One of the 8 standard view definitions."
   },
   "View def — Interconnection (IBD)": {
     "prefix": ["iview", "view-interconnection"],
     "body": [
-      "view def ${1:Name} :> Interconnection {",
+      "view def ${1:Name} :> InterconnectionView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `Interconnection` (parts and the connections between them). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `InterconnectionView` (parts and the connections between them). One of the 8 standard view definitions."
   },
   "View def — ActionFlow": {
     "prefix": ["aview", "view-actionflow"],
     "body": [
-      "view def ${1:Name} :> ActionFlow {",
+      "view def ${1:Name} :> ActionFlowView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `ActionFlow` (actions, their flow, decision/merge nodes). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `ActionFlowView` (actions, their flow, decision/merge nodes). One of the 8 standard view definitions."
   },
   "View def — StateTransition": {
     "prefix": ["sview", "view-state"],
     "body": [
-      "view def ${1:Name} :> StateTransition {",
+      "view def ${1:Name} :> StateTransitionView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `StateTransition` (states and the transitions between them). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `StateTransitionView` (states and the transitions between them). One of the 8 standard view definitions."
   },
   "View def — Sequence": {
     "prefix": ["seqview", "view-sequence"],
     "body": [
-      "view def ${1:Name} :> Sequence {",
+      "view def ${1:Name} :> SequenceView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `Sequence` (time-ordered message exchange between participants). One of the 8 standard supertypes documented in book ch13."
-  },
-  "View def — UseCase": {
-    "prefix": ["ucview", "view-usecase"],
-    "body": [
-      "view def ${1:Name} :> UseCase {",
-      "    expose ${2:Subject};",
-      "    $0",
-      "}"
-    ],
-    "description": "view def specialized from `UseCase` (actors, use cases, and their relationships). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `SequenceView` (time-ordered message exchange between participants). One of the 8 standard view definitions."
   },
   "View def — Browser": {
     "prefix": ["brview", "view-browser"],
     "body": [
-      "view def ${1:Name} :> Browser {",
+      "view def ${1:Name} :> BrowserView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `Browser` (model-tree projection — containment hierarchy). One of the 8 standard supertypes documented in book ch13."
+    "description": "view def specialized from `BrowserView` (model-tree projection — containment hierarchy). One of the 8 standard view definitions."
   },
-  "View def — Requirement": {
+  "View def — Grid": {
+    "prefix": ["gridview", "view-grid"],
+    "body": [
+      "view def ${1:Name} :> GridView {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `GridView` (tabular / matrix projection of the exposed elements). One of the 8 standard view definitions."
+  },
+  "View def — Geometry": {
+    "prefix": ["geoview", "view-geometry"],
+    "body": [
+      "view def ${1:Name} :> GeometryView {",
+      "    expose ${2:Subject};",
+      "    $0",
+      "}"
+    ],
+    "description": "view def specialized from `GeometryView` (spatial layout of geometry-bearing parts). One of the 8 standard view definitions."
+  },
+  "View def — Requirement projection": {
     "prefix": ["reqview", "view-requirement"],
     "body": [
-      "view def ${1:Name} :> Requirement {",
+      "view def ${1:Name} :> GeneralView {",
       "    expose ${2:Subject};",
       "    $0",
       "}"
     ],
-    "description": "view def specialized from `Requirement` (requirements with satisfaction and verification links). One of the 8 standard supertypes documented in book ch13."
+    "description": "Requirement view: SysML v2 defines no RequirementView — a requirement view is a `GeneralView` exposing (and, once grammar support lands, filtering to) requirement elements."
   }
 }

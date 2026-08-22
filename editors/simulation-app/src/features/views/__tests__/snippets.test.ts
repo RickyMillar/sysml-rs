@@ -2,17 +2,20 @@ import { describe, expect, it } from 'vitest';
 import { sysmlViewSnippets } from '../snippets';
 
 describe('sysmlViewSnippets', () => {
-  it('covers exactly the eight standard supertypes from book ch13', () => {
+  it('covers the eight standard view definitions (canonical names)', () => {
     const supertypes = sysmlViewSnippets.map((s) => s.supertype).sort();
+    // The requirement-projection snippet also specializes GeneralView
+    // (SysML v2 defines no RequirementView), hence the duplicate.
     expect(supertypes).toEqual([
-      'ActionFlow',
-      'Browser',
-      'General',
-      'Interconnection',
-      'Requirement',
-      'Sequence',
-      'StateTransition',
-      'UseCase',
+      'ActionFlowView',
+      'BrowserView',
+      'GeneralView',
+      'GeneralView',
+      'GeometryView',
+      'GridView',
+      'InterconnectionView',
+      'SequenceView',
+      'StateTransitionView',
     ]);
   });
 

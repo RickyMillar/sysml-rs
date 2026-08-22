@@ -55,7 +55,7 @@ export function frameExtents(
 /** The heading's main text (`«view» Name`) and muted type suffix.
  *  Per spec §8.2.3.26 (R7) the suffix is the view's LITERALLY-declared
  *  immediate type/supertype (`frame.type_name`) — e.g. `«view» DriveModesView :
- *  StateTransition`. A view that declares no type gets no suffix (never the
+ *  StateTransitionView`. A view that declares no type gets no suffix (never the
  *  internal render-word `view_kind`, which is a rendering concern, not spec
  *  notation). */
 export function frameHeadingParts(frame: ViewFrame): { main: string; suffix: string } {

@@ -1,6 +1,8 @@
 /**
- * Monaco snippet registry for the eight standard `view def` supertypes
- * (Bucket 5.A3).
+ * Monaco snippet registry for `view def` declarations over the eight
+ * standard view definitions (Bucket 5.A3). Supertypes are the canonical
+ * std-lib names (`GeneralView`, `InterconnectionView`, ...) — the
+ * standard library defines no bare-name aliases.
  *
  * Source of truth: `./sysml-views.json` (co-located). This was rehomed from
  * the deleted VS Code extension (`editors/vscode/snippets/sysml-views.json`,
@@ -22,14 +24,14 @@
 import rawSnippets from './sysml-views.json';
 
 const STANDARD_SUPERTYPES = [
-  'General',
-  'Interconnection',
-  'ActionFlow',
-  'StateTransition',
-  'Sequence',
-  'UseCase',
-  'Browser',
-  'Requirement',
+  'GeneralView',
+  'InterconnectionView',
+  'ActionFlowView',
+  'StateTransitionView',
+  'SequenceView',
+  'BrowserView',
+  'GridView',
+  'GeometryView',
 ] as const;
 
 export type SysmlViewSupertype = (typeof STANDARD_SUPERTYPES)[number];

@@ -20,15 +20,15 @@ There is no name-suffix inference — view names are free-form.
 | # | View | Feature exercised |
 |---|---|---|
 | 1 | `OverviewView` | Default General view (no `:>`), single Expose |
-| 2 | `PowertrainView` | `:> Interconnection` |
-| 3 | `DriveModesView` | `:> StateTransition`, Expose a StateDefinition |
-| 4 | `StartFlowView` | `:> ActionFlow` |
-| 5 | `AllReqsView` | `:> Requirement` + multiple Expose |
-| 6 | `CommsView` | `:> Sequence` |
-| 7 | `CatalogView` | `:> Browser` + recursive `Foo::*` Expose |
-| 8 | `TraceMatrixView` | `:> Grid` (traceability matrix) |
-| 9 | `LayoutView` | `:> Geometry` (uses x/y/w/h attributes) |
-| 10 | `Parametric` | Legacy peer kind — reached only by own-name (no std-lib def) |
+| 2 | `PowertrainView` | `:> InterconnectionView` |
+| 3 | `DriveModesView` | `:> StateTransitionView`, Expose a StateDefinition |
+| 4 | `StartFlowView` | `:> ActionFlowView` |
+| 5 | `AllReqsView` | `:> GeneralView` + multiple Expose (no std RequirementView) |
+| 6 | `CommsView` | `:> SequenceView` |
+| 7 | `CatalogView` | `:> BrowserView` + recursive `Foo::*` Expose |
+| 8 | `TraceMatrixView` | `:> GridView` (traceability matrix) |
+| 9 | `LayoutView` | `:> GeometryView` (uses x/y/w/h attributes) |
+| 10 | `ConstraintView` | `:> InterconnectionView` — constraint (parametric) notation |
 | 11 | `MixedExposeView` | Multiple Expose clauses, mixed element kinds (→ General) |
 | 12 | `AllPartsView` | `filter true` — viewCondition pass-through |
 | 13 | `NothingView` | `filter false` — viewCondition exclude-all |
@@ -63,10 +63,11 @@ curl -s "http://localhost:8080/models/__workspace__/views/<view-id>/render" \
   composer keeps only `summary.filters.last()` when stuffing into
   `ViewFilter::expression`.
 - **(FIXED) View-kind resolution follows the `:>` chain.** Declaring
-  `view def Foo :> Interconnection` (or transitively, `:> Bar` where
-  `Bar :> Interconnection`) resolves to the right `ViewType`. Resolution
-  matches the author-written supertype name, so it works even when the
-  std-lib alias isn't merged into the workspace graph.
+  `view def Foo :> InterconnectionView` (or transitively, `:> Bar` where
+  `Bar :> InterconnectionView`) resolves to the right `ViewType`. Only
+  the canonical standard view-def names classify — bare-name spellings
+  (`:> Interconnection`) were aliases of a retired local stdlib patch
+  and now dangle (rendered as General, with a warning).
 - **`expose` narrows nodes but not edges.** Rendering a view whose
   exposed subject has any inbound or outbound relationship in the full
   graph still emits every other relationship in the workspace as a
