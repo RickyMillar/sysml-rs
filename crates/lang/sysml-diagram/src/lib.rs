@@ -5,8 +5,6 @@
 //! This crate provides:
 //! - **ViewModel**: renderer-agnostic scene + tokens (the going-forward wire
 //!   format for the React-SVG renderer)
-//! - **SModel**: Sprotty-compatible diagram model (legacy SGraph format, still
-//!   shipped by CLI/LSP/MCP/REST until they migrate to ViewModel)
 //! - **PlantUML**: Text-based UML diagram export
 //!
 //! ## Example
@@ -14,7 +12,7 @@
 //! ```
 //! use sysml_core::ModelGraph;
 //! use sysml_diagram::{to_view_model, ViewRequest};
-//! use sysml_diagram::smodel::ViewType;
+//! use sysml_diagram::ViewType;
 //!
 //! let graph = ModelGraph::new();
 //! let request = ViewRequest::new(ViewType::General);
@@ -27,16 +25,17 @@ pub mod diagnostic_overlay;
 pub mod gmodel;
 pub mod interaction;
 pub mod ir;
-pub mod payload;
+pub mod non_graph;
 mod plantuml;
 pub mod sim_overlay;
-pub mod smodel;
 pub mod tmodel;
 pub mod text_map;
 pub mod tree;
 pub mod verdict_overlay;
 pub mod view_model;
 pub mod view_request;
+mod view_text;
+pub mod view_type;
 pub mod visual_kind;
 
 pub use design_tokens::{
@@ -48,7 +47,7 @@ pub use interaction::{build_interaction_map, InteractionEntry, InteractionMap};
 pub use diagnostic_overlay::{
     build_diagnostic_overlay, DiagnosticItem, DiagnosticOverlay, ElementDiagnostics,
 };
-pub use payload::{DiagramPayload, NonGraphModel};
+pub use non_graph::NonGraphModel;
 pub use sim_overlay::{
     build_sim_overlay, Activity, ElementOverlay, OverlayChannel, OverlayValue, SimOverlay,
 };
@@ -63,6 +62,7 @@ pub use view_model::{
     ViewModel,
 };
 pub use view_request::{DiagramRequestKey, ViewRequest};
+pub use view_type::ViewType;
 
 pub use visual_kind::{
     ArrowHead, CompartmentKind, EdgeStyle, GraphicalKind, LineStyle, Shape, VisualKind,

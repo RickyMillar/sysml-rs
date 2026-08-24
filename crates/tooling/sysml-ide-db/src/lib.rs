@@ -35,7 +35,6 @@
 mod arc_wrapper;
 pub mod analysis;
 pub mod descendants_query;
-pub mod diagram;
 pub mod view_model;
 pub mod text_map;
 pub mod interaction;
@@ -128,9 +127,6 @@ pub use tokens::{
 };
 pub use trace_matrix_query::{
     file_trace_matrix, workspace_trace_matrix_best, CachedTraceMatrix,
-};
-pub use diagram::{
-    file_diagram, workspace_diagram_best, CachedDiagram,
 };
 pub use view_model::{
     file_view_model, workspace_view_model_best, CachedViewModel,

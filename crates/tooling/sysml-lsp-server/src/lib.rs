@@ -444,30 +444,21 @@ impl SysmlLanguageServer {
         };
         let view_type_str = diagram::view_type_name(view_type);
 
-        // Bucket B / B1 P1: SModel projection + overlay + stale-id prune live
-        // on the service. Refresh becomes "re-render via diagram.view, send
-        // notifications".
+        // The service owns ViewModel projection and expansion-state pruning.
         let model = match self.service.diagram_view(uri, view_type_str) {
             Ok(v) => v,
             Err(_) => return,
         };
 
-        let params = diagram::DiagramSetModelParams {
+        let params = diagram::DiagramSetViewModelParams {
             uri: uri.to_owned(),
             view_type: view_type_str.to_owned(),
-            model,
+            view_model: model,
         };
         tracing::debug!("sending diagram notification: uri={}", uri);
         self.client
-            .send_notification::<commands::DiagramSetModelNotification>(params)
+            .send_notification::<commands::DiagramSetViewModelNotification>(params)
             .await;
-
-        if let Ok(graph) = self.service.workspace_aware_graph() {
-            let graph_params = diagram::build_set_model_graph_params(uri, &graph, view_type);
-            self.client
-                .send_notification::<commands::DiagramSetModelGraphNotification>(graph_params)
-                .await;
-        }
 
         tracing::debug!(
             uri,

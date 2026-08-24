@@ -14,8 +14,7 @@
  *   - `vm.non_graph` present → push it into the store (DiagramHost → TableView /
  *     BrowserView / GeometryView).
  *   - else → clear the non-graph models so DiagramHost falls through to SvgCanvas.
- * The legacy SModel `/render` round-trip is gone: ONE pipeline, ONE fetch for
- * EVERY view family.
+ * One ViewModel pipeline serves every view family.
  *
  * Renders nothing.
  */
@@ -27,7 +26,7 @@ import type { NonGraphModel } from '@/diagram-svg/viewmodel-types';
 
 export function SelectedViewRenderer() {
   const selectedViewId = useWorkspaceStore((s) => s.selectedViewId);
-  const setDiagramPayload = useWorkspaceStore((s) => s.setDiagramPayload);
+  const setNonGraphModel = useWorkspaceStore((s) => s.setNonGraphModel);
 
   // The viewmodel command always composes against the merged workspace
   // graph, so address it with the workspace-scope sentinel.
@@ -52,12 +51,12 @@ export function SelectedViewRenderer() {
     if (!selectedViewId || !vm) return;
     if (nonGraph) {
       // Table / Tree / Geometry: the tagged payload drops straight into the store.
-      setDiagramPayload(nonGraph as Parameters<typeof setDiagramPayload>[0]);
+      setNonGraphModel(nonGraph);
     } else {
       // Graph view: clear the non-graph models so DiagramHost renders SvgCanvas.
-      setDiagramPayload(null);
+      setNonGraphModel(null);
     }
-  }, [selectedViewId, vm, nonGraph, setDiagramPayload]);
+  }, [selectedViewId, vm, nonGraph, setNonGraphModel]);
 
   return null;
 }

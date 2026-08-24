@@ -2040,7 +2040,7 @@
         use sysml_parser_trait::{Parser as _, SysmlFile};
 
         // Fixture relocated into this crate (R60): it previously lived under
-        // `editors/diagram/examples/stress/`, which was deleted with the Sprotty
+        // `editors/diagram/examples/stress/`, which was deleted with the legacy diagram
         // package (commit 71cc007a) — the test then panicked on a missing file.
         let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("tests/fixtures/orchestration-complex.sysml");

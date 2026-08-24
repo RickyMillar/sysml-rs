@@ -36,7 +36,7 @@
 //! a separate `make_port_ir_recursive`).
 
 use super::types::{DiagramChild, DiagramIR, DiagramNode, PortDirection, PortSide};
-use crate::smodel::ViewType;
+use crate::ViewType;
 
 /// Ensure every displayed port has a placement side. See module docs.
 pub(crate) fn assign_port_sides(scene: &mut DiagramIR) {
@@ -96,7 +96,7 @@ fn assign_node_port_sides(node: &mut DiagramNode) {
 mod tests {
     use super::*;
     use crate::ir::types::{DiagramNode, DiagramPort};
-    use crate::smodel::ViewType;
+    use crate::ViewType;
     use crate::visual_kind::VisualKind;
 
     fn port(id: &str, dir: Option<PortDirection>) -> DiagramPort {

@@ -459,50 +459,6 @@ impl VisualKind {
         }
     }
 
-    /// Sprotty node type string (used as `type` field in SModel JSON).
-    pub fn node_type(&self) -> &'static str {
-        match self {
-            Self::Package => "node:package",
-            Self::Part => "node:block",
-            Self::Item => "node:block",
-            Self::Connection => "node:block",
-            Self::Action => "node:action",
-            Self::State => "node:state",
-            Self::Constraint => "node:constraint",
-            Self::Calculation => "node:action",
-            Self::Requirement => "node:requirement",
-            Self::Concern => "node:requirement",
-            Self::VerificationCase => "node:requirement",
-            Self::UseCase => "node:usecase",
-            Self::AnalysisCase => "node:usecase",
-            Self::Interface => "node:interface",
-            Self::Attribute => "node:attribute",
-            Self::Enumeration => "node:enumeration",
-            Self::Allocation => "node:allocation",
-            Self::Occurrence => "node:occurrence",
-            Self::Flow => "node:block",
-            Self::View => "node:view",
-            Self::Viewpoint => "node:view",
-            Self::Port => "port",
-            Self::Rendering => "node:block",
-            Self::Comment => "node:comment",
-            Self::Metadata => "node:metadata",
-            Self::Actor => "node:block",
-            Self::InitialNode => "node:initialNode",
-            Self::FinalNode => "node:finalNode",
-            Self::DecisionNode => "node:decisionNode",
-            Self::MergeNode => "node:mergeNode",
-            Self::ForkNode => "node:forkNode",
-            Self::JoinNode => "node:joinNode",
-            Self::TerminateNode => "node:terminateNode",
-            Self::SendAction => "node:sendAction",
-            Self::AcceptAction => "node:acceptAction",
-            Self::Lifeline => "node:lifeline",
-            Self::SqProxy => "node:sqProxy",
-            Self::Generic => "node:block",
-        }
-    }
-
     /// The canonical visual shape for this graphical kind.
     pub fn shape(&self) -> Shape {
         match self {
@@ -1013,7 +969,7 @@ impl CompartmentKind {
         CompartmentKind::Redefinitions, CompartmentKind::Metadata,
     ];
 
-    /// Sprotty compartment type string.
+    /// Stable compartment identifier used by renderer adapters.
     pub fn type_string(&self) -> &'static str {
         match self {
             // Universal
@@ -1622,8 +1578,8 @@ pub(crate) fn effective_graphical_kind(element: &Element, graph: &ModelGraph) ->
 
 /// Additional CSS classes derived from element properties.
 /// Renderer-agnostic semantic tags derived from an element's properties
-/// (replaces the former `property_css_classes`). The Sprotty adapter maps each
-/// tag back to its CSS class; other renderers map it to their own styling.
+/// (replaces the former `property_css_classes`). Renderers map each tag to
+/// their own styling.
 pub(crate) fn property_tags(element: &Element) -> Vec<NodeTag> {
     let mut tags = Vec::new();
 
@@ -1741,12 +1697,7 @@ pub fn element_keyword(kind: &ElementKind) -> String {
     }
 }
 
-/// Map an ElementKind to its SModel node type string.
-pub(crate) fn smodel_node_type(kind: &ElementKind) -> &'static str {
-    VisualKind::from_element_kind(kind).node_type()
-}
-
-/// Map an ElementKind to CSS classes for Sprotty rendering.
+/// Map an ElementKind to semantic presentation classes.
 pub(crate) fn element_css_classes(kind: &ElementKind) -> Vec<String> {
     let gk = VisualKind::from_element_kind(kind);
     let mut classes = vec![format!("{:?}", kind).to_lowercase()];
@@ -1762,16 +1713,6 @@ pub(crate) fn element_css_classes(kind: &ElementKind) -> Vec<String> {
         classes.push("reference".to_owned());
     }
     classes
-}
-
-/// Map a RelationshipKind to its SModel edge type string.
-pub(crate) fn smodel_edge_type(kind: &RelationshipKind) -> &'static str {
-    kind.edge_type()
-}
-
-/// Map a RelationshipKind to CSS classes for edge styling.
-pub(crate) fn relationship_css_classes(kind: &RelationshipKind) -> Vec<String> {
-    kind.css_classes()
 }
 
 /// Get port direction CSS class from element properties.
@@ -1794,105 +1735,7 @@ pub(crate) fn port_direction_css_class(element: &Element) -> Option<String> {
 mod tests {
     use super::*;
 
-    #[test]
-    fn all_renderable_element_kinds_have_specific_graphical_kind() {
-        let renderable = vec![
-            // Structural
-            ElementKind::Package,
-            ElementKind::LibraryPackage,
-            ElementKind::PartDefinition,
-            ElementKind::PartUsage,
-            ElementKind::ItemDefinition,
-            ElementKind::ItemUsage,
-            ElementKind::ConnectionDefinition,
-            ElementKind::ConnectionUsage,
-            // Behavioral
-            ElementKind::ActionDefinition,
-            ElementKind::ActionUsage,
-            ElementKind::StateDefinition,
-            ElementKind::StateUsage,
-            ElementKind::ConstraintDefinition,
-            ElementKind::ConstraintUsage,
-            ElementKind::CalculationDefinition,
-            ElementKind::CalculationUsage,
-            // Requirements
-            ElementKind::RequirementDefinition,
-            ElementKind::RequirementUsage,
-            ElementKind::ConcernDefinition,
-            ElementKind::ConcernUsage,
-            ElementKind::VerificationCaseDefinition,
-            ElementKind::VerificationCaseUsage,
-            // Cases
-            ElementKind::UseCaseDefinition,
-            ElementKind::UseCaseUsage,
-            ElementKind::AnalysisCaseDefinition,
-            ElementKind::AnalysisCaseUsage,
-            ElementKind::CaseDefinition,
-            ElementKind::CaseUsage,
-            // Type-specific
-            ElementKind::InterfaceDefinition,
-            ElementKind::InterfaceUsage,
-            ElementKind::AttributeDefinition,
-            ElementKind::AttributeUsage,
-            ElementKind::EnumerationDefinition,
-            ElementKind::EnumerationUsage,
-            ElementKind::AllocationDefinition,
-            ElementKind::AllocationUsage,
-            ElementKind::OccurrenceDefinition,
-            ElementKind::OccurrenceUsage,
-            ElementKind::FlowDefinition,
-            ElementKind::FlowUsage,
-            ElementKind::ViewDefinition,
-            ElementKind::ViewUsage,
-            ElementKind::ViewpointDefinition,
-            ElementKind::ViewpointUsage,
-            ElementKind::PortDefinition,
-            ElementKind::PortUsage,
-            ElementKind::RenderingDefinition,
-            ElementKind::RenderingUsage,
-            // Special
-            ElementKind::Comment,
-            ElementKind::Documentation,
-            ElementKind::MetadataDefinition,
-            ElementKind::MetadataUsage,
-            // Control nodes
-            ElementKind::ForkNode,
-            ElementKind::JoinNode,
-            ElementKind::DecisionNode,
-            ElementKind::MergeNode,
-            ElementKind::TerminateActionUsage,
-            ElementKind::SendActionUsage,
-            ElementKind::AcceptActionUsage,
-            // Action subtypes
-            ElementKind::PerformActionUsage,
-            ElementKind::ExhibitStateUsage,
-            ElementKind::IncludeUseCaseUsage,
-            ElementKind::SatisfyRequirementUsage,
-            ElementKind::AssertConstraintUsage,
-            ElementKind::ForLoopActionUsage,
-            ElementKind::WhileLoopActionUsage,
-            ElementKind::IfActionUsage,
-            ElementKind::AssignmentActionUsage,
-            // Flow subtypes
-            ElementKind::SuccessionFlowUsage,
-            ElementKind::EventOccurrenceUsage,
-            // Connector subtypes
-            ElementKind::ConnectorAsUsage,
-            ElementKind::BindingConnectorAsUsage,
-            ElementKind::TransitionUsage,
-            ElementKind::ConjugatedPortDefinition,
-        ];
 
-        for kind in renderable {
-            let gk = VisualKind::from_element_kind(&kind);
-            assert_ne!(
-                gk,
-                VisualKind::Generic,
-                "ElementKind::{:?} maps to Generic — needs explicit VisualKind mapping",
-                kind
-            );
-        }
-    }
 
     #[test]
     fn non_renderable_kinds_map_to_generic() {
@@ -1919,38 +1762,7 @@ mod tests {
         }
     }
 
-    #[test]
-    fn node_type_strings_are_consistent() {
-        // Verify key mappings match the existing classify.rs behavior
-        assert_eq!(
-            VisualKind::Part.node_type(),
-            "node:block"
-        );
-        assert_eq!(
-            VisualKind::Action.node_type(),
-            "node:action"
-        );
-        assert_eq!(
-            VisualKind::State.node_type(),
-            "node:state"
-        );
-        assert_eq!(
-            VisualKind::Requirement.node_type(),
-            "node:requirement"
-        );
-        assert_eq!(
-            VisualKind::UseCase.node_type(),
-            "node:usecase"
-        );
-        assert_eq!(
-            VisualKind::Port.node_type(),
-            "port"
-        );
-        assert_eq!(
-            VisualKind::Package.node_type(),
-            "node:package"
-        );
-    }
+
 
     #[test]
     fn visual_kind_all_const_is_complete() {
@@ -2119,59 +1931,7 @@ mod tests {
 
     // ─── Tests merged from classify.rs ──────────────────────────────────────
 
-    #[test]
-    fn node_type_mapping_covers_key_types() {
-        let checks = vec![
-            (ElementKind::Package, "node:package"),
-            (ElementKind::PartDefinition, "node:block"),
-            (ElementKind::PartUsage, "node:block"),
-            (ElementKind::RequirementDefinition, "node:requirement"),
-            (ElementKind::RequirementUsage, "node:requirement"),
-            (ElementKind::StateDefinition, "node:state"),
-            (ElementKind::StateUsage, "node:state"),
-            (ElementKind::ActionDefinition, "node:action"),
-            (ElementKind::ActionUsage, "node:action"),
-            (ElementKind::ConstraintDefinition, "node:constraint"),
-            (ElementKind::ConstraintUsage, "node:constraint"),
-            (ElementKind::UseCaseDefinition, "node:usecase"),
-            (ElementKind::UseCaseUsage, "node:usecase"),
-            (ElementKind::InterfaceDefinition, "node:interface"),
-            (ElementKind::InterfaceUsage, "node:interface"),
-            (ElementKind::AttributeDefinition, "node:attribute"),
-            (ElementKind::AttributeUsage, "node:attribute"),
-            (ElementKind::EnumerationDefinition, "node:enumeration"),
-            (ElementKind::EnumerationUsage, "node:enumeration"),
-            (ElementKind::AllocationDefinition, "node:allocation"),
-            (ElementKind::AllocationUsage, "node:allocation"),
-            (ElementKind::OccurrenceDefinition, "node:occurrence"),
-            (ElementKind::OccurrenceUsage, "node:occurrence"),
-            (ElementKind::ViewDefinition, "node:view"),
-            (ElementKind::ViewUsage, "node:view"),
-            (ElementKind::ViewpointDefinition, "node:view"),
-            (ElementKind::Comment, "node:comment"),
-            (ElementKind::Documentation, "node:comment"),
-            (ElementKind::MetadataDefinition, "node:metadata"),
-            (ElementKind::SendActionUsage, "node:sendAction"),
-            (ElementKind::AcceptActionUsage, "node:acceptAction"),
-            (ElementKind::PortDefinition, "port"),
-            (ElementKind::PortUsage, "port"),
-            (ElementKind::CalculationDefinition, "node:action"),
-            (ElementKind::CalculationUsage, "node:action"),
-            (ElementKind::VerificationCaseDefinition, "node:requirement"),
-            (ElementKind::VerificationCaseUsage, "node:requirement"),
-            (ElementKind::AnalysisCaseDefinition, "node:usecase"),
-            (ElementKind::AnalysisCaseUsage, "node:usecase"),
-        ];
 
-        for (kind, expected) in checks {
-            let actual = smodel_node_type(&kind);
-            assert_eq!(
-                actual, expected,
-                "ElementKind::{:?} should map to {:?}, got {:?}",
-                kind, expected, actual
-            );
-        }
-    }
 
     #[test]
     fn css_classes_include_element_type() {
@@ -2199,25 +1959,9 @@ mod tests {
         assert_eq!(element_keyword(&ElementKind::ViewDefinition), "view def");
     }
 
-    #[test]
-    fn smodel_edge_type_delegates_to_core() {
-        assert_eq!(smodel_edge_type(&RelationshipKind::Satisfy), "edge:satisfy");
-        assert_eq!(smodel_edge_type(&RelationshipKind::Flow), "edge:flow");
-        assert_eq!(smodel_edge_type(&RelationshipKind::Succession), "edge:succession");
-    }
 
-    #[test]
-    fn relationship_css_classes_delegates_to_core() {
-        let classes = relationship_css_classes(&RelationshipKind::Satisfy);
-        assert!(classes.contains(&"dashed".to_string()));
 
-        let classes = relationship_css_classes(&RelationshipKind::Subsetting);
-        assert!(classes.contains(&"dotted".to_string()));
 
-        let classes = relationship_css_classes(&RelationshipKind::Specialize);
-        assert!(!classes.contains(&"dashed".to_string()));
-        assert!(!classes.contains(&"dotted".to_string()));
-    }
 
     #[test]
     fn bdd_relevant_uses_generated_predicates() {

@@ -28,7 +28,7 @@ The `sysml` command-line binary — a thin shell over `sysml-service` exposing p
 
 - Execution, constraints, flows, physics → `sysml-runtime`
 
-- Diagram (SModel / PlantUML) rendering → `sysml-diagram`
+- Diagram (ViewModel / PlantUML) rendering → `sysml-diagram`
 
 - Dependency resolution → `sysml-resolve` / `sysml-project`
 
@@ -69,7 +69,7 @@ core sysml-runtime sysml-parser-incremental sysml-resolve sysml-project sysml-ma
 | Query | `query unverified <file>` | query.rs | --json | List requirements with no verification. |
 | Export | `export plantuml <file>` | export.rs | --view general\|state\|action\|sequence | Emit a PlantUML diagram for the chosen view. |
 | Export | `export json <file>` | export.rs | --pretty | Canonical model JSON. |
-| Export | `export smodel <file>` | export.rs | --view general\|interconnection\|state\|action\|requirements\|browser\|sequence\|grid\|geometry\|parametric --expand-all | Sprotty SModel JSON for the diagram viewer / fixtures. |
+| Export | `export viewmodel` | export.rs | --workspace DIR --view NAME --expand-all\|--expand ID -o FILE | A declared view's renderer-agnostic ViewModel JSON (sidecars pruned to the scene) for the diagram viewer / fixtures. |
 | Project | `init` | init.rs | --name NAME | Scaffold a new project with `sysml.toml`. |
 | Project | `info` | info.rs | --manifest-path PATH --json | Show manifest metadata. |
 | Project | `add <name>` | add.rs | --path --git --tag --branch --rev --kpar | Add a dependency to `sysml.toml`. |
@@ -133,8 +133,8 @@ sysml simulate DoorController model.sysml --interactive --trace
 # Trace a flow simulation by injecting a message
 sysml trace pipeline.sysml --inject sensor.out:42 --json
 
-# Generate a Sprotty SModel fixture for the diagram viewer
-sysml export smodel model.sysml --view interconnection --expand-all > fixture.json
+# Bake a declared view's ViewModel fixture for the diagram viewer
+sysml export viewmodel --workspace . --view StructuralOverview --expand-all -o fixture.json
 
 # Dependency workflow
 sysml init --name my-model
@@ -157,7 +157,7 @@ cargo run -p sysml-cli --features server -- serve --port 3000
 | `common.rs` | `CliError`, `ExitCode`, `parse_key_val`, `apply_overrides` | `From<ServiceError>` maps service failures to exit code 2. |
 | `progress.rs` | stderr progress subscriber spawned per long-running service construction | Thread exits when the `SysmlService` (and its broadcast sender) drops. |
 | `inspect.rs` | tokens / diagnostics / CST / workspace inspection | Largest module; only direct `TreeSitterParser` callsite (CST dump). |
-| `export.rs` | `plantuml` / `json` / `smodel` export + view enums | Calls into `sysml-diagram`. |
+| `export.rs` | `plantuml` / `json` / `viewmodel` export + view enums | Calls into `sysml-diagram`. |
 | `query.rs` | `find` / `stats` / `trace` / `unverified` | Read-only model queries. |
 | `simulate.rs` | state-machine driving (events / interactive / auto) | Largest execution module. |
 | `solve.rs` / `flow.rs` / `trace.rs` | constraint solve, port-flow inspection, sequence trace | The "port simulation" group. |
@@ -175,7 +175,7 @@ cargo run -p sysml-cli --features server -- serve --port 3000
 
 - `sysml-parser-incremental` (feat `semantic`) — tree-sitter; direct only in `inspect --cst`
 
-- `sysml-diagram` — PlantUML / SModel export (rlib; server-rendered)
+- `sysml-diagram` — PlantUML / ViewModel export (rlib; server-rendered)
 
 - `sysml-project`, `sysml-manifest`, `sysml-resolve` — dependency commands
 

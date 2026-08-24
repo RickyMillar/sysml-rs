@@ -22,7 +22,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
 
 // Stub EmbeddedDiagram — Phase 6 added it as a shared sidebar that pulls
-// in DiagramHost → SprottyCanvas → sysml-layout (WASM). The WASM module
+// in DiagramHost → the diagram canvas → sysml-layout (WASM). The WASM module
 // has a Vite alias in dev/prod but no resolution path under jsdom, so
 // the workflow-level test would fail to load the module graph. The
 // behavioural assertions below don't depend on diagram contents.

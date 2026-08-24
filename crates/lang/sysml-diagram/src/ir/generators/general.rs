@@ -23,8 +23,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramEdge, DiagramEdgeKind, DiagramNode, HeaderStyle, DiagramChild, DiagramPort, PortDirection, CompartmentItemSource, NodeTag, EdgeTag};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, CompartmentKind, VisualKind};
 
 /// Generates General (BDD) diagrams.
@@ -547,7 +547,7 @@ fn find_rendered_ancestor(
 /// Honours the `GeneratorContext`:
 /// - When `ctx.expose_ids` is non-empty, only the exposed elements and their descendants
 ///   count as rendered. Edges to other elements get pruned by the dangling-
-///   endpoint check, instead of slipping through and bloating the SGraph
+///   endpoint check, instead of slipping through and bloating the legacy graph
 ///   payload.
 /// - When `ctx.filter` is set, elements that fail `passes_filter` are
 ///   excluded for the same reason.
@@ -658,7 +658,7 @@ fn generate_node(
 ) -> DiagramNode {
     let id = element.id.to_string();
     let kind = &element.kind;
-    let name = crate::smodel::builders::element_display_name(element, graph);
+    let name = crate::view_text::element_display_name(element, graph);
 
     // Use context-aware graphical kind (e.g. PartUsage via ActorMembership -> Actor)
     let gk = classify::effective_graphical_kind(element, graph);
@@ -676,7 +676,7 @@ fn generate_node(
         if let Some(meta_name) = metadata_type_name {
             format!("\u{00ab}{}\u{00bb}", meta_name)
         } else {
-            builders::stereotype_text(kind)
+            view_text::stereotype_text(kind)
         }
     };
 
@@ -1264,7 +1264,7 @@ fn make_port_ir(element: &Element) -> DiagramPort {
 /// Try to generate a subtree for embedding using the IR ViewGenerator registry.
 ///
 /// Returns `Some(DiagramIR)` if the generator produced non-empty content for the owner,
-/// `None` otherwise. This replaces the old bridge calls to `smodel::xxx::generate_subtree_for_owner`.
+/// `None` otherwise. This replaces the old bridge calls to `earlier renderer-specific subtree bridges`.
 fn try_generate_for_owner(
     view: ViewType,
     graph: &ModelGraph,
@@ -1305,7 +1305,6 @@ mod tests {
     use sysml_core::{Element, ElementKind, ModelGraph, Relationship};
 
     use crate::ir::generator::GeneratorContext;
-    use crate::ir::render::render;
 
     fn make_ctx<'a>(
         graph: &'a ModelGraph,
@@ -1341,31 +1340,9 @@ mod tests {
         assert_eq!(gen.elk_direction(), Some("DOWN"));
     }
 
-    #[test]
-    fn general_ir_produces_valid_json() {
-        let graph = create_test_graph();
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let gen = GeneralViewGenerator;
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string_pretty(&sgraph).unwrap();
-        assert!(json.contains("\"type\": \"graph\""));
-        assert!(json.contains("TestPackage"));
-    }
 
-    #[test]
-    fn general_ir_contains_elements() {
-        let graph = create_test_graph();
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let gen = GeneralViewGenerator;
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("Engine"));
-        assert!(json.contains("SafetyReq"));
-    }
+
+
 
     // ── Requirement notation parity (Phase 1) ──
 
@@ -1503,147 +1480,17 @@ mod tests {
         assert_eq!(satisfy_edge.label, "\u{00ab}satisfy\u{00bb}");
     }
 
-    #[test]
-    fn general_ir_empty_graph() {
-        let graph = ModelGraph::new();
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let gen = GeneralViewGenerator;
-        let ir = gen.generate(&ctx);
 
-        assert_eq!(ir.view_type, ViewType::General);
-        assert!(ir.nodes.is_empty());
-        assert!(ir.edges.is_empty());
-
-        let sgraph = render(&ir);
-        assert_eq!(sgraph.type_, "graph");
-        assert!(sgraph.children.is_empty());
-    }
 
     // ── Edge tests ──
 
-    #[test]
-    fn general_ir_contains_edges_when_expanded() {
-        let graph = create_test_graph();
-        let pkg_id = graph
-            .elements
-            .values()
-            .find(|e| e.kind == ElementKind::Package)
-            .unwrap()
-            .id
-            .to_string();
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id);
 
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("edge:satisfy"));
-    }
 
-    #[test]
-    fn collapsed_children_suppress_dangling_edges() {
-        let mut graph = ModelGraph::new();
-        let parent = Element::new_with_kind(ElementKind::PartDefinition).with_name("Parent");
-        let parent_id = graph.add_element(parent);
-        let part_a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("A")
-            .with_owner(parent_id.clone());
-        let a_id = graph.add_element(part_a);
-        let part_b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("B")
-            .with_owner(parent_id);
-        let b_id = graph.add_element(part_b);
 
-        let dep = Relationship::new(RelationshipKind::Dependency, a_id, b_id);
-        graph.add_relationship(dep);
 
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            !json.contains("edge:dependency"),
-            "Edge between collapsed children should be suppressed"
-        );
-    }
 
-    #[test]
-    fn no_expose_view_excludes_library_content() {
-        // Tracker 3.10: a General view with no Expose clause must not dump the
-        // standard library as top-level nodes (nor leak its internal edges).
-        let mut graph = ModelGraph::new();
 
-        // User content.
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("UserPkg");
-        let pkg_id = graph.add_element(pkg);
-        let engine = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Engine")
-            .with_owner(pkg_id);
-        graph.add_element(engine);
 
-        // Library content: a library package with an internal element + an
-        // internal relationship. None of this should reach the scene.
-        let lib_pkg = Element::new_with_kind(ElementKind::LibraryPackage).with_name("StdLib");
-        let lib_pkg_id = graph.add_library_package(lib_pkg);
-        let lib_a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("LibPartA")
-            .with_owner(lib_pkg_id.clone());
-        let lib_a_id = graph.add_element(lib_a);
-        let lib_b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("LibPartB")
-            .with_owner(lib_pkg_id);
-        let lib_b_id = graph.add_element(lib_b);
-        graph.add_relationship(Relationship::new(
-            RelationshipKind::Dependency,
-            lib_a_id,
-            lib_b_id,
-        ));
-
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(json.contains("Engine"), "user content must render");
-        assert!(!json.contains("StdLib"), "library package must be excluded");
-        assert!(!json.contains("LibPart"), "library members must be excluded");
-        assert!(
-            !json.contains("edge:dependency"),
-            "library-internal edges must prune once library nodes are excluded"
-        );
-    }
-
-    #[test]
-    fn explicitly_exposed_library_element_still_renders() {
-        // The library exclusion is gated on `expose.is_none()`: an author who
-        // explicitly exposes a library element must still get it as the canvas
-        // subject.
-        let mut graph = ModelGraph::new();
-        let lib_pkg = Element::new_with_kind(ElementKind::LibraryPackage).with_name("StdLib");
-        let lib_pkg_id = graph.add_library_package(lib_pkg);
-        let lib_part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("ExposedLibPart")
-            .with_owner(lib_pkg_id);
-        let lib_part_id = graph.add_element(lib_part);
-
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded).with_expose(&lib_part_id);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            json.contains("ExposedLibPart"),
-            "an explicitly exposed library element must render as the canvas subject"
-        );
-    }
 
     #[test]
     fn find_rendered_ancestor_skips_namespace_containers() {
@@ -1682,232 +1529,25 @@ mod tests {
         assert_eq!(find_rendered_ancestor(&graph, &inner_id, &only_pkg), None);
     }
 
-    #[test]
-    fn expanded_children_keep_edges() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-        let part_a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("A")
-            .with_owner(pkg_id.clone());
-        let a_id = graph.add_element(part_a);
-        let part_b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("B")
-            .with_owner(pkg_id.clone());
-        let b_id = graph.add_element(part_b);
 
-        let dep = Relationship::new(RelationshipKind::Dependency, a_id, b_id);
-        graph.add_relationship(dep);
 
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            json.contains("edge:dependency"),
-            "Edge between expanded children should be present"
-        );
-    }
 
-    #[test]
-    fn collapsed_owner_suppresses_port_endpoint_edges() {
-        let mut graph = ModelGraph::new();
-        let parent = Element::new_with_kind(ElementKind::PartDefinition).with_name("Parent");
-        let parent_id = graph.add_element(parent);
 
-        let a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("A")
-            .with_owner(parent_id.clone());
-        let a_id = graph.add_element(a);
-        let b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("B")
-            .with_owner(parent_id);
-        let b_id = graph.add_element(b);
 
-        let a_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("aOut")
-            .with_owner(a_id.clone());
-        let a_port_id = graph.add_element(a_port);
-        let b_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("bIn")
-            .with_owner(b_id.clone());
-        let b_port_id = graph.add_element(b_port);
-
-        graph.add_relationship(Relationship::new(
-            RelationshipKind::Dependency,
-            a_port_id,
-            b_port_id,
-        ));
-
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            !json.contains("edge:dependency"),
-            "Edges targeting ports of collapsed owners must be suppressed"
-        );
-    }
-
-    #[test]
-    fn expanded_owner_keeps_port_endpoint_edges() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-
-        let a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("A")
-            .with_owner(pkg_id.clone());
-        let a_id = graph.add_element(a);
-        let b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("B")
-            .with_owner(pkg_id.clone());
-        let b_id = graph.add_element(b);
-
-        let a_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("aOut")
-            .with_owner(a_id.clone());
-        let a_port_id = graph.add_element(a_port);
-        let b_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("bIn")
-            .with_owner(b_id.clone());
-        let b_port_id = graph.add_element(b_port);
-
-        graph.add_relationship(Relationship::new(
-            RelationshipKind::Dependency,
-            a_port_id,
-            b_port_id,
-        ));
-
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            json.contains("edge:dependency"),
-            "Edges between ports should be kept when owners are rendered"
-        );
-    }
 
     // ── Compartment tests ──
 
-    #[test]
-    fn collapsed_children_render_as_text() {
-        // Root-level packages promote children to top-level BDD nodes.
-        // Use a nested package to test compartment-text rendering.
-        let mut graph = ModelGraph::new();
-        let outer = Element::new_with_kind(ElementKind::Package).with_name("Outer");
-        let outer_id = graph.add_element(outer);
-        let inner = Element::new_with_kind(ElementKind::Package)
-            .with_name("Inner")
-            .with_owner(outer_id.clone());
-        let inner_id = graph.add_element(inner);
-        let part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Engine")
-            .with_owner(inner_id);
-        graph.add_element(part);
 
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        // Engine should appear as compartment text inside the nested Inner package
-        assert!(json.contains("part Engine"), "Nested package children should render as compartment text");
-        assert!(json.contains("compartment-text"));
-    }
 
-    #[test]
-    fn root_package_promotes_children_to_top_level() {
-        let graph = create_test_graph();
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        // Root-level package children should be top-level nodes, not compartment text
-        assert!(json.contains("node:block"), "Children of root package should be top-level nodes");
-        assert!(json.contains("Engine"));
-    }
 
-    #[test]
-    fn expanded_node_shows_children_as_nodes() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-        let part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Engine")
-            .with_owner(pkg_id.clone());
-        graph.add_element(part);
 
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("node:block"));
-    }
+
 
     // ── Expand button tests ──
 
-    #[test]
-    fn expandable_node_has_button() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-        let part_def = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Vehicle")
-            .with_owner(pkg_id);
-        graph.add_element(part_def);
 
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("button:expand"));
-        // Root-level packages auto-expand, so the package should be expanded
-        assert!(json.contains("\"expanded\":true"));
-    }
 
-    #[test]
-    fn leaf_children_get_expand_button() {
-        // Any node with BDD-relevant children should be expandable,
-        // even if those children are "leaf" usages with no grandchildren.
-        // When expanded, children render as nested DiagramChild::Node entries
-        // rather than being absorbed into compartment text.
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-        let part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Wheel")
-            .with_owner(pkg_id);
-        graph.add_element(part);
 
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            json.contains("button:expand"),
-            "Nodes with BDD-relevant children should get expand button"
-        );
-    }
 
     // ── Sub-diagram embedding tests ──
 
@@ -1990,33 +1630,7 @@ mod tests {
         assert!(brew_node.is_some(), "ActionDefinition should be a node");
     }
 
-    #[test]
-    fn expanded_part_def_still_uses_bdd_style() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-        let part_def = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Vehicle")
-            .with_owner(pkg_id.clone());
-        let pd_id = graph.add_element(part_def);
-        let child = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Engine")
-            .with_owner(pd_id.clone());
-        graph.add_element(child);
 
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        expanded.insert(pd_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(
-            json.contains("node:block"),
-            "PartDefinition should use BDD-style nested children"
-        );
-    }
 
     // ── Metadata stereotype tests ──
 
@@ -2076,33 +1690,7 @@ mod tests {
 
     // ── Documentation compartment tests ──
 
-    #[test]
-    fn textual_representation_child_appears_in_documentation() {
-        let mut graph = ModelGraph::new();
-        let part = Element::new_with_kind(ElementKind::PartDefinition).with_name("Vehicle");
-        let part_id = graph.add_element(part);
 
-        let tr = Element::new_with_kind(ElementKind::TextualRepresentation)
-            .with_owner(part_id)
-            .with_prop("body", "This is the SysML textual form");
-        graph.add_element(tr);
-
-        let gen = GeneralViewGenerator;
-        let expanded = HashSet::new();
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(
-            json.contains("comp:documentation"),
-            "Should have documentation compartment"
-        );
-        assert!(
-            json.contains("This is the SysML textual form"),
-            "TextualRepresentation body should appear in documentation"
-        );
-    }
 
     // ── N-ary connection tests ──
 
@@ -2200,67 +1788,9 @@ mod tests {
 
     // ── Perform relationship tests ──
 
-    #[test]
-    fn action_with_perform_has_performed_by_compartment() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
 
-        let action = Element::new_with_kind(ElementKind::ActionUsage)
-            .with_name("Drive")
-            .with_owner(pkg_id.clone());
-        let action_id = graph.add_element(action);
 
-        let part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Driver")
-            .with_owner(pkg_id.clone());
-        let part_id = graph.add_element(part);
 
-        let perform = Relationship::new(RelationshipKind::Perform, part_id, action_id);
-        graph.add_relationship(perform);
-
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(
-            json.contains("comp:performedBy"),
-            "ActionUsage with incoming Perform relationship should have performedBy compartment"
-        );
-        assert!(
-            json.contains("Driver"),
-            "performedBy compartment should list the performer name"
-        );
-    }
-
-    #[test]
-    fn action_without_perform_has_no_performed_by_compartment() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-
-        let action = Element::new_with_kind(ElementKind::ActionUsage)
-            .with_name("Drive")
-            .with_owner(pkg_id.clone());
-        graph.add_element(action);
-
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(
-            !json.contains("comp:performedBy"),
-            "ActionUsage without Perform relationships should not have performedBy compartment"
-        );
-    }
 
     // ── Structural container embedding tests ──
 
@@ -2296,31 +1826,7 @@ mod tests {
         assert!(machine_node.is_some(), "Should have Machine node");
     }
 
-    #[test]
-    fn expanded_package_with_actions_uses_bdd_not_embed() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
 
-        let a1 = Element::new_with_kind(ElementKind::ActionUsage)
-            .with_name("DoStuff")
-            .with_owner(pkg_id.clone());
-        graph.add_element(a1);
-
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        let gen = GeneralViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        // Package should NOT embed sub-diagrams, only structural types do
-        assert!(
-            json.contains("node:action"),
-            "ActionUsage child should be rendered as BDD node"
-        );
-    }
 
     // ── Self-loop suppression test ──
 

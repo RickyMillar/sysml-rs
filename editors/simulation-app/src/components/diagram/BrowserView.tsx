@@ -11,7 +11,7 @@ import type { TreeNode } from '@/shared/api/model';
  * `element.owner.is_none()` for roots, recursive `children_of` for nesting,
  * memberships / imports filtered out) — this component only renders.
  *
- * Sprotty's tree layout is intentionally bypassed: a native React tree
+ * A graph layout is intentionally bypassed here: a native React tree
  * gives us virtualization, keyboard nav, and accessible disclosure
  * semantics for free.
  */

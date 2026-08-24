@@ -1,8 +1,8 @@
 //! Tabular payload types for `GridView` and other table-shaped renderings.
 //!
 //! Produced by [`to_traceability_matrix`] and embedded in
-//! `DiagramPayload::Table` for the wire format. Consumers (FE, MCP clients,
-//! REST callers) work with rows × columns directly — no Sprotty SModel or
+//! `tagged payload::Table` for the wire format. Consumers (FE, MCP clients,
+//! REST callers) work with rows × columns directly — no retired graph-renderer legacy graph model or
 //! ELK layout involved.
 
 use serde::Serialize;

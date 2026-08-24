@@ -71,7 +71,7 @@ pub(crate) fn wrap_doc_text(raw: &str) -> Vec<String> {
 }
 
 use crate::ir::types::DiagramNode;
-use crate::smodel::builders;
+use crate::view_text;
 use crate::visual_kind::{self as classify, VisualKind};
 
 /// Deterministic, source-ordered children of an element (C13).
@@ -150,7 +150,7 @@ pub(crate) fn compartment_text_for_element(
     graph: &ModelGraph,
     compartment: classify::CompartmentKind,
 ) -> String {
-    let name = crate::smodel::builders::element_display_name(element, graph);
+    let name = crate::view_text::element_display_name(element, graph);
 
     match element.kind {
         // Transitions: "source then target" with optional trigger/guard
@@ -266,7 +266,7 @@ pub(crate) fn apply_source_metadata(
 ) {
     // Source location now lives only in the ViewModel text-map (3.15); the node
     // no longer carries source_uri/source_range.
-    node.tooltip = builders::tooltip_text(element, graph);
+    node.tooltip = view_text::tooltip_text(element, graph);
 }
 
 /// Append the requirement-specific compartments to a node — the shared notation

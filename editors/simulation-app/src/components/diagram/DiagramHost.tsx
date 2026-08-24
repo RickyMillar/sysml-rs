@@ -20,10 +20,9 @@ import { SvgCanvas } from '@/diagram-svg/SvgCanvas';
  *   - treeModel     → BrowserView (native React tree)
  *   - graph / none  → SvgCanvas (React-SVG over the Rust ViewModel)
  *
- * The graph renderer is **SvgCanvas** (Bucket 2 spike). It does not consume the
- * `smodel` Sprotty payload — it fetches the renderer-agnostic ViewModel directly
- * for the selected declared view and renders that. The table/geometry/tree
- * families keep their dedicated renderers.
+ * The graph renderer is **SvgCanvas**. It fetches the renderer-neutral
+ * ViewModel for the selected declared view; table/geometry/tree families use
+ * the typed non-graph data carried by that same artifact.
  *
  * The store invariant (see `store/workspace.ts`) guarantees at most one
  * non-graph payload field is non-null at a time, so the dispatch is total.

@@ -1,9 +1,9 @@
 //! Spatial / floor-plan payload types for `GeometryView`.
 //!
 //! Produced by [`to_geometry_model`] and embedded in
-//! `DiagramPayload::Geometry` for the wire format. Consumers (FE, MCP
-//! clients, REST callers) work with primitives directly — no Sprotty
-//! SModel or ELK layout involved.
+//! `tagged payload::Geometry` for the wire format. Consumers (FE, MCP
+//! clients, REST callers) work with primitives directly — no retired graph-renderer
+//! legacy graph model or ELK layout involved.
 //!
 //! Phase 5b will add `x` / `y` / `width` / `height` attributes to a spatial
 //! fixture model so this generator has real spatial content

@@ -27,21 +27,6 @@ impl PlantUmlView {
     }
 }
 
-/// View type for SModel export.
-#[derive(Debug, Clone, clap::ValueEnum)]
-pub enum SmodelView {
-    General,
-    Interconnection,
-    State,
-    Action,
-    Requirements,
-    Browser,
-    Sequence,
-    Grid,
-    Geometry,
-    Parametric,
-}
-
 #[derive(Subcommand)]
 pub enum ExportCommand {
     /// Export model as PlantUML diagram
@@ -59,17 +44,6 @@ pub enum ExportCommand {
         /// Pretty-print the JSON output
         #[arg(long)]
         pretty: bool,
-    },
-    /// Export model as Sprotty SModel JSON
-    Smodel {
-        /// Path to the SysML file
-        file: PathBuf,
-        /// Diagram view type
-        #[arg(long, value_enum, default_value_t = SmodelView::General)]
-        view: SmodelView,
-        /// Expand all expandable nodes (show children as nested boxes)
-        #[arg(long)]
-        expand_all: bool,
     },
     /// Export a declared view's ViewModel JSON (scene + tokens + text-map +
     /// interactions + frame / non-graph payload), sidecars pruned to the
@@ -99,7 +73,6 @@ pub fn run(command: ExportCommand) -> Result<(), CliError> {
     match command {
         ExportCommand::Plantuml { file, view } => run_plantuml(&file, &view),
         ExportCommand::Json { file, pretty } => run_json(&file, pretty),
-        ExportCommand::Smodel { file, view, expand_all } => run_smodel(&file, &view, expand_all),
         ExportCommand::Viewmodel {
             workspace,
             view,
@@ -194,30 +167,6 @@ fn resolve_view_arg<'a, T>(views: &'a [(String, T)], arg: &str) -> Result<&'a T,
             )))
         }
     }
-}
-
-fn run_smodel(file: &std::path::Path, view: &SmodelView, expand_all: bool) -> Result<(), CliError> {
-    // Bucket B / B5 P1: SModel pipeline lives on the service. CLI is a thin
-    // load → dispatch → print shell.
-    let view_str = match view {
-        SmodelView::General => "general",
-        SmodelView::Interconnection => "interconnection",
-        SmodelView::State => "state",
-        SmodelView::Action => "action",
-        SmodelView::Requirements => "requirements",
-        SmodelView::Browser => "browser",
-        SmodelView::Sequence => "sequence",
-        SmodelView::Grid => "grid",
-        SmodelView::Geometry => "geometry",
-        SmodelView::Parametric => "parametric",
-    };
-
-    let service = SysmlService::empty();
-    let uri = service.load_file(file)?;
-    let value = service.export_smodel(&uri, view_str, expand_all)?;
-    let output = serde_json::to_string_pretty(&value).unwrap_or_default();
-    println!("{output}");
-    Ok(())
 }
 
 #[cfg(test)]

@@ -26,8 +26,8 @@ use crate::Db;
 
 /// Salsa-cached [`TextMap`] for an unchanged elaborated graph.
 ///
-/// Wraps `Arc<TextMap>` with pointer-identity equality (same rationale as
-/// [`crate::diagram::CachedDiagram`]).
+/// Wraps `Arc<TextMap>` with pointer-identity equality, matching the other
+/// salsa-cached sidecar artifacts.
 #[derive(Clone, Debug)]
 pub struct CachedTextMap(Arc<TextMap>);
 

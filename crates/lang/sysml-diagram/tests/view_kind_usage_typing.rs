@@ -2,12 +2,11 @@
 //! carries its kind through FeatureTyping exactly as `view def X :> BrowserView`
 //! carries it through Subclassification.
 
-mod smodel_common;
-use smodel_common::parse_sysml;
+mod diagram_test_support;
+use diagram_test_support::parse_sysml;
 
 use sysml_core::build_view_index;
-use sysml_diagram::smodel::ViewType;
-use sysml_diagram::ViewRequest;
+use sysml_diagram::{ViewRequest, ViewType};
 
 fn kind_of(source: &str, view_name: &str) -> ViewType {
     let mut graph = parse_sysml(source);

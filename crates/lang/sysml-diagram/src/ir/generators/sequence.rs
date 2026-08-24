@@ -31,8 +31,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramNode, HeaderStyle, NodeLayout, DiagramChild, DiagramButton, DiagramEdge, DiagramEdgeKind, EdgeLabelPlacement, ButtonType, NodeTag, EdgeTag, SequenceNodeLayout};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, VisualKind};
 
 // ── Layout constants ─────────────────────────────────────────────────────
@@ -258,17 +258,15 @@ pub(crate) fn generate_from_flows(flows: &[SeqEdge], graph: Option<&ModelGraph>)
         .map(|name| (name.clone(), lifeline_head_label(name, graph)))
         .collect();
 
-    // Compute lifeline widths from the head labels. Uses the SAME estimator
-    // the SGraph render layer applies as an expanded-container width floor
-    // (`estimate_node_size`), so the generator's x-stride and the rendered
-    // head width stay in lockstep — a wider floor there would overlap
-    // adjacent lifelines.
+    // Compute lifeline widths from the head labels. This is a renderer-neutral
+    // text measurement contract (bold 13px label estimate plus horizontal
+    // padding), so x-strides do not depend on a retired graph renderer.
     let participant_widths: HashMap<String, f64> = participants
         .iter()
         .map(|name| {
             let label = &participant_labels[name];
-            let w = crate::smodel::estimate_node_size(label, "", 0).width;
-            (name.clone(), w)
+            let width = ((label.chars().count() as f64) * 10.5 + 30.0).max(100.0);
+            (name.clone(), width)
         })
         .collect();
 
@@ -399,7 +397,7 @@ pub(crate) fn generate_from_flows(flows: &[SeqEdge], graph: Option<&ModelGraph>)
                 .values()
                 .find(|e| e.name.as_deref() == Some(participant.as_str()))
             {
-                lifeline.tooltip = builders::tooltip_text(element, graph);
+                lifeline.tooltip = view_text::tooltip_text(element, graph);
             }
         }
 
@@ -608,7 +606,7 @@ pub(crate) fn generate_from_flows(flows: &[SeqEdge], graph: Option<&ModelGraph>)
             .with_size(COMMENT_WIDTH, node_height)
             .with_layout(NodeLayout::Free);
 
-            comment_node.tooltip = builders::tooltip_text(element, graph);
+            comment_node.tooltip = view_text::tooltip_text(element, graph);
 
             ir.nodes.push(comment_node);
             comment_y += node_height + COMMENT_PAD;
@@ -959,7 +957,6 @@ fn prefix_node_ids(node: &mut DiagramNode, prefix: &str) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::ir::render;
     use sysml_core::{Element, ElementKind, ModelGraph, Relationship};
     use sysml_runtime::flows::FlowEndpoint;
     use std::collections::HashSet;
@@ -1576,25 +1573,7 @@ mod tests {
 
     // ── Render round-trip ───────────────────────────────────────────────
 
-    #[test]
-    fn sequence_ir_renders_to_sgraph() {
-        let flows = two_flow_fixture();
-        let ir = generate_from_flows(&flows, None);
-        let sgraph = render::render(&ir);
 
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert_eq!(sgraph.type_, "graph");
-        assert!(json.contains("lifeline:A"));
-        assert!(json.contains("lifeline:B"));
-        assert!(json.contains("node:lifeline"));
-        assert!(json.contains("node:sqProxy"));
-        assert!(json.contains("edge:message"));
-        assert!(json.contains("elk.algorithm"));
-        assert!(json.contains("fixed"));
-        assert!(json.contains("request"));
-        assert!(json.contains("response of Data"));
-    }
 
     // ── generate_for_owner ──────────────────────────────────────────────
 

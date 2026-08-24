@@ -702,7 +702,7 @@ impl SysmlService {
     /// query. Fails hard when no workspace is loaded.
     ///
     /// This is the one home for the workspace-accessor prologue
-    /// (`eval_context`, `workspace_*`, `cached_smodel` / `cached_view_model`).
+    /// (`eval_context`, `workspace_*`, `cached_view_model`).
     /// Never run a salsa query while the host guard is alive — a cold
     /// elaboration inside the guard serializes every other host user for
     /// seconds (same lock, opposite direction from the 2026-07-17 wedge;
@@ -2663,109 +2663,6 @@ impl SysmlService {
         Ok(cached.arc())
     }
 
-    /// Render a `ViewRequest` against the graph for `uri`, going
-    /// through the salsa `diagram_query` cache (ADR-011 §3 / S3.T5)
-    /// when the request is cacheable and the view type produces an
-    /// SGraph payload.
-    ///
-    /// Dispatch:
-    /// 1. View types that do *not* produce SGraph (Grid / Geometry /
-    ///    Browser) bypass the T5 SGraph cache and fall through to
-    ///    `smodel::to_payload_with_filter_cache` (tier 2 below).
-    /// 2. Requests carrying `filter` / `hints` / `overlays` (i.e.
-    ///    `cache_key()` returns `None`) bypass the cache.
-    /// 3. Otherwise the request hits `cached_smodel`, and the SGraph
-    ///    is wrapped in `DiagramPayload::Graph` before JSON
-    ///    serialisation — the canonical `{"kind":"graph","data":{…}}`
-    ///    wire shape (see `graph_payload_json`).
-    ///
-    /// This helper is what every diagram-rendering service command
-    /// (`views_render`, future `diagram_open` etc.) should call.
-    pub fn diagram_with_cached(
-        &self,
-        uri: &str,
-        request: &sysml_diagram::ViewRequest,
-    ) -> Result<serde_json::Value, ServiceError> {
-        // Tier 1: full T5 cache — request must be cacheable AND produce SGraph.
-        if visualization::view_type_produces_sgraph(request.view_type) {
-            if let Some(sgraph) = self.cached_smodel(request)? {
-                return Ok(visualization::graph_payload_json(&sgraph));
-            }
-        }
-        // Tier 2: filter-bearing requests (or hint/overlay-bearing
-        // requests) bypass the T5 SGraph cache. Thread the T6b
-        // precompiled-filter-expression cache so per-element filter
-        // evaluation skips the compile step. Routes through the
-        // `view_filter_exprs_best` dispatcher — fail-hard, no soft
-        // fallback to uncached `diagram_with()` (Q3 of the resolution-
-        //
-        // For `__workspace__` (which has no `SourceFile`), pass any
-        // tracked user file solely as the dispatcher key — the
-        // workspace arms only consult `pfs`, the `source_file` argument
-        // is unused.
-        let graph = self.workspace_aware_graph()?;
-        let project_id = Some(sysml_project::ProjectHandle(
-            Self::SERVICE_WORKSPACE_PROJECT_ID,
-        ));
-        // ONE lock acquisition for snapshot + SourceFile (lock-order
-        // invariant on `host_analysis` — the 2026-07-17 wedge).
-        let (analysis, sf) = self.locked_analysis_with(|host| {
-            host.file_id(uri)
-                .and_then(|id| host.source_file(id))
-                .or_else(|| {
-                    host.files()
-                        .user_file_ids()
-                        .next()
-                        .and_then(|id| host.source_file(id))
-                })
-        });
-        let sf = sf.ok_or_else(|| {
-            ServiceError::ElementNotFound(format!("no graph for URI: {uri}"))
-        })?;
-        let filter_cache = analysis.view_filter_exprs_best(sf, project_id).arc();
-        let payload =
-            sysml_diagram::smodel::to_payload_with_filter_cache(&graph, request, &filter_cache);
-        Ok(serde_json::to_value(&payload).unwrap_or_default())
-    }
-
-    /// Resolve the salsa-cached `SGraph` for a diagram render on the
-    /// workspace `uri`, when the request shape is cacheable.
-    ///
-    /// Routes through the tracked `workspace_diagram_with_library`
-    /// query in `sysml-ide-db` (ADR-011 §3 / S3.T5). Returns `None`
-    /// when the request carries `filter` / `hints` / `overlays` —
-    /// those bypass the cache because the key newtype
-    /// ([`sysml_diagram::DiagramRequestKey`]) deliberately captures
-    /// only `(view_type, expanded_ids, expose)`. Library overlay
-    /// handling + fallback chain (with_library → no-library →
-    /// file-scope) mirrors the other workspace helpers.
-    ///
-    /// Returns `Ok(Some(Arc<SGraph>))` when the cache produced or
-    /// returned a value; `Ok(None)` when the request bypasses the
-    /// cache (caller must fall back to direct `to_smodel_with`);
-    /// `Err(...)` when the URI doesn't resolve to a known graph.
-    ///
-    /// Helper is not a `#[service_command]`; MCP coverage gate
-    /// unaffected.
-    pub fn cached_smodel(
-        &self,
-        request: &sysml_diagram::ViewRequest,
-    ) -> Result<Option<Arc<sysml_diagram::smodel::SGraph>>, ServiceError> {
-        let Some(key) = request.cache_key() else {
-            return Ok(None);
-        };
-        // Guard-drop discipline: snapshot + PFS under one brief lock, then
-        // run the salsa query lock-free (see `workspace_analysis`).
-        let (analysis, pfs) = self.workspace_analysis()?;
-        let cached = sysml_ide_db::workspace_diagram_best(
-            analysis.db(),
-            pfs,
-            analysis.library_graph(),
-            key,
-        );
-        Ok(Some(cached.arc()))
-    }
-
     /// Resolve the salsa-cached [`sysml_diagram::ViewModel`] for a render on the
     /// workspace `uri`, when the request shape is cacheable.
     ///
@@ -2774,7 +2671,7 @@ impl SysmlService {
     /// `ElementId↔Span` text-map, interaction descriptors). Routes through the
     /// tracked `workspace_view_model_best` query in `sysml-ide-db`, with the same
     /// library-overlay → no-library → file-scope fallback chain as
-    /// [`Self::cached_smodel`]. Returns `Ok(None)` when the request carries
+    /// the same request-cache contract. Returns `Ok(None)` when the request carries
     /// `filter`/`hints`/`overlays` (those bypass the cache key).
     ///
     /// Helper is not a `#[service_command]`; MCP coverage gate unaffected.
@@ -2798,7 +2695,7 @@ impl SysmlService {
     }
 
     /// Resolve the [`sysml_diagram::ViewModel`] JSON for a scoped render, with the
-    /// same two-tier dispatch as [`Self::diagram_with_cached`]:
+    /// same two-tier dispatch used by all ViewModel render commands:
     ///
     /// 1. Cacheable request → [`Self::cached_view_model`] (the full ViewModel —
     ///    scene + tokens + text-map + interactions + frame).
@@ -2836,7 +2733,7 @@ impl SysmlService {
             return Ok((*view_model).clone());
         }
         // Tier 2: filter-bearing request bypasses the cache. Thread the precompiled
-        // filter-expression cache, same as `diagram_with_cached`.
+        // filter-expression cache used by the ViewModel render path.
         let graph = self.workspace_aware_graph()?;
         let project_id = Some(sysml_project::ProjectHandle(
             Self::SERVICE_WORKSPACE_PROJECT_ID,
@@ -6517,20 +6414,20 @@ impl SysmlService {
         Ok(visualization::export_json(&graph))
     }
 
-    /// Render a user-authored ViewUsage / ViewDefinition as a Sprotty
-    /// SModel diagram.
+    /// Render a user-authored ViewUsage / ViewDefinition as a renderer-neutral
+    /// [`sysml_diagram::ViewModel`].
     ///
     /// Resolves `view_usage_id` to a `ViewSummary`, composes a
     /// `ViewRequest` from its Expose / filter / rendering memberships,
     /// and dispatches into the same rendering pipeline as
-    /// [`Self::diagram`]. Honours the per-file URI scoping rules
+    /// [`Self::view_model_with_cached`]. Honours the per-file URI scoping rules
     /// (`__workspace__` reads the merged graph; per-file URIs scope
     /// down to the matching file).
     #[service_command(
         name = "sysml.views.render",
         category = Visualization,
         description = "Render a user-authored ViewUsage as a diagram (composes ViewRequest from the view's Expose / filter / rendering memberships)",
-        returns = "JSON (SModel)",
+        returns = "JSON (ViewModel)",
     )]
     pub fn views_render(
         &self,
@@ -6561,7 +6458,7 @@ impl SysmlService {
             "view usage {} not found in workspace",
             view_usage_id
         )))?;
-        self.diagram_with_cached(WORKSPACE_URI, &request)
+        self.view_model_with_cached(WORKSPACE_URI, &request)
     }
 
     /// Views-family scope resolution (scope-collapse W3): query against
@@ -6711,16 +6608,16 @@ impl SysmlService {
         Ok(sysml_core::views_create_scratch_snippet(expose))
     }
 
-    /// Open a diagram for `uri` and return the projected SModel JSON.
+    /// Open an ad-hoc diagram for `uri` and return its ViewModel JSON.
     ///
     /// Updates `diagram_manager().open_diagrams` so subsequent diagnostic
-    /// cycles can auto-refresh the same view. Diagnostics are pulled from
-    /// `service.diagnostics(uri)` and overlaid onto the SGraph in place.
+    /// cycles can refresh the same view; diagnostics are delivered through the
+    /// separate ViewModel diagnostic-overlay contract.
     #[service_command(
         name = "sysml.diagram.open",
         category = Visualization,
-        description = "Open a diagram for the given URI and view type, returning the SModel JSON. Updates open_diagrams for auto-refresh.",
-        returns = "JSON (SGraph)",
+        description = "Open a diagram for the given URI and view type, returning the renderer-neutral ViewModel. Updates open_diagrams for auto-refresh.",
+        returns = "JSON (ViewModel)",
     )]
     pub fn diagram_open(
         &self,
@@ -6735,22 +6632,22 @@ impl SysmlService {
             .get(uri)
             .map(|e| e.value().clone())
             .unwrap_or_default();
-        let value = self.build_diagram_smodel(uri, view_type, &expanded)?;
+        let value = self.build_diagram_view_model(uri, view_type, &expanded)?;
         self.diagram_manager
             .open_diagrams
             .insert(uri.to_owned(), view_type);
         Ok(value)
     }
 
-    /// Switch the diagram view-type for `uri` and return the projected SModel.
+    /// Switch an ad-hoc diagram's view type and return its ViewModel.
     ///
-    /// Behaves like `diagram_open` but with an explicit view_type (no default)
+    /// Behaves like `diagram_open` but with an explicit view type (no default)
     /// and the same `open_diagrams` write semantics.
     #[service_command(
         name = "sysml.diagram.view",
         category = Visualization,
-        description = "Switch a diagram's view-type for the given URI, returning the SModel JSON. Updates open_diagrams.",
-        returns = "JSON (SGraph)",
+        description = "Switch a diagram's view type for the given URI, returning the renderer-neutral ViewModel. Updates open_diagrams.",
+        returns = "JSON (ViewModel)",
     )]
     pub fn diagram_view(
         &self,
@@ -6764,7 +6661,7 @@ impl SysmlService {
             .get(uri)
             .map(|e| e.value().clone())
             .unwrap_or_default();
-        let value = self.build_diagram_smodel(uri, vt, &expanded)?;
+        let value = self.build_diagram_view_model(uri, vt, &expanded)?;
         self.diagram_manager
             .open_diagrams
             .insert(uri.to_owned(), vt);
@@ -6778,9 +6675,8 @@ impl SysmlService {
     /// renderer-agnostic addenda — design tokens (the color palette), the
     /// `ElementId↔Span` text-map (the bidirectional text↔diagram link), and
     /// interaction descriptors (semantic affordances joined by `ElementId`, e.g.
-    /// the go-to-definition target). Unlike `sysml.diagram.view` (which returns a
-    /// Sprotty SModel for the live renderer), this exposes the full ViewModel for
-    /// the new React-SVG renderer and any transport.
+    /// the go-to-definition target). This is the canonical artifact for the
+    /// React-SVG renderer and any other transport.
     ///
     /// Cache-backed (routes through `cached_view_model` →
     /// `workspace_view_model_best`); reads the per-URI expanded-node state like
@@ -6788,7 +6684,7 @@ impl SysmlService {
     #[service_command(
         name = "sysml.diagram.viewmodel",
         category = Visualization,
-        description = "Return the renderer-agnostic ViewModel (scene + design tokens + text-map + interaction descriptors + frame) for a DECLARED view (ViewUsage / ViewDefinition), scoped by its Expose / filter memberships, as JSON. The canonical wire artifact for the new renderer. Mirrors sysml.views.render but returns the ViewModel instead of an SModel.",
+        description = "Return the renderer-agnostic ViewModel (scene + design tokens + text-map + interaction descriptors + frame) for a DECLARED view (ViewUsage / ViewDefinition), scoped by its Expose / filter memberships, as JSON.",
         returns = "JSON (ViewModel)",
     )]
     pub fn diagram_view_model(
@@ -6824,8 +6720,8 @@ impl SysmlService {
     /// of [`Self::diagram_view_model`] (CLI `sysml export viewmodel`).
     ///
     /// Same request composition, two differences for the export use-case:
-    /// - `expand_all` forces every element id into the expanded set (mirrors
-    ///   [`Self::export_smodel`]); otherwise `expanded_ids` is used as given.
+    /// - `expand_all` forces every element id into the expanded set; otherwise
+    ///   `expanded_ids` is used as given.
     /// - The whole-graph `text_map` / `interactions` sidecars are pruned to the
     ///   ids the scene / non-graph payload references
     ///   ([`sysml_diagram::ViewModel::pruned_to_referenced`]) — serialized
@@ -7112,8 +7008,8 @@ impl SysmlService {
     #[service_command(
         name = "sysml.diagram.expand",
         category = Visualization,
-        description = "Re-project a diagram with the given expanded-node set, returning the SModel JSON. Replaces expanded_nodes state for the URI.",
-        returns = "JSON (SGraph)",
+        description = "Re-project a diagram with the given expanded-node set, returning the renderer-neutral ViewModel. Replaces expanded_nodes state for the URI.",
+        returns = "JSON (ViewModel)",
     )]
     pub fn diagram_expand(
         &self,
@@ -7131,47 +7027,10 @@ impl SysmlService {
         self.diagram_manager
             .expanded_nodes
             .insert(uri.to_owned(), expanded.clone());
-        self.build_diagram_smodel(uri, vt, &expanded)
+        self.build_diagram_view_model(uri, vt, &expanded)
     }
 
-    /// Headless SModel export (no overlay, no state mutation).
-    ///
-    /// CLI-facing peer of `diagram_open`. `expand_all` forces every element
-    /// id into the expanded set; otherwise an empty set is used.
-    #[service_command(
-        name = "sysml.export.smodel",
-        category = Visualization,
-        description = "Export a Sprotty SModel JSON for the given URI and view. `expand_all` expands every element; otherwise the expansion set is empty. No diagnostic overlay, no state mutation.",
-        returns = "JSON (SGraph)",
-    )]
-    pub fn export_smodel(
-        &self,
-        #[doc = "URI of the loaded model"] uri: &str,
-        #[doc = "View name (general / interconnection / state / action / requirements / browser / sequence / grid / geometry / parametric)"]
-        view: &str,
-        #[doc = "When true, the expanded-node set contains every element id in the graph"]
-        expand_all: bool,
-    ) -> Result<serde_json::Value, ServiceError> {
-        let vt = diagram::parse_view_type(view);
-        // RSC-6.5 / L13: resolved+elaborated via salsa (was: ad-hoc
-        // `elaborate()` of an unresolved parse-only clone).
-        let graph = self.elaborated_graph(uri)?;
-        let expanded_ids: HashSet<String> = if expand_all {
-            graph.elements.keys().map(|id| id.to_string()).collect()
-        } else {
-            HashSet::new()
-        };
-        let request = sysml_diagram::ViewRequest::new(vt).with_expanded(expanded_ids);
-        let sgraph = sysml_diagram::smodel::to_smodel_with(&graph, &request);
-        Ok(serde_json::to_value(&sgraph).unwrap_or_default())
-    }
-
-    /// Render the flow connections for `uri` as both PlantUML text AND a
-    /// Sprotty SModel sequence diagram.
-    ///
-    /// Returns the design-target `{ plantuml: String, smodel: object }`
-    /// dual-shape: a single graph walk feeds both renderers so transports
-    /// can pick the format they need without paying for two queries.
+    /// Render the flow connections for `uri` as PlantUML sequence text.
     ///
     /// `flow_id` is reserved for narrowing to a single named flow; today
     /// it is accepted but ignored (the renderer always compiles every flow
@@ -7180,8 +7039,8 @@ impl SysmlService {
     #[service_command(
         name = "sysml.flow.visualize",
         category = Visualization,
-        description = "Render the flow connections for the given URI. Returns {plantuml, smodel} — PlantUML sequence text + the Sprotty SModel JSON for the same flows.",
-        returns = "JSON {plantuml, smodel}",
+        description = "Render the flow connections for the given URI as PlantUML sequence text.",
+        returns = "JSON {plantuml}",
     )]
     pub fn flow_visualize(
         &self,
@@ -7189,10 +7048,8 @@ impl SysmlService {
         _flow_id: Option<&str>,
     ) -> Result<serde_json::Value, ServiceError> {
         let graph = self.workspace_aware_graph()?;
-        // One classified LinkGraph is the single source of truth — both the
-        // PlantUML text and the SModel are derived from it, so they agree.
-        // Connectors surface and PowerBonds (continuous physics) drop
-        // (RSC-3.5c.2b).
+        // Connectors surface as message events; PowerBonds (continuous physics)
+        // are intentionally excluded.
         let (lg, _diags) = sysml_runtime::classify_links_from_graph(&graph);
 
         let mut participants: Vec<String> = Vec::new();
@@ -7211,26 +7068,16 @@ impl SysmlService {
         }
 
         let plantuml = sysml_diagram::to_plantuml_sequence(&participants, &events);
-        let sgraph = sysml_diagram::smodel::generate_sequence_from_flows(&lg, Some(&graph));
-        let smodel = serde_json::to_value(&sgraph).unwrap_or_default();
-
-        Ok(serde_json::json!({
-            "plantuml": plantuml,
-            "smodel": smodel,
-        }))
+        Ok(serde_json::json!({ "plantuml": plantuml }))
     }
 
-    /// Render a single named action's control-flow graph as both PlantUML
-    /// activity text AND an SModel ActionFlowView.
-    ///
-    /// Returns the design-target `{ plantuml: String, smodel: object }`
-    /// dual-shape. Compiles the action via `sysml_runtime::compile_action`
-    /// and renders both formats from the resulting `ActionGraphIR`.
+    /// Render a single named action's control-flow graph as PlantUML activity
+    /// text. Compiles the action through `sysml_runtime::compile_action`.
     #[service_command(
         name = "sysml.action.visualize",
         category = Visualization,
-        description = "Render a named action's control flow. Returns {plantuml, smodel} — PlantUML activity text + the Sprotty SModel ActionFlowView for the same action.",
-        returns = "JSON {plantuml, smodel}",
+        description = "Render a named action's control flow as PlantUML activity text.",
+        returns = "JSON {plantuml}",
     )]
     pub fn action_visualize(
         &self,
@@ -7243,13 +7090,7 @@ impl SysmlService {
         })?;
 
         let plantuml = sysml_diagram::to_plantuml_activity(&ir);
-        let sgraph = sysml_diagram::smodel::generate_action_named(&graph, action_id);
-        let smodel = serde_json::to_value(&sgraph).unwrap_or_default();
-
-        Ok(serde_json::json!({
-            "plantuml": plantuml,
-            "smodel": smodel,
-        }))
+        Ok(serde_json::json!({ "plantuml": plantuml }))
     }
 
     // -- Store delegates (Phase 3) --
@@ -8140,43 +7981,6 @@ impl SysmlService {
                 Ok(Arc::new(parsed.graph().clone()))
             }
         }
-    }
-
-    /// File-level **resolved + elaborated** graph for `uri`, salsa-memoized.
-    ///
-    /// For `__workspace__` this is the cross-file workspace graph. For a
-    /// single file it routes through `elaborate_file_best`, which runs
-    /// `resolve_file_best` *then* `elaborate` (analysis.rs) — so the graph
-    /// is name-resolved, unlike the parse-only [`require_graph`]. Fails
-    /// hard when the URI has no loaded source file.
-    ///
-    /// RSC-6.5 / ledger L13: this is the one home for "I need a properly
-    /// elaborated graph for this URI". It replaces the soft fallback in
-    /// `export_smodel`, which ad-hoc `elaborate()`'d an UNRESOLVED parse-only
-    /// clone — resolution is salsa-owned; no command re-elaborates by hand.
-    /// The single-file (no-workspace) CLI export path (`sysml export smodel
-    /// file.sysml`) keeps working — it just gets a resolved graph now.
-    /// (`views_render` does NOT use this — views are workspace-only and fail
-    /// hard without one; see its body.)
-    fn elaborated_graph(&self, uri: &str) -> Result<Arc<ModelGraph>, ServiceError> {
-        if matches!(GraphScope::parse(uri), GraphScope::Workspace) {
-            return self.workspace_aware_graph();
-        }
-        let (sf, project_id) = {
-            let guard = self.host.lock().unwrap();
-            let file_id = guard.file_id(uri).ok_or_else(|| {
-                ServiceError::ElementNotFound(format!("no graph for URI: {uri}"))
-            })?;
-            let sf = guard.source_file(file_id).ok_or_else(|| {
-                ServiceError::ElementNotFound(format!("no graph for URI: {uri}"))
-            })?;
-            let project_id = guard.files().project_id(file_id);
-            (sf, project_id)
-        };
-        let analysis = self.host_analysis();
-        Ok(Arc::new(
-            analysis.elaborate_file_best(sf, project_id).graph().clone(),
-        ))
     }
 
     /// Get the workspace-elaborated graph. Fails hard when no workspace
@@ -10617,38 +10421,22 @@ impl std::fmt::Debug for SysmlService {
 }
 
 impl SysmlService {
-    /// Build the SModel JSON for a diagram render, applying the
-    /// service-native diagnostic overlay.
+    /// Build the ViewModel JSON for an ad-hoc diagram render.
     ///
-    /// Routes through the salsa-tracked `cached_smodel` when the request
-    /// is cacheable; falls back to a direct `to_smodel_with` otherwise.
-    /// Diagnostics come from `self.diagnostics(uri)` so overlay severity
-    /// follows the same full-pipeline output the LSP would publish.
-    ///
-    /// Separated from the `#[service_impl]` block so the proc macro
-    /// doesn't try to register it as a service command.
-    fn build_diagram_smodel(
+    /// Separated from the `#[service_impl]` block so the proc macro does not
+    /// register it as a service command.
+    fn build_diagram_view_model(
         &self,
         uri: &str,
-        view_type: sysml_diagram::smodel::ViewType,
+        view_type: sysml_diagram::ViewType,
         expanded_ids: &HashSet<String>,
     ) -> Result<serde_json::Value, ServiceError> {
         let graph = self.workspace_aware_graph()?;
-        // Prune the URI's expanded set against the current graph so stale
-        // ids (from prior edits) drop out before the next projection.
         if let Some(mut entry) = self.diagram_manager.expanded_nodes.get_mut(uri) {
             diagram::prune_expanded_ids(entry.value_mut(), &graph);
         }
         let request = sysml_diagram::ViewRequest::new(view_type).with_expanded(expanded_ids.clone());
-        let mut sgraph = match self.cached_smodel(&request)? {
-            Some(arc) => (*arc).clone(),
-            None => sysml_diagram::smodel::to_smodel_with(&graph, &request),
-        };
-        let diags = self.diagnostics(uri).unwrap_or_default();
-        if !diags.is_empty() {
-            diagram::overlay_diagnostics(&mut sgraph, &diags);
-        }
-        Ok(serde_json::to_value(&sgraph).unwrap_or_default())
+        self.view_model_with_cached(uri, &request)
     }
 }
 

@@ -215,12 +215,6 @@ export function useViewpointSearch(uri: string | null, query: string) {
 }
 
 /**
- * Render a specific authored view as an SModel diagram payload.
- *
- * Returns the raw JSON object the renderer consumes — callers are
- * expected to drop it into `useWorkspaceStore.setDiagramPayload(...)`.
- */
-/**
  * Build a `view scratch : InterconnectionView { expose ...; }` source
  * snippet from the qualified names (or ids) of selected elements.
  *
@@ -244,7 +238,7 @@ export function useCreateScratchView() {
   });
 }
 
-// `useViewRender` (the legacy SModel `/render` fetch hook) was removed in 3.12:
+// `useViewRender` (the legacy `/render` fetch hook) was removed in 3.12:
 // every view family — graph AND non-graph — now renders from the single
 // `sysml.diagram.viewmodel` query. `SelectedViewRenderer` reads `vm.non_graph`
 // for Table/Tree/Geometry; SvgCanvas reads the scene for graph views. The

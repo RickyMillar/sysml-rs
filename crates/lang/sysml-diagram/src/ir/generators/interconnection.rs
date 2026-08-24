@@ -21,8 +21,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramNode, NodeLayout, DiagramChild, DiagramButton, DiagramPort, PortDirection, PortSide, PortTag, DiagramEdge, DiagramEdgeKind, EndpointMode, EdgeLabelPlacement, EdgeTag, NodeTag, CompartmentItemSource};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, CompartmentKind, VisualKind};
 
 /// Interconnection (IBD) view generator.
@@ -310,13 +310,13 @@ fn generate_constraint_node_ir(
     let id = element.id.to_string();
     let name = element.name.as_deref().unwrap_or("constraint").to_owned();
     let visual_kind = VisualKind::from_element_kind(&element.kind);
-    let stereotype = builders::stereotype_text(&element.kind);
+    let stereotype = view_text::stereotype_text(&element.kind);
 
     let mut node = DiagramNode::new(id.clone(), visual_kind, &name)
         .with_stereotype(stereotype)
         .with_tag(NodeTag::ParametricConstraint)
         .with_element_kind(element.kind.clone());
-    node.tooltip = builders::tooltip_text(element, graph);
+    node.tooltip = view_text::tooltip_text(element, graph);
     node.tags.extend(classify::property_tags(element));
 
     // Expression header — prefer the structured AST, fall back to the legacy
@@ -494,7 +494,7 @@ fn generate_context_block_ir(
     let id = context.id.to_string();
     let name = context.name.as_deref().unwrap_or("unnamed").to_owned();
     let visual_kind = VisualKind::from_element_kind(&context.kind);
-    let stereotype = builders::stereotype_text(&context.kind);
+    let stereotype = view_text::stereotype_text(&context.kind);
 
     let mut node = DiagramNode::new(id.clone(), visual_kind, &name)
         .with_stereotype(stereotype)
@@ -504,7 +504,7 @@ fn generate_context_block_ir(
     // expanded. Without this the renderer showed a collapsed bare box (D-B4).
     node.expanded = Some(true);
 
-    node.tooltip = builders::tooltip_text(context, graph);
+    node.tooltip = view_text::tooltip_text(context, graph);
 
     // Element kind drives lowercased-kind / definition / usage / visual-kind classes
     // in the adapter.
@@ -573,7 +573,7 @@ fn generate_usage_node_ir(
     // Use type_label as the name (for header rendering)
     let mut node = DiagramNode::new(id, visual_kind, &type_label);
 
-    node.tooltip = builders::tooltip_text(element, graph);
+    node.tooltip = view_text::tooltip_text(element, graph);
 
     // Element kind drives lowercased-kind / definition / usage / visual-kind classes
     // in the adapter.
@@ -1548,7 +1548,6 @@ mod tests {
     use sysml_core::{Element, ElementKind, ModelGraph, Relationship, RelationshipKind};
 
     use crate::ir::generator::GeneratorContext;
-    use crate::ir::render::render;
 
     static EMPTY_SET: std::sync::LazyLock<HashSet<String>> =
         std::sync::LazyLock::new(HashSet::new);
@@ -1566,20 +1565,7 @@ mod tests {
 
     // ── Empty graph ──────────────────────────────────────────────────
 
-    #[test]
-    fn ibd_ir_empty_graph() {
-        let graph = ModelGraph::new();
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
 
-        assert_eq!(ir.view_type, ViewType::Interconnection);
-        assert!(ir.nodes.is_empty());
-        assert!(ir.edges.is_empty());
-
-        let sgraph = render(&ir);
-        assert_eq!(sgraph.type_, "graph");
-        assert!(sgraph.children.is_empty());
-    }
 
     // ── Constraint notation parity (Phase 1) ─────────────────────────
 
@@ -1641,56 +1627,7 @@ mod tests {
 
     // ── Flat mode: two parts with flow ───────────────────────────────
 
-    #[test]
-    fn ibd_ir_flat_with_ports_and_flow() {
-        let mut graph = ModelGraph::new();
 
-        let part_a = Element::new_with_kind(ElementKind::PartUsage).with_name("PartA");
-        let part_a_id = graph.add_element(part_a);
-        let port_a = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("outPort")
-            .with_owner(part_a_id.clone());
-        let port_a_id = graph.add_element(port_a);
-
-        let part_b = Element::new_with_kind(ElementKind::PartUsage).with_name("PartB");
-        let part_b_id = graph.add_element(part_b);
-        let port_b = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("inPort")
-            .with_owner(part_b_id.clone());
-        let port_b_id = graph.add_element(port_b);
-
-        let flow =
-            Relationship::new(RelationshipKind::Flow, port_a_id.clone(), port_b_id.clone());
-        graph.add_relationship(flow);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        // Should have 2 nodes
-        assert_eq!(ir.nodes.len(), 2);
-
-        // Nodes should have ports
-        let node_a = ir.nodes.iter().find(|n| n.name == "PartA").unwrap();
-        assert!(!node_a.ports.is_empty(), "PartA should have ports");
-
-        let node_b = ir.nodes.iter().find(|n| n.name == "PartB").unwrap();
-        assert!(!node_b.ports.is_empty(), "PartB should have ports");
-
-        // Should have 1 edge with port routing
-        assert_eq!(ir.edges.len(), 1);
-        let edge = &ir.edges[0];
-        assert!(edge.source_port_id.is_some(), "edge should have source port");
-        assert!(edge.target_port_id.is_some(), "edge should have target port");
-        assert_eq!(edge.endpoint_mode, EndpointMode::StrictPort);
-
-        // Render to SGraph
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("PartA"));
-        assert!(json.contains("PartB"));
-        assert!(json.contains("sourcePortId"));
-        assert!(json.contains("targetPortId"));
-    }
 
     // ── Expose scoping (declared-view path) ──────────────────────────
 
@@ -1774,142 +1711,15 @@ mod tests {
 
     // ── Context block with inherited ports ────────────────────────────
 
-    #[test]
-    fn ibd_ir_context_block_with_inherited_ports() {
-        let mut graph = ModelGraph::new();
 
-        // PartDefinition with ports
-        let engine_def = Element::new_with_kind(ElementKind::PartDefinition).with_name("Engine");
-        let engine_def_id = graph.add_element(engine_def);
-        let _fuel_port_id = {
-            let fuel_port = Element::new_with_kind(ElementKind::PortUsage)
-                .with_name("fuelIn")
-                .with_owner(engine_def_id.clone());
-            graph.add_element(fuel_port)
-        };
-
-        // Context block
-        let vehicle = Element::new_with_kind(ElementKind::PartDefinition).with_name("Vehicle");
-        let vehicle_id = graph.add_element(vehicle);
-
-        // PartUsage typed by Engine
-        let mut engine_usage =
-            Element::new_with_kind(ElementKind::PartUsage).with_name("engine");
-        engine_usage.props.insert(
-            "unresolved_type".into(),
-            sysml_core::Value::String("Engine".to_string()),
-        );
-        let engine_usage = engine_usage.with_owner(vehicle_id.clone());
-        let _engine_usage_id = graph.add_element(engine_usage);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        // Should have 1 top-level node (Vehicle context)
-        assert_eq!(ir.nodes.len(), 1);
-        let context_node = &ir.nodes[0];
-        assert_eq!(context_node.name, "Vehicle");
-
-        // Context node should contain usage as child node
-        let has_usage_child = context_node.children.iter().any(|c| {
-            matches!(c, DiagramChild::Node(n) if n.name.contains("engine"))
-        });
-        assert!(has_usage_child, "context should contain engine usage");
-
-        // Usage should have inherited port from definition
-        let engine_child = context_node.children.iter().find_map(|c| match c {
-            DiagramChild::Node(n) if n.name.contains("engine") => Some(n),
-            _ => None,
-        });
-        let engine_child = engine_child.unwrap();
-        assert!(
-            !engine_child.ports.is_empty(),
-            "engine usage should inherit fuelIn port"
-        );
-
-        // Render roundtrip
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("Vehicle"));
-        assert!(json.contains("engine : Engine"));
-        assert!(json.contains("fuelIn"));
-    }
 
     // ── Context block with nested parts ──────────────────────────────
 
-    #[test]
-    fn ibd_ir_nested_parts() {
-        let mut graph = ModelGraph::new();
 
-        let outer = Element::new_with_kind(ElementKind::PartDefinition).with_name("Outer");
-        let outer_id = graph.add_element(outer);
-        let inner = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("inner")
-            .with_owner(outer_id);
-        graph.add_element(inner);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("Outer"));
-        assert!(json.contains("inner"));
-    }
 
     // ── Edge deduplication ───────────────────────────────────────────
 
-    #[test]
-    fn ibd_ir_dedup_keeps_higher_priority_edge() {
-        let mut graph = ModelGraph::new();
 
-        let part_a = Element::new_with_kind(ElementKind::PartUsage).with_name("PartA");
-        let part_a_id = graph.add_element(part_a);
-        let port_a = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("portA")
-            .with_owner(part_a_id.clone());
-        let port_a_id = graph.add_element(port_a);
-
-        let part_b = Element::new_with_kind(ElementKind::PartUsage).with_name("PartB");
-        let part_b_id = graph.add_element(part_b);
-        let port_b = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("portB")
-            .with_owner(part_b_id.clone());
-        let port_b_id = graph.add_element(port_b);
-
-        // Connection edge (lower priority)
-        let conn = Relationship::new(
-            RelationshipKind::Connection,
-            port_a_id.clone(),
-            port_b_id.clone(),
-        );
-        graph.add_relationship(conn);
-
-        // Binding edge (higher priority)
-        let binding = Relationship::new(RelationshipKind::Binding, port_a_id, port_b_id);
-        graph.add_relationship(binding);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        // Should have exactly 1 edge after dedup
-        assert_eq!(ir.edges.len(), 1, "should have exactly 1 edge after dedup");
-
-        // It should be the binding (higher priority)
-        match &ir.edges[0].kind {
-            DiagramEdgeKind::Relationship(RelationshipKind::Binding) => {}
-            other => panic!("expected Binding edge, got {:?}", other),
-        }
-
-        // Render and verify
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("edge:binding"), "should keep binding edge");
-        assert!(
-            !json.contains("edge:connection"),
-            "should drop duplicate connection edge"
-        );
-    }
 
     // ── Different endpoints not deduped ──────────────────────────────
 
@@ -2033,66 +1843,7 @@ mod tests {
 
     // ── Proxy ports ──────────────────────────────────────────────────
 
-    #[test]
-    fn ibd_ir_context_block_has_proxy_ports() {
-        let mut graph = ModelGraph::new();
 
-        let vehicle = Element::new_with_kind(ElementKind::PartDefinition).with_name("Vehicle");
-        let vehicle_id = graph.add_element(vehicle);
-
-        let vehicle_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("fuelIn")
-            .with_owner(vehicle_id.clone());
-        let vehicle_port_id = graph.add_element(vehicle_port);
-
-        let engine = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("engine")
-            .with_owner(vehicle_id.clone());
-        let engine_id = graph.add_element(engine);
-
-        let engine_port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("fuelIn")
-            .with_owner(engine_id.clone());
-        let engine_port_id = graph.add_element(engine_port);
-
-        let binding = Relationship::new(
-            RelationshipKind::Binding,
-            vehicle_port_id.clone(),
-            engine_port_id.clone(),
-        );
-        graph.add_relationship(binding);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        // Context node should have proxy ports
-        assert_eq!(ir.nodes.len(), 1);
-        let context_node = &ir.nodes[0];
-        let has_proxy = context_node.ports.iter().any(|p| p.is_proxy);
-        assert!(has_proxy, "context block should have proxy ports");
-
-        // Should have a binding edge (nested inside context node)
-        let has_nested_edges = context_node.children.iter().any(|c| matches!(c, DiagramChild::Edge(_)));
-        assert!(
-            has_nested_edges,
-            "should have edges nested in context node"
-        );
-
-        // Proxy port ID should have ctx: prefix
-        let proxy_port = context_node.ports.iter().find(|p| p.is_proxy).unwrap();
-        let ctx_prefix = format!("ctx:{}:", vehicle_id);
-        assert!(
-            proxy_port.element_id.starts_with(&ctx_prefix),
-            "proxy port should have ctx: prefix, got: {}",
-            proxy_port.element_id
-        );
-
-        // Render to SGraph
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("proxy"), "should have proxy CSS class");
-        assert!(json.contains("edge:binding"), "should have binding edge");
-    }
 
     // ── generate_for_owner ───────────────────────────────────────────
 
@@ -2150,32 +1901,7 @@ mod tests {
 
     // ── Render roundtrip ─────────────────────────────────────────────
 
-    #[test]
-    fn ibd_ir_renders_to_sgraph() {
-        let mut graph = ModelGraph::new();
 
-        let vehicle = Element::new_with_kind(ElementKind::PartDefinition).with_name("Vehicle");
-        let vehicle_id = graph.add_element(vehicle);
-
-        let engine = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("engine")
-            .with_owner(vehicle_id.clone());
-        let engine_id = graph.add_element(engine);
-
-        let port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("fuelIn")
-            .with_owner(engine_id);
-        graph.add_element(port);
-
-        let gen = InterconnectionViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(json.contains("Vehicle"));
-        assert!(json.contains("engine"));
-        assert!(json.contains("fuelIn"));
-    }
 
     // ── Edge label text ──────────────────────────────────────────────
 

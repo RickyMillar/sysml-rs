@@ -61,10 +61,10 @@
 //! ### Visualization endpoints
 //! - `GET  /models/:uri/export/json` - Canonical JSON export
 //! - `GET  /models/:uri/views` - List declared views (ViewUsage / ViewDefinition)
-//! - `GET  /models/:uri/views/:view_id/render` - Render a declared view as SModel JSON
+//! - `GET  /models/:uri/views/:view_id/render` - Render a declared view as a ViewModel
 //! - `GET  /models/:uri/views/by_viewpoint/:viewpoint_id` - Views satisfying a viewpoint
 //! - `GET  /models/:uri/viewpoints/by_stakeholder/:stakeholder_id` - Viewpoints with given stakeholder
-//! - `POST /models/:uri/views/scratch` - Build a scratch view-def snippet exposing the given elements
+//! - `POST /views/scratch` - Build a scratch view-def snippet exposing the given elements
 //!
 //! ### Generic command dispatch (auth-gated)
 //! - `POST /api/command` - Execute any registered service command by name
@@ -1753,7 +1753,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn command_routes_are_gated_too() {
+    async fn inventory_generated_command_routes_are_gated_too() {
         // The inventory-generated routes carry their own auth layer. A token
         // that only guarded the hand-written writes would leave the whole
         // command surface open.
@@ -1761,9 +1761,9 @@ mod tests {
             .oneshot(
                 Request::builder()
                     .method("POST")
-                    .uri("/api/command")
+                    .uri("/api/commands/sysml.loaded_uris")
                     .header("content-type", "application/json")
-                    .body(Body::from(r#"{"command":"sysml.model.stats","params":{}}"#))
+                    .body(Body::from("{}"))
                     .unwrap(),
             )
             .await
@@ -2161,9 +2161,7 @@ mod tests {
             .await
             .unwrap();
         let payload: serde_json::Value = serde_json::from_slice(&body).unwrap();
-        // Payload is the SModel JSON envelope — confirm we got an
-        // object back, not an error string.
-        assert!(payload.is_object(), "expected SModel object, got {payload}");
+        assert!(payload.get("scene").is_some(), "expected ViewModel, got {payload}");
     }
 
     #[tokio::test]
@@ -2212,7 +2210,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn commands_endpoint() {
+    async fn commands_endpoint_advertises_the_named_routes() {
         let app = create_router(test_state());
 
         let response = app
@@ -2226,6 +2224,81 @@ mod tests {
             .unwrap();
 
         assert_eq!(response.status(), StatusCode::OK);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        let catalog: serde_json::Value = serde_json::from_slice(&body).unwrap();
+        assert!(
+            catalog.as_array().is_some_and(|commands| commands
+                .iter()
+                .any(|command| command["name"] == "sysml.loaded_uris")),
+            "the catalog must advertise routes created from the same command inventory"
+        );
+    }
+
+    #[tokio::test]
+    async fn inventory_named_route_dispatches_a_catalogued_command() {
+        let state = test_state_with_source("test.sysml", "package Vehicle { part engine; }");
+        let app = create_router(state);
+
+        let response = app
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri("/api/commands/sysml.loaded_uris")
+                    .header("content-type", "application/json")
+                    .body(Body::from("{}"))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+
+        assert_eq!(response.status(), StatusCode::OK);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        let uris: serde_json::Value = serde_json::from_slice(&body).unwrap();
+        assert!(
+            uris.as_array()
+                .is_some_and(|uris| uris.iter().any(|uri| uri == "test.sysml")),
+            "named routes must dispatch the catalogued command, got {uris}"
+        );
+    }
+
+    #[tokio::test]
+    async fn scratch_view_route_is_root_scoped_and_auth_gated() {
+        let unauthorized = token_router()
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri("/views/scratch")
+                    .header("content-type", "application/json")
+                    .body(Body::from(r#"{"expose":["P::engine"]}"#))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(unauthorized.status(), StatusCode::UNAUTHORIZED);
+
+        let response = create_router(test_state())
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri("/views/scratch")
+                    .header("content-type", "application/json")
+                    .body(Body::from(r#"{"expose":["P::engine"]}"#))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::OK);
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        assert!(
+            String::from_utf8_lossy(&body).contains("expose P::engine;"),
+            "scratch route must return the generated view snippet"
+        );
     }
 
     #[tokio::test]

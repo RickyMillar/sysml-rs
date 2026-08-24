@@ -1,4 +1,4 @@
-//! GridView generator (DiagramIR) — **legacy SGraph emitter**.
+//! GridView generator (DiagramIR) — **legacy legacy graph emitter**.
 //!
 //! Produces a traceability matrix: rows are requirements, columns are
 //! verification/design elements, cells mark Satisfy/Verify/Allocate/Derive/Trace
@@ -7,11 +7,11 @@
 //! ## Status
 //!
 //! The canonical wire path for `view=grid` now goes through
-//! [`crate::tmodel::to_traceability_matrix`] → `DiagramPayload::Table(TableModel)`,
-//! which is what REST and MCP serve to the simulation-app FE. This Sprotty
+//! [`crate::tmodel::to_traceability_matrix`] → `tagged payload::Table(TableModel)`,
+//! which is what REST and MCP serve to the simulation-app FE. This retired graph-renderer
 //! generator is retained for LSP push notifications (`sysml/diagram/setModel`)
-//! and the CLI `export smodel --view grid` path, both of which still
-//! expect raw `SGraph`. Delete once those consumers migrate to typed
+//! and the retired CLI graph export path, both of which still
+//! expect raw `legacy graph`. Delete once those consumers migrate to typed
 //! payloads.
 
 use std::collections::{BTreeMap, HashMap, HashSet};
@@ -21,8 +21,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramNode, HeaderStyle, NodeLayout, NodeTag};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, VisualKind};
 
 // ── Layout constants ─────────────────────────────────────────────────────
@@ -208,7 +208,7 @@ impl ViewGenerator for GridViewGenerator {
             .with_layout(NodeLayout::Free)
             .with_tag(NodeTag::GridRow);
 
-            row_node.tooltip = builders::tooltip_text(req, graph);
+            row_node.tooltip = view_text::tooltip_text(req, graph);
 
             ir.nodes.push(row_node);
 
@@ -253,7 +253,6 @@ impl ViewGenerator for GridViewGenerator {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::ir::render;
     use sysml_core::{Element, ElementKind, ModelGraph, Relationship};
     use std::collections::HashSet;
 
@@ -571,40 +570,7 @@ mod tests {
         }
     }
 
-    #[test]
-    fn grid_ir_renders_to_sgraph() {
-        let mut graph = ModelGraph::new();
 
-        let req = Element::new_with_kind(ElementKind::RequirementUsage).with_name("Req-Speed");
-        let req_id = graph.add_element(req);
-
-        let part = Element::new_with_kind(ElementKind::PartUsage).with_name("Engine");
-        let part_id = graph.add_element(part);
-
-        let satisfy = Relationship::new(RelationshipKind::Satisfy, req_id, part_id);
-        graph.add_relationship(satisfy);
-
-        let gen = GridViewGenerator;
-        let ctx = make_ctx(&graph);
-        let ir = gen.generate(&ctx);
-        let sgraph = render::render(&ir);
-
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert_eq!(sgraph.type_, "graph");
-        assert_eq!(
-            sgraph.layout_options.as_ref().unwrap()["elk.algorithm"],
-            "org.eclipse.elk.fixed"
-        );
-
-        // Verify key content appears in rendered JSON
-        assert!(json.contains("Req-Speed"));
-        assert!(json.contains("Engine"));
-        // The adapter derives these CSS classes from the typed grid node tags.
-        assert!(json.contains("grid-col"));
-        assert!(json.contains("grid-row"));
-        assert!(json.contains("grid-cell"));
-    }
 
     #[test]
     fn grid_ir_view_type_and_algorithm() {

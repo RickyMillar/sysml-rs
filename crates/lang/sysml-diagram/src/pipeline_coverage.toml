@@ -1,12 +1,12 @@
 # SysML v2 Visualization Pipeline Coverage Tracker
 #
-# Tracks every graphical concept through the 6-stage pipeline:
-#   1. Parser     — tree-sitter grammar rule parses the syntax
-#   2. AST        — AST builder produces correct ElementKind + properties
-#   3. SModel Gen — Rust generator emits SNode/SEdge/SCompartment
-#   4. TS Reg     — configureModelElement() in sysml-module.ts
-#   5. View       — SVG rendering correct (shape, CSS, children)
-#   6. ELK        — proper sizing, spacing, routing
+# Tracks every graphical concept through the renderer-neutral pipeline:
+#   1. Parser    — tree-sitter grammar rule parses the syntax
+#   2. AST       — AST builder produces correct ElementKind + properties
+#   3. IR        — Rust generator emits typed DiagramIR
+#   4. ViewModel — scene and sidecars serialize at the product boundary
+#   5. View      — SVG rendering is correct (shape, CSS, children)
+#   6. Layout    — sizing, spacing, and routing are coherent
 #
 # Status: "done" | "partial" | "stub" | "missing" | "n/a"
 #

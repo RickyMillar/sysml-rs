@@ -169,10 +169,9 @@ fn views_render_succeeds_after_open_context() {
     let rendered = svc
         .views_render(&coffee_machine_file("views.sysml"), &view_id, &expanded)
         .expect("views_render of a real view id must succeed after open_context");
-    // SModel JSON payload — non-null, contains a top-level node id.
     assert!(
-        rendered.is_object(),
-        "rendered view must be a JSON object, got {:?}",
+        rendered.get("scene").is_some(),
+        "rendered view must be a ViewModel, got {:?}",
         rendered
     );
 }

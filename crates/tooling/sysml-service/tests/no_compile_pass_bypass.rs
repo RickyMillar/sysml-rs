@@ -6,8 +6,7 @@
 //! query). They must NOT re-run the compile passes (`elaborate`,
 //! `resolve_references`) by hand: those are salsa-tracked queries, and a manual
 //! call both bypasses memoization (perf DNA) and risks operating on an
-//! UNRESOLVED graph — the exact L13 defect that `export_smodel` / `views_render`
-//! once carried (ledger L13; both now route through the accessors).
+//! UNRESOLVED graph — the exact L13 defect that `views_render` once carried (ledger L13; both now route through the accessors).
 //!
 //! This test scans `sysml-service/src/` and fails if any production line calls
 //! a raw compile pass. Test code (the bottom `#[cfg(test)] mod tests` of each

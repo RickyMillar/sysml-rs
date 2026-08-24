@@ -1367,9 +1367,9 @@ impl SysmlMcpHandler {
         dispatch_to_service(&self.service, "sysml.diagram.edit", wrapped)
     }
 
-    /// Open a diagram for a URI and return the SModel JSON. Updates open_diagrams
-    /// state so subsequent edits auto-refresh the same view.
-    #[tool(name = "sysml_diagram_open", description = "Open a diagram for the given URI + view_type. Returns the sprotty-compatible SModel JSON with diagnostic overlays applied. Updates open_diagrams state for auto-refresh on file change. view_type defaults to \"general\"; accepts general | interconnection | state | action | requirements | browser | sequence | grid | geometry | parametric.")]
+    /// Open an ad-hoc diagram for a URI and return its ViewModel. Updates open-diagram
+    /// state so subsequent edits refresh the same view.
+    #[tool(name = "sysml_diagram_open", description = "Open a diagram for the given URI + view_type. Returns the renderer-neutral ViewModel. Updates open-diagram state for auto-refresh on file change. view_type defaults to \"general\"; accepts general | interconnection | state | action | browser | sequence | grid | geometry.")]
     async fn diagram_open(
         &self,
         params: Parameters<JsonParams>,
@@ -1378,8 +1378,8 @@ impl SysmlMcpHandler {
         dispatch_to_service(&self.service, "sysml.diagram.open", json)
     }
 
-    /// Switch the diagram view-type for a URI and return the SModel JSON.
-    #[tool(name = "sysml_diagram_view", description = "Switch a diagram's view-type for the given URI. Returns the sprotty-compatible SModel JSON. Accepts view_type: general | interconnection | state | action | requirements | browser | sequence | grid | geometry | parametric.")]
+    /// Switch the diagram view type for a URI and return its ViewModel.
+    #[tool(name = "sysml_diagram_view", description = "Switch a diagram's view type for the given URI. Returns the renderer-neutral ViewModel. Accepts view_type: general | interconnection | state | action | browser | sequence | grid | geometry.")]
     async fn diagram_view(
         &self,
         params: Parameters<JsonParams>,
@@ -1429,7 +1429,7 @@ impl SysmlMcpHandler {
     }
 
     /// Re-project a diagram with a caller-supplied expanded-node set.
-    #[tool(name = "sysml_diagram_expand", description = "Re-project a diagram with a caller-supplied full expanded-node set; replaces the URI's expanded_nodes state. Returns the SModel JSON.")]
+    #[tool(name = "sysml_diagram_expand", description = "Re-project a diagram with a caller-supplied full expanded-node set; replaces the URI's expanded_nodes state. Returns the renderer-neutral ViewModel.")]
     async fn diagram_expand(
         &self,
         params: Parameters<JsonParams>,
@@ -1438,18 +1438,8 @@ impl SysmlMcpHandler {
         dispatch_to_service(&self.service, "sysml.diagram.expand", json)
     }
 
-    /// Headless SModel export for a URI — no diagnostic overlay, no state mutation.
-    #[tool(name = "sysml_export_smodel", description = "Headless SModel export for a URI. Returns the sprotty-compatible SModel JSON with no diagnostic overlay and no diagram_manager state mutation. expand_all=true expands every element; otherwise the expansion set is empty. view accepts general | interconnection | state | action | requirements | browser | sequence | grid | geometry | parametric.")]
-    async fn export_smodel(
-        &self,
-        params: Parameters<JsonParams>,
-    ) -> Result<CallToolResult, rmcp::ErrorData> {
-        let json = serde_json::to_value(params.0.params).unwrap_or_default();
-        dispatch_to_service(&self.service, "sysml.export.smodel", json)
-    }
-
-    /// Render flow connections for a URI as both PlantUML sequence text and SModel JSON.
-    #[tool(name = "sysml_flow_visualize", description = "Render the flow connections for the given URI. Returns {plantuml, smodel} — PlantUML sequence text plus the Sprotty SModel JSON for the same flows. flow_id is reserved for narrowing to a single flow (today renders all).")]
+    /// Render flow connections for a URI as PlantUML sequence text.
+    #[tool(name = "sysml_flow_visualize", description = "Render the flow connections for the given URI as PlantUML sequence text. flow_id is reserved for narrowing to a single flow (today renders all).")]
     async fn flow_visualize(
         &self,
         params: Parameters<JsonParams>,
@@ -1458,8 +1448,8 @@ impl SysmlMcpHandler {
         dispatch_to_service(&self.service, "sysml.flow.visualize", json)
     }
 
-    /// Render a named action's control flow as both PlantUML activity text and SModel JSON.
-    #[tool(name = "sysml_action_visualize", description = "Render a named action's control flow. Returns {plantuml, smodel} — PlantUML activity text plus the Sprotty SModel ActionFlowView for the same action.")]
+    /// Render a named action's control flow as PlantUML activity text.
+    #[tool(name = "sysml_action_visualize", description = "Render a named action's control flow as PlantUML activity text.")]
     async fn action_visualize(
         &self,
         params: Parameters<JsonParams>,

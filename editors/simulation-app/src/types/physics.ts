@@ -110,9 +110,9 @@ export interface ModuleNode {
   id: string;
 
   /**
-   * SModel element ID (UUID) for diagram overlay mapping.
+   * Diagram element ID (UUID) for overlay mapping.
    * Added per ADR-006: topology carries ElementId so the frontend can
-   * attach overlays to Sprotty nodes without a mapping table.
+   * attach overlays to diagram nodes without a mapping table.
    */
   element_id?: string;
 
@@ -138,7 +138,7 @@ export interface SubsystemNode {
   name: string;
 
   /**
-   * SModel element ID (UUID) for diagram overlay mapping.
+   * Diagram element ID (UUID) for overlay mapping.
    * Added per ADR-006.
    */
   element_id?: string;
@@ -186,7 +186,7 @@ export interface DomainMetric {
 
 /** Data needed to render a status overlay on a diagram node. */
 export interface NodeOverlay {
-  /** Element ID in the diagram (matches Sprotty model ID). */
+  /** Element ID in the diagram (matches the ViewModel scene node id). */
   elementId: string;
 
   /** Health dot color. */

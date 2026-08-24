@@ -181,7 +181,7 @@ let resolved = analysis.resolve_file_with_workspace(sf2, pfs);
 | `sysml-parser-incremental` | L1–2 | Tree-sitter CST parsing (`semantic` feature for token extraction). The sole parser. |
 | `sysml-parser-trait` | L1 | `Parser` trait / `ParseResult` contract. |
 | `sysml-runtime` | L3 | Evaluation contexts & physics for the execution-seed query families. Pulls in `diffsol`. |
-| `sysml-diagram` | L3 | SGraph rendering for the `diagram_query` caches. |
+| `sysml-diagram` | L3 | ViewModel rendering for the cached view queries. |
 
 ### Downstream
 

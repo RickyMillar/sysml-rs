@@ -158,7 +158,7 @@ crates/tooling/sysml-service/src/
 ├── aggregation.rs          # Satisfaction-matrix aggregation
 ├── workspace_verify.rs     # Cross-file workspace verification
 │
-├── visualization.rs        # Diagram SModel + JSON / PlantUML export
+├── visualization.rs        # Diagram ViewModel + JSON / PlantUML export
 ├── diagram_manager.rs      # Diagram view state
 ├── diagram_edit.rs         # Diagram-edit operations
 │
@@ -269,7 +269,7 @@ cargo test -p sysml-api -- --test-threads=1       # REST tests (serial for env v
 - **MCP coverage failure.** Adding a `#[service_command]` without a matching MCP tool breaks CI. Mirror an existing wrapper in `sysml-mcp/src/lib.rs`.
 - **`#[doc = "..."]` on params is metadata, not docs.** The `#[service_impl]` macro strips param-level doc comments from the output — they're only used to populate `ParamMeta`. If you need rustdoc on the param, put it on the method-level doc comment.
 - **Don't reintroduce transport bypass paths.** Every new domain feature goes in `sysml-service`. If a transport needs an operation, expose it as a `service_command`, not a transport-local helper.
-- **Don't widen `Visualization` to leak SModel types.** Return `serde_json::Value` from diagram endpoints; the Sprotty client owns the shape.
+- **Don't widen `Visualization` to leak renderer-specific types.** Return `serde_json::Value` from diagram endpoints; the frontend renderer owns the shape.
 
 ## Related documentation
 

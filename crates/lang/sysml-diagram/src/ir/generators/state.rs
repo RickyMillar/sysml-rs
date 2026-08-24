@@ -8,13 +8,13 @@
 //! to show the definition's children inline. The `expanded_ids` set controls
 //! which nodes are currently expanded.
 //!
-//! ## Key design decisions vs. the old `smodel::state` generator
+//! ## Key design decisions vs. the old the earlier state generator generator
 //!
 //! - **No hidden ports**: The old generator injected hidden cardinal ports (N/S/E/W)
 //!   and assigned port sides. Those are rendering concerns — `render.rs` handles them.
 //! - **DiagramEdge::transition()**: Transitions are expressed as `DiagramEdge` with
 //!   `DiagramEdgeKind::Transition { trigger, guard }`, not raw `SEdge` structs.
-//! - **Control node sizes**: Set via `DiagramNode.size`, not SModel `Dimension`.
+//! - **Control node sizes**: Set via `DiagramNode.size`, not legacy graph model `Dimension`.
 //! - **Entry/do/exit**: Expressed as `DiagramChild::Text` in the appropriate
 //!   `CompartmentKind` (Entry, Do, Exit), not raw `SCompartment` construction.
 
@@ -25,8 +25,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramEdge, DiagramNode, NodeLayout, DiagramChild, DiagramButton, HeaderStyle, DiagramEdgeKind, EdgeLabelPlacement, NodeTag, CompartmentItemSource, EdgeSubLabel, EdgeSubLabelKind};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, CompartmentKind, VisualKind};
 
 /// Maximum recursion depth for nested state node generation to prevent stack overflow.
@@ -490,7 +490,7 @@ fn generate_state_node_inner(
         let name = element.name.as_deref().unwrap_or("unnamed").to_owned();
         let mut node = DiagramNode::new(&id, VisualKind::State, format!("{} (max depth)", name));
         node.tags.push(NodeTag::MaxDepth);
-        node.tooltip = builders::tooltip_text(element, graph);
+        node.tooltip = view_text::tooltip_text(element, graph);
         return node;
     }
 
@@ -677,7 +677,7 @@ fn generate_collapsed_state_node(
         display_name.push_str(" \u{00AB}parallel\u{00BB}");
     }
 
-    let stereotype = builders::stereotype_text(&element.kind);
+    let stereotype = view_text::stereotype_text(&element.kind);
 
     let mut node = DiagramNode::new(id, VisualKind::State, &display_name);
     node.stereotype = stereotype;

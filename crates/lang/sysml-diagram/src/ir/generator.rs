@@ -12,7 +12,7 @@ use sysml_core::{Element, ElementId, ModelGraph, ViewFilter};
 use sysml_runtime::expressions::ExprIR;
 
 use crate::ir::types::DiagramIR;
-use crate::smodel::ViewType;
+use crate::ViewType;
 
 use super::generators::action::ActionFlowViewGenerator;
 use super::generators::browser::BrowserViewGenerator;

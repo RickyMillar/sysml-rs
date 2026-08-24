@@ -21,7 +21,6 @@ function seedStaleState() {
       ],
     ]),
     focusedUri: 'file:///a.sysml',
-    smodel: { kind: 'graph' } as Record<string, unknown>,
     tableModel: { columns: [], rows: [] } as never,
     geometryModel: { primitives: [] } as never,
     treeModel: { roots: [] } as never,
@@ -62,10 +61,9 @@ describe('useWorkspaceStore.clearWorkspace', () => {
     expect(useWorkspaceStore.getState().selectedViewId).toBeNull();
   });
 
-  it('clears the four diagram-model slots', () => {
+  it('clears the non-graph view-model slots', () => {
     useWorkspaceStore.getState().clearWorkspace();
     const s = useWorkspaceStore.getState();
-    expect(s.smodel).toBeNull();
     expect(s.tableModel).toBeNull();
     expect(s.geometryModel).toBeNull();
     expect(s.treeModel).toBeNull();

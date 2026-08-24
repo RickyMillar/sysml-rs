@@ -242,7 +242,7 @@ mod tests {
     use sysml_runtime::orchestrator::ConstraintEvalResult;
 
     use super::*;
-    use crate::smodel::ViewType;
+    use crate::ViewType;
     use crate::visual_kind::VisualKind;
 
     /// Canonical scene-id string for a logical id — the same round-trip every

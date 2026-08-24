@@ -17,7 +17,7 @@ pub struct SequenceEvent {
 /// PlantUML stereotype; guarded edges carry their guard label.
 ///
 /// Used by `sysml.action.visualize` so the service-layer command can
-/// return the design-target `{plantuml, smodel}` dual shape (Bucket B2).
+/// return the design-target `{plantuml}` dual shape (Bucket B2).
 pub fn to_plantuml_activity(ir: &ActionGraphIR) -> String {
     let mut out = String::new();
     out.push_str("@startuml\n");

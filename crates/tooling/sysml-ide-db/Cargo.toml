@@ -28,7 +28,7 @@ sysml-project = { workspace = true }
 # evaluation contexts (S2.T17). tooling → lang Layer 3 is allowed.
 sysml-runtime = { workspace = true }
 # Layer 3 dep — Layer 3 lang crate. Needed by the `diagram_query`
-# tracked queries (S3.T5) so the SGraph cache lives next to the
+# tracked queries (S3.T5) so the ViewModel cache lives next to the
 # elaborated-graph queries it depends on.
 sysml-diagram = { workspace = true }
 

@@ -1,4 +1,4 @@
-//! Browser view IR generator — **legacy SGraph emitter**.
+//! Browser view IR generator — **legacy legacy graph emitter**.
 //!
 //! Produces a pure ownership-hierarchy tree with no edges.
 //! Each element becomes a `DiagramNode` with `HeaderStyle::Inline`
@@ -7,14 +7,14 @@
 //! ## Status
 //!
 //! The canonical wire path for `view=browser` now goes through
-//! [`crate::tree::to_tree_model`] → `DiagramPayload::Tree(TreeModel)`,
+//! [`crate::tree::to_tree_model`] → `tagged payload::Tree(TreeModel)`,
 //! served by REST and MCP. Note that the typed path uses *strict*
 //! ownership for roots (`element.owner.is_none()`), whereas this
-//! Sprotty generator uses `is_effectively_top_level` (lifts through
+//! retired graph-renderer generator uses `is_effectively_top_level` (lifts through
 //! packages) — a deliberate semantic difference between containment
 //! tree and diagram canvas. This generator is retained for LSP push
-//! notifications and the CLI `export smodel --view browser` path,
-//! both of which still expect raw `SGraph`. Delete once those
+//! notifications and the retired CLI graph export path,
+//! both of which still expect raw `legacy graph`. Delete once those
 //! consumers migrate to typed payloads.
 
 use std::collections::HashSet;
@@ -23,7 +23,7 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramNode, DiagramChild, DiagramButton, HeaderStyle, NodeLayout, NodeTag};
-use crate::smodel::ViewType;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, VisualKind};
 
 /// Browser view generator — pure ownership tree, no edges.
@@ -82,7 +82,7 @@ fn generate_browser_node(
     let kind = &element.kind;
     // C12: shared display-name synthesis (transitions → `source → target`,
     // redefinitions → `:>> name`) instead of "unnamed".
-    let name = crate::smodel::builders::element_display_name(element, ctx.graph);
+    let name = crate::view_text::element_display_name(element, ctx.graph);
 
     let visual_kind = VisualKind::from_element_kind(kind);
 
@@ -147,150 +147,20 @@ mod tests {
     use sysml_core::{Element, ElementKind, ModelGraph};
 
     use crate::ir::generator::GeneratorContext;
-    use crate::ir::render::render;
 
     fn make_ctx<'a>(graph: &'a ModelGraph, expanded_ids: &'a HashSet<String>) -> GeneratorContext<'a> {
         GeneratorContext::new(graph, expanded_ids)
     }
 
-    #[test]
-    fn browser_ir_three_level_nesting() {
-        let mut graph = ModelGraph::new();
 
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("MyPackage");
-        let pkg_id = graph.add_element(pkg);
 
-        let part = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("MyPart")
-            .with_owner(pkg_id.clone());
-        let part_id = graph.add_element(part);
 
-        let port = Element::new_with_kind(ElementKind::PortUsage)
-            .with_name("MyPort")
-            .with_owner(part_id.clone());
-        graph.add_element(port);
 
-        let mut expanded = HashSet::new();
-        expanded.insert(pkg_id.to_string());
-        expanded.insert(part_id.to_string());
 
-        let gen = BrowserViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
 
-        // Render to SGraph and check JSON
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
 
-        assert!(json.contains("MyPackage"));
-        assert!(json.contains("MyPart"));
-        assert!(json.contains("MyPort"));
-        assert!(!json.contains("edge:"));
-        assert!(json.contains("browser-node"));
-    }
 
-    #[test]
-    fn browser_ir_empty_graph() {
-        let graph = ModelGraph::new();
-        let expanded = HashSet::new();
-        let gen = BrowserViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
 
-        assert_eq!(ir.view_type, ViewType::Browser);
-        assert!(ir.nodes.is_empty());
-        assert!(ir.edges.is_empty());
-
-        let sgraph = render(&ir);
-        assert_eq!(sgraph.type_, "graph");
-        assert!(sgraph.children.is_empty());
-    }
-
-    #[test]
-    fn browser_ir_collapsed_shows_child_count() {
-        let mut graph = ModelGraph::new();
-
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        let pkg_id = graph.add_element(pkg);
-
-        let part_a = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("A")
-            .with_owner(pkg_id.clone());
-        graph.add_element(part_a);
-
-        let part_b = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("B")
-            .with_owner(pkg_id);
-        graph.add_element(part_b);
-
-        // Collapsed (empty expanded_ids)
-        let expanded = HashSet::new();
-        let gen = BrowserViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        // Should show child count in label
-        assert!(
-            json.contains("Pkg (2)"),
-            "collapsed label should show child count, got: {}",
-            json
-        );
-        // Expand button present
-        assert!(json.contains("button:expand"));
-        assert!(json.contains(r#""expanded":false"#));
-    }
-
-    #[test]
-    fn browser_ir_expand_button_on_parent() {
-        let mut graph = ModelGraph::new();
-
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Root");
-        let pkg_id = graph.add_element(pkg);
-
-        let child = Element::new_with_kind(ElementKind::PartUsage)
-            .with_name("Child")
-            .with_owner(pkg_id.clone());
-        graph.add_element(child);
-
-        let leaf = Element::new_with_kind(ElementKind::AttributeUsage).with_name("Leaf");
-        graph.add_element(leaf);
-
-        let expanded = HashSet::new();
-        let gen = BrowserViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        // Parent node should have expand button
-        assert!(json.contains("button:expand"));
-    }
-
-    #[test]
-    fn browser_ir_node_has_inline_header() {
-        let mut graph = ModelGraph::new();
-        let pkg = Element::new_with_kind(ElementKind::Package).with_name("Pkg");
-        graph.add_element(pkg);
-
-        let expanded = HashSet::new();
-        let gen = BrowserViewGenerator;
-        let ctx = make_ctx(&graph, &expanded);
-        let ir = gen.generate(&ctx);
-
-        assert_eq!(ir.nodes.len(), 1);
-        assert_eq!(ir.nodes[0].header_style, HeaderStyle::Inline);
-
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        // Should have label:name (Inline style), NOT comp:header
-        assert!(json.contains("label:name"), "should have inline label");
-        assert!(
-            !json.contains("comp:header"),
-            "should NOT have header compartment"
-        );
-    }
 
     #[test]
     fn browser_ir_view_type() {

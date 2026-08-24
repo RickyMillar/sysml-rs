@@ -4,11 +4,11 @@
 //! (the promoted `DiagramIR` scene plus the addenda later Bucket-1 tasks attach).
 //! Building it is a pure function of `(graph, request)` — it walks the graph,
 //! runs the `ViewType`-specific generator, and applies overlays. No session state
-//! is involved, so it is salsa-cacheable, exactly like the SGraph query in
+//! is involved, so it is salsa-cacheable, exactly like the ViewModel query in
 //! [`crate::diagram`].
 //!
 //! The cache key is the [`DiagramRequestKey`] newtype from `sysml-diagram` — the
-//! same key the SGraph query uses, restricting the key to
+//! same key the ViewModel query uses, restricting the key to
 //! `(view_type, expanded_ids, expose)`. Requests carrying `filter` / `hints` /
 //! `overlays` deliberately bypass the cache (see `crate::diagram` for the
 //! rationale).
@@ -191,7 +191,7 @@ pub fn workspace_view_model_best(
 mod tests {
     use super::*;
     use crate::host::AnalysisHost;
-    use sysml_diagram::smodel::ViewType;
+    use sysml_diagram::ViewType;
     use sysml_diagram::ViewRequest;
 
     fn key_for(vt: ViewType) -> DiagramRequestKey {
@@ -258,7 +258,7 @@ mod tests {
 
     #[test]
     fn view_model_scene_matches_diagram_query_structure() {
-        // The ViewModel scene and the SGraph query are derived from the same
+        // The ViewModel scene and the ViewModel query are derived from the same
         // generate path; the scene should carry the model's node(s).
         let mut host = AnalysisHost::new();
         let id = host.set_file_content(

@@ -7,7 +7,7 @@
 //! into `ActionGraphIR`, then maps `ActionNodeIR` / `ActionEdgeIR` to
 //! `DiagramNode` / `DiagramEdge` IR types.
 //!
-//! ## Key design decisions vs. the old `smodel::action` generator
+//! ## Key design decisions vs. the old the earlier action generator generator
 //!
 //! - **DiagramEdge::control_flow()**: Edges use `DiagramEdgeKind::ControlFlow { guard }`
 //!   instead of raw `SEdge` construction. The guard is stringified once here;
@@ -25,8 +25,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramIR, DiagramNode, HeaderStyle, DiagramChild, PortSide, DiagramPort, PortDirection, DiagramEdge, DiagramEdgeKind, EndpointMode, NodeTag, PortTag};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::VisualKind;
 
 /// Generates Action Flow Diagrams.
@@ -353,7 +353,7 @@ fn generate_action_node(
     });
 
     let tooltip = looked_up_element.and_then(|elem| {
-        graph.and_then(|g| builders::tooltip_text(elem, g))
+        graph.and_then(|g| view_text::tooltip_text(elem, g))
     });
 
     // Determine header style and size based on node kind
@@ -660,7 +660,6 @@ mod tests {
     use sysml_runtime::expressions::ExprIR;
 
     use crate::ir::generator::GeneratorContext;
-    use crate::ir::render::render;
 
     fn make_ctx<'a>(graph: &'a ModelGraph, expanded: &'a HashSet<String>) -> GeneratorContext<'a> {
         GeneratorContext::new(graph, expanded)
@@ -701,65 +700,7 @@ mod tests {
 
     // ── Basic action graph ──────────────────────────────────────────────
 
-    #[test]
-    fn basic_action_graph_from_ir() {
-        let action_ir = ActionGraphIR {
-            id: "a1".to_string(),
-            name: "TestAction".to_string(),
-            nodes: vec![
-                ActionNodeIR::Initial {
-                    id: "init".to_string(),
-                },
-                ActionNodeIR::Perform {
-                    id: "do-stuff".to_string(),
-                    action_ref: "DoStuff".to_string(),
-                    inputs: vec![],
-                    output_binding: None,
-                    sub_action: None,
-                },
-                ActionNodeIR::Final {
-                    id: "end".to_string(),
-                },
-            ],
-            edges: vec![
-                ActionEdgeIR {
-                    from: "init".to_string(),
-                    to: "do-stuff".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "do-stuff".to_string(),
-                    to: "end".to_string(),
-                    guard: None,
-                },
-            ],
-            initial_node_id: "init".to_string(),
-            final_node_ids: vec!["end".to_string()],
-            parameters: vec![],
-        };
 
-        let ir = generate_from_action_ir(&action_ir, None);
-
-        // 3 nodes, 2 edges
-        assert_eq!(ir.nodes.len(), 3);
-        assert_eq!(ir.edges.len(), 2);
-
-        // Check node kinds
-        assert_eq!(ir.nodes[0].visual_kind, VisualKind::InitialNode);
-        assert_eq!(ir.nodes[1].visual_kind, VisualKind::Action);
-        assert_eq!(ir.nodes[2].visual_kind, VisualKind::FinalNode);
-
-        // Check name label on Perform node
-        assert_eq!(ir.nodes[1].name, "DoStuff");
-
-        // Verify it renders to SGraph without error
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-        assert!(json.contains("node:initialNode"));
-        assert!(json.contains("node:action"));
-        assert!(json.contains("node:finalNode"));
-        assert!(json.contains("DoStuff"));
-    }
 
     // ── Control nodes ───────────────────────────────────────────────────
 
@@ -1129,96 +1070,5 @@ mod tests {
 
     // ── Render round-trip ───────────────────────────────────────────────
 
-    #[test]
-    fn renders_to_valid_sgraph() {
-        let action_ir = ActionGraphIR {
-            id: "a1".to_string(),
-            name: "Test".to_string(),
-            nodes: vec![
-                ActionNodeIR::Initial {
-                    id: "init".to_string(),
-                },
-                ActionNodeIR::Decision {
-                    id: "d1".to_string(),
-                },
-                ActionNodeIR::Fork {
-                    id: "fork1".to_string(),
-                },
-                ActionNodeIR::Join {
-                    id: "join1".to_string(),
-                },
-                ActionNodeIR::Send {
-                    id: "s1".to_string(),
-                    payload: ExprIR::LiteralBool(true),
-                    target: "Srv".to_string(),
-                    port_target: None,
-                },
-                ActionNodeIR::Accept {
-                    id: "acc1".to_string(),
-                    source: None,
-                    payload_binding: "msg".to_string(),
-                    port_source: None,
-                },
-                ActionNodeIR::Final {
-                    id: "end".to_string(),
-                },
-            ],
-            edges: vec![
-                ActionEdgeIR {
-                    from: "init".to_string(),
-                    to: "d1".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "d1".to_string(),
-                    to: "fork1".to_string(),
-                    guard: Some(ExprIR::LiteralBool(true)),
-                },
-                ActionEdgeIR {
-                    from: "fork1".to_string(),
-                    to: "s1".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "fork1".to_string(),
-                    to: "acc1".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "s1".to_string(),
-                    to: "join1".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "acc1".to_string(),
-                    to: "join1".to_string(),
-                    guard: None,
-                },
-                ActionEdgeIR {
-                    from: "join1".to_string(),
-                    to: "end".to_string(),
-                    guard: None,
-                },
-            ],
-            initial_node_id: "init".to_string(),
-            final_node_ids: vec!["end".to_string()],
-            parameters: vec![],
-        };
 
-        let ir = generate_from_action_ir(&action_ir, None);
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        // Verify all node types rendered
-        assert!(json.contains("node:initialNode"));
-        assert!(json.contains("node:decisionNode"));
-        assert!(json.contains("node:forkNode"));
-        assert!(json.contains("node:joinNode"));
-        assert!(json.contains("node:sendAction"));
-        assert!(json.contains("node:acceptAction"));
-        assert!(json.contains("node:finalNode"));
-
-        // Verify edge type
-        assert!(json.contains("edge:flow"));
-    }
 }

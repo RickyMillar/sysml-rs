@@ -236,10 +236,9 @@ async function hydrateWorkspaceStore(
   }
 
   // If THIS hydration call promoted a focused URI from null, fetch its
-  // diagram so the renderers (which read smodel/tableModel from the
+  // diagram so the renderers (which read the view state from the
   // workspace store) actually render something on workspace load.
-  // focusFile dispatches the tagged DiagramPayload into the right
-  // store slot per its `kind`.
+  // focusFile loads the focused file's default view.
   if (!hadFocusBeforeHydrate) {
     const newlyFocusedUri = useWorkspaceStore.getState().focusedUri;
     if (newlyFocusedUri) {

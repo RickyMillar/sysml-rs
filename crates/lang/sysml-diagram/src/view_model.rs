@@ -7,9 +7,9 @@
 //! It is the value the `workspace_view_model_best` salsa query caches.
 //!
 //! The pure builder lives here (no salsa dependency); `sysml-ide-db` wraps it in
-//! a tracked query. The Sprotty `SGraph` is *derived from* the same scene via the
+//! a tracked query. The retired graph-renderer `legacy graph` is *derived from* the same scene via the
 //! `render` adapter — there is no parallel generate path: [`to_view_model`] and
-//! `smodel::to_smodel_with` both build the scene through [`build_scene`].
+//! `to_view_model` both build the scene through [`build_scene`].
 
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
@@ -23,7 +23,7 @@ use serde::{Deserialize, Serialize};
 use crate::design_tokens::DesignTokens;
 use crate::interaction::InteractionMap;
 use crate::ir::{self, DiagramIR};
-use crate::smodel::ViewType;
+use crate::ViewType;
 use crate::text_map::TextMap;
 use crate::ViewRequest;
 
@@ -64,7 +64,7 @@ pub struct ViewModel {
     /// families — `Some` only for those kinds (the renderer dispatches Table/Tree/
     /// Geometry from it instead of from a graph `scene`); `None` for graph views.
     /// This makes the ViewModel the SINGLE pipeline for ALL view families — the
-    /// FE no longer hits the legacy SModel `/render` payload for non-graph views.
+    /// FE no longer hits the legacy legacy graph model `/render` payload for non-graph views.
     /// `skip_deserializing`: the wire flows Rust→JSON only, and the underlying
     /// models are `Serialize`-only, so the (derived) `Deserialize` for `ViewModel`
     /// defaults this to `None` rather than forcing `Deserialize` onto every model.
@@ -371,7 +371,7 @@ fn collect_tree_node_ids(node: &crate::TreeNode, out: &mut HashSet<String>) {
 }
 
 /// Build the diagram scene for a request. This is the single generate path
-/// shared by [`to_view_model`] and the Sprotty `to_smodel_with` adapter — the
+/// shared by [`to_view_model`] and the retired graph-renderer `to_view_model` adapter — the
 /// generator runs once, overlays apply once, ELK/CSS rendering is downstream.
 pub(crate) fn build_scene(
     graph: &ModelGraph,
@@ -436,7 +436,7 @@ fn build_view_model_impl(
         // would scan the whole graph to produce a scene the renderer ignores
         // (steward Q2). `frame`/`text_map`/`interactions` join by id, independent
         // of scene node content. The legacy IR generators stay on the
-        // `to_smodel_with` (LSP/CLI export) path.
+        // `to_view_model` (LSP/CLI export) path.
         ViewModel::new(DiagramIR::new_fixed(request.view_type)).with_non_graph(non_graph)
     } else {
         ViewModel::new(build_scene(graph, request, filter_cache))
@@ -450,7 +450,7 @@ pub fn to_view_model(graph: &ModelGraph, request: &ViewRequest) -> ViewModel {
 }
 
 /// Like [`to_view_model`], but routes a precompiled filter-expression cache into
-/// the generator (mirrors `smodel::to_smodel_with_filter_cache`).
+/// the generator (mirrors `to_view_model_with_filter_cache`).
 pub fn to_view_model_with_filter_cache(
     graph: &ModelGraph,
     request: &ViewRequest,

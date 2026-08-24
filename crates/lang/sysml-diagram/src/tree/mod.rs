@@ -1,11 +1,11 @@
 //! Hierarchical tree payload types for `BrowserView`.
 //!
 //! Produced by [`to_tree_model`] and embedded in
-//! `DiagramPayload::Tree` for the wire format. Consumers (FE, MCP
+//! `tagged payload::Tree` for the wire format. Consumers (FE, MCP
 //! clients, REST callers) work with a recursive `TreeNode` structure
-//! directly — no Sprotty SModel or ELK layout involved. The FE renders
+//! directly — no retired graph-renderer legacy graph model or ELK layout involved. The FE renders
 //! these in a native React tree (keyboard nav, virtualization,
-//! accessible disclosure semantics) rather than Sprotty's tree layout.
+//! accessible disclosure semantics) rather than retired graph-renderer's tree layout.
 
 use serde::Serialize;
 use sysml_core::{Element, ElementId, ElementKind, ModelGraph};
@@ -118,7 +118,7 @@ fn build_node(
     // C12: shared display-name synthesis — unnamed transitions read
     // `source → target`, unnamed redefinitions read `:>> name`, instead of
     // leaking "unnamed" rows.
-    let label = crate::smodel::builders::element_display_name(element, graph);
+    let label = crate::view_text::element_display_name(element, graph);
 
     // C13: children in source declaration order, not hash-index order.
     let mut ordered: Vec<&Element> = graph

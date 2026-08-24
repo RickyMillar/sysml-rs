@@ -53,18 +53,6 @@ export async function loadFile(uriOrPath: string): Promise<{ uri: string; source
   return httpPost('/files', { path: fileUriToLocalPath(uriOrPath) });
 }
 
-/**
- * Tagged diagram payload returned by the backend.
- *
- * Wire format: `{ "kind": "graph" | "table" | "geometry" | "tree", "data": ... }`.
- * Each kind has its own typed `data` shape; consumers route by `payload.kind`.
- */
-export type DiagramPayload =
-  | { kind: 'graph'; data: Record<string, unknown> }
-  | { kind: 'table'; data: TableModel }
-  | { kind: 'geometry'; data: GeometryModel }
-  | { kind: 'tree'; data: TreeModel };
-
 // ── Table payload types (mirror crates/lang/sysml-diagram/src/tmodel/) ─
 
 export type TableColumnKind = 'text' | 'number' | 'boolean' | 'symbol';

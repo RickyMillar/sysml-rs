@@ -1,7 +1,7 @@
 //! View generator implementations.
 //!
 //! Each generator implements the `ViewGenerator` trait and produces `DiagramIR`.
-//! Generators are migrated here one-by-one from `smodel/`.
+//! Generators are migrated here one-by-one from `earlier renderer module`.
 //!
 //! Migration order (simplest → most complex):
 //! 1. Browser    — Pure tree, no edges  ✓

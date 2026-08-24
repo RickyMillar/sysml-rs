@@ -54,11 +54,8 @@ interface WorkspaceState {
    */
   reloadEpoch: number;
 
-  // Diagram (for focused file). At most one of these is non-null at a
-  // time — the renderer (DiagramHost) dispatches by payload shape, not
-  // by view-kind string. Populated by `setDiagramPayload` (called by
-  // ViewsPanel when the user picks a declared view via `views.render`).
-  smodel: Record<string, unknown> | null;
+  // Non-graph ViewModel data for the focused view. At most one is non-null;
+  // graph views render directly from ViewModel.scene in SvgCanvas.
   tableModel: TableModel | null;
   geometryModel: GeometryModel | null;
   treeModel: TreeModel | null;
@@ -92,7 +89,7 @@ interface WorkspaceState {
   /**
    * Set the selected ViewDefinition / ViewUsage. ViewsPanel drives this
    * when the user picks a declared view; URL sync mirrors it through
-   * `?view_id=`. The actual SModel push happens via `setDiagramPayload`.
+   * `?view_id=`. Non-graph data arrives through `setNonGraphModel`.
    */
   setSelectedViewId: (id: string | null) => void;
 
@@ -117,21 +114,9 @@ interface WorkspaceState {
    */
   setFocusedUri: (uri: string) => void;
 
-  /**
-   * Push a tagged diagram payload — the wire shape returned by
-   * `views.render` and the legacy `diagram` endpoint. Dispatches to the
-   * right slot by `payload.kind` and clears the others, preserving the
-   * "exactly one non-null at a time" invariant DiagramHost relies on.
-   *
-   * Bucket 5-followup (2026-05-05): ViewsPanel was passing the entire
-   * `{kind, data}` envelope straight into the `smodel` slot, which Sprotty
-   * interpreted as an SModel root with `type === undefined` — every render
-   * warned "no registered view for type 'undefined'" and rendered nothing.
-   * This dispatcher unwraps `payload.data` into the correct slot instead.
-   */
-  setDiagramPayload: (
-    payload:
-      | { kind: 'graph'; data: Record<string, unknown> }
+  /** Set the typed non-graph data carried by a ViewModel, if any. */
+  setNonGraphModel: (
+    model:
       | { kind: 'table'; data: TableModel }
       | { kind: 'geometry'; data: GeometryModel }
       | { kind: 'tree'; data: TreeModel }
@@ -149,7 +134,7 @@ interface WorkspaceState {
    * this clear runs.
    *
    * Bucket 5-followup (2026-05-05): without this, switching workspaces
-   * left the previous root's loadedFiles / focusedUri / smodel intact,
+   * left the previous root's loadedFiles / focusedUri / view data intact,
    * so the diagram pane kept rendering the old espresso-production-cell while
    * the Views drawer started populating from the new root. Mirror of
    * the backend's scope-prefix retain in `sysml.load_workspace`.
@@ -179,7 +164,6 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
   loadedFiles: new Map(),
   focusedUri: null,
   reloadEpoch: 0,
-  smodel: null,
   tableModel: null,
   geometryModel: null,
   treeModel: null,
@@ -199,7 +183,6 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
     // declared view for the new file. No backend round-trip.
     set({
       focusedUri: uri,
-      smodel: null,
       tableModel: null,
       geometryModel: null,
       treeModel: null,
@@ -238,43 +221,20 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
     });
   },
 
-  setDiagramPayload: (payload) => {
-    if (payload === null) {
-      set({ smodel: null, tableModel: null, geometryModel: null, treeModel: null });
+  setNonGraphModel: (model) => {
+    if (model === null) {
+      set({ tableModel: null, geometryModel: null, treeModel: null });
       return;
     }
-    switch (payload.kind) {
-      case 'graph':
-        set({
-          smodel: payload.data,
-          tableModel: null,
-          geometryModel: null,
-          treeModel: null,
-        });
-        return;
+    switch (model.kind) {
       case 'table':
-        set({
-          smodel: null,
-          tableModel: payload.data,
-          geometryModel: null,
-          treeModel: null,
-        });
+        set({ tableModel: model.data, geometryModel: null, treeModel: null });
         return;
       case 'geometry':
-        set({
-          smodel: null,
-          tableModel: null,
-          geometryModel: payload.data,
-          treeModel: null,
-        });
+        set({ tableModel: null, geometryModel: model.data, treeModel: null });
         return;
       case 'tree':
-        set({
-          smodel: null,
-          tableModel: null,
-          geometryModel: null,
-          treeModel: payload.data,
-        });
+        set({ tableModel: null, geometryModel: null, treeModel: model.data });
         return;
     }
   },
@@ -285,7 +245,6 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
       loadedFiles: new Map(),
       focusedUri: null,
       reloadEpoch: 0,
-      smodel: null,
       tableModel: null,
       geometryModel: null,
       treeModel: null,
@@ -299,7 +258,6 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
     set({
       loadedFiles: new Map(),
       focusedUri: null,
-      smodel: null,
       tableModel: null,
       geometryModel: null,
       treeModel: null,

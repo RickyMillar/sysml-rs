@@ -37,7 +37,7 @@ Sort by any column; filter to jump to a crate. Each name links to its own README
 | [`sysml-manifest`](sysml-manifest/README.md) | 2 | Manifest & lock-file parsing | `sysml.toml` / `sysml.lock` models | rlib |
 | [`sysml-project`](sysml-project/README.md) | 2 | Project discovery, workspace info, .kpar archives | Project, workspace discovery (consumes sysml-manifest) | rlib |
 | [`sysml-runtime`](sysml-runtime/README.md) | 3 | IR + execution + physics (absorbed former `sysml-analysis-ir`) | state machines, actions, flows, constraints, diffsol DAE solve | rlib |
-| [`sysml-diagram`](sysml-diagram/README.md) | 3 | Diagram IR + Sprotty SModel / PlantUML exporters | DiagramIR, ViewGenerator, SGraph; server-rendered | rlib (no cdylib) |
+| [`sysml-diagram`](sysml-diagram/README.md) | 3 | Diagram IR + ViewModel / PlantUML exporters | DiagramIR, ViewModel; server-rendered | rlib (no cdylib) |
 
 ## Cross-cutting patterns
 

@@ -4,31 +4,10 @@
 
 use std::collections::HashSet;
 use sysml_core::ModelGraph;
-use sysml_diagram::smodel::{self, ViewType};
 use sysml_diagram::ViewRequest;
 
 /// Re-export ViewType for consumers.
-pub use sysml_diagram::smodel::ViewType as DiagramViewType;
-
-/// True for view types whose [`smodel::to_payload_with_filter_cache`] dispatch
-/// goes through the heavy `to_smodel_with` SGraph path (vs the lighter
-/// Tree / Table / Geometry payloads). Used by the cache router to
-/// decide when [`crate::SysmlService::cached_smodel`] applies.
-pub fn view_type_produces_sgraph(view_type: ViewType) -> bool {
-    !matches!(
-        view_type,
-        ViewType::Grid | ViewType::Geometry | ViewType::Browser
-    )
-}
-
-/// Wrap a cached SGraph in a tagged `DiagramPayload::Graph` and
-/// serialise it to the canonical `{"kind":"graph","data":{…SGraph…}}` JSON shape.
-pub fn graph_payload_json(sgraph: &smodel::SGraph) -> serde_json::Value {
-    let payload = sysml_diagram::DiagramPayload::Graph(sgraph.clone());
-    serde_json::to_value(&payload).expect(
-        "DiagramPayload::Graph wraps an SGraph — both are internal Serde-derive and cannot fail to serialize",
-    )
-}
+pub use sysml_diagram::ViewType as DiagramViewType;
 
 /// Build a `ViewRequest` for a user-authored `ViewUsage` /
 /// `ViewDefinition` using a precomputed `ViewSummary` slice.

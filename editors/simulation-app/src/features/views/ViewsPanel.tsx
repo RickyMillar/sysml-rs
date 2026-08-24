@@ -4,7 +4,7 @@
  *
  * Lists every view discovered in the focused workspace via
  * `sysml.query`. Click a row → fetches `sysml.views.render` and
- * pushes the resulting SModel into `useWorkspaceStore` so the Diagram
+ * pushes the resulting ViewModel into `useWorkspaceStore` so the Diagram
  * pane re-renders against the authored view's Expose / filter /
  * rendering members.
  *

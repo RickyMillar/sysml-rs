@@ -16,7 +16,7 @@
 //! SequenceTrace { lifelines, messages }
 //!     │
 //!     ▼
-//! JSON output or SModel sequence diagram
+//! JSON output or ViewModel sequence diagram
 //! ```
 
 #![allow(clippy::indexing_slicing)]

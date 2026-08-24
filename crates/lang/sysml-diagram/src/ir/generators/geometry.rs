@@ -1,4 +1,4 @@
-//! GeometryView IR generator — **legacy SGraph emitter**.
+//! GeometryView IR generator — **legacy legacy graph emitter**.
 //!
 //! Like General but with explicit positions/sizes from element properties.
 //! Elements with `x`/`y` properties get fixed positions; elements with
@@ -11,10 +11,10 @@
 //! ## Status
 //!
 //! The canonical wire path for `view=geometry` now goes through
-//! [`crate::gmodel::to_geometry_model`] → `DiagramPayload::Geometry(GeometryModel)`,
-//! served by REST and MCP. This Sprotty generator is retained for LSP
-//! push notifications and the CLI `export smodel --view geometry` path,
-//! both of which still expect raw `SGraph`. Delete once those consumers
+//! [`crate::gmodel::to_geometry_model`] → `tagged payload::Geometry(GeometryModel)`,
+//! served by REST and MCP. This retired graph-renderer generator is retained for LSP
+//! push notifications and the retired CLI graph export path,
+//! both of which still expect raw `legacy graph`. Delete once those consumers
 //! migrate to typed payloads.
 
 use std::collections::HashSet;
@@ -24,8 +24,8 @@ use tracing::instrument;
 
 use crate::ir::generator::{GeneratorContext, ViewGenerator};
 use crate::ir::types::{DiagramChild, DiagramIR, DiagramEdge, DiagramNode, DiagramPort};
-use crate::smodel::builders;
-use crate::smodel::ViewType;
+use crate::view_text;
+use crate::ViewType;
 use crate::visual_kind::{self as classify, VisualKind};
 
 /// Geometry view generator — positions and sizes from element properties.
@@ -61,7 +61,7 @@ impl ViewGenerator for GeometryViewGenerator {
             .filter(|e| ctx.is_canvas_root(e))
             .collect();
 
-        // Layout algorithm is no longer carried on the IR — the Sprotty adapter
+        // Layout algorithm is no longer carried on the IR — the retired graph-renderer adapter
         // derives the fixed layout for Geometry views from `view_type`.
         let mut ir = DiagramIR::new(ViewType::Geometry);
 
@@ -155,7 +155,7 @@ fn generate_geometry_node(
     let kind = &element.kind;
     let name = element.name.as_deref().unwrap_or("unnamed").to_owned();
     let visual_kind = VisualKind::from_element_kind(kind);
-    let stereotype = builders::stereotype_text(kind);
+    let stereotype = view_text::stereotype_text(kind);
     let is_expanded = expanded_ids.contains(&id);
 
     let mut node = DiagramNode::new(id, visual_kind, &name)
@@ -169,7 +169,7 @@ fn generate_geometry_node(
         node = node.with_size(w, h);
     }
 
-    node.tooltip = builders::tooltip_text(element, graph);
+    node.tooltip = view_text::tooltip_text(element, graph);
 
     // Element kind drives the adapter-derived kind/definition/usage/visual classes;
     // property-based decorations become typed node tags.
@@ -247,7 +247,6 @@ mod tests {
     use sysml_core::{Element, ElementKind, ModelGraph, Relationship, RelationshipKind};
 
     use crate::ir::generator::GeneratorContext;
-    use crate::ir::render::render;
 
     static EMPTY_SET: std::sync::LazyLock<HashSet<String>> =
         std::sync::LazyLock::new(HashSet::new);
@@ -265,64 +264,11 @@ mod tests {
 
     // ── Empty graph ──────────────────────────────────────────────────
 
-    #[test]
-    fn geometry_ir_empty_graph() {
-        let graph = ModelGraph::new();
-        let gen = GeometryViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
 
-        assert_eq!(ir.view_type, ViewType::Geometry);
-        assert!(ir.nodes.is_empty());
-        assert!(ir.edges.is_empty());
-
-        let sgraph = render(&ir);
-        assert_eq!(sgraph.type_, "graph");
-        assert!(sgraph.children.is_empty());
-    }
 
     // ── Position extraction ──────────────────────────────────────────
 
-    #[test]
-    fn geometry_ir_carries_positions() {
-        let mut graph = ModelGraph::new();
-        let a = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Sensor")
-            .with_prop("x", 100.0)
-            .with_prop("y", 200.0)
-            .with_prop("width", 150.0)
-            .with_prop("height", 80.0);
-        let a_id = graph.add_element(a);
 
-        let b = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Actuator")
-            .with_prop("x", 400.0)
-            .with_prop("y", 200.0)
-            .with_prop("width", 150.0)
-            .with_prop("height", 80.0);
-        let b_id = graph.add_element(b);
-
-        let rel = Relationship::new(RelationshipKind::Reference, a_id, b_id);
-        graph.add_relationship(rel);
-
-        let gen = GeometryViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-
-        // Check positions on IR nodes (the fixed-vs-layered layout decision now
-        // lives in the Sprotty adapter, derived from `view_type`).
-        let sensor = ir.nodes.iter().find(|n| n.name == "Sensor").unwrap();
-        assert_eq!(sensor.position, Some((100.0, 200.0)));
-        assert_eq!(sensor.size, Some((150.0, 80.0)));
-
-        let actuator = ir.nodes.iter().find(|n| n.name == "Actuator").unwrap();
-        assert_eq!(actuator.position, Some((400.0, 200.0)));
-        assert_eq!(actuator.size, Some((150.0, 80.0)));
-
-        // Render to SGraph and verify JSON output
-        let sgraph = render(&ir);
-        let json = serde_json::to_string_pretty(&sgraph).unwrap();
-        assert!(json.contains("Sensor"));
-        assert!(json.contains("Actuator"));
-    }
 
     // Source-shape coverage: SysML files spell coordinates as
     // `attribute x = 100.0;` inside a part body, which the parser
@@ -573,34 +519,5 @@ mod tests {
 
     // ── Render roundtrip ─────────────────────────────────────────────
 
-    #[test]
-    fn geometry_ir_renders_to_sgraph() {
-        let mut graph = ModelGraph::new();
-        let a = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Sensor")
-            .with_prop("x", 100.0)
-            .with_prop("y", 200.0)
-            .with_prop("width", 150.0)
-            .with_prop("height", 80.0);
-        let a_id = graph.add_element(a);
 
-        let b = Element::new_with_kind(ElementKind::PartDefinition)
-            .with_name("Actuator")
-            .with_prop("x", 400.0)
-            .with_prop("y", 200.0);
-        let b_id = graph.add_element(b);
-
-        let rel = Relationship::new(RelationshipKind::Reference, a_id, b_id);
-        graph.add_relationship(rel);
-
-        let gen = GeometryViewGenerator;
-        let ir = gen.generate(&make_ctx(&graph));
-        let sgraph = render(&ir);
-        let json = serde_json::to_string(&sgraph).unwrap();
-
-        assert!(json.contains("Sensor"));
-        assert!(json.contains("Actuator"));
-        // Fixed layout since both elements have positions
-        assert!(json.contains("org.eclipse.elk.fixed"));
-    }
 }

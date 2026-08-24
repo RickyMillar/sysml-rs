@@ -2,7 +2,7 @@
 //!
 //! Overlays let consumers opt into visual fidelity that the standard
 //! generators don't carry on their own. They run after the generator
-//! produces the IR and before render emits SGraph, so they can:
+//! produces the IR and before render emits legacy graph, so they can:
 //!
 //! - Add CSS extras (e.g. `diagnostic-error` overlays)
 //! - Add or restructure compartments
@@ -80,7 +80,7 @@ pub fn apply_all(overlays: &[&'static dyn DiagramOverlay], ir: &mut DiagramIR, g
 mod tests {
     use super::*;
     use crate::ir::types::DiagramNode;
-    use crate::smodel::ViewType;
+    use crate::ViewType;
     use crate::visual_kind::VisualKind;
 
     /// Test overlay: tags every top-level node with an `info` diagnostic.

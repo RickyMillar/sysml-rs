@@ -247,52 +247,6 @@ impl RelationshipKind {
 }
 
 impl RelationshipKind {
-    /// Returns the SModel edge type string for diagram rendering.
-    ///
-    /// Used by Sprotty-based diagram views to assign edge types.
-    pub fn edge_type(&self) -> &'static str {
-        match self {
-            RelationshipKind::Owning => "edge:ownership",
-            RelationshipKind::TypeOf => "edge:typing",
-            RelationshipKind::Satisfy => "edge:satisfy",
-            RelationshipKind::Verify => "edge:verify",
-            RelationshipKind::Derive => "edge:derive",
-            RelationshipKind::Refine => "edge:refine",
-            RelationshipKind::Trace => "edge:trace",
-            RelationshipKind::Reference => "edge:reference",
-            RelationshipKind::Specialize => "edge:specialize",
-            RelationshipKind::Redefine => "edge:redefine",
-            RelationshipKind::Subsetting => "edge:subsetting",
-            RelationshipKind::Flow => "edge:flow",
-            RelationshipKind::Transition => "edge:transition",
-            RelationshipKind::Dependency => "edge:dependency",
-            RelationshipKind::Import => "edge:import",
-            RelationshipKind::Allocate => "edge:allocate",
-            RelationshipKind::Binding => "edge:binding",
-            RelationshipKind::Connection => "edge:connection",
-            RelationshipKind::Perform => "edge:perform",
-            RelationshipKind::Exhibit => "edge:exhibit",
-            RelationshipKind::Include => "edge:include",
-            RelationshipKind::Succession => "edge:succession",
-            RelationshipKind::Composition => "edge:composition",
-            RelationshipKind::Annotation => "edge:annotation",
-            RelationshipKind::SuccessionFlow => "edge:successionFlow",
-            RelationshipKind::Message => "edge:message",
-            RelationshipKind::FeatureMembership => "edge:featureMembership",
-            RelationshipKind::Membership => "edge:membership",
-            RelationshipKind::FlowOnConnection => "edge:flowOnConnection",
-            RelationshipKind::InterfaceConnection => "edge:interfaceConnection",
-            RelationshipKind::Portion => "edge:portion",
-            RelationshipKind::Expose => "edge:expose",
-            RelationshipKind::Frame => "edge:frame",
-            RelationshipKind::Assert => "edge:assert",
-            RelationshipKind::Assume => "edge:assume",
-            RelationshipKind::Require => "edge:require",
-            RelationshipKind::ParameterLink => "edge:parameterLink",
-            RelationshipKind::EventOccurrence => "edge:eventOccurrence",
-        }
-    }
-
     /// Returns the CSS line style for diagram edge rendering.
     ///
     /// Per SysML v2 graphical notation:

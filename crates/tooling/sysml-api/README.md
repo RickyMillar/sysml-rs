@@ -12,7 +12,7 @@ The server speaks three protocols on one router:
 
 **REST.**
 
-42 explicit JSON routes plus 124 auto-generated command routes. Reads are unauthenticated; mutations are gated by a bearer token when configured.
+Explicit HTTP routes plus one auto-generated named route per registered service command. Reads are unauthenticated; mutations are gated by a bearer token when configured. `GET /commands` is the live inventory; do not rely on a copied route count.
 
 **WebSocket.**
 
@@ -62,11 +62,11 @@ Constructs `AppState::new()`, builds the router, binds a `TcpListener`, and serv
 
 #### `— *fn inventory_routes() -> Router<Arc<AppState>>` — *router*
 
-Iterates `sysml_service::registered_commands()` and, for each, registers `POST /api/commands/{name}` that dispatches the JSON body through `sysml_service::execute_command`. Named, discoverable aliases for the generic `POST /api/command` dispatcher. At authoring time there are **124** registered commands.
+Iterates `sysml_service::registered_commands()` and, for each, registers `POST /api/commands/{name}` that dispatches the JSON body through `sysml_service::execute_command`. Named, discoverable aliases for the generic `POST /api/command` dispatcher. The command inventory is dynamic; query `GET /commands` rather than relying on a copied count.
 
 ## REST routes
 
-42 explicit routes. Reads need no auth; writes are gated by `require_auth` when `SYSML_API_TOKEN` is set. Filter below to find a route.
+The explicit routes below are assembled in `create_router_with_config`. Reads need no auth; writes are gated by `require_auth` when `SYSML_API_TOKEN` is set. The live native-command inventory is available from `GET /commands`.
 
 | Method | Path | Handler | Auth |
 |---|---|---|---|
@@ -108,12 +108,10 @@ Iterates `sysml_service::registered_commands()` and, for each, registers `POST /
 | DELETE | /sessions/:key | simulate_stop | token |
 | POST | /sessions/action/start | action_start | token |
 | POST | /sessions/action/:key/step | action_step | token |
-| POST | /sessions/continuous/start | continuous_start | token |
-| POST | /sessions/orchestrator/:key/step | orchestrator_step | token |
 | DELETE | /sessions/orchestrator/:key | orchestrator_stop | token |
 | POST | /api/command | dispatch_command | token |
 
->  **Plus 124 auto-generated routes.** `inventory_routes()` registers `POST /api/commands/{name}` for every command from `registered_commands()` (e.g. `sysml.load_workspace`, `sysml.load_file`, `sysml.query`, …). They are token-gated and are named aliases for `POST /api/command`. `GET /commands` returns the live catalog so the list never drifts.
+> **Plus one auto-generated route per registered command.** `inventory_routes()` registers `POST /api/commands/{name}` for every command from `registered_commands()` (for example, `sysml.load_workspace`, `sysml.load_file`, and `sysml.query`). They are token-gated named aliases for `POST /api/command`. `GET /commands` returns the live catalog.
 
 ## Readiness envelope & progress
 
@@ -237,4 +235,4 @@ None inside the workspace — `sysml-api` is a terminal transport. It is consume
 
 - **Prefer dispatch over new aliases.** New structured reads should go through `POST /api/query` or an inventory command, not a hand-coded REST alias.
 
-Part of the [sysml-rs](../../../README.md) workspace · regenerated 2026-06-03
+Part of the [sysml-rs](../../../README.md) workspace. The explicit route list follows `create_router_with_config`; `GET /commands` is authoritative for generated command routes.

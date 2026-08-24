@@ -89,21 +89,12 @@ impl LibrarySnapshot {
     }
 }
 
-/// Custom notification for sending diagram models to the client.
-pub(crate) struct DiagramSetModelNotification;
+/// Custom notification for sending renderer-neutral ViewModels to the client.
+pub(crate) struct DiagramSetViewModelNotification;
 
-impl tower_lsp::lsp_types::notification::Notification for DiagramSetModelNotification {
-    type Params = diagram::DiagramSetModelParams;
-    const METHOD: &'static str = diagram::DIAGRAM_SET_MODEL_METHOD;
-}
-
-/// Custom notification for sending the full ModelGraph JSON to the client.
-/// Enables client-side WASM expand/collapse without LSP round-trips.
-pub(crate) struct DiagramSetModelGraphNotification;
-
-impl tower_lsp::lsp_types::notification::Notification for DiagramSetModelGraphNotification {
-    type Params = diagram::DiagramSetModelGraphParams;
-    const METHOD: &'static str = diagram::DIAGRAM_SET_MODEL_GRAPH_METHOD;
+impl tower_lsp::lsp_types::notification::Notification for DiagramSetViewModelNotification {
+    type Params = diagram::DiagramSetViewModelParams;
+    const METHOD: &'static str = diagram::DIAGRAM_SET_VIEW_MODEL_METHOD;
 }
 
 /// Context bundle passed to command handlers.
@@ -1716,25 +1707,11 @@ pub(crate) async fn handle_action_visualize(
         Err(error) => return error,
     };
 
-    // Bucket B / B2 P1b: service owns the dual-shape {plantuml, smodel}
-    // projection; the LSP only marshals the SModel half into the LSP
-    // setModel notification.
+    // The service owns PlantUML projection; the LSP returns its result directly.
     let payload = match ctx.service.action_visualize(&action_name) {
         Ok(v) => v,
         Err(e) => return error_json(&e.to_string()),
     };
-    let smodel = payload
-        .get("smodel")
-        .cloned()
-        .unwrap_or(serde_json::Value::Null);
-    let params = crate::diagram::DiagramSetModelParams {
-        uri: uri_str.clone(),
-        view_type: "ActionFlowView".to_owned(),
-        model: smodel,
-    };
-    ctx.client
-        .send_notification::<DiagramSetModelNotification>(params)
-        .await;
     show_command_result(ctx, format!("Action '{}' diagram generated", action_name)).await;
     payload
 }
@@ -1756,25 +1733,11 @@ pub(crate) async fn handle_flow_visualize(
         Err(error) => return error,
     };
 
-    // Bucket B / B2 P1b: service produces {plantuml, smodel}; the LSP
-    // forwards the SModel half over the setModel notification and returns
-    // the dual-shape payload to the caller.
+    // The service produces PlantUML; the LSP returns that payload directly.
     let payload = match ctx.service.flow_visualize(None) {
         Ok(v) => v,
         Err(e) => return error_json(&e.to_string()),
     };
-    let smodel = payload
-        .get("smodel")
-        .cloned()
-        .unwrap_or(serde_json::Value::Null);
-    let params = diagram::DiagramSetModelParams {
-        uri: uri_str.clone(),
-        view_type: "SequenceView".to_owned(),
-        model: smodel,
-    };
-    ctx.client
-        .send_notification::<DiagramSetModelNotification>(params)
-        .await;
 
     show_command_result(ctx, format!("Flow visualization sent for '{}'", uri_str)).await;
     payload
@@ -2255,28 +2218,21 @@ pub(crate) async fn handle_diagram_open(
     let view_type_str = view_type_value.as_deref().unwrap_or("general");
     let view_type = diagram::parse_view_type(view_type_str);
 
-    // Bucket B / B1 P1: service owns the SModel projection + open_diagrams write.
+    // The service owns ViewModel projection and open-diagram state.
     let model = match ctx.service.diagram_open(&uri_str, Some(view_type_str)) {
         Ok(v) => v,
         Err(e) => return error_json(&e.to_string()),
     };
 
-    let params = diagram::DiagramSetModelParams {
+    let params = diagram::DiagramSetViewModelParams {
         uri: uri_str.clone(),
         view_type: diagram::view_type_name(view_type).to_owned(),
-        model,
+        view_model: model,
     };
     ctx.client
-        .send_notification::<DiagramSetModelNotification>(params)
+        .send_notification::<DiagramSetViewModelNotification>(params)
         .await;
 
-    // Send the full ModelGraph for client-side WASM expand/collapse.
-    if let Ok(graph) = ctx.service.workspace_aware_graph() {
-        let graph_params = diagram::build_set_model_graph_params(&uri_str, &graph, view_type);
-        ctx.client
-            .send_notification::<DiagramSetModelGraphNotification>(graph_params)
-            .await;
-    }
 
     show_command_result(
         ctx,
@@ -2311,27 +2267,21 @@ pub(crate) async fn handle_diagram_view(
     let view_type_str = view_type_value.as_str();
     let view_type = diagram::parse_view_type(view_type_str);
 
-    // Bucket B / B1 P1: service owns the SModel projection + open_diagrams write.
+    // The service owns ViewModel projection and open-diagram state.
     let model = match ctx.service.diagram_view(&uri_str, view_type_str) {
         Ok(v) => v,
         Err(e) => return error_json(&e.to_string()),
     };
 
-    let params = diagram::DiagramSetModelParams {
+    let params = diagram::DiagramSetViewModelParams {
         uri: uri_str.clone(),
         view_type: diagram::view_type_name(view_type).to_owned(),
-        model,
+        view_model: model,
     };
     ctx.client
-        .send_notification::<DiagramSetModelNotification>(params)
+        .send_notification::<DiagramSetViewModelNotification>(params)
         .await;
 
-    if let Ok(graph) = ctx.service.workspace_aware_graph() {
-        let graph_params = diagram::build_set_model_graph_params(&uri_str, &graph, view_type);
-        ctx.client
-            .send_notification::<DiagramSetModelGraphNotification>(graph_params)
-            .await;
-    }
 
     show_command_result(
         ctx,
@@ -2368,10 +2318,8 @@ pub(crate) async fn handle_diagram_export(
     };
     let view_type_str = view_type_value.as_deref().unwrap_or("general");
 
-    // Bucket B / B1 P1: SModel projection lives on the service. Export is
-    // morally `diagram.view` minus a notification — same projection, same
-    // overlay, no transport-side state mutation needed since we don't write
-    // open_diagrams ourselves (diagram_view does, harmlessly).
+    // The service owns ViewModel projection. This export shares the ad-hoc
+    // view path and its expansion-state contract.
     let model = match ctx.service.diagram_view(&uri_str, view_type_str) {
         Ok(v) => v,
         Err(e) => return error_json(&e.to_string()),
@@ -2386,14 +2334,14 @@ pub(crate) async fn handle_diagram_export(
     serde_json::json!({
         "uri": uri_str,
         "viewType": view_type_str,
-        "model": model,
+        "viewModel": model,
     })
 }
 
 /// Handle expand/collapse of a diagram node.
 ///
 /// Toggles the expanded state of a typed state usage node, re-generates
-/// the diagram, and sends the updated model to the client.
+/// the diagram, and sends the updated ViewModel to the client.
 ///
 /// Arguments: [uri, elementId, expanded (bool)]
 #[tracing::instrument(level = "info", skip_all)]
@@ -2440,7 +2388,7 @@ pub(crate) async fn handle_diagram_expand(
         .open_diagrams
         .get(&uri_str)
         .map(|v| *v.value())
-        .unwrap_or(sysml_diagram::smodel::ViewType::StateTransition);
+        .unwrap_or(sysml_diagram::ViewType::StateTransition);
     let view_type_str = diagram::view_type_name(view_type);
 
     let expanded_vec: Vec<String> = expanded_set.into_iter().collect();
@@ -2452,19 +2400,15 @@ pub(crate) async fn handle_diagram_expand(
         Err(e) => return error_json(&e.to_string()),
     };
 
-    let params = diagram::DiagramSetModelParams {
+    let params = diagram::DiagramSetViewModelParams {
         uri: uri_str.clone(),
         view_type: view_type_str.to_owned(),
-        model,
+        view_model: model,
     };
     ctx.client
-        .send_notification::<DiagramSetModelNotification>(params)
+        .send_notification::<DiagramSetViewModelNotification>(params)
         .await;
 
-    // Note: we do NOT send setModelGraph on expand/collapse — the client
-    // already has the ModelGraph from the initial open/view-switch and can
-    // do local expand/collapse via WASM. The setModel above is sent for
-    // backward compat with clients that don't have WASM support.
 
     tracing::info!(
         uri = %uri_str,

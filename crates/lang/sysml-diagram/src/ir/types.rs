@@ -5,12 +5,12 @@
 //! renderer, and any future renderer). It sits between `ModelGraph` and any
 //! concrete rendering:
 //! - Generators produce `DiagramIR` (what should appear) using **typed** fields.
-//! - The Sprotty adapter (`render.rs`) converts `DiagramIR` → `SGraph` (how it
-//!   looks in Sprotty), mapping the typed fields to ELK options and CSS classes.
+//! - The retired graph-renderer adapter (`render.rs`) converts `DiagramIR` → `legacy graph` (how it
+//!   looks in retired graph-renderer), mapping the typed fields to ELK options and CSS classes.
 //!
 //! ## Wire-format invariants (steward-ruled, 2026-06-24)
 //!
-//! 1. **No Sprotty/ELK artifacts here.** This type carries *no* ELK option strings
+//! 1. **No retired graph-renderer/ELK artifacts here.** This type carries *no* ELK option strings
 //!    (`elk.algorithm`, `elk.port.side`, …) and *no* CSS-class strings. Layout
 //!    algorithm/options are derived per `view_type` inside `render.rs`; CSS is
 //!    derived from the typed semantic fields below. The redundant `"elk.port.side"`
@@ -30,7 +30,7 @@ use sysml_core::{ElementKind, RelationshipKind};
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-use crate::smodel::ViewType;
+use crate::ViewType;
 use crate::visual_kind::{CompartmentKind, VisualKind};
 
 // ── Semantic classification enums (replace free-form CSS strings) ──────────
@@ -126,7 +126,7 @@ pub enum NodeTag {
 /// Sequence-diagram lifeline layout payload. This is rendering **data** (not ELK
 /// styling) the sequence view needs — it used to be smuggled through
 /// `layout_options` as the `lifelineWidth` / `activations` strings. Carried typed
-/// here; the Sprotty adapter serializes it back into the SModel layout options.
+/// here; the retired graph-renderer adapter serializes it back into the legacy graph model layout options.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct SequenceNodeLayout {
@@ -154,7 +154,7 @@ pub enum SolverStatus {
 /// Complete diagram IR for one view.
 ///
 /// Layout algorithm and graph-level ELK options are **not** stored here — the
-/// Sprotty adapter (`render.rs`) derives them from `view_type` (e.g. fixed layout
+/// retired graph-renderer adapter (`render.rs`) derives them from `view_type` (e.g. fixed layout
 /// for Grid/Sequence/Geometry, layered/DOWN for the rest).
 #[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -213,10 +213,10 @@ pub struct DiagramNode {
     // `ViewModel`'s `ElementId↔Span` text-map (`crate::text_map`, Bucket 1.6) is
     // the single typed home for source spans — look them up by `element_id`. The
     // FE link already consumes the text-map (byte-offset accurate). The legacy
-    // SGraph carried these on `SNode` for VS Code go-to-source / the SGraph
+    // legacy graph carried these on `SNode` for VS Code go-to-source / the legacy graph
     // diagnostic overlay; that path is unmaintained (we've moved to the ViewModel
-    // renderer), so `SNode` source is now `None` and the SGraph source overlay is
-    // inert. See `crate::smodel::SNode` if the legacy path is ever revived.
+    // renderer), so `SNode` source is now `None` and the legacy graph source overlay is
+    // inert. See the ViewModel node contract if the legacy path is ever revived.
     /// Tooltip text.
     pub tooltip: Option<String>,
     /// Fixed position (for Geometry/Grid/Sequence views).
@@ -245,7 +245,7 @@ pub enum HeaderStyle {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum NodeLayout {
-    /// Vertical box layout (Sprotty VBoxLayouter).
+    /// Vertical box layout (retired graph-renderer VBoxLayouter).
     VBox,
     /// No layout — children positioned by ELK or fixed coordinates.
     Free,
@@ -329,7 +329,7 @@ pub struct DiagramPort {
     /// State diagrams inject hidden cardinal ports for edge routing.
     pub is_hidden: bool,
     /// Fixed port side constraint (§F-6 anchor side). Single source of truth —
-    /// the Sprotty adapter derives the `elk.port.side` option from this.
+    /// the retired graph-renderer adapter derives the `elk.port.side` option from this.
     pub side: Option<PortSide>,
     /// Fixed position (for Sequence proxy nodes, etc.).
     pub position: Option<(f64, f64)>,
@@ -561,7 +561,7 @@ impl DiagramIR {
 
     /// Create for a fixed-layout view (Grid, Sequence, Geometry).
     ///
-    /// Layout selection now lives in the Sprotty adapter keyed on `view_type`,
+    /// Layout selection now lives in the retired graph-renderer adapter keyed on `view_type`,
     /// so this is a thin alias of [`DiagramIR::new`] retained for call-site
     /// readability.
     pub fn new_fixed(view_type: ViewType) -> Self {

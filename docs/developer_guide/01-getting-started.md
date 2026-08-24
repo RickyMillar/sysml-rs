@@ -2,14 +2,20 @@
 
 This guide covers setting up your development environment for sysml-rs.
 
-## Prerequisites
+## Prerequisites and bootstrap
 
-### Required
+For a clean checkout, follow [Environment setup](../../CONTRIBUTING.md#environment-setup) before building. It is the maintained developer-bootstrap procedure: it records the current CI Rust toolchain, Node.js and `tree-sitter-cli` pins, required shell tools, the checksum-verified specification fetch, and parser generation. The public [Quick start](../../README.md#quick-start) is the maintained installation path for users.
 
-- **Rust 1.75+** (2024 edition features)
-- **Git** for version control
+At minimum, clone from the public repository and then complete those bootstrap steps:
 
-### Optional
+```bash
+git clone https://github.com/RickyMillar/sysml-rs.git
+cd sysml-rs
+```
+
+The OMG source materials under `references/sysmlv2/` are fetched into an ignored local directory; they are not vendored by this repository. Do not begin a build before running the fetch script and generating the pinned tree-sitter parser described in `CONTRIBUTING.md`.
+
+### Optional tools
 
 - **PostgreSQL 14+** for the `sysml-store` PostgreSQL backend tests (behind the `sqlx` feature)
 - **Python 3.10+** for benchmark report generation
@@ -17,15 +23,9 @@ This guide covers setting up your development environment for sysml-rs.
 
 ## Building
 
+Use a release build for a usable runtime:
+
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/sysml-rs.git
-cd sysml-rs
-
-# Build all crates
-cargo build
-
-# Build with release optimizations
 cargo build --release
 ```
 
@@ -141,7 +141,7 @@ sysml-rs/
 │   │   ├── sysml-parser-incremental/ # Tree-sitter — the SOLE parser (impl Parser)
 │   │   ├── sysml-runtime/          # Execution engine + full analysis IR
 │   │   │                           #   (absorbed sysml-analysis-ir; diffsol physics)
-│   │   └── sysml-diagram/          # Visualization IR → Sprotty SModel (rlib, server-rendered)
+│   │   └── sysml-diagram/          # Visualization IR → renderer-agnostic ViewModel (rlib, server-rendered)
 │   ├── tooling/                    # Developer tools consuming the lang crates (10 crates)
 │   │   ├── sysml-resolve/          # Multi-package dependency resolution
 │   │   ├── sysml-query/            # Transport-agnostic structured-query engine
@@ -157,7 +157,7 @@ sysml-rs/
 │       └── sysml-spec-tests/       # OMG spec corpus coverage tests
 ├── docs/developer_guide/           # This documentation
 ├── benchmarks/                     # Performance benchmarks
-└── references/sysmlv2/             # Spec files (vendored)
+└── references/sysmlv2/             # Fetched, ignored specification sources
 ```
 
 > **Came from older docs/code?** `sysml-meta` and `sysml-canon` were folded into
@@ -167,15 +167,9 @@ sysml-rs/
 
 ## Reference Materials
 
-The `references/sysmlv2/` directory contains the SysML v2 specification materials:
+After the bootstrap fetch, `references/sysmlv2/` contains the pinned SysML v2 and KerML materials used for this checkout: grammars, vocabulary/shape files, API inputs, the standard library, and test corpus inputs. The directory is an ignored local reconstruction, not a source-controlled vendor directory.
 
-- **Grammar files**: `SysML.xtext`, `KerML.xtext`
-- **Vocabulary**: `SysML-vocab.ttl`, `KerML-vocab.ttl`
-- **API specs**: `OpenAPI.json`, `SysmlAPISchema.json` (untracked local-optional since 2026-07-30; on fresh clones fetch from https://www.omg.org/spec/SystemsModelingAPI/)
-- **Standard library**: `library.kernel/`, `library.systems/`
-- **Test corpus**: `org.omg.sysml.xpect.tests/`
-
-See each crate's `README.md` for detailed reference mappings.
+Run `tools/fetch-references/fetch.sh verify` to verify an existing reconstruction. See [`tools/fetch-references/README.md`](../../tools/fetch-references/README.md) for the source inventory and each crate's README for detailed reference mappings.
 
 ## Common Tasks
 

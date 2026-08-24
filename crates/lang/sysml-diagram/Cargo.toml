@@ -3,7 +3,7 @@ name = "sysml-diagram"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Visualization exporters for SysML v2: SModel (Sprotty), PlantUML"
+description = "Renderer-neutral visualization models and PlantUML exporters for SysML v2"
 repository.workspace = true
 # OSA-04: no Cargo package in this workspace publishes to crates.io at Stage A
 # (first public preview ships binaries/VSIX only). Tier and rationale:
@@ -15,9 +15,8 @@ crate-type = ["rlib"]
 [features]
 default = []
 # Toggles `Serialize`/`Deserialize` derives on the `DiagramIR`/ViewModel wire
-# types. The `serde` crate itself is always compiled (the `SGraph` Sprotty JSON
-# in `smodel/` is an inherently-serialized output and cannot be feature-gated),
-# so this flag is purely a derive-toggle on the renderer-agnostic IR — mirroring
+# types. The `serde` crate itself is always compiled, so this flag is purely a
+# derive-toggle on the renderer-neutral IR — mirroring
 # the `sysml-core` opt-in pattern. Downstream consumers that serialize the
 # ViewModel (the `workspace_view_model_best` salsa query, the service layer)
 # enable `sysml-diagram/serde`.

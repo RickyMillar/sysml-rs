@@ -5,7 +5,7 @@ use std::sync::Arc;
 
 use dashmap::DashMap;
 use sysml_core::ModelGraph;
-use sysml_diagram::smodel::ViewType;
+use sysml_diagram::ViewType;
 
 /// Owns the open diagrams, their view types, and node expansion state.
 pub struct DiagramManager {

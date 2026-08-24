@@ -1066,7 +1066,7 @@ export function snapEdgeToPorts(
  * generator already computed every node position/size and every edge route, so
  * the renderer just resolves child positions to absolute and re-anchors routes.
  *
- * Child node positions are parent-relative (Sprotty convention), so a node's
+ * Child node positions are parent-relative, so a node's
  * absolute origin is `parentAbs + node.position`. Edge routes are re-anchored to
  * the resolved source-node center: the sequence generator's `precomputed_route`
  * omits the lifeline y-offset, so shifting every route point by

@@ -4,7 +4,7 @@
 //! ViewDefinitions) plus optional `viewCondition` filter, layout hints,
 //! and an `Expose`d Namespace. Composed by transport layers from a
 //! discovered `ViewSummary` (user-authored `ViewUsage` /
-//! `ViewDefinition`) and handed to `smodel::to_payload_with_filter_cache`
+//! `ViewDefinition`) and handed to `to_view_model_with_filter_cache`
 //! for execution.
 
 use std::collections::{BTreeSet, HashSet, VecDeque};
@@ -12,12 +12,12 @@ use std::collections::{BTreeSet, HashSet, VecDeque};
 use sysml_core::{Element, ElementId, ElementKind, ModelGraph, ViewFilter, ViewSummary};
 
 use crate::ir::{DiagramOverlay, RenderingHints};
-use crate::smodel::ViewType;
+use crate::ViewType;
 
 /// A structured request for diagram generation.
 ///
 /// Built by transport layers from their wire-format params, then handed
-/// to [`crate::smodel::to_payload_with_filter_cache`] for execution. See
+/// to [`crate::to_view_model_with_filter_cache`] for execution. See
 /// module docs for the dispatch flow.
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -123,7 +123,7 @@ impl ViewRequest {
     /// be fully described by `(view_type, expanded_ids, expose)` — i.e.
     /// `filter`, `hints`, and `overlays` are all absent. Callers that
     /// hold a non-trivial filter / hints / overlay set must bypass the
-    /// salsa cache and call `to_smodel_with` directly; the cache key
+    /// salsa cache and call `to_view_model` directly; the cache key
     /// would otherwise hash unrelated requests to the same slot.
     ///
     /// `expanded_ids` strings that do not round-trip through
@@ -225,7 +225,7 @@ impl ViewRequest {
 /// [`DiagramRequestKey::new`] when constructing a key for testing.
 ///
 /// Per ADR-011 §3 / S3.T4: every byte of state that influences the
-/// generated SGraph must be in this key, otherwise the cache returns
+/// generated legacy graph must be in this key, otherwise the cache returns
 /// stale results. The plan deliberately scopes the key to the
 /// LSP-`generate_diagram` shape (no filter / hints / overlays) — those
 /// fields appear only on user-authored ViewUsage requests, which take
@@ -306,7 +306,7 @@ impl DiagramRequestKey {
     }
 
     /// Materialise this key back into a [`ViewRequest`]. Used by the
-    /// cache-fill path to call the existing `to_smodel_with` body
+    /// cache-fill path to call the existing `to_view_model` body
     /// without duplicating its parameter list. The returned request
     /// has `filter` / `hints` / `overlays` empty by definition.
     pub fn to_view_request(&self) -> ViewRequest {

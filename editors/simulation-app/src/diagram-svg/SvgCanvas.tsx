@@ -4,7 +4,7 @@
  * THE graph renderer for the simulation app. Renders one view's geometry from
  * `sysml.diagram.viewmodel`, lays it out + routes edges with elkjs (one native
  * pass, frontend-side), pans/zooms with d3-zoom, and links bidirectionally to the
- * editor through the single `selectedId` selection store. No Sprotty.
+ * editor through the single `selectedId` selection store. No graph framework.
  *
  * This is a go/no-go spike: viability over polish.
  */

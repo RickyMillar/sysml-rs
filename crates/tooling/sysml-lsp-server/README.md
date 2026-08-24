@@ -142,12 +142,13 @@ T3 bgbackground · cross-file + library▸full validation · find-refs · rename
 The server is the bridge between Rust model analysis and interactive webview diagrams. Models are **server-rendered** in this process (there is no browser-side WASM engine) and pushed to the client by custom notification.
 
 ```text
-analyzeModelGraph (sysml-core)▸
-rendersysml_diagram::smodel::to_smodel()▸SGraph JSON
-notifysysml/diagram/setModel▸webview
+analyze ModelGraph (sysml-core) → ViewModel (sysml-diagram)
+  → sysml/diagram/setViewModel → webview
 ```
 
-Notification methods are defined in `src/diagram.rs`: `DIAGRAM_SET_MODEL_METHOD = "sysml/diagram/setModel"` (rendered SGraph) and `DIAGRAM_SET_MODEL_GRAPH_METHOD = "sysml/diagram/setModelGraph"` (raw graph payload). Expand/collapse goes through the `sysml.diagram.expand` command — an LSP roundtrip, not a local engine.
+`src/diagram.rs` defines `DIAGRAM_SET_VIEW_MODEL_METHOD =
+"sysml/diagram/setViewModel"`. Expand/collapse goes through the
+`sysml.diagram.expand` command, which returns an updated ViewModel.
 
 ## Standard library
 
@@ -179,7 +180,7 @@ Library loading is asynchronous; features degrade gracefully until the stdlib is
 
 - `sysml-resolve` — name resolution
 
-- `sysml-diagram` — server-side SModel rendering
+- `sysml-diagram` — server-side ViewModel construction
 
 - `sysml-project` · `sysml-manifest` — project discovery, `sysml.toml`
 

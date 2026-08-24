@@ -7,7 +7,7 @@
 //! about. This module is the single Rust source, keyed by the existing
 //! [`VisualKind`] taxonomy (see `visual_kind.rs`); the palette is serialized into
 //! `ViewModel::tokens` and consumed directly by the React-SVG renderer. (The old
-//! CSS emitter `emit_css_root` + its drift gate were retired with the Sprotty
+//! CSS emitter `emit_css_root` + its drift gate were retired with the retired graph-renderer
 //! `editors/diagram` package.)
 //!
 //! ## Scope (steward-ruled (A″), 2026-06-25)
@@ -15,7 +15,7 @@
 //! This task single-sources the **palette only**. Node *geometry*
 //! (`shape-catalog.json`: sizes, padding, corner radii, shape-intrinsic SVG
 //! params) and *typography* (`defaults.fonts`) are deliberately **NOT** carried
-//! here: both feed the live Sprotty renderer's internal layout/text-measurement
+//! here: both feed the live retired graph-renderer renderer's internal layout/text-measurement
 //! contract (`shape-registry.ts`), and that contract is rewritten wholesale by
 //! the Bucket-3 rip-and-replace renderer. Carrying them now would create an
 //! un-gated duplicate (principle #5) or a dead-variable gate (principle #2).

@@ -167,7 +167,7 @@ fn collect_child_ids(child: &DiagramChild, ids: &mut HashSet<String>) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::smodel::ViewType;
+    use crate::ViewType;
     use crate::visual_kind::{CompartmentKind, VisualKind};
 
     fn eid(id: &str) -> String {

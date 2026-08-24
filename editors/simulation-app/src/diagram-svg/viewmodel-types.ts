@@ -12,6 +12,8 @@
  * ignores (buttons, ports, sequence_layout, …) are left loosely typed.
  */
 
+import type { GeometryModel, TableModel, TreeModel } from '@/shared/api/model';
+
 // ── Top-level ViewModel ──────────────────────────────────────────────
 
 export interface ViewModel {
@@ -20,20 +22,18 @@ export interface ViewModel {
   text_map: TextMap | null;
   interactions: InteractionMap | null;
   frame: ViewFrame | null;
-  /** Non-graph structured model (3.12) for Grid/Browser/Geometry views — the
-   *  dedicated renderers consume this instead of the graph `scene`. `null` for
-   *  graph views. Wire shape matches the legacy `/render` payload's non-graph
-   *  arms (`{ kind: "table"|"tree"|"geometry", data }`) so it drops straight into
-   *  `setDiagramPayload`. */
+  /** Non-graph structured model for Grid/Browser/Geometry views. Dedicated
+   *  renderers consume it instead of the graph scene; it is `null` for graph
+   *  views. */
   non_graph: NonGraphModel | null;
 }
 
 /** Tagged non-graph payload (Rust `NonGraphModel`). `data` is the structured
  *  TableModel/TreeModel/GeometryModel the dedicated renderer reads. */
 export type NonGraphModel =
-  | { kind: 'table'; data: unknown }
-  | { kind: 'tree'; data: unknown }
-  | { kind: 'geometry'; data: unknown };
+  | { kind: 'table'; data: TableModel }
+  | { kind: 'tree'; data: TreeModel }
+  | { kind: 'geometry'; data: GeometryModel };
 
 export interface DiagramIR {
   view_type: string;
