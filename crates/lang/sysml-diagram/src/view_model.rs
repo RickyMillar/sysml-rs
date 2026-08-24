@@ -269,6 +269,20 @@ impl ViewModel {
             .map(|im| Arc::new(im.retained(&keep)));
         pruned
     }
+
+    /// Rewrite every text-map span file URI that lives under `root` to a
+    /// root-relative path, so a serialized `ViewModel` (a baked fixture, a
+    /// downloaded export) carries no absolute machine paths. A file outside
+    /// `root` keeps its URI verbatim — an honest fallback, matching the
+    /// provenance-manifest normalization in the service layer.
+    pub fn with_relative_file_uris(mut self, root: &std::path::Path) -> ViewModel {
+        if let Some(tm) = self.text_map.as_deref() {
+            let mut rewritten = tm.clone();
+            rewritten.relativize_files(root);
+            self.text_map = Some(Arc::new(rewritten));
+        }
+        self
+    }
 }
 
 fn collect_scene_ids(scene: &DiagramIR, out: &mut HashSet<String>) {

@@ -82,6 +82,18 @@ impl TextMap {
     /// in the workspace; export paths that serialize one view's `ViewModel`
     /// scope it down to the ids the scene / non-graph payload actually
     /// references (see `ViewModel::pruned_to_referenced`).
+    /// Rewrite every span whose `file` is a `file://` URI (or absolute path)
+    /// under `root` to the root-relative path. Files outside `root` are left
+    /// verbatim.
+    pub fn relativize_files(&mut self, root: &std::path::Path) {
+        for span in self.spans.values_mut() {
+            let fs = span.file.strip_prefix("file://").unwrap_or(&span.file);
+            if let Ok(rel) = std::path::Path::new(fs).strip_prefix(root) {
+                span.file = rel.to_string_lossy().into_owned();
+            }
+        }
+    }
+
     pub fn retained(&self, keep: &std::collections::HashSet<String>) -> TextMap {
         TextMap {
             spans: self

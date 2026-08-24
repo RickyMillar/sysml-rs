@@ -6754,7 +6754,22 @@ impl SysmlService {
             ServiceError::NotFound(format!("view usage {view_usage_id} not found in workspace"))
         })?;
         let view_model = self.resolve_view_model(WORKSPACE_URI, &request)?;
-        Ok(serde_json::to_value(view_model.pruned_to_referenced()).unwrap_or_default())
+        let mut pruned = view_model.pruned_to_referenced();
+        // Baked exports must not leak absolute machine paths: span file URIs
+        // under the context root become root-relative. Root resolution is the
+        // execution_snapshot idiom: the workspace project's directory root by
+        // handle (folder contexts), else the from_workspace root.
+        let root = {
+            let host = self.host.lock().unwrap();
+            host.project_root_dir_for_handle(sysml_project::ProjectHandle(
+                Self::SERVICE_WORKSPACE_PROJECT_ID,
+            ))
+        }
+        .or_else(|| self.workspace_root().map(|p| p.to_path_buf()));
+        if let Some(root) = root {
+            pruned = pruned.with_relative_file_uris(&root);
+        }
+        Ok(serde_json::to_value(pruned).unwrap_or_default())
     }
 
     /// Every declared view in the workspace as `(qualified_name, id)` pairs,

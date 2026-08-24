@@ -90,6 +90,15 @@ fn export_viewmodel_prunes_sidecars_for_graph_and_browser_views() {
         );
     }
 
+    // No absolute machine paths: every retained span file under the
+    // workspace root is exported root-relative (a baked fixture must not
+    // leak the exporting machine's directory layout).
+    let spans_json = serde_json::to_string(&pruned["text_map"]).expect("text_map serializes");
+    assert!(
+        !spans_json.contains("file:///") && !spans_json.contains("/home/"),
+        "exported text_map leaks absolute paths: {spans_json}"
+    );
+
     // Pruning actually bites: the raw map spans the whole workspace
     // (user model + standard library), the pruned map only this view.
     let raw_keys = text_map_keys(&raw);
