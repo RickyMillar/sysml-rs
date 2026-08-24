@@ -270,15 +270,14 @@ impl ViewModel {
         pruned
     }
 
-    /// Rewrite every text-map span file URI that lives under `root` to a
-    /// root-relative path, so a serialized `ViewModel` (a baked fixture, a
-    /// downloaded export) carries no absolute machine paths. A file outside
-    /// `root` keeps its URI verbatim — an honest fallback, matching the
-    /// provenance-manifest normalization in the service layer.
-    pub fn with_relative_file_uris(mut self, root: &std::path::Path) -> ViewModel {
+    /// Rewrite every text-map span file URI under one of the labeled `roots`
+    /// to `label + relative-path`, so a serialized `ViewModel` (a baked
+    /// fixture, a downloaded export) carries no absolute machine paths. An
+    /// absolute path matching no root is reduced to `<external>/<file-name>`.
+    pub fn with_relative_file_uris(mut self, roots: &[(&std::path::Path, &str)]) -> ViewModel {
         if let Some(tm) = self.text_map.as_deref() {
             let mut rewritten = tm.clone();
-            rewritten.relativize_files(root);
+            rewritten.relativize_files(roots);
             self.text_map = Some(Arc::new(rewritten));
         }
         self

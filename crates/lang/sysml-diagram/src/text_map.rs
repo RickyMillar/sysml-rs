@@ -83,13 +83,30 @@ impl TextMap {
     /// scope it down to the ids the scene / non-graph payload actually
     /// references (see `ViewModel::pruned_to_referenced`).
     /// Rewrite every span whose `file` is a `file://` URI (or absolute path)
-    /// under `root` to the root-relative path. Files outside `root` are left
-    /// verbatim.
-    pub fn relativize_files(&mut self, root: &std::path::Path) {
+    /// under one of the labeled `roots` to `label + relative-path` (first
+    /// match wins). An absolute path matching no root is reduced to
+    /// `<external>/<file-name>` — a serialized text map is an export
+    /// artifact and must never carry a machine's directory layout.
+    /// Already-relative files are left untouched.
+    pub fn relativize_files(&mut self, roots: &[(&std::path::Path, &str)]) {
         for span in self.spans.values_mut() {
             let fs = span.file.strip_prefix("file://").unwrap_or(&span.file);
-            if let Ok(rel) = std::path::Path::new(fs).strip_prefix(root) {
-                span.file = rel.to_string_lossy().into_owned();
+            let path = std::path::Path::new(fs);
+            if path.is_relative() {
+                continue;
+            }
+            if let Some(rewritten) = roots.iter().find_map(|(root, label)| {
+                path.strip_prefix(root)
+                    .ok()
+                    .map(|rel| format!("{label}{}", rel.to_string_lossy()))
+            }) {
+                span.file = rewritten;
+            } else {
+                let name = path
+                    .file_name()
+                    .map(|n| n.to_string_lossy().into_owned())
+                    .unwrap_or_default();
+                span.file = format!("<external>/{name}");
             }
         }
     }

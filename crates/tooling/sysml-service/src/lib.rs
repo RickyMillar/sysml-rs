@@ -6766,9 +6766,16 @@ impl SysmlService {
             ))
         }
         .or_else(|| self.workspace_root().map(|p| p.to_path_buf()));
-        if let Some(root) = root {
-            pruned = pruned.with_relative_file_uris(&root);
+        let stdlib_root = sysml_parser_trait::library::LibraryConfig::from_env_optional()
+            .map(|cfg| cfg.library_path.clone());
+        let mut roots: Vec<(&std::path::Path, &str)> = Vec::new();
+        if let Some(root) = root.as_deref() {
+            roots.push((root, ""));
         }
+        if let Some(stdlib) = stdlib_root.as_deref() {
+            roots.push((stdlib, "<stdlib>/"));
+        }
+        pruned = pruned.with_relative_file_uris(&roots);
         Ok(serde_json::to_value(pruned).unwrap_or_default())
     }
 
