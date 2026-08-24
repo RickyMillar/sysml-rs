@@ -747,7 +747,7 @@ fn baseline_commands() -> Vec<BaselineCommand> {
         },
         BaselineCommand {
             name: "sysml.views.render",
-            rationale: "View → SModel render — Sprotty diagram contract.",
+            rationale: "View → renderer-neutral ViewModel contract.",
             build_req: req_views_render,
         },
         BaselineCommand {
@@ -1034,7 +1034,7 @@ fn service_command_baseline() {
     // Wall-clock timings (workspace_verify response) — drift every run.
     let elapsed_re = r#""elapsed_ms":\s*[0-9]+"#;
     settings.add_filter(elapsed_re, "\"elapsed_ms\": \"<MS>\"");
-    // Synthetic SModel ids of the form `<UUID>/<segment>/<digits>` —
+    // Synthetic diagram ids of the form `<UUID>/<segment>/<digits>` —
     // the trailing counter drifts run-to-run with HashMap iteration
     // order even when the source bytes are stable.
     let synth_id_re = r"<UUID>/([A-Za-z_-]+)/[0-9]+";
@@ -1134,11 +1134,9 @@ fn service_command_baseline() {
                 // upstream and not stable run-to-run. Shape is covered
                 // by `sysml-diagram` plantuml tests.
                 "sysml.export.plantuml",
-                // SModel diagram includes synthetic ids of the form
-                // `<UUID>/text/N` whose counter is assigned during walk
-                // — N drifts run-to-run even when the source bytes are
-                // identical (HashMap iteration order). Covered by the
-                // sysml-diagram smodel snapshot suite.
+                // ViewModel scenes include synthetic ids whose counters can
+                // drift with HashMap iteration even when source bytes are
+                // identical. Focused ViewModel tests cover their structure.
                 "sysml.views.render",
             ];
             if !SKIP_INSTA.contains(&cmd.name) {
