@@ -46,6 +46,19 @@ fn main() {
                 Err(e) => panic!("language-pack info failed: {e}"),
             }
         }
+        // `language-pack render-mdbook <output-dir>` renders the generated
+        // pack (at the default/SYSML_LP_PACK_DIR location) as mdBook pages.
+        if sub.as_deref() == Some("render-mdbook") {
+            let out_dir = args
+                .next()
+                .map(PathBuf::from)
+                .unwrap_or_else(|| panic!("usage: language-pack render-mdbook <output-dir>"));
+            let pack_dir = spec_index::language_pack::default_output_dir(&repo_root);
+            match spec_index::language_pack::render_mdbook::render(&pack_dir, &out_dir) {
+                Ok(()) => return,
+                Err(e) => panic!("language-pack render-mdbook failed: {e}"),
+            }
+        }
         // Otherwise regenerate the pack (optional explicit output dir).
         let out_dir = sub
             .map_or_else(|| spec_index::language_pack::default_output_dir(&repo_root), PathBuf::from);

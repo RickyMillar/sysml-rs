@@ -22,6 +22,7 @@ pub mod manifest;
 pub mod metamodel;
 pub mod obligations;
 pub mod pilot;
+pub mod render_mdbook;
 pub mod report;
 pub mod retrieval;
 pub mod retriever;
