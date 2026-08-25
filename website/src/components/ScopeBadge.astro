@@ -1,0 +1,61 @@
+---
+/**
+ * Accessible scope badge: always text plus an icon glyph, never colour alone.
+ * `label` must be one of the documentation-policy scope labels.
+ */
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+
+const GLYPHS: Record<string, string> = {
+  'SysML v2 / KerML': '◆',
+  'sysml-rs implementation': '▣',
+  'sysml-rs tooling': '●',
+  'OMG API subset': '◍',
+  'Experimental / partial support': '◭',
+};
+
+const SLUGS: Record<string, string> = {
+  'SysML v2 / KerML': 'language',
+  'sysml-rs implementation': 'implementation',
+  'sysml-rs tooling': 'tooling',
+  'OMG API subset': 'omg-api',
+  'Experimental / partial support': 'experimental',
+};
+
+const glyph = GLYPHS[label] ?? '■';
+const slug = SLUGS[label] ?? 'other';
+---
+
+<span class="scope-badge" data-scope={slug}>
+  <span aria-hidden="true" class="scope-glyph">{glyph}</span>
+  {label}
+</span>
+
+<style>
+  .scope-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.35em 0.6em;
+    border-radius: 999px;
+    border: 1px solid var(--sl-color-gray-4);
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-white);
+    white-space: nowrap;
+  }
+  .scope-glyph {
+    font-size: 0.9em;
+  }
+  .scope-badge[data-scope='language'] {
+    border-color: var(--sl-color-accent);
+  }
+  .scope-badge[data-scope='experimental'] {
+    border-color: var(--sl-color-orange);
+  }
+</style>

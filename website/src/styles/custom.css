@@ -1,0 +1,19 @@
+/* Portal-wide adjustments on top of Starlight defaults. */
+
+:root {
+  --sl-color-accent-low: #1c2f4a;
+  --sl-color-accent: #3b82c4;
+  --sl-color-accent-high: #a8cdec;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #d6e6f5;
+  --sl-color-accent: #22639e;
+  --sl-color-accent-high: #16344f;
+}
+
+/* Keep wide tables and code inside their own scroll container. */
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+}

@@ -1,0 +1,18 @@
+---
+/**
+ * Callout for a documented limitation; link to the versioned
+ * known-limitations entry via `href` where one exists.
+ */
+import { Aside } from '@astrojs/starlight/components';
+
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+---
+
+<Aside type="caution" title="Known limitation">
+  <slot />
+  {href && <p><a href={href}>Details and status</a></p>}
+</Aside>

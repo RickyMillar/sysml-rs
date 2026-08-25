@@ -1,0 +1,12 @@
+{
+  "$comment": "Pinned external inputs for the documentation portal build. No portal build may fetch an unpinned revision of another repository. Update deliberately, with review.",
+  "book": {
+    "repository": "https://github.com/RickyMillar/sysmlv2-book",
+    "commit": null,
+    "$comment": "null until Phase 4 imports the Book under /learn/; the standalone Book Pages site is linked from navigation instead."
+  },
+  "generated_reference": {
+    "$comment": "Phase 5 records the sysml-rs commit and generation commands for each generated reference artefact here.",
+    "inputs": {}
+  }
+}

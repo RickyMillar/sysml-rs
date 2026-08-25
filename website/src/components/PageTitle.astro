@@ -1,0 +1,44 @@
+---
+/**
+ * Starlight PageTitle override: renders the default title, then the page's
+ * scope and status badges from frontmatter (documentation-policy contract).
+ */
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import ScopeBadge from './ScopeBadge.astro';
+
+const { scope, status } = Astro.locals.starlightRoute.entry.data as {
+  scope?: string[];
+  status?: string;
+};
+---
+
+<Default><slot /></Default>
+{
+  (scope?.length || status) && (
+    <p class="page-scope">
+      {scope?.map((label) => <ScopeBadge label={label} />)}
+      {status && <span class="status-badge">status: {status}</span>}
+    </p>
+  )
+}
+
+<style>
+  .page-scope {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.35em 0.6em;
+    border-radius: 999px;
+    border: 1px dashed var(--sl-color-gray-4);
+    color: var(--sl-color-gray-2);
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+/**
+ * Starlight Footer override: prepends a source/evidence footer built from the
+ * page's documentation-policy frontmatter, then renders the default footer.
+ */
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const REPO_BLOB = 'https://github.com/RickyMillar/sysml-rs/blob/main/';
+
+const { source_of_truth, last_verified_against, known_limitations } = Astro.locals
+  .starlightRoute.entry.data as {
+  source_of_truth?: string[];
+  last_verified_against?: string;
+  known_limitations?: string;
+};
+
+const hasEvidence = source_of_truth?.length || last_verified_against || known_limitations;
+
+/** Repo-relative paths become links into the repository; anything else stays text. */
+const isRepoPath = (entry: string) => /^[A-Za-z0-9_.-]+(\/[A-Za-z0-9_.:-]+)+$/.test(entry);
+---
+
+{
+  hasEvidence && (
+    <div class="evidence-footer not-content">
+      <p class="evidence-title">Evidence for this page</p>
+      <ul>
+        {source_of_truth?.map((entry) => (
+          <li>
+            Source of truth:{' '}
+            {isRepoPath(entry) ? <a href={`${REPO_BLOB}${entry}`}>{entry}</a> : entry}
+          </li>
+        ))}
+        {last_verified_against && <li>Last verified against: <code>{last_verified_against}</code></li>}
+        {known_limitations && (
+          <li>
+            <a href={known_limitations}>Known limitations for this feature</a>
+          </li>
+        )}
+      </ul>
+    </div>
+  )
+}
+<Default><slot /></Default>
+
+<style>
+  .evidence-footer {
+    margin-top: 2rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .evidence-title {
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+  .evidence-footer ul {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+  }
+</style>

@@ -210,6 +210,15 @@ look-up-then-cite-the-primary-clause workflows, for people and agents alike.
 See [tools/spec-index/README.md](tools/spec-index/README.md) for generation
 commands and the consumption pattern.
 
+## Documentation
+
+The **[sysml-rs documentation portal](https://rickymillar.github.io/sysml-rs/)**
+is the growing home for user documentation — what the tool is, how to use it,
+and reference material. It is early: sections land incrementally, and this
+README remains the maintained quick start until the portal's installation and
+workflow guides replace it. The portal source lives in
+[`website/`](website/README.md).
+
 ## Learning SysML v2
 
 If you are learning the language rather than the tool, start with

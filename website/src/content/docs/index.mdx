@@ -1,0 +1,49 @@
+---
+title: sysml-rs
+description: Documentation portal for sysml-rs, a pre-alpha Rust implementation of OMG SysML v2.
+template: splash
+banner:
+  content: 'sysml-rs is <strong>pre-alpha</strong>: a partial SysML v2 implementation with no OMG conformance claim.'
+hero:
+  title: sysml-rs documentation
+  tagline: A Rust implementation of OMG SysML v2 — parser, semantic model, execution runtime, CLI, language server, REST and MCP services.
+  actions:
+    - text: What sysml-rs is
+      link: /sysml-rs/start-here/what-is-sysml-rs/
+      icon: right-arrow
+    - text: Learn SysML v2 (the Book)
+      link: https://rickymillar.github.io/sysmlv2-book/
+      icon: external
+      variant: secondary
+    - text: Source on GitHub
+      link: https://github.com/RickyMillar/sysml-rs
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Learn SysML v2" icon="open-book">
+    The [SysML v2 Book](https://rickymillar.github.io/sysmlv2-book/) teaches the
+    textual language with checked examples and interactive diagrams, and the
+    [Language Reference](https://rickymillar.github.io/sysmlv2-book/language-reference/index.html)
+    catalogues syntax concept by concept.
+  </Card>
+  <Card title="Use sysml-rs" icon="rocket">
+    Read, check, query, and execute models from the CLI, VS Code, HTTP, or MCP.
+    The product guide is being written here — until a section lands, the
+    [repository README](https://github.com/RickyMillar/sysml-rs#readme) is the
+    maintained starting point.
+  </Card>
+  <Card title="Reference" icon="document">
+    CLI commands, `sysml.toml`, diagnostics, capability status, and the API/MCP
+    catalogue — generated or contract-tested rather than hand-maintained.
+    Landing here as the portal grows.
+  </Card>
+  <Card title="Develop sysml-rs" icon="seti:rust">
+    Architecture and contribution guides live in the repository:
+    [developer guide](https://github.com/RickyMillar/sysml-rs/tree/main/docs/developer_guide)
+    and [CONTRIBUTING](https://github.com/RickyMillar/sysml-rs/blob/main/CONTRIBUTING.md).
+  </Card>
+</CardGrid>
