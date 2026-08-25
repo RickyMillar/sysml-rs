@@ -16,8 +16,8 @@ source_of_truth:
 
 The `examples/` directory in the repository is the fastest way to see what
 sysml-rs can actually do: every model in it is a maintained fixture that the
-regression suite executes, so they are guaranteed to work at the commit you
-checked out. The models are written in standard SysML v2 (*scope: SysML v2 /
+regression suite executes, so a green test suite at your checkout means they
+parse, resolve, and (where applicable) run there. The models are written in standard SysML v2 (*scope: SysML v2 /
 KerML*); the commands and tests that exercise them are sysml-rs tooling.
 
 Two shapes to know before you start:
