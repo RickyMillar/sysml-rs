@@ -53,17 +53,19 @@ export default defineConfig({
         {
           label: 'Learn SysML v2',
           items: [
+            // Starlight prepends the site base to sidebar links, so these are
+            // written base-relative (unlike in-page markdown links).
             {
               label: 'The SysML v2 Book',
-              link: '/sysml-rs/learn/',
+              link: '/learn/',
             },
             {
               label: 'Language Reference',
-              link: '/sysml-rs/learn/language-reference/index.html',
+              link: '/learn/language-reference/',
             },
             {
               label: 'Language pack for agents',
-              link: '/sysml-rs/learn/language-pack/',
+              link: '/learn/language-pack/manifest.json',
             },
           ],
         },
