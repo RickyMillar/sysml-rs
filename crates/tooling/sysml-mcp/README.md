@@ -1,6 +1,6 @@
 # sysml-mcp
 
-MCP (Model Context Protocol) server that exposes the unified `SysmlService` to AI agents as **125** stdio JSON-RPC tools. A pure transport adapter — every tool delegates to the service layer.
+MCP (Model Context Protocol) server that exposes every unified `SysmlService` command to AI agents as a stdio JSON-RPC tool (`sysml_command_catalog` is the authoritative inventory). A pure transport adapter — every tool delegates to the service layer.
 
 `Layer 5 · tooling` · `MCP server` · `crate-type: bin` · `transport: stdio JSON-RPC` · `framework: rmcp`
 
@@ -17,7 +17,7 @@ The crate enforces a single architectural invariant: **no domain logic lives her
 ```text
 client Claude Desktop / Claude Code / any MCP client
 ▼ stdio · JSON-RPC · `notifications/message` progress stream
-this crate sysml-mcp · serve() SysmlMcpHandler ToolRouter (125 #[tool])
+this crate sysml-mcp · serve() SysmlMcpHandler ToolRouter (one #[tool] per service command)
 ▼ dispatch_to_service(service, "sysml.<cmd>", json)
 hub sysml-service · execute_command (inventory dispatch)
 ▼
@@ -70,39 +70,39 @@ Claude Desktop (`claude_desktop_config.json`) or a project `.mcp.json`:
 
 ## Tool families
 
-All **125** tools (verified `rg -c '#[tool' src/lib.rs`). Tool names use underscores; the backing service command uses dots — the mapping is mechanical (`sysml.sessions.fork` → `sysml_sessions_fork`). This grouping is for orientation only; the canonical list is `sysml_command_catalog`.
+Tool names use underscores; the backing service command uses dots — the mapping is mechanical (`sysml.sessions.fork` → `sysml_sessions_fork`). This grouping is for orientation only and lists representative tools, not every tool; the canonical, always-current list is `sysml_command_catalog`.
 
 filter
 
-| Family | Count | Representative tools |
-|---|---|---|
-| Loading | 7 | load_source, load_file, load_file_ts, load_workspace, unload_file, get_source, loaded_uris |
-| Model query | 9 | query, find, element, children, ancestors, descendants, stats, model_tree, trace |
-| Diagnostics & analysis | 9 | diagnostics, constraint_check, expression_eval, expression_ast, unverified, trace_matrix, flow_inspect, causation_trace, verify |
-| Evaluate (cases) | 6 | evaluate, evaluate_constraints, evaluate_verification_cases, evaluate_analysis_cases, evaluate_calculations, evaluate_expression |
-| Solve / analysis cases | 4 | solve, analysis_run, montecarlo_run, sensitivity_analyze |
-| Trade studies & what-if | 5 | whatif, whatif_sweep, trade_study, trade_study_ode_sweep, aggregate |
-| Verification w/ simulation | 4 | verify_with_simulation, verify_with_simulation_trace, verify_timeline, workspace_verify |
-| Simulation (discrete) | 5 | simulate_start, simulate_step, simulate_stop, simulate_continuous_start, simulate_continuous_auto |
-| Action execution | 3 | action_start, action_step, action_run |
-| Orchestration | 5 | orchestrate_start, orchestrate_step, orchestrate_inject, orchestrate_stop, orchestrate_workspace_start |
-| Debug (breakpoints) | 3 | breakpoint_set, breakpoint_clear, breakpoint_list |
-| Sessions (lifecycle) | 11 | sessions_list, sessions_info, sessions_stop, sessions_reap, sessions_reset, sessions_rename, sessions_quota, sessions_step, sessions_inject, sessions_fork, sessions_subsystems |
-| Sessions (overrides) | 3 | sessions_step_with_overrides, sessions_inject_with_overrides, sessions_fork_with_overrides |
-| Sessions (timeseries) | 3 | sessions_timeseries, sessions_timeseries_decimated, sessions_timeseries_names |
-| Sessions (diff & topology) | 3 | sessions_diff, sessions_diff_timeline, sessions_topology |
-| Session archive | 4 | sessions_archive_list, sessions_archive_get, sessions_archive_mark_golden, sessions_archive_unmark_golden |
-| Batch (R5.0) | 4 | batch_create, batch_status, batch_results, batch_slice |
-| IDE / LSP-style | 11 | outline, references, goto_definition, hover, completion, completion_resolve, rename, format_document, code_action_list, inspect, parse |
-| Diagram & export | 3 | diagram_edit, export_json, export_plantuml |
-| Views & viewpoints | 5 | views_list, views_render, views_by_viewpoint, views_create_scratch, viewpoints_by_stakeholder |
-| Store / persistence | 5 | store_save, store_load, store_latest, store_projects, store_history |
-| Workspace & capabilities | 6 | workspace_info, workspace_files, workspace_refresh, workspace_capabilities, system_capabilities, readiness |
-| Cache & salsa stats | 5 | cache_clear, cache_status, cache_rebuild, salsa_stats, salsa_stats_reset |
-| Dependencies | 1 | dependency_status |
-| Meta | 1 | command_catalog (calls SysmlService::command_catalog() directly) |
+| Family | Representative tools |
+|---|---|
+| Loading | load_source, load_file, load_file_ts, load_workspace, unload_file, get_source, loaded_uris |
+| Model query | query, find, element, children, ancestors, descendants, stats, model_tree, trace |
+| Diagnostics & analysis | diagnostics, constraint_check, expression_eval, expression_ast, unverified, trace_matrix, flow_inspect, causation_trace, verify |
+| Evaluate (cases) | evaluate, evaluate_constraints, evaluate_verification_cases, evaluate_analysis_cases, evaluate_calculations, evaluate_expression |
+| Solve / analysis cases | solve, analysis_run, montecarlo_run, sensitivity_analyze |
+| Trade studies & what-if | whatif, whatif_sweep, trade_study, trade_study_ode_sweep, aggregate |
+| Verification w/ simulation | verify_with_simulation, verify_with_simulation_trace, verify_timeline, workspace_verify |
+| Simulation (discrete) | simulate_start, simulate_step, simulate_stop, simulate_continuous_start, simulate_continuous_auto |
+| Action execution | action_start, action_step, action_run |
+| Orchestration | orchestrate_start, orchestrate_step, orchestrate_inject, orchestrate_stop, orchestrate_workspace_start |
+| Debug (breakpoints) | breakpoint_set, breakpoint_clear, breakpoint_list |
+| Sessions (lifecycle) | sessions_list, sessions_info, sessions_stop, sessions_reap, sessions_reset, sessions_rename, sessions_quota, sessions_step, sessions_inject, sessions_fork, sessions_subsystems |
+| Sessions (overrides) | sessions_step_with_overrides, sessions_inject_with_overrides, sessions_fork_with_overrides |
+| Sessions (timeseries) | sessions_timeseries, sessions_timeseries_decimated, sessions_timeseries_names |
+| Sessions (diff & topology) | sessions_diff, sessions_diff_timeline, sessions_topology |
+| Session archive | sessions_archive_list, sessions_archive_get, sessions_archive_mark_golden, sessions_archive_unmark_golden |
+| Batch (R5.0) | batch_create, batch_status, batch_results, batch_slice |
+| IDE / LSP-style | outline, references, goto_definition, hover, completion, completion_resolve, rename, format_document, code_action_list, inspect, parse |
+| Diagram & export | diagram_edit, export_json, export_plantuml |
+| Views & viewpoints | views_list, views_render, views_by_viewpoint, views_create_scratch, viewpoints_by_stakeholder |
+| Store / persistence | store_save, store_load, store_latest, store_projects, store_history |
+| Workspace & capabilities | workspace_info, workspace_files, workspace_refresh, workspace_capabilities, system_capabilities, readiness |
+| Cache & salsa stats | cache_clear, cache_status, cache_rebuild, salsa_stats, salsa_stats_reset |
+| Dependencies | dependency_status |
+| Meta | command_catalog (calls SysmlService::command_catalog() directly) |
 
-Counts sum to 125. The grouping is editorial; only `sysml_command_catalog` is authoritative.
+The grouping is editorial; only `sysml_command_catalog` is authoritative.
 
 ## Key types & entry points
 
@@ -138,7 +138,7 @@ filter
 
 | File | Responsibility | Key items |
 |---|---|---|
-| src/lib.rs | All 125 `#[tool]` handlers, request structs, dispatch bridge, ServerHandler impl, coverage test | SysmlMcpHandler, serve, dispatch_to_service(_with_readiness), JsonParams, all_commands_have_mcp_tools |
+| src/lib.rs | All `#[tool]` handlers (one per service command), request structs, dispatch bridge, ServerHandler impl, coverage test | SysmlMcpHandler, serve, dispatch_to_service(_with_readiness), JsonParams, all_commands_have_mcp_tools |
 | src/main.rs | Binary entry: stderr-only tracing, build empty service, spawn shared session reaper, call serve() | main, SysmlService::empty(), session_reaper::spawn_session_reaper |
 
 ## Usage from an agent

@@ -77,7 +77,7 @@ a **local development server**. It ships with:
 Two defaults are deliberately narrow, and both widen only when you say so:
 
 - **Bind address `127.0.0.1:8080`** — reachable from this machine only. Pass a
-  different address (`sysml-api 0.0.0.0:8080`, or `sysml serve --host`) to go
+  different address as the positional argument (`sysml-api 0.0.0.0:8080`) to go
   wider; the server warns on startup when it binds a non-loopback address, and
   warns again if it does so without a token set.
 - **Browser origins restricted to loopback** — `localhost`, `127.0.0.1`, and
