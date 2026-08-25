@@ -2,8 +2,8 @@
   "$comment": "Pinned external inputs for the documentation portal build. No portal build may fetch an unpinned revision of another repository. Update deliberately, with review.",
   "book": {
     "repository": "https://github.com/RickyMillar/sysmlv2-book",
-    "commit": null,
-    "$comment": "null until Phase 4 imports the Book under /learn/; the standalone Book Pages site is linked from navigation instead."
+    "commit": "deb799f51ecf1cfd8ef0208c59e7880ea1eb2ea1",
+    "$comment": "Public Book revision built into /learn/ by scripts/build-learn.sh. Verify the standalone Book deploy is green before advancing the pin."
   },
   "generated_reference": {
     "$comment": "Phase 5 records the sysml-rs commit and generation commands for each generated reference artefact here.",

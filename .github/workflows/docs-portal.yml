@@ -21,6 +21,9 @@ concurrency:
 
 env:
   ASTRO_TELEMETRY_DISABLED: "1"
+  # Match the Book repository's own build toolchain.
+  MDBOOK_VERSION: "0.5.2"
+  MDBOOK_TABS_VERSION: "0.3.4"
 
 jobs:
   build:
@@ -35,10 +38,22 @@ jobs:
           node-version-file: website/.nvmrc
           cache: npm
           cache-dependency-path: website/package-lock.json
+      - name: Cache cargo-installed binaries
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.cargo/bin
+          key: mdbook-${{ env.MDBOOK_VERSION }}-tabs-${{ env.MDBOOK_TABS_VERSION }}
+      - name: Install mdBook and the tabs preprocessor
+        run: |
+          set -euo pipefail
+          command -v mdbook      || cargo install mdbook      --version "${MDBOOK_VERSION}" --locked
+          command -v mdbook-tabs || cargo install mdbook-tabs --version "${MDBOOK_TABS_VERSION}" --locked
       - name: Install dependencies
         run: npm ci
       - name: Type-check
         run: npm run check
+      - name: Build the pinned Book into /learn/
+        run: bash scripts/build-learn.sh
       - name: Build (fails on broken internal links)
         run: npm run build
       - name: Accessibility smoke check
