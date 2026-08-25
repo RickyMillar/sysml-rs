@@ -2,7 +2,7 @@
   "$comment": "Pinned external inputs for the documentation portal build. No portal build may fetch an unpinned revision of another repository. Update deliberately, with review.",
   "book": {
     "repository": "https://github.com/RickyMillar/sysmlv2-book",
-    "commit": "e243806dc7b47464e1a0ade153ff2bc76616c767",
+    "commit": "87d74b348f5548acbfec027c0d9a1583c3969ee6",
     "$comment": "Public Book revision built into /learn/ by scripts/build-learn.sh. Verify the standalone Book deploy is green before advancing the pin."
   },
   "generated_reference": {
