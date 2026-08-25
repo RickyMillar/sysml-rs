@@ -159,6 +159,12 @@ state attributes and `calc` members for the derivatives. The runtime detects
 that structure, compiles the ODE system, and integrates it (an RK45-family
 solver, `crates/lang/sysml-runtime/src/ode45.rs`).
 
+One authoring rule to know: the runtime pairs each derivative with its state
+**by name**, and the derivative's result name must contain the full state
+attribute name. State names that are substrings of one another (`stroke` and
+`strokeRate`) can pair ambiguously and break the wiring — give states
+non-overlapping names.
+
 There is **no single-shot CLI command** that drives a continuous simulation
 end to end; continuous runs happen inside sessions (below) and in the
 regression suite. The claim that these examples execute is locked by tests
