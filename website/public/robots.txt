@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rickymillar.github.io/sysml-rs/sitemap-index.xml

@@ -1,0 +1,40 @@
+name: Documentation issue
+description: Report a wrong, missing, or unclear piece of documentation (portal, Book, or README).
+labels: ["docs-drift"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Where
+      description: URL or file path of the page.
+      placeholder: https://rickymillar.github.io/sysml-rs/use/...
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope of the claim
+      description: Which kind of claim is affected? (See the page's scope badges.)
+      options:
+        - SysML v2 / KerML (language)
+        - sysml-rs implementation
+        - sysml-rs tooling
+        - OMG API subset
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing
+      description: >-
+        For a behavioural claim, paste the command you ran and what you saw.
+        For a language claim, an OMG citation settles it — include one if you
+        can.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Tool version or commit
+      placeholder: sysml 0.1.0 / commit abc1234

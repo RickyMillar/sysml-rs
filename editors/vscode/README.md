@@ -1,6 +1,9 @@
 # SysML v2 — VS Code (LSP-only)
 
-Lightweight VS Code extension for SysML v2 / KerML. It provides:
+Lightweight VS Code extension for SysML v2 / KerML. User-facing setup and
+feature documentation lives on the
+[documentation portal](https://rickymillar.github.io/sysml-rs/use/editors/);
+this README is the developer reference. It provides:
 
 - **Syntax highlighting** — TextMate grammars (`syntaxes/*.tmLanguage.json`) plus
   semantic highlighting from the language server.
