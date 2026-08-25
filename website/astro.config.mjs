@@ -92,6 +92,7 @@ export default defineConfig({
           label: 'About',
           items: [
             { slug: 'about/licensing' },
+            { slug: 'about/maintenance' },
             {
               label: 'Contributing ↗',
               link: 'https://github.com/RickyMillar/sysml-rs/blob/main/CONTRIBUTING.md',
