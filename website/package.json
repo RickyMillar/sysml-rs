@@ -19,6 +19,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "a11y": "node scripts/a11y-smoke.mjs dist",
-    "gen-check": "node scripts/generate-reference.mjs --check"
+    "gen-check": "node scripts/generate-reference.mjs --check",
+    "frontmatter": "node scripts/frontmatter-check.mjs"
   }
 }
