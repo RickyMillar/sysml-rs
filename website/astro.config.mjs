@@ -73,18 +73,41 @@ export default defineConfig({
           label: 'Use sysml-rs',
           items: [
             { slug: 'use/cli-workflows' },
-            { slug: 'use/imports-vs-dependencies' },
-            { slug: 'use/sysml-toml' },
-            { slug: 'use/dependencies' },
-            { slug: 'use/lock-and-cache' },
-            { slug: 'use/workspaces' },
-            { slug: 'use/kpar' },
-            { slug: 'use/runtime' },
-            { slug: 'use/views-and-diagrams' },
-            { slug: 'use/editors' },
-            { slug: 'use/integrations' },
-            { slug: 'use/examples' },
+            {
+              label: 'Projects & dependencies',
+              items: [
+                { slug: 'use/imports-vs-dependencies' },
+                { slug: 'use/sysml-toml' },
+                { slug: 'use/dependencies' },
+                { slug: 'use/lock-and-cache' },
+                { slug: 'use/workspaces' },
+                { slug: 'use/kpar' },
+              ],
+            },
+            {
+              label: 'Modelling & execution',
+              items: [
+                { slug: 'use/runtime' },
+                { slug: 'use/views-and-diagrams' },
+                { slug: 'use/examples' },
+              ],
+            },
+            {
+              label: 'Interfaces',
+              items: [
+                { slug: 'use/integrations' },
+                { slug: 'use/editors' },
+                { slug: 'use/lsp' },
+                { slug: 'use/service-api' },
+                { slug: 'use/mcp' },
+                { slug: 'use/simulation-app' },
+              ],
+            },
           ],
+        },
+        {
+          label: 'Develop sysml-rs',
+          items: [{ slug: 'develop/architecture' }, { slug: 'develop/code-map' }],
         },
         {
           label: 'Reference',

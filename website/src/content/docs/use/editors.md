@@ -1,6 +1,6 @@
 ---
 title: Editor setup
-description: Set up SysML v2 language support in VS Code or any LSP-capable editor, backed by the sysml-lsp-server binary.
+description: Set up SysML v2 language support in VS Code — the client extension, the bundled language server, and the settings that tune it.
 scope:
   - sysml-rs tooling
 status: pre-alpha
@@ -15,10 +15,12 @@ source_of_truth:
 ---
 
 You want diagnostics, completion, hover, and navigation while you edit
-`.sysml` and `.kerml` files. That comes from two pieces: the
-**`sysml-lsp-server`** language server (a Rust binary) and, for VS Code, a
-thin **client extension** that launches it. Any other editor with a Language
-Server Protocol client can use the same server directly.
+`.sysml` and `.kerml` files in VS Code. That comes from two pieces: the
+**`sysml-lsp-server`** language server (a Rust binary) and a thin
+**client extension** that launches it. This page covers the VS Code setup;
+for the server as an interface in its own right — its capabilities, generic
+LSP clients like Helix or Neovim, and the WebSocket bridge — see
+[the language server](/sysml-rs/use/lsp/).
 
 ## Before you start
 
@@ -95,20 +97,11 @@ All settings are under the `SysML` section (`sysml.*`):
 
 ## What you get
 
-The language server advertises these capabilities (verified against the
-server's initialize response at the commit above):
-
-- **Diagnostics** — parse and semantic errors pushed as you type.
-- **Semantic highlighting** — semantic tokens (full, delta, and ranged), on
-  top of the extension's TextMate grammars.
-- **Completion** — context-aware, triggered on `:`, `.`, `=`, `[`, and `"`.
-- **Hover** and **signature help**.
-- **Navigation** — go-to-definition, type definition, implementation, and
-  find-references; document and workspace symbols; call hierarchy.
-- **Rename** with prepare support, **formatting**, **folding**, selection
-  ranges, document links, and code lenses.
-- **Code actions** — quick fixes, rewrites, and organize-imports.
-- **Inlay hints** for inferred types and multiplicities (toggleable).
+Everything the language server provides — diagnostics as you type,
+semantic highlighting on top of the extension's TextMate grammars,
+completion, hover, navigation, rename, formatting, code actions, and inlay
+hints. The full capability list, checked against the server's live
+initialize response, is on [the language server page](/sysml-rs/use/lsp/#what-it-advertises).
 
 The extension additionally ships snippets for common SysML/KerML constructs
 and JSON-schema validation for `.project.json` / `.workspace.json` /
@@ -122,14 +115,9 @@ renderer. Diagrams are available today through the
 and model execution through the [CLI](/sysml-rs/use/cli-workflows/) and
 [runtime](/sysml-rs/use/runtime/).
 
-## Other editors (generic LSP clients)
+## Other editors
 
-`sysml-lsp-server` is a standard LSP server: run with no arguments it speaks
-the protocol over **stdin/stdout** (logs go to stderr), so any editor with
-an LSP client — Neovim, Helix, Emacs, Zed, and the rest — can use it. Point
-your client at the binary for the `sysml` and `kerml` filetypes; there is no
-sysml-rs-maintained configuration for editors other than VS Code, so
-highlighting quality and feature coverage depend on your client.
-
-The server is also reachable over WebSocket at the API server's `/lsp`
-endpoint — see [Integrations](/sysml-rs/use/integrations/).
+`sysml-lsp-server` is a standard LSP server, so any editor with an LSP
+client — Neovim, Helix, Emacs, Zed, and the rest — can use it directly.
+Invocation, a worked client configuration, and the WebSocket bridge are on
+[the language server page](/sysml-rs/use/lsp/).

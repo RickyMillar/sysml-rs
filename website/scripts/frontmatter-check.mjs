@@ -12,7 +12,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const DOCS_ROOT = new URL('../src/content/docs/', import.meta.url).pathname;
-const REQUIRED_SECTIONS = ['start-here', 'use', 'reference'];
+const REQUIRED_SECTIONS = ['start-here', 'use', 'reference', 'develop'];
 const REQUIRED_KEYS = ['scope', 'status', 'last_verified_against', 'source_of_truth'];
 
 function* pages(dir) {

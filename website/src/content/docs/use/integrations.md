@@ -1,171 +1,62 @@
 ---
 title: Integrations
-description: Drive sysml-rs from other software — the REST/WebSocket API server, the MCP server for AI agents, and the security defaults that govern both.
+description: One service layer, many doors — choose the sysml-rs interface for your job, with the security defaults that govern the networked ones.
 scope:
   - sysml-rs tooling
-  - OMG API subset
 status: pre-alpha
-last_verified_against: fcd1305
+last_verified_against: 023a5ef
 source_of_truth:
-  - crates/tooling/sysml-api/src/main.rs
   - crates/tooling/sysml-api/README.md
   - crates/tooling/sysml-mcp/README.md
   - SECURITY.md
 ---
 
 You want something other than a human at a keyboard to work with your
-models — a script, a web frontend, a CI job, or an AI agent. sysml-rs
-exposes one service layer through several transports, so the same
-operations are available whichever door you come in: the CLI, the LSP
-server, the **REST/WebSocket/SSE API server**, and the **MCP server**.
-This page covers the last two.
+models — a script, an editor, a CI job, a web UI, or an AI agent. sysml-rs
+exposes **one service layer through several transports**: every interface
+dispatches into the same command registry, so an operation behaves
+identically whichever door you come in through. Pick the door, and this
+page points you at its documentation.
 
-## The REST API server (`sysml-api`)
+## Which interface for which job
 
-Build and start it from a source checkout:
+| Interface | It's for | Page |
+|---|---|---|
+| **CLI** (`sysml`) | Terminal and CI workflows: parse, check, export, simulate, verify | [CLI workflows](/sysml-rs/use/cli-workflows/) |
+| **Language server** (`sysml-lsp-server`) | Diagnostics, completion, and navigation in any LSP-capable editor | [The language server](/sysml-rs/use/lsp/) · [VS Code setup](/sysml-rs/use/editors/) |
+| **REST / WebSocket / SSE** (`sysml-api`) | Scripting over HTTP, custom frontends, streaming progress and session events | [The service API](/sysml-rs/use/service-api/) |
+| **MCP** (`sysml-mcp`) | AI agents — every service command as a callable tool over stdio | [MCP for AI agents](/sysml-rs/use/mcp/) |
+| **Simulation App** | A browser workbench: browse, run, verify, requirements, analyze | [The Simulation App](/sysml-rs/use/simulation-app/) |
 
-```bash
-cargo build --release -p sysml-api
-./target/release/sysml-api
-# SysML API server listening on 127.0.0.1:8080
-```
+The machine-readable inventory of what all of these can do is the API
+server's `GET /commands` (its MCP twin is the `sysml_command_catalog`
+tool); a rendered snapshot is published as the
+[API & MCP catalogue](/sysml-rs/reference/api-mcp-catalog/).
 
-By default it binds **`127.0.0.1:8080` — loopback only**. To bind elsewhere,
-pass the address as a positional argument (`sysml-api 0.0.0.0:8080`); the
-server prints a warning explaining what a non-loopback bind exposes, and a
-second warning if you do it without an auth token set. Read
-[security defaults](#security-defaults) before widening anything.
+Combinations work too: `sysml-api --mcp` runs the HTTP server and an MCP
+handler over the **same live model**, so a human in the Simulation App and
+an AI agent can share one session — see
+[MCP for AI agents](/sysml-rs/use/mcp/).
 
-Two endpoints to try first:
+## Security defaults, in brief
 
-```bash
-curl http://127.0.0.1:8080/health
-# {"status":"ok","version":"0.1.0"}
+The networked interface is a **local development server**, and its
+defaults are deliberately narrow:
 
-curl http://127.0.0.1:8080/commands
-# [{"category":"Visualization","deprecated":false,
-#   "description":"Re-project a diagram with the given expanded-node set, …",
-#   "name":"sysml.diagram.expand","params":[…]}, …]
-```
+- `sysml-api` binds **`127.0.0.1:8080` — loopback only** — and warns at
+  startup if you bind wider (twice, if you do it with no auth token set).
+- **CORS admits loopback origins only** (`localhost`, `127.0.0.1`, `[::1]`);
+  `--permissive-cors` restores allow-any and belongs behind a trusted
+  proxy, nowhere else.
+- **Authentication is off by default.** Setting `SYSML_API_TOKEN` gates
+  write and command routes behind `Authorization: Bearer <token>`; read
+  routes are never authenticated. There is no rate limiting.
+- The **MCP server has no network surface** — stdio only, with the
+  privileges of whatever launched it.
 
-`GET /commands` is the **machine-readable catalogue** of every registered
-service command, with parameters and descriptions. It is the authoritative
-inventory — the docs deliberately never copy a command count out of it.
-Each command is callable as `POST /api/commands/{name}` (or through the
-generic `POST /api/command` dispatcher) with a JSON body.
-
-On top of the command catalogue there are explicit REST routes for common
-reads — model trees, element navigation, diagnostics, queries, view
-rendering, trace matrices — and for loading files and driving simulation
-sessions. The crate README in `crates/tooling/sysml-api` carries the full
-route table.
-
-### Streaming: WebSocket and SSE
-
-- `GET /v1/progress` — **Server-Sent Events** stream of progress
-  (`library_load`, `workspace_index`, `dependency_fetch`, `refresh`,
-  `ready`), with a keep-alive comment every 15 seconds. Long-running loads
-  are observable instead of silent.
-- `GET /api/sessions/:id/events` — **WebSocket** stream of live
-  simulation/action session events, used by the desktop workbench.
-- `GET /lsp` — bridges a full LSP session over WebSocket, for editors that
-  prefer a socket to spawning the [server binary](/sysml-rs/use/editors/).
-
-### OMG Systems Modeling API subset vs the native API
-
-**OMG API subset** — the project/commit snapshot routes follow the resource
-shape of the OMG Systems Modeling API and Services specification: projects
-contain commits, and a commit addresses a model snapshot.
-
-```
-GET  /projects
-GET  /projects/:project_id/commits
-GET  /projects/:project_id/commits/:commit_id/model
-POST /projects/:project_id/commits/:commit_id/model
-```
-
-This is a small, shape-level subset; sysml-rs makes **no conformance claim**
-against the OMG API specification.
-
-Everything else — `/models/:uri/*`, `/commands`, `/api/command(s)`, the
-session and streaming endpoints — is the **native sysml-rs API**, not OMG
-standard, and can change without a deprecation period while the version
-stays `0.x`.
-
-## The MCP server (`sysml-mcp`)
-
-AI agents connect over the
-[Model Context Protocol](https://modelcontextprotocol.io): the client
-launches `sysml-mcp` as a subprocess and speaks JSON-RPC over stdio. Every
-service command is exposed as a tool — loading models, querying the graph,
-diagnostics, rendering views, running simulations and trade studies.
-
-```bash
-cargo build --release -p sysml-mcp
-```
-
-Register it with any MCP client — Claude Code / Claude Desktop
-(`.mcp.json` / `claude_desktop_config.json`) or another client's
-equivalent:
-
-```json
-{
-  "mcpServers": {
-    "sysml": {
-      "command": "/abs/path/to/sysml-rs/target/release/sysml-mcp",
-      "args": [],
-      "env": { "RUST_LOG": "sysml_mcp=info" }
-    }
-  }
-}
-```
-
-Once connected, the agent should call the **`sysml_command_catalog`** tool
-for the live tool inventory (the stdio twin of `GET /commands`), and can
-start with `sysml_load_workspace` or `sysml_load_source` followed by
-`sysml_query`. Responses that touch a model URI carry a `_readiness` field
-describing library/workspace load state, so an agent can tell "still
-indexing" apart from "actually empty".
-
-Two operational notes: the binary's stdout **is** the transport (all logs
-go to stderr), and the server holds models in memory for the lifetime of
-the subprocess.
-
-### One process for both: `sysml-api --mcp`
-
-`sysml-api --mcp` runs the HTTP server and an MCP stdio handler over the
-**same service instance**: a file loaded through HTTP (say, by the desktop
-app) is immediately visible to the agent, and vice versa. Use it when a
-human UI and an agent should share one live model; use plain `sysml-mcp`
-when the agent should have its own.
-
-## Security defaults
-
-The API server is a **local development server**, and its defaults are
-deliberately narrow. Both widen only when you explicitly say so:
-
-- **Bind address `127.0.0.1:8080`** — reachable from this machine only.
-  Passing a non-loopback address makes the server warn on startup, and warn
-  again if no token is set.
-- **Browser origins restricted to loopback** — CORS admits `localhost`,
-  `127.0.0.1`, and `[::1]` on any port; every other origin gets no
-  allow-origin header. `--permissive-cors` (or
-  `SYSML_API_CORS=permissive`) restores allow-any, which is appropriate
-  behind a trusted proxy and nowhere else.
-
-Authentication is **off by default**: with `SYSML_API_TOKEN` unset, write
-and command routes are open. Set it, and those routes require
-`Authorization: Bearer <token>`; read routes are never authenticated.
-There is no rate limiting, and the 50 MB request body limit is a resource
-guard, not a security control.
-
-Anyone who can reach the port can read and modify the loaded model and run
-simulations on your machine — so keep the server on loopback, or put it
-behind your own authenticating proxy. The project's
-[SECURITY.md](https://github.com/RickyMillar/sysml-rs/blob/main/SECURITY.md)
-states the full threat model and how to report a vulnerability privately.
-
-The MCP server has no network surface of its own — it is stdio-only, with
-the privileges of whatever launched it (it reads files your user can read).
-The `--mcp` combined mode carries the HTTP surface above, with the same
-defaults.
+Anyone who can reach the API port can read and modify the loaded model and
+run simulations on your machine, so keep it on loopback or behind your own
+authenticating proxy. The full defaults, with the verification behind each
+claim, are on [the service API page](/sysml-rs/use/service-api/#security-defaults);
+the threat model and private vulnerability reporting are in
+[SECURITY.md](https://github.com/RickyMillar/sysml-rs/blob/main/SECURITY.md).
