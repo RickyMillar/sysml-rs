@@ -2,7 +2,7 @@
 
 The developer-tooling tier of sysml-rs: a unified service hub plus the IDE, query, CLI, storage, and REST surfaces built on top of the [lang/](../lang/README.md) spec crates.
 
-`Layers 3–5 · tooling` · `10 crates` · `69 service commands` · `tree-sitter-only parsing`
+`Layers 3–5 · tooling` · `10 crates` · `tree-sitter-only parsing`
 
 ## What lives here
 
@@ -30,7 +30,7 @@ Each crate name links to its own README.
 
 | Crate | Role | Crate type | Description |
 |---|---|---|---|
-| [`sysml-service`](sysml-service/README.md) | Service hub | lib | Unified service layer — owns all domain state; 69 registered commands dispatched to every transport. |
+| [`sysml-service`](sysml-service/README.md) | Service hub | lib | Unified service layer — owns all domain state; every registered command is dispatched to every transport (GET /commands is the live catalogue). |
 | `sysml-service-macros` | Proc macro | proc-macro | `#[service_command]` — generates request types, metadata, and `inventory` registrations. |
 | [`sysml-mcp`](sysml-mcp/README.md) | Transport | lib + bin | MCP server exposing SysML v2 model intelligence to AI agents (over `sysml-service`). |
 | `sysml-query` | Query engine | lib | Transport-neutral structured query engine over model element lists (filter / project / sort). |
@@ -61,7 +61,7 @@ pub fn execute_command(
 }
 ```
 
-Commands are declared inline on `SysmlService` methods. The proc macro turns each into a typed request, metadata, and an `inventory::submit!` so the registry is assembled at link time — the docs cite the registration count (69 distinct names), never a hand-maintained list.
+Commands are declared inline on `SysmlService` methods. The proc macro turns each into a typed request, metadata, and an `inventory::submit!` so the registry is assembled at link time — the docs defer to the live registry (GET /commands or the sysml_command_catalog tool), never a hand-maintained list or count.
 
 ```
 // sketch of a declared command (crates/tooling/sysml-service/src/lib.rs)

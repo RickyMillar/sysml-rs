@@ -79,7 +79,7 @@ Diagnostics, completion, hover, navigation, rename, semantic tokens, code action
 
 **Diagrams.**
 
-Server-rendered and delivered to editors — no in-browser parse/render engine. `sysml-diagram` emits two formats: `ViewModel` (renderer-agnostic scene + design tokens, the going-forward wire format) and the legacy renderer-neutral `ViewModel` JSON that CLI/LSP/REST/MCP still ship until they migrate.
+Server-rendered and delivered to editors — no in-browser parse/render engine. `sysml-diagram` emits one wire format: `ViewModel` (renderer-agnostic scene + design tokens + text map + non-graph data), shipped identically by CLI, LSP, REST, and MCP. The legacy SModel/Sprotty payloads are fully retired.
 
 ## Key design principles
 

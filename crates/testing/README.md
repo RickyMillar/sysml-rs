@@ -30,7 +30,7 @@ transport tower-lsp axum tower
 
 ## What the suite covers
 
-`sysml-spec-tests` splits into two halves: reusable **coverage primitives** in `src/` (importable as a library), and 37 **integration test files** in `tests/` (count refreshed 2026-07-30; layer map in `sysml-spec-tests/README.md`) that drive the real engine and transports against committed fixtures and the official corpus.
+`sysml-spec-tests` splits into two halves: reusable **coverage primitives** in `src/` (importable as a library), and the **integration test files** in `tests/` (layer map in `sysml-spec-tests/README.md`) that drive the real engine and transports against committed fixtures and the official corpus.
 
 **Coverage primitives (`src/`).**
 
@@ -40,7 +40,7 @@ transport tower-lsp axum tower
 
 - **treesitter_validation** — node types / enums vs spec TTL + xtext
 
-- **pilot_normalise** — canonicalise OMG pilot JSON dumps for equivalence
+- **eval_pipeline / path_canon / candidate_report** — evaluation harness, checkout-independent path canonicalisation, and retrieval-eval reporting
 
 - **report** — human-readable coverage / failure rendering
 
@@ -49,13 +49,11 @@ transport tower-lsp axum tower
 
 - `data/constructible_kinds.txt` — **77** kinds (curated, spec-aligned)
 
-- `fixtures/pilot-dumps/` — **138** OMG pilot JSON dumps
+- `fixtures/u1-pilot-raw/` — raw pilot lesson sources
 
-- `fixtures/service-baseline/` — **182** per-command JSON baselines
+- `fixtures/service-baseline/` — per-command JSON baselines
 
-- `fixtures/cross-transport-*/` — LSP/REST parity + identity baselines
 
-- `fixtures/reparse-identity-baseline/` — round-trip stability
 
 - `corpus/advent/` — **56** lesson files
 
