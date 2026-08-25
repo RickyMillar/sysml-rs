@@ -35,6 +35,9 @@ export default defineConfig({
         starlightLinksValidator({
           errorOnRelativeLinks: true,
           errorOnInvalidHashes: true,
+          // The Book is built into public/learn/ as static assets by
+          // scripts/build-learn.sh; its routes are not Starlight pages.
+          exclude: ['/sysml-rs/learn/**'],
         }),
       ],
       sidebar: [
@@ -51,19 +54,16 @@ export default defineConfig({
           label: 'Learn SysML v2',
           items: [
             {
-              label: 'The SysML v2 Book ↗',
-              link: BOOK_URL,
-              attrs: { target: '_blank', rel: 'noopener' },
+              label: 'The SysML v2 Book',
+              link: '/sysml-rs/learn/',
             },
             {
-              label: 'Language Reference ↗',
-              link: `${BOOK_URL}language-reference/index.html`,
-              attrs: { target: '_blank', rel: 'noopener' },
+              label: 'Language Reference',
+              link: '/sysml-rs/learn/language-reference/index.html',
             },
             {
-              label: 'Language pack for agents ↗',
-              link: `${BOOK_URL}language-pack/`,
-              attrs: { target: '_blank', rel: 'noopener' },
+              label: 'Language pack for agents',
+              link: '/sysml-rs/learn/language-pack/',
             },
           ],
         },

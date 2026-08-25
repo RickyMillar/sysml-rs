@@ -12,8 +12,8 @@ hero:
       link: /sysml-rs/start-here/what-is-sysml-rs/
       icon: right-arrow
     - text: Learn SysML v2 (the Book)
-      link: https://rickymillar.github.io/sysmlv2-book/
-      icon: external
+      link: /sysml-rs/learn/
+      icon: open-book
       variant: secondary
     - text: Source on GitHub
       link: https://github.com/RickyMillar/sysml-rs
@@ -25,21 +25,22 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
   <Card title="Learn SysML v2" icon="open-book">
-    The [SysML v2 Book](https://rickymillar.github.io/sysmlv2-book/) teaches the
-    textual language with checked examples and interactive diagrams, and the
-    [Language Reference](https://rickymillar.github.io/sysmlv2-book/language-reference/index.html)
+    The [SysML v2 Book](/sysml-rs/learn/) teaches the textual language with
+    checked examples and interactive diagrams, and the
+    [Language Reference](/sysml-rs/learn/language-reference/index.html)
     catalogues syntax concept by concept.
   </Card>
   <Card title="Use sysml-rs" icon="rocket">
     Read, check, query, and execute models from the CLI, VS Code, HTTP, or MCP.
-    The product guide is being written here — until a section lands, the
-    [repository README](https://github.com/RickyMillar/sysml-rs#readme) is the
-    maintained starting point.
+    Start with [your first model](/sysml-rs/start-here/first-model/), then the
+    guide covers [projects and dependencies](/sysml-rs/use/sysml-toml/),
+    [the runtime](/sysml-rs/use/runtime/), [diagrams](/sysml-rs/use/views-and-diagrams/),
+    [editors](/sysml-rs/use/editors/), and [integrations](/sysml-rs/use/integrations/).
   </Card>
   <Card title="Reference" icon="document">
-    CLI commands, `sysml.toml`, diagnostics, capability status, and the API/MCP
-    catalogue — generated or contract-tested rather than hand-maintained.
-    Landing here as the portal grows.
+    [Known limitations](/sysml-rs/reference/known-limitations/) — verified and
+    versioned. CLI, manifest, diagnostics, and API/MCP catalogues land here
+    generated or contract-tested rather than hand-maintained.
   </Card>
   <Card title="Develop sysml-rs" icon="seti:rust">
     Architecture and contribution guides live in the repository:
