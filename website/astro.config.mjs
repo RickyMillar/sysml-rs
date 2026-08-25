@@ -40,7 +40,12 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Start Here',
-          items: [{ slug: 'start-here/what-is-sysml-rs' }],
+          items: [
+            { slug: 'start-here/what-is-sysml-rs' },
+            { slug: 'start-here/install' },
+            { slug: 'start-here/first-model' },
+            { slug: 'start-here/choose-your-path' },
+          ],
         },
         {
           label: 'Learn SysML v2',
@@ -61,6 +66,27 @@ export default defineConfig({
               attrs: { target: '_blank', rel: 'noopener' },
             },
           ],
+        },
+        {
+          label: 'Use sysml-rs',
+          items: [
+            { slug: 'use/cli-workflows' },
+            { slug: 'use/imports-vs-dependencies' },
+            { slug: 'use/sysml-toml' },
+            { slug: 'use/dependencies' },
+            { slug: 'use/lock-and-cache' },
+            { slug: 'use/workspaces' },
+            { slug: 'use/kpar' },
+            { slug: 'use/runtime' },
+            { slug: 'use/views-and-diagrams' },
+            { slug: 'use/editors' },
+            { slug: 'use/integrations' },
+            { slug: 'use/examples' },
+          ],
+        },
+        {
+          label: 'Reference',
+          items: [{ slug: 'reference/known-limitations' }],
         },
         {
           label: 'About',
