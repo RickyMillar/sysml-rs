@@ -1,0 +1,399 @@
+{
+  "codes": [
+    {
+      "category": "Structural",
+      "code": "E001",
+      "short_description": "orphan element without an owner"
+    },
+    {
+      "category": "Structural",
+      "code": "E002",
+      "short_description": "ownership cycle detected"
+    },
+    {
+      "category": "Structural",
+      "code": "E003",
+      "short_description": "dangling membership reference"
+    },
+    {
+      "category": "Structural",
+      "code": "E004",
+      "short_description": "relationship source type mismatch"
+    },
+    {
+      "category": "Structural",
+      "code": "E005",
+      "short_description": "relationship target type mismatch"
+    },
+    {
+      "category": "Structural",
+      "code": "E006",
+      "short_description": "dangling relationship reference"
+    },
+    {
+      "category": "Structural",
+      "code": "E007",
+      "short_description": "dangling owning membership reference"
+    },
+    {
+      "category": "Structural",
+      "code": "E008",
+      "short_description": "invalid owning membership type"
+    },
+    {
+      "category": "Resolution",
+      "code": "E200",
+      "short_description": "unresolved name reference"
+    },
+    {
+      "category": "Resolution",
+      "code": "E201",
+      "short_description": "ambiguous reference (requires qualification)"
+    },
+    {
+      "category": "Resolution",
+      "code": "IM010",
+      "short_description": "name not in local scope but defined elsewhere — add import or qualify"
+    },
+    {
+      "category": "Resolution",
+      "code": "IM012",
+      "short_description": "file opened in strict single-file mode; cross-file imports cannot resolve"
+    },
+    {
+      "category": "Semantic",
+      "code": "S001",
+      "short_description": "duplicate member name in namespace"
+    },
+    {
+      "category": "Semantic",
+      "code": "S005",
+      "short_description": "same top-level package name declared in multiple files (workspace)"
+    },
+    {
+      "category": "Semantic",
+      "code": "S015",
+      "short_description": "invalid typing for usage element"
+    },
+    {
+      "category": "Semantic",
+      "code": "S030",
+      "short_description": "invalid specialization across type boundaries"
+    },
+    {
+      "category": "Semantic",
+      "code": "S041",
+      "short_description": "ReturnParameterMembership in non-function/expression context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S042",
+      "short_description": "membership in wrong ownership context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S043",
+      "short_description": "SubjectMembership in non-requirement/case context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S044",
+      "short_description": "ObjectiveMembership in non-case context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S045",
+      "short_description": "ActorMembership in non-requirement/case context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S046",
+      "short_description": "StakeholderMembership in non-requirement context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S047",
+      "short_description": "RequirementConstraintMembership in non-requirement context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S048",
+      "short_description": "ViewRenderingMembership in non-view context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S051",
+      "short_description": "ResultExpressionMembership in non-function/expression context"
+    },
+    {
+      "category": "Semantic",
+      "code": "S060",
+      "short_description": "member cardinality violation"
+    },
+    {
+      "category": "Semantic",
+      "code": "S066",
+      "short_description": "function has more than one ReturnParameterMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S067",
+      "short_description": "expression has more than one ReturnParameterMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S068",
+      "short_description": "state definition has duplicate subaction"
+    },
+    {
+      "category": "Semantic",
+      "code": "S069",
+      "short_description": "state usage has duplicate subaction"
+    },
+    {
+      "category": "Semantic",
+      "code": "S070",
+      "short_description": "ViewDefinition has more than one ViewRenderingMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S071",
+      "short_description": "ViewUsage has more than one ViewRenderingMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S130",
+      "short_description": "RequirementDefinition constraint not composite"
+    },
+    {
+      "category": "Semantic",
+      "code": "S131",
+      "short_description": "RequirementUsage constraint not composite"
+    },
+    {
+      "category": "Semantic",
+      "code": "S132",
+      "short_description": "SatisfyRequirementUsage typed by more than one requirement"
+    },
+    {
+      "category": "Semantic",
+      "code": "S133",
+      "short_description": "ConcernDefinition has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S134",
+      "short_description": "ConcernUsage has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S135",
+      "short_description": "VerificationCaseDefinition has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S136",
+      "short_description": "VerificationCaseUsage has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S137",
+      "short_description": "AnalysisCaseDefinition has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S138",
+      "short_description": "AnalysisCaseUsage has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S139",
+      "short_description": "UseCaseDefinition has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S140",
+      "short_description": "UseCaseUsage has more than one SubjectMembership"
+    },
+    {
+      "category": "Semantic",
+      "code": "S106",
+      "short_description": "connection owned by package instead of type"
+    },
+    {
+      "category": "Semantic",
+      "code": "S107",
+      "short_description": "interface owned by package instead of type"
+    },
+    {
+      "category": "Semantic",
+      "code": "S108",
+      "short_description": "flow owned by package instead of type"
+    },
+    {
+      "category": "Semantic",
+      "code": "S090",
+      "short_description": "AttributeUsage must not be composite"
+    },
+    {
+      "category": "Semantic",
+      "code": "S091",
+      "short_description": "AttributeDefinition must not be composite"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH001",
+      "short_description": "domain mismatch on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH002",
+      "short_description": "conservation imbalance — all ports same direction"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH003",
+      "short_description": "incomplete physics port — missing effort or flow feature"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH004",
+      "short_description": "direction conflict on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH005",
+      "short_description": "R/C/I element detected but not wired with constraint"
+    },
+    {
+      "category": "Semantic",
+      "code": "PH006",
+      "short_description": "Real-typed attribute could use ISQ type for physics features"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL010",
+      "short_description": "port type mismatch on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL011",
+      "short_description": "target port expects a feature the source does not provide"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL012",
+      "short_description": "conjugation incompatibility on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL013",
+      "short_description": "unconnected output port / open terminal"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL014",
+      "short_description": "direction conflict on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL015",
+      "short_description": "port multiplicity detected (informational)"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL016",
+      "short_description": "structural payload incompatibility on flow connection"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL017",
+      "short_description": "link class unresolved — routing as message channel"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL018",
+      "short_description": "transfer between ports not connected by any declared interface or connection (Ports.sysml interfacingPorts constraint)"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL019",
+      "short_description": "transfer direction violation — pick-up at an in-direction port or drop-off into an out-direction port (post-conjugation)"
+    },
+    {
+      "category": "Semantic",
+      "code": "FL020",
+      "short_description": "payload type does not conform to the flow's source-output / target-input typing (Transfers.kerml payload subsetting)"
+    },
+    {
+      "category": "Semantic",
+      "code": "VR001",
+      "short_description": "assignment to configuration attribute (defaulted part attribute) at runtime"
+    },
+    {
+      "category": "Semantic",
+      "code": "RS001",
+      "short_description": "multiple runtime writers — two executors claim the same runtime variable slot"
+    },
+    {
+      "category": "Semantic",
+      "code": "RS002",
+      "short_description": "unknown override target — session override names neither a runtime slot alias nor an existing context variable"
+    },
+    {
+      "category": "Semantic",
+      "code": "RS003",
+      "short_description": "unresolved runtime name — expression reference resolves to neither a runtime slot nor a model feature (hard compile error since RSC-2.5)"
+    },
+    {
+      "category": "Semantic",
+      "code": "RS014",
+      "short_description": "time-accurate zero-crossing re-step failed hard — a located crossing could not be re-stepped without silently corrupting the run: the per-tick crossing bound was exceeded, a sub-interval integration did not perform (non-RK45 solver on the re-step path is a Wave-2b deferral), the target state machine is not slot-attached (its mode/drive writeback would be dropped — the L44 raw add_state_machine shape), or a non-crossing due event raced the crossing for the same SM in the same tick (FIFO ordering unresolved)"
+    },
+    {
+      "category": "Semantic",
+      "code": "UQ001",
+      "short_description": "quantity dimension mismatch at a binding connector — endpoints carry incompatible ISQ dimensions (error), or a dimensioned endpoint is bound to an untyped attribute (warning)"
+    },
+    {
+      "category": "Semantic",
+      "code": "UQ002",
+      "short_description": "quantity dimension mismatch across a signal link — the source and target port-feature slots carry incompatible ISQ dimensions, so the boundary has no meaningful conversion (same-dimension scale differences are converted, not flagged)"
+    },
+    {
+      "category": "Semantic",
+      "code": "UQ003",
+      "short_description": "cross-dimension comparison in a constraint expression — an ordering comparison (<, <=, >, >=) between operands with incompatible ISQ dimensions (the static twin of the RSC-5.1b eval-time error)"
+    },
+    {
+      "category": "Semantic",
+      "code": "UQ004",
+      "short_description": "dimensioned argument to a dimensionless-only function — a transcendental (sin, cos, exp, ln, …) requires a pure-number argument"
+    },
+    {
+      "category": "Validation",
+      "code": "V001",
+      "short_description": "missing required property"
+    },
+    {
+      "category": "Validation",
+      "code": "V002",
+      "short_description": "property has wrong type"
+    },
+    {
+      "category": "Validation",
+      "code": "V003",
+      "short_description": "property requires at least one value"
+    },
+    {
+      "category": "Validation",
+      "code": "V004",
+      "short_description": "property allows at most one value"
+    },
+    {
+      "category": "Validation",
+      "code": "V005",
+      "short_description": "read-only property modified"
+    }
+  ]
+}

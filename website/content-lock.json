@@ -6,7 +6,6 @@
     "$comment": "Public Book revision built into /learn/ by scripts/build-learn.sh. Verify the standalone Book deploy is green before advancing the pin."
   },
   "generated_reference": {
-    "$comment": "Phase 5 records the sysml-rs commit and generation commands for each generated reference artefact here.",
-    "inputs": {}
+    "$comment": "Generation commands, input revisions, and dates for each generated reference artefact are recorded in src/generated/generated-meta.json, written by scripts/generate-reference.mjs. The capability matrix additionally consumes the language pack inside the pinned Book checkout above."
   }
 }

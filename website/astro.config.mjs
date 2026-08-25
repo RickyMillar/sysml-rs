@@ -86,7 +86,14 @@ export default defineConfig({
         },
         {
           label: 'Reference',
-          items: [{ slug: 'reference/known-limitations' }],
+          items: [
+            { slug: 'reference/cli-commands' },
+            { slug: 'reference/api-mcp-catalog' },
+            { slug: 'reference/diagnostics' },
+            { slug: 'reference/capability-matrix' },
+            { slug: 'reference/sysml-toml' },
+            { slug: 'reference/known-limitations' },
+          ],
         },
         {
           label: 'About',

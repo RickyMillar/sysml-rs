@@ -1,0 +1,3979 @@
+{
+  "pack": {
+    "spec_drop": "2025-04",
+    "metamodel_drop": "20250201",
+    "generator_version": "1",
+    "book_pin": "e243806dc7b47464e1a0ade153ff2bc76616c767",
+    "book_repository": "https://github.com/RickyMillar/sysmlv2-book"
+  },
+  "support_stages": [
+    "parse",
+    "lower",
+    "resolve",
+    "elaborate",
+    "validate",
+    "execute",
+    "format",
+    "lsp"
+  ],
+  "totals": {
+    "cards": 327,
+    "cards_with_any_validated_stage": 138,
+    "stage_validated_counts": {
+      "parse": 138,
+      "lower": 138,
+      "resolve": 101,
+      "elaborate": 0,
+      "validate": 8,
+      "execute": 0,
+      "format": 0,
+      "lsp": 0
+    }
+  },
+  "categories": {
+    "behavior": {
+      "concepts": [
+        {
+          "id": "kerml.behavior.behavior",
+          "title": "Behavior",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.behavior.function",
+          "title": "Function",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.behavior.interaction",
+          "title": "Interaction",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.behavior.invariant",
+          "title": "Invariant",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.behavior.predicate",
+          "title": "Predicate",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.calc-result-is-expression-value",
+          "title": "Calc Result Is Expression Value",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.clock-timeflow-constraint",
+          "title": "Clock Timeflow Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.durationof-end-minus-start",
+          "title": "Durationof End Minus Start",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.happens-just-before-no-intervening",
+          "title": "Happens Just Before No Intervening",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.invocation-binds-arguments-to-input-params",
+          "title": "Invocation Binds Arguments To Input Params",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.local-clock-defaults-to-universal-clock",
+          "title": "Local Clock Defaults To Universal Clock",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.occurrence-has-lifetime-extent",
+          "title": "Occurrence Has Lifetime Extent",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.timeof-continuity-constraint",
+          "title": "Timeof Continuity Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.timeof-ordering-constraint",
+          "title": "Timeof Ordering Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.accept-node",
+          "title": "Accept Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.action-definition",
+          "title": "Action Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.action-usage",
+          "title": "Action Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.assignment-node",
+          "title": "Assignment Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.calculation-definition",
+          "title": "Calculation Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.calculation-usage",
+          "title": "Calculation Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.decision-node",
+          "title": "Decision Node",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.exhibit-state",
+          "title": "Exhibit State Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.for-loop-node",
+          "title": "For Loop Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.fork-node",
+          "title": "Fork Node",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.join-node",
+          "title": "Join Node",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.merge-node",
+          "title": "Merge Node",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.message",
+          "title": "Message",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.message-event",
+          "title": "Message Event",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.perform-action",
+          "title": "Perform Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.send-node",
+          "title": "Send Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.state-action-usage",
+          "title": "State Action Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.state-definition",
+          "title": "State Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.state-usage",
+          "title": "State Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.succession",
+          "title": "Succession",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.succession-flow-usage",
+          "title": "Succession Flow Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.terminate-node",
+          "title": "Terminate Node",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.transition-usage",
+          "title": "Transition Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.while-loop-node",
+          "title": "While Loop Action",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.calc-always-has-result-parameter",
+          "title": "Calc Always Has Result Parameter",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.decision-node-exactly-one-outgoing",
+          "title": "Decision Node Exactly One Outgoing",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.for-loop-iterates-over-sequence",
+          "title": "For Loop Iterates Over Sequence",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.fork-node-concurrent-fanout",
+          "title": "Fork Node Concurrent Fanout",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.if-action-evaluates-test-then-branch",
+          "title": "If Action Evaluates Test Then Branch",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.interpolate-returns-null-out-of-bounds",
+          "title": "Interpolate Returns Null Out Of Bounds",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.join-node-synchronize-all-incoming",
+          "title": "Join Node Synchronize All Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.merge-node-any-one-incoming",
+          "title": "Merge Node Any One Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.mref-dimension-must-match-attribute",
+          "title": "Mref Dimension Must Match Attribute",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.quantity-arithmetic-dimension-rules",
+          "title": "Quantity Arithmetic Dimension Rules",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.sampled-function-must-be-monotonic",
+          "title": "Sampled Function Must Be Monotonic",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.send-action-initiates-message-transfer",
+          "title": "Send Action Initiates Message Transfer",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.while-loop-iterates-while-test",
+          "title": "While Loop Iterates While Test",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 29,
+        "lower": 29,
+        "resolve": 19,
+        "elaborate": 0,
+        "validate": 2,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 51
+    },
+    "cases": {
+      "concepts": [
+        {
+          "id": "sysml.cases.analysis-case",
+          "title": "Analysis Case",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.analysis-case-definition",
+          "title": "Analysis Case Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.case-definition",
+          "title": "Case Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.case-usage",
+          "title": "Case Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.include-use-case",
+          "title": "Include Use Case",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.objective",
+          "title": "Objective",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.requirement-verification",
+          "title": "Requirement Verification",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.use-case-definition",
+          "title": "Use Case Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.use-case-usage",
+          "title": "Use Case Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.verification-case",
+          "title": "Verification Case",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.cases.verification-case-definition",
+          "title": "Verification Case Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.analysis-case-objective-bound-to-result",
+          "title": "Analysis Case Objective Bound To Result",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.case-has-subject-and-objective",
+          "title": "Case Has Subject And Objective",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.verdict-criteria-modeled-explicitly",
+          "title": "Verdict Criteria Modeled Explicitly",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.verdict-semantics",
+          "title": "Verdict Semantics",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 11,
+        "lower": 11,
+        "resolve": 10,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 15
+    },
+    "connection": {
+      "concepts": [
+        {
+          "id": "kerml.behavior.interaction",
+          "title": "Interaction",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.association",
+          "title": "Association",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.association-structure",
+          "title": "Association Structure",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.binding-connector",
+          "title": "Binding Connector",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.connector",
+          "title": "Connector",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.connection-definition",
+          "title": "Connection Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.connection-usage",
+          "title": "Connection Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.flow-connection",
+          "title": "Flow Connection",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.interface-definition",
+          "title": "Interface Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.interface-usage",
+          "title": "Interface Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.port-definition",
+          "title": "Port Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.port-usage",
+          "title": "Port Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.port-usage-referential",
+          "title": "Port Usage Referential",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 12,
+        "lower": 12,
+        "resolve": 11,
+        "elaborate": 0,
+        "validate": 3,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 13
+    },
+    "expression": {
+      "concepts": [
+        {
+          "id": "kerml.behavior.function",
+          "title": "Function",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.behavior.predicate",
+          "title": "Predicate",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.additive-operator",
+          "title": "Additive Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.and-operator",
+          "title": "And Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.cast-operator",
+          "title": "Cast Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.classification-test-operator",
+          "title": "ClassificationTest Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.conditional-and-operator",
+          "title": "ConditionalAnd Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.conditional-operator",
+          "title": "Conditional Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.conditional-or-operator",
+          "title": "ConditionalOr Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.constructor",
+          "title": "Constructor Expression",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.equality-operator",
+          "title": "Equality Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.exponentiation-operator",
+          "title": "Exponentiation Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.feature-reference",
+          "title": "Feature Reference Expression",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.feature-value",
+          "title": "Feature Value",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.implies-operator",
+          "title": "Implies Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.invocation",
+          "title": "Invocation Expression",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.literal-boolean",
+          "title": "Boolean Literal",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.literal-infinity",
+          "title": "Infinity Literal",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.literal-integer",
+          "title": "Integer Literal",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.literal-real",
+          "title": "Real Literal",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.literal-string",
+          "title": "String Literal",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.meta-cast-operator",
+          "title": "MetaCast Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.meta-classification-test-operator",
+          "title": "MetaClassificationTest Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.metadata-access",
+          "title": "Metadata Access Expression",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.multiplicative-operator",
+          "title": "Multiplicative Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.null-coalescing-operator",
+          "title": "NullCoalescing Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.null-expression",
+          "title": "Null Expression",
+          "language": "Expressions",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.or-operator",
+          "title": "Or Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.relational-operator",
+          "title": "Relational Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.unary-operator",
+          "title": "Unary Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.expression.xor-operator",
+          "title": "Xor Operator",
+          "language": "Expressions",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.constraint-result-boolean",
+          "title": "Constraint Result Boolean",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.core-operator-semantics",
+          "title": "Core Operator Semantics",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.feature-ref-resolves-to-bound-value",
+          "title": "Feature Ref Resolves To Bound Value",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.unbound-feature-yields-inconclusive-not-false",
+          "title": "Unbound Feature Yields Inconclusive Not False",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.calculation-definition",
+          "title": "Calculation Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.calculation-usage",
+          "title": "Calculation Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.assert-constraint-must-be-true",
+          "title": "Assert Constraint Must Be True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.constraint-satisfied-iff-true",
+          "title": "Constraint Satisfied Iff True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.constraint-usage-discovered",
+          "title": "Constraint Usage Discovered",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.negated-assert-must-be-false",
+          "title": "Negated Assert Must Be False",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 15,
+        "lower": 15,
+        "resolve": 7,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 41
+    },
+    "implementation": {
+      "concepts": [
+        {
+          "id": "tooling.implementation.constructor-expression-generic-lowering",
+          "title": "constructor expression does not lower to a distinct kind",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.control-node-if-terminate-generic-lowering",
+          "title": "if / terminate action nodes do not lower to distinct node kinds",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.enumeration-usage-not-distinct",
+          "title": "enum members do not lower to a distinct EnumerationUsage",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.message-generic-lowering",
+          "title": "message / message-event do not lower to distinct kinds",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.occurrence-prefix-generic-lowering",
+          "title": "individual / portion occurrence prefixes do not lower to distinct kinds",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.prefixed-def-and-ref-keyword-usage-misparse",
+          "title": "prefixed `individual|variation <kind> def` and `ref <keyword-usage>` forms misparse",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.role-usage-resolution-nondeterminism",
+          "title": "membership-wrapped role usages under-resolve their type refs nondeterministically",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.state-subaction-generic-lowering",
+          "title": "state effect / state action / trigger subactions do not lower to distinct kinds",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.textual-representation-generic-lowering",
+          "title": "TextualRepresentation lowers to a generic ReferenceUsage",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        },
+        {
+          "id": "tooling.implementation.type-relationship-fragment-generic-lowering",
+          "title": "type-relationship operators do not materialize a distinct relationship kind",
+          "language": "Tooling",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 1
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 0,
+        "lower": 0,
+        "resolve": 0,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 10
+    },
+    "library": {
+      "concepts": [
+        {
+          "id": "kerml.library.boolean-evaluation",
+          "title": "Boolean Evaluation",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.flow-transfer",
+          "title": "FlowTransfer",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.happens-before",
+          "title": "HappensBefore",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.happens-during",
+          "title": "HappensDuring",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.head",
+          "title": "head (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.includes",
+          "title": "includes (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.is-empty",
+          "title": "isEmpty (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.last",
+          "title": "last (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.message-transfer",
+          "title": "MessageTransfer",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.not-empty",
+          "title": "notEmpty (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.occurrence",
+          "title": "Occurrence",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.scalar-max",
+          "title": "max (Scalar Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.scalar-min",
+          "title": "min (Scalar Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.size",
+          "title": "size (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.state-performance",
+          "title": "State Performance",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.tail",
+          "title": "tail (Sequence Function)",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.library.transfer",
+          "title": "Transfer",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.analysis-case",
+          "title": "Analysis Case (Library Definition)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.calculation",
+          "title": "Calculation (Library Definition)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.case",
+          "title": "Case (Library Definition)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.constraint-check",
+          "title": "Constraint Check",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.duration-value",
+          "title": "DurationValue (ISQ Base Quantity)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.kilogram",
+          "title": "kilogram (SI Unit)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.length-value",
+          "title": "LengthValue (ISQ Base Quantity)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.mass-value",
+          "title": "MassValue (ISQ Base Quantity)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.metre",
+          "title": "metre (SI Unit)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.pass-if",
+          "title": "Pass If",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.requirement-check",
+          "title": "Requirement Check",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.second",
+          "title": "second (SI Unit)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.state-action",
+          "title": "State Action (Library Definition)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.verdict-kind",
+          "title": "Verdict Kind",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.verification-case",
+          "title": "Verification Case (Library Definition)",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.library.verification-method-kind",
+          "title": "Verification Method Kind",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 0,
+        "lower": 0,
+        "resolve": 0,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 33
+    },
+    "metadata": {
+      "concepts": [
+        {
+          "id": "kerml.metadata.comment",
+          "title": "Comment",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.metadata.documentation",
+          "title": "Documentation",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.metadata.textual-representation",
+          "title": "Textual Representation",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.metaclass",
+          "title": "Metaclass",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.metadata.metadata-definition",
+          "title": "Metadata Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.metadata.metadata-usage",
+          "title": "Metadata Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 6,
+        "lower": 6,
+        "resolve": 3,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 6
+    },
+    "requirements": {
+      "concepts": [
+        {
+          "id": "sysml.requirements.actor",
+          "title": "Actor",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.assert-constraint",
+          "title": "Assert Constraint",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.concern-definition",
+          "title": "Concern Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.concern-usage",
+          "title": "Concern Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.constraint-definition",
+          "title": "Constraint Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.constraint-usage",
+          "title": "Constraint Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.framed-concern",
+          "title": "Framed Concern",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.requirement-constraint",
+          "title": "Requirement Constraint (assume / require)",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.requirement-definition",
+          "title": "Requirement Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.requirement-usage",
+          "title": "Requirement Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.satisfaction",
+          "title": "Requirement Satisfaction",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.stakeholder",
+          "title": "Stakeholder",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.requirements.subject",
+          "title": "Subject",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.negated-satisfy-requires-not-satisfied",
+          "title": "Negated Satisfy Requires Not Satisfied",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-check-result-is-boolean",
+          "title": "Requirement Check Result Is Boolean",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-is-constraint-satisfied-iff-true",
+          "title": "Requirement Is Constraint Satisfied Iff True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-result-is-assumption-implies-required",
+          "title": "Requirement Result Is Assumption Implies Required",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-subject-must-be-first-parameter",
+          "title": "Requirement Subject Must Be First Parameter",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 13,
+        "lower": 13,
+        "resolve": 10,
+        "elaborate": 0,
+        "validate": 1,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 18
+    },
+    "state-machine": {
+      "concepts": [
+        {
+          "id": "kerml.validation.at-most-one-transition-fires-per-trigger",
+          "title": "At Most One Transition Fires Per Trigger",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.state-definition",
+          "title": "State Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.state-usage",
+          "title": "State Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.behavior.transition-usage",
+          "title": "Transition Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-each-subaction-kind",
+          "title": "At Most One Each Subaction Kind",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.entry-do-exit-ordering",
+          "title": "Entry Do Exit Ordering",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.initial-state-via-entry-succession",
+          "title": "Initial State Via Entry Succession",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.no-transition-on-unmatched-event",
+          "title": "No Transition On Unmatched Event",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-firing-order-exit-effect-entry",
+          "title": "Transition Firing Order Exit Effect Entry",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-guard-boolean",
+          "title": "Transition Guard Boolean",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-selection",
+          "title": "Transition Selection",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 3,
+        "lower": 3,
+        "resolve": 1,
+        "elaborate": 0,
+        "validate": 1,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 11
+    },
+    "structure": {
+      "concepts": [
+        {
+          "id": "kerml.structure.association",
+          "title": "Association",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.association-structure",
+          "title": "Association Structure",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.binding-connector",
+          "title": "Binding Connector",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.class",
+          "title": "Class",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.classifier",
+          "title": "Classifier",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.classifier-conjugation",
+          "title": "Classifier Conjugation",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.conjugation",
+          "title": "Conjugation",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.connector",
+          "title": "Connector",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.data-type",
+          "title": "Data Type",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.differencing",
+          "title": "Differencing",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.disjoining",
+          "title": "Disjoining",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.end-feature-membership",
+          "title": "EndFeatureMembership",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.feature-conjugation",
+          "title": "Feature Conjugation",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.feature-inverting",
+          "title": "Feature Inverting",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.feature-membership",
+          "title": "FeatureMembership",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.feature-typing",
+          "title": "Feature Typing",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.filter-package",
+          "title": "Filter Package",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.import",
+          "title": "Import",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.intersecting",
+          "title": "Intersecting",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.library-package",
+          "title": "Library Package",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.membership",
+          "title": "Membership",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.membership-import",
+          "title": "Membership Import",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.metaclass",
+          "title": "Metaclass",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.multiplicity",
+          "title": "Multiplicity",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.namespace",
+          "title": "Namespace",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.namespace-import",
+          "title": "Namespace Import",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.owning-membership",
+          "title": "OwningMembership",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.package",
+          "title": "Package",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.redefinition",
+          "title": "Redefinition",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.specialization",
+          "title": "Specialization",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.structure",
+          "title": "Structure",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.subsetting",
+          "title": "Subsetting",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.type",
+          "title": "Type",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.type-featuring",
+          "title": "Type Featuring",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.structure.unioning",
+          "title": "Unioning",
+          "language": "KerML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.allocation-definition",
+          "title": "Allocation Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.allocation-usage",
+          "title": "Allocation Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.attribute-definition",
+          "title": "Attribute Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.attribute-usage",
+          "title": "Attribute Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.binding-connector-as-usage",
+          "title": "Binding Connector (as Usage)",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.conjugated-port-definition",
+          "title": "Conjugated Port Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.connection-definition",
+          "title": "Connection Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.connection-usage",
+          "title": "Connection Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.dependency",
+          "title": "Dependency",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.enumerated-value",
+          "title": "Enumerated Value",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.enumeration-definition",
+          "title": "Enumeration Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.enumeration-usage",
+          "title": "Enumeration Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.event-occurrence-usage",
+          "title": "Event Occurrence Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.feature-typing",
+          "title": "Feature Typing",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.flow-connection",
+          "title": "Flow Connection",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.flow-definition",
+          "title": "Flow Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.individual-definition",
+          "title": "Individual Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.individual-usage",
+          "title": "Individual Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.interface-definition",
+          "title": "Interface Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.interface-usage",
+          "title": "Interface Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve",
+            "validate"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.item-definition",
+          "title": "Item Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.item-usage",
+          "title": "Item Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.occurrence-definition",
+          "title": "Occurrence Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.occurrence-usage",
+          "title": "Occurrence Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.part-definition",
+          "title": "Part Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.part-usage",
+          "title": "Part Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.port-definition",
+          "title": "Port Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.port-usage",
+          "title": "Port Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.portion-usage",
+          "title": "Portion Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.structure.reference-usage",
+          "title": "Reference Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 61,
+        "lower": 61,
+        "resolve": 51,
+        "elaborate": 0,
+        "validate": 5,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 65
+    },
+    "validation": {
+      "concepts": [
+        {
+          "id": "kerml.validation.at-most-one-return-parameter",
+          "title": "At Most One Return Parameter",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.at-most-one-transition-fires-per-trigger",
+          "title": "At Most One Transition Fires Per Trigger",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.behavior-not-specialize-structure",
+          "title": "Behavior Not Specialize Structure",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.binary-connector-two-ends",
+          "title": "Binary Connector Two Ends",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.binding-connector-two-ends",
+          "title": "Binding Connector Two Ends",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.calc-result-is-expression-value",
+          "title": "Calc Result Is Expression Value",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.class-not-specialize-datatype",
+          "title": "Class Not Specialize Datatype",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.clock-timeflow-constraint",
+          "title": "Clock Timeflow Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.connector-owned-by-type",
+          "title": "Connector Owned By Type",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.constraint-result-boolean",
+          "title": "Constraint Result Boolean",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.core-operator-semantics",
+          "title": "Core Operator Semantics",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.datatype-not-specialize-class",
+          "title": "Datatype Not Specialize Class",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.durationof-end-minus-start",
+          "title": "Durationof End Minus Start",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.feature-ref-resolves-to-bound-value",
+          "title": "Feature Ref Resolves To Bound Value",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.happens-just-before-no-intervening",
+          "title": "Happens Just Before No Intervening",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.invocation-binds-arguments-to-input-params",
+          "title": "Invocation Binds Arguments To Input Params",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.local-clock-defaults-to-universal-clock",
+          "title": "Local Clock Defaults To Universal Clock",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.model-element-must-be-owned",
+          "title": "Model Element Must Be Owned",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.no-inherited-name-conflict",
+          "title": "No Inherited Name Conflict",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.no-name-alias-conflict",
+          "title": "No Name Alias Conflict",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.occurrence-has-lifetime-extent",
+          "title": "Occurrence Has Lifetime Extent",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.parameter-membership-owning-type",
+          "title": "Parameter Membership Owning Type",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.result-expression-in-function-or-expression",
+          "title": "Result Expression In Function Or Expression",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.return-parameter-membership-owning-type",
+          "title": "Return Parameter Membership Owning Type",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.structure-not-specialize-behavior",
+          "title": "Structure Not Specialize Behavior",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.succession-two-ends",
+          "title": "Succession Two Ends",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.timeof-continuity-constraint",
+          "title": "Timeof Continuity Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.timeof-ordering-constraint",
+          "title": "Timeof Ordering Constraint",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.unbound-feature-yields-inconclusive-not-false",
+          "title": "Unbound Feature Yields Inconclusive Not False",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "kerml.validation.unique-owned-member-names",
+          "title": "Unique Owned Member Names",
+          "language": "KerML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.accept-action-has-payload",
+          "title": "Accept Action Has Payload",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.action-typed-by-behavior",
+          "title": "Action Typed By Behavior",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.actor-membership-in-req-or-case",
+          "title": "Actor Membership In Req Or Case",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.allocation-has-ends",
+          "title": "Allocation Has Ends",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.allocation-typed-by-allocation-defs",
+          "title": "Allocation Typed By Allocation Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.analysis-case-at-most-one-subject",
+          "title": "Analysis Case At Most One Subject",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.analysis-case-objective-bound-to-result",
+          "title": "Analysis Case Objective Bound To Result",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.assert-constraint-must-be-true",
+          "title": "Assert Constraint Must Be True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.assignment-action-has-target",
+          "title": "Assignment Action Has Target",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-each-subaction-kind",
+          "title": "At Most One Each Subaction Kind",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-objective",
+          "title": "At Most One Objective",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-state-subaction",
+          "title": "At Most One State Subaction",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-subject",
+          "title": "At Most One Subject",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.at-most-one-view-rendering",
+          "title": "At Most One View Rendering",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.attribute-def-not-specialize-item-def",
+          "title": "Attribute Def Not Specialize Item Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.attribute-must-not-be-composite",
+          "title": "Attribute Must Not Be Composite",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.attribute-typed-by-datatypes",
+          "title": "Attribute Typed By Datatypes",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.calc-always-has-result-parameter",
+          "title": "Calc Always Has Result Parameter",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.calculation-typed-by-one-calc-def",
+          "title": "Calculation Typed By One Calc Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.case-has-subject-and-objective",
+          "title": "Case Has Subject And Objective",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.case-typed-by-one-case-def",
+          "title": "Case Typed By One Case Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.concern-at-most-one-subject",
+          "title": "Concern At Most One Subject",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.connection-has-ends",
+          "title": "Connection Has Ends",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.connection-typed-by-association",
+          "title": "Connection Typed By Association",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.constraint-satisfied-iff-true",
+          "title": "Constraint Satisfied Iff True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.constraint-typed-by-predicate",
+          "title": "Constraint Typed By Predicate",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.constraint-usage-discovered",
+          "title": "Constraint Usage Discovered",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.decision-node-exactly-one-outgoing",
+          "title": "Decision Node Exactly One Outgoing",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.decision-node-one-incoming",
+          "title": "Decision Node One Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.entry-do-exit-ordering",
+          "title": "Entry Do Exit Ordering",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.enumeration-typed-by-one-enum-def",
+          "title": "Enumeration Typed By One Enum Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.exhibit-state-one-type",
+          "title": "Exhibit State One Type",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.flow-typed-by-interaction",
+          "title": "Flow Typed By Interaction",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.for-loop-iterates-over-sequence",
+          "title": "For Loop Iterates Over Sequence",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.fork-node-concurrent-fanout",
+          "title": "Fork Node Concurrent Fanout",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.fork-node-one-incoming",
+          "title": "Fork Node One Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.if-action-evaluates-test-then-branch",
+          "title": "If Action Evaluates Test Then Branch",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.initial-state-via-entry-succession",
+          "title": "Initial State Via Entry Succession",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.interface-has-ends",
+          "title": "Interface Has Ends",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.interface-typed-by-interface-defs",
+          "title": "Interface Typed By Interface Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.interpolate-returns-null-out-of-bounds",
+          "title": "Interpolate Returns Null Out Of Bounds",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.item-def-not-specialize-attribute-def",
+          "title": "Item Def Not Specialize Attribute Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.item-typed-by-item-defs",
+          "title": "Item Typed By Item Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.join-node-one-outgoing",
+          "title": "Join Node One Outgoing",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.join-node-synchronize-all-incoming",
+          "title": "Join Node Synchronize All Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.merge-node-any-one-incoming",
+          "title": "Merge Node Any One Incoming",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.merge-node-one-outgoing",
+          "title": "Merge Node One Outgoing",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.mref-dimension-must-match-attribute",
+          "title": "Mref Dimension Must Match Attribute",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.negated-assert-must-be-false",
+          "title": "Negated Assert Must Be False",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.negated-satisfy-requires-not-satisfied",
+          "title": "Negated Satisfy Requires Not Satisfied",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.no-transition-on-unmatched-event",
+          "title": "No Transition On Unmatched Event",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.objective-membership-in-case",
+          "title": "Objective Membership In Case",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.occurrence-typed-by-occurrence-defs",
+          "title": "Occurrence Typed By Occurrence Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.parallel-state-no-transitions",
+          "title": "Parallel State No Transitions",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.part-typed-by-part-defs",
+          "title": "Part Typed By Part Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.perform-action-one-type",
+          "title": "Perform Action One Type",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.port-definition-owned-usages-referential",
+          "title": "Port Definition Owned Usages Referential",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.port-typed-by-port-defs",
+          "title": "Port Typed By Port Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.port-usage-nested-usages-referential",
+          "title": "Port Usage Nested Usages Referential",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.port-usage-referential",
+          "title": "Port Usage Referential",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.quantity-arithmetic-dimension-rules",
+          "title": "Quantity Arithmetic Dimension Rules",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-check-result-is-boolean",
+          "title": "Requirement Check Result Is Boolean",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-constraint-in-requirement",
+          "title": "Requirement Constraint In Requirement",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-constraints-composite",
+          "title": "Requirement Constraints Composite",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-is-constraint-satisfied-iff-true",
+          "title": "Requirement Is Constraint Satisfied Iff True",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-result-is-assumption-implies-required",
+          "title": "Requirement Result Is Assumption Implies Required",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-subject-must-be-first-parameter",
+          "title": "Requirement Subject Must Be First Parameter",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.requirement-typed-by-one-req-def",
+          "title": "Requirement Typed By One Req Def",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.sampled-function-must-be-monotonic",
+          "title": "Sampled Function Must Be Monotonic",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.satisfy-req-one-type",
+          "title": "Satisfy Req One Type",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.send-action-has-payload",
+          "title": "Send Action Has Payload",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.send-action-initiates-message-transfer",
+          "title": "Send Action Initiates Message Transfer",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.stakeholder-membership-in-requirement",
+          "title": "Stakeholder Membership In Requirement",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.state-subaction-owned-by-state",
+          "title": "State Subaction Owned By State",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.state-typed-by-state-defs",
+          "title": "State Typed By State Defs",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.subject-is-first-parameter",
+          "title": "Subject Is First Parameter",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.subject-membership-in-req-or-case",
+          "title": "Subject Membership In Req Or Case",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-feature-in-transition",
+          "title": "Transition Feature In Transition",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-firing-order-exit-effect-entry",
+          "title": "Transition Firing Order Exit Effect Entry",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-guard-boolean",
+          "title": "Transition Guard Boolean",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-has-source",
+          "title": "Transition Has Source",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-owned-by-state-or-action",
+          "title": "Transition Owned By State Or Action",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.transition-selection",
+          "title": "Transition Selection",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.usage-typed-by-definitions",
+          "title": "Usage Typed By Definitions",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.use-case-at-most-one-subject",
+          "title": "Use Case At Most One Subject",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.variant-membership-in-variation",
+          "title": "Variant Membership In Variation",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.variation-members-are-variants",
+          "title": "Variation Members Are Variants",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.variation-must-be-abstract",
+          "title": "Variation Must Be Abstract",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.variation-no-chain",
+          "title": "Variation No Chain",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.verdict-criteria-modeled-explicitly",
+          "title": "Verdict Criteria Modeled Explicitly",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.verdict-semantics",
+          "title": "Verdict Semantics",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.verification-case-at-most-one-subject",
+          "title": "Verification Case At Most One Subject",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.view-rendering-in-view",
+          "title": "View Rendering In View",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.validation.while-loop-iterates-while-test",
+          "title": "While Loop Iterates While Test",
+          "language": "SysML",
+          "validated_stages": [],
+          "evidence": "none",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 0,
+        "lower": 0,
+        "resolve": 0,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 124
+    },
+    "views": {
+      "concepts": [
+        {
+          "id": "sysml.views.membership-expose",
+          "title": "Membership Expose",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.namespace-expose",
+          "title": "Namespace Expose",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.rendering-definition",
+          "title": "Rendering Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.rendering-usage",
+          "title": "Rendering Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.view-definition",
+          "title": "View Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.view-usage",
+          "title": "View Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.viewpoint-definition",
+          "title": "Viewpoint Definition",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        },
+        {
+          "id": "sysml.views.viewpoint-usage",
+          "title": "Viewpoint Usage",
+          "language": "SysML",
+          "validated_stages": [
+            "parse",
+            "lower",
+            "resolve"
+          ],
+          "evidence": "positive + negative fixtures",
+          "known_gaps": 0
+        }
+      ],
+      "stage_validated_counts": {
+        "parse": 8,
+        "lower": 8,
+        "resolve": 6,
+        "elaborate": 0,
+        "validate": 0,
+        "execute": 0,
+        "format": 0,
+        "lsp": 0
+      },
+      "card_count": 8
+    }
+  }
+}

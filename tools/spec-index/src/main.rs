@@ -71,6 +71,40 @@ fn main() {
         }
     }
 
+    // `diagnostics-registry --json`: dump the sysml-core diagnostic error-code
+    // registry as JSON on stdout (consumed by website/scripts/generate-reference.mjs).
+    // Runtime health families (AX/SM/FL/VC/CN/RQ/PH runtime codes) are not in
+    // this registry and are deliberately not synthesized here.
+    if first.as_deref() == Some("diagnostics-registry") {
+        let json_flag = args.next();
+        if json_flag.as_deref() != Some("--json") {
+            panic!("usage: diagnostics-registry --json");
+        }
+        let codes: Vec<serde_json::Value> = sysml_core::error_codes::all()
+            .iter()
+            .map(|entry| {
+                serde_json::json!({
+                    "code": entry.code,
+                    "short_description": entry.short_description,
+                    "category": match entry.category {
+                        sysml_core::error_codes::ErrorCategory::Structural => "Structural",
+                        sysml_core::error_codes::ErrorCategory::Resolution => "Resolution",
+                        sysml_core::error_codes::ErrorCategory::Semantic => "Semantic",
+                        sysml_core::error_codes::ErrorCategory::Validation => "Validation",
+                    },
+                })
+            })
+            .collect();
+        let doc = serde_json::json!({ "codes": codes });
+        match serde_json::to_string_pretty(&doc) {
+            Ok(s) => {
+                println!("{s}");
+                return;
+            }
+            Err(e) => panic!("diagnostics-registry serialization failed: {e}"),
+        }
+    }
+
     let out_dir = first.map_or_else(|| refs_dir().join("derived"), PathBuf::from);
     std::fs::create_dir_all(&out_dir)
         .unwrap_or_else(|e| panic!("cannot create {}: {e}", out_dir.display()));

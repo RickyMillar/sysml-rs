@@ -18,6 +18,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "a11y": "node scripts/a11y-smoke.mjs dist"
+    "a11y": "node scripts/a11y-smoke.mjs dist",
+    "gen-check": "node scripts/generate-reference.mjs --check"
   }
 }

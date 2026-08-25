@@ -1,0 +1,27 @@
+{
+  "generator": "node scripts/generate-reference.mjs (run from website/)",
+  "generated_at": "2026-08-25T07:07:19.261Z",
+  "sysml_rs_commit": "11bd751",
+  "artifacts": {
+    "cli-commands.json": {
+      "command": "target/release/sysml <subcommand…> --help (recursive)",
+      "tool_version": "sysml 0.1.0",
+      "input_revision": "11bd751"
+    },
+    "service-commands.json": {
+      "command": "GET /commands + GET /health on a locally started target/release/sysml-api",
+      "tool_version": "sysml-api 0.1.0",
+      "input_revision": "11bd751"
+    },
+    "diagnostics-core.json": {
+      "command": "cargo run --release -p spec-index -- diagnostics-registry --json",
+      "tool_version": "sysml-core error_codes registry",
+      "input_revision": "11bd751"
+    },
+    "capability-matrix.json": {
+      "command": "aggregate website/.learn-src/src/language-pack/cards/*.json",
+      "tool_version": "language-pack generator_version 1 (spec drop 2025-04)",
+      "input_revision": "Book pin e243806dc7b47464e1a0ade153ff2bc76616c767"
+    }
+  }
+}

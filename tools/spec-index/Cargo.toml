@@ -16,6 +16,10 @@ sha2 = { workspace = true }
 # new crate compilation to the default-members build. No network-fetched JSON-schema
 # crate is pulled: the schema gate reads the committed schema files directly.
 sysml-codegen = { workspace = true }
+# diagnostics-registry subcommand: dumps the sysml-core error-code registry
+# for the generated documentation reference. sysml-core is already compiled
+# in the default-members build, so this reuses that artifact.
+sysml-core = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 regex = { workspace = true }

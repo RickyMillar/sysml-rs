@@ -1,0 +1,1108 @@
+{
+  "tool_version": "sysml 0.1.0",
+  "commands": [
+    {
+      "name": "sysml",
+      "path": [],
+      "description": "SysML v2 execution tool",
+      "usage": "sysml [OPTIONS] <COMMAND>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--quiet",
+          "description": "Suppress progress output on stderr (also silences the progress subscriber even when stderr is a TTY). Place before the subcommand"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        },
+        {
+          "flags": "-V, --version",
+          "description": "Print version"
+        }
+      ],
+      "subcommands": [
+        "init",
+        "info",
+        "add",
+        "remove",
+        "lock",
+        "fetch",
+        "update",
+        "tree",
+        "why",
+        "cache",
+        "package",
+        "eval",
+        "check",
+        "verify",
+        "analysis",
+        "trade-study",
+        "simulate",
+        "run",
+        "solve",
+        "trace",
+        "flow",
+        "project",
+        "query",
+        "export",
+        "inspect"
+      ],
+      "help": "SysML v2 execution tool\n\nUsage: sysml [OPTIONS] <COMMAND>\n\nCommands:\n  init         Initialize a new SysML project\n  info         Show project information\n  add          Add a dependency to sysml.toml\n  remove       Remove a dependency from sysml.toml\n  lock         Resolve dependencies and update sysml.lock\n  fetch        Resolve dependencies and fetch/cache all sources (without writing sysml.lock)\n  update       Force dependency update and rewrite sysml.lock\n  tree         Show dependency graph\n  why          Show why a dependency exists in the resolved graph\n  cache        Manage local dependency cache\n  package      Build a .kpar distribution archive\n  eval         Evaluate a SysML expression\n  check        Check constraints in a SysML file\n  verify       Run a verification case\n  analysis     Run an analysis case\n  trade-study  Run a trade study (evaluate alternatives against an objective)\n  simulate     Simulate a state machine\n  run          Run an action\n  solve        Solve constraint network via binding propagation\n  trace        Generate a sequence trace from flow simulation\n  flow         Inspect and test port flows\n  project      Manage SysML projects (legacy)\n  query        Query elements in a SysML model\n  export       Export a SysML model to various formats\n  inspect      Inspect semantic tokens and diagnostics for a SysML file\n  help         Print this message or the help of the given subcommand(s)\n\nOptions:\n      --quiet    Suppress progress output on stderr (also silences the progress subscriber even when stderr is a TTY). Place before the subcommand\n  -h, --help     Print help\n  -V, --version  Print version\n"
+    },
+    {
+      "name": "init",
+      "path": [
+        "init"
+      ],
+      "description": "Initialize a new SysML project",
+      "usage": "sysml init [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--name <NAME>",
+          "description": "Project name (creates a new directory)"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Initialize a new SysML project\n\nUsage: sysml init [OPTIONS]\n\nOptions:\n      --name <NAME>  Project name (creates a new directory)\n  -h, --help         Print help\n"
+    },
+    {
+      "name": "info",
+      "path": [
+        "info"
+      ],
+      "description": "Show project information",
+      "usage": "sysml info [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--manifest-path <MANIFEST_PATH>",
+          "description": "Path to sysml.toml (auto-discovered if omitted)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show project information\n\nUsage: sysml info [OPTIONS]\n\nOptions:\n      --manifest-path <MANIFEST_PATH>  Path to sysml.toml (auto-discovered if omitted)\n      --json                           Output as JSON\n  -h, --help                           Print help\n"
+    },
+    {
+      "name": "add",
+      "path": [
+        "add"
+      ],
+      "description": "Add a dependency to sysml.toml",
+      "usage": "sysml add [OPTIONS] <NAME>",
+      "arguments": [
+        {
+          "name": "<NAME>",
+          "description": "Dependency name"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--path <PATH>",
+          "description": "Local path dependency"
+        },
+        {
+          "flags": "--git <GIT>",
+          "description": "Git repository URL"
+        },
+        {
+          "flags": "--tag <TAG>",
+          "description": "Git tag"
+        },
+        {
+          "flags": "--branch <BRANCH>",
+          "description": "Git branch"
+        },
+        {
+          "flags": "--rev <REV>",
+          "description": "Git revision (commit hash)"
+        },
+        {
+          "flags": "--kpar <KPAR>",
+          "description": "KPAR archive URL"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Add a dependency to sysml.toml\n\nUsage: sysml add [OPTIONS] <NAME>\n\nArguments:\n  <NAME>  Dependency name\n\nOptions:\n      --path <PATH>      Local path dependency\n      --git <GIT>        Git repository URL\n      --tag <TAG>        Git tag\n      --branch <BRANCH>  Git branch\n      --rev <REV>        Git revision (commit hash)\n      --kpar <KPAR>      KPAR archive URL\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "remove",
+      "path": [
+        "remove"
+      ],
+      "description": "Remove a dependency from sysml.toml",
+      "usage": "sysml remove <NAME>",
+      "arguments": [
+        {
+          "name": "<NAME>",
+          "description": "Dependency name to remove"
+        }
+      ],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Remove a dependency from sysml.toml\n\nUsage: sysml remove <NAME>\n\nArguments:\n  <NAME>  Dependency name to remove\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "lock",
+      "path": [
+        "lock"
+      ],
+      "description": "Resolve dependencies and update sysml.lock",
+      "usage": "sysml lock [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--force",
+          "description": "Force re-resolve even if lock file is up to date"
+        },
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Resolve dependencies and update sysml.lock\n\nUsage: sysml lock [OPTIONS]\n\nOptions:\n      --force  Force re-resolve even if lock file is up to date\n      --quiet  Suppress non-error output\n      --json   Output as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "fetch",
+      "path": [
+        "fetch"
+      ],
+      "description": "Resolve dependencies and fetch/cache all sources (without writing sysml.lock)",
+      "usage": "sysml fetch [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Resolve dependencies and fetch/cache all sources (without writing sysml.lock)\n\nUsage: sysml fetch [OPTIONS]\n\nOptions:\n      --quiet  Suppress non-error output\n      --json   Output as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "update",
+      "path": [
+        "update"
+      ],
+      "description": "Force dependency update and rewrite sysml.lock",
+      "usage": "sysml update [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Force dependency update and rewrite sysml.lock\n\nUsage: sysml update [OPTIONS]\n\nOptions:\n      --quiet  Suppress non-error output\n      --json   Output as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "tree",
+      "path": [
+        "tree"
+      ],
+      "description": "Show dependency graph",
+      "usage": "sysml tree [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show dependency graph\n\nUsage: sysml tree [OPTIONS]\n\nOptions:\n      --quiet  Suppress non-error output\n      --json   Output as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "why",
+      "path": [
+        "why"
+      ],
+      "description": "Show why a dependency exists in the resolved graph",
+      "usage": "sysml why [OPTIONS] <NAME>",
+      "arguments": [
+        {
+          "name": "<NAME>",
+          "description": "Dependency package name"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show why a dependency exists in the resolved graph\n\nUsage: sysml why [OPTIONS] <NAME>\n\nArguments:\n  <NAME>  Dependency package name\n\nOptions:\n      --quiet  Suppress non-error output\n      --json   Output as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "cache",
+      "path": [
+        "cache"
+      ],
+      "description": "Manage local dependency cache",
+      "usage": "sysml cache <COMMAND>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [
+        "clean"
+      ],
+      "help": "Manage local dependency cache\n\nUsage: sysml cache <COMMAND>\n\nCommands:\n  clean  Remove cached dependency artifacts\n  help   Print this message or the help of the given subcommand(s)\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "cache clean",
+      "path": [
+        "cache",
+        "clean"
+      ],
+      "description": "Remove cached dependency artifacts",
+      "usage": "sysml cache clean [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--all",
+          "description": "Also remove other cache files under the cache root"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "--quiet",
+          "description": "Suppress non-error output"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Remove cached dependency artifacts\n\nUsage: sysml cache clean [OPTIONS]\n\nOptions:\n      --all    Also remove other cache files under the cache root\n      --json   Output as JSON\n      --quiet  Suppress non-error output\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "package",
+      "path": [
+        "package"
+      ],
+      "description": "Build a .kpar distribution archive",
+      "usage": "sysml package [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--manifest-path <MANIFEST_PATH>",
+          "description": "Path to sysml.toml (auto-discovered if omitted)"
+        },
+        {
+          "flags": "-o, --output <OUTPUT>",
+          "description": "Output directory (default: target/package/)"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Build a .kpar distribution archive\n\nUsage: sysml package [OPTIONS]\n\nOptions:\n      --manifest-path <MANIFEST_PATH>  Path to sysml.toml (auto-discovered if omitted)\n  -o, --output <OUTPUT>                Output directory (default: target/package/)\n  -h, --help                           Print help\n"
+    },
+    {
+      "name": "eval",
+      "path": [
+        "eval"
+      ],
+      "description": "Evaluate a SysML expression",
+      "usage": "sysml eval <EXPR>",
+      "arguments": [
+        {
+          "name": "<EXPR>",
+          "description": "The expression to evaluate (e.g. \"2 + 3\")"
+        }
+      ],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Evaluate a SysML expression\n\nUsage: sysml eval <EXPR>\n\nArguments:\n  <EXPR>  The expression to evaluate (e.g. \"2 + 3\")\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "check",
+      "path": [
+        "check"
+      ],
+      "description": "Check constraints in a SysML file",
+      "usage": "sysml check [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--set <OVERRIDES>",
+          "description": "Override attribute values (e.g. --set mass=2600)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Check constraints in a SysML file\n\nUsage: sysml check [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --set <OVERRIDES>  Override attribute values (e.g. --set mass=2600)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "verify",
+      "path": [
+        "verify"
+      ],
+      "description": "Run a verification case",
+      "usage": "sysml verify [OPTIONS] <CASE_NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<CASE_NAME>",
+          "description": "Name of the verification case to run"
+        },
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--set <OVERRIDES>",
+          "description": "Override attribute values (e.g. --set speed=85)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Run a verification case\n\nUsage: sysml verify [OPTIONS] <CASE_NAME> <FILE>\n\nArguments:\n  <CASE_NAME>  Name of the verification case to run\n  <FILE>       Path to the SysML file\n\nOptions:\n      --set <OVERRIDES>  Override attribute values (e.g. --set speed=85)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "analysis",
+      "path": [
+        "analysis"
+      ],
+      "description": "Run an analysis case",
+      "usage": "sysml analysis [OPTIONS] <CASE_NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<CASE_NAME>",
+          "description": "Name of the analysis case to run"
+        },
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--set <OVERRIDES>",
+          "description": "Override attribute values (e.g. --set temperature=350)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Run an analysis case\n\nUsage: sysml analysis [OPTIONS] <CASE_NAME> <FILE>\n\nArguments:\n  <CASE_NAME>  Name of the analysis case to run\n  <FILE>       Path to the SysML file\n\nOptions:\n      --set <OVERRIDES>  Override attribute values (e.g. --set temperature=350)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "trade-study",
+      "path": [
+        "trade-study"
+      ],
+      "description": "Run a trade study (evaluate alternatives against an objective)",
+      "usage": "sysml trade-study [OPTIONS] <STUDY_NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<STUDY_NAME>",
+          "description": "Name of the trade study analysis case"
+        },
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--set <OVERRIDES>",
+          "description": "Override attribute values (e.g. --set mass=100)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Run a trade study (evaluate alternatives against an objective)\n\nUsage: sysml trade-study [OPTIONS] <STUDY_NAME> <FILE>\n\nArguments:\n  <STUDY_NAME>  Name of the trade study analysis case\n  <FILE>        Path to the SysML file\n\nOptions:\n      --set <OVERRIDES>  Override attribute values (e.g. --set mass=100)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "simulate",
+      "path": [
+        "simulate"
+      ],
+      "description": "Simulate a state machine",
+      "usage": "sysml simulate [OPTIONS] <SM_NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<SM_NAME>",
+          "description": "Name of the state machine"
+        },
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--events <EVENTS>",
+          "description": "Comma-separated list of events (e.g. \"timer,timer,reset\")"
+        },
+        {
+          "flags": "--interactive",
+          "description": "Interactive mode: read events from stdin"
+        },
+        {
+          "flags": "--auto",
+          "description": "Auto-demo mode: walk all transitions automatically"
+        },
+        {
+          "flags": "--trace",
+          "description": "Show detailed execution trace"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Simulate a state machine\n\nUsage: sysml simulate [OPTIONS] <SM_NAME> <FILE>\n\nArguments:\n  <SM_NAME>  Name of the state machine\n  <FILE>     Path to the SysML file\n\nOptions:\n      --events <EVENTS>  Comma-separated list of events (e.g. \"timer,timer,reset\")\n      --interactive      Interactive mode: read events from stdin\n      --auto             Auto-demo mode: walk all transitions automatically\n      --trace            Show detailed execution trace\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "run",
+      "path": [
+        "run"
+      ],
+      "description": "Run an action",
+      "usage": "sysml run [OPTIONS] <ACTION_NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<ACTION_NAME>",
+          "description": "Name of the action to run"
+        },
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--trace",
+          "description": "Show detailed execution trace"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Run an action\n\nUsage: sysml run [OPTIONS] <ACTION_NAME> <FILE>\n\nArguments:\n  <ACTION_NAME>  Name of the action to run\n  <FILE>         Path to the SysML file\n\nOptions:\n      --trace  Show detailed execution trace\n      --json   Output results as JSON\n  -h, --help   Print help\n"
+    },
+    {
+      "name": "solve",
+      "path": [
+        "solve"
+      ],
+      "description": "Solve constraint network via binding propagation",
+      "usage": "sysml solve [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--set <OVERRIDES>",
+          "description": "Override attribute values (e.g. --set mass=2600)"
+        },
+        {
+          "flags": "--rollup <ROLLUP>",
+          "description": "Compute rollup for a named property (e.g. --rollup mass)"
+        },
+        {
+          "flags": "--sweep <SWEEP>",
+          "description": "Sweep a parameter across a range (format: param:lo:hi, e.g. --sweep speed:0:200)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Solve constraint network via binding propagation\n\nUsage: sysml solve [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --set <OVERRIDES>  Override attribute values (e.g. --set mass=2600)\n      --rollup <ROLLUP>  Compute rollup for a named property (e.g. --rollup mass)\n      --sweep <SWEEP>    Sweep a parameter across a range (format: param:lo:hi, e.g. --sweep speed:0:200)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "trace",
+      "path": [
+        "trace"
+      ],
+      "description": "Generate a sequence trace from flow simulation",
+      "usage": "sysml trace [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--inject <INJECT>",
+          "description": "Inject messages to simulate flow (format: source.port:value, repeatable)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Generate a sequence trace from flow simulation\n\nUsage: sysml trace [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --inject <INJECT>  Inject messages to simulate flow (format: source.port:value, repeatable)\n      --json             Output results as JSON\n  -h, --help             Print help\n"
+    },
+    {
+      "name": "flow",
+      "path": [
+        "flow"
+      ],
+      "description": "Inspect and test port flows",
+      "usage": "sysml flow [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--flow-name <FLOW_NAME>",
+          "description": "Name of a specific flow (optional — shows all if omitted)"
+        },
+        {
+          "flags": "--inject <INJECT>",
+          "description": "Inject a payload into the flow source (JSON or simple value)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output results as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Inspect and test port flows\n\nUsage: sysml flow [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --flow-name <FLOW_NAME>  Name of a specific flow (optional — shows all if omitted)\n      --inject <INJECT>        Inject a payload into the flow source (JSON or simple value)\n      --json                   Output results as JSON\n  -h, --help                   Print help\n"
+    },
+    {
+      "name": "project",
+      "path": [
+        "project"
+      ],
+      "description": "Manage SysML projects (legacy)",
+      "usage": "sysml project <COMMAND>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [
+        "init",
+        "info",
+        "stdlib"
+      ],
+      "help": "Manage SysML projects (legacy)\n\nUsage: sysml project <COMMAND>\n\nCommands:\n  init    Initialize a new SysML project in the current directory\n  info    Show project information\n  stdlib  List standard library projects\n  help    Print this message or the help of the given subcommand(s)\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "project init",
+      "path": [
+        "project",
+        "init"
+      ],
+      "description": "Initialize a new SysML project in the current directory",
+      "usage": "sysml project init [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--name <NAME>",
+          "description": "Project name (defaults to the current directory name)"
+        },
+        {
+          "flags": "--version <VERSION>",
+          "description": "Project version (defaults to \"0.1.0\") [default: 0.1.0]"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Initialize a new SysML project in the current directory\n\nUsage: sysml project init [OPTIONS]\n\nOptions:\n      --name <NAME>        Project name (defaults to the current directory name)\n      --version <VERSION>  Project version (defaults to \"0.1.0\") [default: 0.1.0]\n  -h, --help               Print help\n"
+    },
+    {
+      "name": "project info",
+      "path": [
+        "project",
+        "info"
+      ],
+      "description": "Show project information",
+      "usage": "sysml project info",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show project information\n\nUsage: sysml project info\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "project stdlib",
+      "path": [
+        "project",
+        "stdlib"
+      ],
+      "description": "List standard library projects",
+      "usage": "sysml project stdlib [OPTIONS]",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--symbols",
+          "description": "List all symbols exported by each library"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "List standard library projects\n\nUsage: sysml project stdlib [OPTIONS]\n\nOptions:\n      --symbols  List all symbols exported by each library\n  -h, --help     Print help\n"
+    },
+    {
+      "name": "query",
+      "path": [
+        "query"
+      ],
+      "description": "Query elements in a SysML model",
+      "usage": "sysml query <COMMAND>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [
+        "find",
+        "stats",
+        "trace",
+        "unverified"
+      ],
+      "help": "Query elements in a SysML model\n\nUsage: sysml query <COMMAND>\n\nCommands:\n  find        Find elements by name pattern\n  stats       Show element statistics\n  trace       Show traceability matrix (requirements to parts via Satisfy)\n  unverified  Show unverified requirements\n  help        Print this message or the help of the given subcommand(s)\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "query find",
+      "path": [
+        "query",
+        "find"
+      ],
+      "description": "Find elements by name pattern",
+      "usage": "sysml query find [OPTIONS] --name <NAME> <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--name <NAME>",
+          "description": "Name pattern to search for (substring match)"
+        },
+        {
+          "flags": "--kind <KIND>",
+          "description": "Filter by element kind (e.g. PartUsage, RequirementUsage)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Find elements by name pattern\n\nUsage: sysml query find [OPTIONS] --name <NAME> <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --name <NAME>  Name pattern to search for (substring match)\n      --kind <KIND>  Filter by element kind (e.g. PartUsage, RequirementUsage)\n      --json         Output as JSON\n  -h, --help         Print help\n"
+    },
+    {
+      "name": "query stats",
+      "path": [
+        "query",
+        "stats"
+      ],
+      "description": "Show element statistics",
+      "usage": "sysml query stats [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show element statistics\n\nUsage: sysml query stats [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --json  Output as JSON\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "query trace",
+      "path": [
+        "query",
+        "trace"
+      ],
+      "description": "Show traceability matrix (requirements to parts via Satisfy)",
+      "usage": "sysml query trace [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show traceability matrix (requirements to parts via Satisfy)\n\nUsage: sysml query trace [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --json  Output as JSON\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "query unverified",
+      "path": [
+        "query",
+        "unverified"
+      ],
+      "description": "Show unverified requirements",
+      "usage": "sysml query unverified [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Show unverified requirements\n\nUsage: sysml query unverified [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --json  Output as JSON\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "export",
+      "path": [
+        "export"
+      ],
+      "description": "Export a SysML model to various formats",
+      "usage": "sysml export <COMMAND>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [
+        "plantuml",
+        "json",
+        "viewmodel"
+      ],
+      "help": "Export a SysML model to various formats\n\nUsage: sysml export <COMMAND>\n\nCommands:\n  plantuml   Export model as PlantUML diagram\n  json       Export model as canonical JSON\n  viewmodel  Export a declared view's ViewModel JSON (scene + tokens + text-map + interactions + frame / non-graph payload), sidecars pruned to the view's referenced ids\n  help       Print this message or the help of the given subcommand(s)\n\nOptions:\n  -h, --help  Print help\n"
+    },
+    {
+      "name": "export plantuml",
+      "path": [
+        "export",
+        "plantuml"
+      ],
+      "description": "Export model as PlantUML diagram",
+      "usage": "sysml export plantuml [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--view <VIEW>",
+          "description": "Diagram view type [default: general] [possible values: general, state, action, sequence]"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Export model as PlantUML diagram\n\nUsage: sysml export plantuml [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --view <VIEW>  Diagram view type [default: general] [possible values: general, state, action, sequence]\n  -h, --help         Print help\n"
+    },
+    {
+      "name": "export json",
+      "path": [
+        "export",
+        "json"
+      ],
+      "description": "Export model as canonical JSON",
+      "usage": "sysml export json [OPTIONS] <FILE>",
+      "arguments": [
+        {
+          "name": "<FILE>",
+          "description": "Path to the SysML file"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--pretty",
+          "description": "Pretty-print the JSON output"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Export model as canonical JSON\n\nUsage: sysml export json [OPTIONS] <FILE>\n\nArguments:\n  <FILE>  Path to the SysML file\n\nOptions:\n      --pretty  Pretty-print the JSON output\n  -h, --help    Print help\n"
+    },
+    {
+      "name": "export viewmodel",
+      "path": [
+        "export",
+        "viewmodel"
+      ],
+      "description": "Export a declared view's ViewModel JSON (scene + tokens + text-map + interactions + frame / non-graph payload), sidecars pruned to the view's referenced ids",
+      "usage": "sysml export viewmodel [OPTIONS] --workspace <WORKSPACE> --view <VIEW>",
+      "arguments": [],
+      "options": [
+        {
+          "flags": "--workspace <WORKSPACE>",
+          "description": "Workspace directory to load (declared views render against the whole workspace)"
+        },
+        {
+          "flags": "--view <VIEW>",
+          "description": "Qualified name of the declared view to export (e.g. ShowcaseViews::OverviewView; a unique bare name also resolves)"
+        },
+        {
+          "flags": "--expand-all",
+          "description": "Expand every expandable node"
+        },
+        {
+          "flags": "--expand <EXPAND>",
+          "description": "Element id to render expanded (repeatable)"
+        },
+        {
+          "flags": "-o, --output <OUTPUT>",
+          "description": "Write the JSON to this file instead of stdout"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Export a declared view's ViewModel JSON (scene + tokens + text-map + interactions + frame / non-graph payload), sidecars pruned to the view's referenced ids\n\nUsage: sysml export viewmodel [OPTIONS] --workspace <WORKSPACE> --view <VIEW>\n\nOptions:\n      --workspace <WORKSPACE>  Workspace directory to load (declared views render against the whole workspace)\n      --view <VIEW>            Qualified name of the declared view to export (e.g. ShowcaseViews::OverviewView; a unique bare name also resolves)\n      --expand-all             Expand every expandable node\n      --expand <EXPAND>        Element id to render expanded (repeatable)\n  -o, --output <OUTPUT>        Write the JSON to this file instead of stdout\n  -h, --help                   Print help\n"
+    },
+    {
+      "name": "inspect",
+      "path": [
+        "inspect"
+      ],
+      "description": "Inspect semantic tokens and diagnostics for a SysML file",
+      "usage": "sysml inspect [OPTIONS] [FILE]",
+      "arguments": [
+        {
+          "name": "[FILE]",
+          "description": "Path to the SysML file (required unless --workspace is used)"
+        }
+      ],
+      "options": [
+        {
+          "flags": "--tokens",
+          "description": "Show only semantic tokens"
+        },
+        {
+          "flags": "--diagnostics",
+          "description": "Show only diagnostics"
+        },
+        {
+          "flags": "--cst",
+          "description": "Show raw CST (tree-sitter parse tree)"
+        },
+        {
+          "flags": "--json",
+          "description": "Output as JSON"
+        },
+        {
+          "flags": "--no-stdlib",
+          "description": "Disable loading the standard library for inspect diagnostics"
+        },
+        {
+          "flags": "--library-path <LIBRARY_PATH>",
+          "description": "Override standard library path (directory containing library.kernel/library.systems)"
+        },
+        {
+          "flags": "--workspace <WORKSPACE>",
+          "description": "Inspect all files in a workspace directory with cross-file resolution"
+        },
+        {
+          "flags": "--focus <FOCUS>",
+          "description": "Focus diagnostics on a specific file within workspace mode"
+        },
+        {
+          "flags": "--no-workspace-deps",
+          "description": "Disable dependency source hydration in workspace mode"
+        },
+        {
+          "flags": "-h, --help",
+          "description": "Print help"
+        }
+      ],
+      "subcommands": [],
+      "help": "Inspect semantic tokens and diagnostics for a SysML file\n\nUsage: sysml inspect [OPTIONS] [FILE]\n\nArguments:\n  [FILE]  Path to the SysML file (required unless --workspace is used)\n\nOptions:\n      --tokens                       Show only semantic tokens\n      --diagnostics                  Show only diagnostics\n      --cst                          Show raw CST (tree-sitter parse tree)\n      --json                         Output as JSON\n      --no-stdlib                    Disable loading the standard library for inspect diagnostics\n      --library-path <LIBRARY_PATH>  Override standard library path (directory containing library.kernel/library.systems)\n      --workspace <WORKSPACE>        Inspect all files in a workspace directory with cross-file resolution\n      --focus <FOCUS>                Focus diagnostics on a specific file within workspace mode\n      --no-workspace-deps            Disable dependency source hydration in workspace mode\n  -h, --help                         Print help\n"
+    }
+  ]
+}

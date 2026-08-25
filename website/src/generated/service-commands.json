@@ -1,0 +1,3926 @@
+{
+  "api_version": "0.1.0",
+  "commands": [
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compile and run a named action to completion, returning the execution trace",
+      "name": "sysml.action.run",
+      "params": [
+        {
+          "description": "URI of the loaded model containing the action",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the action definition to run",
+          "name": "action_name",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ActionTraceResult { steps, completed, total_steps }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compile an action from the model and start an execution session",
+      "name": "sysml.action.start",
+      "params": [
+        {
+          "description": "URI of the loaded model containing the action",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the action definition to execute",
+          "name": "action_name",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "string (session_key)",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Step an action session forward, returning the trace entry for the executed node",
+      "name": "sysml.action.step",
+      "params": [
+        {
+          "description": "Session key returned by action.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ActionTraceEntry",
+      "stateful": true
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Render a named action's control flow as PlantUML activity text.",
+      "name": "sysml.action.visualize",
+      "params": [
+        {
+          "description": "Action definition or usage name (qualified or short)",
+          "name": "action_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "JSON {plantuml}",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compute aggregate constraint/verification/requirement status for all owners in a model",
+      "name": "sysml.aggregate",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<AggregateStatus>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run a named analysis case using the solver registry with optional parameter overrides",
+      "name": "sysml.analysis.run",
+      "params": [
+        {
+          "description": "Name of the analysis case to run",
+          "name": "case_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Key=value parameter overrides for the evaluation context",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "AnalysisResult { case_name, tool_name, outputs, converged, iterations }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Walk the ownership chain upward from an element to the root",
+      "name": "sysml.ancestors",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Element ID to start from",
+          "name": "id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Vec<Element>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Create a BatchSession with N child runtime sessions (sweep / monte_carlo / trade_study)",
+      "name": "sysml.batch.create",
+      "params": [
+        {
+          "description": "Batch workflow kind: `sweep`, `monte_carlo`, or `trade_study`",
+          "name": "kind",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "URI of the loaded model the children simulate",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional state machine name; when set, children are simulate.start sessions of that SM",
+          "name": "subsystem_name",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "JSON-encoded array of per-child override maps (e.g. '[{\"mass\": 1.0}, {\"mass\": 2.0}]')",
+          "name": "children_params",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional free-form display label surfaced on the workflow tab",
+          "name": "label",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "JSON-encoded array of variable names to measure on each child (e.g. '[\"temperature\"]')",
+          "name": "outcomes",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Simulation time step in milliseconds for every child (default 1.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Model-time budget in milliseconds for every child (default 60000). Size this to the study's horizon or children stop early.",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        }
+      ],
+      "returns": "{ batch_id: string, child_session_ids: Vec<string> }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return per-child descriptors for a batch, optionally including each child's verdicts",
+      "name": "sysml.batch.results",
+      "params": [
+        {
+          "description": "Opaque batch id returned by sysml.batch.create",
+          "name": "batch_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Include each child's archived verdicts in the response",
+          "name": "include_verdicts",
+          "required": true,
+          "ty": "bool"
+        }
+      ],
+      "returns": "{ children: Vec<ChildDescriptor> }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Filter a batch's children by status, verdict, or parameter predicate",
+      "name": "sysml.batch.slice",
+      "params": [
+        {
+          "description": "Opaque batch id returned by sysml.batch.create",
+          "name": "batch_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Additive filter clauses; see the BatchFilter JSON shape",
+          "name": "filter",
+          "required": true,
+          "ty": "BatchFilter"
+        }
+      ],
+      "returns": "{ children: Vec<ChildDescriptor> }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fetch the current BatchSession snapshot (kind, children, rollup status)",
+      "name": "sysml.batch.status",
+      "params": [
+        {
+          "description": "Opaque batch id returned by sysml.batch.create",
+          "name": "batch_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "{ batch: BatchSession }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Remove a breakpoint from a session by id (idempotent)",
+      "name": "sysml.breakpoint.clear",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Breakpoint id returned by sysml.breakpoint.set",
+          "name": "breakpoint_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List registered breakpoints for a session as (id, breakpoint) pairs",
+      "name": "sysml.breakpoint.list",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<(BreakpointId, Breakpoint)>",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Register a breakpoint on a running session; returns an opaque id",
+      "name": "sysml.breakpoint.set",
+      "params": [
+        {
+          "description": "Opaque session id returned by any *.start command",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Breakpoint specification; see sysml_runtime::breakpoint::Breakpoint",
+          "name": "breakpoint",
+          "required": true,
+          "ty": "Breakpoint"
+        }
+      ],
+      "returns": "BreakpointId (string)",
+      "stateful": true
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Delete the library cache file from disk.",
+      "name": "sysml.cache.clear",
+      "params": [],
+      "returns": "Value ({status: cleared|no_library} | {error})",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a library cache rebuild payload: clears the cache, returns before/after snapshots and library state. Reload spawn stays on the transport.",
+      "name": "sysml.cache.rebuild",
+      "params": [],
+      "returns": "Value (rebuild status JSON)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Library cache file snapshot (size_bytes, element_count, crate_version, exists).",
+      "name": "sysml.cache.status",
+      "params": [],
+      "returns": "Value (cache stats JSON)",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Walk backward through the causation graph from a root event; returns the root plus upstream chain",
+      "name": "sysml.causation.trace",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Explicit causation event id (preferred when known)",
+          "name": "root_event_id",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Tick of the root event (used when root_event_id is absent)",
+          "name": "root_tick",
+          "required": false,
+          "ty": "u64?"
+        },
+        {
+          "description": "Target element / variable of the root event (used when root_event_id is absent)",
+          "name": "root_target",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Maximum BFS depth; 0 or absent = default (5). Clamped to u8 range.",
+          "name": "max_depth",
+          "required": false,
+          "ty": "u32?"
+        }
+      ],
+      "returns": "CausationTraceResult",
+      "stateful": true
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: get direct children of an element (ownership hierarchy)",
+      "name": "sysml.children",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Parent element ID",
+          "name": "id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Vec<Element>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute every code action (quick-fixes, refactorings, source actions) at a range",
+      "name": "sysml.code_action.list",
+      "params": [
+        {
+          "description": "URI of the loaded document",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Selection start line (0-indexed)",
+          "name": "range_start_line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Selection start column (UTF-16 code units, 0-indexed)",
+          "name": "range_start_col",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Selection end line (0-indexed)",
+          "name": "range_end_line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Selection end column (UTF-16 code units, 0-indexed)",
+          "name": "range_end_col",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Diagnostics visible at the selection (array of CodeActionDiagnostic)",
+          "name": "diagnostics",
+          "required": true,
+          "ty": "json"
+        }
+      ],
+      "returns": "Vec<CodeAction>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute completion candidates for the cursor position",
+      "name": "sysml.completion",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Cursor line (0-indexed)",
+          "name": "line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Cursor column (UTF-16 code units, 0-indexed)",
+          "name": "col",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Trigger character (LSP triggerCharacter)",
+          "name": "trigger",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "syntax_ctx.in_import (LSP CST classification)",
+          "name": "ctx_in_import",
+          "required": true,
+          "ty": "bool"
+        },
+        {
+          "description": "syntax_ctx.in_comment_or_string",
+          "name": "ctx_in_comment_or_string",
+          "required": true,
+          "ty": "bool"
+        },
+        {
+          "description": "syntax_ctx.in_feature_chain",
+          "name": "ctx_in_feature_chain",
+          "required": true,
+          "ty": "bool"
+        },
+        {
+          "description": "syntax_ctx.in_type_ref",
+          "name": "ctx_in_type_ref",
+          "required": true,
+          "ty": "bool"
+        }
+      ],
+      "returns": "Vec<CompletionCandidate>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Enrich a completion item with documentation and type detail",
+      "name": "sysml.completion.resolve",
+      "params": [
+        {
+          "description": "Preferred URI to resolve in first (the document where completion was triggered)",
+          "name": "uri",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "ElementId of the completion candidate to resolve",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "CompletionDetails?",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate all constraints in a model with optional parameter overrides",
+      "name": "sysml.constraint.check",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Key=value parameter overrides (values parsed as int/float/bool/string)",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "Vec<ConstraintResult>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Walk workspace roots, hydrate manifest dependencies, and report per-root resolution outcomes + summary counts.",
+      "name": "sysml.dependency.status",
+      "params": [
+        {
+          "description": "Absolute workspace-root paths to walk. Each root's `sysml.toml` is hydrated independently; missing manifests surface as `{status: no_manifest}` entries.",
+          "name": "roots",
+          "required": true,
+          "ty": "[string]"
+        }
+      ],
+      "returns": "Value (dependency status JSON)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Recursively collect all descendant elements in the ownership tree",
+      "name": "sysml.descendants",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Root element ID",
+          "name": "id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Vec<Element>",
+      "stateful": false
+    },
+    {
+      "category": "Analysis",
+      "deprecated": false,
+      "description": "Get the full diagnostic pipeline (parse + resolve + validate + health) for a loaded URI",
+      "name": "sysml.diagnostics",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<Diagnostic>",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Return the diagnostics overlay (validation-diagnostic badges: worst-case severity + per-message tooltip detail) for the given DECLARED view's scene, joined by ElementId, as JSON. Companion to sysml.diagram.viewmodel — pass the SAME view_usage_id so the overlay joins the same scene. Reads workspace diagnostics (readiness-gated); needs no session.",
+      "name": "sysml.diagram.diagnostic_overlay",
+      "params": [
+        {
+          "description": "ElementId of the ViewUsage / ViewDefinition the overlay joins to (must match the sysml.diagram.viewmodel call)",
+          "name": "view_usage_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "IDs of nodes shown expanded (must match the viewmodel call so scene ids align)",
+          "name": "expanded_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "JSON (DiagnosticOverlay)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute the workspace edit for a diagram-driven create/delete/editLabel/addSequenceMessage/addSequenceLifeline action",
+      "name": "sysml.diagram.edit",
+      "params": [
+        {
+          "description": "Diagram edit request (matches DiagramEditRequest JSON schema: { uri, action, ...payload })",
+          "name": "request",
+          "required": true,
+          "ty": "json"
+        }
+      ],
+      "returns": "DiagramEditComputed",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Re-project a diagram with the given expanded-node set, returning the renderer-neutral ViewModel. Replaces expanded_nodes state for the URI.",
+      "name": "sysml.diagram.expand",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "View type (e.g. \"general\", \"state\", \"action\")",
+          "name": "view_type",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Full set of expanded node ids (replaces existing state)",
+          "name": "expanded_node_ids",
+          "required": true,
+          "ty": "[string]"
+        }
+      ],
+      "returns": "JSON (ViewModel)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Open a diagram for the given URI and view type, returning the renderer-neutral ViewModel. Updates open_diagrams for auto-refresh.",
+      "name": "sysml.diagram.open",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "View type (e.g. \"general\", \"state\", \"action\"); defaults to \"general\"",
+          "name": "view_type",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "JSON (ViewModel)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Return the per-tick simulation overlay (active-element highlights, live scalar badges, time-series channel directory) for a live session, joined to the given DECLARED view's scene by ElementId, as JSON. Companion to sysml.diagram.viewmodel — pass the SAME view_usage_id so the overlay joins the same scene.",
+      "name": "sysml.diagram.sim_overlay",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the ViewUsage / ViewDefinition the overlay joins to (must match the sysml.diagram.viewmodel call)",
+          "name": "view_usage_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "IDs of nodes shown expanded (must match the viewmodel call so scene ids align)",
+          "name": "expanded_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "JSON (SimOverlay)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Return the per-run verdict overlay (constraint solver pass/fail badges + solved scalar values) for a live session, joined to the given DECLARED view's scene by ElementId, as JSON. Companion verdict sidecar to sysml.diagram.viewmodel — pass the SAME view_usage_id so the overlay joins the same scene.",
+      "name": "sysml.diagram.verdict_overlay",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the ViewUsage / ViewDefinition the overlay joins to (must match the sysml.diagram.viewmodel call)",
+          "name": "view_usage_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "IDs of nodes shown expanded (must match the viewmodel call so scene ids align)",
+          "name": "expanded_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "JSON (VerdictOverlay)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Switch a diagram's view type for the given URI, returning the renderer-neutral ViewModel. Updates open_diagrams.",
+      "name": "sysml.diagram.view",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "View type (e.g. \"general\", \"state\", \"action\")",
+          "name": "view_type",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "JSON (ViewModel)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Return the renderer-agnostic ViewModel (scene + design tokens + text-map + interaction descriptors + frame) for a DECLARED view (ViewUsage / ViewDefinition), scoped by its Expose / filter memberships, as JSON.",
+      "name": "sysml.diagram.viewmodel",
+      "params": [
+        {
+          "description": "URI of the loaded model (unused — views render against the workspace graph)",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the ViewUsage / ViewDefinition to render",
+          "name": "view_usage_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "IDs of nodes to show expanded (merged with the view's auto-expansion)",
+          "name": "expanded_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "JSON (ViewModel)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Get a single element by its ID",
+      "name": "sysml.element",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element's unique identifier",
+          "name": "id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Element?",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate a single element's expression value by its ID",
+      "name": "sysml.evaluate",
+      "params": [
+        {
+          "description": "Element ID to evaluate",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "string?",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate all analysis case elements in a model, returning output summaries per case",
+      "name": "sysml.evaluate.analysis_cases",
+      "params": [],
+      "returns": "Vec<AnalysisCaseResult>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate all calculation elements in a model, returning computed values",
+      "name": "sysml.evaluate.calculations",
+      "params": [],
+      "returns": "Vec<(ElementId, display)>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate all constraint elements in a model, returning pass/fail results with details",
+      "name": "sysml.evaluate.constraints",
+      "params": [],
+      "returns": "Vec<EvalConstraintResult>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate one expression-bearing element with optional overrides, returning value, verdict, context, and diagnostics",
+      "name": "sysml.evaluate.expression",
+      "params": [
+        {
+          "description": "Element ID to evaluate",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Key=value overrides applied to the evaluation context",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "EvaluateExpressionResult",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate all verification case elements in a model, returning verdicts per case",
+      "name": "sysml.evaluate.verification_cases",
+      "params": [],
+      "returns": "Vec<VerificationCaseResult>",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Export a loaded model as canonical SysML v2 JSON",
+      "name": "sysml.export.json",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "string (JSON)",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Export a loaded model as PlantUML notation. `view` selects general | state | action | sequence (default general).",
+      "name": "sysml.export.plantuml",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "View selector: \"general\" (default), \"state\", \"action\", or \"sequence\"",
+          "name": "view",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "string (PlantUML)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Project expression element subtrees as JSON ASTs for rendering (KaTeX) and inspection",
+      "name": "sysml.expression.ast",
+      "params": [
+        {
+          "description": "Optional element ID to project a single owner (constraint, calc, attribute). Omit to project all.",
+          "name": "element_id",
+          "required": false,
+          "ty": "ElementId?"
+        }
+      ],
+      "returns": "Vec<ExpressionAstResult>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Evaluate a standalone expression with optional variable bindings",
+      "name": "sysml.expression.eval",
+      "params": [
+        {
+          "description": "Expression to evaluate (e.g. '2 + 3', 'speed * 1.5')",
+          "name": "expr",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Variable bindings as key=value pairs",
+          "name": "context",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "Value",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: find elements by name pattern (substring match), optionally filtered by element kind",
+      "name": "sysml.find",
+      "params": [
+        {
+          "description": "URI of the loaded model to search",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name pattern to search for (substring match)",
+          "name": "pattern",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional element kind filter (e.g. 'PartUsage', 'RequirementUsage')",
+          "name": "kind",
+          "required": false,
+          "ty": "ElementKind?"
+        }
+      ],
+      "returns": "Vec<Element>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Inspect port connections, flow paths, and optionally inject a payload to test delivery",
+      "name": "sysml.flow.inspect",
+      "params": [
+        {
+          "description": "URI of the loaded model with port/flow definitions",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Source port key to inject payload into",
+          "name": "inject_source",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Payload value to inject (parsed as int/float/bool/string)",
+          "name": "inject_payload",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "FlowResult { ports, flows, delivery }",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Render the flow connections for the given URI as PlantUML sequence text.",
+      "name": "sysml.flow.visualize",
+      "params": [
+        {
+          "description": "Optional flow id to narrow to (reserved; today renders all flows)",
+          "name": "_flow_id",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "JSON {plantuml}",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute whitespace-only formatting edits for a loaded document",
+      "name": "sysml.format.document",
+      "params": [
+        {
+          "description": "URI of the loaded document",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Indent width in characters (default 4)",
+          "name": "tab_size",
+          "required": false,
+          "ty": "u32?"
+        },
+        {
+          "description": "Insert spaces (true) or tabs (false); default true",
+          "name": "insert_spaces",
+          "required": false,
+          "ty": "bool?"
+        }
+      ],
+      "returns": "Vec<TextEdit>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Get the source text and span covering one element's declaration",
+      "name": "sysml.get_source",
+      "params": [
+        {
+          "description": "URI of the loaded model that owns the element",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element's unique identifier",
+          "name": "id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "GetSourceResult?",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Resolve the goto-definition target for the cursor position",
+      "name": "sysml.goto_definition",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Cursor line (0-indexed)",
+          "name": "line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Cursor column (UTF-16 code units, 0-indexed)",
+          "name": "col",
+          "required": true,
+          "ty": "u32"
+        }
+      ],
+      "returns": "GotoTarget?",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Render hover content (markdown + range) for the cursor position",
+      "name": "sysml.hover",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Cursor line (0-indexed)",
+          "name": "line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Cursor column (UTF-16 code units, 0-indexed)",
+          "name": "col",
+          "required": true,
+          "ty": "u32"
+        }
+      ],
+      "returns": "HoverInfo?",
+      "stateful": false
+    },
+    {
+      "category": "Analysis",
+      "deprecated": false,
+      "description": "Compute the inspect-pipeline result (diagnostics + semantic tokens) for one URI or every loaded user URI",
+      "name": "sysml.inspect",
+      "params": [
+        {
+          "description": "URI of the loaded model; required when workspace=false",
+          "name": "uri",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "If true, return inspect results for every loaded user URI",
+          "name": "workspace",
+          "required": true,
+          "ty": "bool"
+        },
+        {
+          "description": "Optional filename filter (workspace mode); keeps only URIs ending with this suffix",
+          "name": "focus_file",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "InspectResponse { files: Vec<InspectFileResult> }",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "Parse and load a SysML file using the PEG batch parser",
+      "name": "sysml.load_file",
+      "params": [
+        {
+          "description": "File system path to the .sysml file",
+          "name": "path",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "string (URI key for the loaded file)",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "Parse and load SysML source text directly (no file I/O)",
+      "name": "sysml.load_source",
+      "params": [
+        {
+          "description": "Identifier for the source (used as lookup key)",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "SysML v2 source text",
+          "name": "source",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "Discover and load all .sysml files under a directory (recursive). Returns loaded URIs and any errors.",
+      "name": "sysml.load_workspace",
+      "params": [
+        {
+          "description": "Root directory of the workspace to scan",
+          "name": "root",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkspaceLoadResult { loaded_uris, error_count, errors }",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "List all currently loaded model URIs",
+      "name": "sysml.loaded_uris",
+      "params": [],
+      "returns": "Vec<string>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Build a hierarchical tree of root elements and their children (for tree views)",
+      "name": "sysml.model.tree",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Maximum depth to recurse (omit for unlimited)",
+          "name": "max_depth",
+          "required": false,
+          "ty": "usize?"
+        },
+        {
+          "description": "View to project: \"user_facing\" (default — mirrors what the simulation UI sees, drops spec-mandated wrappers + currently-hidden kinds) or \"full\" (every element kind preserved, for AI agents inspecting the raw graph).",
+          "name": "view",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "Vec<TreeNode>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run Monte Carlo constraint analysis with parameter distributions, statistics, and histograms",
+      "name": "sysml.montecarlo.run",
+      "params": [
+        {
+          "description": "Configuration: iterations, seed, parameters (distributions)",
+          "name": "config",
+          "required": true,
+          "ty": "json"
+        }
+      ],
+      "returns": "json",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Inject an event into a specific subsystem and advance the orchestrator",
+      "name": "sysml.orchestrate.inject",
+      "params": [
+        {
+          "description": "Session key returned by orchestrate.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the subsystem to inject the event into",
+          "name": "subsystem",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Event to inject",
+          "name": "event",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ExecutionSnapshot",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": true,
+      "description": "Start a multi-subsystem orchestrator session from the model",
+      "name": "sysml.orchestrate.start",
+      "params": [
+        {
+          "description": "URI of the loaded model with multiple subsystems",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "(session_key: string, ExecutionSnapshot)",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Advance all subsystems in the orchestrator by one tick",
+      "name": "sysml.orchestrate.step",
+      "params": [
+        {
+          "description": "Session key returned by orchestrate.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ExecutionSnapshot",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Terminate an orchestrator session and release its resources",
+      "name": "sysml.orchestrate.stop",
+      "params": [
+        {
+          "description": "Session key returned by orchestrate.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compile all subsystems from the workspace and start an orchestrator session",
+      "name": "sysml.orchestrate.workspace.start",
+      "params": [
+        {
+          "description": "URI of the loaded workspace (or __workspace__)",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Time step in milliseconds (default 1.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (default 60000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Parameter overrides applied while BUILDING the orchestrator, so they are in force at tick 0 (scenario setup). An unknown target is a hard error, never a silent no-op. For changing a parameter mid-run use sessions.step's overrides instead.",
+          "name": "overrides",
+          "required": false,
+          "ty": "[(string, string)]?"
+        }
+      ],
+      "returns": "(session_key: string, ExecutionSnapshot)",
+      "stateful": true
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Build the document outline (nested symbol tree) for a loaded URI",
+      "name": "sysml.outline",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<OutlineNode>",
+      "stateful": false
+    },
+    {
+      "category": "Analysis",
+      "deprecated": false,
+      "description": "Parse a SysML file and return the model graph with diagnostics (does not store)",
+      "name": "sysml.parse",
+      "params": [
+        {
+          "description": "File system path to the .sysml file",
+          "name": "path",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "(ModelGraph, Vec<Diagnostic>)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Run a structured, paged query over model elements",
+      "name": "sysml.query",
+      "params": [
+        {
+          "description": "URI of the loaded model to query; use '__workspace__' for the merged workspace graph",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Structured QuerySpec JSON",
+          "name": "spec",
+          "required": true,
+          "ty": "json"
+        }
+      ],
+      "returns": "QueryResult",
+      "stateful": false
+    },
+    {
+      "category": "Analysis",
+      "deprecated": false,
+      "description": "Per-URI readiness predicate: is this question answerable yet (library/project/file)?",
+      "name": "sysml.readiness",
+      "params": [
+        {
+          "description": "URI of the file to query",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Readiness { library, project, file, project_kind }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Find every reference to the element at the given cursor position",
+      "name": "sysml.references",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Cursor line (0-indexed)",
+          "name": "line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Cursor column (UTF-16 code units, 0-indexed)",
+          "name": "col",
+          "required": true,
+          "ty": "u32"
+        }
+      ],
+      "returns": "Vec<RefHit>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute prepare-rename info or apply-rename workspace edits at a cursor position",
+      "name": "sysml.rename",
+      "params": [
+        {
+          "description": "URI of the file at the cursor",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Cursor line (0-indexed)",
+          "name": "line",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "Cursor column (UTF-16 code units, 0-indexed)",
+          "name": "col",
+          "required": true,
+          "ty": "u32"
+        },
+        {
+          "description": "When set, returns apply-rename edits; otherwise returns prepare-rename info",
+          "name": "new_name",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "RenameResponse { prepare? | apply? }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Salsa query execution statistics (executions, validations, hit ratio)",
+      "name": "sysml.salsa.stats",
+      "params": [],
+      "returns": "SalsaStats { executions, validations, hit_ratio }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Reset salsa query execution statistics to zero",
+      "name": "sysml.salsa.stats.reset",
+      "params": [],
+      "returns": "SalsaStatsResetResult { status }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run a verification case end-to-end (SM compile + event-script + auto-step + per-tick assertion eval). Returns verdict + trace + assertion_checkpoints.",
+      "name": "sysml.scenario.run",
+      "params": [
+        {
+          "description": "Verification case name (e.g. \"MyVerificationCase\")",
+          "name": "case_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional max-ticks override (defaults to OrchestratorConfig::max_ticks)",
+          "name": "max_ticks",
+          "required": false,
+          "ty": "u32?"
+        }
+      ],
+      "returns": "JSON { verdict, requirement_results, assertion_checkpoints, trace, final_snapshot }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compute per-parameter Morris (μ, σ) or Sobol (S_i, S_Ti) indices from a completed sensitivity batch",
+      "name": "sysml.sensitivity.analyze",
+      "params": [
+        {
+          "description": "Opaque batch id returned by sysml.batch.create with kind=sensitivity",
+          "name": "batch_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Sensitivity method: \"morris\" or \"sobol\"",
+          "name": "method",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "JSON-encoded array of ParamRange objects (one per parameter, same order as batch generation)",
+          "name": "parameters_of_interest",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Metric name used to score each child (verdict evidence key or params key)",
+          "name": "output_metric",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Morris level count p (default 4). Ignored for Sobol.",
+          "name": "morris_levels",
+          "required": false,
+          "ty": "usize?"
+        }
+      ],
+      "returns": "{ method, parameters: Vec<SensitivityResult> }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fetch the full archived session record (metadata + snapshots + verdicts) by id",
+      "name": "sysml.sessions.archive.get",
+      "params": [
+        {
+          "description": "Opaque archived session id",
+          "name": "id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ArchiveGetResult { entry: Option<ArchivedSession> }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List archived sessions (completed runs) matching optional workspace / origin / since / only_golden filters",
+      "name": "sysml.sessions.archive.list",
+      "params": [
+        {
+          "description": "Restrict to sessions whose workspace_uri matches exactly",
+          "name": "workspace_uri",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Restrict to sessions produced by this workflow: run | verify | sweep | montecarlo | tradestudy",
+          "name": "origin",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Unix-millisecond lower bound on created_at (inclusive)",
+          "name": "since",
+          "required": false,
+          "ty": "i64?"
+        },
+        {
+          "description": "If true, only sessions tagged golden are returned",
+          "name": "only_golden",
+          "required": false,
+          "ty": "bool?"
+        }
+      ],
+      "returns": "ArchiveListResult { entries: Vec<ArchivedSessionSummary> }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Tag an archived session as a golden reference run — pins it against archive eviction",
+      "name": "sysml.sessions.archive.mark_golden",
+      "params": [
+        {
+          "description": "Opaque archived session id",
+          "name": "id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Human-readable label for the golden marker (e.g. 'v1.3 baseline')",
+          "name": "label",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ArchiveMarkGoldenResult { ok: bool }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Remove the golden tag from an archived session — it becomes eligible for LRU eviction again",
+      "name": "sysml.sessions.archive.unmark_golden",
+      "params": [
+        {
+          "description": "Opaque archived session id",
+          "name": "id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ArchiveUnmarkGoldenResult { ok: bool }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Create an execution session, inferring the kind (simulation / action / orchestrator) from the model and optional target. Unified entry point subsuming the *.start commands.",
+      "name": "sysml.sessions.create",
+      "params": [
+        {
+          "description": "URI of the loaded model, or __workspace__ for the merged workspace",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional target: a state-machine or action name. Omit (or pass __workspace__) to run the whole multi-subsystem workspace orchestrator.",
+          "name": "target",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Time step in milliseconds (orchestrator sessions; default 1.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (orchestrator sessions; default 60000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Scenario overrides applied while BUILDING the session, so they hold from tick 0. Orchestrator sessions only. An unknown target is a hard error. Recorded on the session as create_overrides and archived on stop; use sessions.step's overrides to change a parameter mid-run instead.",
+          "name": "overrides",
+          "required": false,
+          "ty": "[(string, string)]?"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Diff two sessions' latest snapshots (subsystem states + context variables)",
+      "name": "sysml.sessions.diff",
+      "params": [
+        {
+          "description": "Opaque session id of side A",
+          "name": "a_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Opaque session id of side B",
+          "name": "b_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SessionDivergence",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Walk two sessions' histories tick-by-tick and report where they first diverged",
+      "name": "sysml.sessions.diff_timeline",
+      "params": [
+        {
+          "description": "Opaque session id of side A",
+          "name": "a_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Opaque session id of side B",
+          "name": "b_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SessionTimelineDivergence",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fork a session at its current tick into an independent child",
+      "name": "sysml.sessions.fork",
+      "params": [
+        {
+          "description": "Opaque session id of the parent session",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fork a session (optionally rewound to a past tick) and atomically apply parameter overrides to the child",
+      "name": "sysml.sessions.fork_with_overrides",
+      "params": [
+        {
+          "description": "Opaque session id of the parent session",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Parameter overrides as (name, value) pairs; values parsed into numeric or string values",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        },
+        {
+          "description": "Optional tick to rewind to before forking. None or null = fork from current tick (backward compatible). Past ticks require a retained orchestrator snapshot.",
+          "name": "at_tick",
+          "required": false,
+          "ty": "u64?"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return full detail for a session, including subsystems and the latest snapshot",
+      "name": "sysml.sessions.info",
+      "params": [
+        {
+          "description": "Session id (UUID) returned by any *.start command",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "When false, strip the 'variables' map from latest_snapshot. A large multi-subsystem workspace has ~14k variables (~920 KB JSON); skipping them cuts this payload by 99% and is the right default for polling callers that only need tick / current_state / subsystem summaries. Defaults to true for backward compatibility.",
+          "name": "include_variables",
+          "required": false,
+          "ty": "bool?"
+        }
+      ],
+      "returns": "Option<SessionDetail>",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Inject an event into a named subsystem of any session and advance one tick, optionally applying context overrides first",
+      "name": "sysml.sessions.inject",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Subsystem name as registered on the orchestrator",
+          "name": "subsystem",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Event name to inject",
+          "name": "event",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional context overrides applied before stepping; numeric strings are parsed into typed values",
+          "name": "overrides",
+          "required": false,
+          "ty": "[(string, string)]?"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List all live runtime sessions (state-machine, action, orchestrator) as typed summaries",
+      "name": "sysml.sessions.list",
+      "params": [],
+      "returns": "Vec<SessionSummary>",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Report per-kind session budgets and current usage",
+      "name": "sysml.sessions.quota",
+      "params": [],
+      "returns": "SessionQuota",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Drop all sessions past the inactivity timeout; returns the count removed",
+      "name": "sysml.sessions.reap",
+      "params": [],
+      "returns": "usize",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Set the display label on any session",
+      "name": "sysml.sessions.rename",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "New display label; empty string clears it",
+          "name": "label",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Reset any session to its initial state, clearing step history and restarting the expiry timer",
+      "name": "sysml.sessions.reset",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Clear the pause flag on a session halted at a breakpoint so subsequent sessions.step calls advance again. Idempotent: a no-op success on a session that isn't paused. Does not itself advance any ticks.",
+      "name": "sysml.sessions.resume",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Advance any session, optionally injecting an event and applying context overrides ONCE before stepping. `ticks` (default 1) runs that many ticks server-side in one call — for fine-dt runs that need thousands of ticks to reach an event (avoids a per-tick round-trip); the run still stops early at a breakpoint pause or the session's configured tick/time limit. Every advanced tick is recorded to the time series, so chart data stays complete; poll sessions.timeseries_decimated for it.",
+      "name": "sysml.sessions.step",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional event to inject into the primary subsystem before stepping",
+          "name": "event",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Optional context overrides applied before stepping; numeric strings are parsed into typed values",
+          "name": "overrides",
+          "required": false,
+          "ty": "[(string, string)]?"
+        },
+        {
+          "description": "Number of ticks to advance in this call (default 1). Runs server-side; capped at MAX_BULK_STEP_TICKS — a larger value is InvalidInput, never silently clamped.",
+          "name": "ticks",
+          "required": false,
+          "ty": "u64?"
+        }
+      ],
+      "returns": "SessionSummary",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Terminate a session of any kind and release its resources",
+      "name": "sysml.sessions.stop",
+      "params": [
+        {
+          "description": "Opaque session id returned by any *.start command",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List the subsystems of any session without fetching a full snapshot",
+      "name": "sysml.sessions.subsystems",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<SubsystemSummary>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fetch (time_ms, value) points for a single variable from a session's canonical time-series buffer (optionally bounded)",
+      "name": "sysml.sessions.timeseries",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Variable name (as it appears in NormalizedSnapshot::scalar_vars)",
+          "name": "var",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Inclusive lower bound on time_ms; None = unbounded",
+          "name": "start_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Inclusive upper bound on time_ms; None = unbounded",
+          "name": "end_ms",
+          "required": false,
+          "ty": "f64?"
+        }
+      ],
+      "returns": "TimeSeriesResult",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Fetch an LTTB-decimated time series for a single variable (preserves visual shape; ideal for chart rendering)",
+      "name": "sysml.sessions.timeseries_decimated",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Variable name (as it appears in NormalizedSnapshot::scalar_vars)",
+          "name": "var",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Target decimated point count (typical: on-screen pixel width)",
+          "name": "target_points",
+          "required": true,
+          "ty": "usize"
+        },
+        {
+          "description": "Inclusive lower bound on time_ms; None = unbounded",
+          "name": "start_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Inclusive upper bound on time_ms; None = unbounded",
+          "name": "end_ms",
+          "required": false,
+          "ty": "f64?"
+        }
+      ],
+      "returns": "TimeSeriesResult",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List the variable names captured in a session's canonical time-series buffer",
+      "name": "sysml.sessions.timeseries_names",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "TimeSeriesNamesResult",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return the structural topology of a session (modules, subsystems, physics domains)",
+      "name": "sysml.sessions.topology",
+      "params": [
+        {
+          "description": "Session id (UUID)",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "SystemTopology",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Verify a running session's declared verification cases against its LIVE final-tick state (reads simulation-produced attributes like tripped/trip_time from the session's orchestrator context, including its slot store), routing each case through the one VerificationRunner. Reflects live-injected overrides and advanced ticks with no re-run. Optional case_names filters to specific cases; omit for all declared cases in the session's workspace.",
+      "name": "sysml.sessions.verify",
+      "params": [
+        {
+          "description": "Opaque session id",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional verification-case names to run; omit or empty = all declared cases",
+          "name": "case_names",
+          "required": false,
+          "ty": "[string]?"
+        }
+      ],
+      "returns": "Vec<VerifyResult>",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Start a continuous simulation auto-discovering ODE config from model metadata",
+      "name": "sysml.simulate.continuous.auto",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the state machine definition to simulate",
+          "name": "sm_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Time step in milliseconds (default 100.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (default 30000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        }
+      ],
+      "returns": "json",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Compile a state machine from the model and start a simulation session",
+      "name": "sysml.simulate.start",
+      "params": [
+        {
+          "description": "URI of the loaded model containing the state machine",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the state machine definition to simulate",
+          "name": "sm_name",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "(session_key: string, StepResult)",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Advance a simulation session by one step with an optional event",
+      "name": "sysml.simulate.step",
+      "params": [
+        {
+          "description": "Session key returned by simulate.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional event to inject (e.g. 'timer', 'buttonPress')",
+          "name": "event",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "StepResult",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Terminate a simulation session and release its resources",
+      "name": "sysml.simulate.stop",
+      "params": [
+        {
+          "description": "Session key returned by simulate.start",
+          "name": "session_key",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "()",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run constraint network solving with binding propagation, DOF analysis, optional rollup and sensitivity sweep",
+      "name": "sysml.solve",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Key=value parameter overrides for known variable values",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        },
+        {
+          "description": "Property name to compute hierarchical rollup (e.g. 'mass')",
+          "name": "rollup_property",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Sensitivity sweep spec as 'param:lo:hi' (e.g. 'speed:0:200')",
+          "name": "sweep_spec",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "SolveResult { solved, iterations, unsolved, dof, rollups, sensitivity }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute element and relationship count statistics for a model",
+      "name": "sysml.stats",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ElementStats",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Create a named, immutable baseline pointing at a commit (default: the latest). Baselines can never be renamed or retargeted; the referenced commit becomes eviction-exempt. When the workspace root is a git work tree, git provenance (HEAD sha, dirty flag, branch) is recorded as corroborating metadata — a dirty tree is recorded honestly, never refused (the content-addressed commit digest is the identity; B6 steward ruling 2026-07-16).",
+      "name": "sysml.store.baseline.create",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Baseline name (unique per project)",
+          "name": "name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Commit id to baseline (default: latest)",
+          "name": "commit",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "BaselineMeta",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "List a project's baselines (most recently created first)",
+      "name": "sysml.store.baseline.list",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<BaselineMeta>",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Element-level diff between two stored snapshots. `from`/`to` each accept a baseline name (resolved first) or a commit id; omitted `to` means the latest commit. Optional element_ids narrows the result (the changed-since composition). Scope renames / anonymous-sibling shifts surface as removed+added per the ADR-009 identity contract.",
+      "name": "sysml.store.diff",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Baseline name or commit id to diff from",
+          "name": "from",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Baseline name or commit id to diff to (default: latest commit)",
+          "name": "to",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Element ids to narrow the diff to (empty = no filter)",
+          "name": "element_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "GraphDiff",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "List all commits for a project (most recent first)",
+      "name": "sysml.store.history",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<SnapshotMeta>",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Get the latest commit ID for a project from the store",
+      "name": "sysml.store.latest",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "CommitId?",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Load a stored model snapshot by project and commit ID",
+      "name": "sysml.store.load",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Commit identifier",
+          "name": "commit",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "ModelGraph?",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "List all projects in the store",
+      "name": "sysml.store.projects",
+      "params": [],
+      "returns": "Vec<ProjectId>",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Store a model snapshot with version metadata",
+      "name": "sysml.store.save",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Snapshot metadata (commit ID, message, timestamp)",
+          "name": "meta",
+          "required": true,
+          "ty": "SnapshotMeta"
+        },
+        {
+          "description": "The model graph to store",
+          "name": "graph",
+          "required": true,
+          "ty": "ModelGraph"
+        }
+      ],
+      "returns": "()",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Snapshot the current elaborated workspace graph into the store under a content-addressed commit id (SHA-256 of the diff-compared content). Idempotent: an unchanged workspace returns the existing commit's metadata instead of minting a new one. The graph is read through the same workspace accessor `sysml.workspace.requirement_rows` uses, so element ids in stored snapshots correlate 1:1 with row ids.",
+      "name": "sysml.store.save_workspace",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Commit message (default: 'workspace snapshot')",
+          "name": "message",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "SnapshotMeta",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Report service feature-flag capabilities (fork-at-tick, snapshot retention, etc.)",
+      "name": "sysml.system.capabilities",
+      "params": [],
+      "returns": "ServiceCapabilities",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return a single TickSnapshot from a runtime session's history at the given tick index.",
+      "name": "sysml.timeline.getSnapshot",
+      "params": [
+        {
+          "description": "Runtime session id (ElementId-as-string)",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Tick index into session.history() (0-based)",
+          "name": "tick",
+          "required": true,
+          "ty": "usize"
+        }
+      ],
+      "returns": "JSON TickSnapshot",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return the full execution trace for a runtime session — every TickSnapshot from history() serialized to JSON.",
+      "name": "sysml.timeline.getTrace",
+      "params": [
+        {
+          "description": "Runtime session id (ElementId-as-string)",
+          "name": "session_id",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "JSON { trace: [TickSnapshot, ...] }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Generate a sequence trace by simulating message flow through compiled flow topology",
+      "name": "sysml.trace",
+      "params": [
+        {
+          "description": "URI of the loaded model with flow connections",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Source port and payload pairs to inject",
+          "name": "inject_specs",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "TraceResult { lifelines, messages }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Generate a traceability matrix between element kinds via a relationship kind",
+      "name": "sysml.trace_matrix",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Kind of source elements (e.g. 'PartUsage')",
+          "name": "source_kind",
+          "required": true,
+          "ty": "ElementKind"
+        },
+        {
+          "description": "Relationship kind to trace (e.g. 'Satisfy')",
+          "name": "rel_kind",
+          "required": true,
+          "ty": "RelationshipKind"
+        },
+        {
+          "description": "Kind of target elements (e.g. 'RequirementUsage')",
+          "name": "target_kind",
+          "required": true,
+          "ty": "ElementKind"
+        }
+      ],
+      "returns": "Vec<TraceMatrixRow>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run a trade study evaluating design alternatives against a minimize/maximize objective",
+      "name": "sysml.trade_study",
+      "params": [
+        {
+          "description": "Name of the trade study analysis case",
+          "name": "study_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Key=value parameter overrides",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "json",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Sweep an ODE parameter across a range, running full simulations per value",
+      "name": "sysml.trade_study.ode_sweep",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the state machine definition to simulate",
+          "name": "sm_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the ODE parameter to sweep (e.g. 'loadCurrent')",
+          "name": "parameter_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Minimum value of sweep range",
+          "name": "min_value",
+          "required": true,
+          "ty": "f64"
+        },
+        {
+          "description": "Maximum value of sweep range",
+          "name": "max_value",
+          "required": true,
+          "ty": "f64"
+        },
+        {
+          "description": "Number of sweep steps (e.g. 20)",
+          "name": "steps",
+          "required": true,
+          "ty": "usize"
+        },
+        {
+          "description": "Time step in milliseconds (default 10.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (default 30000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Baseline parameter overrides applied to ALL variants (e.g. [['leakageCurrent','0']] to isolate the Breaker path)",
+          "name": "baseline_overrides",
+          "required": false,
+          "ty": "[(string, string)]?"
+        }
+      ],
+      "returns": "json",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "Remove a previously-loaded URI from the analysis host",
+      "name": "sysml.unload_file",
+      "params": [
+        {
+          "description": "URI of the loaded model to remove",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "bool",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: find all requirements that have no Verify relationship targeting them",
+      "name": "sysml.unverified",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<Element>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run a named verification case against model requirements with optional parameter overrides",
+      "name": "sysml.verify",
+      "params": [
+        {
+          "description": "Name of the verification case to run",
+          "name": "case_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Key=value parameter overrides for the evaluation context",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        }
+      ],
+      "returns": "VerifyResult { verdict, summary, requirements, diagnostics }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run ODE simulation with parameter overrides, then verify the model's verification cases against the result (verdict via VerificationRunner)",
+      "name": "sysml.verify_with_simulation",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the state machine definition to simulate",
+          "name": "sm_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Parameter overrides as (key, value) pairs",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        },
+        {
+          "description": "Time step in milliseconds (default 1.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (default 60000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        }
+      ],
+      "returns": "json",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run ODE simulation and return full time-series trace for charting (sampled to max_points)",
+      "name": "sysml.verify_with_simulation_trace",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Name of the state machine definition to simulate",
+          "name": "sm_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Parameter overrides as (key, value) pairs",
+          "name": "overrides",
+          "required": true,
+          "ty": "[(string, string)]"
+        },
+        {
+          "description": "Time step in milliseconds (default 1.0)",
+          "name": "dt_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum simulation time in milliseconds (default 60000.0)",
+          "name": "max_time_ms",
+          "required": false,
+          "ty": "f64?"
+        },
+        {
+          "description": "Maximum trace points to return (default 500)",
+          "name": "max_points",
+          "required": false,
+          "ty": "usize?"
+        }
+      ],
+      "returns": "json",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "List verification executions (newest-first) as a projection over the session archive: each is an archived session (trajectory or external ingest) carrying >=1 verdict, with origin, evaluation_mode, B6 provenance, external run identity, per-case results (verdict + case_changed_since stale flag), and verdict counts. Verdict-less simulation runs are not executions. Optional case_name filter keeps only executions touching that case. Scoped server-side via session provenance, like sysml.verify.timeline.",
+      "name": "sysml.verify.executions",
+      "params": [
+        {
+          "description": "Optional verification-case NAME: keep only executions that touched that case. Omit for all executions.",
+          "name": "case_name",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "ExecutionsResult { executions: [{ execution_id, origin, label?, timestamp, evaluation_mode, provenance?, external?, results: [{ case_id, verdict, evaluation_mode, timestamp, case_digest?, case_changed_since }], counts }] }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Per-case latest verification status across executions, context-qualified by evaluation_mode: {trajectory?, external?} with verdict, execution_id, timestamp, case_changed_since, and mode-specific provenance (trajectory model_digest; external tool + matches_current_model). Execution-side only — the caller composes it with the static read. Scoped server-side via session provenance.",
+      "name": "sysml.verify.latest_status",
+      "params": [],
+      "returns": "LatestStatusResult { cases: [{ case_id, case_element_id?, latest: { trajectory?: { verdict, execution_id, timestamp, case_changed_since, model_digest? }, external?: { verdict, execution_id, timestamp, tool?, matches_current_model, case_changed_since } } }] }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Ingest externally produced verification verdicts (CI, pytest, HIL) as a synthetic archived session (origin 'external'). Requires the producing tool name and the model content digest the results were produced against (declared_digest); each verdict row is {case_id: <verification case NAME in the current workspace>, verdict: pass|fail|inconclusive|error, artifacts?: [uri]}. Unknown case names or verdict strings reject the whole batch; a stale declared_digest is recorded and labeled, never rejected. Verdicts appear in sysml.verify.timeline with the external evidence block.",
+      "name": "sysml.verify.record_external",
+      "params": [
+        {
+          "description": "Producing tool, e.g. 'pytest-7.4' (required, non-blank)",
+          "name": "tool",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ModelGraph content digest the results were produced against (required — same identity space as baselines and session provenance)",
+          "name": "declared_digest",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Verdict rows: array of {case_id, verdict, artifacts?}",
+          "name": "verdicts",
+          "required": true,
+          "ty": "json"
+        },
+        {
+          "description": "Opaque run reference in the tool's namespace (CI job URL, test-run id)",
+          "name": "run_ref",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Run-level artifact URIs attached to every verdict",
+          "name": "artifacts",
+          "required": false,
+          "ty": "[string]?"
+        },
+        {
+          "description": "Optional human label for the archive entry",
+          "name": "label",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "RecordExternalResult { session_id, recorded, declared_digest, current_digest, matches_current_model }",
+      "stateful": true
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Return verdict-flip history across past verification runs of the current workspace (scoped server-side via session provenance), with optional case and timestamp filters",
+      "name": "sysml.verify.timeline",
+      "params": [
+        {
+          "description": "Optional list of case ids to restrict the timeline to. Omit to include every case in the workspace.",
+          "name": "case_ids",
+          "required": false,
+          "ty": "[string]?"
+        },
+        {
+          "description": "Optional Unix-millisecond lower bound: only entries with timestamp >= since_timestamp are returned. Omit for all time.",
+          "name": "since_timestamp",
+          "required": false,
+          "ty": "i64?"
+        }
+      ],
+      "returns": "VerdictTimelineResult { entries: [{ session_id, timestamp, case_id, verdict, evaluation_mode, evidence?, external? }] }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: list ViewpointDefinitions / ViewpointUsages whose StakeholderMembership references the given stakeholder PartUsage",
+      "name": "sysml.viewpoints.by_stakeholder",
+      "params": [
+        {
+          "description": "URI of the loaded model. Use '__workspace__' for the merged workspace graph.",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the stakeholder PartUsage.",
+          "name": "stakeholder_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Vec<ElementId>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: list user-authored views that satisfy the given ViewpointDefinition / ViewpointUsage",
+      "name": "sysml.views.by_viewpoint",
+      "params": [
+        {
+          "description": "URI of the loaded model. Use '__workspace__' for the merged workspace graph.",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the ViewpointDefinition / ViewpointUsage.",
+          "name": "viewpoint_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "Vec<ViewSummary>",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Build a 'view scratch : InterconnectionView { expose ...; }' source snippet from a list of qualified names",
+      "name": "sysml.views.create_scratch",
+      "params": [
+        {
+          "description": "Qualified names or element references to expose. One `expose <name>;` line is emitted per entry.",
+          "name": "expose",
+          "required": true,
+          "ty": "[string]"
+        }
+      ],
+      "returns": "string (SysML source)",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Legacy wrapper over sysml.query: list user-authored ViewUsage / ViewDefinition elements (id, name, exposed namespaces, render and filter members)",
+      "name": "sysml.views.list",
+      "params": [
+        {
+          "description": "URI of the loaded model. Use '__workspace__' for the merged workspace graph.",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "Vec<ViewSummary>",
+      "stateful": false
+    },
+    {
+      "category": "Visualization",
+      "deprecated": false,
+      "description": "Render a user-authored ViewUsage as a diagram (composes ViewRequest from the view's Expose / filter / rendering memberships)",
+      "name": "sysml.views.render",
+      "params": [
+        {
+          "description": "URI of the loaded model",
+          "name": "uri",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "ElementId of the ViewUsage / ViewDefinition to render",
+          "name": "view_usage_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "IDs of nodes to show expanded (merged with the view's auto-expansion)",
+          "name": "expanded_ids",
+          "required": true,
+          "ty": "Set<string>"
+        }
+      ],
+      "returns": "JSON (ViewModel)",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Override a variable value and evaluate ALL constraints on the graph (baseline vs override), returning per-constraint flips plus an overlay payload (values, constraintResults, guardDiagnoses) suitable for the diagram overlay UI. Optional session_key selects an orchestrator session as the base context.",
+      "name": "sysml.whatif",
+      "params": [
+        {
+          "description": "Name of the variable to override",
+          "name": "variable_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Override value (as string, parsed via parse_value_string)",
+          "name": "override_value",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional orchestrator session_key (ElementId string). When provided, the active session's context is used as the baseline and the latest snapshot's guardDiagnoses are surfaced.",
+          "name": "session_key",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "WhatIfResult { variable_name, override_value, baseline, overridden, flipped, values, constraintResults, guardDiagnoses, overriddenVariable, overriddenValue }",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Sweep a parameter across a range and evaluate constraints at each step to find thresholds",
+      "name": "sysml.whatif.sweep",
+      "params": [
+        {
+          "description": "Element ID of the variable to sweep",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Name of the variable to sweep",
+          "name": "variable_name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Start value of sweep range",
+          "name": "start",
+          "required": true,
+          "ty": "f64"
+        },
+        {
+          "description": "End value of sweep range",
+          "name": "end",
+          "required": true,
+          "ty": "f64"
+        },
+        {
+          "description": "Number of steps in the sweep",
+          "name": "steps",
+          "required": true,
+          "ty": "usize"
+        }
+      ],
+      "returns": "SweepResult { variable_name, steps, threshold }",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Assign an engineer to an element (workflow sidecar). Folded state keeps the latest assignee; the log keeps every assignment. The element must exist in the current workspace; requires an explicit non-blank `actor` and `assignee`.",
+      "name": "sysml.workflow.assign",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element being assigned (must exist)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Who is assigned",
+          "name": "assignee",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who assigns (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Record a suspect-clearing attestation: `actor` reviewed `element_id`'s changes since `baseline` (name or commit id) and vouches the intent still holds. Mints/resolves the current content commit first (idempotent) and pins it as `attested_commit` — any later content change supersedes the attestation and suspicion re-fires. Fails if the element is not actually suspect against the baseline, or if `actor` is blank (no silent default identity).",
+      "name": "sysml.workflow.attest_suspect_clearing",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The suspect requirement's element id",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Baseline name or commit id the clearing is against",
+          "name": "baseline",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Why the change does not invalidate intent",
+          "name": "rationale",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who attests (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Record a MANUAL verification act on an element (B10 layer 3, human leg): `actor` verified `element_id` by `method` (one of the spec's VerificationMethodKind: inspect | analyze | demo | test — validated, closed set). An ATTESTATION in the append-only workflow sidecar — never a computed verdict; it must never render as a verdict chip or enter verdict rollups. Mints/resolves the current content commit and pins it as `attested_commit`; any later content change supersedes the attestation at display time. Requires a non-blank `actor` and `statement`.",
+      "name": "sysml.workflow.attest_verification",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The verified element's id (verification case or requirement)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Verification method: inspect | analyze | demo | test",
+          "name": "method",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "What the engineer actually did/observed",
+          "name": "statement",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who attests (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Record a review comment on an element in the append-only workflow sidecar. The element must exist in the current workspace (new writes against dead ids are rejected — history on later-churned ids is handled at read time). Requires an explicit non-blank `actor` and `body`.",
+      "name": "sysml.workflow.comment",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element the comment is about (must exist)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Comment text",
+          "name": "body",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who comments (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "The append-only workflow event log for a project, oldest-first; optionally filtered to one element. Events keyed on ids that no longer exist are still returned — history is never deleted or silently re-attached (ADR-009).",
+      "name": "sysml.workflow.log",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Filter to one element's history",
+          "name": "element_id",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "Vec<WorkflowEvent>",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Record a deliberate re-link of workflow history from a dead element id to its successor (ADR-009: identity changes are never auto-matched; a re-link is itself an audited event). The target must exist in the current workspace.",
+      "name": "sysml.workflow.relink",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The dead/prior element id",
+          "name": "from_element",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The successor element id (must exist)",
+          "name": "to_element",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Why these identities are the same artifact",
+          "name": "rationale",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who re-links (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Transition an element's approval state (workflow sidecar; closed vocabulary: draft, in_review, approved, rejected — 'draft' is every element's initial state). The transition's `from` is derived server-side from the folded event log, never client-claimed; a no-op transition (target == current state) is rejected. The element must exist in the current workspace; requires an explicit non-blank `actor`.",
+      "name": "sysml.workflow.set_approval",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element whose approval state changes (must exist)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Target state: draft | in_review | approved | rejected",
+          "name": "to",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who transitions (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Storage",
+      "deprecated": false,
+      "description": "Record a sign-off attestation statement against an element (workflow sidecar; all sign-offs are kept oldest-first in folded state — a sign-off is a statement of record, never overwritten). The element must exist in the current workspace; requires an explicit non-blank `actor` and `statement`.",
+      "name": "sysml.workflow.sign_off",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element being signed off (must exist)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The attestation statement",
+          "name": "statement",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Who signs (explicit identity, required)",
+          "name": "actor",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "WorkflowEvent",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Current workflow state of one element, derived by folding its event log (never authored): latest approval + assignee, sign-offs, suspect-clearing attestations (each flagged `superseded` when the requirement changed again after it), comment count, and `orphaned` (the id no longer exists in the current graph — history belongs to a prior identity).",
+      "name": "sysml.workflow.state",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "The element whose state to fold",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "ElementWorkflowState",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding an `attribute <name> [= <value>];` member to an element. Name must be a valid identifier; value (optional) is a single-line expression (no `;`). Fails when an attribute of that name already exists (edit its value instead). Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_attribute",
+      "params": [
+        {
+          "description": "Element id gaining the attribute (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Attribute name (identifier)",
+          "name": "name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional value expression (single line, no `;`)",
+          "name": "value",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding an `assume/require constraint [name] { <expr> }` member to a requirement. kind is \"assume\" or \"require\"; expr is a single-line boolean expression (no braces or `;`); name (optional) is an identifier. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_constraint",
+      "params": [
+        {
+          "description": "Requirement element id gaining the constraint",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Constraint kind: \"assume\" or \"require\"",
+          "name": "kind",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Single-line boolean expression (no braces or `;`)",
+          "name": "expr",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional constraint name (identifier)",
+          "name": "name",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit inserting `#derivation connection { end #original ::> <original>; end #derive ::> <derived>; }` at the end of the derived requirement's owning package. Prepends `private import RequirementDerivation::*;` in the same insertion when the owning-package chain lacks one (the import is load-bearing for Derive elaboration). Fails hard when the derive link already exists. requirement_id is the DERIVED end; a 'derived to' add swaps the roles client-side. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_derive_link",
+      "params": [
+        {
+          "description": "The DERIVED requirement's element id (the row being edited)",
+          "name": "requirement_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The ORIGINAL requirement's element id (what it derives from)",
+          "name": "original_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding a @Rationale { text = \"…\" } metadata member to an element. Add-only (a requirement may carry several rationale annotations; the read side joins them). Text must be single-line non-blank; embedded quotes/backslashes are escaped. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_rationale",
+      "params": [
+        {
+          "description": "Element id gaining the rationale (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Rationale text (single line)",
+          "name": "text",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit inserting `dependency from <refining> to <refined> { @Refinement; }` at the end of the refining requirement's owning package. Prepends `private import ModelingMetadata::*;` in the same insertion when the owning-package chain lacks one (the import is load-bearing for Refine elaboration). requirement_id is the REFINING end (the row's outgoing `refines`). Fails hard when the refine link already exists. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_refine_link",
+      "params": [
+        {
+          "description": "The REFINING requirement's element id (the row being edited)",
+          "name": "requirement_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The REFINED requirement's element id (what it refines)",
+          "name": "refined_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding a doc comment to an element that has none. Fails when a doc comment already exists (use edit_requirement_doc). Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_requirement_doc",
+      "params": [
+        {
+          "description": "Element id gaining the doc comment (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Doc body text",
+          "name": "new_text",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding @StatusInfo { status = StatusKind::<status> } to an element that has none (closed vocabulary: open|tbd|tbr|tbc|done|closed). Fails when @StatusInfo already exists (use edit_requirement_maturity). Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_requirement_maturity",
+      "params": [
+        {
+          "description": "Element id gaining the maturity metadata (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Maturity: one of open|tbd|tbr|tbc|done|closed",
+          "name": "status",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit adding a `<keyword> <name> : <Type>;` member (role = \"subject\"|\"actor\"|\"stakeholder\"|\"concern\") to a requirement. type_id references the definition: subject accepts any definition, actor/stakeholder a part definition, concern a concern definition. Subject is singleton (fails when one exists). name is an identifier. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_requirement_role",
+      "params": [
+        {
+          "description": "Requirement element id gaining the role",
+          "name": "requirement_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Role: \"subject\" | \"actor\" | \"stakeholder\" | \"concern\"",
+          "name": "role",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Element id of the referenced definition",
+          "name": "type_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Local parameter name (identifier)",
+          "name": "name",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit inserting `satisfy <requirement>;` at the end of the picked subject element's body (the subject's file — possibly a different file than the requirement's). The reference is the requirement's simple name when it is a sibling scope member, its fully qualified name otherwise. Fails hard when the satisfy link already exists. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_satisfy_link",
+      "params": [
+        {
+          "description": "The satisfied requirement's element id (a requirement row id)",
+          "name": "requirement_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The satisfying element's id (typically a part usage — the insertion target)",
+          "name": "subject_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit inserting `verify <requirement>;` into the picked verification case's objective body (the case's file). A case with no objective gets the whole `objective { verify <requirement>; }` block. Fails hard when the case already verifies the requirement, or when the target is not a verification case. Buffer-writeback with an expected_old_text guard.",
+      "name": "sysml.workspace.add_verify_link",
+      "params": [
+        {
+          "description": "The verified requirement's element id (a requirement row id)",
+          "name": "requirement_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "The verifying case's element id (a verification case def/usage — the insertion target)",
+          "name": "case_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Workspace-level model-content feature flags + name lists for the simulation app's UI gating.",
+      "name": "sysml.workspace.capabilities",
+      "params": [],
+      "returns": "WorkspaceCapabilitiesResult",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit inserting a new requirement (optional <'short name'> reqId and doc body) at the end of a package's or requirement's body. Buffer-writeback: the client applies the edit only if the buffer slice equals expected_old_text. The parent must be a package or requirement.",
+      "name": "sysml.workspace.create_requirement",
+      "params": [
+        {
+          "description": "Parent element id (a package or requirement row id)",
+          "name": "parent_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "Requirement name (identifier)",
+          "name": "name",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Optional requirement ID (the spec's declaredShortName, rendered <'…'>)",
+          "name": "short_name",
+          "required": false,
+          "ty": "string?"
+        },
+        {
+          "description": "Optional statement text (rendered as a doc comment)",
+          "name": "doc",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit replacing an attribute usage's inline `= value` expression. Buffer-writeback with an expected_old_text guard. Fails hard when the declaration has no inline value (adding one is a creation action).",
+      "name": "sysml.workspace.edit_attribute_value",
+      "params": [
+        {
+          "description": "The attribute usage's element id",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "New value expression (single line, no `;`)",
+          "name": "new_value",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit replacing an element's doc-comment body (first doc in document order). Buffer-writeback: the client applies the edit only if the buffer slice equals expected_old_text, else fails loudly. Fails hard when no doc comment exists (adding one is a creation action).",
+      "name": "sysml.workspace.edit_requirement_doc",
+      "params": [
+        {
+          "description": "Element id owning the doc comment (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "New doc body text (comment delimiters are preserved)",
+          "name": "new_text",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Compute a guarded text edit setting @StatusInfo status to StatusKind::<status> (closed vocabulary: open|tbd|tbr|tbc|done|closed). Buffer-writeback with an expected_old_text guard. Fails hard when the element has no @StatusInfo metadata (adding one is a creation action).",
+      "name": "sysml.workspace.edit_requirement_maturity",
+      "params": [
+        {
+          "description": "Element id carrying the @StatusInfo metadata (a requirement row id)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        },
+        {
+          "description": "New maturity: one of open|tbd|tbr|tbc|done|closed",
+          "name": "status",
+          "required": true,
+          "ty": "string"
+        }
+      ],
+      "returns": "FieldEditComputed { uri, element_id, field, edit: TextEdit }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Recursively list .sysml/.kerml files under a workspace directory; tree pruned to directories that contain such files.",
+      "name": "sysml.workspace.files",
+      "params": [
+        {
+          "description": "Absolute path to the workspace root to scan",
+          "name": "root",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Maximum recursion depth (default: 5)",
+          "name": "max_depth",
+          "required": false,
+          "ty": "u32?"
+        }
+      ],
+      "returns": "WorkspaceFilesResult { root, entries }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Return tree + stats for every loaded user URI in one call (excludes __workspace__/__stdlib__).",
+      "name": "sysml.workspace.info",
+      "params": [
+        {
+          "description": "Optional explicit list of URIs to query. Omit to return info for every loaded user URI.",
+          "name": "uris",
+          "required": false,
+          "ty": "[string]?"
+        }
+      ],
+      "returns": "Vec<WorkspaceUriInfo { uri, tree, stats }>",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Workspace-level summary: per-root discovery + loaded host counts + transport-supplied telemetry counters.",
+      "name": "sysml.workspace.info_summary",
+      "params": [
+        {
+          "description": "Absolute workspace-root paths to report on.",
+          "name": "workspace_roots",
+          "required": true,
+          "ty": "[string]"
+        },
+        {
+          "description": "Telemetry counters from the calling transport (key, value).",
+          "name": "telemetry_counters",
+          "required": true,
+          "ty": "[(string, u64)]"
+        }
+      ],
+      "returns": "WorkspaceInfoSummary",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Walk all loaded user files; emit per-URI tree projections with line/character ranges (LSP Position semantics). Deterministic URI ordering for cache stability.",
+      "name": "sysml.workspace.model_tree",
+      "params": [
+        {
+          "description": "Maximum depth to recurse (omit for unlimited)",
+          "name": "max_depth",
+          "required": false,
+          "ty": "usize?"
+        },
+        {
+          "description": "Tree view: \"full\" (default, every element kind) or \"user_facing\"",
+          "name": "view",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "Vec<WorkspaceModelTreeFile>",
+      "stateful": false
+    },
+    {
+      "category": "FileManagement",
+      "deprecated": false,
+      "description": "Rediscover projects across workspace roots, reset the shared host, re-register projects, and re-enable stdlib. Returns the discovered project list + stdlib status. Does NOT preserve open-document buffers (LSP shell handles that).",
+      "name": "sysml.workspace.refresh",
+      "params": [
+        {
+          "description": "Absolute workspace-root paths to walk. Each root contributes its discovered projects to the shared host.",
+          "name": "roots",
+          "required": true,
+          "ty": "[string]"
+        },
+        {
+          "description": "Force-enable stdlib (Some(true)) / force-disable (Some(false)) / honour per-root discovery (None — default true if any root requested it).",
+          "name": "enable_stdlib",
+          "required": false,
+          "ty": "bool?"
+        }
+      ],
+      "returns": "WorkspaceRefreshResult { projects, stdlib_loaded, roots_count }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Evaluated contract of one requirement: subject, assumed/required constraints (inline text is verbatim source; reference-form links resolve when unambiguous), owned attribute values, plus narrative buckets (actors, stakeholders, framed concerns, rationale). Verdict inputs vs narrative separation is binding — render constraints/values next to the verified chip, roles in a generic detail bucket. Fails on unknown ids and non-requirement elements.",
+      "name": "sysml.workspace.requirement_detail",
+      "params": [
+        {
+          "description": "The requirement element id (a row id from requirement_rows)",
+          "name": "element_id",
+          "required": true,
+          "ty": "ElementId"
+        }
+      ],
+      "returns": "sysml_query::RequirementDetail { id, subject, assumed_constraints, required_constraints, framed_concerns, actors, stakeholders, referenced_attributes, rationale }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Requirements-workbench table rows: document-ordered Requirement{Definition,Usage} rows over the elaborated workspace, with statement text, outline depth, StatusInfo maturity, satisfy/verify/derive/refine links, and a three-state verification rollup. Paged via limit/cursor in the spec ({} for defaults).",
+      "name": "sysml.workspace.requirement_rows",
+      "params": [
+        {
+          "description": "RequirementRowsSpec JSON: { filter?, limit?, cursor? } — pass {} for defaults",
+          "name": "spec",
+          "required": true,
+          "ty": "json"
+        }
+      ],
+      "returns": "sysml_query::RequirementRowsResult { rows, total_estimate, cursor, cursor_invalidated, revision }",
+      "stateful": false
+    },
+    {
+      "category": "Query",
+      "deprecated": false,
+      "description": "Requirement rows suspect against a baseline: diffs two stored snapshots (`from`/`to` accept a baseline name or commit id; omitted `to` = latest commit), attributes every change to its nearest owning requirement, and propagates downstream along Derive edges. Causes distinguish text edits (with before/after bodies), other content changes, added/removed children, identity-not-in-baseline (ADR-009: never name-matched), and upstream suspicion. Each record carries `cleared_by` (workflow event seq) when a non-superseded suspect-clearing attestation covers it — cleared rows are not suspect for display but stay listed.",
+      "name": "sysml.workspace.requirement_suspects",
+      "params": [
+        {
+          "description": "Project identifier",
+          "name": "project",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Baseline name or commit id to diff from",
+          "name": "from",
+          "required": true,
+          "ty": "string"
+        },
+        {
+          "description": "Baseline name or commit id to diff to (default: latest commit)",
+          "name": "to",
+          "required": false,
+          "ty": "string?"
+        }
+      ],
+      "returns": "Vec<SuspectRecordView>",
+      "stateful": false
+    },
+    {
+      "category": "Execution",
+      "deprecated": false,
+      "description": "Run cross-file workspace verification, merging all loaded graphs and evaluating all verification cases",
+      "name": "sysml.workspace.verify",
+      "params": [
+        {
+          "description": "Timeout in seconds for the verification run (default: 30)",
+          "name": "timeout_secs",
+          "required": false,
+          "ty": "u64?"
+        }
+      ],
+      "returns": "WorkspaceVerifyResult { total_cases, passed, failed, elapsed, model_digest }",
+      "stateful": false
+    }
+  ]
+}
