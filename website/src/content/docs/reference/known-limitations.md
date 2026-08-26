@@ -121,8 +121,15 @@ model (or use a redefinition) to change analysis inputs until this works.
 
 ## Not defects, but easy to trip on
 
-- **No binary release yet.** Install is
-  [from source](/sysml-rs/start-here/install/) until a release is cut.
+- **No Windows CLI binary.** Releases ship the `sysml` CLI for Linux
+  (x86-64, ARM64) and macOS (Apple Silicon, Intel), and a Windows *language
+  server* inside the VS Code extension — but not `sysml.exe`. On Windows,
+  [build from source](/sysml-rs/start-here/install/) or use WSL.
+- **Released binaries report `0.1.0` regardless of the release tag.** The
+  crate and extension versions are not bumped with the tag, so cite the
+  release you downloaded from, not `--version`.
+- **Released binaries are unsigned.** macOS Gatekeeper quarantines them; see
+  [install](/sysml-rs/start-here/install/).
 - **Language coverage is partial.** Unsupported syntax surfaces as a parse
   diagnostic; it is not silently accepted (with the `expose` exception above).
 - **The desktop workbench and diagram surfaces are previews.** The CLI and

@@ -14,11 +14,47 @@ known_limitations: /sysml-rs/reference/known-limitations/
 ---
 
 The goal of this page is a working `sysml` binary on your machine. There are
-**no binary releases yet** — the project is pre-alpha and the GitHub releases
-list is empty — so today that means building from source. A download section
-will be added here when releases start; until then, the
-[repository README](https://github.com/RickyMillar/sysml-rs#readme) remains the
-maintained quick start, and this page follows it.
+two routes: **download a prebuilt binary** (fastest), or **build from source**
+(needed on Windows, and for developing sysml-rs).
+
+## Download a prebuilt binary
+
+The [latest release](https://github.com/RickyMillar/sysml-rs/releases/latest)
+publishes standalone binaries. They are self-contained: no separate toolchain,
+no specification fetch, no parser generation.
+
+| Platform | CLI asset |
+|---|---|
+| Linux x86-64 | `sysml-x86_64-unknown-linux-gnu` |
+| Linux ARM64 | `sysml-aarch64-unknown-linux-gnu` |
+| macOS Apple Silicon | `sysml-aarch64-apple-darwin` |
+| macOS Intel | `sysml-x86_64-apple-darwin` |
+
+```bash
+curl -L -o sysml \
+  https://github.com/RickyMillar/sysml-rs/releases/latest/download/sysml-x86_64-unknown-linux-gnu
+chmod +x sysml
+./sysml --version
+# sysml 0.1.0
+```
+
+On macOS, Gatekeeper blocks unsigned downloaded binaries: the release is not
+notarised, so clear the quarantine attribute yourself
+(`xattr -d com.apple.quarantine sysml`) if you trust it, or build from source.
+
+Two things worth knowing before you file a bug:
+
+- **The binary reports `0.1.0` even in the `v0.1.1` release.** The crate
+  version has not been bumped alongside the tag. Use the release tag, not
+  `--version`, to say which build you have.
+- **There is no Windows CLI binary.** The release ships a Windows *language
+  server* (inside the VS Code extension), but not `sysml.exe`. On Windows,
+  build from source below, or use WSL with the Linux binary.
+
+The language server and the VS Code extension packages are published in the
+same release — see [editor setup](/sysml-rs/use/editors/).
+
+## Build from source
 
 The build has two unusual steps before `cargo build` — fetching the OMG
 specification sources and generating the parser — and it genuinely does not

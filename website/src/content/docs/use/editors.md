@@ -24,9 +24,23 @@ LSP clients like Helix or Neovim, and the WebSocket bridge — see
 
 ## Before you start
 
-The extension is **not published to the VS Code Marketplace or Open VSX**,
-and no GitHub release has been published yet, so both the extension and the
-server are built from a source checkout today. Follow the
+The extension is **not published to the VS Code Marketplace or Open VSX**.
+Install it from the `.vsix` attached to the
+[latest release](https://github.com/RickyMillar/sysml-rs/releases/latest) —
+one per platform, each with the language server bundled — or build it from a
+source checkout.
+
+```bash
+# Linux x86-64; substitute your platform's asset name
+curl -L -O https://github.com/RickyMillar/sysml-rs/releases/latest/download/sysml-linux-x64-0.1.0.vsix
+code --install-extension sysml-linux-x64-0.1.0.vsix
+```
+
+The published packages are `sysml-{linux-x64,linux-arm64,darwin-arm64,darwin-x64,win32-x64}-0.1.0.vsix`.
+They carry the extension's own version (`0.1.0`), which is not the release tag —
+check the release you downloaded from rather than the filename.
+
+To build both from source instead, follow the
 [installation guide](/sysml-rs/start-here/install/) first so that `cargo`
 builds work in your clone.
 
@@ -58,10 +72,10 @@ automatically. Otherwise, point the extension at the binary you built in
 step 1 with the `sysml.server.path` setting (or put `sysml-lsp-server` on
 your `PATH`).
 
-Continuous integration also packages per-platform VSIXes (Linux x64/arm64,
-macOS arm64/x64, Windows x64) with the server bundled, as workflow artifacts
-of `.github/workflows/vscode-extension.yml`; a tagged release will attach
-them to a GitHub Release once releases begin.
+Continuous integration packages the same per-platform VSIXes (Linux x64/arm64,
+macOS arm64/x64, Windows x64) with the server bundled, via
+`.github/workflows/vscode-extension.yml`; a tagged build attaches them to the
+GitHub Release, which is where the packages above come from.
 
 ### 3. Check it works
 
@@ -77,9 +91,10 @@ In priority order:
 1. the `sysml.server.path` setting,
 2. a bundled `server/` binary inside the installed extension,
 3. `sysml-lsp-server` on the system `PATH`,
-4. the **SysML: Install/Update Language Server** command, which downloads
-   from GitHub releases — **this cannot work yet**, because no release has
-   been published. Use one of the first three until then.
+4. the **SysML: Install/Update Language Server** command, which downloads a
+   prebuilt server from GitHub releases. Releases now publish those server
+   binaries, so this path is live for Linux x64/arm64, macOS arm64/x64, and
+   Windows x64.
 
 ### Useful settings
 
