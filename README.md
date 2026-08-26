@@ -43,7 +43,26 @@ What that buys you concretely:
 - **Edit them** — LSP diagnostics, semantic highlighting, completion, hover,
   and go-to-definition, in VS Code or any LSP client.
 
-### Where it is rough
+## What it looks like
+
+Diagrams are generated from the model, not drawn by hand: you declare a `view`
+in SysML and the workbench renders it — here the interconnection view of a
+two-station espresso production cell, with parts, ports, and the flows between
+them.
+
+![The sysml-rs workbench rendering an interconnection view: nested parts, ports, and flow connections generated from the model](docs/images/simulation-app-diagram.png)
+
+The same model read as requirements: every `requirement` grouped by package,
+with its identifier, text, verification method, and how much of it is covered.
+
+![The requirements workbench: nine requirements grouped by package, each with id, text, method, and verification coverage](docs/images/simulation-app-requirements.png)
+
+Both come from the [Simulation App](editors/simulation-app/), a browser
+workbench over the same service layer the CLI and editors use. It is a preview
+— see the [documentation portal](https://rickymillar.github.io/sysml-rs/use/simulation-app/)
+for how to run it.
+
+## Where it is rough
 
 Honest about the edges, because you will hit them:
 
@@ -66,6 +85,23 @@ Honest about the edges, because you will hit them:
   opt-in — read [SECURITY.md](SECURITY.md) before you do.
 
 ## Quick start
+
+**Just want the tool?** Download a binary from the
+[latest release](https://github.com/RickyMillar/sysml-rs/releases/latest) —
+`sysml` for Linux (x86-64, ARM64) and macOS (Apple Silicon, Intel), plus the
+language server and a VS Code package per platform. No toolchain, no build.
+
+```bash
+curl -L -o sysml \
+  https://github.com/RickyMillar/sysml-rs/releases/latest/download/sysml-x86_64-unknown-linux-gnu
+chmod +x sysml && ./sysml --version
+```
+
+There is no Windows CLI binary yet, and the downloads are unsigned (macOS will
+quarantine them). Full instructions, including Windows, are on the
+[installation page](https://rickymillar.github.io/sysml-rs/start-here/install/).
+
+### Building from source
 
 From a fresh clone. Every step is required — the build genuinely does not work
 without the first two.
