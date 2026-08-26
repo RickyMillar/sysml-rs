@@ -62,6 +62,17 @@ workbench over the same service layer the CLI and editors use. It is a preview
 — see the [documentation portal](https://rickymillar.github.io/sysml-rs/use/simulation-app/)
 for how to run it.
 
+In the editor, the language server gives you semantic highlighting, workspace
+diagnostics, and hover that resolves a name to its qualified definition —
+here `Grinder` resolving to `Definitions::Grinder`, with the file tree showing
+which files carry diagnostics.
+
+![VS Code editing a SysML model: semantic highlighting, a hover tooltip resolving Grinder to Definitions::Grinder, and per-file diagnostic counts in the explorer](docs/images/vscode-extension.png)
+
+The [VS Code extension](editors/vscode/) is installable from the
+[latest release](https://github.com/RickyMillar/sysml-rs/releases/latest), and
+the same server drives [any LSP client](https://rickymillar.github.io/sysml-rs/use/lsp/).
+
 ## Where it is rough
 
 Honest about the edges, because you will hit them:
