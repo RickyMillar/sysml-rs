@@ -55,9 +55,18 @@ const FIXTURE: &str = r#"package DocIdiom {
 "#;
 
 fn open_fixture() -> SysmlService {
-    let dir = std::env::temp_dir().join(format!("sysml-doc-idiom-fixture-{}", std::process::id()));
-    std::fs::create_dir_all(&dir).expect("create fixture dir");
-    std::fs::write(dir.join("DocIdiom.sysml"), FIXTURE).expect("write fixture");
+    // Written once per process: parallel tests share this directory, and a
+    // per-call rewrite truncates the file under a concurrent reader.
+    static DIR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+    let dir = DIR
+        .get_or_init(|| {
+            let dir =
+                std::env::temp_dir().join(format!("sysml-doc-idiom-fixture-{}", std::process::id()));
+            std::fs::create_dir_all(&dir).expect("create fixture dir");
+            std::fs::write(dir.join("DocIdiom.sysml"), FIXTURE).expect("write fixture");
+            dir
+        })
+        .clone();
     let service = SysmlService::empty();
     service
         .open_context(OpenTarget::Folder(PathBuf::from(dir)))

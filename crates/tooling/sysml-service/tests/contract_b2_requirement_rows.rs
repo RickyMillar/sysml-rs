@@ -94,10 +94,17 @@ const FIXTURE: &str = r#"package B2RowsFixture {
 "#;
 
 fn fixture_workspace() -> PathBuf {
-    let dir = std::env::temp_dir().join(format!("sysml-b2-rows-fixture-{}", std::process::id()));
-    std::fs::create_dir_all(&dir).expect("create fixture dir");
-    std::fs::write(dir.join("B2RowsFixture.sysml"), FIXTURE).expect("write fixture");
-    dir
+    // Written once per process: parallel tests share this directory, and a
+    // per-call rewrite truncates the file under a concurrent reader.
+    static DIR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+    DIR.get_or_init(|| {
+        let dir =
+            std::env::temp_dir().join(format!("sysml-b2-rows-fixture-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).expect("create fixture dir");
+        std::fs::write(dir.join("B2RowsFixture.sysml"), FIXTURE).expect("write fixture");
+        dir
+    })
+    .clone()
 }
 
 fn open_fixture() -> SysmlService {

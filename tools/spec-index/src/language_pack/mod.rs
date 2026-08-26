@@ -110,6 +110,7 @@ const KERML_XTEXT: &str = "references/sysmlv2/SysML-v2-Pilot-Implementation/org.
 const EXPR_XTEXT: &str = "references/sysmlv2/SysML-v2-Pilot-Implementation/org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext";
 const SYSML_SPEC_TXT: &str = "references/sysmlv2/derived/SysML-spec-r2025-04.txt";
 const KERML_SPEC_TXT: &str = "references/sysmlv2/derived/KerML-spec-r2025-04.txt";
+const DERIVED_XTEXT_RULES: &str = "references/sysmlv2/derived/xtext-rules.toml";
 const SEMANTIC_RULES_TOML: &str = "crates/lang/codegen/src/semantic_rules.toml";
 const KERML_VOCAB_TTL: &str = "references/sysmlv2/Kerml-Vocab.ttl";
 const SYSML_VOCAB_TTL: &str = "references/sysmlv2/SysML-vocab.ttl";
@@ -142,8 +143,14 @@ pub fn derived_spec_text_present(repo_root: &Path) -> bool {
 }
 
 /// True when everything [`generate`] reads is present.
+///
+/// The derived xtext index is a generation input like the derived spec text:
+/// both are produced by `cargo run -p spec-index` and neither is committed, so
+/// a fresh checkout (CI included) has the fetched sources but not these.
 pub fn generation_sources_present(repo_root: &Path) -> bool {
-    fetched_sources_present(repo_root) && derived_spec_text_present(repo_root)
+    fetched_sources_present(repo_root)
+        && derived_spec_text_present(repo_root)
+        && repo_root.join(DERIVED_XTEXT_RULES).exists()
 }
 
 /// Read an allowlisted source file (hard-rejects any non-allowlisted path).
@@ -1668,6 +1675,14 @@ mod vertical_slice {
         assert_eq!(axes.parse, "validated");
         assert_eq!(axes.lower, "unknown", "stale-commit evidence must not validate");
         assert_eq!(axes.execute, "unknown");
+
+        // The assertions above are pure and always run. The rest generates a
+        // pack, so it needs the generation inputs (fetched sources plus the
+        // derived artifacts, which are never committed).
+        if !generation_sources_present(&root()) {
+            eprintln!("SKIP: generation sources absent (fetch references, then cargo run -p spec-index)");
+            return;
+        }
 
         // With no evidence at all, every pilot card carries honest all-unknown
         // support (generate() reads the committed evidence.jsonl, so drive the

@@ -48,11 +48,19 @@ const FIXTURE: &str = r#"package B10EvidenceFixture {
 "#;
 
 fn fixture_workspace() -> PathBuf {
-    let dir =
-        std::env::temp_dir().join(format!("sysml-b10-evidence-fixture-{}", std::process::id()));
-    std::fs::create_dir_all(&dir).expect("create fixture dir");
-    std::fs::write(dir.join("B10EvidenceFixture.sysml"), FIXTURE).expect("write fixture");
-    dir
+    // Every test in this binary shares one fixture directory and the harness
+    // runs them in parallel, so rewriting the file per call truncates it under
+    // a concurrent reader — which loads an empty model and fails looking for
+    // elements the fixture declares. Write it exactly once per process.
+    static DIR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+    DIR.get_or_init(|| {
+        let dir =
+            std::env::temp_dir().join(format!("sysml-b10-evidence-fixture-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).expect("create fixture dir");
+        std::fs::write(dir.join("B10EvidenceFixture.sysml"), FIXTURE).expect("write fixture");
+        dir
+    })
+    .clone()
 }
 
 fn open_fixture_with_archive() -> (SysmlService, Arc<InMemorySessionArchive>) {
