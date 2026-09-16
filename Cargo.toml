@@ -132,7 +132,7 @@ chrono = { version = "0.4", default-features = false, features = ["clock", "serd
 zip = { version = "2", default-features = false, features = ["deflate"] }
 tempfile = "3"
 hex = "0.4"
-rmcp = { version = "1.4", features = ["server", "transport-io"] }
+rmcp = { version = "2.0", features = ["server", "transport-io"] }
 inventory = "0.3"
 diffsol = "0.11"
 base64 = "0.22"
