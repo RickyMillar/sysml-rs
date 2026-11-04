@@ -129,7 +129,7 @@ toml = "0.8"
 quick-xml = "0.41"
 semver = { version = "1", features = ["serde"] }
 chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
-zip = { version = "2", default-features = false, features = ["deflate"] }
+zip = { version = "9", default-features = false, features = ["deflate"] }
 tempfile = "3"
 hex = "0.4"
 rmcp = { version = "1.4", features = ["server", "transport-io"] }
