@@ -238,21 +238,6 @@ allow-wildcard-paths = true
 # Re-audit at each release tag, and drop any entry the graph no longer reaches.
 [advisories]
 ignore = [
-    # ── Tauri → GTK3 bindings. Reached only from `sysml-desktop`, which is
-    # excluded from the workspace default-members; the CLI, LSP, API, and MCP
-    # binaries never link them. The gtk-rs project retired the GTK3 bindings
-    # in favour of GTK4, and Tauri v2 has not moved. No upgrade exists.
-    "RUSTSEC-2024-0411",  # gdkwayland-sys
-    "RUSTSEC-2024-0412",  # gdk
-    "RUSTSEC-2024-0413",  # atk
-    "RUSTSEC-2024-0414",  # gdkx11-sys
-    "RUSTSEC-2024-0415",  # gtk
-    "RUSTSEC-2024-0416",  # atk-sys
-    "RUSTSEC-2024-0417",  # gdkx11
-    "RUSTSEC-2024-0418",  # gdk-sys
-    "RUSTSEC-2024-0419",  # gtk3-macros
-    "RUSTSEC-2024-0420",  # gtk-sys
-
     # ── Tauri → urlpattern → the rust-unic Unicode family, retired upstream
     # in favour of icu_properties / unicode-ident. Same reachability as above:
     # desktop shell only.
